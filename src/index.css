@@ -1,37 +1,16 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-h1 {
-    font-family: "Outfit", sans-serif;
-    font-optical-sizing: auto;
-    font-weight: weight;
-    font-style: normal;
+@theme {
+    --color-primary: #800000;
+    --color-overlay: #81001d;
+    --color-special: #5a413d;
+    --color-heading: #1a1a1a;
+    --color-body: #5f5e5e;
+    --color-banner: #F8F9FA;
+    --color-banner-border: #E5E7EB;
+    --color-btn: #570000;
+    --color-hero-description: #E2E2E2;
+    --color-hero-heading: #F9F9F9;
+    --font-heading: "Playfair Display", serif;
+    --font-body: "Inter", sans-serif;
 }
-
-h2 {
-    font-family: "Outfit", sans-serif;
-    font-optical-sizing: auto;
-    font-weight: 800;
-    font-style: normal;
-}
-p {
-    font-family: "Outfit", sans-serif;
-    font-optical-sizing: auto;
-    font-weight: weight;
-    font-style: normal;
-}
-a {
-    font-family: "Outfit", sans-serif;
-    font-optical-sizing: auto;
-    font-weight: weight;
-    font-style: normal;
-}
-button {
-    font-family: "Outfit", sans-serif;
-    font-optical-sizing: auto;
-    font-weight: weight;
-    font-style: normal;
-}
-
-

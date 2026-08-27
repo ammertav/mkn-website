@@ -1,38 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://sivinaries.click/</loc>
+    <loc>https://mkn.unissula.ac.id/</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://sivinaries.click/partner</loc>
+    <loc>https://mkn.unissula.ac.id/akademik/kurikulum</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://sivinaries.click/service</loc>
+    <loc>https://mkn.unissula.ac.id/informasi/penerimaan-mahasiswa</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://sivinaries.click/work</loc>
+    <loc>https://mkn.unissula.ac.id/staff/faculty-directory</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://mkn.unissula.ac.id/fasilitas/perpustakaan</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://sivinaries.click/contact</loc>
+    <loc>https://mkn.unissula.ac.id/quality-assurance/qa-documents</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://sivinaries.click/partner/beil</loc>
+    <loc>https://mkn.unissula.ac.id/alumni/tracer-study</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://sivinaries.click/partner/funnev</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <loc>https://mkn.unissula.ac.id/alumni/lowongan</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
 </urlset>
