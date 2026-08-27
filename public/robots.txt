@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://sivinaries.click/sitemap.xml
+Sitemap: https://mkn.unissula.ac.id/sitemap.xml
