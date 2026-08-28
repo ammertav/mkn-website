@@ -40,6 +40,7 @@ const Perpustakaan = lazy(() => import("./pages/Fasilitas/Perpustakaan"));
 
 // Quality Assurance Unit sub-pages
 const QualityAssuranceLayout = lazy(() => import("./pages/QualityAssurance/index"));
+const QualityAssuranceOverview = lazy(() => import("./pages/QualityAssurance/QualityAssuranceOverview"));
 const QaDocuments = lazy(() => import("./pages/QualityAssurance/QaDocuments"));
 const QaPolicy = lazy(() => import("./pages/QualityAssurance/QaPolicy"));
 const QaManualStandard = lazy(() => import("./pages/QualityAssurance/QaManualStandard"));
@@ -126,8 +127,8 @@ export default function App() {
 
         {/* Quality Assurance Unit — nested routes */}
         <Route path="/quality-assurance" element={<QualityAssuranceLayout />}>
-          <Route index element={<Navigate to="qa-documents" replace />} />
-          <Route path="qa-documents" element={<QaDocuments />} />
+          <Route index element={<QualityAssuranceOverview />} />
+          <Route path="qa-documents" element={<Navigate to="/quality-assurance/qa-documents/qa-policy" replace />} />
           <Route path="qa-documents/qa-policy" element={<QaPolicy />} />
           <Route path="qa-documents/qa-manual-standard" element={<QaManualStandard />} />
           <Route path="qa-documents/qa-standar" element={<QaStandar />} />

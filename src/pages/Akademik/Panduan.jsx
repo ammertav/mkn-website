@@ -59,7 +59,7 @@ export default function Panduan() {
           <span className="text-xs font-bold tracking-[0.18em] uppercase text-primary block mb-2">
             ACADEMIC
           </span>
-          <h1 className="text-3xl sm:text-4xl lg:text-[44px] font-heading font-bold text-heading tracking-tight leading-tight">
+          <h1 className="text-3xl sm:text-4xl lg:text-[42px] font-heading font-bold text-heading tracking-tight leading-tight">
             Panduan Akademik
           </h1>
           <div className="w-full h-[2px] bg-primary my-4" />
