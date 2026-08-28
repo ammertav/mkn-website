@@ -15,7 +15,7 @@ export const facultyData = [
       "Ahmad Fauzan bergabung dengan Fakultas Hukum UNISSULA pada 1998 dan dikukuhkan sebagai Guru Besar Hukum Agraria pada 2014. Ia mengampu Hukum Agraria dan Pendaftaran Tanah serta Praktik Pejabat Pembuat Akta Tanah, dan sejak 2019 memimpin Pusat Studi Hukum Pertanahan program studi.",
       "Di luar kampus ia menjadi saksi ahli pada perkara sengketa tanah di Pengadilan Negeri Semarang dan anggota tim penyusun naskah akademik peraturan daerah tentang penataan ruang. Ia menempuh pendidikan doktor di Universitas Gadjah Mada dengan disertasi tentang perlindungan pembeli beriktikad baik dalam peralihan hak atas tanah.",
     ],
-    image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=800&q=80",
+    image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&crop=faces,top&w=1200&h=1000&q=85",
     imageCaption: "Potret Ahmad Fauzan",
     courses: [
       { name: "Hukum Agraria dan Pendaftaran Tanah", placement: "Semester 1", sks: 3 },
@@ -78,7 +78,7 @@ export const facultyData = [
       "Dr. Siti Aminah, S.H., M.Kn. mengabdikan diri di Program Studi Magister Kenotariatan UNISSULA sejak 2005. Beliau aktif mempublikasikan kajian kritis mengenai perlindungan kreditur separatis dalam kepailitan perseroan terbatas.",
       "Selain mengajar, beliau aktif sebagai konsultan hukum korporasi dan narasumber berbagai seminar nasional perbankan dan hukum perseroan.",
     ],
-    image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80",
+    image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&crop=faces,top&w=1200&h=1000&q=85",
     imageCaption: "Potret Siti Aminah",
     courses: [
       { name: "Hukum Perseroan dan Kepailitan", placement: "Semester 1", sks: 3 },
