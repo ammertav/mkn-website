@@ -60,7 +60,7 @@ export default function FacultyDetail() {
               </div>
 
               {/* Metadata Rows - Dibatasi max-w-xl agar tidak melebar mendekati foto */}
-              <div className="w-full max-w-xl pt-2 divide-y divide-gray-100 border-t border-gray-100 text-xs sm:text-sm">
+              <div className="w-full max-w-xl pt-2 divide-y border-gray-100 border-t text-xs sm:text-sm">
                 {faculty.nidn && (
                   <div className="py-2.5 flex items-center justify-between">
                     <span className="text-body font-medium">NIDN</span>
