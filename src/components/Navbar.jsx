@@ -38,19 +38,20 @@ export default function Navbar() {
         setSearchQuery={setSearchQuery}
       />
 
-      <div className={`bg-white transition-all duration-200 ${isScrolled ? "py-3 shadow-md" : "py-4"}`}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+      {/* Navbar bar — h-16 fixed, shadow muncul saat isScrolled */}
+      <div className={`bg-white h-16 transition-shadow duration-200 ${isScrolled ? "shadow-md" : ""}`}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center justify-between">
+
+          {/* Logo */}
           <Link
             to="/"
-            className="text-primary font-heading text-2xl sm:text-3xl font-bold tracking-normal hover:opacity-95 transition-opacity"
+            className="text-primary font-heading text-xl font-bold tracking-normal hover:opacity-95 transition-opacity shrink-0"
           >
             MKn UNISSULA
           </Link>
 
-          <DesktopNav
-            navLinks={navLinks}
-            checkIsActive={checkIsActive}
-          />
+          {/* Desktop Nav — items-stretch + h-full agar border-b-2 mepet bawah navbar */}
+          <DesktopNav navLinks={navLinks} />
 
           {/* Mobile Toggle */}
           <button
@@ -60,6 +61,7 @@ export default function Navbar() {
           >
             {isMobileOpen ? <FiX className="w-6 h-6" /> : <FiMenu className="w-6 h-6" />}
           </button>
+
         </div>
       </div>
 

@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { FiChevronRight } from "react-icons/fi";
@@ -8,75 +9,91 @@ export default function SidebarLink({ menu }) {
   if (!menu) return null;
 
   const hasChildren = Boolean(menu.children?.length);
-  const isParentActive = pathname.startsWith(menu.href);
+  const isParentActive =
+    hasChildren &&
+    (pathname === menu.href || pathname.startsWith(menu.href + "/"));
+
+  const [isOpen, setIsOpen] = useState(isParentActive);
+
+  // Otomatis buka jika user berada di route anak menu ini
+  useEffect(() => {
+    if (isParentActive) {
+      setIsOpen(true);
+    }
+  }, [isParentActive]);
 
   return (
     <div>
-      <NavLink
-        to={menu.href}
-        end
-        className={({ isActive }) =>
-          `relative flex items-center justify-between gap-1 text-sm md:text-[15px] transition-colors duration-150 py-0.5 ${
-            isActive
-              ? "text-primary font-bold before:absolute before:-left-[18px] before:top-0 before:bottom-0 before:w-[3px] before:bg-primary before:rounded-full"
-              : isParentActive
-              ? "text-heading font-semibold"
-              : "text-special hover:text-heading font-normal"
-          }`
-        }
-      >
-        <span>{menu.title}</span>
+      <div className="flex items-center justify-between group">
+        <NavLink
+          to={menu.href}
+          end={!hasChildren}
+          className={({ isActive }) => {
+            const isSelfActive = !hasChildren && isActive;
+            return `relative flex-grow flex items-center justify-between gap-1 transition-colors duration-150 py-0.5 text-sm md:text-[15px] ${
+              isSelfActive
+                ? "text-primary font-bold before:absolute before:-left-[18px] before:top-0 before:bottom-0 before:w-[3px] before:bg-primary before:rounded-full"
+                : isParentActive
+                ? "text-primary font-semibold"
+                : "text-special hover:text-heading font-normal"
+            }`;
+          }}
+        >
+          <span>{menu.title}</span>
+        </NavLink>
 
-        {/* Indikator ada sub-menu */}
+        {/* Indikator icon dan tombol toggle sub-menu */}
         {hasChildren && (
-          <motion.span
-            animate={{ rotate: isParentActive ? 90 : 0 }}
-            transition={{ duration: 0.2, ease: "easeInOut" }}
-            className="shrink-0"
+          <button
+            type="button"
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              setIsOpen((prev) => !prev);
+            }}
+            className="p-1 text-gray-400 hover:text-primary transition-colors cursor-pointer"
+            aria-label={`Toggle submenu ${menu.title}`}
           >
-            <FiChevronRight
-              className={`text-xs transition-colors ${
-                isParentActive ? "text-primary" : "text-gray-400"
-              }`}
-            />
-          </motion.span>
+            <motion.span
+              animate={{ rotate: isOpen ? 90 : 0 }}
+              transition={{ duration: 0.2, ease: "easeInOut" }}
+              className="inline-block"
+            >
+              <FiChevronRight
+                className={`text-xs transition-colors ${
+                  isParentActive || isOpen ? "text-primary" : "text-gray-400"
+                }`}
+              />
+            </motion.span>
+          </button>
         )}
-      </NavLink>
+      </div>
 
-      {/* Sub-items dengan animasi smooth */}
+      {/* Sub-items dengan animasi accordion */}
       <AnimatePresence initial={false}>
-        {hasChildren && isParentActive && (
+        {hasChildren && isOpen && (
           <motion.div
             key="submenu"
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.25, ease: "easeInOut" }}
+            transition={{ duration: 0.2, ease: "easeInOut" }}
             className="overflow-hidden"
           >
-            <div className="ml-3 mt-2 pb-1 space-y-2 pl-3 border-l border-primary/30">
+            <div className="ml-2 mt-1.5 pb-1 space-y-1 pl-3 border-l border-primary/25">
               {menu.children.map((child) => (
                 <NavLink
                   key={child.href}
                   to={child.href}
                   className={({ isActive }) =>
-                    `flex items-center gap-1.5 text-xs md:text-sm transition-colors duration-150 py-0.5 ${
+                    `block text-xs md:text-[13.5px] transition-colors duration-150 py-1 ${
                       isActive
                         ? "text-primary font-semibold"
-                        : "text-body/80 hover:text-heading font-normal"
+                        : "text-gray-500 hover:text-heading font-normal"
                     }`
                   }
                 >
-                  {({ isActive }) => (
-                    <>
-                      <motion.span
-                        animate={{ scale: isActive ? 1 : 0, opacity: isActive ? 1 : 0 }}
-                        transition={{ duration: 0.15 }}
-                        className="w-1 h-1 rounded-full bg-primary shrink-0"
-                      />
-                      {child.title}
-                    </>
-                  )}
+                  {child.title}
                 </NavLink>
               ))}
             </div>

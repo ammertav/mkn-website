@@ -1,26 +1,65 @@
 import { Link, useLocation } from "react-router-dom";
 import { navLinks } from "../../data/navLinks";
-import { toTitleCase } from "../../utils/format";
 
-export default function Breadcrumb({ current }) {
+/**
+ * Breadcrumb otomatis: Beranda / [Parent] / [Child]
+ * Semua data diambil dari navLinks berdasarkan pathname saat ini.
+ */
+export default function Breadcrumb() {
   const { pathname } = useLocation();
 
-  // Otomatis deteksi parent dari navLinks berdasarkan pathname
-  const detectedParent = navLinks.find(
+  // Cari parent nav (misal: /akademik, /mahasiswa, dst)
+  const parent = navLinks.find(
     (nav) => nav.href !== "/" && pathname.startsWith(nav.href)
   );
 
-  const label = current || (detectedParent ? toTitleCase(detectedParent.title) : null);
+  // Cari child page yang aktif dari children parent (exclude isDeep)
+  const child = parent?.children?.find(
+    (c) => !c.isDeep && (pathname === c.href || pathname.startsWith(c.href))
+  );
 
-  if (!label) return null;
+  // Cari sub-child (isDeep) jika aktif
+  const deepChild = parent?.children?.find(
+    (c) => c.isDeep && (pathname === c.href || pathname.startsWith(c.href))
+  );
+
+  if (!parent) return null;
+
+  // Format title parent jadi Title Case (ACADEMIC → Academic)
+  const parentLabel = parent.title.charAt(0) + parent.title.slice(1).toLowerCase();
 
   return (
-    <nav className="flex items-center space-x-2 text-xs sm:text-[13px] text-gray-500 mb-8 sm:mb-12">
+    <nav
+      aria-label="Breadcrumb"
+      className="flex items-center gap-2 text-xs sm:text-[13px] text-gray-500 mb-8 sm:mb-12"
+    >
       <Link to="/" className="hover:text-primary transition-colors">
         Beranda
       </Link>
-      <span className="text-gray-400 font-medium">›</span>
-      <span className="font-semibold text-heading">{label}</span>
+
+      <span className="text-gray-400">/</span>
+
+      {child ? (
+        <>
+          <Link to={parent.href} className="hover:text-primary transition-colors">
+            {parentLabel}
+          </Link>
+          <span className="text-gray-400">/</span>
+          {deepChild ? (
+            <>
+              <Link to={child.href} className="hover:text-primary transition-colors">
+                {child.title}
+              </Link>
+              <span className="text-gray-400">/</span>
+              <span className="font-semibold text-heading">{deepChild.title}</span>
+            </>
+          ) : (
+            <span className="font-semibold text-heading">{child.title}</span>
+          )}
+        </>
+      ) : (
+        <span className="font-semibold text-heading">{parentLabel}</span>
+      )}
     </nav>
   );
 }

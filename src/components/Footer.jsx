@@ -1,158 +1,146 @@
-import { FaLinkedinIn, FaTwitter, FaYoutube } from "react-icons/fa";
+import { Link } from "react-router-dom";
+import { FaInstagram, FaTwitter, FaYoutube, FaLinkedinIn } from "react-icons/fa";
 
 const footerSections = [
   {
-    title: "TENTANG KAMI",
+    title: "ACADEMIC",
     links: [
-      { name: "Sejarah & Visi Misi", href: "#sejarah-visi-misi" },
-      { name: "Struktur Organisasi", href: "#struktur-organisasi" },
-      { name: "Pimpinan Program", href: "#pimpinan-program" },
-      { name: "Fasilitas Kampus", href: "#fasilitas-kampus" },
-      { name: "Akreditasi BAN-PT", href: "#akreditasi-ban-pt" },
-      { name: "Akreditasi ACQUIN", href: "#akreditasi-acquin" },
-      { name: "Laporan Tahunan", href: "#laporan-tahunan" },
-      { name: "Berita & Pengumuman", href: "#berita-pengumuman" },
+      { name: "Profil Lulusan", href: "/akademik/profil-lulusan" },
+      { name: "Capaian Pembelajaran Lulusan", href: "/akademik/capaian-pembelajaran" },
+      { name: "Kurikulum", href: "/akademik/kurikulum" },
+      { name: "Panduan Akademik", href: "/akademik/panduan-akademik" },
+      { name: "Panduan Evaluasi Pembelajaran", href: "/akademik/panduan-evaluasi" },
+      { name: "Panduan Ujian", href: "/akademik/panduan-ujian" },
     ],
   },
   {
-    title: "AKADEMIK",
+    title: "MAHASISWA",
     links: [
-      { name: "Kurikulum MKn", href: "#kurikulum-mkn" },
-      { name: "Kalender Akademik", href: "#kalender-akademik" },
-      { name: "Pedoman Tesis", href: "#pedoman-tesis" },
-      { name: "Peraturan Akademik", href: "#peraturan-akademik" },
-      { name: "Jadwal Kuliah", href: "#jadwal-kuliah" },
-      { name: "Bahan Ajar", href: "#bahan-ajar" },
-      { name: "Ujian Komprehensif", href: "#ujian-komprehensif" },
-      { name: "Wisuda", href: "#wisuda" },
+      { name: "Organisasi Mahasiswa", href: "/mahasiswa/organisasi" },
+      { name: "Unit Kegiatan Mahasiswa", href: "/mahasiswa/ukm" },
     ],
   },
   {
-    title: "PENERIMAAN",
+    title: "ALUMNI",
     links: [
-      { name: "Persyaratan Pendaftaran", href: "#persyaratan-pendaftaran" },
-      { name: "Prosedur Pendaftaran", href: "#prosedur-pendaftaran" },
-      { name: "Biaya Pendidikan", href: "#biaya-pendidikan" },
-      { name: "Beasiswa", href: "#beasiswa" },
-      { name: "Jadwal Penerimaan", href: "#jadwal-penerimaan" },
-      { name: "Mahasiswa Asing", href: "#mahasiswa-asing" },
-      { name: "Pendaftaran Mahasiswa", href: "#pendaftaran-mahasiswa" },
-      { name: "FAQ PMB", href: "#faq-pmb" },
+      { name: "Tracer Study", href: "/alumni/tracer-study" },
+      { name: "Pusat Karir", href: "/alumni/pusat-karir" },
+      { name: "Lowongan Pekerjaan", href: "/alumni/lowongan" },
     ],
   },
   {
-    title: "DOSEN & RISET",
+    title: "INFORMASI",
     links: [
-      { name: "Direktori Dosen", href: "#direktori-dosen" },
-      { name: "Pusat Studi Hukum", href: "#pusat-studi-hukum" },
-      { name: "Publikasi Ilmiah", href: "#publikasi-ilmiah" },
-      { name: "Jurnal Kenotariatan", href: "#jurnal-kenotariatan" },
-      { name: "Hibah Penelitian", href: "#hibah-penelitian" },
-      { name: "Seminar & Konferensi", href: "#seminar-konferensi" },
-      { name: "Kerjasama Riset", href: "#kerjasama-riset" },
-      { name: "Perpustakaan", href: "#perpustakaan" },
+      { name: "Penerimaan Mahasiswa", href: "/informasi/penerimaan-mahasiswa" },
+      { name: "Tingkat Kelulusan", href: "/informasi/tingkat-kelulusan" },
+      { name: "Penelitian Dosen", href: "/informasi/penelitian-dosen" },
+      { name: "Pengabdian Dosen", href: "/informasi/pengabdian-dosen" },
     ],
   },
   {
-    title: "KEHIDUPAN KAMPUS & ALUMNI",
+    title: "STAF & FASILITAS",
     links: [
-      { name: "Organisasi Mahasiswa", href: "#organisasi-mahasiswa" },
-      { name: "Kegiatan Mahasiswa", href: "#kegiatan-mahasiswa" },
-      { name: "Layanan Kesehatan", href: "#layanan-kesehatan" },
-      { name: "Konseling Hukum", href: "#konseling-hukum" },
-      { name: "Portal Alumni", href: "#portal-alumni" },
-      { name: "Jejaring Karir", href: "#jejaring-karir" },
-      { name: "Tracer Study", href: "#tracer-study" },
-      { name: "Donasi & Endowment", href: "#donasi-endowment" },
+      { name: "Dosen", href: "/staff/dosen" },
+      { name: "Tenaga Kependidikan", href: "/staff/tendik" },
+      { name: "Ruang Kelas", href: "/fasilitas/ruang-kelas" },
+      { name: "Laboratorium", href: "/fasilitas/laboratorium" },
+      { name: "Student Research Center", href: "/fasilitas/student-research-center" },
+      { name: "Perpustakaan", href: "/fasilitas/perpustakaan" },
     ],
   },
   {
-    title: "AKSES CEPAT & PORTAL",
+    title: "DOWNLOAD",
     links: [
-      { name: "SIAKAD", href: "#siakad" },
-      { name: "E-Learning", href: "#e-learning" },
-      { name: "Repository Institusi", href: "#repository-institusi" },
-      { name: "Sistem Informasi Alumni", href: "#sistem-informasi-alumni" },
-      { name: "Panduan IT", href: "#panduan-it" },
-      { name: "Unduh Formulir", href: "#unduh-formulir" },
-      { name: "Layanan Bantuan", href: "#layanan-bantuan" },
-      { name: "Kontak Kami", href: "#kontak-kami" },
+      { name: "Quality Assurance Unit", href: "/quality-assurance" },
+      { name: "QA Documents", href: "/quality-assurance/qa-documents" },
+      { name: "Internal Audit Report", href: "/quality-assurance/internal-audit-report" },
+      { name: "Learning and Teaching Report", href: "/quality-assurance/learning-teaching-report" },
+      { name: "Student Survey Report", href: "/quality-assurance/student-survey-report" },
+      { name: "Alumni Survey Report", href: "/quality-assurance/alumni-survey-report" },
     ],
   },
 ];
 
-const Footer = () => {
-
+export default function Footer() {
   return (
-    <footer className="w-full bg-banner border-t border-banner-border font-body text-body">
+    <footer className="w-full bg-white border-t border-gray-200 font-body text-body">
       {/* Main Footer Content */}
-      <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 pt-14 pb-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-6">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-8">
           {/* Brand & About Column */}
-          <div className="lg:col-span-3 space-y-5 pr-0 lg:pr-4">
-            <a
-              href="/"
-              className="inline-block text-primary font-heading text-2xl sm:text-3xl font-bold tracking-normal"
+          <div className="lg:col-span-3 space-y-4 pr-0 lg:pr-4">
+            <Link
+              to="/"
+              className="inline-block text-primary font-heading text-2xl font-bold tracking-normal hover:opacity-95 transition-opacity"
             >
               MKn UNISSULA
-            </a>
-            <p className="text-body text-[13px] sm:text-sm leading-relaxed max-w-sm">
+            </Link>
+            <p className="text-body text-xs sm:text-[13px] leading-relaxed max-w-xs">
               Mencetak Notaris profesional, beretika tinggi, dan berwawasan global melalui pendidikan hukum yang komprehensif.
             </p>
 
-            {/* Social Media Icons */}
-            <div className="flex items-center space-x-4 pt-3 text-gray-400">
+            {/* Social Media Icons — Solid gray buttons with white icons */}
+            <div className="flex items-center space-x-2 pt-2">
               <a
-                href="https://linkedin.com"
+                href="https://instagram.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="LinkedIn"
-                className="w-8 h-8 rounded-full border border-gray-300 flex items-center justify-center hover:text-primary hover:border-primary hover:bg-primary/5 transition-all duration-200"
+                aria-label="Instagram"
+                className="w-7 h-7 rounded-xs bg-gray-400 text-white flex items-center justify-center hover:bg-primary transition-colors duration-150"
               >
-                <FaLinkedinIn className="text-sm" />
+                <FaInstagram className="text-sm" />
               </a>
               <a
                 href="https://twitter.com"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Twitter"
-                className="w-8 h-8 rounded-full border border-gray-300 flex items-center justify-center hover:text-primary hover:border-primary hover:bg-primary/5 transition-all duration-200"
+                className="w-7 h-7 rounded-xs bg-gray-400 text-white flex items-center justify-center hover:bg-primary transition-colors duration-150"
               >
-                <FaTwitter className="text-sm" />
+                <FaTwitter className="text-xs" />
               </a>
               <a
                 href="https://youtube.com"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="YouTube"
-                className="w-8 h-8 rounded-full border border-gray-300 flex items-center justify-center hover:text-primary hover:border-primary hover:bg-primary/5 transition-all duration-200"
+                className="w-7 h-7 rounded-xs bg-gray-400 text-white flex items-center justify-center hover:bg-primary transition-colors duration-150"
               >
-                <FaYoutube className="text-sm" />
+                <FaYoutube className="text-xs" />
+              </a>
+              <a
+                href="https://linkedin.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="LinkedIn"
+                className="w-7 h-7 rounded-xs bg-gray-400 text-white flex items-center justify-center hover:bg-primary transition-colors duration-150"
+              >
+                <FaLinkedinIn className="text-xs" />
               </a>
             </div>
           </div>
 
           {/* Nav Link Columns (6 Columns) */}
-          <div className="lg:col-span-9 grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-6 gap-6 sm:gap-5">
+          <div className="lg:col-span-9 grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-6 gap-6 sm:gap-4">
             {footerSections.map((section, idx) => (
-              <div key={idx} className="flex flex-col space-y-3">
+              <div key={idx} className="flex flex-col space-y-2.5">
                 {/* Header Title with underline */}
-                <div className="pb-1.5 border-b border-gray-300">
-                  <h2 className="font-heading text-[12px] sm:text-[13px] font-semibold uppercase tracking-wider text-heading min-h-[32px] flex items-end">
+                <div className="pb-2 border-b border-gray-200">
+                  <h2 className="font-heading text-[11px] sm:text-xs font-semibold uppercase tracking-wider text-heading">
                     {section.title}
                   </h2>
                 </div>
 
                 {/* Link List */}
-                <ul className="space-y-2 pt-1">
+                <ul className="space-y-1.5 pt-0.5">
                   {section.links.map((link, linkIdx) => (
                     <li key={linkIdx}>
-                      <a
-                        href={link.href}
+                      <Link
+                        to={link.href}
                         className="text-[12px] sm:text-[12.5px] text-body hover:text-primary transition-colors duration-150 block leading-tight py-0.5"
                       >
                         {link.name}
-                      </a>
+                      </Link>
                     </li>
                   ))}
                 </ul>
@@ -163,17 +151,11 @@ const Footer = () => {
       </div>
 
       {/* Bottom Copyright Bar */}
-      <div className="border-t border-banner-border py-5 bg-white">
-        <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <p className="text-[12px] sm:text-[13px] text-body">
-            © {new Date().getFullYear()} Magister Kenotariatan UNISSULA. All Rights Reserved.
-          </p>
-        </div>
+      <div className="border-t border-gray-200 py-5 bg-white text-center">
+        <p className="text-[11.5px] sm:text-xs text-gray-500">
+          © {new Date().getFullYear()} Magister Kenotariatan UNISSULA. All Rights Reserved.
+        </p>
       </div>
     </footer>
   );
-};
-
-
-export default Footer;
-
+}

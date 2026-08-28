@@ -8,6 +8,7 @@ const Kurikulum = lazy(() => import("./pages/Akademik/Kurikulum"));
 const ProfilLulusan = lazy(() => import("./pages/Akademik/ProfilLulusan"));
 const CapaianPembelajaran = lazy(() => import("./pages/Akademik/CapaianPembelajaran"));
 const Panduan = lazy(() => import("./pages/Akademik/Panduan"));
+const PanduanEvaluasi = lazy(() => import("./pages/Akademik/PanduanEvaluasi"));
 const PanduanUjian = lazy(() => import("./pages/Akademik/PanduanUjian"));
 const UtsUas = lazy(() => import("./pages/Akademik/UtsUas"));
 const Magang = lazy(() => import("./pages/Akademik/Magang"));
@@ -23,7 +24,6 @@ const CommunityService = lazy(() => import("./pages/Penerimaan/CommunityService"
 
 // Staff sub-pages
 const StaffLayout = lazy(() => import("./pages/Staff/index"));
-const Dosen = lazy(() => import("./pages/Staff/Dosen"));
 const Tendik = lazy(() => import("./pages/Staff/Tendik"));
 const FacultyDirectory = lazy(() => import("./pages/Staff/FacultyDirectory"));
 
@@ -70,13 +70,16 @@ export default function App() {
 
         {/* Akademik — nested routes */}
         <Route path="/akademik" element={<AkademikLayout />}>
-          <Route index element={<Navigate to="kurikulum" replace />} />
-          <Route path="kurikulum/*" element={<Kurikulum />} />
+          <Route index element={<Navigate to="profil-lulusan" replace />} />
           <Route path="profil-lulusan" element={<ProfilLulusan />} />
           <Route path="capaian-pembelajaran" element={<CapaianPembelajaran />} />
+          <Route path="kurikulum" element={<Navigate to="reguler" replace />} />
+          <Route path="kurikulum/reguler" element={<Kurikulum />} />
+          <Route path="kurikulum/internasional" element={<Kurikulum />} />
+          <Route path="kurikulum/*" element={<Navigate to="reguler" replace />} />
           <Route path="panduan-akademik" element={<Panduan />} />
-          <Route path="panduan-evaluasi" element={<Panduan />} />
-          <Route path="asesmen" element={<Panduan />} />
+          <Route path="panduan-evaluasi" element={<PanduanEvaluasi />} />
+          <Route path="asesmen" element={<PanduanEvaluasi />} />
           <Route path="panduan-ujian" element={<PanduanUjian />}>
             <Route index element={<Navigate to="uts-uas" replace />} />
             <Route path="uts-uas" element={<UtsUas />} />
@@ -101,7 +104,7 @@ export default function App() {
         {/* Staff — nested routes */}
         <Route path="/staff" element={<StaffLayout />}>
           <Route index element={<Navigate to="dosen" replace />} />
-          <Route path="dosen" element={<Dosen />} />
+          <Route path="dosen" element={<FacultyDirectory />} />
           <Route path="tendik" element={<Tendik />} />
           <Route path="faculty-directory" element={<FacultyDirectory />} />
         </Route>
@@ -149,6 +152,16 @@ export default function App() {
           <Route path="pusat-karir" element={<CareerCenter />} />
           <Route path="lowongan" element={<JobVacancies />} />
         </Route>
+        {/* Direct / Legacy Aliases */}
+        <Route path="/kurikulum" element={<Navigate to="/akademik/kurikulum/reguler" replace />} />
+        <Route path="/kurikulum/*" element={<Navigate to="/akademik/kurikulum/reguler" replace />} />
+        <Route path="/organisasi-mahasiswa" element={<Navigate to="/mahasiswa/organisasi" replace />} />
+        <Route path="/unit-kegiatan-mahasiswa" element={<Navigate to="/mahasiswa/ukm" replace />} />
+        <Route path="/dosen" element={<Navigate to="/staff/dosen" replace />} />
+        <Route path="/tenaga-kependidikan" element={<Navigate to="/staff/tendik" replace />} />
+        <Route path="/pusat-karir" element={<Navigate to="/alumni/pusat-karir" replace />} />
+        <Route path="/qa-documents" element={<Navigate to="/quality-assurance/qa-documents" replace />} />
+        <Route path="/qa-documents/*" element={<Navigate to="/quality-assurance/qa-documents" replace />} />
         <Route path="/alumni-karir" element={<Navigate to="/alumni" replace />} />
 
         <Route path="*" element={<h1>404 Not Found</h1>} />
