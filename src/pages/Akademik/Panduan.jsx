@@ -73,38 +73,38 @@ export default function Panduan() {
           {academicGuidelines.map((item) => (
             <div
               key={item.id}
-              className="bg-white border border-gray-200 rounded-xs p-5 sm:p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-5 hover:border-gray-300 transition-all duration-200 shadow-2xs group"
+              className="bg-white border border-gray-200 rounded-xs p-6 sm:p-7 flex flex-col sm:flex-row sm:items-center justify-between gap-6 lg:gap-12 hover:border-gray-300 transition-all duration-200 shadow-2xs group"
             >
               {/* Sisi Kiri: Ikon Buku + Judul + Deskripsi + File Info */}
               <div className="flex items-start gap-4 sm:gap-5 flex-1 min-w-0">
-                <div className="text-primary text-xl sm:text-2xl mt-0.5 shrink-0">
+                <div className="text-primary text-2xl sm:text-3xl mt-0.5 shrink-0">
                   <FiBookOpen />
                 </div>
 
-                <div className="space-y-1 flex-1 min-w-0">
-                  <h2 className="font-heading font-bold text-base sm:text-[17px] text-heading leading-snug group-hover:text-primary transition-colors">
+                <div className="space-y-2 flex-1 min-w-0 max-w-2xl">
+                  <h2 className="font-heading font-bold text-base sm:text-[18px] text-heading leading-snug group-hover:text-primary transition-colors">
                     {item.title}
                   </h2>
                   <p className="text-xs sm:text-sm text-body leading-relaxed">
                     {item.desc}
                   </p>
-                  <p className="text-[11px] sm:text-xs text-gray-400 font-medium tracking-wide pt-1">
+                  <p className="text-[11px] sm:text-xs text-gray-400 font-medium tracking-wide pt-0.5">
                     {item.fileType} ({item.fileSize})
                   </p>
                 </div>
               </div>
 
               {/* Sisi Kanan: Tombol Unduh */}
-              <div className="shrink-0 flex items-center self-start sm:self-center pl-9 sm:pl-0">
+              <div className="shrink-0 flex items-center self-start sm:self-center pl-10 sm:pl-0">
                 <a
                   href={item.downloadUrl}
                   download={item.fileName}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 px-4 py-2 bg-white border border-primary/50 text-primary hover:bg-primary hover:text-white rounded-xs text-xs font-medium transition-all duration-150 shadow-2xs cursor-pointer active:scale-98"
+                  className="inline-flex items-center justify-center gap-2 px-6 py-2.5 bg-white border border-gray-300 hover:border-primary hover:bg-primary hover:text-white text-heading rounded-xs text-xs sm:text-sm font-semibold transition-all duration-150 shadow-2xs cursor-pointer active:scale-98"
                 >
-                  <FiDownload className="text-xs" />
                   <span>Unduh</span>
+                  <FiDownload className="text-sm" />
                 </a>
               </div>
             </div>
