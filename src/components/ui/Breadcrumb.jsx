@@ -18,6 +18,11 @@ export default function Breadcrumb() {
     (c) => !c.isDeep && (pathname === c.href || pathname.startsWith(c.href))
   );
 
+  // Cari sub-child (isDeep) jika aktif
+  const deepChild = parent?.children?.find(
+    (c) => c.isDeep && (pathname === c.href || pathname.startsWith(c.href))
+  );
+
   if (!parent) return null;
 
   // Format title parent jadi Title Case (ACADEMIC → Academic)
@@ -40,7 +45,17 @@ export default function Breadcrumb() {
             {parentLabel}
           </Link>
           <span className="text-gray-400">/</span>
-          <span className="font-semibold text-heading">{child.title}</span>
+          {deepChild ? (
+            <>
+              <Link to={child.href} className="hover:text-primary transition-colors">
+                {child.title}
+              </Link>
+              <span className="text-gray-400">/</span>
+              <span className="font-semibold text-heading">{deepChild.title}</span>
+            </>
+          ) : (
+            <span className="font-semibold text-heading">{child.title}</span>
+          )}
         </>
       ) : (
         <span className="font-semibold text-heading">{parentLabel}</span>

@@ -1,13 +1,27 @@
 import SidebarLink from "./SidebarLink";
 
+
 /**
- * SidebarNav — judul bergaya label uppercase kecil (text-subheading-sidebar)
- * Mendukung section kontak opsional di bawah menu.
+ * Mengelompokkan item berurutan yang memiliki isDeep: true ke dalam children item induknya
  */
+function groupNestedMenus(items) {
+  return items.reduce((acc, item) => {
+    if (item.isDeep && acc.length > 0) {
+      const parent = acc[acc.length - 1];
+      (parent.children ??= []).push(item);
+    } else {
+      acc.push({ ...item, children: item.children ? [...item.children] : [] });
+    }
+    return acc;
+  }, []);
+}
+
 export default function SidebarNav({ title, menus = [], contact }) {
+  const structuredMenus = groupNestedMenus(menus);
+
   return (
     <div className="space-y-6">
-      {/* Judul sidebar — label uppercase kecil */}
+      {/* Judul sidebar */}
       {title && (
         <div className="pb-3 border-b border-gray-200">
           <p className="text-[11px] uppercase tracking-widest font-semibold text-subheading-sidebar">
@@ -18,7 +32,7 @@ export default function SidebarNav({ title, menus = [], contact }) {
 
       {/* List menu */}
       <nav className="relative pl-4 space-y-4 border-l border-gray-200">
-        {menus.map((menu) => (
+        {structuredMenus.map((menu) => (
           <SidebarLink key={menu.href} menu={menu} />
         ))}
       </nav>

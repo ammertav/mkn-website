@@ -70,10 +70,13 @@ export default function App() {
 
         {/* Akademik — nested routes */}
         <Route path="/akademik" element={<AkademikLayout />}>
-          <Route index element={<Navigate to="kurikulum" replace />} />
-          <Route path="kurikulum/*" element={<Kurikulum />} />
+          <Route index element={<Navigate to="profil-lulusan" replace />} />
           <Route path="profil-lulusan" element={<ProfilLulusan />} />
           <Route path="capaian-pembelajaran" element={<CapaianPembelajaran />} />
+          <Route path="kurikulum" element={<Navigate to="reguler" replace />} />
+          <Route path="kurikulum/reguler" element={<Kurikulum />} />
+          <Route path="kurikulum/internasional" element={<Kurikulum />} />
+          <Route path="kurikulum/*" element={<Navigate to="reguler" replace />} />
           <Route path="panduan-akademik" element={<Panduan />} />
           <Route path="panduan-evaluasi" element={<Panduan />} />
           <Route path="asesmen" element={<Panduan />} />
@@ -150,8 +153,8 @@ export default function App() {
           <Route path="lowongan" element={<JobVacancies />} />
         </Route>
         {/* Direct / Legacy Aliases */}
-        <Route path="/kurikulum" element={<Navigate to="/akademik/kurikulum" replace />} />
-        <Route path="/kurikulum/*" element={<Navigate to="/akademik/kurikulum" replace />} />
+        <Route path="/kurikulum" element={<Navigate to="/akademik/kurikulum/reguler" replace />} />
+        <Route path="/kurikulum/*" element={<Navigate to="/akademik/kurikulum/reguler" replace />} />
         <Route path="/organisasi-mahasiswa" element={<Navigate to="/mahasiswa/organisasi" replace />} />
         <Route path="/unit-kegiatan-mahasiswa" element={<Navigate to="/mahasiswa/ukm" replace />} />
         <Route path="/dosen" element={<Navigate to="/staff/dosen" replace />} />

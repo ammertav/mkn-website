@@ -15,11 +15,12 @@ export const navLinks = [
       { title: "Profil Lulusan", href: "/akademik/profil-lulusan" },
       { title: "Capaian Pembelajaran Lulusan", href: "/akademik/capaian-pembelajaran" },
       { title: "Kurikulum", href: "/akademik/kurikulum" },
-      { title: "Reguler", href: "/akademik/kurikulum", isDeep: true },
-      { title: "Internasional", href: "/akademik/kurikulum", isDeep: true },
+      { title: "Reguler", href: "/akademik/kurikulum/reguler", isDeep: true },
+      { title: "Internasional", href: "/akademik/kurikulum/internasional", isDeep: true },
       { title: "Panduan Akademik", href: "/akademik/panduan-akademik" },
       { title: "Panduan Evaluasi Pembelajaran", href: "/akademik/panduan-evaluasi" },
       { title: "Panduan Ujian", href: "/akademik/panduan-ujian" },
+    
     ],
   },
   {
