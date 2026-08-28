@@ -1,81 +1,8 @@
 import { useState, useMemo } from "react";
 import { Helmet } from "react-helmet-async";
+import { Link } from "react-router-dom";
 import { FiSearch, FiChevronDown } from "react-icons/fi";
-
-const facultyData = [
-    {
-        id: 1,
-        name: "Prof. Dr. H. Ahmad Fauzan",
-        title: "Guru Besar Hukum Agraria",
-        expertise: "Hukum Agraria",
-        type: "Guru Besar",
-        bio: "Pakar dalam penyelesaian sengketa tanah dan regulasi pendaftaran tanah di Indonesia.",
-        image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=600&q=80",
-    },
-    {
-        id: 2,
-        name: "Dr. Siti Aminah",
-        title: "Hukum Perusahaan",
-        expertise: "Hukum Perusahaan",
-        type: "Dosen Tetap",
-        bio: "Fokus pada hukum kepailitan, tata kelola perusahaan yang baik, dan akuisisi.",
-        image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=600&q=80",
-    },
-    {
-        id: 3,
-        name: "Dr. Budi Santoso",
-        title: "Hukum Perikatan",
-        expertise: "Hukum Perikatan",
-        type: "Dosen Tetap",
-        bio: "Spesialisasi dalam penyusunan kontrak dan hukum jaminan fidusia.",
-        image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=600&q=80",
-    },
-    {
-        id: 4,
-        name: "Prof. Dr. Sri Wiyanti",
-        title: "Hukum Keluarga & Waris",
-        expertise: "Hukum Keluarga & Waris",
-        type: "Guru Besar",
-        bio: "Ahli dalam hukum kewarisan perdata barat dan hukum keluarga Islam.",
-        image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=600&q=80",
-    },
-    {
-        id: 5,
-        name: "Dr. Hendro Prasetyo, S.H., M.Kn.",
-        title: "Dosen Praktisi / Notaris & PPAT",
-        expertise: "Hukum Kenotariatan",
-        type: "Dosen Praktisi",
-        bio: "Praktisi senior dengan pengalaman 20+ tahun dalam perancangan akta perbankan syariah.",
-        image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600&q=80",
-    },
-    {
-        id: 6,
-        name: "Dr. Nurul Hidayati, S.H., M.H.",
-        title: "Hukum Pasar Modal & Siber",
-        expertise: "Hukum Bisnis & Pasar Modal",
-        type: "Dosen Tetap",
-        bio: "Peneliti transaksi elektronik, cyber law, dan perlindungan data pribadi konsumen.",
-        image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80",
-    },
-    {
-        id: 7,
-        name: "Prof. Dr. Gunarto, S.H., M.Hum.",
-        title: "Guru Besar Filsafat Hukum",
-        expertise: "Filsafat & Teori Hukum",
-        type: "Guru Besar",
-        bio: "Mendalami rekonstruksi hukum berbasis nilai keadilan Islam dan kemaslahatan umat.",
-        image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=600&q=80",
-    },
-    {
-        id: 8,
-        name: "Dr. Rahmat Hidayat, S.H., M.Kn.",
-        title: "Hukum Pajak & BPHTB",
-        expertise: "Hukum Pajak Kenotariatan",
-        type: "Dosen Tetap",
-        bio: "Fokus kajian kewajiban perpajakan dalam transaksi peralihan hak atas tanah dan bangunan.",
-        image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=600&q=80",
-    },
-];
+import { facultyData } from "../../data/facultyData";
 
 export default function FacultyDirectory() {
     const [searchQuery, setSearchQuery] = useState("");
@@ -234,24 +161,25 @@ export default function FacultyDirectory() {
                     {displayedFaculty.length > 0 ? (
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                             {displayedFaculty.map((faculty) => (
-                                <div
+                                <Link
                                     key={faculty.id}
-                                    className="bg-white border border-gray-200 rounded-xs overflow-hidden flex flex-col hover:border-gray-300 transition-all duration-200 shadow-2xs"
+                                    to={`/staff/dosen/${faculty.slug || faculty.id}`}
+                                    className="bg-white border border-gray-200 rounded-xs overflow-hidden flex flex-col hover:border-primary/40 hover:shadow-md transition-all duration-200 group cursor-pointer"
                                 >
                                     {/* Grayscale Portrait Photo */}
-                                    <div className="w-full aspect-[4/5] bg-gray-100 overflow-hidden relative">
+                                    <div className="w-full aspect-4/5 bg-gray-100 overflow-hidden relative">
                                         <img
                                             src={faculty.image}
                                             alt={faculty.name}
-                                            className="w-full h-full object-cover object-top grayscale contrast-110"
+                                            className="w-full h-full object-cover object-top grayscale contrast-110 group-hover:scale-103 transition-transform duration-300"
                                             loading="lazy"
                                         />
                                     </div>
 
                                     {/* Card Details */}
-                                    <div className="p-5 text-center flex flex-col flex-grow justify-between">
+                                    <div className="p-5 text-center flex flex-col grow justify-between">
                                         <div className="space-y-1.5">
-                                            <h3 className="font-heading font-bold text-[17px] text-primary leading-tight">
+                                            <h3 className="font-heading font-bold text-[17px] text-primary leading-tight group-hover:text-primary/90 transition-colors">
                                                 {faculty.name}
                                             </h3>
                                             <p className="text-[11.5px] uppercase tracking-wider text-gray-500 font-medium">
@@ -259,11 +187,11 @@ export default function FacultyDirectory() {
                                             </p>
                                         </div>
 
-                                        <p className="text-[12.5px] text-body leading-relaxed mt-4">
+                                        <p className="text-[12.5px] text-body leading-relaxed mt-4 line-clamp-3">
                                             {faculty.bio}
                                         </p>
                                     </div>
-                                </div>
+                                </Link>
                             ))}
                         </div>
                     ) : (

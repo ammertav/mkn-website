@@ -26,6 +26,7 @@ const CommunityService = lazy(() => import("./pages/Penerimaan/CommunityService"
 const StaffLayout = lazy(() => import("./pages/Staff/index"));
 const Tendik = lazy(() => import("./pages/Staff/Tendik"));
 const FacultyDirectory = lazy(() => import("./pages/Staff/FacultyDirectory"));
+const FacultyDetail = lazy(() => import("./pages/Staff/FacultyDetail"));
 
 // Download page
 const Download = lazy(() => import("./pages/Download"));
@@ -105,8 +106,10 @@ export default function App() {
         <Route path="/staff" element={<StaffLayout />}>
           <Route index element={<Navigate to="dosen" replace />} />
           <Route path="dosen" element={<FacultyDirectory />} />
+          <Route path="dosen/:slug" element={<FacultyDetail />} />
           <Route path="tendik" element={<Tendik />} />
           <Route path="faculty-directory" element={<FacultyDirectory />} />
+          <Route path="faculty-directory/:slug" element={<FacultyDetail />} />
         </Route>
 
         {/* Download route */}

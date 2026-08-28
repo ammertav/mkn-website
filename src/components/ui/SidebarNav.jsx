@@ -2,21 +2,6 @@ import { useLocation } from "react-router-dom";
 import SidebarLink from "./SidebarLink";
 import { navLinks } from "../../data/navLinks";
 
-/**
- * Mengelompokkan item berurutan yang memiliki isDeep: true ke dalam children item induknya
- */
-function groupNestedMenus(items) {
-  return items.reduce((acc, item) => {
-    if (item.isDeep && acc.length > 0) {
-      const parent = acc[acc.length - 1];
-      (parent.children ??= []).push(item);
-    } else {
-      acc.push({ ...item, children: item.children ? [...item.children] : [] });
-    }
-    return acc;
-  }, []);
-}
-
 export default function SidebarNav({ title, menus, contact }) {
   const { pathname } = useLocation();
 
@@ -29,9 +14,8 @@ export default function SidebarNav({ title, menus, contact }) {
   const displayTitle =
     title ?? (currentParent ? `MENU ${currentParent.title.toUpperCase()}` : null);
 
-  // Jika menus tidak diberikan, otomatis ambil children dari currentParent
-  const rawMenus = menus ?? currentParent?.children ?? [];
-  const structuredMenus = groupNestedMenus(rawMenus);
+  // Ambil menu anak langsung dari struktur pohon navLinks
+  const navItems = menus ?? currentParent?.children ?? [];
 
   return (
     <div className="space-y-6">
@@ -46,7 +30,7 @@ export default function SidebarNav({ title, menus, contact }) {
 
       {/* List menu */}
       <nav className="relative pl-4 space-y-4 border-l border-gray-200">
-        {structuredMenus.map((menu) => (
+        {navItems.map((menu) => (
           <SidebarLink key={menu.href} menu={menu} />
         ))}
       </nav>

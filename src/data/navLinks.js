@@ -2,7 +2,6 @@
  * @typedef {Object} NavItem
  * @property {string} title
  * @property {string} href
- * @property {boolean} [isDeep]
  * @property {NavItem[]} [children]
  */
 
@@ -14,13 +13,17 @@ export const navLinks = [
     children: [
       { title: "Profil Lulusan", href: "/akademik/profil-lulusan" },
       { title: "Capaian Pembelajaran Lulusan", href: "/akademik/capaian-pembelajaran" },
-      { title: "Kurikulum", href: "/akademik/kurikulum" },
-      { title: "Reguler", href: "/akademik/kurikulum/reguler", isDeep: true },
-      { title: "Internasional", href: "/akademik/kurikulum/internasional", isDeep: true },
+      {
+        title: "Kurikulum",
+        href: "/akademik/kurikulum",
+        children: [
+          { title: "Reguler", href: "/akademik/kurikulum/reguler" },
+          { title: "Internasional", href: "/akademik/kurikulum/internasional" },
+        ],
+      },
       { title: "Panduan Akademik", href: "/akademik/panduan-akademik" },
       { title: "Panduan Evaluasi Pembelajaran", href: "/akademik/panduan-evaluasi" },
       { title: "Panduan Ujian", href: "/akademik/panduan-ujian" },
-    
     ],
   },
   {
@@ -73,11 +76,16 @@ export const navLinks = [
     href: "/download",
     children: [
       { title: "Quality Assurance Unit", href: "/quality-assurance" },
-      { title: "QA Documents", href: "/quality-assurance/qa-documents" },
-      { title: "QA Policy", href: "/quality-assurance/qa-documents/qa-policy", isDeep: true },
-      { title: "QA Manual Standard", href: "/quality-assurance/qa-documents/qa-manual-standard", isDeep: true },
-      { title: "QA Standar", href: "/quality-assurance/qa-documents/qa-standar", isDeep: true },
-      { title: "QA Forms", href: "/quality-assurance/qa-documents/qa-forms", isDeep: true },
+      {
+        title: "QA Documents",
+        href: "/quality-assurance/qa-documents",
+        children: [
+          { title: "QA Policy", href: "/quality-assurance/qa-documents/qa-policy" },
+          { title: "QA Manual Standard", href: "/quality-assurance/qa-documents/qa-manual-standard" },
+          { title: "QA Standar", href: "/quality-assurance/qa-documents/qa-standar" },
+          { title: "QA Forms", href: "/quality-assurance/qa-documents/qa-forms" },
+        ],
+      },
       { title: "Internal Audit Report", href: "/quality-assurance/internal-audit-report" },
       { title: "Learning and Teaching Report", href: "/quality-assurance/learning-teaching-report" },
       { title: "Student Survey Report", href: "/quality-assurance/student-survey-report" },

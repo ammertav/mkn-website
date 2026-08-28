@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 
 /**
- * DesktopNav - Navigasi desktop dengan active underline dan dropdown
+ * DesktopNav - Navigasi desktop dengan active underline dan dropdown bertingkat
  */
 export default function DesktopNav({ navLinks }) {
   const [activeDropdown, setActiveDropdown] = useState(null);
@@ -25,14 +25,6 @@ export default function DesktopNav({ navLinks }) {
         ? "text-primary border-primary"
         : "text-navbar border-transparent hover:text-primary hover:border-primary/40"
     }`;
-
-  // Class untuk item di dalam dropdown
-  const getDropdownItemClass = (isDeep) => ({ isActive }) => {
-    const base = "block py-1.5 transition-colors duration-150 hover:bg-red-50/70 hover:text-primary";
-    const indent = isDeep ? "pl-8 pr-4 text-[12.5px]" : "px-5 py-2 text-[13.5px]";
-    const color = isActive ? "text-primary font-semibold" : isDeep ? "text-gray-400" : "text-navbar";
-    return `${base} ${indent} ${color}`;
-  };
 
   return (
     <nav
@@ -84,17 +76,40 @@ export default function DesktopNav({ navLinks }) {
                 >
                   <div className="bg-white shadow-[0_8px_24px_rgba(0,0,0,0.10)] border-t-[3px] border-t-primary border border-gray-100/80 min-w-[250px] py-2">
                     {link.children.map((item, idx) => {
-                      const isDeep = Boolean(item.isDeep);
+                      const hasSubChildren = Boolean(item.children?.length);
 
                       return (
-                        <NavLink
-                          key={idx}
-                          to={item.href}
-                          onClick={() => setActiveDropdown(null)}
-                          className={getDropdownItemClass(isDeep)}
-                        >
-                          {item.title}
-                        </NavLink>
+                        <div key={idx}>
+                          {/* Item Level 1 */}
+                          <NavLink
+                            to={item.href}
+                            onClick={() => setActiveDropdown(null)}
+                            className={({ isActive }) =>
+                              `block px-5 py-2 text-[13.5px] transition-colors duration-150 hover:bg-red-50/70 hover:text-primary ${
+                                isActive ? "text-primary font-semibold" : "text-navbar"
+                              }`
+                            }
+                          >
+                            {item.title}
+                          </NavLink>
+
+                          {/* Sub-item Level 2 (Indented) */}
+                          {hasSubChildren &&
+                            item.children.map((sub, subIdx) => (
+                              <NavLink
+                                key={subIdx}
+                                to={sub.href}
+                                onClick={() => setActiveDropdown(null)}
+                                className={({ isActive }) =>
+                                  `block pl-8 pr-4 py-1.5 text-[12.5px] transition-colors duration-150 hover:bg-red-50/70 hover:text-primary ${
+                                    isActive ? "text-primary font-semibold" : "text-gray-400"
+                                  }`
+                                }
+                              >
+                                {sub.title}
+                              </NavLink>
+                            ))}
+                        </div>
                       );
                     })}
                   </div>
