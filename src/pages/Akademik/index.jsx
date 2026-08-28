@@ -43,8 +43,6 @@ export default function AkademikLayout() {
             {/* Sidebar */}
             <aside className="lg:col-span-4 xl:col-span-3">
               <SidebarNav
-                title="Menu Academic"
-                menus={akademikMenus}
                 contact={akademikContact}
               />
             </aside>

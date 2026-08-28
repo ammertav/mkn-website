@@ -1,5 +1,6 @@
+import { useLocation } from "react-router-dom";
 import SidebarLink from "./SidebarLink";
-
+import { navLinks } from "../../data/navLinks";
 
 /**
  * Mengelompokkan item berurutan yang memiliki isDeep: true ke dalam children item induknya
@@ -16,16 +17,29 @@ function groupNestedMenus(items) {
   }, []);
 }
 
-export default function SidebarNav({ title, menus = [], contact }) {
-  const structuredMenus = groupNestedMenus(menus);
+export default function SidebarNav({ title, menus, contact }) {
+  const { pathname } = useLocation();
+
+  // Cari parent dari navLinks berdasarkan pathname (misal /akademik -> ACADEMIC)
+  const currentParent = navLinks.find(
+    (nav) => nav.href !== "/" && pathname.startsWith(nav.href)
+  );
+
+  // Jika title tidak diberikan, otomatis gunakan "MENU {CURRENT_PARENT_TITLE}"
+  const displayTitle =
+    title ?? (currentParent ? `MENU ${currentParent.title.toUpperCase()}` : null);
+
+  // Jika menus tidak diberikan, otomatis ambil children dari currentParent
+  const rawMenus = menus ?? currentParent?.children ?? [];
+  const structuredMenus = groupNestedMenus(rawMenus);
 
   return (
     <div className="space-y-6">
       {/* Judul sidebar */}
-      {title && (
+      {displayTitle && (
         <div className="pb-3 border-b border-gray-200">
           <p className="text-[11px] uppercase tracking-widest font-semibold text-subheading-sidebar">
-            {title}
+            {displayTitle}
           </p>
         </div>
       )}

@@ -1,9 +1,10 @@
-import { Helmet } from "react-helmet-async";
 import { Outlet } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
+import Breadcrumb from "../../components/ui/Breadcrumb";
 
-export default function StafLayout() {
+export default function StaffLayout() {
   return (
     <>
       <Helmet>
@@ -15,18 +16,19 @@ export default function StafLayout() {
         />
       </Helmet>
 
-      <div className="flex flex-col min-h-screen font-body text-body bg-banner">
-        {/* Header Navbar */}
+      <main className="flex flex-col min-h-screen bg-banner font-body text-body">
         <Navbar />
 
-        {/* Full-width content tanpa sidebar */}
-        <main className="flex-grow">
-          <Outlet />
-        </main>
+        <div className="w-full flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+          {/* Breadcrumb berada di paling atas */}
+          <Breadcrumb />
 
-        {/* Footer */}
+          {/* Konten full-width tanpa sidebar */}
+          <Outlet />
+        </div>
+
         <Footer />
-      </div>
+      </main>
     </>
   );
 }

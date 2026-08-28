@@ -34,7 +34,7 @@ export default function QualityAssuranceLayout() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
             {/* Left Sidebar Navigation */}
             <aside className="lg:col-span-4 xl:col-span-3">
-              <SidebarNav title="Navigasi Bagian" menus={qualityAssuranceMenus} />
+              <SidebarNav />
             </aside>
 
             {/* Right Main Dynamic Route Content */}
