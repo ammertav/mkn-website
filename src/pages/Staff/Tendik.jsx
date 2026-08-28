@@ -173,7 +173,7 @@ export default function Tendik() {
         />
       </Helmet>
 
-      <div className="space-y-10">
+      <div className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 pt-4 sm:pt-6 pb-12 sm:pb-16 space-y-10">
         {/* Header Title Section */}
         <div>
           <span className="text-[11px] font-bold tracking-[0.16em] uppercase text-primary block mb-2">

@@ -132,25 +132,23 @@ export default function FacultyDirectory() {
 
             <div className="w-full font-body text-body">
                 {/* Hero Title Section */}
-                <div className="w-full bg-banner">
-                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-14 lg:pt-24 pb-8">
-                        <span className="text-xs sm:text-xs font-semibold tracking-widest text-body uppercase block mb-2">
-                            DIREKTORI AKADEMIK
-                        </span>
-                        <h1 className="text-3xl sm:text-4xl md:text-5xl font-heading text-heading font-normal tracking-tight">
-                            Faculty & Research
-                        </h1>
-                        <p className="mt-4 text-text-sm sm:text-base text-special leading-relaxed max-w-2xl">
-                            Jelajahi keahlian dan kontribusi penelitian dari staf pengajar kami yang merupakan pakar
-                            terkemuka di bidang ilmu kenotariatan dan hukum, berkomitmen pada keunggulan akademis dan
-                            integritas profesional.
-                        </p>
-                    </div>
+                <div className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 pt-4 sm:pt-6 pb-8">
+                    <span className="text-xs font-semibold tracking-widest text-primary uppercase block mb-2">
+                        DIREKTORI AKADEMIK
+                    </span>
+                    <h1 className="text-3xl sm:text-4xl md:text-5xl font-heading text-heading font-normal tracking-tight">
+                        Faculty & Research
+                    </h1>
+                    <p className="mt-4 text-sm sm:text-base text-special leading-relaxed max-w-3xl">
+                        Jelajahi keahlian dan kontribusi penelitian dari staf pengajar kami yang merupakan pakar
+                        terkemuka di bidang ilmu kenotariatan dan hukum, berkomitmen pada keunggulan akademis dan
+                        integritas profesional.
+                    </p>
                 </div>
 
                 {/* Filter & Search Bar Section */}
                 <div className="w-full border-y border-gray-200 bg-white">
-                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5">
+                    <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 py-5">
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-4 items-end">
 
                             {/* Search by Name */}
@@ -232,7 +230,7 @@ export default function FacultyDirectory() {
                 </div>
 
                 {/* Faculty Grid Cards */}
-                <div className="w-full flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+                <div className="w-full flex-grow max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 py-12">
                     {displayedFaculty.length > 0 ? (
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                             {displayedFaculty.map((faculty) => (

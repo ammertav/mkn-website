@@ -39,7 +39,7 @@ const campusCultureData = [
 export default function CampusCulture() {
   return (
     <section className="w-full bg-hero-heading font-body py-16 sm:py-24 border-b border-gray-200">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
         <div className="text-center mb-12 sm:mb-16">
