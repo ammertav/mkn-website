@@ -9,6 +9,7 @@ export default function SidebarLink({ menu }) {
 
   const hasChildren = Boolean(menu.children?.length);
   const isParentActive = pathname.startsWith(menu.href);
+  const isDeep = Boolean(menu.isDeep);
 
   return (
     <div>
@@ -16,12 +17,18 @@ export default function SidebarLink({ menu }) {
         to={menu.href}
         end
         className={({ isActive }) =>
-          `relative flex items-center justify-between gap-1 text-sm md:text-[15px] transition-colors duration-150 py-0.5 ${
-            isActive
-              ? "text-primary font-bold before:absolute before:-left-[18px] before:top-0 before:bottom-0 before:w-[3px] before:bg-primary before:rounded-full"
-              : isParentActive
-              ? "text-heading font-semibold"
-              : "text-special hover:text-heading font-normal"
+          `relative flex items-center justify-between gap-1 transition-colors duration-150 py-0.5 ${
+            isDeep
+              ? "ml-4 text-xs md:text-[13.5px] " +
+                (isActive
+                  ? "text-primary font-semibold before:absolute before:-left-[18px] before:top-0 before:bottom-0 before:w-[2px] before:bg-primary"
+                  : "text-gray-500 hover:text-heading font-normal")
+              : "text-sm md:text-[15px] " +
+                (isActive
+                  ? "text-primary font-bold before:absolute before:-left-[18px] before:top-0 before:bottom-0 before:w-[3px] before:bg-primary before:rounded-full"
+                  : isParentActive
+                  ? "text-heading font-semibold"
+                  : "text-special hover:text-heading font-normal")
           }`
         }
       >

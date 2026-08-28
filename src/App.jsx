@@ -149,6 +149,16 @@ export default function App() {
           <Route path="pusat-karir" element={<CareerCenter />} />
           <Route path="lowongan" element={<JobVacancies />} />
         </Route>
+        {/* Direct / Legacy Aliases */}
+        <Route path="/kurikulum" element={<Navigate to="/akademik/kurikulum" replace />} />
+        <Route path="/kurikulum/*" element={<Navigate to="/akademik/kurikulum" replace />} />
+        <Route path="/organisasi-mahasiswa" element={<Navigate to="/mahasiswa/organisasi" replace />} />
+        <Route path="/unit-kegiatan-mahasiswa" element={<Navigate to="/mahasiswa/ukm" replace />} />
+        <Route path="/dosen" element={<Navigate to="/staff/dosen" replace />} />
+        <Route path="/tenaga-kependidikan" element={<Navigate to="/staff/tendik" replace />} />
+        <Route path="/pusat-karir" element={<Navigate to="/alumni/pusat-karir" replace />} />
+        <Route path="/qa-documents" element={<Navigate to="/quality-assurance/qa-documents" replace />} />
+        <Route path="/qa-documents/*" element={<Navigate to="/quality-assurance/qa-documents" replace />} />
         <Route path="/alumni-karir" element={<Navigate to="/alumni" replace />} />
 
         <Route path="*" element={<h1>404 Not Found</h1>} />

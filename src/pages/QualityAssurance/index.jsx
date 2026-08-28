@@ -7,7 +7,7 @@ import SidebarNav from "../../components/ui/SidebarNav";
 import { navLinks } from "../../data/navLinks";
 
 const qualityAssuranceMenus =
-  navLinks.find((n) => n.href === "/quality-assurance")?.children ?? [];
+  navLinks.find((n) => n.href === "/download" || n.href === "/quality-assurance")?.children ?? [];
 
 export default function QualityAssuranceLayout() {
   return (
@@ -26,7 +26,7 @@ export default function QualityAssuranceLayout() {
         <Navbar />
 
         {/* Main Content Container */}
-        <div className="w-full flex-grow max-w-[1300px] mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+        <div className="w-full flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
           {/* Breadcrumb berada di paling atas full-width */}
           <Breadcrumb />
 

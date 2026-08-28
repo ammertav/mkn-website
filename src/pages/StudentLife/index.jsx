@@ -26,7 +26,7 @@ export default function StudentLifeLayout() {
         <Navbar />
 
         {/* Main Content Container */}
-        <div className="w-full flex-grow max-w-[1300px] mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+        <div className="w-full flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
           {/* Breadcrumb berada di paling atas */}
           <Breadcrumb />
 

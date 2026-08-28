@@ -20,8 +20,8 @@ export default function Download() {
         <Navbar />
 
         {/* Main Content Container */}
-        <div className="w-full flex-grow max-w-[1300px] mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 space-y-6">
-          <Breadcrumb current="Download" />
+        <div className="w-full flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 space-y-6">
+          <Breadcrumb />
 
           <div className="space-y-2">
             <span className="text-xs font-bold tracking-wider uppercase text-primary">

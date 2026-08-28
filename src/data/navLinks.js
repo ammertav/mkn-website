@@ -1,32 +1,42 @@
-/** @type {Array<{title: string, href: string, children?: Array}>} */
+/** 
+ * @typedef {Object} NavItem
+ * @property {string} title
+ * @property {string} href
+ * @property {boolean} [isDeep]
+ * @property {NavItem[]} [children]
+ */
+
+/** @type {NavItem[]} */
 export const navLinks = [
-  { title: "TENTANG KAMI", href: "/#tentang-kami" },
   {
-    title: "AKADEMIK",
+    title: "ACADEMIC",
     href: "/akademik",
     children: [
       { title: "Profil Lulusan", href: "/akademik/profil-lulusan" },
       { title: "Capaian Pembelajaran Lulusan", href: "/akademik/capaian-pembelajaran" },
-      {
-        title: "Kurikulum",
-        href: "/akademik/kurikulum",
-        children: [
-          { title: "Reguler", href: "/akademik/kurikulum/reguler" },
-          { title: "Internasional", href: "/akademik/kurikulum/internasional" },
-        ],
-      },
+      { title: "Kurikulum", href: "/akademik/kurikulum" },
+      { title: "Reguler", href: "/akademik/kurikulum", isDeep: true },
+      { title: "Internasional", href: "/akademik/kurikulum", isDeep: true },
       { title: "Panduan Akademik", href: "/akademik/panduan-akademik" },
-      { title: "Panduan Evaluasi/Penilaian Pembelajaran", href: "/akademik/panduan-evaluasi" },
-      {
-        title: "Panduan Ujian",
-        href: "/akademik/panduan-ujian",
-        children: [
-          { title: "UTS/UAS", href: "/akademik/panduan-ujian/uts-uas" },
-          { title: "Magang", href: "/akademik/panduan-ujian/magang" },
-          { title: "Skripsi", href: "/akademik/panduan-ujian/skripsi" },
-        ],
-      },
-      { title: "Asesment", href: "/akademik/asesmen" },
+      { title: "Panduan Evaluasi Pembelajaran", href: "/akademik/panduan-evaluasi" },
+      { title: "Panduan Ujian", href: "/akademik/panduan-ujian" },
+    ],
+  },
+  {
+    title: "MAHASISWA",
+    href: "/mahasiswa",
+    children: [
+      { title: "Organisasi Mahasiswa", href: "/mahasiswa/organisasi" },
+      { title: "Unit Kegiatan Mahasiswa", href: "/mahasiswa/ukm" },
+    ],
+  },
+  {
+    title: "ALUMNI",
+    href: "/alumni",
+    children: [
+      { title: "Tracer Study", href: "/alumni/tracer-study" },
+      { title: "Pusat Karir", href: "/alumni/pusat-karir" },
+      { title: "Lowongan Pekerjaan", href: "/alumni/lowongan" },
     ],
   },
   {
@@ -40,12 +50,11 @@ export const navLinks = [
     ],
   },
   {
-    title: "STAFF",
+    title: "STAF",
     href: "/staff",
     children: [
       { title: "Dosen", href: "/staff/dosen" },
-      { title: "Tendik", href: "/staff/tendik" },
-      { title: "Faculty Directory", href: "/staff/faculty-directory" },
+      { title: "Tenaga Kependidikan", href: "/staff/tendik" },
     ],
   },
   {
@@ -61,44 +70,17 @@ export const navLinks = [
   {
     title: "DOWNLOAD",
     href: "/download",
-  },
-  {
-    title: "QUALITY ASSURANCE UNIT",
-    href: "/quality-assurance",
     children: [
-      {
-        title: "QA Documents",
-        href: "/quality-assurance/qa-documents",
-        children: [
-          { title: "QA Policy", href: "/quality-assurance/qa-documents/qa-policy" },
-          { title: "QA Manual Standard", href: "/quality-assurance/qa-documents/qa-manual-standard" },
-          { title: "QA Standar", href: "/quality-assurance/qa-documents/qa-standar" },
-          { title: "QA Forms", href: "/quality-assurance/qa-documents/qa-forms" },
-        ],
-      },
+      { title: "Quality Assurance Unit", href: "/quality-assurance" },
+      { title: "QA Documents", href: "/quality-assurance/qa-documents" },
+      { title: "QA Policy", href: "/quality-assurance/qa-documents/qa-policy", isDeep: true },
+      { title: "QA Manual Standard", href: "/quality-assurance/qa-documents/qa-manual-standard", isDeep: true },
+      { title: "QA Standar", href: "/quality-assurance/qa-documents/qa-standar", isDeep: true },
+      { title: "QA Forms", href: "/quality-assurance/qa-documents/qa-forms", isDeep: true },
       { title: "Internal Audit Report", href: "/quality-assurance/internal-audit-report" },
       { title: "Learning and Teaching Report", href: "/quality-assurance/learning-teaching-report" },
       { title: "Student Survey Report", href: "/quality-assurance/student-survey-report" },
       { title: "Alumni Survey Report", href: "/quality-assurance/alumni-survey-report" },
-    ],
-  },
-  {
-    title: "MAHASISWA",
-    href: "/mahasiswa",
-    children: [
-      { title: "Organisasi Mahasiswa", href: "/mahasiswa/organisasi" },
-      { title: "Unit Kegiatan Mahasiswa (UKM)", href: "/mahasiswa/ukm" },
-      { title: "Fasilitas Kampus", href: "/mahasiswa/fasilitas" },
-      { title: "Akomodasi", href: "/mahasiswa/akomodasi" },
-    ],
-  },
-  {
-    title: "ALUMNI",
-    href: "/alumni",
-    children: [
-      { title: "Tracer Study", href: "/alumni/tracer-study" },
-      { title: "Pusat Karir", href: "/alumni/pusat-karir" },
-      { title: "Lowongan Pekerjaan", href: "/alumni/lowongan" },
     ],
   },
 ];

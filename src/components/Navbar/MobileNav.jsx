@@ -8,14 +8,10 @@ import { AnimatePresence, motion } from "framer-motion";
  */
 function MobileMenuItem({ link, checkIsActive, onClose }) {
   const location = useLocation();
-  const [expanded, setExpanded] = useState({});
+  const [isExpanded, setIsExpanded] = useState(false);
   const isActive = checkIsActive(link.href);
   const hasChildren = Boolean(link.children?.length);
 
-  // Toggle buka/tutup submenu berdasarkan key
-  const toggle = (key) => setExpanded((prev) => ({ ...prev, [key]: !prev[key] }));
-
-  // Menu dengan Submenu (Accordion)
   if (hasChildren) {
     return (
       <div className="border-b border-gray-100 py-1">
@@ -24,96 +20,49 @@ function MobileMenuItem({ link, checkIsActive, onClose }) {
           <Link
             to={link.href}
             onClick={onClose}
-            className={`text-xs uppercase tracking-wider transition-colors ${
-              isActive ? "font-bold text-primary" : "font-semibold text-heading hover:text-primary"
+            className={`text-[11px] uppercase tracking-[0.16em] transition-colors ${
+              isActive ? "font-bold text-primary" : "font-semibold text-navbar hover:text-primary"
             }`}
           >
             {link.title}
           </Link>
           <button
-            onClick={() => toggle(link.title)}
+            onClick={() => setIsExpanded((prev) => !prev)}
             className="p-1 text-gray-500 hover:text-primary cursor-pointer"
             aria-label="Toggle submenu"
           >
             <FiChevronDown
               className={`w-4 h-4 transition-transform duration-200 ${
-                expanded[link.title] ? "rotate-180 text-primary" : ""
+                isExpanded ? "rotate-180 text-primary" : ""
               }`}
             />
           </button>
         </div>
 
-        {/* Submenu Level-1 */}
-        {expanded[link.title] && (
-          <div className="pl-3 pb-2 space-y-1 bg-gray-50/50 rounded-md my-1 py-2">
+        {/* Submenu List */}
+        {isExpanded && (
+          <div className="pl-2 pb-2 space-y-1 bg-gray-50/60 rounded-md my-1 py-2">
             {link.children.map((sub, si) => {
-              const hasSub = Boolean(sub.children?.length);
-              const subKey = `${link.title}_${sub.title}`;
-              const isSubActive =
-                location.pathname === sub.href ||
-                (hasSub && location.pathname.startsWith(sub.href));
+              const isSubActive = location.pathname === sub.href;
+              const isDeep = Boolean(sub.isDeep);
 
-              // Submenu Level-2 (Nested Accordion)
-              if (hasSub) {
-                return (
-                  <div key={si} className="py-1">
-                    <div className="flex items-center justify-between pr-2">
-                      <Link
-                        to={sub.href}
-                        onClick={onClose}
-                        className={`text-xs font-medium py-1 transition-colors ${
-                          isSubActive ? "text-primary font-bold" : "text-heading hover:text-primary"
-                        }`}
-                      >
-                        {sub.title}
-                      </Link>
-                      <button
-                        onClick={() => toggle(subKey)}
-                        className="p-1 text-gray-400 hover:text-primary cursor-pointer"
-                        aria-label="Toggle nested submenu"
-                      >
-                        <FiChevronDown
-                          className={`w-3.5 h-3.5 transition-transform duration-200 ${
-                            expanded[subKey] ? "rotate-180 text-primary" : ""
-                          }`}
-                        />
-                      </button>
-                    </div>
-
-                    {/* Submenu Level-2 Links */}
-                    {expanded[subKey] && (
-                      <div className="pl-4 py-1 space-y-1">
-                        {sub.children.map((nested, ni) => {
-                          const isNestedActive = location.pathname === nested.href;
-                          return (
-                            <Link
-                              key={ni}
-                              to={nested.href}
-                              onClick={onClose}
-                              className={`block text-xs py-1 pl-2 transition-colors ${
-                                isNestedActive
-                                  ? "text-primary font-bold border-l-2 border-primary"
-                                  : "text-gray-600 hover:text-primary border-l border-primary/30 font-normal"
-                              }`}
-                            >
-                              {nested.title}
-                            </Link>
-                          );
-                        })}
-                      </div>
-                    )}
-                  </div>
-                );
-              }
-
-              // Single Sub-item Link
               return (
                 <Link
                   key={si}
                   to={sub.href}
                   onClick={onClose}
-                  className={`block text-xs py-1.5 transition-colors ${
-                    isSubActive ? "text-primary font-bold" : "text-heading hover:text-primary font-medium"
+                  className={`block transition-colors leading-relaxed ${
+                    isDeep
+                      ? `pl-6 py-1 text-xs ${
+                          isSubActive
+                            ? "text-primary font-semibold"
+                            : "text-gray-500 hover:text-primary font-normal"
+                        }`
+                      : `pl-3 py-1.5 text-xs ${
+                          isSubActive
+                            ? "text-primary font-bold"
+                            : "text-heading hover:text-primary font-medium"
+                        }`
                   }`}
                 >
                   {sub.title}
@@ -127,8 +76,8 @@ function MobileMenuItem({ link, checkIsActive, onClose }) {
   }
 
   // Single Menu Item (Tanpa Children)
-  const cls = `text-xs uppercase tracking-wider py-2.5 border-b border-gray-100 transition-colors ${
-    isActive ? "font-bold text-primary" : "font-semibold text-heading hover:text-primary"
+  const cls = `text-[11px] uppercase tracking-[0.16em] py-2.5 border-b border-gray-100 transition-colors block ${
+    isActive ? "font-bold text-primary" : "font-semibold text-navbar hover:text-primary"
   }`;
 
   const isInternal = link.href.startsWith("/") && !link.href.startsWith("/#");
