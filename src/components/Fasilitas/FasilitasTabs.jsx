@@ -1,4 +1,5 @@
-import { NavLink } from "react-router-dom";
+import { useEffect, useRef } from "react";
+import { NavLink, useLocation } from "react-router-dom";
 import { FiChevronUp, FiChevronDown } from "react-icons/fi";
 
 const tabs = [
@@ -9,33 +10,53 @@ const tabs = [
 ];
 
 export default function FasilitasTabs() {
+  const location = useLocation();
+  const navRef = useRef(null);
+  const activeTabRef = useRef(null);
+
+  // Auto-scroll active tab into center view on route change (especially on mobile)
+  useEffect(() => {
+    if (activeTabRef.current) {
+      activeTabRef.current.scrollIntoView({
+        behavior: "smooth",
+        block: "nearest",
+        inline: "center",
+      });
+    }
+  }, [location.pathname]);
+
   return (
-    <div className="w-full bg-white border-b border-gray-200 sticky top-16 z-30 shadow-xs">
-      <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
-        {/* Horizontal Navigation Tabs */}
+    <div className="w-full bg-white border-b border-gray-200 sticky top-16 z-30 shadow-2xs">
+      <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between relative">
+        {/* Horizontal Navigation Tabs with smooth touch scrolling */}
         <nav
-          className="flex items-center space-x-6 sm:space-x-8 lg:space-x-10 overflow-x-auto scrollbar-none py-0 -mb-px"
+          ref={navRef}
+          className="flex items-center gap-2 sm:gap-6 lg:gap-8 overflow-x-auto scrollbar-none py-2.5 w-full flex-1 scroll-smooth overscroll-x-contain touch-pan-x"
           aria-label="Fasilitas Tabs"
         >
-          {tabs.map((tab) => (
-            <NavLink
-              key={tab.path}
-              to={tab.path}
-              className={({ isActive }) =>
-                `whitespace-nowrap py-4 px-1 text-xs sm:text-sm font-semibold tracking-wider transition-all border-b-2 ${
-                  isActive
-                    ? "border-primary text-primary"
-                    : "border-transparent text-gray-500 hover:text-heading hover:border-gray-300"
-                }`
-              }
-            >
-              {tab.label}
-            </NavLink>
-          ))}
+          {tabs.map((tab) => {
+            const isActive = location.pathname === tab.path;
+            return (
+              <NavLink
+                key={tab.path}
+                to={tab.path}
+                ref={isActive ? activeTabRef : null}
+                className={({ isActive }) =>
+                  `shrink-0 whitespace-nowrap px-3 sm:px-4 py-2 text-xs sm:text-sm font-semibold tracking-wider transition-all rounded-xs ${
+                    isActive
+                      ? "border-2 border-heading text-primary font-bold bg-white shadow-2xs"
+                      : "border-2 border-transparent text-body hover:text-heading hover:bg-gray-50"
+                  }`
+                }
+              >
+                {tab.label}
+              </NavLink>
+            );
+          })}
         </nav>
 
-        {/* Right Tab Switcher / Scroll Indicator Icon */}
-        <div className="hidden sm:flex items-center flex-col justify-center text-gray-400 pl-4 py-2 select-none">
+        {/* Right Tab Switcher Indicator */}
+        <div className="hidden sm:flex items-center flex-col justify-center text-gray-400 pl-4 py-2 select-none shrink-0">
           <FiChevronUp className="w-3.5 h-3.5 -mb-1" />
           <FiChevronDown className="w-3.5 h-3.5 -mt-1" />
         </div>
