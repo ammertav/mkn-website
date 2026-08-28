@@ -24,7 +24,6 @@ const CommunityService = lazy(() => import("./pages/Penerimaan/CommunityService"
 
 // Staff sub-pages
 const StaffLayout = lazy(() => import("./pages/Staff/index"));
-const Dosen = lazy(() => import("./pages/Staff/Dosen"));
 const Tendik = lazy(() => import("./pages/Staff/Tendik"));
 const FacultyDirectory = lazy(() => import("./pages/Staff/FacultyDirectory"));
 
@@ -105,7 +104,7 @@ export default function App() {
         {/* Staff — nested routes */}
         <Route path="/staff" element={<StaffLayout />}>
           <Route index element={<Navigate to="dosen" replace />} />
-          <Route path="dosen" element={<Dosen />} />
+          <Route path="dosen" element={<FacultyDirectory />} />
           <Route path="tendik" element={<Tendik />} />
           <Route path="faculty-directory" element={<FacultyDirectory />} />
         </Route>
