@@ -1,9 +1,14 @@
+import { useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import { useParams, Link, Navigate } from "react-router-dom";
 import { facultyData } from "../../data/facultyData";
 
 export default function FacultyDetail() {
   const { slug } = useParams();
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+  }, [slug]);
 
   // Cari dosen berdasarkan slug atau id
   const faculty = facultyData.find(

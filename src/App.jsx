@@ -1,6 +1,7 @@
 import { Suspense, lazy } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import Loading from "./components/Loading";
+import ScrollToTop from "./components/ScrollToTop";
 
 const Home = lazy(() => import("./pages/Home"));
 
@@ -78,8 +79,10 @@ const JobVacancies = lazy(() => import("./pages/Alumni/JobVacancies"));
 
 export default function App() {
   return (
-    <Suspense fallback={<Loading />}>
-      <Routes>
+    <>
+      <ScrollToTop />
+      <Suspense fallback={<Loading />}>
+        <Routes>
         <Route path="/" element={<Home />} />
 
         {/* Profil — nested routes */}
@@ -201,5 +204,6 @@ export default function App() {
         <Route path="*" element={<h1>404 Not Found</h1>} />
       </Routes>
     </Suspense>
+    </>
   );
 }
