@@ -3,6 +3,18 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import Loading from "./components/Loading";
 
 const Home = lazy(() => import("./pages/Home"));
+
+// Profil sub-pages
+const ProfilLayout = lazy(() => import("./pages/Profil/index"));
+const Sejarah = lazy(() => import("./pages/Profil/Sejarah"));
+const VisiMisi = lazy(() => import("./pages/Profil/VisiMisi"));
+const Tujuan = lazy(() => import("./pages/Profil/Tujuan"));
+const StrukturOrganisasi = lazy(() => import("./pages/Profil/StrukturOrganisasi"));
+
+// Berita sub-pages
+const BeritaIndex = lazy(() => import("./pages/Berita/index"));
+const BeritaDetail = lazy(() => import("./pages/Berita/BeritaDetail"));
+
 const AkademikLayout = lazy(() => import("./pages/Akademik/index"));
 const Kurikulum = lazy(() => import("./pages/Akademik/Kurikulum"));
 const ProfilLulusan = lazy(() => import("./pages/Akademik/ProfilLulusan"));
@@ -26,6 +38,7 @@ const CommunityService = lazy(() => import("./pages/Penerimaan/CommunityService"
 const StaffLayout = lazy(() => import("./pages/Staff/index"));
 const Tendik = lazy(() => import("./pages/Staff/Tendik"));
 const FacultyDirectory = lazy(() => import("./pages/Staff/FacultyDirectory"));
+const FacultyDetail = lazy(() => import("./pages/Staff/FacultyDetail"));
 
 // Download page
 const Download = lazy(() => import("./pages/Download"));
@@ -39,6 +52,7 @@ const Perpustakaan = lazy(() => import("./pages/Fasilitas/Perpustakaan"));
 
 // Quality Assurance Unit sub-pages
 const QualityAssuranceLayout = lazy(() => import("./pages/QualityAssurance/index"));
+const QualityAssuranceOverview = lazy(() => import("./pages/QualityAssurance/QualityAssuranceOverview"));
 const QaDocuments = lazy(() => import("./pages/QualityAssurance/QaDocuments"));
 const QaPolicy = lazy(() => import("./pages/QualityAssurance/QaPolicy"));
 const QaManualStandard = lazy(() => import("./pages/QualityAssurance/QaManualStandard"));
@@ -67,6 +81,20 @@ export default function App() {
     <Suspense fallback={<Loading />}>
       <Routes>
         <Route path="/" element={<Home />} />
+
+        {/* Profil — nested routes */}
+        <Route path="/profil" element={<ProfilLayout />}>
+          <Route index element={<Navigate to="sejarah" replace />} />
+          <Route path="sejarah" element={<Sejarah />} />
+          <Route path="sejarah-latar-belakang" element={<Navigate to="/profil/sejarah" replace />} />
+          <Route path="visi-misi" element={<VisiMisi />} />
+          <Route path="tujuan" element={<Tujuan />} />
+          <Route path="struktur-organisasi" element={<StrukturOrganisasi />} />
+        </Route>
+
+        {/* Berita — catalog & detail routes */}
+        <Route path="/berita" element={<BeritaIndex />} />
+        <Route path="/berita/:slug" element={<BeritaDetail />} />
 
         {/* Akademik — nested routes */}
         <Route path="/akademik" element={<AkademikLayout />}>
@@ -105,8 +133,10 @@ export default function App() {
         <Route path="/staff" element={<StaffLayout />}>
           <Route index element={<Navigate to="dosen" replace />} />
           <Route path="dosen" element={<FacultyDirectory />} />
+          <Route path="dosen/:slug" element={<FacultyDetail />} />
           <Route path="tendik" element={<Tendik />} />
           <Route path="faculty-directory" element={<FacultyDirectory />} />
+          <Route path="faculty-directory/:slug" element={<FacultyDetail />} />
         </Route>
 
         {/* Download route */}
@@ -123,8 +153,8 @@ export default function App() {
 
         {/* Quality Assurance Unit — nested routes */}
         <Route path="/quality-assurance" element={<QualityAssuranceLayout />}>
-          <Route index element={<Navigate to="qa-documents" replace />} />
-          <Route path="qa-documents" element={<QaDocuments />} />
+          <Route index element={<QualityAssuranceOverview />} />
+          <Route path="qa-documents" element={<Navigate to="/quality-assurance/qa-documents/qa-policy" replace />} />
           <Route path="qa-documents/qa-policy" element={<QaPolicy />} />
           <Route path="qa-documents/qa-manual-standard" element={<QaManualStandard />} />
           <Route path="qa-documents/qa-standar" element={<QaStandar />} />
@@ -153,6 +183,10 @@ export default function App() {
           <Route path="lowongan" element={<JobVacancies />} />
         </Route>
         {/* Direct / Legacy Aliases */}
+        <Route path="/sejarah" element={<Navigate to="/profil/sejarah" replace />} />
+        <Route path="/visi-misi" element={<Navigate to="/profil/visi-misi" replace />} />
+        <Route path="/tujuan" element={<Navigate to="/profil/tujuan" replace />} />
+        <Route path="/struktur-organisasi" element={<Navigate to="/profil/struktur-organisasi" replace />} />
         <Route path="/kurikulum" element={<Navigate to="/akademik/kurikulum/reguler" replace />} />
         <Route path="/kurikulum/*" element={<Navigate to="/akademik/kurikulum/reguler" replace />} />
         <Route path="/organisasi-mahasiswa" element={<Navigate to="/mahasiswa/organisasi" replace />} />

@@ -3,7 +3,7 @@ import { FiSearch, FiMail, FiX } from "react-icons/fi";
 export default function TopBar({ currentLang, setCurrentLang, isSearchOpen, setIsSearchOpen, searchQuery, setSearchQuery }) {
   return (
     <div className="border-b border-gray-200/80 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-10 flex items-center justify-between text-xs sm:text-sm">
+      <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 h-10 flex items-center justify-between text-xs sm:text-sm">
         {/* Language Selector */}
         <div className="flex items-center space-x-2 font-medium tracking-wide">
           {["ID", "EN"].map((lang, i) => (

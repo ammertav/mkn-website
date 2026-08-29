@@ -2,45 +2,34 @@ import { Helmet } from "react-helmet-async";
 import { Outlet } from "react-router-dom";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
-import Breadcrumb from "../../components/ui/Breadcrumb";
-import SidebarNav from "../../components/ui/SidebarNav";
-import { navLinks } from "../../data/navLinks";
-
-const fasilitasMenus = navLinks.find((n) => n.href === "/fasilitas")?.children ?? [];
+import FasilitasHero from "../../components/Fasilitas/FasilitasHero";
+import FasilitasTabs from "../../components/Fasilitas/FasilitasTabs";
 
 export default function FasilitasLayout() {
   return (
     <>
       <Helmet>
         <html lang="id" />
-        <title>Fasilitas Kampus | MKn UNISSULA</title>
+        <title>Fasilitas Kampus | Magister Kenotariatan UNISSULA</title>
         <meta
           name="description"
           content="Fasilitas Ruang Kelas, Laboratorium Kenotariatan, Student Research Center, dan Perpustakaan Program Studi Magister Kenotariatan (MKn) UNISSULA."
         />
       </Helmet>
 
-      <main className="flex flex-col min-h-screen bg-banner font-body text-body">
+      <main className="flex flex-col min-h-screen bg-white font-body text-body">
         {/* Header Navbar */}
         <Navbar />
 
-        {/* Main Content Container */}
-        <div className="w-full flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
-          {/* Breadcrumb berada di paling atas full-width */}
-          <Breadcrumb />
+        {/* Hero Section */}
+        <FasilitasHero />
 
-          {/* 2-Column Layout */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
-            {/* Left Sidebar Navigation */}
-            <aside className="lg:col-span-4 xl:col-span-3">
-              <SidebarNav />
-            </aside>
+        {/* Tab Navigation Subnav */}
+        <FasilitasTabs />
 
-            {/* Right Main Dynamic Route Content */}
-            <section className="lg:col-span-8 xl:col-span-9">
-              <Outlet />
-            </section>
-          </div>
+        {/* Main Content Area (Full-Width, No Sidebar) */}
+        <div className="w-full flex-grow max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16 lg:py-20">
+          <Outlet />
         </div>
 
         {/* Footer */}

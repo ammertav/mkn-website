@@ -63,7 +63,7 @@ export default function Hero() {
 
       {/* Bottom Accreditation & Stats Bar */}
       <div className="w-full bg-white border-y border-gray-200">
-        <div className="max-w-[1400px] mx-auto grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-gray-200 py-4 sm:py-5">
+        <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-gray-200 py-4 sm:py-5">
           <div className="px-4 py-2 sm:py-1 text-center">
             <span className="text-xs font-semibold tracking-widest text-heading uppercase">
               AKREDITASI UNGGUL BAN-PT

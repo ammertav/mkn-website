@@ -34,7 +34,7 @@ export default function AkademikLayout() {
       <main className="flex flex-col min-h-screen bg-banner font-body text-body">
         <Navbar />
 
-        <div className="w-full flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+        <div className="w-full flex-grow max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
           {/* Breadcrumb berada di paling atas, membentang di atas 2 kolom */}
           <Breadcrumb />
 

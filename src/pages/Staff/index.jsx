@@ -19,11 +19,13 @@ export default function StaffLayout() {
       <main className="flex flex-col min-h-screen bg-banner font-body text-body">
         <Navbar />
 
-        <div className="w-full flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
-          {/* Breadcrumb berada di paling atas */}
+        {/* Breadcrumb container aligns with Navbar */}
+        <div className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 pt-6 sm:pt-8 pb-2">
           <Breadcrumb />
+        </div>
 
-          {/* Konten full-width tanpa sidebar */}
+        {/* Full-width container for outlet so child sections can go full-bleed */}
+        <div className="w-full flex-grow">
           <Outlet />
         </div>
 
