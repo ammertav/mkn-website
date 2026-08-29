@@ -3,26 +3,31 @@ import { FaInstagram, FaTwitter, FaYoutube, FaLinkedinIn } from "react-icons/fa"
 
 const footerSections = [
   {
+    title: "PROFIL",
+    links: [
+      { name: "Sejarah / Latar Belakang", href: "/profil/sejarah" },
+      { name: "Visi dan Misi", href: "/profil/visi-misi" },
+      { name: "Tujuan", href: "/profil/tujuan" },
+      { name: "Struktur Organisasi", href: "/profil/struktur-organisasi" },
+      { name: "Berita & Wawasan", href: "/berita" },
+    ],
+  },
+  {
     title: "ACADEMIC",
     links: [
       { name: "Profil Lulusan", href: "/akademik/profil-lulusan" },
-      { name: "Capaian Pembelajaran Lulusan", href: "/akademik/capaian-pembelajaran" },
+      { name: "Capaian Pembelajaran", href: "/akademik/capaian-pembelajaran" },
       { name: "Kurikulum", href: "/akademik/kurikulum" },
       { name: "Panduan Akademik", href: "/akademik/panduan-akademik" },
-      { name: "Panduan Evaluasi Pembelajaran", href: "/akademik/panduan-evaluasi" },
+      { name: "Panduan Evaluasi", href: "/akademik/panduan-evaluasi" },
       { name: "Panduan Ujian", href: "/akademik/panduan-ujian" },
     ],
   },
   {
-    title: "MAHASISWA",
+    title: "MAHASISWA & ALUMNI",
     links: [
       { name: "Organisasi Mahasiswa", href: "/mahasiswa/organisasi" },
       { name: "Unit Kegiatan Mahasiswa", href: "/mahasiswa/ukm" },
-    ],
-  },
-  {
-    title: "ALUMNI",
-    links: [
       { name: "Tracer Study", href: "/alumni/tracer-study" },
       { name: "Pusat Karir", href: "/alumni/pusat-karir" },
       { name: "Lowongan Pekerjaan", href: "/alumni/lowongan" },
@@ -44,7 +49,6 @@ const footerSections = [
       { name: "Tenaga Kependidikan", href: "/staff/tendik" },
       { name: "Ruang Kelas", href: "/fasilitas/ruang-kelas" },
       { name: "Laboratorium", href: "/fasilitas/laboratorium" },
-      { name: "Student Research Center", href: "/fasilitas/student-research-center" },
       { name: "Perpustakaan", href: "/fasilitas/perpustakaan" },
     ],
   },
@@ -54,9 +58,8 @@ const footerSections = [
       { name: "Quality Assurance Unit", href: "/quality-assurance" },
       { name: "QA Documents", href: "/quality-assurance/qa-documents" },
       { name: "Internal Audit Report", href: "/quality-assurance/internal-audit-report" },
-      { name: "Learning and Teaching Report", href: "/quality-assurance/learning-teaching-report" },
-      { name: "Student Survey Report", href: "/quality-assurance/student-survey-report" },
-      { name: "Alumni Survey Report", href: "/quality-assurance/alumni-survey-report" },
+      { name: "Learning Report", href: "/quality-assurance/learning-teaching-report" },
+      { name: "Student Survey", href: "/quality-assurance/student-survey-report" },
     ],
   },
 ];

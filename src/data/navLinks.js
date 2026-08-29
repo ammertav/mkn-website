@@ -5,8 +5,21 @@
  * @property {NavItem[]} [children]
  */
 
-/** @type {NavItem[]} */
 export const navLinks = [
+  {
+    title: "PROFIL",
+    href: "/profil",
+    children: [
+      { title: "Sejarah / Latar Belakang", href: "/profil/sejarah" },
+      { title: "Visi dan Misi", href: "/profil/visi-misi" },
+      { title: "Tujuan", href: "/profil/tujuan" },
+      { title: "Struktur Organisasi", href: "/profil/struktur-organisasi" },
+    ],
+  },
+  {
+    title: "BERITA",
+    href: "/berita",
+  },
   {
     title: "ACADEMIC",
     href: "/akademik",

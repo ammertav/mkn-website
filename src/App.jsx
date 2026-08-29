@@ -3,6 +3,18 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import Loading from "./components/Loading";
 
 const Home = lazy(() => import("./pages/Home"));
+
+// Profil sub-pages
+const ProfilLayout = lazy(() => import("./pages/Profil/index"));
+const Sejarah = lazy(() => import("./pages/Profil/Sejarah"));
+const VisiMisi = lazy(() => import("./pages/Profil/VisiMisi"));
+const Tujuan = lazy(() => import("./pages/Profil/Tujuan"));
+const StrukturOrganisasi = lazy(() => import("./pages/Profil/StrukturOrganisasi"));
+
+// Berita sub-pages
+const BeritaIndex = lazy(() => import("./pages/Berita/index"));
+const BeritaDetail = lazy(() => import("./pages/Berita/BeritaDetail"));
+
 const AkademikLayout = lazy(() => import("./pages/Akademik/index"));
 const Kurikulum = lazy(() => import("./pages/Akademik/Kurikulum"));
 const ProfilLulusan = lazy(() => import("./pages/Akademik/ProfilLulusan"));
@@ -69,6 +81,20 @@ export default function App() {
     <Suspense fallback={<Loading />}>
       <Routes>
         <Route path="/" element={<Home />} />
+
+        {/* Profil — nested routes */}
+        <Route path="/profil" element={<ProfilLayout />}>
+          <Route index element={<Navigate to="sejarah" replace />} />
+          <Route path="sejarah" element={<Sejarah />} />
+          <Route path="sejarah-latar-belakang" element={<Navigate to="/profil/sejarah" replace />} />
+          <Route path="visi-misi" element={<VisiMisi />} />
+          <Route path="tujuan" element={<Tujuan />} />
+          <Route path="struktur-organisasi" element={<StrukturOrganisasi />} />
+        </Route>
+
+        {/* Berita — catalog & detail routes */}
+        <Route path="/berita" element={<BeritaIndex />} />
+        <Route path="/berita/:slug" element={<BeritaDetail />} />
 
         {/* Akademik — nested routes */}
         <Route path="/akademik" element={<AkademikLayout />}>
@@ -157,6 +183,10 @@ export default function App() {
           <Route path="lowongan" element={<JobVacancies />} />
         </Route>
         {/* Direct / Legacy Aliases */}
+        <Route path="/sejarah" element={<Navigate to="/profil/sejarah" replace />} />
+        <Route path="/visi-misi" element={<Navigate to="/profil/visi-misi" replace />} />
+        <Route path="/tujuan" element={<Navigate to="/profil/tujuan" replace />} />
+        <Route path="/struktur-organisasi" element={<Navigate to="/profil/struktur-organisasi" replace />} />
         <Route path="/kurikulum" element={<Navigate to="/akademik/kurikulum/reguler" replace />} />
         <Route path="/kurikulum/*" element={<Navigate to="/akademik/kurikulum/reguler" replace />} />
         <Route path="/organisasi-mahasiswa" element={<Navigate to="/mahasiswa/organisasi" replace />} />
