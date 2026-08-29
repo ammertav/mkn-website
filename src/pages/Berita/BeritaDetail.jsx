@@ -10,27 +10,62 @@ import {
   FiCheck,
   FiArrowRight,
 } from "react-icons/fi";
-import { FaWhatsapp, FaTwitter, FaFacebookF, FaLinkedinIn } from "react-icons/fa";
+import { FaWhatsapp, FaTwitter } from "react-icons/fa";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import Breadcrumb from "../../components/ui/Breadcrumb";
-import { beritaList } from "../../data/beritaData";
+import beritaList from "../../data/berita.json";
+import { getBeritaImage } from "../../utils/imageResolver";
+import { generateSlug } from "../../utils/slugHelper";
 
 export default function BeritaDetail() {
   const { slug } = useParams();
   const navigate = useNavigate();
   const [copied, setCopied] = useState(false);
 
-  const article = useMemo(() => {
-    return beritaList.find((b) => b.slug === slug);
+  const rawArticle = useMemo(() => {
+    return (beritaList || []).find(
+      (b) => generateSlug(b.title, b.slug) === slug || b.slug === slug || String(b.id) === slug
+    );
   }, [slug]);
 
-  // Berita terkait (kategori sama atau artikel lain)
+  const article = useMemo(() => {
+    if (!rawArticle) return null;
+    const paragraphs =
+      typeof rawArticle.content === "string"
+        ? rawArticle.content
+            .split(/\n+/)
+            .map((p) => p.trim())
+            .filter(Boolean)
+        : Array.isArray(rawArticle.content)
+        ? rawArticle.content
+        : [rawArticle.content];
+
+    return {
+      ...rawArticle,
+      image: getBeritaImage(rawArticle.gambar),
+      category: rawArticle.tags || "News",
+      date: rawArticle.tanggal || "Oktober 2022",
+      readTime: "3 min baca",
+      author: rawArticle.author || "admkn",
+      authorRole: "Redaksi MKn UNISSULA",
+      paragraphs,
+      tags: Array.isArray(rawArticle.tags) ? rawArticle.tags : [rawArticle.tags || "News"],
+    };
+  }, [rawArticle]);
+
+  // Berita terkait
   const relatedArticles = useMemo(() => {
     if (!article) return [];
-    return beritaList
-      .filter((b) => b.id !== article.id)
-      .slice(0, 3);
+    const currentSlug = generateSlug(article.title, article.slug);
+    return (beritaList || [])
+      .filter((b) => generateSlug(b.title, b.slug) !== currentSlug && b.id !== article.id)
+      .slice(0, 3)
+      .map((item) => ({
+        ...item,
+        image: getBeritaImage(item.gambar),
+        slug: generateSlug(item.title, item.slug),
+      }));
   }, [article]);
 
   const handleCopyLink = () => {
@@ -67,9 +102,9 @@ export default function BeritaDetail() {
       <Helmet>
         <html lang="id" />
         <title>{article.title} | Berita MKn UNISSULA</title>
-        <meta name="description" content={article.excerpt} />
+        <meta name="description" content={article.paragraphs[0]} />
         <meta property="og:title" content={article.title} />
-        <meta property="og:description" content={article.excerpt} />
+        <meta property="og:description" content={article.paragraphs[0]} />
         <meta property="og:image" content={article.image} />
       </Helmet>
 
@@ -171,46 +206,26 @@ export default function BeritaDetail() {
             </div>
 
             {/* Featured Image */}
-            <div className="my-8 overflow-hidden rounded-xs bg-gray-100 border border-gray-200">
-              <img
-                src={article.image}
-                alt={article.title}
-                className="w-full max-h-[520px] object-cover object-center"
-              />
-              <p className="p-3 text-center text-xs text-gray-500 bg-gray-50/80 italic border-t border-gray-100">
-                Dokumentasi Program Studi Magister Kenotariatan (MKn) Fakultas Hukum UNISSULA Semarang.
-              </p>
-            </div>
-
-            {/* Lead Excerpt */}
-            <div className="text-base sm:text-lg font-medium text-special leading-relaxed pb-6 border-b border-gray-100">
-              {article.excerpt}
-            </div>
+            {article.image && (
+              <div className="my-8 overflow-hidden rounded-xs bg-gray-100 border border-gray-200">
+                <img
+                  src={article.image}
+                  alt={article.title}
+                  className="w-full max-h-[520px] object-cover object-center"
+                />
+                <p className="p-3 text-center text-xs text-gray-500 bg-gray-50/80 italic border-t border-gray-100">
+                  Dokumentasi Program Studi Magister Kenotariatan (MKn) Fakultas Hukum UNISSULA Semarang.
+                </p>
+              </div>
+            )}
 
             {/* Main Content Paragraphs */}
-            <div className="py-6 space-y-5 text-base text-body leading-relaxed">
-              {article.content.map((paragraph, idx) => (
-                <p key={idx}>{paragraph}</p>
+            <div className="py-6 space-y-5 text-base sm:text-[16.5px] text-body leading-relaxed">
+              {article.paragraphs.map((paragraph, idx) => (
+                <p key={idx} className="leading-relaxed">
+                  {paragraph}
+                </p>
               ))}
-
-              {/* Highlight Quote Box */}
-              <div className="my-6 bg-red-50/50 border-l-4 border-primary p-5 sm:p-6 rounded-r-xs">
-                <blockquote className="font-heading italic text-heading text-lg sm:text-xl">
-                  &ldquo;Pendidikan kenotariatan di UNISSULA diarahkan agar para notaris masa depan
-                  memiliki kecakapan hukum komparatif dan internasional, dengan benteng moral Budaya
-                  Akademik Islami yang kokoh.&rdquo;
-                </blockquote>
-                <span className="block mt-2 text-xs font-bold text-primary uppercase tracking-wider">
-                  — Pimpinan Fakultas Hukum UNISSULA
-                </span>
-              </div>
-
-              <p>
-                Dengan senantiasa memperbaharui kurikulum dan menjalin sinergi dengan instansi
-                regulator serta organisasi profesi kenotariatan nasional, Program Studi Magister
-                Kenotariatan UNISSULA berkomitmen melahirkan praktisi dan pemikir hukum yang berdaya saing
-                tinggi di kancah nasional maupun global.
-              </p>
             </div>
 
             {/* Tags Section */}
@@ -242,8 +257,10 @@ export default function BeritaDetail() {
                 <h4 className="font-heading font-semibold text-base text-heading">
                   {article.author}
                 </h4>
-                <p className="text-xs text-gray-500">
-                  {article.authorRole} • Magister Kenotariatan UNISSULA
+                <p className="text-xs text-gray-500">{article.authorRole}</p>
+                <p className="text-xs text-body leading-relaxed pt-1">
+                  Kabar berita dan publikasi kegiatan Program Studi Magister (S2) Kenotariatan Fakultas
+                  Hukum Universitas Islam Sultan Agung (UNISSULA) Semarang.
                 </p>
               </div>
             </div>
@@ -251,51 +268,52 @@ export default function BeritaDetail() {
 
           {/* Related Articles Section */}
           {relatedArticles.length > 0 && (
-            <div className="mt-14 space-y-6">
-              <div className="flex items-center justify-between pb-4 border-b border-gray-200">
-                <h3 className="font-heading font-bold text-xl sm:text-2xl text-heading">
-                  Berita & Publikasi Terkait
+            <section className="mt-14 space-y-6">
+              <div className="flex items-center justify-between border-b border-gray-200 pb-3">
+                <h3 className="font-heading font-semibold text-xl sm:text-2xl text-heading">
+                  Berita Lainnya
                 </h3>
                 <Link
                   to="/berita"
-                  className="text-xs font-bold text-primary hover:underline flex items-center space-x-1"
+                  className="text-xs font-semibold text-primary hover:underline flex items-center space-x-1"
                 >
                   <span>Lihat Semua</span>
                   <FiArrowRight />
                 </Link>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {relatedArticles.map((rel) => (
                   <Link
                     key={rel.id}
                     to={`/berita/${rel.slug}`}
-                    className="bg-white border border-gray-200 rounded-xs overflow-hidden group hover:border-primary/40 hover:shadow-xs transition-all flex flex-col justify-between"
+                    className="bg-white border border-gray-200 rounded-xs overflow-hidden group hover:border-primary/50 transition-colors flex flex-col shadow-2xs"
                   >
-                    <div className="aspect-[16/10] bg-gray-100 overflow-hidden">
+                    <div className="aspect-[16/10] bg-gray-100 overflow-hidden relative">
                       <img
                         src={rel.image}
                         alt={rel.title}
-                        className="w-full h-full object-cover group-hover:scale-103 transition-transform duration-300"
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        onError={(e) => {
+                          e.currentTarget.style.display = "none";
+                        }}
                       />
                     </div>
                     <div className="p-4 space-y-2 flex-grow flex flex-col justify-between">
-                      <div>
-                        <span className="text-[10px] font-bold text-primary uppercase block">
-                          {rel.category}
-                        </span>
-                        <h4 className="font-heading font-medium text-sm text-heading group-hover:text-primary transition-colors line-clamp-2 mt-1">
-                          {rel.title}
-                        </h4>
-                      </div>
-                      <span className="text-[11px] text-gray-400 pt-2 block border-t border-gray-100">
-                        {rel.date}
+                      <span className="text-[11px] font-semibold text-primary uppercase tracking-wider block">
+                        {rel.tags || "NEWS"}
+                      </span>
+                      <h4 className="font-heading font-semibold text-sm sm:text-base text-heading group-hover:text-primary transition-colors line-clamp-2">
+                        {rel.title}
+                      </h4>
+                      <span className="text-[11px] text-gray-400 block pt-1">
+                        {rel.author || "admkn"}
                       </span>
                     </div>
                   </Link>
                 ))}
               </div>
-            </div>
+            </section>
           )}
         </div>
 
