@@ -36,7 +36,15 @@ export const navLinks = [
       },
       { title: "Panduan Akademik", href: "/akademik/panduan-akademik" },
       { title: "Panduan Evaluasi Pembelajaran", href: "/akademik/panduan-evaluasi" },
-      { title: "Panduan Ujian", href: "/akademik/panduan-ujian" },
+      {
+        title: "Panduan Ujian",
+        href: "/akademik/panduan-ujian",
+        children: [
+          { title: "UTS/UAS", href: "/akademik/panduan-ujian/uts-uas" },
+          { title: "Magang", href: "/akademik/panduan-ujian/magang" },
+          { title: "Skripsi", href: "/akademik/panduan-ujian/skripsi" },
+        ],
+      },
     ],
   },
   {
@@ -45,6 +53,7 @@ export const navLinks = [
     children: [
       { title: "Organisasi Mahasiswa", href: "/mahasiswa/organisasi" },
       { title: "Unit Kegiatan Mahasiswa", href: "/mahasiswa/ukm" },
+      { title: "Akomodasi", href: "/mahasiswa/akomodasi" },
     ],
   },
   {
@@ -86,7 +95,7 @@ export const navLinks = [
   },
   {
     title: "DOWNLOAD",
-    href: "/download",
+    href: "/quality-assurance",
     children: [
       { title: "Quality Assurance Unit", href: "/quality-assurance" },
       {

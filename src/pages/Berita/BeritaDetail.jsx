@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import {
@@ -22,6 +22,10 @@ export default function BeritaDetail() {
   const { slug } = useParams();
   const navigate = useNavigate();
   const [copied, setCopied] = useState(false);
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+  }, [slug]);
 
   const rawArticle = useMemo(() => {
     return (beritaList || []).find(

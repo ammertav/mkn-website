@@ -8,7 +8,7 @@ import { navLinks } from "../../data/navLinks";
 
 // Ambil menu anak untuk Quality Assurance dari navLinks
 const qualityAssuranceMenus =
-  navLinks.find((n) => n.href === "/download")?.children ?? [];
+  navLinks.find((n) => n.href === "/quality-assurance" || n.href === "/download")?.children ?? [];
 
 const qaContact = {
   title: "Kontak Penjaminan Mutu",
