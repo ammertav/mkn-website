@@ -45,6 +45,7 @@ export const navLinks = [
     children: [
       { title: "Organisasi Mahasiswa", href: "/mahasiswa/organisasi" },
       { title: "Unit Kegiatan Mahasiswa", href: "/mahasiswa/ukm" },
+      { title: "Akomodasi", href: "/mahasiswa/akomodasi" },
     ],
   },
   {

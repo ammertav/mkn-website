@@ -28,6 +28,7 @@ const footerSections = [
     links: [
       { name: "Organisasi Mahasiswa", href: "/mahasiswa/organisasi" },
       { name: "Unit Kegiatan Mahasiswa", href: "/mahasiswa/ukm" },
+      { name: "Akomodasi", href: "/mahasiswa/akomodasi" },
       { name: "Tracer Study", href: "/alumni/tracer-study" },
       { name: "Pusat Karir", href: "/alumni/pusat-karir" },
       { name: "Lowongan Pekerjaan", href: "/alumni/lowongan" },
