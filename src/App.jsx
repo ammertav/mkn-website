@@ -67,6 +67,7 @@ const StudentOrganizations = lazy(() => import("./pages/StudentLife/StudentOrgan
 const StudentActivities = lazy(() => import("./pages/StudentLife/StudentActivities"));
 const Accommodation = lazy(() => import("./pages/StudentLife/Accommodation"));
 const StudentOrganizationDetail = lazy(() => import("./pages/StudentLife/StudentOrganizationDetail"));
+const UKMDetail = lazy(() => import("./pages/StudentLife/UKMDetail"));
 
 // Alumni & Karir sub-pages
 const AlumniLayout = lazy(() => import("./pages/Alumni/index"));
@@ -173,6 +174,7 @@ export default function App() {
           <Route path="akomodasi" element={<Accommodation />} />
         </Route>
         <Route path="/mahasiswa/organisasi/:slug" element={<StudentOrganizationDetail />} />
+        <Route path="/mahasiswa/ukm/:slug" element={<UKMDetail />} />
 
 
         {/* Alumni & Karir — nested routes */}
