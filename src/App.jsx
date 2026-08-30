@@ -41,9 +41,6 @@ const Tendik = lazy(() => import("./pages/Staff/Tendik"));
 const FacultyDirectory = lazy(() => import("./pages/Staff/FacultyDirectory"));
 const FacultyDetail = lazy(() => import("./pages/Staff/FacultyDetail"));
 
-// Download page
-const Download = lazy(() => import("./pages/Download"));
-
 // Fasilitas sub-pages
 const FasilitasLayout = lazy(() => import("./pages/Fasilitas/index"));
 const RuangKelas = lazy(() => import("./pages/Fasilitas/RuangKelas"));
@@ -141,8 +138,8 @@ export default function App() {
           <Route path="faculty-directory/:slug" element={<FacultyDetail />} />
         </Route>
 
-        {/* Download route */}
-        <Route path="/download" element={<Download />} />
+        {/* Download route redirect to Quality Assurance */}
+        <Route path="/download" element={<Navigate to="/quality-assurance" replace />} />
 
         {/* Fasilitas — nested routes */}
         <Route path="/fasilitas" element={<FasilitasLayout />}>
