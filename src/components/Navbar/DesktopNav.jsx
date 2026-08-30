@@ -1,9 +1,10 @@
 import { useState, useRef } from "react";
 import { NavLink } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
+import { FiChevronRight } from "react-icons/fi";
 
 /**
- * DesktopNav - Navigasi desktop dengan active underline dan dropdown bertingkat
+ * DesktopNav - Navigasi desktop dengan active underline dan dropdown bertingkat (hover flyout)
  */
 export default function DesktopNav({ navLinks }) {
   const [activeDropdown, setActiveDropdown] = useState(null);
@@ -74,14 +75,15 @@ export default function DesktopNav({ navLinks }) {
                     isRightAligned ? "right-0" : "left-0"
                   }`}
                 >
-                  <div className="bg-white shadow-[0_8px_24px_rgba(0,0,0,0.10)] border-t-[3px] border-t-primary border border-gray-100/80 min-w-[250px] py-2">
+                  <div className="bg-white shadow-[0_8px_24px_rgba(0,0,0,0.10)] border-t-[3px] border-t-primary border border-gray-100/80 min-w-[250px] py-1.5">
                     {link.children.map((item, idx) => {
                       const hasSubChildren = Boolean(item.children?.length);
 
-                      return (
-                        <div key={idx}>
-                          {/* Item Level 1 */}
+                      // Jika tidak ada sub-item, tampilkan NavLink biasa
+                      if (!hasSubChildren) {
+                        return (
                           <NavLink
+                            key={idx}
                             to={item.href}
                             onClick={() => setActiveDropdown(null)}
                             className={({ isActive }) =>
@@ -92,23 +94,48 @@ export default function DesktopNav({ navLinks }) {
                           >
                             {item.title}
                           </NavLink>
+                        );
+                      }
 
-                          {/* Sub-item Level 2 (Indented) */}
-                          {hasSubChildren &&
-                            item.children.map((sub, subIdx) => (
-                              <NavLink
-                                key={subIdx}
-                                to={sub.href}
-                                onClick={() => setActiveDropdown(null)}
-                                className={({ isActive }) =>
-                                  `block pl-8 pr-4 py-1.5 text-[12.5px] transition-colors duration-150 hover:bg-red-50/70 hover:text-primary ${
-                                    isActive ? "text-primary font-semibold" : "text-gray-400"
-                                  }`
-                                }
-                              >
-                                {sub.title}
-                              </NavLink>
-                            ))}
+                      // Jika memiliki sub-item, tampilkan dengan icon chevron dan flyout saat di-hover
+                      return (
+                        <div key={idx} className="relative group/sub">
+                          <NavLink
+                            to={item.href}
+                            onClick={() => setActiveDropdown(null)}
+                            className={({ isActive }) =>
+                              `flex items-center justify-between px-5 py-2 text-[13.5px] transition-colors duration-150 hover:bg-red-50/70 hover:text-primary group-hover/sub:bg-red-50/70 group-hover/sub:text-primary ${
+                                isActive ? "text-primary font-semibold" : "text-navbar"
+                              }`
+                            }
+                          >
+                            <span>{item.title}</span>
+                            <FiChevronRight className="w-3.5 h-3.5 text-gray-400 group-hover/sub:text-primary group-hover/sub:translate-x-0.5 transition-all duration-150" />
+                          </NavLink>
+
+                          {/* Flyout Submenu Level 2 */}
+                          <div
+                            className={`hidden group-hover/sub:block absolute top-0 ${
+                              isRightAligned ? "right-full -mr-1.5 pr-1.5" : "left-full -ml-1.5 pl-1.5"
+                            } z-50`}
+                          >
+                            <div className="bg-white shadow-[0_8px_24px_rgba(0,0,0,0.12)] border-t-[3px] border-t-primary border border-gray-100/80 min-w-[200px] py-1.5">
+                              {item.children.map((sub, subIdx) => (
+                                <NavLink
+                                  key={subIdx}
+                                  to={sub.href}
+                                  onClick={() => setActiveDropdown(null)}
+                                  className={({ isActive }) =>
+                                    `block px-4 py-2 text-[13px] transition-colors duration-150 hover:bg-red-50/70 hover:text-primary ${
+                                      isActive ? "text-primary font-semibold bg-red-50/40" : "text-navbar"
+                                    }`
+                                  }
+                                >
+                                  {sub.title}
+                                </NavLink>
+                              ))}
+                            </div>
+                          </div>
                         </div>
                       );
                     })}
