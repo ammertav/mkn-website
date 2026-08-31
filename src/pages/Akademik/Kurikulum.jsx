@@ -18,7 +18,6 @@ export default function Kurikulum() {
   return (
     <>
       <Helmet>
-        <html lang="id" />
         <title>Kurikulum Program Studi | MKn UNISSULA</title>
         <meta
           name="description"

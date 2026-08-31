@@ -9,7 +9,6 @@ export default function InternalAuditReport() {
   return (
     <>
       <Helmet>
-        <html lang="id" />
         <title>Internal Audit Report | MKn UNISSULA</title>
         <meta
           name="description"

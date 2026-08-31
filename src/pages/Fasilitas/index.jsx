@@ -9,7 +9,6 @@ export default function FasilitasLayout() {
   return (
     <>
       <Helmet>
-        <html lang="id" />
         <title>Fasilitas Kampus | Magister Kenotariatan UNISSULA</title>
         <meta
           name="description"

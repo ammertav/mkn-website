@@ -6,7 +6,6 @@ export default function Kalender() {
   return (
     <>
       <Helmet>
-        <html lang="id" />
         <title>Kalender Akademik | MKn UNISSULA</title>
         <meta
           name="description"

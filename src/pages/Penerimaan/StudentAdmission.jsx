@@ -13,7 +13,6 @@ export default function StudentAdmission() {
   return (
     <>
       <Helmet>
-        <html lang="id" />
         <title>Penerimaan Mahasiswa Baru | MKn UNISSULA</title>
         <meta
           name="description"

@@ -4,14 +4,13 @@ import { NavLink, Outlet } from "react-router-dom";
 const subMenus = [
   { path: "uts-uas",  label: "UTS / UAS" },
   { path: "magang",   label: "Magang" },
-  { path: "skripsi",  label: "Skripsi" },
+  { path: "tesis",    label: "Tesis" },
 ];
 
 export default function PanduanUjian() {
   return (
     <>
       <Helmet>
-        <html lang="id" />
         <title>Panduan Ujian & Evaluasi | MKn UNISSULA</title>
         <meta
           name="description"
@@ -26,7 +25,7 @@ export default function PanduanUjian() {
           </h1>
           <p className="mt-4 text-[14px] md:text-[15px] text-body leading-relaxed max-w-3xl">
             Panduan resmi pelaksanaan ujian di Program Magister Kenotariatan UNISSULA, mencakup
-            prosedur UTS/UAS, pelaksanaan magang, dan penulisan serta sidang skripsi/tesis.
+            prosedur UTS/UAS, pelaksanaan magang, dan penulisan serta sidang tesis.
           </p>
         </div>
 

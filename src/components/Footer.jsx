@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import { FaInstagram, FaTwitter, FaYoutube, FaLinkedinIn } from "react-icons/fa";
 
+import logoUnissula from "../assets/images/logo-unissula-crest.png";
+
 const footerSections = [
   {
     title: "PROFIL",
@@ -75,9 +77,18 @@ export default function Footer() {
           <div className="lg:col-span-3 space-y-4 pr-0 lg:pr-4">
             <Link
               to="/"
-              className="inline-block text-primary font-heading text-2xl font-bold tracking-normal hover:opacity-95 transition-opacity"
+              className="flex items-center gap-2.5 hover:opacity-95 transition-opacity"
             >
-              MKn UNISSULA
+              <img
+                src={logoUnissula}
+                alt=""
+                aria-hidden="true"
+                className="h-11 w-auto object-contain shrink-0"
+              />
+              <span className="flex flex-col justify-center text-primary font-heading font-bold leading-tight tracking-normal">
+                <span className="text-[13px] sm:text-[15px]">MAGISTER KENOTARIATAN</span>
+                <span className="text-[13px] sm:text-[15px]">UNISSULA</span>
+              </span>
             </Link>
             <p className="text-body text-xs sm:text-[13px] leading-relaxed max-w-xs">
               Mencetak Notaris profesional, beretika tinggi, dan berwawasan global melalui pendidikan hukum yang komprehensif.

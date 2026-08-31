@@ -10,7 +10,6 @@ export default function CommunityService() {
   return (
     <>
       <Helmet>
-        <html lang="id" />
         <title>Pengabdian Dosen | MKn UNISSULA</title>
         <meta
           name="description"

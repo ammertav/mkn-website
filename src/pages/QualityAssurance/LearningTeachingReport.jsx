@@ -10,7 +10,6 @@ export default function LearningTeachingReport() {
   return (
     <>
       <Helmet>
-        <html lang="id" />
         <title>Learning and Teaching Report | MKn UNISSULA</title>
         <meta
           name="description"

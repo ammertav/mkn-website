@@ -16,7 +16,6 @@ export default function StudentOrganizations() {
   return (
     <>
       <Helmet>
-        <html lang="id" />
         <title>Organisasi Mahasiswa | MKn UNISSULA</title>
         <meta
           name="description"

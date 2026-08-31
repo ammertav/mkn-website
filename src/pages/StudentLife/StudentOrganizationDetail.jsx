@@ -29,7 +29,6 @@ export default function StudentOrganizationDetail() {
   return (
     <>
       <Helmet>
-        <html lang="id" />
         <title>{`${organization.title} | MKn UNISSULA`}</title>
         <meta name="description" content={organization.description} />
       </Helmet>

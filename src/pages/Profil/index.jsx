@@ -9,7 +9,6 @@ export default function ProfilLayout() {
   return (
     <>
       <Helmet>
-        <html lang="id" />
         <title>Profil Program Studi | Magister Kenotariatan UNISSULA</title>
         <meta
           name="description"

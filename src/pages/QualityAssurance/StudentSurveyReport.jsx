@@ -10,7 +10,6 @@ export default function StudentSurveyReport() {
   return (
     <>
       <Helmet>
-        <html lang="id" />
         <title>Student Survey Report | MKn UNISSULA</title>
         <meta
           name="description"

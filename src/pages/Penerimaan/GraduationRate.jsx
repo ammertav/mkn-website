@@ -10,7 +10,6 @@ export default function GraduationRate() {
   return (
     <>
       <Helmet>
-        <html lang="id" />
         <title>Tingkat Kelulusan | MKn UNISSULA</title>
         <meta
           name="description"

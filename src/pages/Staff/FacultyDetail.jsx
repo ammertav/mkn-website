@@ -28,7 +28,6 @@ export default function FacultyDetail() {
   return (
     <>
       <Helmet>
-        <html lang="id" />
         <title>{`${faculty.name} | MKn UNISSULA`}</title>
         <meta
           name="description"

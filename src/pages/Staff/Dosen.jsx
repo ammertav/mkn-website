@@ -4,7 +4,6 @@ export default function Dosen() {
   return (
     <>
       <Helmet>
-        <html lang="id" />
         <title>Daftar Dosen & Tenaga Pengajar | MKn UNISSULA</title>
         <meta
           name="description"

@@ -45,7 +45,6 @@ export default function Accommodation() {
   return (
     <>
       <Helmet>
-        <html lang="id" />
         <title>Akomodasi & Asrama Mahasiswa | MKn UNISSULA</title>
         <meta
           name="description"

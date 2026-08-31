@@ -9,7 +9,6 @@ export default function Laboratorium() {
   return (
     <>
       <Helmet>
-        <html lang="id" />
         <title>Laboratorium Kenotariatan & Peradilan Semu | MKn UNISSULA</title>
         <meta
           name="description"

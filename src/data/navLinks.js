@@ -42,7 +42,7 @@ export const navLinks = [
         children: [
           { title: "UTS/UAS", href: "/akademik/panduan-ujian/uts-uas" },
           { title: "Magang", href: "/akademik/panduan-ujian/magang" },
-          { title: "Skripsi", href: "/akademik/panduan-ujian/skripsi" },
+          { title: "Tesis", href: "/akademik/panduan-ujian/tesis" },
         ],
       },
     ],

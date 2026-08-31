@@ -4,7 +4,6 @@ export default function TracerStudy() {
   return (
     <>
       <Helmet>
-        <html lang="id" />
         <title>Tracer Study Alumni | MKn UNISSULA</title>
         <meta
           name="description"

@@ -59,7 +59,6 @@ export default function CareerCenter() {
   return (
     <>
       <Helmet>
-        <html lang="id" />
         <title>Pusat Karir & Bursa Kerja | MKn UNISSULA</title>
         <meta
           name="description"

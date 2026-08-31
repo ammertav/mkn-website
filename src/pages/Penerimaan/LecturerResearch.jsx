@@ -10,7 +10,6 @@ export default function LecturerResearch() {
   return (
     <>
       <Helmet>
-        <html lang="id" />
         <title>Penelitian Dosen | MKn UNISSULA</title>
         <meta
           name="description"

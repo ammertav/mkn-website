@@ -1,14 +1,38 @@
-import { Link } from "react-router-dom";
+import { useRef, useState } from "react";
+import { FiPause, FiPlay } from "react-icons/fi";
+
+import logoUnissula from "../../assets/images/logo-unissula-crest.png";
 
 export default function Hero() {
+  const videoRef = useRef(null);
+  const [isPlaying, setIsPlaying] = useState(true);
+
+  const toggleVideo = () => {
+    const video = videoRef.current;
+    if (!video) return;
+    if (video.paused) {
+      video.play().catch(() => {});
+    } else {
+      video.pause();
+    }
+  };
+
   return (
     <section className="w-full relative">
-      {/* Background Image Container */}
+      {/* Background Video Container */}
       <div className="relative min-h-[600px] sm:min-h-[680px] lg:min-h-[780px] w-full flex items-center justify-center bg-neutral-900 overflow-hidden">
-        {/* Grand Law Library Background Photo */}
-        <img
-          src="https://images.unsplash.com/photo-1521587760476-6c12a4b040da?auto=format&fit=crop&w=2000&q=85"
-          alt="Magister Kenotariatan UNISSULA Library"
+        {/* Background Video */}
+        <video
+          ref={videoRef}
+          onPlay={() => setIsPlaying(true)}
+          onPause={() => setIsPlaying(false)}
+          src="/videos/vid-hero-home.mp4"
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+          aria-hidden="true"
           className="absolute inset-0 w-full h-full object-cover object-center filter brightness-[0.75] contrast-105"
         />
 
@@ -18,28 +42,21 @@ export default function Hero() {
         {/* Hero Content */}
         <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-20 flex flex-col items-center text-center">
           
-          {/* Classical University / Law Landmark Icon in Circle */}
-          <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full border-[1.5px] border-white/90 flex items-center justify-center bg-black/20 backdrop-blur-[2px] mb-8 sm:mb-10 shadow-lg">
-            <svg
-              className="w-10 h-10 sm:w-11 sm:h-11 text-white fill-current"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              {/* Roof / Pediment */}
-              <path d="M12 2L2 7v2.5h20V7L12 2z" />
-              {/* Columns */}
-              <rect x="4.5" y="11" width="2.5" height="7.5" rx="0.5" />
-              <rect x="10.75" y="11" width="2.5" height="7.5" rx="0.5" />
-              <rect x="17" y="11" width="2.5" height="7.5" rx="0.5" />
-              {/* Base */}
-              <rect x="2" y="19.5" width="20" height="2.5" rx="0.5" />
-            </svg>
-          </div>
+          {/* UNISSULA Crest */}
+          <img
+            src={logoUnissula}
+            alt="Lambang UNISSULA"
+            className="w-24 h-24 sm:w-28 sm:h-28 object-contain mb-8 sm:mb-10 drop-shadow-lg"
+          />
 
           {/* Main Title: MAGISTER KENOTARIATAN */}
-          <h1 className="font-heading font-extrabold text-hero-heading text-4xl sm:text-6xl md:text-7xl tracking-normal uppercase leading-[1.08] drop-shadow-md">
-            MAGISTER <br />
-            KENOTARIATAN
+          <h1 className="font-heading font-extrabold text-hero-heading tracking-normal uppercase leading-[1.08] drop-shadow-md">
+            <span className="block text-3xl sm:text-5xl md:text-6xl">
+              MAGISTER KENOTARIATAN
+            </span>
+            <span className="block text-2xl sm:text-4xl md:text-5xl tracking-wide">
+              UNISSULA
+            </span>
           </h1>
 
           {/* Subtitle / Tagline */}
@@ -48,17 +65,17 @@ export default function Hero() {
             an unwavering commitment to justice.
           </p>
 
-          {/* Call to Action Button */}
-          <div className="mt-8 sm:mt-10">
-            <Link
-              to="/akademik"
-              className="inline-block bg-white hover:bg-neutral-100 text-primary font-semibold text-xs sm:text-sm px-7 sm:px-9 py-3.5 rounded-none shadow-md transition-transform duration-200 hover:scale-105 tracking-wide"
-            >
-              Explore the Program
-            </Link>
-          </div>
-
         </div>
+
+        {/* Video Play / Pause Control */}
+        <button
+          type="button"
+          onClick={toggleVideo}
+          aria-label={isPlaying ? "Jeda video latar" : "Putar video latar"}
+          className="absolute bottom-5 right-5 sm:bottom-6 sm:right-6 z-20 w-11 h-11 rounded-full border border-white/70 bg-black/30 backdrop-blur-sm text-white flex items-center justify-center hover:bg-black/55 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white transition-colors duration-200 cursor-pointer"
+        >
+          {isPlaying ? <FiPause className="w-5 h-5" /> : <FiPlay className="w-5 h-5 ml-0.5" />}
+        </button>
       </div>
 
       {/* Bottom Accreditation & Stats Bar */}

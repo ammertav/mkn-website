@@ -49,7 +49,6 @@ export default function QaDocuments() {
   return (
     <>
       <Helmet>
-        <html lang="id" />
         <title>Quality Assurance Documents | MKn UNISSULA</title>
         <meta
           name="description"

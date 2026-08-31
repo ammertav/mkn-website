@@ -9,7 +9,6 @@ export default function RuangKelas() {
   return (
     <>
       <Helmet>
-        <html lang="id" />
         <title>Ruang Kelas & Hybrid Learning | MKn UNISSULA</title>
         <meta
           name="description"

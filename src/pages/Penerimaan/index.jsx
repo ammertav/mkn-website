@@ -13,7 +13,6 @@ export default function PenerimaanLayout() {
   return (
     <>
       <Helmet>
-        <html lang="id" />
         <title>Informasi & Penerimaan Mahasiswa Baru | MKn UNISSULA</title>
         <meta
           name="description"

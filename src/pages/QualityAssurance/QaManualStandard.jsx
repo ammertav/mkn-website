@@ -8,7 +8,6 @@ export default function QaManualStandard() {
   return (
     <>
       <Helmet>
-        <html lang="id" />
         <title>QA Manual Standard | MKn UNISSULA</title>
         <meta
           name="description"

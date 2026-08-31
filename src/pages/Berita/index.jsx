@@ -97,7 +97,6 @@ export default function BeritaIndex() {
   return (
     <>
       <Helmet>
-        <html lang="id" />
         <title>Berita & Pengumuman | Magister Kenotariatan UNISSULA</title>
         <meta
           name="description"

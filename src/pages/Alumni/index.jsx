@@ -12,7 +12,6 @@ export default function AlumniLayout() {
   return (
     <>
       <Helmet>
-        <html lang="id" />
         <title>Alumni & Karir | MKn UNISSULA</title>
         <meta
           name="description"

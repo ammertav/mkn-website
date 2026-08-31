@@ -10,7 +10,6 @@ export default function QualityAssuranceOverview() {
   return (
     <>
       <Helmet>
-        <html lang="id" />
         <title>Quality Assurance Unit | MKn UNISSULA</title>
         <meta
           name="description"

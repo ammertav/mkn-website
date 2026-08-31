@@ -8,7 +8,6 @@ export default function StaffLayout() {
   return (
     <>
       <Helmet>
-        <html lang="id" />
         <title>Staf Pengajar & Tenaga Kependidikan | MKn UNISSULA</title>
         <meta
           name="description"

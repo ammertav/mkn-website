@@ -13,7 +13,6 @@ export default function StudentLifeLayout() {
   return (
     <>
       <Helmet>
-        <html lang="id" />
         <title>Kehidupan Mahasiswa | MKn UNISSULA</title>
         <meta
           name="description"

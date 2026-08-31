@@ -4,7 +4,6 @@ export default function Magang() {
   return (
     <>
       <Helmet>
-        <html lang="id" />
         <title>Panduan Magang Kenotariatan | MKn UNISSULA</title>
         <meta
           name="description"

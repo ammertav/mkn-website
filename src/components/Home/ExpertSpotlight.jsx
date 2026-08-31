@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { FiArrowRight } from "react-icons/fi";
-import professorImg from "../../assets/images/dosen/Prof. Dr. H. Ahmad Fauzan, S.H., Sp.N., M.Kn..png";
+import professorImg from "../../assets/images/dosen/Dr.NanangSriDarmadi,S.H.,M.H..jpg";
 
 export default function ExpertSpotlight() {
   return (
@@ -15,7 +15,7 @@ export default function ExpertSpotlight() {
                 <img
                   src={professorImg}
                   alt="Prof. Dr. Budi Santoso, S.H., M.Kn."
-                  className="w-full h-full object-cover object-top grayscale contrast-110"
+                  className="w-full h-full object-cover object-top"
                 />
               </div>
             </div>
@@ -42,10 +42,10 @@ export default function ExpertSpotlight() {
             {/* Lecturer Identity */}
             <div>
               <h3 className="font-heading font-semibold text-lg text-heading">
-                Prof. Dr. Budi Santoso, S.H., M.Kn.
+                Dr. Nanang Sri Darmadi, S.H., M.H.
               </h3>
               <p className="text-xs uppercase tracking-widest text-gray-500 font-medium mt-1">
-                GURU BESAR HUKUM PERDATA
+                KAPRODI MAGISTER KENOTARIATAN
               </p>
             </div>
 

@@ -99,7 +99,7 @@ export const academicCalendar = [
       { date: "17 Februari 2025",      name: "Awal Perkuliahan Semester Genap" },
       { date: "14 - 25 April 2025",    name: "Ujian Tengah Semester (UTS) Genap" },
       { date: "16 - 28 Juni 2025",     name: "Ujian Akhir Semester (UAS) Genap" },
-      { date: "Juli 2025",             name: "Sidang Tesis & Wisuda Sarjana/Magister Periode II" },
+      { date: "Juli 2025",             name: "Sidang Tesis & Wisuda Magister Periode II" },
     ],
   },
 ];

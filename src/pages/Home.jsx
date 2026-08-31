@@ -12,7 +12,6 @@ export default function Home() {
   return (
     <>
       <Helmet>
-        <html lang="id" />
         <title>Magister Kenotariatan (MKn) | UNISSULA</title>
 
         <meta charSet="utf-8" />

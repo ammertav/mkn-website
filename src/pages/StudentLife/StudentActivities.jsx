@@ -16,7 +16,6 @@ export default function StudentActivities() {
   return (
     <>
       <Helmet>
-        <html lang="id" />
         <title>Unit Kegiatan Mahasiswa (UKM) | MKn UNISSULA</title>
         <meta
           name="description"

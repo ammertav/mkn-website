@@ -42,7 +42,6 @@ export default function Sejarah() {
   return (
     <>
       <Helmet>
-        <html lang="id" />
         <title>Sejarah & Latar Belakang | MKn UNISSULA</title>
         <meta
           name="description"

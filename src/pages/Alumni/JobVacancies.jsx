@@ -87,7 +87,6 @@ export default function JobVacancies() {
   return (
     <>
       <Helmet>
-        <html lang="id" />
         <title>Lowongan Pekerjaan & Magang | MKn UNISSULA</title>
         <meta
           name="description"

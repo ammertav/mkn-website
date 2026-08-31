@@ -104,7 +104,6 @@ export default function BeritaDetail() {
   return (
     <>
       <Helmet>
-        <html lang="id" />
         <title>{article.title} | Berita MKn UNISSULA</title>
         <meta name="description" content={article.paragraphs[0]} />
         <meta property="og:title" content={article.title} />

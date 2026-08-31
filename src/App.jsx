@@ -25,7 +25,7 @@ const PanduanEvaluasi = lazy(() => import("./pages/Akademik/PanduanEvaluasi"));
 const PanduanUjian = lazy(() => import("./pages/Akademik/PanduanUjian"));
 const UtsUas = lazy(() => import("./pages/Akademik/UtsUas"));
 const Magang = lazy(() => import("./pages/Akademik/Magang"));
-const Skripsi = lazy(() => import("./pages/Akademik/Skripsi"));
+const Tesis = lazy(() => import("./pages/Akademik/Tesis"));
 const Kalender = lazy(() => import("./pages/Akademik/Kalender"));
 
 // Informasi / Penerimaan sub-pages
@@ -113,7 +113,9 @@ export default function App() {
             <Route index element={<Navigate to="uts-uas" replace />} />
             <Route path="uts-uas" element={<UtsUas />} />
             <Route path="magang" element={<Magang />} />
-            <Route path="skripsi" element={<Skripsi />} />
+            <Route path="tesis" element={<Tesis />} />
+            {/* Alias lama: istilah diubah dari Skripsi ke Tesis */}
+            <Route path="skripsi" element={<Navigate to="../tesis" replace />} />
           </Route>
           <Route path="kalender" element={<Kalender />} />
         </Route>

@@ -49,7 +49,6 @@ export default function FacultyDirectory() {
     return (
         <>
             <Helmet>
-                <html lang="id" />
                 <title>Faculty & Research | MKn UNISSULA</title>
                 <meta
                     name="description"

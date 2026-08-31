@@ -29,7 +29,6 @@ export default function UKMDetail() {
   return (
     <>
       <Helmet>
-        <html lang="id" />
         <title>{`${ukm.title} | MKn UNISSULA`}</title>
         <meta name="description" content={ukm.description} />
       </Helmet>

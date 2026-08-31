@@ -10,7 +10,6 @@ export default function QaStandar() {
   return (
     <>
       <Helmet>
-        <html lang="id" />
         <title>QA Standar | MKn UNISSULA</title>
         <meta
           name="description"

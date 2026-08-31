@@ -165,7 +165,6 @@ export default function Tendik() {
   return (
     <>
       <Helmet>
-        <html lang="id" />
         <title>Tenaga Kependidikan | MKn UNISSULA</title>
         <meta
           name="description"

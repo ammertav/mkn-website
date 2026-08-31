@@ -1,22 +1,17 @@
+import gedungImg from "../../assets/images/gedung.jpg";
+
 export default function ProfilHero() {
   return (
     <section className="w-full bg-white font-body">
       {/* Full-width Banner Image / Placeholder */}
       <div className="w-full h-[280px] sm:h-[360px] lg:h-[420px] bg-[#E8E6E1] relative overflow-hidden flex items-center justify-center">
         <img
-          src="https://images.unsplash.com/photo-1541829070764-84a7d30dd3f3?auto=format&fit=crop&w=2000&q=80"
+          src={gedungImg}
           alt="Gedung Fakultas Hukum & Pascasarjana UNISSULA"
           className="w-full h-full object-cover object-center filter contrast-[1.02] brightness-95"
-          onError={(e) => {
-            e.currentTarget.style.display = "none";
-          }}
         />
-        {/* Overlay Text Description */}
-        <div className="absolute inset-0 flex items-center justify-center bg-black/15 pointer-events-none">
-          <p className="text-xs sm:text-sm text-gray-700 bg-white/80 px-4 py-2 rounded-xs shadow-xs backdrop-blur-xs text-center max-w-md">
-            Foto gedung Fakultas Hukum atau Pascasarjana UNISSULA (lebar penuh)
-          </p>
-        </div>
+        {/* Subtle Overlay */}
+        <div className="absolute inset-0 bg-black/15 pointer-events-none" />
       </div>
 
       {/* Header Title Section below Hero */}

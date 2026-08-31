@@ -8,7 +8,6 @@ export default function QaForms() {
   return (
     <>
       <Helmet>
-        <html lang="id" />
         <title>QA Forms | MKn UNISSULA</title>
         <meta
           name="description"

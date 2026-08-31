@@ -10,7 +10,6 @@ export default function AlumniSurveyReport() {
   return (
     <>
       <Helmet>
-        <html lang="id" />
         <title>Alumni Survey Report | MKn UNISSULA</title>
         <meta
           name="description"

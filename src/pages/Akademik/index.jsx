@@ -23,7 +23,6 @@ export default function AkademikLayout() {
   return (
     <>
       <Helmet>
-        <html lang="id" />
         <title>Akademik | MKn UNISSULA</title>
         <meta
           name="description"

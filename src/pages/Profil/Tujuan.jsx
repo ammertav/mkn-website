@@ -32,7 +32,6 @@ export default function Tujuan() {
   return (
     <>
       <Helmet>
-        <html lang="id" />
         <title>Tujuan Pendidikan | MKn UNISSULA</title>
         <meta
           name="description"

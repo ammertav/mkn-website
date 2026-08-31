@@ -50,7 +50,6 @@ export default function ProfilLulusan() {
   return (
     <>
       <Helmet>
-        <html lang="id" />
         <title>Profil Lulusan | MKn UNISSULA</title>
         <meta
           name="description"

@@ -8,7 +8,6 @@ export default function QaPolicy() {
   return (
     <>
       <Helmet>
-        <html lang="id" />
         <title>QA Policy | MKn UNISSULA</title>
         <meta
           name="description"

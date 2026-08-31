@@ -4,7 +4,6 @@ export default function UtsUas() {
   return (
     <>
       <Helmet>
-        <html lang="id" />
         <title>Panduan Ujian UTS & UAS | MKn UNISSULA</title>
         <meta
           name="description"

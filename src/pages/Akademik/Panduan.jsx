@@ -45,7 +45,6 @@ export default function Panduan() {
   return (
     <>
       <Helmet>
-        <html lang="id" />
         <title>Panduan Akademik & Prosedur | MKn UNISSULA</title>
         <meta
           name="description"

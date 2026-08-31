@@ -98,7 +98,6 @@ export default function CapaianPembelajaran() {
   return (
     <>
       <Helmet>
-        <html lang="id" />
         <title>Capaian Pembelajaran Lulusan | MKn UNISSULA</title>
         <meta
           name="description"

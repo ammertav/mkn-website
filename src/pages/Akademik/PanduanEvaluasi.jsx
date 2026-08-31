@@ -81,7 +81,6 @@ export default function PanduanEvaluasi() {
   return (
     <>
       <Helmet>
-        <html lang="id" />
         <title>Panduan Evaluasi Pembelajaran | MKn UNISSULA</title>
         <meta
           name="description"

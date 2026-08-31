@@ -8,7 +8,6 @@ export default function Perpustakaan() {
   return (
     <>
       <Helmet>
-        <html lang="id" />
         <title>Perpustakaan Hukum & Digital Library | MKn UNISSULA</title>
         <meta
           name="description"

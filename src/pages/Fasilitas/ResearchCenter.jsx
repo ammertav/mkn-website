@@ -9,7 +9,6 @@ export default function ResearchCenter() {
   return (
     <>
       <Helmet>
-        <html lang="id" />
         <title>Student Research Center | MKn UNISSULA</title>
         <meta
           name="description"

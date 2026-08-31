@@ -22,7 +22,6 @@ export default function VisiMisi() {
   return (
     <>
       <Helmet>
-        <html lang="id" />
         <title>Visi dan Misi | MKn UNISSULA</title>
         <meta
           name="description"

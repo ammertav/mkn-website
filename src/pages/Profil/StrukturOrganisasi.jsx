@@ -85,7 +85,6 @@ export default function StrukturOrganisasi() {
   return (
     <>
       <Helmet>
-        <html lang="id" />
         <title>Struktur Organisasi | MKn UNISSULA</title>
         <meta
           name="description"
