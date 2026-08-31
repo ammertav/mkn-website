@@ -45,6 +45,8 @@ export const navLinks = [
           { title: "Skripsi", href: "/akademik/panduan-ujian/skripsi" },
         ],
       },
+      { title: "Asesmen", href: "/akademik/asesmen" },
+      { title: "Kalender Akademik", href: "/akademik/kalender" },
     ],
   },
   {
@@ -94,7 +96,7 @@ export const navLinks = [
     ],
   },
   {
-    title: "DOWNLOAD",
+    title: "QUALITY ASSURANCE",
     href: "/quality-assurance",
     children: [
       { title: "Quality Assurance Unit", href: "/quality-assurance" },
@@ -113,5 +115,9 @@ export const navLinks = [
       { title: "Student Survey Report", href: "/quality-assurance/student-survey-report" },
       { title: "Alumni Survey Report", href: "/quality-assurance/alumni-survey-report" },
     ],
+  },
+  {
+    title: "DOWNLOAD",
+    href: "/download",
   },
 ];

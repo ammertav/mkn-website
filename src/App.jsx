@@ -22,11 +22,15 @@ const ProfilLulusan = lazy(() => import("./pages/Akademik/ProfilLulusan"));
 const CapaianPembelajaran = lazy(() => import("./pages/Akademik/CapaianPembelajaran"));
 const Panduan = lazy(() => import("./pages/Akademik/Panduan"));
 const PanduanEvaluasi = lazy(() => import("./pages/Akademik/PanduanEvaluasi"));
+const Asesmen = lazy(() => import("./pages/Akademik/Asesmen"));
 const PanduanUjian = lazy(() => import("./pages/Akademik/PanduanUjian"));
 const UtsUas = lazy(() => import("./pages/Akademik/UtsUas"));
 const Magang = lazy(() => import("./pages/Akademik/Magang"));
 const Skripsi = lazy(() => import("./pages/Akademik/Skripsi"));
 const Kalender = lazy(() => import("./pages/Akademik/Kalender"));
+
+// Download page
+const Download = lazy(() => import("./pages/Download/index"));
 
 // Informasi / Penerimaan sub-pages
 const InformasiLayout = lazy(() => import("./pages/Penerimaan/index"));
@@ -108,7 +112,7 @@ export default function App() {
           <Route path="kurikulum/*" element={<Navigate to="reguler" replace />} />
           <Route path="panduan-akademik" element={<Panduan />} />
           <Route path="panduan-evaluasi" element={<PanduanEvaluasi />} />
-          <Route path="asesmen" element={<PanduanEvaluasi />} />
+          <Route path="asesmen" element={<Asesmen />} />
           <Route path="panduan-ujian" element={<PanduanUjian />}>
             <Route index element={<Navigate to="uts-uas" replace />} />
             <Route path="uts-uas" element={<UtsUas />} />
@@ -140,8 +144,8 @@ export default function App() {
           <Route path="faculty-directory/:slug" element={<FacultyDetail />} />
         </Route>
 
-        {/* Download route redirect to Quality Assurance */}
-        <Route path="/download" element={<Navigate to="/quality-assurance" replace />} />
+        {/* Download route */}
+        <Route path="/download" element={<Download />} />
 
         {/* Fasilitas — nested routes */}
         <Route path="/fasilitas" element={<FasilitasLayout />}>
