@@ -151,51 +151,47 @@ export default function StrukturOrganisasi() {
               {/* Connecting Line 1 */}
               <div className="w-px h-8 bg-gray-300" />
 
-              {/* Level 2: Kaprodi & Sekprodi (2 Columns with Photos) */}
-              <div className="w-full max-w-3xl grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
-                {/* Kaprodi Card */}
-                <div className="bg-white border-2 border-primary p-6 text-center rounded-xs shadow-sm flex flex-col items-center justify-between">
-                  <div className="w-28 h-36 sm:w-32 sm:h-40 rounded-xs overflow-hidden bg-gray-100 mb-4 border border-gray-200 shadow-2xs">
-                    <img
-                      src={imgKaprodi}
-                      alt="Dr. Nanang Sri Darmadi, S.H., M.H."
-                      className="w-full h-full object-cover object-top"
-                    />
-                  </div>
-                  <div>
-                    <span className="text-[10px] font-bold tracking-[0.14em] uppercase text-primary block mb-1">
-                      KAPRODI MAGISTER (S2) KENOTARIATAN
-                    </span>
-                    <p className="font-heading text-base sm:text-lg font-bold text-heading">
-                      Dr. Nanang Sri Darmadi, S.H., M.H.
-                    </p>
-                  </div>
+              {/* Level 2: Kaprodi */}
+              <div className="w-full max-w-sm bg-white border-2 border-primary p-6 text-center rounded-xs shadow-sm flex flex-col items-center">
+                <div className="w-28 h-36 sm:w-32 sm:h-40 rounded-xs overflow-hidden bg-gray-100 mb-4 border border-gray-200 shadow-2xs">
+                  <img
+                    src={imgKaprodi}
+                    alt="Dr. Nanang Sri Darmadi, S.H., M.H."
+                    className="w-full h-full object-cover object-top"
+                  />
                 </div>
-
-                {/* Sekprodi Card */}
-                <div className="bg-white border-2 border-primary/70 p-6 text-center rounded-xs shadow-sm flex flex-col items-center justify-between">
-                  <div className="w-28 h-36 sm:w-32 sm:h-40 rounded-xs overflow-hidden bg-gray-100 mb-4 border border-gray-200 shadow-2xs">
-                    <img
-                      src={imgSekprodi}
-                      alt="Dr. Toni Triyanto, S.H., M.H."
-                      className="w-full h-full object-cover object-top"
-                    />
-                  </div>
-                  <div>
-                    <span className="text-[10px] font-bold tracking-[0.14em] uppercase text-primary block mb-1">
-                      SEKPRODI MAGISTER (S2) KENOTARIATAN
-                    </span>
-                    <p className="font-heading text-base sm:text-lg font-bold text-heading">
-                      Dr. Toni Triyanto, S.H., M.H.
-                    </p>
-                  </div>
-                </div>
+                <span className="text-[10px] font-bold tracking-[0.14em] uppercase text-primary block mb-1">
+                  KAPRODI MAGISTER (S2) KENOTARIATAN
+                </span>
+                <p className="font-heading text-base sm:text-lg font-bold text-heading">
+                  Dr. Nanang Sri Darmadi, S.H., M.H.
+                </p>
               </div>
 
               {/* Connecting Line 2 */}
               <div className="w-px h-8 bg-gray-300" />
 
-              {/* Level 3: Koordinator Tata Usaha */}
+              {/* Level 3: Sekprodi (di bawah Kaprodi) */}
+              <div className="w-full max-w-sm bg-white border-2 border-primary/70 p-6 text-center rounded-xs shadow-sm flex flex-col items-center">
+                <div className="w-28 h-36 sm:w-32 sm:h-40 rounded-xs overflow-hidden bg-gray-100 mb-4 border border-gray-200 shadow-2xs">
+                  <img
+                    src={imgSekprodi}
+                    alt="Dr. Toni Triyanto, S.H., M.H."
+                    className="w-full h-full object-cover object-top"
+                  />
+                </div>
+                <span className="text-[10px] font-bold tracking-[0.14em] uppercase text-primary block mb-1">
+                  SEKPRODI MAGISTER (S2) KENOTARIATAN
+                </span>
+                <p className="font-heading text-base sm:text-lg font-bold text-heading">
+                  Dr. Toni Triyanto, S.H., M.H.
+                </p>
+              </div>
+
+              {/* Connecting Line 3 */}
+              <div className="w-px h-8 bg-gray-300" />
+
+              {/* Level 4: Koordinator Tata Usaha */}
               <div className="w-full max-w-md bg-red-50/70 border border-primary/30 p-4 text-center rounded-xs shadow-2xs">
                 <span className="text-[10px] font-bold tracking-[0.14em] uppercase text-primary block mb-0.5">
                   KOORDINASI KETATAUSAHAAN
@@ -205,10 +201,10 @@ export default function StrukturOrganisasi() {
                 </p>
               </div>
 
-              {/* Connecting Line 3 */}
+              {/* Connecting Line 4 */}
               <div className="w-px h-8 bg-gray-300" />
 
-              {/* Level 4: 5 Bidang Administrasi */}
+              {/* Level 5: 5 Bidang Administrasi */}
               <div className="w-full max-w-5xl">
                 <div className="text-center mb-3">
                   <span className="text-[11px] font-bold tracking-widest uppercase text-gray-400 bg-gray-50 px-3 py-1 border border-gray-200 rounded-full">

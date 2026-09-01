@@ -1,107 +1,23 @@
-import { Fragment } from "react";
 import { Helmet } from "react-helmet-async";
-
-const cplStats = [
-  { value: "10", label: "RUMUSAN CPL" },
-  { value: "4", label: "RANAH SN-DIKTI" },
-  { value: "8", label: "JENJANG KKNI" },
-  { value: "2024", label: "PENINJAUAN TERAKHIR" },
-];
-
-const cplSections = [
-  {
-    category: "RANAH SIKAP",
-    items: [
-      {
-        code: "CPL-1",
-        desc: "Menjalankan jabatan dan pekerjaan hukum dengan menjunjung nilai keislaman, integritas, kejujuran, serta kode etik profesi notaris.",
-      },
-      {
-        code: "CPL-2",
-        desc: "Menunjukkan tanggung jawab atas pekerjaan mandiri dan kelompok, serta kepekaan terhadap kepentingan masyarakat pencari kepastian hukum.",
-      },
-    ],
-  },
-  {
-    category: "RANAH PENGETAHUAN",
-    items: [
-      {
-        code: "CPL-3",
-        desc: "Menguasai teori hukum perdata, hukum agraria, hukum jaminan, dan hukum perusahaan pada tataran mutakhir serta perkembangan doktrinnya.",
-      },
-      {
-        code: "CPL-4",
-        desc: "Menguasai asas, norma, dan teknik pembuatan akta autentik beserta konsekuensi yuridis dari setiap pilihan perumusan.",
-      },
-      {
-        code: "CPL-5",
-        desc: "Menguasai metode penelitian hukum normatif dan empiris, termasuk pemanfaatan basis data hukum internasional.",
-      },
-    ],
-  },
-  {
-    category: "RANAH KETERAMPILAN UMUM",
-    items: [
-      {
-        code: "CPL-6",
-        desc: "Mengembangkan pemikiran logis, kritis, dan orisinal melalui riset yang menghasilkan karya ilmiah teruji dan layak dipublikasikan.",
-      },
-      {
-        code: "CPL-7",
-        desc: "Mengambil keputusan dalam konteks penyelesaian masalah hukum berdasarkan kajian analitis dan argumentasi yang dapat dipertanggungjawabkan.",
-      },
-    ],
-  },
-  {
-    category: "RANAH KETERAMPILAN KHUSUS",
-    items: [
-      {
-        code: "CPL-8",
-        desc: "Merancang dan menyusun akta notaris beserta dokumen pendukungnya secara mandiri, sistematis, dan sesuai kaidah kenotariatan.",
-      },
-      {
-        code: "CPL-9",
-        desc: "Menganalisis transaksi keperdataan dan korporasi lintas yurisdiksi serta menyusun pendapat hukum atasnya.",
-      },
-      {
-        code: "CPL-10",
-        desc: "Menyampaikan gagasan hukum secara tertulis dan lisan kepada masyarakat akademik maupun pengguna jasa secara terstruktur.",
-      },
-    ],
-  },
-];
-
-const instruments = [
-  {
-    name: "Asesmen mata kuliah (tugas, UTS, UAS)",
-    coverage: "CPL-3 s.d. CPL-10",
-    period: "Setiap semester",
-  },
-  {
-    name: "Penilaian magang kenotariatan",
-    coverage: "CPL-1, CPL-2, CPL-4, CPL-8",
-    period: "Semester 3",
-  },
-  {
-    name: "Ujian tesis dan naskah publikasi",
-    coverage: "CPL-5, CPL-6, CPL-10",
-    period: "Semester 4",
-  },
-  {
-    name: "Survei kepuasan pengguna lulusan",
-    coverage: "Seluruh CPL",
-    period: "Tahunan",
-  },
-];
+import { useT } from "../../i18n/languageContext";
+import RichText from "../../components/ui/RichText";
+import {
+  cplIntro,
+  kkniDescriptors,
+  cplStats,
+  cplItems,
+} from "../../data/akademik/capaianPembelajaranData";
 
 export default function CapaianPembelajaran() {
+  const t = useT();
+
   return (
     <>
       <Helmet>
         <title>Capaian Pembelajaran Lulusan | MKn UNISSULA</title>
         <meta
           name="description"
-          content="Capaian Pembelajaran Lulusan (CPL) Program Studi Magister Kenotariatan (MKn) UNISSULA pada empat ranah SN-DIKTI dan instrumen pengukurannya."
+          content="Capaian Pembelajaran Lulusan (CPL) Program Studi Magister Kenotariatan (MKn) UNISSULA, disusun mengacu pada KKNI Level 8."
         />
       </Helmet>
 
@@ -115,12 +31,23 @@ export default function CapaianPembelajaran() {
             Capaian Pembelajaran Lulusan
           </h1>
           <div className="w-full h-[2px] bg-primary mt-4 mb-5" />
-          <p className="text-base text-body leading-relaxed max-w-3xl">
-            Capaian Pembelajaran Lulusan (CPL) memuat sepuluh rumusan yang menjadi acuan
-            penyusunan mata kuliah, rencana pembelajaran semester, dan instrumen penilaian.
-            Setiap rumusan dipetakan pada empat ranah Standar Nasional Pendidikan Tinggi dan
-            diukur melalui asesmen yang terdokumentasi pada setiap mata kuliah.
+          <p className="text-base text-body leading-relaxed max-w-5xl">
+            <RichText>{t(cplIntro)}</RichText>
           </p>
+
+          {/* Tiga deskriptor KKNI Level 8 */}
+          <ol className="mt-5 space-y-3 max-w-5xl list-none">
+            {kkniDescriptors.map((item, idx) => (
+              <li key={idx} className="flex gap-4">
+                <span className="text-sm font-bold text-primary shrink-0 pt-0.5 tabular-nums">
+                  {idx + 1}.
+                </span>
+                <p className="text-sm sm:text-base text-body leading-relaxed">
+                  <RichText>{t(item)}</RichText>
+                </p>
+              </li>
+            ))}
+          </ol>
         </div>
 
         {/* Stats Grid 4 Kolom */}
@@ -134,90 +61,50 @@ export default function CapaianPembelajaran() {
                 {stat.value}
               </div>
               <p className="text-[11px] font-medium tracking-wider text-gray-500 uppercase">
-                {stat.label}
+                {t(stat.label)}
               </p>
             </div>
           ))}
         </div>
 
-        {/* Tabel CPL Berdasarkan Ranah */}
-        <div className="border border-gray-200 bg-white overflow-x-auto">
-          <table className="w-full text-left border-collapse">
-            <thead>
-              <tr className="border-b-2 border-heading">
-                <th className="py-3 px-5 sm:px-6 text-[11px] font-bold tracking-wider uppercase text-heading w-24">
-                  KODE
-                </th>
-                <th className="py-3 px-5 sm:px-6 text-[11px] font-bold tracking-wider uppercase text-heading">
-                  RUMUSAN CAPAIAN PEMBELAJARAN
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {cplSections.map((section, sIdx) => (
-                <Fragment key={sIdx}>
-                  <tr className="bg-gray-50/90 border-y border-gray-200">
-                    <td
-                      colSpan={2}
-                      className="px-5 sm:px-6 py-2.5 text-[11px] font-bold tracking-wider text-heading uppercase"
-                    >
-                      {section.category}
-                    </td>
-                  </tr>
-                  {section.items.map((item, iIdx) => (
-                    <tr
-                      key={iIdx}
-                      className="border-b border-gray-100 hover:bg-gray-50/50 transition-colors"
-                    >
-                      <td className="py-4 px-5 sm:px-6 font-bold text-heading whitespace-nowrap align-top">
-                        {item.code}
-                      </td>
-                      <td className="py-4 px-5 sm:px-6 text-sm text-body leading-relaxed">
-                        {item.desc}
-                      </td>
-                    </tr>
-                  ))}
-                </Fragment>
-              ))}
-            </tbody>
-          </table>
-        </div>
-
-        {/* Section 2: Instrumen Pengukuran */}
+        {/* Tabel CPL dan Deskriptor KKNI */}
         <div className="space-y-4">
           <div>
             <h2 className="text-xl sm:text-2xl font-heading font-medium text-heading tracking-normal">
-              Instrumen Pengukuran
+              Rumusan Capaian Pembelajaran Lulusan
             </h2>
             <div className="w-full h-[1.5px] bg-heading mt-2.5" />
           </div>
 
           <div className="border border-gray-200 bg-white overflow-x-auto">
-            <table className="w-full text-left border-collapse">
+            <table className="w-full text-left border-collapse min-w-[720px]">
               <thead>
                 <tr className="border-b-2 border-heading">
-                  <th className="py-3 px-5 sm:px-6 text-[11px] font-bold tracking-wider uppercase text-heading">
-                    INSTRUMEN
+                  <th className="py-3 px-5 sm:px-6 text-[11px] font-bold tracking-wider uppercase text-heading w-24">
+                    NO
+                  </th>
+                  <th className="py-3 px-5 sm:px-6 text-[11px] font-bold tracking-wider uppercase text-heading w-1/2">
+                    DESKRIPSI CAPAIAN PEMBELAJARAN LULUSAN
                   </th>
                   <th className="py-3 px-5 sm:px-6 text-[11px] font-bold tracking-wider uppercase text-heading">
-                    CAKUPAN CPL
-                  </th>
-                  <th className="py-3 px-5 sm:px-6 text-[11px] font-bold tracking-wider uppercase text-heading">
-                    PERIODE
+                    KKNI
                   </th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-100 text-sm">
-                {instruments.map((item, idx) => (
-                  <tr key={idx} className="hover:bg-gray-50/50 transition-colors">
-                    <td className="py-4 px-5 sm:px-6 text-heading font-normal">
-                      {item.name}
+              <tbody>
+                {cplItems.map((item) => (
+                  <tr
+                    key={item.code}
+                    className="border-b border-gray-100 hover:bg-gray-50/50 transition-colors"
+                  >
+                    <td className="py-4 px-5 sm:px-6 font-bold text-heading whitespace-nowrap align-top">
+                      {item.code}
                     </td>
-                    <td className="py-4 px-5 sm:px-6 text-body">
-                      {item.coverage}
+                    <td className="py-4 px-5 sm:px-6 text-sm text-body leading-relaxed align-top">
+                      <RichText>{t(item.desc)}</RichText>
                     </td>
-                    <td className="py-4 px-5 sm:px-6 text-body">
-                      {item.period}
+                    <td className="py-4 px-5 sm:px-6 text-sm text-body leading-relaxed align-top">
+                      <RichText>{t(item.kkni)}</RichText>
                     </td>
                   </tr>
                 ))}
