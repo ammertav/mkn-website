@@ -20,9 +20,9 @@ const footerSections = [
       { name: "Profil Lulusan", href: "/akademik/profil-lulusan" },
       { name: "Capaian Pembelajaran", href: "/akademik/capaian-pembelajaran" },
       { name: "Kurikulum", href: "/akademik/kurikulum" },
-      { name: "Panduan Akademik", href: "/akademik/panduan-akademik" },
       { name: "Panduan Evaluasi", href: "/akademik/panduan-evaluasi" },
       { name: "Panduan Ujian", href: "/akademik/panduan-ujian" },
+      { name: "Asesmen", href: "/akademik/asesmen" },
     ],
   },
   {
@@ -56,13 +56,14 @@ const footerSections = [
     ],
   },
   {
-    title: "DOWNLOAD",
+    title: "QUALITY ASSURANCE",
     links: [
       { name: "Quality Assurance Unit", href: "/quality-assurance" },
       { name: "QA Documents", href: "/quality-assurance/qa-documents" },
       { name: "Internal Audit Report", href: "/quality-assurance/internal-audit-report" },
       { name: "Learning Report", href: "/quality-assurance/learning-teaching-report" },
       { name: "Student Survey", href: "/quality-assurance/student-survey-report" },
+      { name: "Pusat Unduhan", href: "/download" },
     ],
   },
 ];
