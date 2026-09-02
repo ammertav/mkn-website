@@ -282,16 +282,10 @@ export default function StudentOrganizationDetail() {
           )}
 
           {/* Navigasi Kemahasiswaan Lainnya */}
-          <div className="mt-14 pt-8 border-t border-gray-200 flex flex-wrap gap-4 items-center justify-between text-xs sm:text-sm">
-            <Link
-              to="/mahasiswa/ukm"
-              className="inline-flex items-center font-semibold text-primary hover:underline transition-colors"
-            >
-              Unit Kegiatan Mahasiswa (UKM) →
-            </Link>
+          <div className="mt-14 pt-8 border-t border-gray-200 flex flex-wrap gap-4 items-center justify-end text-xs sm:text-sm">
             <Link
               to="/mahasiswa/akomodasi"
-              className="inline-flex items-center font-medium text-body hover:text-primary transition-colors"
+              className="inline-flex items-center font-semibold text-primary hover:underline transition-colors"
             >
               Informasi Akomodasi Mahasiswa →
             </Link>

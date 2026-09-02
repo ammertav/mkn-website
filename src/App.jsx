@@ -67,10 +67,8 @@ const AlumniSurveyReport = lazy(() => import("./pages/QualityAssurance/AlumniSur
 
 // Mahasiswa sub-pages
 const MahasiswaLayout = lazy(() => import("./pages/StudentLife/index"));
-const StudentActivities = lazy(() => import("./pages/StudentLife/StudentActivities"));
 const Accommodation = lazy(() => import("./pages/StudentLife/Accommodation"));
 const StudentOrganizationDetail = lazy(() => import("./pages/StudentLife/StudentOrganizationDetail"));
-const UKMDetail = lazy(() => import("./pages/StudentLife/UKMDetail"));
 
 // Alumni & Karir sub-pages
 const AlumniLayout = lazy(() => import("./pages/Alumni/index"));
@@ -175,14 +173,15 @@ export default function App() {
         <Route path="/mahasiswa/organisasi" element={<StudentOrganizationDetail />} />
         <Route path="/mahasiswa/organisasi/*" element={<Navigate to="/mahasiswa/organisasi" replace />} />
 
-        {/* Mahasiswa — nested routes (UKM & Akomodasi) */}
+        {/* Mahasiswa — nested routes (Akomodasi) */}
         <Route path="/mahasiswa" element={<MahasiswaLayout />}>
           <Route index element={<Navigate to="/mahasiswa/organisasi" replace />} />
           <Route path="organisasi" element={<Navigate to="/mahasiswa/organisasi" replace />} />
-          <Route path="ukm" element={<StudentActivities />} />
           <Route path="akomodasi" element={<Accommodation />} />
         </Route>
-        <Route path="/mahasiswa/ukm/:slug" element={<UKMDetail />} />
+        {/* Fallback legacy UKM routes */}
+        <Route path="/mahasiswa/ukm/*" element={<Navigate to="/mahasiswa/organisasi" replace />} />
+        <Route path="/mahasiswa/ukm" element={<Navigate to="/mahasiswa/organisasi" replace />} />
 
 
         {/* Alumni & Karir — nested routes */}
@@ -200,7 +199,7 @@ export default function App() {
         <Route path="/kurikulum" element={<Navigate to="/akademik/kurikulum/reguler" replace />} />
         <Route path="/kurikulum/*" element={<Navigate to="/akademik/kurikulum/reguler" replace />} />
         <Route path="/organisasi-mahasiswa" element={<Navigate to="/mahasiswa/organisasi" replace />} />
-        <Route path="/unit-kegiatan-mahasiswa" element={<Navigate to="/mahasiswa/ukm" replace />} />
+        <Route path="/unit-kegiatan-mahasiswa" element={<Navigate to="/mahasiswa/organisasi" replace />} />
         <Route path="/dosen" element={<Navigate to="/staff/dosen" replace />} />
         <Route path="/tenaga-kependidikan" element={<Navigate to="/staff/tendik" replace />} />
         <Route path="/pusat-karir" element={<Navigate to="/alumni/pusat-karir" replace />} />

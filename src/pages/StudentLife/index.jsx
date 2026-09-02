@@ -16,7 +16,7 @@ export default function StudentLifeLayout() {
         <title>Kehidupan Mahasiswa | MKn UNISSULA</title>
         <meta
           name="description"
-          content="Kehidupan Mahasiswa Magister Kenotariatan (MKn) UNISSULA: Organisasi Mahasiswa, Unit Kegiatan Mahasiswa (UKM), dan Akomodasi."
+          content="Kehidupan Mahasiswa Magister Kenotariatan (MKn) UNISSULA: Organisasi Mahasiswa dan Akomodasi."
         />
       </Helmet>
 
