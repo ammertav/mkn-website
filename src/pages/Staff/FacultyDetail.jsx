@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import { useParams, Link, Navigate } from "react-router-dom";
 import { facultyData } from "../../data/facultyData";
+import FacultyAiChatbot from "../../components/Staff/FacultyAiChatbot";
 
 export default function FacultyDetail() {
   const { slug } = useParams();
@@ -286,6 +287,9 @@ export default function FacultyDetail() {
           </div>
         </div>
       </div>
+
+      {/* Floating AI Chatbot Dosen (Floating Kanan, Sesuai Desain Tampilan, Rounded) */}
+      <FacultyAiChatbot faculty={faculty} />
     </>
   );
 }
