@@ -66,7 +66,6 @@ const StudentSurveyReport = lazy(() => import("./pages/QualityAssurance/StudentS
 const AlumniSurveyReport = lazy(() => import("./pages/QualityAssurance/AlumniSurveyReport"));
 
 // Mahasiswa sub-pages
-const MahasiswaLayout = lazy(() => import("./pages/StudentLife/index"));
 const Accommodation = lazy(() => import("./pages/StudentLife/Accommodation"));
 const StudentOrganizationDetail = lazy(() => import("./pages/StudentLife/StudentOrganizationDetail"));
 
@@ -173,13 +172,12 @@ export default function App() {
         <Route path="/mahasiswa/organisasi" element={<StudentOrganizationDetail />} />
         <Route path="/mahasiswa/organisasi/*" element={<Navigate to="/mahasiswa/organisasi" replace />} />
 
-        {/* Mahasiswa — nested routes (Akomodasi) */}
-        <Route path="/mahasiswa" element={<MahasiswaLayout />}>
-          <Route index element={<Navigate to="/mahasiswa/organisasi" replace />} />
-          <Route path="organisasi" element={<Navigate to="/mahasiswa/organisasi" replace />} />
-          <Route path="akomodasi" element={<Accommodation />} />
-        </Route>
-        {/* Fallback legacy UKM routes */}
+        {/* Akomodasi — Standalone page dengan PageTabs Asrama & Guest House (tanpa sidebar) */}
+        <Route path="/mahasiswa/akomodasi" element={<Navigate to="/mahasiswa/akomodasi/asrama" replace />} />
+        <Route path="/mahasiswa/akomodasi/:tab" element={<Accommodation />} />
+
+        {/* Mahasiswa root & Fallback legacy routes */}
+        <Route path="/mahasiswa" element={<Navigate to="/mahasiswa/organisasi" replace />} />
         <Route path="/mahasiswa/ukm/*" element={<Navigate to="/mahasiswa/organisasi" replace />} />
         <Route path="/mahasiswa/ukm" element={<Navigate to="/mahasiswa/organisasi" replace />} />
 
