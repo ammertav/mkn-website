@@ -2,6 +2,7 @@ import { Helmet } from "react-helmet-async";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import Hero from "../components/Home/Hero";
+import ProfilVideo from "../components/Home/ProfilVideo";
 import AcademicFocus from "../components/Home/AcademicFocus";
 import ResearchCommunity from "../components/Home/ResearchCommunity";
 import ExpertSpotlight from "../components/Home/ExpertSpotlight";
@@ -36,6 +37,9 @@ export default function Home() {
 
         {/* Hero Section */}
         <Hero />
+
+        {/* Profil / Video Profil Section */}
+        <ProfilVideo />
 
         {/* Academic Focus / Berita & Wawasan Section */}
         <AcademicFocus />

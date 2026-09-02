@@ -11,8 +11,8 @@ export const navLinks = [
     href: "/profil",
     children: [
       { title: "Sejarah / Latar Belakang", href: "/profil/sejarah" },
-      { title: "Visi dan Misi", href: "/profil/visi-misi" },
-      { title: "Tujuan", href: "/profil/tujuan" },
+      { title: "Visi", href: "/profil/visi-misi" },
+      { title: "Tujuan Pendidikan (PEO)", href: "/profil/tujuan" },
       { title: "Struktur Organisasi", href: "/profil/struktur-organisasi" },
     ],
   },

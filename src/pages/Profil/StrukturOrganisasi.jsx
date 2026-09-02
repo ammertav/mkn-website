@@ -1,83 +1,82 @@
 import { Helmet } from "react-helmet-async";
-import { FiBookOpen, FiDollarSign, FiGlobe, FiHardDrive, FiHome } from "react-icons/fi";
+import {
+  FiBookOpen,
+  FiDollarSign,
+  FiGlobe,
+  FiHome,
+} from "react-icons/fi";
 
 import imgDekan from "../../assets/images/struktur-organisasi/Dekan Fakultas Hukum UNISSULA.jpg";
-import imgKaprodi from "../../assets/images/struktur-organisasi/Kaprodi Magister (S2).jpg";
+import imgKaprodi from "../../assets/images/dosen/Dr.NanangSriDarmadi,S.H.,M.H..jpg";
 import imgSekprodi from "../../assets/images/struktur-organisasi/Sekprodi a- Dr. Toni Triyanto, S.H., M.jpeg";
 
 const strukturPejabat = [
   {
     jabatan: "Dekan Fakultas Hukum UNISSULA",
     pejabat: "Prof. Dr. H. Jawade Hafidz, S.H., M.H.",
-    tanggungJawab: "Penanggung jawab utama kebijakan dan penyelenggaraan pendidikan Fakultas Hukum dan Pascasarjana Kenotariatan.",
+    tanggungJawab:
+      "Penanggung jawab utama kebijakan dan penyelenggaraan pendidikan Fakultas Hukum dan Pascasarjana Kenotariatan.",
   },
   {
-    jabatan: "Kaprodi Magister (S2) Kenotariatan",
+    jabatan: "Ketua Program Studi Magister (S2) Kenotariatan",
     pejabat: "Dr. Nanang Sri Darmadi, S.H., M.H.",
-    tanggungJawab: "Kebijakan akademik, penetapan standar mutu, kurikulum, kepemimpinan prodi, dan hubungan kelembagaan.",
+    tanggungJawab:
+      "Kebijakan akademik, penetapan standar mutu, kurikulum, kepemimpinan prodi, dan hubungan kelembagaan.",
   },
   {
-    jabatan: "Sekprodi Magister (S2) Kenotariatan",
+    jabatan: "Sekretaris Program Studi Magister (S2) Kenotariatan",
     pejabat: "Dr. Toni Triyanto, S.H., M.H.",
-    tanggungJawab: "Penyelenggaraan perkuliahan harian, penjadwalan dosen/mahasiswa, ujian, dan dokumentasi akademik.",
+    tanggungJawab:
+      "Penyelenggaraan perkuliahan harian, penjadwalan dosen/mahasiswa, ujian, dan dokumentasi akademik.",
   },
   {
     jabatan: "Koordinator Tata Usaha",
-    pejabat: "Koordinator Tata Usaha FH MKn",
-    tanggungJawab: "Koordinasi operasional ketatausahaan, layanan administratif terpadu, dan pengelolaan staf.",
+    pejabat: "Ikrom, S.H., M.H.",
+    tanggungJawab:
+      "Koordinasi operasional ketatausahaan, layanan administratif terpadu, dan pengelolaan staf.",
   },
   {
-    jabatan: "Admin Akademik",
-    pejabat: "Staf Administrasi Akademik",
-    tanggungJawab: "Pelayanan registrasi, KRS, ujian proposal tesis, kelulusan, dan administrasi akademik mahasiswa.",
+    jabatan: "Bidang Akademik",
+    pejabat: "Pelaksana Bidang Akademik",
+    tanggungJawab:
+      "Layanan administrasi akademik mahasiswa, registrasi, penjadwalan perkuliahan, dan dokumentasi ujian.",
   },
   {
-    jabatan: "Admin Keuangan",
-    pejabat: "Staf Administrasi Keuangan",
-    tanggungJawab: "Pengelolaan administrasi SPP, pembiayaan kegiatan akademik, dan rekonsiliasi anggaran program studi.",
+    jabatan: "Bidang Keuangan",
+    pejabat: "Pelaksana Bidang Keuangan",
+    tanggungJawab:
+      "Administrasi keuangan mahasiswa, pembiayaan kegiatan akademik, dan pengelolaan anggaran program studi.",
   },
   {
-    jabatan: "Admin Marketing & Publikasi",
-    pejabat: "Staf Humas & Marketing",
-    tanggungJawab: "Sosialisasi program studi, promosi penerimaan mahasiswa baru, dan media publikasi kenotariatan.",
+    jabatan: "Bidang Promosi & Humas",
+    pejabat: "Pelaksana Bidang Promosi & Humas",
+    tanggungJawab:
+      "Sosialisasi program studi, promosi penerimaan mahasiswa baru, serta pengelolaan publikasi dan media.",
   },
   {
-    jabatan: "Admin IT & Sistem Informasi",
-    pejabat: "Staf Teknologi Informasi",
-    tanggungJawab: "Pengelolaan sistem informasi akademik, website resmi, lab komputer akta, dan infrastruktur digital.",
-  },
-  {
-    jabatan: "Admin Rumah Tangga & Sarpras",
-    pejabat: "Staf Rumah Tangga & Logistik",
-    tanggungJawab: "Pengelolaan sarana prasarana, ruang kuliah pascasarjana, pemeliharaan lab akta, dan fasilitas kampus.",
+    jabatan: "Bidang Sarana Prasarana",
+    pejabat: "Pelaksana Bidang Sarana Prasarana",
+    tanggungJawab:
+      "Pengelolaan ruang kuliah, laboratorium kenotariatan, dan fasilitas penunjang program studi.",
   },
 ];
 
 const adminUnits = [
   {
     icon: FiBookOpen,
-    name: "Admin Akademik",
-    desc: "Layanan registrasi & ujian",
+    name: "Akademik",
   },
   {
     icon: FiDollarSign,
-    name: "Admin Keuangan",
-    desc: "Layanan SPP & anggaran",
+    name: "Keuangan",
   },
   {
     icon: FiGlobe,
-    name: "Admin Marketing",
-    desc: "Sosialisasi & publikasi",
-  },
-  {
-    icon: FiHardDrive,
-    name: "Admin IT",
-    desc: "Sistem informasi & lab digital",
+    name: "Promosi & Humas",
   },
   {
     icon: FiHome,
-    name: "Admin Rumah Tangga",
-    desc: "Sarana prasarana & fasilitas",
+    name: "Sarana Prasarana",
   },
 ];
 
@@ -96,7 +95,7 @@ export default function StrukturOrganisasi() {
         {/* Section STRUKTUR ORGANISASI Header */}
         <section className="space-y-4">
           <span className="text-xs font-semibold tracking-wider text-primary uppercase block">
-            STRUKTUR ORGANISASI
+            STRUKTUR ORGANISASI DAN TATA KELOLA
           </span>
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-start pt-2">
@@ -110,10 +109,11 @@ export default function StrukturOrganisasi() {
             {/* Right Column: Paragraph */}
             <div className="lg:col-span-7 text-sm sm:text-base text-body leading-relaxed space-y-4">
               <p>
-                Program Studi Magister (S2) Kenotariatan Fakultas Hukum UNISSULA dipimpin oleh Ketua
-                Program Studi yang bertanggung jawab langsung kepada Dekan Fakultas Hukum.
-                Sekretaris Program Studi mengoordinasi penyelenggaraan akademik harian, didukung oleh
-                Koordinator Tata Usaha beserta lima unit pelaksana administrasi terpadu.
+                Program Studi Magister (S2) Kenotariatan Fakultas Hukum UNISSULA
+                dipimpin oleh Ketua Program Studi yang bertanggung jawab
+                langsung kepada Dekan Fakultas Hukum. Sekretaris Program Studi
+                mengoordinasi penyelenggaraan akademik harian, didukung oleh
+                Koordinator Tata Usaha beserta empat bidang pelaksana administrasi.
               </p>
             </div>
           </div>
@@ -121,13 +121,6 @@ export default function StrukturOrganisasi() {
 
         {/* Section Bagan Organisasi Visual */}
         <section className="space-y-6">
-          <div>
-            <h2 className="font-heading font-normal text-3xl sm:text-4xl text-heading tracking-normal">
-              Bagan Organisasi
-            </h2>
-            <div className="w-full h-[1.5px] bg-heading mt-3 mb-8" />
-          </div>
-
           <div className="bg-white border border-gray-200 p-6 sm:p-12 rounded-xs shadow-2xs">
             <div className="flex flex-col items-center">
               {/* Level 1: Dekan Fakultas Hukum UNISSULA (Top Card with Photo) */}
@@ -161,7 +154,7 @@ export default function StrukturOrganisasi() {
                   />
                 </div>
                 <span className="text-[10px] font-bold tracking-[0.14em] uppercase text-primary block mb-1">
-                  KAPRODI MAGISTER (S2) KENOTARIATAN
+                  KETUA PROGRAM STUDI MAGISTER (S2) KENOTARIATAN
                 </span>
                 <p className="font-heading text-base sm:text-lg font-bold text-heading">
                   Dr. Nanang Sri Darmadi, S.H., M.H.
@@ -181,7 +174,7 @@ export default function StrukturOrganisasi() {
                   />
                 </div>
                 <span className="text-[10px] font-bold tracking-[0.14em] uppercase text-primary block mb-1">
-                  SEKPRODI MAGISTER (S2) KENOTARIATAN
+                  SEKRETARIS PROGRAM STUDI MAGISTER (S2) KENOTARIATAN
                 </span>
                 <p className="font-heading text-base sm:text-lg font-bold text-heading">
                   Dr. Toni Triyanto, S.H., M.H.
@@ -194,17 +187,17 @@ export default function StrukturOrganisasi() {
               {/* Level 4: Koordinator Tata Usaha */}
               <div className="w-full max-w-md bg-red-50/70 border border-primary/30 p-4 text-center rounded-xs shadow-2xs">
                 <span className="text-[10px] font-bold tracking-[0.14em] uppercase text-primary block mb-0.5">
-                  KOORDINASI KETATAUSAHAAN
+                  KOORDINATOR TATA USAHA
                 </span>
                 <p className="font-heading text-sm sm:text-base font-semibold text-heading">
-                  Koordinator Tata Usaha
+                  Ikrom, S.H., M.H.
                 </p>
               </div>
 
               {/* Connecting Line 4 */}
               <div className="w-px h-8 bg-gray-300" />
 
-              {/* Level 5: 5 Bidang Administrasi */}
+              {/* Level 5: 4 Bidang Pelaksana */}
               <div className="w-full max-w-5xl">
                 <div className="text-center mb-3">
                   <span className="text-[11px] font-bold tracking-widest uppercase text-gray-400 bg-gray-50 px-3 py-1 border border-gray-200 rounded-full">
@@ -212,7 +205,7 @@ export default function StrukturOrganisasi() {
                   </span>
                 </div>
 
-                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4 pt-2">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 pt-2">
                   {adminUnits.map((unit, idx) => {
                     const Icon = unit.icon;
                     return (
@@ -227,9 +220,6 @@ export default function StrukturOrganisasi() {
                           <p className="font-heading text-xs sm:text-sm font-bold text-heading">
                             {unit.name}
                           </p>
-                          <span className="text-[11px] text-gray-500 block mt-0.5">
-                            {unit.desc}
-                          </span>
                         </div>
                       </div>
                     );
@@ -266,7 +256,10 @@ export default function StrukturOrganisasi() {
               </thead>
               <tbody className="divide-y divide-gray-100 text-sm sm:text-[13.5px]">
                 {strukturPejabat.map((item, idx) => (
-                  <tr key={idx} className="hover:bg-gray-50/50 transition-colors">
+                  <tr
+                    key={idx}
+                    className="hover:bg-gray-50/50 transition-colors"
+                  >
                     <td className="py-4 px-5 sm:px-6 font-semibold text-heading align-top">
                       {item.jabatan}
                     </td>
@@ -284,9 +277,10 @@ export default function StrukturOrganisasi() {
 
           {/* Footnote Notice */}
           <p className="text-xs text-gray-500 leading-relaxed pt-2">
-            Struktur organisasi Program Studi Magister (S2) Kenotariatan Fakultas Hukum UNISSULA
-            disusun untuk menjamin akuntabilitas, tata kelola akademik yang kredibel, serta
-            pelayanan prima kepada seluruh mahasiswa dan pemangku kepentingan.
+            Struktur organisasi Program Studi Magister (S2) Kenotariatan
+            Fakultas Hukum UNISSULA disusun untuk menjamin akuntabilitas, tata
+            kelola akademik yang kredibel, serta pelayanan prima kepada seluruh
+            mahasiswa dan pemangku kepentingan.
           </p>
         </section>
       </div>

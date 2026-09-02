@@ -1,6 +1,6 @@
-import { useState, useMemo, useRef } from "react";
+import { useState, useMemo, useRef, useEffect } from "react";
 import { Helmet } from "react-helmet-async";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
@@ -11,73 +11,46 @@ import { generateSlug } from "../../utils/slugHelper";
 
 const ITEMS_PER_PAGE = 10;
 
-const announcements = [
-  {
-    date: "24 Agu 2026",
-    title: "Jadwal perkuliahan semester gasal 2026/2027 telah terbit",
-    category: "Akademik",
-    validUntil: "—",
-  },
-  {
-    date: "20 Agu 2026",
-    title: "Pendaftaran gelombang dua dibuka sampai 12 September",
-    category: "Penerimaan",
-    validUntil: "12 Sep 2026",
-  },
-  {
-    date: "15 Agu 2026",
-    title: "Batas akhir pengajuan judul tesis semester ini",
-    category: "Tesis",
-    validUntil: "30 Sep 2026",
-  },
-  {
-    date: "11 Agu 2026",
-    title: "Pendaftaran anggota unit kegiatan mahasiswa dibuka",
-    category: "Kemahasiswaan",
-    validUntil: "19 Sep 2026",
-  },
-  {
-    date: "04 Agu 2026",
-    title: "Survei kepuasan mahasiswa semester genap dapat diisi",
-    category: "Penjaminan mutu",
-    validUntil: "10 Sep 2026",
-  },
-];
+/**
+ * Kategori dibedakan lewat kolom `tags` di src/data/berita.json.
+ * Entri tanpa tags dianggap Berita, sehingga data lama tetap tampil.
+ */
+const TAG_PENGUMUMAN = "Pengumuman";
 
-const agendaList = [
-  {
-    date: "12 Sep 2026",
-    activity: "Orientasi mahasiswa baru semester gasal",
-    location: "Aula Pascasarjana",
-  },
-  {
-    date: "26 Sep 2026",
-    activity: "Kuliah tamu: notaris dan transaksi lintas negara",
-    location: "Ruang MKn 3.03",
-  },
-  {
-    date: "17 Okt 2026",
-    activity: "Seminar proposal tesis gelombang satu",
-    location: "Ruang MKn 3.04",
-  },
-  {
-    date: "08 Nov 2026",
-    activity: "Asesmen lapangan ACQUIN",
-    location: "Gedung Pascasarjana",
-  },
-  {
-    date: "05 Des 2026",
-    activity: "Temu pengguna lulusan dan mitra magang",
-    location: "Aula Pascasarjana",
-  },
+const KATEGORI_TABS = [
+  { key: "berita", label: "Berita" },
+  { key: "pengumuman", label: "Pengumuman" },
 ];
 
 export default function BeritaIndex() {
   const [currentPage, setCurrentPage] = useState(1);
   const newsSectionRef = useRef(null);
+  const [searchParams, setSearchParams] = useSearchParams();
 
-  const featuredNews = beritaList[0];
-  const allOtherNews = useMemo(() => beritaList.slice(1), []);
+  // Kategori aktif dibaca dari URL supaya tautannya bisa dibagikan
+  // dan tombol kembali peramban tetap berfungsi.
+  const kategori =
+    searchParams.get("kategori") === "pengumuman" ? "pengumuman" : "berita";
+  const isBerita = kategori === "berita";
+
+  const beritaItems = useMemo(
+    () => beritaList.filter((item) => item.tags !== TAG_PENGUMUMAN),
+    []
+  );
+  const pengumumanItems = useMemo(
+    () => beritaList.filter((item) => item.tags === TAG_PENGUMUMAN),
+    []
+  );
+
+  const handleKategoriChange = (key) => {
+    setSearchParams(key === "berita" ? {} : { kategori: key });
+  };
+
+  // Halaman kembali ke awal setiap berpindah kategori.
+  useEffect(() => setCurrentPage(1), [kategori]);
+
+  const featuredNews = beritaItems[0];
+  const allOtherNews = useMemo(() => beritaItems.slice(1), [beritaItems]);
 
   const totalPages = Math.ceil(allOtherNews.length / ITEMS_PER_PAGE);
 
@@ -128,8 +101,33 @@ export default function BeritaIndex() {
             </div>
           </section>
 
+          {/* Pemisah kategori: Berita / Pengumuman */}
+          <nav
+            className="flex items-center gap-6 sm:gap-10 border-b border-gray-200 -mt-10 sm:-mt-14 overflow-x-auto scrollbar-none"
+            aria-label="Kategori Berita dan Pengumuman"
+          >
+            {KATEGORI_TABS.map((tab) => {
+              const active = kategori === tab.key;
+              return (
+                <button
+                  key={tab.key}
+                  type="button"
+                  onClick={() => handleKategoriChange(tab.key)}
+                  aria-current={active ? "page" : undefined}
+                  className={`shrink-0 whitespace-nowrap py-3.5 sm:py-4 text-xs sm:text-sm font-semibold tracking-[0.14em] uppercase transition-colors border-b-2 cursor-pointer ${
+                    active
+                      ? "border-primary text-primary"
+                      : "border-transparent text-body hover:text-heading hover:border-gray-300"
+                  }`}
+                >
+                  {tab.label}
+                </button>
+              );
+            })}
+          </nav>
+
           {/* Section Berita Utama (Featured News dari item pertama berita.json) */}
-          {featuredNews && (
+          {isBerita && featuredNews && (
             <section className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
               {/* Left Column: Image Box */}
               <div className="lg:col-span-6">
@@ -185,7 +183,7 @@ export default function BeritaIndex() {
           )}
 
           {/* Section Berita Lainnya dengan Pagination Max 10 per halaman */}
-          {allOtherNews.length > 0 && (
+          {isBerita && allOtherNews.length > 0 && (
             <section ref={newsSectionRef} className="space-y-6 pt-4 scroll-mt-20">
               <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-2 border-b border-heading pb-3">
                 <h2 className="font-heading font-normal text-3xl sm:text-4xl text-heading tracking-normal">
@@ -265,97 +263,80 @@ export default function BeritaIndex() {
             </section>
           )}
 
-          {/* Section Pengumuman Table */}
-          <section className="space-y-6">
-            <div>
-              <h2 className="font-heading font-normal text-3xl sm:text-4xl text-heading tracking-normal">
-                Pengumuman
-              </h2>
-              <div className="w-full h-[1.5px] bg-heading mt-3 mb-8" />
-            </div>
+          {/* Tab Pengumuman */}
+          {!isBerita && (
+            <section className="space-y-6">
+              <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-2 border-b border-heading pb-3">
+                <h2 className="font-heading font-normal text-3xl sm:text-4xl text-heading tracking-normal">
+                  Pengumuman
+                </h2>
+                {pengumumanItems.length > 0 && (
+                  <span className="text-xs text-gray-500 font-medium">
+                    {pengumumanItems.length} pengumuman
+                  </span>
+                )}
+              </div>
 
-            <div className="border border-gray-200 bg-white overflow-x-auto rounded-xs shadow-2xs">
-              <table className="w-full text-left border-collapse">
-                <thead>
-                  <tr className="border-b border-gray-200 bg-gray-50/50">
-                    <th className="py-3.5 px-5 sm:px-6 text-[11px] font-bold tracking-wider uppercase text-heading w-36 sm:w-44">
-                      TANGGAL
-                    </th>
-                    <th className="py-3.5 px-5 sm:px-6 text-[11px] font-bold tracking-wider uppercase text-heading">
-                      PENGUMUMAN
-                    </th>
-                    <th className="py-3.5 px-5 sm:px-6 text-[11px] font-bold tracking-wider uppercase text-heading w-36 sm:w-44">
-                      KATEGORI
-                    </th>
-                    <th className="py-3.5 px-5 sm:px-6 text-[11px] font-bold tracking-wider uppercase text-heading w-36 sm:w-44">
-                      BERLAKU HINGGA
-                    </th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-gray-100 text-sm sm:text-[13.5px]">
-                  {announcements.map((item, idx) => (
-                    <tr key={idx} className="hover:bg-gray-50/50 transition-colors">
-                      <td className="py-4 px-5 sm:px-6 font-semibold text-heading whitespace-nowrap">
-                        {item.date}
-                      </td>
-                      <td className="py-4 px-5 sm:px-6 text-heading font-medium">
-                        {item.title}
-                      </td>
-                      <td className="py-4 px-5 sm:px-6 text-body whitespace-nowrap">
-                        {item.category}
-                      </td>
-                      <td className="py-4 px-5 sm:px-6 text-body whitespace-nowrap">
-                        {item.validUntil}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </section>
-
-          {/* Section Agenda Kegiatan Table */}
-          <section className="space-y-6">
-            <div>
-              <h2 className="font-heading font-normal text-3xl sm:text-4xl text-heading tracking-normal">
-                Agenda Kegiatan
-              </h2>
-              <div className="w-full h-[1.5px] bg-heading mt-3 mb-8" />
-            </div>
-
-            <div className="border border-gray-200 bg-white overflow-x-auto rounded-xs shadow-2xs">
-              <table className="w-full text-left border-collapse">
-                <thead>
-                  <tr className="border-b border-gray-200 bg-gray-50/50">
-                    <th className="py-3.5 px-5 sm:px-6 text-[11px] font-bold tracking-wider uppercase text-heading w-36 sm:w-44">
-                      TANGGAL
-                    </th>
-                    <th className="py-3.5 px-5 sm:px-6 text-[11px] font-bold tracking-wider uppercase text-heading">
-                      KEGIATAN
-                    </th>
-                    <th className="py-3.5 px-5 sm:px-6 text-[11px] font-bold tracking-wider uppercase text-heading w-48 sm:w-60">
-                      TEMPAT
-                    </th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-gray-100 text-sm sm:text-[13.5px]">
-                  {agendaList.map((item, idx) => (
-                    <tr key={idx} className="hover:bg-gray-50/50 transition-colors">
-                      <td className="py-4 px-5 sm:px-6 font-semibold text-heading whitespace-nowrap">
-                        {item.date}
-                      </td>
-                      <td className="py-4 px-5 sm:px-6 text-heading font-medium">
-                        {item.activity}
-                      </td>
-                      <td className="py-4 px-5 sm:px-6 text-body whitespace-nowrap">
-                        {item.location}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </section>
+              {pengumumanItems.length > 0 ? (
+                <div className="border border-gray-200 bg-white overflow-x-auto rounded-xs shadow-2xs">
+                  <table className="w-full text-left border-collapse">
+                    <thead>
+                      <tr className="border-b border-gray-200 bg-gray-50/50">
+                        <th className="py-3.5 px-5 sm:px-6 text-[11px] font-bold tracking-wider uppercase text-heading w-36 sm:w-44">
+                          TANGGAL
+                        </th>
+                        <th className="py-3.5 px-5 sm:px-6 text-[11px] font-bold tracking-wider uppercase text-heading">
+                          PENGUMUMAN
+                        </th>
+                        <th className="py-3.5 px-5 sm:px-6 text-[11px] font-bold tracking-wider uppercase text-heading w-36 sm:w-44">
+                          KATEGORI
+                        </th>
+                        <th className="py-3.5 px-5 sm:px-6 text-[11px] font-bold tracking-wider uppercase text-heading w-36 sm:w-44">
+                          BERLAKU HINGGA
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-gray-100 text-sm sm:text-[13.5px]">
+                      {pengumumanItems.map((item) => (
+                        <tr key={item.id} className="hover:bg-gray-50/50 transition-colors">
+                          <td className="py-4 px-5 sm:px-6 font-semibold text-heading whitespace-nowrap align-top">
+                            {item.tanggal}
+                          </td>
+                          <td className="py-4 px-5 sm:px-6 align-top">
+                            {item.content ? (
+                              <Link
+                                to={`/berita/${generateSlug(item.title, item.slug)}`}
+                                className="text-heading font-medium hover:text-primary transition-colors"
+                              >
+                                {item.title}
+                              </Link>
+                            ) : (
+                              <span className="text-heading font-medium">{item.title}</span>
+                            )}
+                          </td>
+                          <td className="py-4 px-5 sm:px-6 text-body whitespace-nowrap align-top">
+                            {item.kategori || "\u2014"}
+                          </td>
+                          <td className="py-4 px-5 sm:px-6 text-body whitespace-nowrap align-top">
+                            {item.berlakuHingga || "\u2014"}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              ) : (
+                <div className="border border-dashed border-gray-300 bg-white p-10 sm:p-14 text-center rounded-xs">
+                  <p className="text-sm font-medium text-gray-500">
+                    Belum ada pengumuman yang diterbitkan.
+                  </p>
+                  <p className="mt-1.5 text-xs text-gray-400 max-w-md mx-auto leading-relaxed">
+                    Pengumuman resmi program studi akan ditampilkan di sini.
+                  </p>
+                </div>
+              )}
+            </section>
+          )}
         </div>
 
         {/* Footer */}

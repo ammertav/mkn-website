@@ -1,104 +1,89 @@
 import { Helmet } from "react-helmet-async";
-
-const tujuanList = [
-  {
-    number: "01",
-    title: "Kompetensi Khusus Pejabat Umum Pembuat Akta",
-    desc: "Terwujudnya lulusan Magister Kenotariatan yang miliki kompetensi khusus sebagai Pejabat Umum pembuat akta sebagai : Notaris, Pejabat Pembuat Akta Tanah (PPAT), Juru Lelang Kelas II, serta memiliki kemampuan akademik untuk studi lanjut; Program Doktor, dengan landasan kepribadian Islami dan mampu menjadi kader pemimpin umat dan dakwah dalam menegakkan hukum dan keadilan menuju rahmatan lil'alamin.",
-  },
-  {
-    number: "02",
-    title: "Pelaksana Hukum Profesional & Perancangan Kontrak",
-    desc: "Terwujudnya lulusan Magister Kenotariatan yang miliki kompetensi sebagai Pelaksana hukum profesional di bidang Kenotariatan yakni : Kepaniteraan, Kepengacaraan, Konsultan Hukum, Bagian Hukum Badan Perusahaan, In-house lawyer pada perusahaan, Law firm, Perbankan, dan lain lain mampu mengembangkan pengetahuan keilmuan hukum pada umumnya serta ilmu Kenotariatan khususnya, mampu memecahkan masalah masalah hukum serta memiliki ketrampilan dalam pembuatan perjanjian /Kontrak dan perancangan hukum, secara profesional yang jujur dan amanah, sehingga dapat memberikan pelayanan hukum proposional kepada masyarakat.",
-  },
-  {
-    number: "03",
-    title: "Peningkatan Kualitas SDM Analisis Hukum",
-    desc: "Meningkatkan produktivitas dan kualitas Sumber Daya Manusia yang mampu mengenali dan menganalisa serta memecahkan masalah-masalah hukum secara bijaksana dan tetap bersandar pada prinsip-prinsip hukum.",
-  },
-  {
-    number: "04",
-    title: "Penyelesaian Problematika Hukum Keperdataan",
-    desc: "Meningkatkan produktivitas dan kualitas Sumber Daya Manusia dalam memecahkan masalah-masalah hukum keperdataan (Kenotariatan) bersandarkan prinsip-prinsip hukum.",
-  },
-  {
-    number: "05",
-    title: "Kesiapan Studi Lanjut Program Doktor (S3)",
-    desc: "Mempersiapkan lulusan yang mempunyai kemampuan akademik untuk melanjutkan jenjang pendidikan lanjut Program Doktor Ilmu Hukum ( S3).",
-  },
-];
+import { useT } from "../../i18n/languageContext";
+import RichText from "../../components/ui/RichText";
+import { peoIntro, peoItems } from "../../data/profil/peoData";
 
 export default function Tujuan() {
+  const t = useT();
+
   return (
     <>
       <Helmet>
-        <title>Tujuan Pendidikan | MKn UNISSULA</title>
+        <title>Program Educational Objectives (PEO) | MKn UNISSULA</title>
         <meta
           name="description"
-          content="Tujuan pendidikan dan kualifikasi lulusan Program Studi Magister Kenotariatan (MKn) Fakultas Hukum UNISSULA."
+          content="Program Educational Objectives (PEO) Program Studi Magister Kenotariatan UNISSULA dan integrasinya dengan European Purposes of Higher Education (EPHE)."
         />
       </Helmet>
 
-      <div className="space-y-16 sm:space-y-20">
-        {/* Section TUJUAN PENDIDIKAN */}
+      <div className="space-y-14 sm:space-y-16">
+        {/* Header */}
         <section className="space-y-4">
           <span className="text-xs font-semibold tracking-wider text-primary uppercase block">
             TUJUAN PENDIDIKAN
           </span>
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-start pt-2">
-            {/* Left Column: Heading */}
             <div className="lg:col-span-5">
               <h2 className="font-heading font-normal text-3xl sm:text-4xl lg:text-[40px] text-heading leading-tight">
-                Mencetak Tenaga Hukum dan Pejabat Umum Berkualitas
+                Program Educational Objectives
               </h2>
             </div>
 
-            {/* Right Column: Intro Paragraphs */}
-            <div className="lg:col-span-7 space-y-4 text-sm sm:text-base text-body leading-relaxed">
+            <div className="lg:col-span-7 text-sm sm:text-base text-body leading-relaxed">
               <p>
-                Dengan setting Indonesia sebagai negara Hukum, maka Indonesia memerlukan tenaga
-                sebagai Pejabat Umum pembuat akta maupun Pelaksana hukum proposianal pada perusahaan
-                atau lembaga yang memiliki bagian Hukum serta unit Riset dan pengembangan.
-              </p>
-              <p>
-                Tenaga-tenaga tersebut harus disiapkan sejak mahasiswa di Kampus. Usaha ini
-                memerlukan Magister Kenotariatan yang memadai secara kuantitas maupun kualitas.
-                Oleh karena itu Program Studi Magister (S.2) Kenotariatan Fakultas Hukum UNISSULA
-                dirancang agar dapat menghasilkan Magister Kenotariatan yang merupakan Program profesi
-                yang berbasis akademik, dengan kualifikasi sebagai berikut:
+                <RichText>{t(peoIntro)}</RichText>
               </p>
             </div>
           </div>
         </section>
 
-        {/* Section 5 Butir Tujuan / Kualifikasi */}
+        {/* Empat PEO berpasangan dengan capaian EPHE */}
         <section className="space-y-6">
           <div>
-            <h2 className="font-heading font-normal text-3xl sm:text-4xl text-heading tracking-normal">
-              Tujuan dan Kualifikasi Program Studi
+            <h2 className="font-heading font-normal text-2xl sm:text-3xl text-heading tracking-normal">
+              Rumusan PEO dan Relevansinya
             </h2>
-            <div className="w-full h-[1.5px] bg-heading mt-3 mb-8" />
+            <div className="w-full h-[1.5px] bg-heading mt-3" />
           </div>
 
-          <div className="grid grid-cols-1 gap-5">
-            {tujuanList.map((item, idx) => (
-              <div
-                key={idx}
-                className="bg-white border border-gray-200 p-6 sm:p-7 rounded-xs flex flex-col sm:flex-row sm:items-start gap-5 hover:border-primary/40 transition-colors shadow-2xs"
+          <div className="space-y-5">
+            {peoItems.map((item) => (
+              <article
+                key={item.code}
+                className="bg-white border border-gray-200 rounded-xs shadow-2xs hover:border-primary/40 transition-colors overflow-hidden"
               >
-                <span className="w-11 h-11 rounded-xs bg-primary/10 text-primary font-heading font-bold text-lg flex items-center justify-center shrink-0">
-                  {item.number}
-                </span>
-                <div className="space-y-2 flex-grow">
-                  <h3 className="font-heading font-semibold text-lg text-heading">
-                    {item.title}
-                  </h3>
-                  <p className="text-sm sm:text-base text-body leading-relaxed">
-                    {item.desc}
-                  </p>
+                <div className="grid grid-cols-1 lg:grid-cols-[1.15fr_1fr]">
+                  {/* Rumusan PEO */}
+                  <div className="p-6 sm:p-7 space-y-3.5">
+                    <span className="inline-block px-3 py-1.5 rounded-xs bg-primary/10 text-primary font-heading font-bold text-sm tracking-wide">
+                      {item.code}
+                    </span>
+                    <p className="text-sm sm:text-base text-body leading-relaxed">
+                      <RichText>{t(item.objective)}</RichText>
+                    </p>
+                  </div>
+
+                  {/* Capaian EPHE — kutipan berbahasa Inggris dari kerangka Eropa */}
+                  <div
+                    lang="en"
+                    className="p-6 sm:p-7 space-y-2.5 bg-gray-50/70 border-t border-gray-200 lg:border-t-0 lg:border-l"
+                  >
+                    <span
+                      lang="id"
+                      className="text-[10px] font-bold tracking-[0.14em] text-gray-400 uppercase block"
+                    >
+                      Capaian EPHE
+                    </span>
+                    <h3 className="font-heading font-semibold text-base text-heading leading-snug">
+                      {item.ephe.title}
+                    </h3>
+                    <p className="text-sm text-body leading-relaxed">
+                      {item.ephe.desc}
+                    </p>
+                  </div>
                 </div>
-              </div>
+              </article>
             ))}
           </div>
         </section>
