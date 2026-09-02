@@ -40,7 +40,7 @@ export default function AkademikLayout() {
           {/* 2-Column Grid Layout: Judul Sidebar & Judul Konten Sejajar */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
             {/* Sidebar */}
-            <aside className="lg:col-span-4 xl:col-span-3">
+            <aside className="lg:col-span-4 xl:col-span-3 lg:self-stretch">
               <SidebarNav
                 contact={akademikContact}
               />

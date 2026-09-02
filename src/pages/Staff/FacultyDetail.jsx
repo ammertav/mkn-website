@@ -224,7 +224,7 @@ export default function FacultyDetail() {
             </div>
 
             {/* Kolom Kanan / Sidebar (4 Cols): Riwayat Pendidikan & Dosen Lain */}
-            <aside className="lg:col-span-4 space-y-10 lg:pl-2">
+            <aside className="lg:col-span-4 space-y-10 lg:pl-2 lg:sticky lg:top-28 lg:self-start">
               {/* Riwayat Pendidikan */}
               {faculty.education && faculty.education.length > 0 && (
                 <div className="space-y-4">

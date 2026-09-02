@@ -176,7 +176,7 @@ export default function StudentOrganizationDetail() {
             </div>
 
             {/* Right Column (4 cols): Summary & Contact Sidebar */}
-            <aside className="lg:col-span-4 space-y-8 pl-0 lg:pl-6 lg:border-l border-gray-200 lg:sticky lg:top-24">
+            <aside className="lg:col-span-4 space-y-8 pl-0 lg:pl-6 lg:border-l border-gray-200 lg:sticky lg:top-28 lg:self-start">
               {/* RINGKASAN */}
               {organization.summary && organization.summary.length > 0 && (
                 <div className="space-y-4">
