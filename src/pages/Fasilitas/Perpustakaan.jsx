@@ -1,6 +1,7 @@
 import { Helmet } from "react-helmet-async";
 import FacilitySectionHeader from "../../components/Fasilitas/FacilitySectionHeader";
 import { perpustakaanData } from "../../data/fasilitasData";
+import Img from "../../components/ui/Img";
 
 export default function Perpustakaan() {
   const { header, bannerImage, stats, servicesList } = perpustakaanData;
@@ -29,7 +30,7 @@ export default function Perpustakaan() {
         {/* Section 2: Full-Width Photo Banner */}
         <section>
           <div className="relative w-full aspect-[21/9] sm:aspect-[24/9] max-h-[440px] bg-neutral-100 overflow-hidden shadow-sm group">
-            <img
+            <Img
               src={bannerImage.src}
               alt={bannerImage.alt}
               className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105"

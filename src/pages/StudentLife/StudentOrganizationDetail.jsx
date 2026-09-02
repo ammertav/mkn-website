@@ -5,6 +5,7 @@ import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import Breadcrumb from "../../components/ui/Breadcrumb";
 import { studentOrganizationsData } from "../../data/studentOrganizationsData";
+import Img from "../../components/ui/Img";
 
 export default function StudentOrganizationDetail() {
   useEffect(() => {
@@ -66,11 +67,11 @@ export default function StudentOrganizationDetail() {
 
             {/* Right Photo Column (5 cols): Mentok Sampai Ujung Kanan Layar (Full Bleed Right) */}
             <div className="lg:col-span-5 w-full bg-[#eaeaea] relative min-h-[300px] sm:min-h-[380px] lg:min-h-full overflow-hidden flex items-center justify-center">
-              <img
+              <Img
                 src={organization.image}
                 alt={organization.title}
                 className="w-full h-full object-cover object-center"
-                loading="eager"
+                eager
               />
             </div>
           </div>
@@ -226,11 +227,10 @@ export default function StudentOrganizationDetail() {
                   key={item.id || idx}
                   className="group relative aspect-[4/3] sm:aspect-[16/10] lg:aspect-auto lg:h-[380px] xl:h-[440px] bg-gray-200 overflow-hidden border-r border-white/20 last:border-r-0"
                 >
-                  <img
+                  <Img
                     src={item.image}
                     alt={item.title}
                     className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out"
-                    loading="lazy"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/25 to-transparent flex items-end p-6 sm:p-8">
                     <span className="text-sm sm:text-base md:text-lg font-medium text-white tracking-wide drop-shadow-md">
@@ -260,11 +260,10 @@ export default function StudentOrganizationDetail() {
                     className="flex flex-col bg-white border border-gray-200/90 rounded-sm overflow-hidden shadow-2xs hover:shadow-sm transition-all duration-300 group"
                   >
                     <div className="aspect-[3/4] bg-[#eaeaea] overflow-hidden relative">
-                      <img
+                      <Img
                         src={member.image}
                         alt={member.name}
                         className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
-                        loading="lazy"
                       />
                     </div>
                     <div className="p-4 space-y-1">

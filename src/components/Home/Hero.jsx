@@ -2,6 +2,7 @@ import { useRef, useState } from "react";
 import { FiPause, FiPlay } from "react-icons/fi";
 
 import logoUnissula from "../../assets/images/logo-unissula-crest.png";
+import Img from "../ui/Img";
 
 export default function Hero() {
   const videoRef = useRef(null);
@@ -43,7 +44,8 @@ export default function Hero() {
         <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-20 flex flex-col items-center text-center">
           
           {/* UNISSULA Crest */}
-          <img
+          <Img
+            eager
             src={logoUnissula}
             alt="Lambang UNISSULA"
             className="w-24 h-24 sm:w-28 sm:h-28 object-contain mb-8 sm:mb-10 drop-shadow-lg"

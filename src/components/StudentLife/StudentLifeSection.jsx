@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { FiArrowRight } from "react-icons/fi";
+import Img from "../ui/Img";
 
 export default function StudentLifeSection({
   category = "MAHASISWA",
@@ -39,19 +40,17 @@ export default function StudentLifeSection({
               <div className="relative w-full aspect-[16/10] bg-gray-100 overflow-hidden">
                 {isInternal ? (
                   <Link to={item.linkHref} className="block w-full h-full">
-                    <img
+                    <Img
                       src={item.image}
                       alt={item.title}
                       className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
-                      loading="lazy"
                     />
                   </Link>
                 ) : (
-                  <img
+                  <Img
                     src={item.image}
                     alt={item.title}
                     className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
-                    loading="lazy"
                   />
                 )}
               </div>

@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { FaInstagram, FaTwitter, FaYoutube, FaLinkedinIn } from "react-icons/fa";
 
 import logoUnissula from "../assets/images/logo-unissula-crest.png";
+import Img from "./ui/Img";
 
 const footerSections = [
   {
@@ -80,7 +81,7 @@ export default function Footer() {
               to="/"
               className="flex items-center gap-2.5 hover:opacity-95 transition-opacity"
             >
-              <img
+              <Img
                 src={logoUnissula}
                 alt=""
                 aria-hidden="true"

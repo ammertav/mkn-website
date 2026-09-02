@@ -2,6 +2,7 @@ import { Helmet } from "react-helmet-async";
 import FacilitySectionHeader from "../../components/Fasilitas/FacilitySectionHeader";
 import FacilitySpecSection from "../../components/Fasilitas/FacilitySpecSection";
 import { laboratoriumData } from "../../data/fasilitasData";
+import Img from "../../components/ui/Img";
 
 export default function Laboratorium() {
   const { header, standard, labList, gallery } = laboratoriumData;
@@ -80,7 +81,7 @@ export default function Laboratorium() {
                 key={index}
                 className="group relative aspect-[4/3] bg-neutral-100 overflow-hidden flex items-center justify-center p-6 text-center shadow-xs transition-all duration-300 hover:shadow-md"
               >
-                <img
+                <Img
                   src={item.image}
                   alt={item.title}
                   className="absolute inset-0 w-full h-full object-cover object-center filter brightness-[0.7] contrast-105 transition-transform duration-500 group-hover:scale-105"

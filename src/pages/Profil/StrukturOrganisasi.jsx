@@ -9,6 +9,7 @@ import {
 import imgDekan from "../../assets/images/struktur-organisasi/Dekan Fakultas Hukum UNISSULA.jpg";
 import imgKaprodi from "../../assets/images/dosen/Dr.NanangSriDarmadi,S.H.,M.H..jpg";
 import imgSekprodi from "../../assets/images/struktur-organisasi/Sekprodi a- Dr. Toni Triyanto, S.H., M.jpeg";
+import Img from "../../components/ui/Img";
 
 const strukturPejabat = [
   {
@@ -127,7 +128,7 @@ export default function StrukturOrganisasi() {
               <div className="w-full max-w-sm bg-white border-2 border-primary/80 p-6 text-center rounded-xs shadow-sm flex flex-col items-center">
                 {/* Photo Dekan */}
                 <div className="w-28 h-36 sm:w-32 sm:h-40 rounded-xs overflow-hidden bg-gray-100 mb-4 border border-gray-200 shadow-2xs">
-                  <img
+                  <Img
                     src={imgDekan}
                     alt="Prof. Dr. H. Jawade Hafidz, S.H., M.H."
                     className="w-full h-full object-cover object-top"
@@ -147,7 +148,7 @@ export default function StrukturOrganisasi() {
               {/* Level 2: Kaprodi */}
               <div className="w-full max-w-sm bg-white border-2 border-primary p-6 text-center rounded-xs shadow-sm flex flex-col items-center">
                 <div className="w-28 h-36 sm:w-32 sm:h-40 rounded-xs overflow-hidden bg-gray-100 mb-4 border border-gray-200 shadow-2xs">
-                  <img
+                  <Img
                     src={imgKaprodi}
                     alt="Dr. Nanang Sri Darmadi, S.H., M.H."
                     className="w-full h-full object-cover object-top"
@@ -167,7 +168,7 @@ export default function StrukturOrganisasi() {
               {/* Level 3: Sekprodi (di bawah Kaprodi) */}
               <div className="w-full max-w-sm bg-white border-2 border-primary/70 p-6 text-center rounded-xs shadow-sm flex flex-col items-center">
                 <div className="w-28 h-36 sm:w-32 sm:h-40 rounded-xs overflow-hidden bg-gray-100 mb-4 border border-gray-200 shadow-2xs">
-                  <img
+                  <Img
                     src={imgSekprodi}
                     alt="Dr. Toni Triyanto, S.H., M.H."
                     className="w-full h-full object-cover object-top"

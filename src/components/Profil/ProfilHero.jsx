@@ -1,11 +1,13 @@
 import gedungImg from "../../assets/images/gedung.jpg";
+import Img from "../ui/Img";
 
 export default function ProfilHero() {
   return (
     <section className="w-full bg-white font-body">
       {/* Full-width Banner Image / Placeholder */}
       <div className="w-full h-[280px] sm:h-[360px] lg:h-[420px] bg-[#E8E6E1] relative overflow-hidden flex items-center justify-center">
-        <img
+        <Img
+          eager
           src={gedungImg}
           alt="Gedung Fakultas Hukum & Pascasarjana UNISSULA"
           className="w-full h-full object-cover object-center filter contrast-[1.02] brightness-95"

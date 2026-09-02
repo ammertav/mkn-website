@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { FiArrowRight } from "react-icons/fi";
 import professorImg from "../../assets/images/dosen/Dr.NanangSriDarmadi,S.H.,M.H..jpg";
+import Img from "../ui/Img";
 
 export default function ExpertSpotlight() {
   return (
@@ -12,7 +13,7 @@ export default function ExpertSpotlight() {
           <div className="lg:col-span-5 flex justify-center lg:justify-start">
             <div className="p-2.5 sm:p-3.5 bg-white border border-gray-200 shadow-sm w-full max-w-sm sm:max-w-md">
               <div className="aspect-[4/5] w-full overflow-hidden bg-gray-100">
-                <img
+                <Img
                   src={professorImg}
                   alt="Prof. Dr. Budi Santoso, S.H., M.Kn."
                   className="w-full h-full object-cover object-top"

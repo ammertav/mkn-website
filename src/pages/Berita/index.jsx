@@ -8,6 +8,7 @@ import Breadcrumb from "../../components/ui/Breadcrumb";
 import beritaList from "../../data/berita.json";
 import { getBeritaImage } from "../../utils/imageResolver";
 import { generateSlug } from "../../utils/slugHelper";
+import Img from "../../components/ui/Img";
 
 const ITEMS_PER_PAGE = 10;
 
@@ -135,7 +136,8 @@ export default function BeritaIndex() {
                   to={`/berita/${generateSlug(featuredNews.title, featuredNews.slug)}`}
                   className="block w-full aspect-[4/3] bg-[#E8E6E1] rounded-xs relative overflow-hidden border border-gray-200 group"
                 >
-                  <img
+                  <Img
+                    eager
                     src={getBeritaImage(featuredNews.gambar)}
                     alt={featuredNews.title}
                     className="w-full h-full object-cover object-center group-hover:scale-102 transition-transform duration-500"
@@ -263,68 +265,50 @@ export default function BeritaIndex() {
             </section>
           )}
 
-          {/* Tab Pengumuman */}
+          {/* Tab Pengumuman — daftar tanggal + judul bertaut, setiap entri punya halaman detail */}
           {!isBerita && (
             <section className="space-y-6">
-              <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-2 border-b border-heading pb-3">
+              <div className="border-b border-heading pb-3">
                 <h2 className="font-heading font-normal text-3xl sm:text-4xl text-heading tracking-normal">
                   Pengumuman
                 </h2>
-                {pengumumanItems.length > 0 && (
-                  <span className="text-xs text-gray-500 font-medium">
-                    {pengumumanItems.length} pengumuman
-                  </span>
-                )}
               </div>
 
               {pengumumanItems.length > 0 ? (
-                <div className="border border-gray-200 bg-white overflow-x-auto rounded-xs shadow-2xs">
-                  <table className="w-full text-left border-collapse">
-                    <thead>
-                      <tr className="border-b border-gray-200 bg-gray-50/50">
-                        <th className="py-3.5 px-5 sm:px-6 text-[11px] font-bold tracking-wider uppercase text-heading w-36 sm:w-44">
-                          TANGGAL
-                        </th>
-                        <th className="py-3.5 px-5 sm:px-6 text-[11px] font-bold tracking-wider uppercase text-heading">
-                          PENGUMUMAN
-                        </th>
-                        <th className="py-3.5 px-5 sm:px-6 text-[11px] font-bold tracking-wider uppercase text-heading w-36 sm:w-44">
-                          KATEGORI
-                        </th>
-                        <th className="py-3.5 px-5 sm:px-6 text-[11px] font-bold tracking-wider uppercase text-heading w-36 sm:w-44">
-                          BERLAKU HINGGA
-                        </th>
-                      </tr>
-                    </thead>
-                    <tbody className="divide-y divide-gray-100 text-sm sm:text-[13.5px]">
-                      {pengumumanItems.map((item) => (
-                        <tr key={item.id} className="hover:bg-gray-50/50 transition-colors">
-                          <td className="py-4 px-5 sm:px-6 font-semibold text-heading whitespace-nowrap align-top">
-                            {item.tanggal}
-                          </td>
-                          <td className="py-4 px-5 sm:px-6 align-top">
-                            {item.content ? (
-                              <Link
-                                to={`/berita/${generateSlug(item.title, item.slug)}`}
-                                className="text-heading font-medium hover:text-primary transition-colors"
-                              >
-                                {item.title}
-                              </Link>
-                            ) : (
-                              <span className="text-heading font-medium">{item.title}</span>
-                            )}
-                          </td>
-                          <td className="py-4 px-5 sm:px-6 text-body whitespace-nowrap align-top">
-                            {item.kategori || "\u2014"}
-                          </td>
-                          <td className="py-4 px-5 sm:px-6 text-body whitespace-nowrap align-top">
-                            {item.berlakuHingga || "\u2014"}
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
+                <ul className="divide-y divide-gray-200 border-b border-gray-200">
+                  {pengumumanItems.map((item) => (
+                    <li key={item.id} className="py-5 sm:py-6 group">
+                      <div className="flex flex-wrap items-center gap-x-2.5 gap-y-1 mb-1.5">
+                        <span className="text-xs font-bold tracking-wider text-primary uppercase tabular-nums">
+                          {item.tanggal}
+                        </span>
+                        {item.kategori && (
+                          <>
+                            <span aria-hidden="true" className="text-gray-300">
+                              &middot;
+                            </span>
+                            <span className="text-xs text-gray-500 uppercase tracking-wider">
+                              {item.kategori}
+                            </span>
+                          </>
+                        )}
+                      </div>
+
+                      <Link
+                        to={`/berita/${generateSlug(item.title, item.slug)}`}
+                        className="font-heading text-lg sm:text-xl text-heading leading-snug hover:text-primary transition-colors inline-flex items-start gap-2"
+                      >
+                        <span>{item.title}</span>
+                        <span
+                          aria-hidden="true"
+                          className="text-primary opacity-0 group-hover:opacity-100 transition-opacity shrink-0 mt-0.5"
+                        >
+                          &rarr;
+                        </span>
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
               ) : (
                 <div className="border border-dashed border-gray-300 bg-white p-10 sm:p-14 text-center rounded-xs">
                   <p className="text-sm font-medium text-gray-500">
@@ -337,6 +321,7 @@ export default function BeritaIndex() {
               )}
             </section>
           )}
+
         </div>
 
         {/* Footer */}

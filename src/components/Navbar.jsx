@@ -7,6 +7,7 @@ import logoUnissula from "../assets/images/logo-unissula-crest.png";
 import TopBar from "./Navbar/TopBar";
 import DesktopNav from "./Navbar/DesktopNav";
 import MobileNav from "./Navbar/MobileNav";
+import Img from "./ui/Img";
 
 export default function Navbar() {
   const location = useLocation();
@@ -45,7 +46,8 @@ export default function Navbar() {
             to="/"
             className="flex items-center gap-2.5 hover:opacity-95 transition-opacity shrink-0"
           >
-            <img
+            <Img
+              eager
               src={logoUnissula}
               alt=""
               aria-hidden="true"
