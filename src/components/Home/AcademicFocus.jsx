@@ -4,6 +4,7 @@ import { FiArrowRight } from "react-icons/fi";
 import beritaList from "../../data/berita.json";
 import { getBeritaImage } from "../../utils/imageResolver";
 import { generateSlug } from "../../utils/slugHelper";
+import Img from "../ui/Img";
 
 export default function AcademicFocus() {
   const featured = beritaList[0];
@@ -41,7 +42,7 @@ export default function AcademicFocus() {
               to={`/berita/${generateSlug(featured.title, featured.slug)}`}
               className="relative w-full aspect-[16/9] sm:aspect-[16/8.5] bg-gray-100 overflow-hidden rounded-xs block"
             >
-              <img
+              <Img
                 src={getBeritaImage(featured.gambar)}
                 alt={featured.title}
                 className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-102"

@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { FiChevronRight } from "react-icons/fi";
+import Img from "../ui/Img";
 
 const campusCultureData = [
   {
@@ -54,11 +55,10 @@ export default function CampusCulture() {
             <article key={item.id} className="flex flex-col group h-full">
               {/* Image Container (Grayscale Aspect 16/10) */}
               <div className="relative w-full aspect-[16/10] bg-gray-100 overflow-hidden rounded-xs">
-                <img
+                <Img
                   src={item.image}
                   alt={item.title}
                   className="w-full h-full object-cover object-center grayscale contrast-110 transition-transform duration-500 group-hover:scale-105"
-                  loading="lazy"
                 />
               </div>
 

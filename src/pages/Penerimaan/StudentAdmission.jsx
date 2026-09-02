@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { FiChevronDown, FiChevronUp, FiExternalLink } from "react-icons/fi";
 import { admissionRequirements } from "../../data/penerimaanData";
+import Img from "../../components/ui/Img";
 
 export default function StudentAdmission() {
   const [openIndex, setOpenIndex] = useState(1);
@@ -43,11 +44,10 @@ export default function StudentAdmission() {
 
         {/* Hero Banner Image */}
         <div className="w-full aspect-[21/9] sm:aspect-[16/7] rounded-xs overflow-hidden bg-gray-100 shadow-2xs">
-          <img
+          <Img
             src="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?auto=format&fit=crop&w=1200&q=80"
             alt="Penerimaan Mahasiswa Baru MKn UNISSULA"
             className="w-full h-full object-cover object-center"
-            loading="lazy"
           />
         </div>
 

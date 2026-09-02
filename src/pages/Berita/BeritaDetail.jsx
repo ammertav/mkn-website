@@ -17,6 +17,7 @@ import Breadcrumb from "../../components/ui/Breadcrumb";
 import beritaList from "../../data/berita.json";
 import { getBeritaImage } from "../../utils/imageResolver";
 import { generateSlug } from "../../utils/slugHelper";
+import Img from "../../components/ui/Img";
 
 export default function BeritaDetail() {
   const { slug } = useParams();
@@ -211,7 +212,8 @@ export default function BeritaDetail() {
             {/* Featured Image */}
             {article.image && (
               <div className="my-8 overflow-hidden rounded-xs bg-gray-100 border border-gray-200">
-                <img
+                <Img
+                  eager
                   src={article.image}
                   alt={article.title}
                   className="w-full max-h-[520px] object-cover object-center"
@@ -224,11 +226,17 @@ export default function BeritaDetail() {
 
             {/* Main Content Paragraphs */}
             <div className="py-6 space-y-5 text-base sm:text-[16.5px] text-body leading-relaxed">
-              {article.paragraphs.map((paragraph, idx) => (
-                <p key={idx} className="leading-relaxed">
-                  {paragraph}
+              {article.paragraphs.length > 0 ? (
+                article.paragraphs.map((paragraph, idx) => (
+                  <p key={idx} className="leading-relaxed">
+                    {paragraph}
+                  </p>
+                ))
+              ) : (
+                <p className="text-sm text-gray-500 italic">
+                  Isi lengkap belum tersedia.
                 </p>
-              ))}
+              )}
             </div>
 
             {/* Tags Section */}
@@ -293,7 +301,7 @@ export default function BeritaDetail() {
                     className="bg-white border border-gray-200 rounded-xs overflow-hidden group hover:border-primary/50 transition-colors flex flex-col shadow-2xs"
                   >
                     <div className="aspect-[16/10] bg-gray-100 overflow-hidden relative">
-                      <img
+                      <Img
                         src={rel.image}
                         alt={rel.title}
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"

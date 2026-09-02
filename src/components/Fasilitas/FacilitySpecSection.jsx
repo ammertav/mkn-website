@@ -1,3 +1,5 @@
+import Img from "../ui/Img";
+
 export default function FacilitySpecSection({
   title,
   description,
@@ -71,7 +73,7 @@ export default function FacilitySpecSection({
           }`}
         >
           <div className="relative w-full aspect-[4/3] sm:aspect-[16/10] bg-neutral-100 overflow-hidden shadow-sm group">
-            <img
+            <Img
               src={image.src}
               alt={image.alt || title}
               className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105"

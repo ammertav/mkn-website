@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { FiArrowRight } from "react-icons/fi";
+import Img from "../ui/Img";
 
 export default function ResearchCommunity() {
   return (
@@ -17,7 +18,7 @@ export default function ResearchCommunity() {
         {/* Card 1: Legal Scholarship & Publications */}
         <div className="relative min-h-[460px] sm:min-h-[520px] lg:min-h-[560px] flex flex-col justify-end p-8 sm:p-12 lg:p-16 overflow-hidden group">
           {/* Background Image */}
-          <img
+          <Img
             src="https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=1200&q=80"
             alt="Legal Scholarship and Publications"
             className="absolute inset-0 w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
@@ -55,7 +56,7 @@ export default function ResearchCommunity() {
         {/* Card 2: Community Legal Empowerment */}
         <div className="relative min-h-[460px] sm:min-h-[520px] lg:min-h-[560px] flex flex-col justify-end p-8 sm:p-12 lg:p-16 overflow-hidden group">
           {/* Background Image */}
-          <img
+          <Img
             src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=1200&q=80"
             alt="Community Legal Empowerment"
             className="absolute inset-0 w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"

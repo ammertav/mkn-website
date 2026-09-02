@@ -3,6 +3,7 @@ import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import { FiSearch, FiChevronDown } from "react-icons/fi";
 import { facultyData } from "../../data/facultyData";
+import Img from "../../components/ui/Img";
 
 export default function FacultyDirectory() {
     const [searchQuery, setSearchQuery] = useState("");
@@ -167,11 +168,10 @@ export default function FacultyDirectory() {
                                 >
                                     {/* Grayscale Portrait Photo */}
                                     <div className="w-full aspect-4/5 bg-gray-100 overflow-hidden relative">
-                                        <img
+                                        <Img
                                             src={faculty.image}
                                             alt={faculty.name}
                                             className="w-full h-full object-cover object-top grayscale contrast-110 group-hover:scale-103 transition-transform duration-300"
-                                            loading="lazy"
                                         />
                                     </div>
 

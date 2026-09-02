@@ -1,9 +1,12 @@
+import Img from "../ui/Img";
+
 export default function FasilitasHero() {
   return (
     <section className="relative w-full bg-neutral-900 text-white overflow-hidden">
       {/* Background Image with Dark Vignette Overlay */}
       <div className="absolute inset-0 z-0">
-        <img
+        <Img
+          eager
           src="https://images.unsplash.com/photo-1541829070764-84a7d30dd3f3?auto=format&fit=crop&w=2000&q=80"
           alt="Gedung Pascasarjana MKn UNISSULA"
           className="w-full h-full object-cover object-center filter brightness-50 contrast-105"

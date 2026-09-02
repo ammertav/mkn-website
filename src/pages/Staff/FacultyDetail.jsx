@@ -1,10 +1,26 @@
 import { useEffect } from "react";
 import { Helmet } from "react-helmet-async";
-import { useParams, Link, Navigate } from "react-router-dom";
+import { useParams, Link, Navigate, useSearchParams } from "react-router-dom";
 import { facultyData } from "../../data/facultyData";
+import Img from "../../components/ui/Img";
+import DosenChatSidebar from "../../components/Staff/chat/DosenChatSidebar";
+import DosenChatInline from "../../components/Staff/chat/DosenChatInline";
+import DosenChatFloating from "../../components/Staff/chat/DosenChatFloating";
+import DosenChatDrawer from "../../components/Staff/chat/DosenChatDrawer";
+import DosenChatTab from "../../components/Staff/chat/DosenChatTab";
 
 export default function FacultyDetail() {
   const { slug } = useParams();
+  const [searchParams] = useSearchParams();
+
+  // Varian tampilan chatbot untuk peragaan ke klien:
+  //   /staff/dosen/<slug>                   -> kartu sidebar (bawaan)
+  //   /staff/dosen/<slug>?chat=inline       -> prompt menyatu setelah biografi
+  //   /staff/dosen/<slug>?chat=drawer       -> tombol di hero, panel meluncur dari kanan
+  //   /staff/dosen/<slug>?chat=tab          -> sidebar bertab bersama Riwayat Pendidikan
+  //   /staff/dosen/<slug>?chat=floating     -> gelembung mengambang
+  //   /staff/dosen/<slug>?chat=off          -> tanpa chatbot
+  const varianChat = searchParams.get("chat") || "sidebar";
 
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: "instant" });
@@ -63,6 +79,12 @@ export default function FacultyDetail() {
                 </p>
               </div>
 
+              {varianChat === "drawer" && (
+                <div className="pt-1">
+                  <DosenChatDrawer dosen={faculty} />
+                </div>
+              )}
+
               {/* Metadata Rows - Dibatasi max-w-xl agar tidak melebar mendekati foto */}
               <div className="w-full max-w-xl pt-2 divide-y border-gray-100 border-t text-xs sm:text-sm">
                 {faculty.nidn && (
@@ -94,11 +116,11 @@ export default function FacultyDetail() {
             {/* Kolom Kanan (5 Cols): Mentok sampai Ujung Kanan Layar (Full Bleed Right) */}
             <div className="lg:col-span-5 w-full bg-[#eaeaea] relative min-h-75 sm:min-h-90 lg:min-h-full overflow-hidden flex items-center justify-center">
               {faculty.image ? (
-                <img
+                <Img
                   src={faculty.image}
                   alt={faculty.name}
                   className="w-full h-full object-cover object-[center_15%] grayscale contrast-105"
-                  loading="eager"
+                  eager
                 />
               ) : (
                 <span className="text-xs sm:text-sm text-gray-500 font-medium tracking-wide">
@@ -126,6 +148,8 @@ export default function FacultyDetail() {
                   ))}
                 </div>
               )}
+
+              {varianChat === "inline" && <DosenChatInline dosen={faculty} />}
 
               {/* Mata Kuliah yang Diampu */}
               {faculty.courses && faculty.courses.length > 0 && (
@@ -225,8 +249,12 @@ export default function FacultyDetail() {
 
             {/* Kolom Kanan / Sidebar (4 Cols): Riwayat Pendidikan & Dosen Lain */}
             <aside className="lg:col-span-4 space-y-10 lg:pl-2">
-              {/* Riwayat Pendidikan */}
-              {faculty.education && faculty.education.length > 0 && (
+              {varianChat === "sidebar" && <DosenChatSidebar dosen={faculty} />}
+              {varianChat === "tab" && <DosenChatTab dosen={faculty} />}
+
+              {/* Riwayat Pendidikan — disembunyikan pada varian tab karena
+                  sudah tampil di dalam komponen bertab di atas. */}
+              {varianChat !== "tab" && faculty.education && faculty.education.length > 0 && (
                 <div className="space-y-4">
                   <h3 className="text-xs font-bold tracking-[0.14em] uppercase text-body pb-2 border-b border-gray-200">
                     RIWAYAT PENDIDIKAN
@@ -286,6 +314,8 @@ export default function FacultyDetail() {
           </div>
         </div>
       </div>
+
+      {varianChat === "floating" && <DosenChatFloating dosen={faculty} />}
     </>
   );
 }
