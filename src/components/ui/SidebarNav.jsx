@@ -2,7 +2,7 @@ import { useLocation } from "react-router-dom";
 import SidebarLink from "./SidebarLink";
 import { navLinks } from "../../data/navLinks";
 
-export default function SidebarNav({ title, menus, contact }) {
+export default function SidebarNav({ title, menus, contact, className = "" }) {
   const { pathname } = useLocation();
 
   // Cari parent dari navLinks berdasarkan pathname (misal /akademik -> ACADEMIC)
@@ -18,7 +18,9 @@ export default function SidebarNav({ title, menus, contact }) {
   const navItems = menus ?? currentParent?.children ?? [];
 
   return (
-    <div className="space-y-6">
+    <div
+      className={`space-y-6 lg:sticky lg:top-28 lg:max-h-[calc(100vh-8.5rem)] lg:overflow-y-auto pr-1 scrollbar-none ${className}`}
+    >
       {/* Judul sidebar */}
       {displayTitle && (
         <div className="pb-3 border-b border-gray-200">

@@ -66,12 +66,12 @@ const StudentSurveyReport = lazy(() => import("./pages/QualityAssurance/StudentS
 const AlumniSurveyReport = lazy(() => import("./pages/QualityAssurance/AlumniSurveyReport"));
 
 // Mahasiswa sub-pages
-const MahasiswaLayout = lazy(() => import("./pages/StudentLife/index"));
-const StudentOrganizations = lazy(() => import("./pages/StudentLife/StudentOrganizations"));
-const StudentActivities = lazy(() => import("./pages/StudentLife/StudentActivities"));
 const Accommodation = lazy(() => import("./pages/StudentLife/Accommodation"));
 const StudentOrganizationDetail = lazy(() => import("./pages/StudentLife/StudentOrganizationDetail"));
-const UKMDetail = lazy(() => import("./pages/StudentLife/UKMDetail"));
+
+// Event sub-pages
+const EventPage = lazy(() => import("./pages/Event/index"));
+const EventDetailPage = lazy(() => import("./pages/Event/EventDetail"));
 
 // Alumni & Karir sub-pages
 const AlumniLayout = lazy(() => import("./pages/Alumni/index"));
@@ -172,16 +172,23 @@ export default function App() {
           <Route path="alumni-survey-report" element={<AlumniSurveyReport />} />
         </Route>
 
-        {/* Mahasiswa — nested routes */}
-        <Route path="/mahasiswa" element={<MahasiswaLayout />}>
-          <Route index element={<Navigate to="organisasi" replace />} />
-          <Route path="organisasi" element={<StudentOrganizations />} />
-          <Route path="ukm" element={<StudentActivities />} />
-          <Route path="akomodasi" element={<Accommodation />} />
-        </Route>
-        <Route path="/mahasiswa/organisasi/:slug" element={<StudentOrganizationDetail />} />
-        <Route path="/mahasiswa/ukm/:slug" element={<UKMDetail />} />
+        {/* Organisasi Mahasiswa — Standalone page langsung tanpa sidebar (organisasi hanya 1) */}
+        <Route path="/mahasiswa/organisasi" element={<StudentOrganizationDetail />} />
+        <Route path="/mahasiswa/organisasi/*" element={<Navigate to="/mahasiswa/organisasi" replace />} />
 
+        {/* Akomodasi — Standalone page dengan PageTabs Asrama & Guest House (tanpa sidebar) */}
+        <Route path="/mahasiswa/akomodasi" element={<Navigate to="/mahasiswa/akomodasi/asrama" replace />} />
+        <Route path="/mahasiswa/akomodasi/:tab" element={<Accommodation />} />
+
+        {/* Mahasiswa root & Fallback legacy routes */}
+        <Route path="/mahasiswa" element={<Navigate to="/mahasiswa/organisasi" replace />} />
+        <Route path="/mahasiswa/ukm/*" element={<Navigate to="/mahasiswa/organisasi" replace />} />
+        <Route path="/mahasiswa/ukm" element={<Navigate to="/mahasiswa/organisasi" replace />} />
+
+        {/* Event / Agenda — Harvard Law School style calendar layout */}
+        <Route path="/event" element={<EventPage />} />
+        <Route path="/event/:slug" element={<EventDetailPage />} />
+        <Route path="/agenda" element={<Navigate to="/event" replace />} />
 
         {/* Alumni & Karir — nested routes */}
         <Route path="/alumni" element={<AlumniLayout />}>
@@ -198,7 +205,7 @@ export default function App() {
         <Route path="/kurikulum" element={<Navigate to="/akademik/kurikulum/reguler" replace />} />
         <Route path="/kurikulum/*" element={<Navigate to="/akademik/kurikulum/reguler" replace />} />
         <Route path="/organisasi-mahasiswa" element={<Navigate to="/mahasiswa/organisasi" replace />} />
-        <Route path="/unit-kegiatan-mahasiswa" element={<Navigate to="/mahasiswa/ukm" replace />} />
+        <Route path="/unit-kegiatan-mahasiswa" element={<Navigate to="/mahasiswa/organisasi" replace />} />
         <Route path="/dosen" element={<Navigate to="/staff/dosen" replace />} />
         <Route path="/tenaga-kependidikan" element={<Navigate to="/staff/tendik" replace />} />
         <Route path="/pusat-karir" element={<Navigate to="/alumni/pusat-karir" replace />} />

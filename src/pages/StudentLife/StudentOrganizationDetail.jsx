@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { Helmet } from "react-helmet-async";
-import { useParams, Navigate, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import Breadcrumb from "../../components/ui/Breadcrumb";
@@ -8,24 +8,11 @@ import { studentOrganizationsData } from "../../data/studentOrganizationsData";
 import Img from "../../components/ui/Img";
 
 export default function StudentOrganizationDetail() {
-  const { slug } = useParams();
-
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: "instant" });
-  }, [slug]);
+  }, []);
 
-  // Cari organisasi berdasarkan slug atau alternateSlugs
-  const organization =
-    studentOrganizationsData.find(
-      (org) =>
-        org.slug === slug ||
-        org.alternateSlugs?.includes(slug) ||
-        String(org.id) === slug
-    ) || studentOrganizationsData[0]; // fallback ke himpunan mahasiswa jika direct
-
-  if (!organization && slug) {
-    return <Navigate to="/mahasiswa/organisasi" replace />;
-  }
+  const organization = studentOrganizationsData[0];
 
   return (
     <>
@@ -42,7 +29,7 @@ export default function StudentOrganizationDetail() {
         {/* BREADCRUMB (Aligned with 1600px Max-Width) */}
         {/* ========================================================================= */}
         <div className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 pt-6 sm:pt-8 pb-2">
-          <Breadcrumb customTitle={organization.title} />
+          <Breadcrumb />
         </div>
 
         {/* ========================================================================= */}
@@ -190,7 +177,7 @@ export default function StudentOrganizationDetail() {
             </div>
 
             {/* Right Column (4 cols): Summary & Contact Sidebar */}
-            <aside className="lg:col-span-4 space-y-8 pl-0 lg:pl-6 lg:border-l border-gray-200 lg:sticky lg:top-24">
+            <aside className="lg:col-span-4 space-y-8 pl-0 lg:pl-6 lg:border-l border-gray-200 lg:sticky lg:top-28 lg:self-start">
               {/* RINGKASAN */}
               {organization.summary && organization.summary.length > 0 && (
                 <div className="space-y-4">
@@ -293,13 +280,13 @@ export default function StudentOrganizationDetail() {
             </section>
           )}
 
-          {/* Back to Organizations Link */}
-          <div className="mt-14 pt-8 border-t border-gray-200">
+          {/* Navigasi Kemahasiswaan Lainnya */}
+          <div className="mt-14 pt-8 border-t border-gray-200 flex flex-wrap gap-4 items-center justify-end text-xs sm:text-sm">
             <Link
-              to="/mahasiswa/organisasi"
-              className="inline-flex items-center text-xs sm:text-sm font-semibold text-primary hover:underline transition-colors"
+              to="/mahasiswa/akomodasi"
+              className="inline-flex items-center font-semibold text-primary hover:underline transition-colors"
             >
-              ← Kembali ke Daftar Organisasi Mahasiswa
+              Informasi Akomodasi Mahasiswa →
             </Link>
           </div>
         </div>

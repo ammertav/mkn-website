@@ -16,7 +16,7 @@ export default function StudentLifeLayout() {
         <title>Kehidupan Mahasiswa | MKn UNISSULA</title>
         <meta
           name="description"
-          content="Kehidupan Mahasiswa Magister Kenotariatan (MKn) UNISSULA: Organisasi Mahasiswa, Unit Kegiatan Mahasiswa (UKM), dan Akomodasi."
+          content="Kehidupan Mahasiswa Magister Kenotariatan (MKn) UNISSULA: Organisasi Mahasiswa dan Akomodasi."
         />
       </Helmet>
 
@@ -32,7 +32,7 @@ export default function StudentLifeLayout() {
           {/* 2-Column Layout */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
             {/* Left Sidebar Navigation */}
-            <aside className="lg:col-span-4 xl:col-span-3">
+            <aside className="lg:col-span-4 xl:col-span-3 lg:self-stretch">
               <SidebarNav />
             </aside>
 

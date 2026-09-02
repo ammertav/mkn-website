@@ -30,7 +30,6 @@ const footerSections = [
     title: "MAHASISWA & ALUMNI",
     links: [
       { name: "Organisasi Mahasiswa", href: "/mahasiswa/organisasi" },
-      { name: "Unit Kegiatan Mahasiswa", href: "/mahasiswa/ukm" },
       { name: "Akomodasi", href: "/mahasiswa/akomodasi" },
       { name: "Tracer Study", href: "/alumni/tracer-study" },
       { name: "Pusat Karir", href: "/alumni/pusat-karir" },
@@ -41,6 +40,7 @@ const footerSections = [
     title: "INFORMASI",
     links: [
       { name: "Penerimaan Mahasiswa", href: "/informasi/penerimaan-mahasiswa" },
+      { name: "Agenda & Event", href: "/event" },
       { name: "Tingkat Kelulusan", href: "/informasi/tingkat-kelulusan" },
       { name: "Penelitian Dosen", href: "/informasi/penelitian-dosen" },
       { name: "Pengabdian Dosen", href: "/informasi/pengabdian-dosen" },
