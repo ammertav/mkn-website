@@ -39,6 +39,7 @@ const footerSections = [
     title: "INFORMASI",
     links: [
       { name: "Penerimaan Mahasiswa", href: "/informasi/penerimaan-mahasiswa" },
+      { name: "Agenda & Event", href: "/event" },
       { name: "Tingkat Kelulusan", href: "/informasi/tingkat-kelulusan" },
       { name: "Penelitian Dosen", href: "/informasi/penelitian-dosen" },
       { name: "Pengabdian Dosen", href: "/informasi/pengabdian-dosen" },

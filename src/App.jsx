@@ -69,6 +69,10 @@ const AlumniSurveyReport = lazy(() => import("./pages/QualityAssurance/AlumniSur
 const Accommodation = lazy(() => import("./pages/StudentLife/Accommodation"));
 const StudentOrganizationDetail = lazy(() => import("./pages/StudentLife/StudentOrganizationDetail"));
 
+// Event sub-pages
+const EventPage = lazy(() => import("./pages/Event/index"));
+const EventDetailPage = lazy(() => import("./pages/Event/EventDetail"));
+
 // Alumni & Karir sub-pages
 const AlumniLayout = lazy(() => import("./pages/Alumni/index"));
 const TracerStudy = lazy(() => import("./pages/Alumni/TracerStudy"));
@@ -181,6 +185,10 @@ export default function App() {
         <Route path="/mahasiswa/ukm/*" element={<Navigate to="/mahasiswa/organisasi" replace />} />
         <Route path="/mahasiswa/ukm" element={<Navigate to="/mahasiswa/organisasi" replace />} />
 
+        {/* Event / Agenda — Harvard Law School style calendar layout */}
+        <Route path="/event" element={<EventPage />} />
+        <Route path="/event/:slug" element={<EventDetailPage />} />
+        <Route path="/agenda" element={<Navigate to="/event" replace />} />
 
         {/* Alumni & Karir — nested routes */}
         <Route path="/alumni" element={<AlumniLayout />}>

@@ -95,6 +95,10 @@ export const navLinks = [
     ],
   },
   {
+    title: "EVENT",
+    href: "/event",
+  },
+  {
     title: "QUALITY ASSURANCE",
     href: "/quality-assurance",
     children: [
