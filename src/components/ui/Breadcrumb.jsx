@@ -14,6 +14,7 @@ const routeTitleMap = {
   "/quality-assurance": { id: "Quality Assurance Unit", en: "Quality Assurance Unit" },
   "/penerimaan": { id: "Informasi", en: "Information" },
   "/staff/faculty-directory": { id: "Dosen", en: "Academic Staff" },
+  "/layanan-pengaduan": { id: "Pengaduan & Bantuan", en: "Support & Grievance" },
 };
 
 function buildRouteTitleMap(items) {

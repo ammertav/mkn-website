@@ -234,4 +234,8 @@ export const navLinks = [
     title: { id: "DOWNLOAD", en: "DOWNLOAD" },
     href: "/download",
   },
+  {
+    title: { id: "LAYANAN PENGADUAN", en: "COMPLAINT SERVICE" },
+    href: "/layanan-pengaduan",
+  },
 ];

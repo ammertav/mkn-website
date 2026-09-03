@@ -31,6 +31,7 @@ const footerSections = [
     links: [
       { name: "Organisasi Mahasiswa", href: "/mahasiswa/organisasi" },
       { name: "Akomodasi", href: "/mahasiswa/akomodasi" },
+      { name: "Pengaduan & Bantuan", href: "/layanan-pengaduan" },
       { name: "Tracer Study", href: "/alumni/tracer-study" },
       { name: "Pusat Karir", href: "/alumni/pusat-karir" },
       { name: "Lowongan Pekerjaan", href: "/alumni/lowongan" },

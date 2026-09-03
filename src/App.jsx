@@ -35,6 +35,9 @@ const Kalender = lazy(() => import("./pages/Akademik/Kalender"));
 // Download page
 const Download = lazy(() => import("./pages/Download/index"));
 
+// Layanan Pengaduan page
+const LayananPengaduan = lazy(() => import("./pages/LayananPengaduan/index"));
+
 // Informasi / Penerimaan sub-pages
 const InformasiLayout = lazy(() => import("./pages/Penerimaan/index"));
 const StudentAdmission = lazy(() => import("./pages/Penerimaan/StudentAdmission"));
@@ -164,6 +167,12 @@ export default function App() {
 
         {/* Download route */}
         <Route path="/download" element={<Download />} />
+
+        {/* Layanan Pengaduan & Bantuan — Standalone page */}
+        <Route path="/layanan-pengaduan" element={<LayananPengaduan />} />
+        <Route path="/pengaduan" element={<Navigate to="/layanan-pengaduan" replace />} />
+        <Route path="/pengaduan-bantuan" element={<Navigate to="/layanan-pengaduan" replace />} />
+        <Route path="/bantuan" element={<Navigate to="/layanan-pengaduan" replace />} />
 
         {/* Fasilitas — nested routes */}
         <Route path="/fasilitas" element={<FasilitasLayout />}>
