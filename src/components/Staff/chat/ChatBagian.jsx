@@ -7,14 +7,29 @@ import { FiSend } from "react-icons/fi";
  */
 
 export function DaftarPesan({ pesan, sedangMengetik, className = "" }) {
-  const akhirRef = useRef(null);
+  const containerRef = useRef(null);
+  const baruDimuatRef = useRef(true);
 
   useEffect(() => {
-    akhirRef.current?.scrollIntoView({ block: "nearest" });
+    // Jangan lakukan scroll pada render awal saat halaman baru dibuka
+    if (baruDimuatRef.current) {
+      baruDimuatRef.current = false;
+      return;
+    }
+
+    // Hanya gulir kontainer chat internal, jangan sentuh scroll halaman utama
+    if (containerRef.current) {
+      containerRef.current.scrollTop = containerRef.current.scrollHeight;
+    }
   }, [pesan, sedangMengetik]);
 
   return (
-    <div className={`space-y-3 ${className}`} role="log" aria-live="polite">
+    <div
+      ref={containerRef}
+      className={`space-y-3 ${className}`}
+      role="log"
+      aria-live="polite"
+    >
       {pesan.map((m, idx) => (
         <div
           key={idx}
@@ -37,8 +52,6 @@ export function DaftarPesan({ pesan, sedangMengetik, className = "" }) {
           <p className="text-xs text-gray-400 px-3.5 py-2 italic">Sedang mengetik…</p>
         </div>
       )}
-
-      <div ref={akhirRef} />
     </div>
   );
 }
@@ -101,7 +114,7 @@ export function FormInput({
 /** Keterangan kecil bahwa jawaban dibatasi pada profil dosen ini. */
 export function CatatanCakupan({ className = "" }) {
   return (
-    <p className={`text-[11px] text-gray-400 leading-relaxed ${className}`}>
+    <p className={`text-xs text-gray-400 leading-relaxed ${className}`}>
       Asisten ini hanya menjawab berdasarkan profil dosen pada halaman ini.
     </p>
   );

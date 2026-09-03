@@ -20,7 +20,7 @@ export default function DosenChatInline({ dosen }) {
   return (
     <section className="border-t border-b border-gray-200 py-7 sm:py-8 space-y-5">
       <div className="space-y-1.5">
-        <span className="text-[11px] font-bold tracking-[0.14em] uppercase text-primary block">
+        <span className="text-xs font-bold tracking-[0.14em] uppercase text-primary block">
           Tanya Langsung
         </span>
         <h2 className="font-heading font-normal text-xl sm:text-2xl text-heading leading-snug">

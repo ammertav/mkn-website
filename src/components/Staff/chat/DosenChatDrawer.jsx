@@ -47,7 +47,7 @@ export default function DosenChatDrawer({ dosen }) {
             <FiMessageSquare className="text-base" />
           </span>
           <span className="text-left min-w-0">
-            <span className="block text-[10px] font-bold tracking-[0.14em] uppercase text-primary">
+            <span className="block text-xs font-bold tracking-[0.14em] uppercase text-primary">
               Tanya Langsung
             </span>
             <span className="block font-heading text-sm font-semibold text-heading truncate">
@@ -98,7 +98,7 @@ export default function DosenChatDrawer({ dosen }) {
                   )}
                 </div>
                 <div className="min-w-0 flex-grow">
-                  <span className="text-[10px] font-bold tracking-[0.14em] uppercase text-primary block">
+                  <span className="text-xs font-bold tracking-[0.14em] uppercase text-primary block">
                     Tanya Langsung
                   </span>
                   <p className="font-heading text-base font-semibold text-heading truncate">
