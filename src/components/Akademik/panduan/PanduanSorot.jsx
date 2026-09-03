@@ -1,6 +1,22 @@
 import { useT } from "../../../i18n/languageContext";
 import RichText from "../../ui/RichText";
 
+
+/** Label bawaan komponen — bukan konten dokumen, jadi tinggal di sini. */
+const LABEL = {
+  luaran: { id: "Luaran", en: "Output" },
+  nilaiAkhir: { id: "Nilai Akhir", en: "Final Mark" },
+  catatanAwal: {
+    id: "Halaman ini memuat pokok-pokok ketentuan. Rujukan resmi dan lengkap adalah",
+    en:
+      "This page presents the main provisions. The official and complete reference is the",
+  },
+  catatanAkhir: {
+    id: "yang ditetapkan Program Studi.",
+    en: "as adopted by the Study Programme.",
+  },
+};
+
 /**
  * Komponen penyajian ringkasan panduan ujian.
  *
@@ -208,7 +224,9 @@ export function AlurTahap({ tahap }) {
             <RichText>{t(h.uraian)}</RichText>
           </p>
           {h.luaran && (
-            <p className="mt-1.5 text-xs text-primary font-medium">Luaran: {t(h.luaran)}</p>
+            <p className="mt-1.5 text-xs text-primary font-medium">
+              {t(LABEL.luaran)}: {t(h.luaran)}
+            </p>
           )}
         </li>
       ))}
@@ -250,7 +268,7 @@ export function BobotPenilaian({ komponen }) {
           {total}%
         </span>
         <p className="text-[11px] font-bold tracking-wider uppercase text-gray-500">
-          Nilai Akhir
+          {t(LABEL.nilaiAkhir)}
         </p>
       </div>
     </div>
@@ -263,8 +281,8 @@ export function CatatanDokumen({ nama }) {
   return (
     <div className="border-l-3 border-l-primary border border-gray-200 bg-gray-50/70 p-4 sm:p-5 rounded-xs">
       <p className="text-sm text-body leading-relaxed">
-        Halaman ini memuat pokok-pokok ketentuan. Rujukan resmi dan lengkap adalah{" "}
-        <strong className="text-heading">{t(nama)}</strong> yang ditetapkan Program Studi.
+        {t(LABEL.catatanAwal)}{" "}
+        <strong className="text-heading">{t(nama)}</strong> {t(LABEL.catatanAkhir)}
       </p>
     </div>
   );

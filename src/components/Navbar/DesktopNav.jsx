@@ -2,17 +2,19 @@ import { useState, useRef } from "react";
 import { NavLink } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import { FiChevronRight } from "react-icons/fi";
+import { useT } from "../../i18n/languageContext";
 
 /**
  * DesktopNav - Navigasi desktop dengan active underline dan dropdown bertingkat (hover flyout)
  */
 export default function DesktopNav({ navLinks }) {
+  const t = useT();
   const [activeDropdown, setActiveDropdown] = useState(null);
   const dropdownTimeoutRef = useRef(null);
 
-  const openDropdown = (title) => {
+  const openDropdown = (href) => {
     if (dropdownTimeoutRef.current) clearTimeout(dropdownTimeoutRef.current);
-    setActiveDropdown(title);
+    setActiveDropdown(href);
   };
 
   const closeDropdown = () => {
@@ -35,14 +37,14 @@ export default function DesktopNav({ navLinks }) {
       {navLinks.map((link, i) => {
         const hasChildren = Boolean(link.children?.length);
         const isRightAligned = i >= navLinks.length - 2;
-        const isLinkOpen = activeDropdown === link.title;
+        const isLinkOpen = activeDropdown === link.href;
 
         // Menu tanpa dropdown
         if (!hasChildren) {
           return (
-            <div key={link.title} className="relative flex items-stretch">
+            <div key={link.href} className="relative flex items-stretch">
               <NavLink to={link.href} className={getLinkClass(false)}>
-                {link.title}
+                {t(link.title)}
               </NavLink>
             </div>
           );
@@ -51,9 +53,9 @@ export default function DesktopNav({ navLinks }) {
         // Menu dengan dropdown
         return (
           <div
-            key={link.title}
+            key={link.href}
             className="relative flex items-stretch"
-            onMouseEnter={() => openDropdown(link.title)}
+            onMouseEnter={() => openDropdown(link.href)}
             onMouseLeave={closeDropdown}
           >
             <NavLink
@@ -61,7 +63,7 @@ export default function DesktopNav({ navLinks }) {
               onClick={() => setActiveDropdown(null)}
               className={getLinkClass(isLinkOpen)}
             >
-              {link.title}
+              {t(link.title)}
             </NavLink>
 
             <AnimatePresence>
@@ -92,7 +94,7 @@ export default function DesktopNav({ navLinks }) {
                               }`
                             }
                           >
-                            {item.title}
+                            {t(item.title)}
                           </NavLink>
                         );
                       }
@@ -109,7 +111,7 @@ export default function DesktopNav({ navLinks }) {
                               }`
                             }
                           >
-                            <span>{item.title}</span>
+                            <span>{t(item.title)}</span>
                             <FiChevronRight className="w-3.5 h-3.5 text-gray-400 group-hover/sub:text-primary group-hover/sub:translate-x-0.5 transition-all duration-150" />
                           </NavLink>
 
@@ -131,7 +133,7 @@ export default function DesktopNav({ navLinks }) {
                                     }`
                                   }
                                 >
-                                  {sub.title}
+                                  {t(sub.title)}
                                 </NavLink>
                               ))}
                             </div>

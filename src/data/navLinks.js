@@ -1,136 +1,237 @@
-/** 
+/**
  * @typedef {Object} NavItem
- * @property {string} title
+ * @property {{ id: string, en: string }} title
  * @property {string} href
  * @property {NavItem[]} [children]
  */
 
+/**
+ * Struktur menu situs, dwibahasa.
+ *
+ * `title` selalu berbentuk { id, en } dan dibaca dengan useT(). Jangan memakai
+ * `title` sebagai kunci React atau kunci state — pakai `href`, karena `title`
+ * kini objek dan tidak lagi unik sebagai string.
+ *
+ * Judul yang memang sudah berbahasa Inggris pada versi Indonesia (Quality
+ * Assurance, Tracer Study, Student Research Center, Download) sengaja ditulis
+ * sama di kedua kolom, bukan diterjemahkan balik.
+ */
 export const navLinks = [
   {
-    title: "PROFIL",
+    title: { id: "PROFIL", en: "PROFILE" },
     href: "/profil",
     children: [
-      { title: "Sejarah / Latar Belakang", href: "/profil/sejarah" },
-      { title: "Visi", href: "/profil/visi-misi" },
-      { title: "Tujuan Pendidikan (PEO)", href: "/profil/tujuan" },
-      { title: "Struktur Organisasi", href: "/profil/struktur-organisasi" },
+      {
+        title: { id: "Sejarah / Latar Belakang", en: "History / Background" },
+        href: "/profil/sejarah",
+      },
+      { title: { id: "Visi", en: "Vision" }, href: "/profil/visi-misi" },
+      {
+        title: { id: "Tujuan Pendidikan (PEO)", en: "Educational Objectives (PEO)" },
+        href: "/profil/tujuan",
+      },
+      {
+        title: { id: "Struktur Organisasi", en: "Organisational Structure" },
+        href: "/profil/struktur-organisasi",
+      },
     ],
   },
   {
-    title: "BERITA",
+    title: { id: "BERITA", en: "NEWS" },
     href: "/berita",
   },
   {
-    title: "ACADEMIC",
+    title: { id: "ACADEMIC", en: "ACADEMIC" },
     href: "/akademik",
     children: [
-      { title: "Profil Lulusan", href: "/akademik/profil-lulusan" },
-      { title: "Capaian Pembelajaran Lulusan", href: "/akademik/capaian-pembelajaran" },
-      { title: "Kurikulum", href: "/akademik/kurikulum" },
       {
-        title: "RPS & Evaluasi Pembelajaran",
+        title: { id: "Profil Lulusan", en: "Graduate Profiles" },
+        href: "/akademik/profil-lulusan",
+      },
+      {
+        title: { id: "Capaian Pembelajaran Lulusan", en: "Intended Learning Outcomes" },
+        href: "/akademik/capaian-pembelajaran",
+      },
+      { title: { id: "Kurikulum", en: "Curriculum" }, href: "/akademik/kurikulum" },
+      {
+        title: { id: "RPS & Evaluasi Pembelajaran", en: "Learning Plans & Evaluation" },
         href: "/akademik/pembelajaran",
         children: [
-          { title: "RPS", href: "/akademik/pembelajaran/rps" },
           {
-            title: "Panduan Evaluasi Pembelajaran",
+            title: { id: "RPS", en: "Semester Learning Plan (RPS)" },
+            href: "/akademik/pembelajaran/rps",
+          },
+          {
+            title: {
+              id: "Panduan Evaluasi Pembelajaran",
+              en: "Learning Evaluation Guidelines",
+            },
             href: "/akademik/pembelajaran/panduan-evaluasi",
           },
-          { title: "Asesmen", href: "/akademik/pembelajaran/asesmen" },
+          {
+            title: { id: "Asesmen", en: "Assessment" },
+            href: "/akademik/pembelajaran/asesmen",
+          },
         ],
       },
-      { title: "Panduan Akademik", href: "/akademik/panduan-akademik" },
       {
-        title: "Panduan Ujian",
+        title: { id: "Panduan Akademik", en: "Academic Guidelines" },
+        href: "/akademik/panduan-akademik",
+      },
+      {
+        title: { id: "Panduan Ujian", en: "Examination Guidelines" },
         href: "/akademik/panduan-ujian",
         children: [
-          { title: "UTS/UAS", href: "/akademik/panduan-ujian/uts-uas" },
           {
-            title: "Tesis",
+            title: { id: "UTS/UAS", en: "Midterm & Final Examinations" },
+            href: "/akademik/panduan-ujian/uts-uas",
+          },
+          {
+            title: { id: "Tesis", en: "Thesis" },
             href: "/akademik/panduan-ujian/tesis",
             children: [
-              { title: "Pra Proposal", href: "/akademik/panduan-ujian/tesis/pra-proposal" },
-              { title: "Proposal", href: "/akademik/panduan-ujian/tesis/proposal" },
-              { title: "Tesis", href: "/akademik/panduan-ujian/tesis/ujian-tesis" },
+              {
+                title: { id: "Pra Proposal", en: "Pre-Proposal" },
+                href: "/akademik/panduan-ujian/tesis/pra-proposal",
+              },
+              {
+                title: { id: "Proposal", en: "Proposal" },
+                href: "/akademik/panduan-ujian/tesis/proposal",
+              },
+              {
+                title: { id: "Tesis", en: "Thesis" },
+                href: "/akademik/panduan-ujian/tesis/ujian-tesis",
+              },
             ],
           },
         ],
       },
-      { title: "Kalender Akademik", href: "/akademik/kalender" },
+      {
+        title: { id: "Kalender Akademik", en: "Academic Calendar" },
+        href: "/akademik/kalender",
+      },
     ],
   },
   {
-    title: "MAHASISWA",
+    title: { id: "MAHASISWA", en: "STUDENTS" },
     href: "/mahasiswa",
     children: [
-      { title: "Organisasi Mahasiswa", href: "/mahasiswa/organisasi" },
-      { title: "Akomodasi", href: "/mahasiswa/akomodasi" },
+      {
+        title: { id: "Organisasi Mahasiswa", en: "Student Organisations" },
+        href: "/mahasiswa/organisasi",
+      },
+      { title: { id: "Akomodasi", en: "Accommodation" }, href: "/mahasiswa/akomodasi" },
     ],
   },
   {
-    title: "ALUMNI",
+    title: { id: "ALUMNI", en: "ALUMNI" },
     href: "/alumni",
     children: [
-      { title: "Tracer Study", href: "/alumni/tracer-study" },
-      { title: "Pusat Karir", href: "/alumni/pusat-karir" },
-      { title: "Lowongan Pekerjaan", href: "/alumni/lowongan" },
+      { title: { id: "Tracer Study", en: "Tracer Study" }, href: "/alumni/tracer-study" },
+      { title: { id: "Pusat Karir", en: "Career Centre" }, href: "/alumni/pusat-karir" },
+      { title: { id: "Lowongan Pekerjaan", en: "Job Vacancies" }, href: "/alumni/lowongan" },
     ],
   },
   {
-    title: "INFORMASI",
+    title: { id: "INFORMASI", en: "INFORMATION" },
     href: "/informasi",
     children: [
-      { title: "Penerimaan Mahasiswa", href: "/informasi/penerimaan-mahasiswa" },
-      { title: "Tingkat Kelulusan", href: "/informasi/tingkat-kelulusan" },
-      { title: "Penelitian Dosen", href: "/informasi/penelitian-dosen" },
-      { title: "Pengabdian Dosen", href: "/informasi/pengabdian-dosen" },
+      {
+        title: { id: "Penerimaan Mahasiswa", en: "Admissions" },
+        href: "/informasi/penerimaan-mahasiswa",
+      },
+      {
+        title: { id: "Tingkat Kelulusan", en: "Graduation Rates" },
+        href: "/informasi/tingkat-kelulusan",
+      },
+      {
+        title: { id: "Penelitian Dosen", en: "Faculty Research" },
+        href: "/informasi/penelitian-dosen",
+      },
+      {
+        title: { id: "Pengabdian Dosen", en: "Faculty Community Service" },
+        href: "/informasi/pengabdian-dosen",
+      },
     ],
   },
   {
-    title: "STAF",
+    title: { id: "STAF", en: "STAFF" },
     href: "/staff",
     children: [
-      { title: "Dosen", href: "/staff/dosen" },
-      { title: "Tenaga Kependidikan", href: "/staff/tendik" },
+      { title: { id: "Dosen", en: "Academic Staff" }, href: "/staff/dosen" },
+      {
+        title: { id: "Tenaga Kependidikan", en: "Administrative Staff" },
+        href: "/staff/tendik",
+      },
     ],
   },
   {
-    title: "FASILITAS",
+    title: { id: "FASILITAS", en: "FACILITIES" },
     href: "/fasilitas",
     children: [
-      { title: "Ruang Kelas", href: "/fasilitas/ruang-kelas" },
-      { title: "Laboratorium", href: "/fasilitas/laboratorium" },
-      { title: "Student Research Center", href: "/fasilitas/student-research-center" },
-      { title: "Perpustakaan", href: "/fasilitas/perpustakaan" },
+      { title: { id: "Ruang Kelas", en: "Classrooms" }, href: "/fasilitas/ruang-kelas" },
+      { title: { id: "Laboratorium", en: "Laboratory" }, href: "/fasilitas/laboratorium" },
+      {
+        title: { id: "Student Research Center", en: "Student Research Center" },
+        href: "/fasilitas/student-research-center",
+      },
+      { title: { id: "Perpustakaan", en: "Library" }, href: "/fasilitas/perpustakaan" },
     ],
   },
   {
-    title: "EVENT",
+    title: { id: "EVENT", en: "EVENTS" },
     href: "/event",
   },
   {
-    title: "QUALITY ASSURANCE",
+    title: { id: "QUALITY ASSURANCE", en: "QUALITY ASSURANCE" },
     href: "/quality-assurance",
     children: [
-      { title: "Quality Assurance Unit", href: "/quality-assurance" },
       {
-        title: "QA Documents",
+        title: { id: "Quality Assurance Unit", en: "Quality Assurance Unit" },
+        href: "/quality-assurance",
+      },
+      {
+        title: { id: "QA Documents", en: "QA Documents" },
         href: "/quality-assurance/qa-documents",
         children: [
-          { title: "QA Policy", href: "/quality-assurance/qa-documents/qa-policy" },
-          { title: "QA Manual Standard", href: "/quality-assurance/qa-documents/qa-manual-standard" },
-          { title: "QA Standar", href: "/quality-assurance/qa-documents/qa-standar" },
-          { title: "QA Forms", href: "/quality-assurance/qa-documents/qa-forms" },
+          {
+            title: { id: "QA Policy", en: "QA Policy" },
+            href: "/quality-assurance/qa-documents/qa-policy",
+          },
+          {
+            title: { id: "QA Manual Standard", en: "QA Manual Standard" },
+            href: "/quality-assurance/qa-documents/qa-manual-standard",
+          },
+          {
+            title: { id: "QA Standar", en: "QA Standards" },
+            href: "/quality-assurance/qa-documents/qa-standar",
+          },
+          {
+            title: { id: "QA Forms", en: "QA Forms" },
+            href: "/quality-assurance/qa-documents/qa-forms",
+          },
         ],
       },
-      { title: "Internal Audit Report", href: "/quality-assurance/internal-audit-report" },
-      { title: "Learning and Teaching Report", href: "/quality-assurance/learning-teaching-report" },
-      { title: "Student Survey Report", href: "/quality-assurance/student-survey-report" },
-      { title: "Alumni Survey Report", href: "/quality-assurance/alumni-survey-report" },
+      {
+        title: { id: "Internal Audit Report", en: "Internal Audit Report" },
+        href: "/quality-assurance/internal-audit-report",
+      },
+      {
+        title: { id: "Learning and Teaching Report", en: "Learning and Teaching Report" },
+        href: "/quality-assurance/learning-teaching-report",
+      },
+      {
+        title: { id: "Student Survey Report", en: "Student Survey Report" },
+        href: "/quality-assurance/student-survey-report",
+      },
+      {
+        title: { id: "Alumni Survey Report", en: "Alumni Survey Report" },
+        href: "/quality-assurance/alumni-survey-report",
+      },
     ],
   },
   {
-    title: "DOWNLOAD",
+    title: { id: "DOWNLOAD", en: "DOWNLOAD" },
     href: "/download",
   },
 ];

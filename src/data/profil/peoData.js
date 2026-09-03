@@ -21,7 +21,14 @@ export const peoIntro = {
     "Purposes Of Higher Education* (EPHE). *Program Educational Objectives* (PEO) dirumuskan " +
     "untuk mengukur pencapaian profesional dan kontribusi alumni dalam jangka menengah atau " +
     "3-5 tahun setelah kelulusan.",
-  en: "",
+  en:
+    "Beyond its Outcome-Based Education (OBE) design, the curriculum of the UNISSULA " +
+    "Master of Notarial Law programme also follows international curriculum frameworks, " +
+    "in particular the European Standards and Guidelines (ESG), and is oriented towards " +
+    "fulfilling the four principal aims of the European Purposes of Higher Education " +
+    "(EPHE). The Program Educational Objectives (PEO) are formulated to measure the " +
+    "professional achievement and contribution of alumni over the medium term, three to " +
+    "five years after graduation.",
 };
 
 export const peoItems = [
@@ -43,7 +50,12 @@ export const peoItems = [
         "dalam membuat akta autentik berdasarkan peraturan dan etika jabatan yang dilandasi " +
         "nilai-nilai kebaikan dan kejujuran, serta disesuaikan dengan kebutuhan nasional dan " +
         "internasional.",
-      en: "",
+      en:
+        "To produce graduates of the Master’s (S2) Programme in Notarial Law, Faculty " +
+        "of Law, UNISSULA who possess the ability and expertise to apply notarial law in " +
+        "drawing up authentic deeds in accordance with the regulations and professional " +
+        "ethics of the office, grounded in the values of virtue and honesty, and attuned " +
+        "to national and international needs.",
     },
     ephe: {
       title: "Preparation for sustainable employment",
@@ -61,7 +73,11 @@ export const peoItems = [
         "UNISSULA yang mampu mengelola penyelenggaraan pemerintahan dan pelayanan " +
         "masyarakat, baik sebagai eksekutif, legislatif dan yudikatif yang dijiwai nilai " +
         "keadilan Islam.",
-      en: "",
+      en:
+        "To produce graduates of the Master’s (S2) Programme in Notarial Law, Faculty " +
+        "of Law, UNISSULA who are able to administer governance and public service, whether " +
+        "in executive, legislative, or judicial capacities, imbued with the Islamic value " +
+        "of justice.",
     },
     ephe: {
       title: "Preparation for life as active citizens",
@@ -80,7 +96,12 @@ export const peoItems = [
         "teoritis ilmu hukum kenotariatan, menganalisis teori serta memformulasikan " +
         "penyelesaian masalah konseptual dan prosedural dengan mengintegrasikan ilmu " +
         "pengetahuan modern yang berlandaskan kejujuran dan keadilan.",
-      en: "",
+      en:
+        "To form graduates of the Master’s (S2) Programme in Notarial Law, Faculty of " +
+        "Law, UNISSULA who are able to build a career as lecturers and/or researchers, to " +
+        "master the theoretical concepts of notarial law, to analyse theory, and to " +
+        "formulate solutions to conceptual and procedural problems by integrating modern " +
+        "scholarship grounded in honesty and justice.",
     },
     ephe: {
       title: "Development and maintenance of a broad, advanced knowledge base",
@@ -98,7 +119,11 @@ export const peoItems = [
         "UNISSULA yang mampu menjadi motivator, inspirator dan dinamisator dalam " +
         "menyelesaikan persoalan-persoalan hukum kenotariatan dalam masyarakat yang didasari " +
         "nilai kejujuran, keadilan dan kebaikan.",
-      en: "",
+      en:
+        "To produce graduates of the Master’s (S2) Programme in Notarial Law, Faculty " +
+        "of Law, UNISSULA who are able to act as motivators, sources of inspiration, and " +
+        "driving forces in resolving notarial law problems within society, grounded in the " +
+        "values of honesty, justice, and virtue.",
     },
     ephe: {
       title: "Personal development",
@@ -108,3 +133,29 @@ export const peoItems = [
     },
   },
 ];
+
+/** Teks halaman Program Educational Objectives. */
+export const halaman = {
+  meta: {
+    title: {
+      id: "Program Educational Objectives (PEO) | MKn UNISSULA",
+      en: "Program Educational Objectives (PEO) | MKn UNISSULA",
+    },
+    description: {
+      id:
+        "Program Educational Objectives (PEO) Program Studi Magister Kenotariatan UNISSULA " +
+        "dan integrasinya dengan European Purposes of Higher Education (EPHE).",
+      en:
+        "The Program Educational Objectives (PEO) of the UNISSULA Master of Notarial Law " +
+        "Study Programme and their alignment with the European Purposes of Higher " +
+        "Education (EPHE).",
+    },
+  },
+  eyebrow: { id: "TUJUAN PENDIDIKAN", en: "EDUCATIONAL OBJECTIVES" },
+  judul: { id: "Program Educational Objectives", en: "Program Educational Objectives" },
+  judulRumusan: {
+    id: "Rumusan PEO dan Relevansinya",
+    en: "PEO Statements and Their Relevance",
+  },
+  labelEphe: { id: "Capaian EPHE", en: "EPHE Purpose" },
+};

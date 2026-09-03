@@ -7,7 +7,15 @@ import { useT } from "../../i18n/languageContext";
  * HN2680080xx mudah dipindai, kolom sks rata kanan, dan jumlah sks semester
  * tampil sebagai baris kaki tabel — mengikuti bentuk dokumen aslinya.
  */
-export default function TabelSemester({ nama, jumlahSks, kolom, baris, pilihan }) {
+export default function TabelSemester({
+  nama,
+  jumlahSks,
+  kolom,
+  baris,
+  pilihan,
+  labelJumlahSks,
+  labelSks,
+}) {
   const t = useT();
 
   return (
@@ -15,7 +23,7 @@ export default function TabelSemester({ nama, jumlahSks, kolom, baris, pilihan }
       <header className="flex items-baseline justify-between gap-4 px-4 sm:px-5 py-3.5 bg-gray-50/70 border-b border-gray-200">
         <h3 className="font-heading font-bold text-base sm:text-lg text-heading">{t(nama)}</h3>
         <span className="text-sm font-semibold text-primary tabular-nums shrink-0">
-          {jumlahSks} sks
+          {jumlahSks} {t(labelSks)}
         </span>
       </header>
 
@@ -56,7 +64,7 @@ export default function TabelSemester({ nama, jumlahSks, kolom, baris, pilihan }
           <tfoot>
             <tr className="border-t-2 border-gray-300 bg-gray-50/70">
               <td colSpan={3} className="py-3 px-4 sm:px-5 font-semibold text-heading text-sm">
-                Jumlah sks {t(nama)}
+                {t(labelJumlahSks)} {t(nama)}
               </td>
               <td className="py-3 px-4 sm:px-5 text-right font-heading font-bold text-heading tabular-nums">
                 {jumlahSks}
@@ -77,7 +85,9 @@ export default function TabelSemester({ nama, jumlahSks, kolom, baris, pilihan }
                   {r[1]}
                 </span>
                 <span className="text-heading font-medium leading-relaxed flex-1">{t(r[2])}</span>
-                <span className="tabular-nums text-body shrink-0">{r[3]} sks</span>
+                <span className="tabular-nums text-body shrink-0">
+                  {r[3]} {t(labelSks)}
+                </span>
               </li>
             ))}
           </ul>

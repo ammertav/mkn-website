@@ -101,60 +101,29 @@ export default function Accommodation() {
               ))}
             </div>
 
-            {/* Spesifikasi Fasilitas & Tipe Kamar (2 Kolom) */}
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 pt-2 items-start">
-              {/* Kolom Kiri: Fasilitas Utama */}
-              <div className="lg:col-span-6 space-y-4">
-                <h3 className="text-xs sm:text-sm font-bold uppercase tracking-wider text-heading pb-3 border-b border-gray-200">
-                  Fasilitas Utama
-                </h3>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  {item.features.map((feat, idx) => (
-                    <div
-                      key={idx}
-                      className="flex items-center gap-3 p-3 bg-white border border-gray-200/80 rounded-sm shadow-2xs hover:border-primary/40 transition-colors"
-                    >
-                      <div className="w-6 h-6 rounded-full bg-red-50 text-primary flex items-center justify-center shrink-0">
-                        <FiCheck className="w-3.5 h-3.5 stroke-[2.5]" />
-                      </div>
-                      <span className="text-xs sm:text-sm text-heading font-medium">
-                        {feat}
-                      </span>
-                    </div>
-                  ))}
-                </div>
-              </div>
+            {/*
+              Fasilitas Utama.
 
-              {/* Kolom Kanan: Tipe Kamar & Estimasi Biaya */}
-              <div className="lg:col-span-6 space-y-4">
-                <h3 className="text-xs sm:text-sm font-bold uppercase tracking-wider text-heading pb-3 border-b border-gray-200">
-                  Tipe Kamar & Estimasi Biaya
-                </h3>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  {item.roomTypes.map((room, idx) => (
-                    <div
-                      key={idx}
-                      className="bg-white border border-gray-200 rounded-sm p-5 space-y-2.5 shadow-2xs flex flex-col justify-between"
-                    >
-                      <div className="space-y-1">
-                        <span className="text-xs font-bold text-heading uppercase tracking-wide">
-                          {room.type}
-                        </span>
-                        <div className="flex items-baseline gap-1.5 pt-1">
-                          <span className="text-xl sm:text-2xl font-bold font-heading text-primary">
-                            {room.price}
-                          </span>
-                          <span className="text-xs text-gray-500 font-normal">
-                            / {room.period}
-                          </span>
-                        </div>
-                      </div>
-                      <p className="text-xs text-body leading-relaxed pt-2 border-t border-gray-100">
-                        {room.specs}
-                      </p>
+              Kolom "Tipe Kamar & Estimasi Biaya" sengaja tidak ditampilkan atas
+              permintaan program studi; datanya tetap ada pada `roomTypes` di
+              akomodasiData.js bila sewaktu-waktu perlu dimunculkan kembali.
+            */}
+            <div className="space-y-4 pt-2">
+              <h3 className="text-xs sm:text-sm font-bold uppercase tracking-wider text-heading pb-3 border-b border-gray-200">
+                Fasilitas Utama
+              </h3>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+                {item.features.map((feat, idx) => (
+                  <div
+                    key={idx}
+                    className="flex items-center gap-3 p-3 bg-white border border-gray-200/80 rounded-sm shadow-2xs hover:border-primary/40 transition-colors"
+                  >
+                    <div className="w-6 h-6 rounded-full bg-red-50 text-primary flex items-center justify-center shrink-0">
+                      <FiCheck className="w-3.5 h-3.5 stroke-[2.5]" />
                     </div>
-                  ))}
-                </div>
+                    <span className="text-xs sm:text-sm text-heading font-medium">{feat}</span>
+                  </div>
+                ))}
               </div>
             </div>
 

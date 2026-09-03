@@ -6,12 +6,44 @@ import {
   KartuRingkas,
   AlurTahap,
 } from "../../components/Akademik/panduan/PanduanSorot";
-import { sorotTesis, alurTahap, tigaUjian } from "../../data/akademik/panduanTesisData";
+import { useT } from "../../i18n/languageContext";
+import {
+  sorotTesis,
+  alurTahap,
+  tigaUjian,
+  halamanTesis,
+} from "../../data/akademik/panduanTesisData";
+
+const ALUR = {
+  judul: { id: "Alur Penyelesaian Tesis", en: "The Thesis Pathway" },
+  keterangan: {
+    id:
+      "Delapan tahap sejak pengajuan judul hingga ujian tesis, ditempuh dalam waktu dua " +
+      "semester.",
+    en:
+      "Eight stages from submitting the title to the thesis examination, completed over " +
+      "two semesters.",
+  },
+};
+
+const TIGA = {
+  judul: {
+    id: "Tiga Ujian dalam Penyelesaian Tesis",
+    en: "Three Examinations Along the Thesis Pathway",
+  },
+  keterangan: {
+    id:
+      "Seluruh pembimbing tesis bergelar Doktor, dan setiap ujian memiliki ketentuannya " +
+      "sendiri.",
+    en:
+      "Every thesis supervisor holds a doctorate, and each examination has its own rules.",
+  },
+};
 
 const subTab = [
-  { path: "pra-proposal", label: "Pra Proposal" },
-  { path: "proposal", label: "Proposal" },
-  { path: "ujian-tesis", label: "Tesis" },
+  { path: "pra-proposal", label: halamanTesis.tab.praProposal },
+  { path: "proposal", label: halamanTesis.tab.proposal },
+  { path: "ujian-tesis", label: halamanTesis.tab.tesis },
 ];
 
 /**
@@ -22,14 +54,13 @@ const subTab = [
  * berada di tab masing-masing.
  */
 export default function Tesis() {
+  const t = useT();
+
   return (
     <>
       <Helmet>
-        <title>Panduan Ujian Tesis | MKn UNISSULA</title>
-        <meta
-          name="description"
-          content="Pokok-pokok panduan Ujian Pra Proposal, Usulan Proposal, dan Ujian Tesis Program Studi Magister Kenotariatan UNISSULA."
-        />
+        <title>{t(halamanTesis.meta.title)}</title>
+        <meta name="description" content={t(halamanTesis.meta.description)} />
       </Helmet>
 
       <div className="space-y-12 sm:space-y-14">
@@ -39,8 +70,8 @@ export default function Tesis() {
         {/* Alur delapan tahap */}
         <section className="space-y-6">
           <JudulSeksi
-            judul="Alur Penyelesaian Tesis"
-            keterangan="Delapan tahap sejak pengajuan judul hingga ujian tesis, ditempuh dalam waktu dua semester."
+            judul={ALUR.judul}
+            keterangan={ALUR.keterangan}
           />
           <AlurTahap tahap={alurTahap} />
         </section>
@@ -48,8 +79,8 @@ export default function Tesis() {
         {/* Tiga jenis ujian */}
         <section className="space-y-5">
           <JudulSeksi
-            judul="Tiga Ujian dalam Penyelesaian Tesis"
-            keterangan="Seluruh pembimbing tesis bergelar Doktor, dan setiap ujian memiliki ketentuannya sendiri."
+            judul={TIGA.judul}
+            keterangan={TIGA.keterangan}
           />
           <KartuRingkas butir={tigaUjian} kolom={3} />
         </section>
@@ -72,7 +103,7 @@ export default function Tesis() {
                   }`
                 }
               >
-                {item.label}
+                {t(item.label)}
               </NavLink>
             ))}
           </nav>

@@ -2,11 +2,13 @@ import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { FiChevronDown } from "react-icons/fi";
 import { AnimatePresence, motion } from "framer-motion";
+import { useT } from "../../i18n/languageContext";
 
 /**
  * MobileMenuItem: Item menu mobile dengan accordion bertingkat sejati (Level 1, 2, dst)
  */
 function MobileMenuItem({ link, checkIsActive, onClose }) {
+  const t = useT();
   const location = useLocation();
   const [isExpanded, setIsExpanded] = useState(false);
   const isActive = checkIsActive(link.href);
@@ -24,7 +26,7 @@ function MobileMenuItem({ link, checkIsActive, onClose }) {
               isActive ? "font-bold text-primary" : "font-semibold text-navbar hover:text-primary"
             }`}
           >
-            {link.title}
+            {t(link.title)}
           </Link>
           <button
             onClick={() => setIsExpanded((prev) => !prev)}
@@ -57,7 +59,7 @@ function MobileMenuItem({ link, checkIsActive, onClose }) {
                         : "text-heading hover:text-primary font-medium"
                     }`}
                   >
-                    {sub.title}
+                    {t(sub.title)}
                   </Link>
 
                   {/* Deep Nested Sub-items */}
@@ -74,7 +76,7 @@ function MobileMenuItem({ link, checkIsActive, onClose }) {
                               : "text-gray-500 hover:text-primary font-normal"
                           }`}
                         >
-                          {deeper.title}
+                          {t(deeper.title)}
                         </Link>
                       ))}
                     </div>
@@ -96,11 +98,11 @@ function MobileMenuItem({ link, checkIsActive, onClose }) {
   const isInternal = link.href.startsWith("/") && !link.href.startsWith("/#");
   return isInternal ? (
     <Link to={link.href} onClick={onClose} className={cls}>
-      {link.title}
+      {t(link.title)}
     </Link>
   ) : (
     <a href={link.href} onClick={onClose} className={cls}>
-      {link.title}
+      {t(link.title)}
     </a>
   );
 }

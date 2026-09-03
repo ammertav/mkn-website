@@ -38,25 +38,37 @@ const strukturPejabat = [
   },
   {
     jabatan: "Bidang Akademik",
-    pejabat: "Pelaksana Bidang Akademik",
+    pejabat: "—",
     tanggungJawab:
       "Layanan administrasi akademik mahasiswa, registrasi, penjadwalan perkuliahan, dan dokumentasi ujian.",
   },
   {
+    jabatan: "Direktur Laboratorium Akta & Manajemen Kantor Notaris",
+    pejabat: "—",
+    tanggungJawab:
+      "Pengelolaan laboratorium akta, pembinaan praktik pembuatan akta, dan simulasi manajemen kantor notaris.",
+  },
+  {
+    jabatan: "Direktur Perpustakaan",
+    pejabat: "—",
+    tanggungJawab:
+      "Pengelolaan koleksi pustaka hukum kenotariatan, layanan referensi, dan dukungan literatur penelitian tesis.",
+  },
+  {
     jabatan: "Bidang Keuangan",
-    pejabat: "Pelaksana Bidang Keuangan",
+    pejabat: "—",
     tanggungJawab:
       "Administrasi keuangan mahasiswa, pembiayaan kegiatan akademik, dan pengelolaan anggaran program studi.",
   },
   {
     jabatan: "Bidang Promosi & Humas",
-    pejabat: "Pelaksana Bidang Promosi & Humas",
+    pejabat: "—",
     tanggungJawab:
       "Sosialisasi program studi, promosi penerimaan mahasiswa baru, serta pengelolaan publikasi dan media.",
   },
   {
     jabatan: "Bidang Sarana Prasarana",
-    pejabat: "Pelaksana Bidang Sarana Prasarana",
+    pejabat: "—",
     tanggungJawab:
       "Pengelolaan ruang kuliah, laboratorium kenotariatan, dan fasilitas penunjang program studi.",
   },
@@ -66,6 +78,10 @@ const adminUnits = [
   {
     icon: FiBookOpen,
     name: "Akademik",
+    children: [
+      "Direktur Laboratorium Akta & Manajemen Kantor Notaris",
+      "Direktur Perpustakaan",
+    ],
   },
   {
     icon: FiDollarSign,
@@ -162,30 +178,42 @@ export default function StrukturOrganisasi() {
                 </p>
               </div>
 
-              {/* Connecting Line 2 */}
-              <div className="w-px h-8 bg-gray-300" />
+              {/* Persimpangan: garis Kaprodi → Koordinator TU, dengan Sekprodi
+                  sebagai cabang mendatar ke kiri (posisi staf, bukan mata rantai). */}
+              <div className="relative w-full max-w-5xl flex flex-col items-center">
+                {/* Spine vertikal yang menembus blok ini (desktop) */}
+                <div className="hidden md:block absolute inset-y-0 left-1/2 -translate-x-1/2 w-px bg-gray-300" />
 
-              {/* Level 3: Sekprodi (di bawah Kaprodi) */}
-              <div className="w-full max-w-sm bg-white border-2 border-primary/70 p-6 text-center rounded-xs shadow-sm flex flex-col items-center">
-                <div className="w-28 h-36 sm:w-32 sm:h-40 rounded-xs overflow-hidden bg-gray-100 mb-4 border border-gray-200 shadow-2xs">
-                  <Img
-                    src={imgSekprodi}
-                    alt="Dr. Toni Triyanto, S.H., M.H."
-                    className="w-full h-full object-cover object-top"
-                  />
+                {/* Mobile: cabang mendatar tidak muat, jadi dirantai vertikal biasa */}
+                <div className="md:hidden w-px h-8 bg-gray-300" />
+
+                <div className="w-full flex md:py-8">
+                  {/* Separuh kiri: kartu Sekprodi menempel ke spine lewat garis mendatar */}
+                  <div className="w-full md:w-1/2 flex items-center justify-center md:justify-end">
+                    <div className="w-full max-w-sm bg-white border-2 border-primary/70 p-6 text-center rounded-xs shadow-sm flex flex-col items-center">
+                      <div className="w-28 h-36 sm:w-32 sm:h-40 rounded-xs overflow-hidden bg-gray-100 mb-4 border border-gray-200 shadow-2xs">
+                        <Img
+                          src={imgSekprodi}
+                          alt="Dr. Toni Triyanto, S.H., M.H."
+                          className="w-full h-full object-cover object-top"
+                        />
+                      </div>
+                      <span className="text-[10px] font-bold tracking-[0.14em] uppercase text-primary block mb-1">
+                        SEKRETARIS PROGRAM STUDI MAGISTER (S2) KENOTARIATAN
+                      </span>
+                      <p className="font-heading text-base sm:text-lg font-bold text-heading">
+                        Dr. Toni Triyanto, S.H., M.H.
+                      </p>
+                    </div>
+                    <div className="hidden md:block w-10 lg:w-16 h-px bg-gray-300 shrink-0" />
+                  </div>
+                  <div className="hidden md:block md:w-1/2" />
                 </div>
-                <span className="text-[10px] font-bold tracking-[0.14em] uppercase text-primary block mb-1">
-                  SEKRETARIS PROGRAM STUDI MAGISTER (S2) KENOTARIATAN
-                </span>
-                <p className="font-heading text-base sm:text-lg font-bold text-heading">
-                  Dr. Toni Triyanto, S.H., M.H.
-                </p>
+
+                <div className="md:hidden w-px h-8 bg-gray-300" />
               </div>
 
-              {/* Connecting Line 3 */}
-              <div className="w-px h-8 bg-gray-300" />
-
-              {/* Level 4: Koordinator Tata Usaha */}
+              {/* Level 3: Koordinator Tata Usaha */}
               <div className="w-full max-w-md bg-red-50/70 border border-primary/30 p-4 text-center rounded-xs shadow-2xs">
                 <span className="text-[10px] font-bold tracking-[0.14em] uppercase text-primary block mb-0.5">
                   KOORDINATOR TATA USAHA
@@ -195,10 +223,10 @@ export default function StrukturOrganisasi() {
                 </p>
               </div>
 
-              {/* Connecting Line 4 */}
+              {/* Connecting Line 3 */}
               <div className="w-px h-8 bg-gray-300" />
 
-              {/* Level 5: 4 Bidang Pelaksana */}
+              {/* Level 4: 4 Bidang Pelaksana */}
               <div className="w-full max-w-5xl">
                 <div className="text-center mb-3">
                   <span className="text-[11px] font-bold tracking-widest uppercase text-gray-400 bg-gray-50 px-3 py-1 border border-gray-200 rounded-full">
@@ -206,22 +234,40 @@ export default function StrukturOrganisasi() {
                   </span>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 pt-2">
+                <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 pt-2 items-start">
                   {adminUnits.map((unit, idx) => {
                     const Icon = unit.icon;
                     return (
-                      <div
-                        key={idx}
-                        className="border border-gray-200 bg-white p-4 text-center rounded-xs shadow-2xs space-y-2 hover:border-primary/40 transition-colors flex flex-col items-center justify-between"
-                      >
-                        <div className="w-9 h-9 rounded-full bg-primary/10 text-primary flex items-center justify-center text-base shrink-0">
-                          <Icon />
-                        </div>
-                        <div>
+                      <div key={idx} className="flex flex-col items-center">
+                        <div className="w-full min-h-[104px] border border-gray-200 bg-white p-4 text-center rounded-xs shadow-2xs space-y-2 hover:border-primary/40 transition-colors flex flex-col items-center justify-center">
+                          <div className="w-9 h-9 rounded-full bg-primary/10 text-primary flex items-center justify-center text-base shrink-0">
+                            <Icon />
+                          </div>
                           <p className="font-heading text-xs sm:text-sm font-bold text-heading">
                             {unit.name}
                           </p>
                         </div>
+
+                        {/* Sub-unit di bawah bidang ini. Ditumpuk vertikal agar
+                            lebarnya tetap sama dengan kotak bidang dan barisan
+                            bidang tetap simetris terhadap garis di atasnya. */}
+                        {unit.children && (
+                          <>
+                            <div className="w-px h-4 bg-gray-300" />
+                            <div className="w-full space-y-3">
+                              {unit.children.map((child) => (
+                                <div
+                                  key={child}
+                                  className="border border-gray-200 bg-gray-50/70 p-4 text-center rounded-xs shadow-2xs"
+                                >
+                                  <p className="font-heading text-xs sm:text-sm font-bold text-heading leading-snug">
+                                    {child}
+                                  </p>
+                                </div>
+                              ))}
+                            </div>
+                          </>
+                        )}
                       </div>
                     );
                   })}

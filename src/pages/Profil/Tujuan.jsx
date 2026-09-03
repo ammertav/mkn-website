@@ -1,32 +1,30 @@
 import { Helmet } from "react-helmet-async";
-import { useT } from "../../i18n/languageContext";
+import { useT, useLanguage } from "../../i18n/languageContext";
 import RichText from "../../components/ui/RichText";
-import { peoIntro, peoItems } from "../../data/profil/peoData";
+import { peoIntro, peoItems, halaman } from "../../data/profil/peoData";
 
 export default function Tujuan() {
   const t = useT();
+  const { lang } = useLanguage();
 
   return (
     <>
       <Helmet>
-        <title>Program Educational Objectives (PEO) | MKn UNISSULA</title>
-        <meta
-          name="description"
-          content="Program Educational Objectives (PEO) Program Studi Magister Kenotariatan UNISSULA dan integrasinya dengan European Purposes of Higher Education (EPHE)."
-        />
+        <title>{t(halaman.meta.title)}</title>
+        <meta name="description" content={t(halaman.meta.description)} />
       </Helmet>
 
       <div className="space-y-14 sm:space-y-16">
         {/* Header */}
         <section className="space-y-4">
           <span className="text-xs font-semibold tracking-wider text-primary uppercase block">
-            TUJUAN PENDIDIKAN
+            {t(halaman.eyebrow)}
           </span>
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-start pt-2">
             <div className="lg:col-span-5">
               <h2 className="font-heading font-normal text-3xl sm:text-4xl lg:text-[40px] text-heading leading-tight">
-                Program Educational Objectives
+                {t(halaman.judul)}
               </h2>
             </div>
 
@@ -42,7 +40,7 @@ export default function Tujuan() {
         <section className="space-y-6">
           <div>
             <h2 className="font-heading font-normal text-2xl sm:text-3xl text-heading tracking-normal">
-              Rumusan PEO dan Relevansinya
+              {t(halaman.judulRumusan)}
             </h2>
             <div className="w-full h-[1.5px] bg-heading mt-3" />
           </div>
@@ -70,10 +68,10 @@ export default function Tujuan() {
                     className="p-6 sm:p-7 space-y-2.5 bg-gray-50/70 border-t border-gray-200 lg:border-t-0 lg:border-l"
                   >
                     <span
-                      lang="id"
+                      lang={lang}
                       className="text-[10px] font-bold tracking-[0.14em] text-gray-400 uppercase block"
                     >
-                      Capaian EPHE
+                      {t(halaman.labelEphe)}
                     </span>
                     <h3 className="font-heading font-semibold text-base text-heading leading-snug">
                       {item.ephe.title}

@@ -13,5 +13,26 @@ export const visi = {
   id:
     "Menjadi Program Studi Magister Kenotariatan dengan reputasi ASIA, dengan dijiwai " +
     "nilai-nilai Islam untuk menghasilkan generasi khaira ummah pada tahun 2025",
-  en: "",
+  en:
+    "To become a Master of Notarial Law study programme of ASIAN reputation, imbued " +
+    "with Islamic values, producing a khaira ummah generation by 2025",
+};
+
+/** Teks halaman Visi. */
+export const halaman = {
+  meta: {
+    title: { id: "Visi | MKn UNISSULA", en: "Vision | MKn UNISSULA" },
+    description: {
+      id:
+        "Visi Program Studi Magister Kenotariatan (MKn) UNISSULA: bereputasi Asia dengan " +
+        "dijiwai nilai-nilai Islam untuk menghasilkan generasi khaira ummah.",
+      en:
+        "The vision of the UNISSULA Master of Notarial Law (MKn) Study Programme: a " +
+        "programme of Asian reputation, imbued with Islamic values, producing a khaira " +
+        "ummah generation.",
+    },
+  },
+  eyebrow: { id: "VISI", en: "VISION" },
+  judul: { id: "Visi Program Studi", en: "Study Programme Vision" },
+  labelKutipan: { id: "RUMUSAN VISI RESMI", en: "OFFICIAL VISION STATEMENT" },
 };

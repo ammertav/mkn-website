@@ -1,6 +1,8 @@
 import { useState, useMemo, useEffect } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
+import { useT } from "../../i18n/languageContext";
+import { useUi } from "../../i18n/useUi";
 import {
   FiArrowLeft,
   FiCalendar,
@@ -19,7 +21,29 @@ import { getBeritaImage } from "../../utils/imageResolver";
 import { generateSlug } from "../../utils/slugHelper";
 import Img from "../../components/ui/Img";
 
+/**
+ * Teks antarmuka halaman detail berita. Isi artikelnya sendiri tidak
+ * diterjemahkan di sini — versi bahasanya dibuat saat penulisan di dashboard admin.
+ */
+const halaman = {
+  tidakDitemukan: { id: "Artikel Tidak Ditemukan", en: "Article Not Found" },
+  tidakDitemukanDetail: {
+    id: "Artikel yang Anda cari tidak tersedia atau telah dipindahkan.",
+    en: "The article you are looking for is unavailable or has been moved.",
+  },
+  kembaliKeIndeks: { id: "Kembali ke Indeks Berita", en: "Back to News Index" },
+  bagikan: { id: "Bagikan:", en: "Share:" },
+  bagikanWhatsapp: { id: "Bagikan ke WhatsApp", en: "Share on WhatsApp" },
+  bagikanX: { id: "Bagikan ke X / Twitter", en: "Share on X / Twitter" },
+  salinTautan: { id: "Salin Tautan", en: "Copy link" },
+  beritaLainnya: { id: "Berita Lainnya", en: "More News" },
+  redaksi: { id: "Redaksi MKn UNISSULA", en: "MKn UNISSULA Editorial Team" },
+  waktuBaca: { id: "3 menit baca", en: "3 min read" },
+};
+
 export default function BeritaDetail() {
+  const t = useT();
+  const ui = useUi();
   const { slug } = useParams();
   const navigate = useNavigate();
   const [copied, setCopied] = useState(false);
@@ -51,9 +75,9 @@ export default function BeritaDetail() {
       image: getBeritaImage(rawArticle.gambar),
       category: rawArticle.tags || "News",
       date: rawArticle.tanggal || "Oktober 2022",
-      readTime: "3 min baca",
+      readTime: halaman.waktuBaca,
       author: rawArticle.author || "admkn",
-      authorRole: "Redaksi MKn UNISSULA",
+      authorRole: halaman.redaksi,
       paragraphs,
       tags: Array.isArray(rawArticle.tags) ? rawArticle.tags : [rawArticle.tags || "News"],
     };
@@ -84,14 +108,14 @@ export default function BeritaDetail() {
       <main className="flex flex-col min-h-screen bg-banner font-body text-body">
         <Navbar />
         <div className="w-full flex-grow max-w-[1200px] mx-auto px-4 py-20 text-center">
-          <h1 className="font-heading text-3xl font-bold text-heading">Artikel Tidak Ditemukan</h1>
-          <p className="mt-3 text-body">Artikel yang Anda cari tidak tersedia atau telah dipindahkan.</p>
+          <h1 className="font-heading text-3xl font-bold text-heading">{t(halaman.tidakDitemukan)}</h1>
+          <p className="mt-3 text-body">{t(halaman.tidakDitemukanDetail)}</p>
           <Link
             to="/berita"
             className="mt-6 inline-flex items-center space-x-2 bg-primary text-white text-xs font-semibold px-5 py-2.5 rounded-xs"
           >
             <FiArrowLeft />
-            <span>Kembali ke Indeks Berita</span>
+            <span>{t(halaman.kembaliKeIndeks)}</span>
           </Link>
         </div>
         <Footer />
@@ -151,7 +175,7 @@ export default function BeritaDetail() {
                     </div>
                     <div>
                       <p className="font-semibold text-heading">{article.author}</p>
-                      <p className="text-[11px] text-gray-400">{article.authorRole}</p>
+                      <p className="text-[11px] text-gray-400">{t(article.authorRole)}</p>
                     </div>
                   </div>
 
@@ -165,7 +189,7 @@ export default function BeritaDetail() {
                     <span>•</span>
                     <span className="flex items-center gap-1.5">
                       <FiClock className="text-primary text-xs" />
-                      {article.readTime}
+                      {t(article.readTime)}
                     </span>
                   </div>
                 </div>
@@ -173,14 +197,14 @@ export default function BeritaDetail() {
                 {/* Share Buttons */}
                 <div className="flex items-center space-x-2">
                   <span className="text-[11px] uppercase tracking-wider font-semibold text-gray-400 mr-1">
-                    Bagikan:
+                    {t(halaman.bagikan)}
                   </span>
                   <a
                     href={`https://api.whatsapp.com/send?text=${shareText}%20${encodeURIComponent(currentUrl)}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="w-7 h-7 rounded-xs bg-[#25D366] text-white flex items-center justify-center hover:opacity-90 transition-opacity"
-                    title="Bagikan ke WhatsApp"
+                    title={t(halaman.bagikanWhatsapp)}
                   >
                     <FaWhatsapp className="text-sm" />
                   </a>
@@ -189,14 +213,14 @@ export default function BeritaDetail() {
                     target="_blank"
                     rel="noopener noreferrer"
                     className="w-7 h-7 rounded-xs bg-[#1DA1F2] text-white flex items-center justify-center hover:opacity-90 transition-opacity"
-                    title="Bagikan ke X / Twitter"
+                    title={t(halaman.bagikanX)}
                   >
                     <FaTwitter className="text-xs" />
                   </a>
                   <button
                     onClick={handleCopyLink}
                     className="w-7 h-7 rounded-xs bg-gray-600 text-white flex items-center justify-center hover:bg-primary transition-colors cursor-pointer"
-                    title="Salin Tautan"
+                    title={t(halaman.salinTautan)}
                   >
                     {copied ? <FiCheck className="text-xs" /> : <FiShare2 className="text-xs" />}
                   </button>
@@ -268,7 +292,7 @@ export default function BeritaDetail() {
                 <h4 className="font-heading font-semibold text-base text-heading">
                   {article.author}
                 </h4>
-                <p className="text-xs text-gray-500">{article.authorRole}</p>
+                <p className="text-xs text-gray-500">{t(article.authorRole)}</p>
                 <p className="text-xs text-body leading-relaxed pt-1">
                   Kabar berita dan publikasi kegiatan Program Studi Magister (S2) Kenotariatan Fakultas
                   Hukum Universitas Islam Sultan Agung (UNISSULA) Semarang.
@@ -282,13 +306,13 @@ export default function BeritaDetail() {
             <section className="mt-14 space-y-6">
               <div className="flex items-center justify-between border-b border-gray-200 pb-3">
                 <h3 className="font-heading font-semibold text-xl sm:text-2xl text-heading">
-                  Berita Lainnya
+                  {t(halaman.beritaLainnya)}
                 </h3>
                 <Link
                   to="/berita"
                   className="text-xs font-semibold text-primary hover:underline flex items-center space-x-1"
                 >
-                  <span>Lihat Semua</span>
+                  <span>{ui("viewAll")}</span>
                   <FiArrowRight />
                 </Link>
               </div>

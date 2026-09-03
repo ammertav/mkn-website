@@ -1,10 +1,16 @@
 import PageTabs from "../ui/PageTabs";
 
 export const profilTabs = [
-  { label: "SEJARAH", path: "/profil/sejarah" },
-  { label: "VISI", path: "/profil/visi-misi" },
-  { label: "TUJUAN PENDIDIKAN (PEO)", path: "/profil/tujuan" },
-  { label: "STRUKTUR ORGANISASI", path: "/profil/struktur-organisasi" },
+  { label: { id: "SEJARAH", en: "HISTORY" }, path: "/profil/sejarah" },
+  { label: { id: "VISI", en: "VISION" }, path: "/profil/visi-misi" },
+  {
+    label: { id: "TUJUAN PENDIDIKAN (PEO)", en: "EDUCATIONAL OBJECTIVES (PEO)" },
+    path: "/profil/tujuan",
+  },
+  {
+    label: { id: "STRUKTUR ORGANISASI", en: "ORGANISATIONAL STRUCTURE" },
+    path: "/profil/struktur-organisasi",
+  },
 ];
 
 export default function ProfilTabs({

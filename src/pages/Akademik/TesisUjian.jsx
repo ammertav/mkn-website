@@ -11,6 +11,7 @@ import {
   komponenPenilaian,
   tataTertibRingkas,
   yudisiumRingkas,
+  halamanTesis,
 } from "../../data/akademik/panduanTesisData";
 
 export default function TesisUjian() {
@@ -18,39 +19,39 @@ export default function TesisUjian() {
     <div className="space-y-12 sm:space-y-14">
       <section className="space-y-5">
         <JudulSeksi
-          judul="Delapan Syarat Ujian Tesis"
-          keterangan="Ujian tesis hanya dapat dilaksanakan apabila seluruh syarat berikut telah dipenuhi."
+          judul={halamanTesis.seksi.syaratTesis}
+          keterangan={halamanTesis.seksi.syaratTesisKeterangan}
         />
         <DaftarSyarat butir={tesisSyaratRingkas} />
       </section>
 
       <section className="space-y-5">
         <JudulSeksi
-          judul="Tim Penguji"
-          keterangan="Ujian berbentuk seminar terbuka di hadapan sekurang-kurangnya tiga orang penguji."
+          judul={halamanTesis.seksi.timPengujiTesis}
+          keterangan={halamanTesis.seksi.timPengujiTesisKeterangan}
         />
         <KartuRingkas butir={timPengujiRingkas} kolom={3} />
       </section>
 
       <section className="space-y-5">
         <JudulSeksi
-          judul="Komponen Penilaian"
-          keterangan="Lima komponen penilaian beserta bobotnya. Mahasiswa dinyatakan lulus apabila memperoleh nilai sekurang-kurangnya B."
+          judul={halamanTesis.seksi.komponen}
+          keterangan={halamanTesis.seksi.komponenKeterangan}
         />
         <BobotPenilaian komponen={komponenPenilaian} />
       </section>
 
       <section className="space-y-5">
-        <JudulSeksi judul="Tata Tertib Ujian" />
+        <JudulSeksi judul={halamanTesis.seksi.tataTertib} />
         <KartuRingkas butir={tataTertibRingkas} kolom={2} />
       </section>
 
       <section className="space-y-5">
-        <JudulSeksi judul="Perbaikan, Yudisium, dan Predikat" />
+        <JudulSeksi judul={halamanTesis.seksi.yudisium} />
         <KartuRingkas butir={yudisiumRingkas} kolom={3} />
       </section>
 
-      <CatatanDokumen nama="Panduan Ujian Tesis" />
+      <CatatanDokumen nama={halamanTesis.namaDokumen} />
     </div>
   );
 }

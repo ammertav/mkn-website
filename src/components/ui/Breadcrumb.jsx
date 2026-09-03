@@ -1,25 +1,25 @@
 import { Link, useLocation } from "react-router-dom";
 import { navLinks } from "../../data/navLinks";
+import { useT } from "../../i18n/languageContext";
+import { useUi } from "../../i18n/useUi";
 
 /**
- * Kamus pemetaan rute ke judul resmi berdasarkan navLinks
+ * Kamus pemetaan rute ke judul resmi berdasarkan navLinks.
+ *
+ * Nilainya disimpan mentah dalam bentuk { id, en } dan baru diselesaikan ke satu
+ * bahasa saat render — peta ini dibangun sekali ketika modul dimuat, jadi tidak
+ * boleh menyimpan hasil terjemahan yang terlanjur terkunci pada satu bahasa.
  */
 const routeTitleMap = {
-  "/quality-assurance": "Quality Assurance Unit",
-  "/penerimaan": "Informasi",
-  "/staff/faculty-directory": "Dosen",
+  "/quality-assurance": { id: "Quality Assurance Unit", en: "Quality Assurance Unit" },
+  "/penerimaan": { id: "Informasi", en: "Information" },
+  "/staff/faculty-directory": { id: "Dosen", en: "Academic Staff" },
 };
 
 function buildRouteTitleMap(items) {
   items.forEach((item) => {
     if (item.href && item.title) {
-      // Format ALL CAPS jadi Title Case ("ACADEMIC" -> "Academic", "STAF" -> "Staf")
-      const formattedTitle =
-        item.title === item.title.toUpperCase() && item.title.length > 3
-          ? item.title.charAt(0) + item.title.slice(1).toLowerCase()
-          : item.title;
-
-      routeTitleMap[item.href] = formattedTitle;
+      routeTitleMap[item.href] = item.title;
     }
     if (item.children && Array.isArray(item.children)) {
       buildRouteTitleMap(item.children);
@@ -27,6 +27,14 @@ function buildRouteTitleMap(items) {
   });
 }
 buildRouteTitleMap(navLinks);
+
+/** Format ALL CAPS jadi Title Case ("ACADEMIC" -> "Academic", "STAFF" -> "Staff"). */
+function rapikanJudul(teks) {
+  if (!teks) return teks;
+  return teks === teks.toUpperCase() && teks.length > 3
+    ? teks.charAt(0) + teks.slice(1).toLowerCase()
+    : teks;
+}
 
 /**
  * Helper untuk mengubah slug URL dinamis menjadi teks Title Case
@@ -60,6 +68,8 @@ function formatSlug(slug) {
  * Otomatis memetakan URL sedalam apapun (N-Level) secara dinamis tanpa hardcode.
  */
 export default function Breadcrumb({ customTitle }) {
+  const t = useT();
+  const ui = useUi();
   const { pathname } = useLocation();
 
   // Pecah pathname menjadi array segmen (abaikan string kosong)
@@ -73,7 +83,7 @@ export default function Breadcrumb({ customTitle }) {
       className="flex items-center gap-2 text-xs sm:text-[13px] text-gray-500 mb-6 sm:mb-10 flex-wrap"
     >
       <Link to="/" className="hover:text-primary transition-colors">
-        Beranda
+        {ui("home")}
       </Link>
 
       {segments.map((segment, index) => {
@@ -84,10 +94,13 @@ export default function Breadcrumb({ customTitle }) {
         // 1. Jika customTitle diberikan pada item terakhir, pakai customTitle.
         // 2. Jika ada di routeTitleMap, pakai judul resmi.
         // 3. Jika tidak ada (URL dinamis/slug), ubah slug menjadi Title Case.
+        const judulRute = routeTitleMap[path];
         const label =
           isLast && customTitle
             ? customTitle
-            : routeTitleMap[path] || formatSlug(segment);
+            : judulRute
+            ? rapikanJudul(t(judulRute))
+            : formatSlug(segment);
 
         return (
           <span key={path} className="flex items-center gap-2">

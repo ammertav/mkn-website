@@ -5,6 +5,8 @@ import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import Breadcrumb from "../../components/ui/Breadcrumb";
+import { useT } from "../../i18n/languageContext";
+import { useUi } from "../../i18n/useUi";
 import beritaList from "../../data/berita.json";
 import { getBeritaImage } from "../../utils/imageResolver";
 import { generateSlug } from "../../utils/slugHelper";
@@ -18,12 +20,66 @@ const ITEMS_PER_PAGE = 10;
  */
 const TAG_PENGUMUMAN = "Pengumuman";
 
+/**
+ * Teks antarmuka halaman Berita.
+ *
+ * Isi berita dan pengumuman sendiri (judul, tanggal, naskah) TIDAK diterjemahkan
+ * di sini — keduanya data dinamis yang versi bahasanya dibuat saat penulisan
+ * lewat dashboard admin.
+ */
+const halaman = {
+  meta: {
+    title: {
+      id: "Berita & Pengumuman | Magister Kenotariatan UNISSULA",
+      en: "News & Announcements | Master of Notarial Law UNISSULA",
+    },
+    description: {
+      id:
+        "Kabar terbaru, hasil penelitian, agenda kegiatan, dan pengumuman resmi Program " +
+        "Studi Magister Kenotariatan (MKn) UNISSULA.",
+      en:
+        "Latest news, research findings, activities, and official announcements of the " +
+        "UNISSULA Master of Notarial Law (MKn) Study Programme.",
+    },
+  },
+  breadcrumb: { id: "Berita & Pengumuman", en: "News & Announcements" },
+  eyebrow: { id: "BERITA & PENGUMUMAN", en: "NEWS & ANNOUNCEMENTS" },
+  judul: { id: "Kabar Terbaru", en: "Latest Updates" },
+  intro: {
+    id:
+      "Kegiatan akademik, hasil penelitian, agenda, dan pengumuman resmi Program Studi " +
+      "Magister Kenotariatan.",
+    en:
+      "Academic activities, research findings, events, and official announcements of the " +
+      "Master of Notarial Law Study Programme.",
+  },
+  ariaKategori: {
+    id: "Kategori Berita dan Pengumuman",
+    en: "News and Announcements categories",
+  },
+  fotoUtama: { id: "Foto berita utama", en: "Featured news photo" },
+  beritaUtama: { id: "BERITA UTAMA", en: "FEATURED" },
+  bacaSelengkapnya: { id: "BACA SELENGKAPNYA", en: "READ MORE" },
+  beritaLainnya: { id: "Berita Lainnya", en: "More News" },
+  judulPengumuman: { id: "Pengumuman", en: "Announcements" },
+  pengumumanKosong: {
+    id: "Belum ada pengumuman yang diterbitkan.",
+    en: "No announcements have been published yet.",
+  },
+  pengumumanKosongDetail: {
+    id: "Pengumuman resmi program studi akan ditampilkan di sini.",
+    en: "Official study programme announcements will appear here.",
+  },
+};
+
 const KATEGORI_TABS = [
-  { key: "berita", label: "Berita" },
-  { key: "pengumuman", label: "Pengumuman" },
+  { key: "berita", label: { id: "Berita", en: "News" } },
+  { key: "pengumuman", label: { id: "Pengumuman", en: "Announcements" } },
 ];
 
 export default function BeritaIndex() {
+  const t = useT();
+  const ui = useUi();
   const [currentPage, setCurrentPage] = useState(1);
   const newsSectionRef = useRef(null);
   const [searchParams, setSearchParams] = useSearchParams();
@@ -71,11 +127,8 @@ export default function BeritaIndex() {
   return (
     <>
       <Helmet>
-        <title>Berita & Pengumuman | Magister Kenotariatan UNISSULA</title>
-        <meta
-          name="description"
-          content="Kabar terbaru, hasil penelitian, agenda kegiatan, dan pengumuman resmi Program Studi Magister Kenotariatan (MKn) UNISSULA."
-        />
+        <title>{t(halaman.meta.title)}</title>
+        <meta name="description" content={t(halaman.meta.description)} />
       </Helmet>
 
       <main className="flex flex-col min-h-screen bg-white font-body text-body">
@@ -85,19 +138,18 @@ export default function BeritaIndex() {
         <div className="w-full flex-grow max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 space-y-16 sm:space-y-20">
           {/* Breadcrumb & Main Header */}
           <section className="space-y-6">
-            <Breadcrumb customTitle="Berita & Pengumuman" />
+            <Breadcrumb customTitle={t(halaman.breadcrumb)} />
 
             <div className="space-y-3">
               <span className="text-xs font-bold tracking-[0.16em] uppercase text-primary block">
-                BERITA & PENGUMUMAN
+                {t(halaman.eyebrow)}
               </span>
               <h1 className="text-4xl sm:text-5xl lg:text-[56px] font-heading font-normal text-heading tracking-tight">
-                Kabar Terbaru
+                {t(halaman.judul)}
               </h1>
               <div className="w-full max-w-sm h-[2.5px] bg-primary mt-3 mb-4" />
               <p className="text-base sm:text-lg text-body leading-relaxed max-w-3xl">
-                Kegiatan akademik, hasil penelitian, agenda, dan pengumuman resmi Program Studi
-                Magister Kenotariatan.
+                {t(halaman.intro)}
               </p>
             </div>
           </section>
@@ -105,7 +157,7 @@ export default function BeritaIndex() {
           {/* Pemisah kategori: Berita / Pengumuman */}
           <nav
             className="flex items-center gap-6 sm:gap-10 border-b border-gray-200 -mt-10 sm:-mt-14 overflow-x-auto scrollbar-none"
-            aria-label="Kategori Berita dan Pengumuman"
+            aria-label={t(halaman.ariaKategori)}
           >
             {KATEGORI_TABS.map((tab) => {
               const active = kategori === tab.key;
@@ -121,7 +173,7 @@ export default function BeritaIndex() {
                       : "border-transparent text-body hover:text-heading hover:border-gray-300"
                   }`}
                 >
-                  {tab.label}
+                  {t(tab.label)}
                 </button>
               );
             })}
@@ -147,7 +199,7 @@ export default function BeritaIndex() {
                   />
                   <div className="absolute inset-0 bg-black/15 flex items-center justify-center p-4">
                     <span className="text-xs sm:text-sm text-gray-700 bg-white/90 px-4 py-2 rounded-xs shadow-xs backdrop-blur-xs font-medium">
-                      Foto berita utama
+                      {t(halaman.fotoUtama)}
                     </span>
                   </div>
                 </Link>
@@ -156,7 +208,7 @@ export default function BeritaIndex() {
               {/* Right Column: Article Details */}
               <div className="lg:col-span-6 space-y-4">
                 <span className="text-xs font-bold tracking-wider text-primary uppercase block">
-                  BERITA UTAMA · {featuredNews.tanggal ? featuredNews.tanggal.toUpperCase() : "OKTOBER 2022"}
+                  {t(halaman.beritaUtama)} · {featuredNews.tanggal ? featuredNews.tanggal.toUpperCase() : "OKTOBER 2022"}
                 </span>
 
                 <Link to={`/berita/${generateSlug(featuredNews.title, featuredNews.slug)}`}>
@@ -174,7 +226,7 @@ export default function BeritaIndex() {
                     to={`/berita/${generateSlug(featuredNews.title, featuredNews.slug)}`}
                     className="inline-flex items-center text-xs font-bold tracking-wider text-primary hover:text-[#680000] uppercase transition-colors group/btn"
                   >
-                    <span>BACA SELENGKAPNYA</span>
+                    <span>{t(halaman.bacaSelengkapnya)}</span>
                     <span className="ml-1.5 transition-transform group-hover/btn:translate-x-1">
                       →
                     </span>
@@ -189,7 +241,7 @@ export default function BeritaIndex() {
             <section ref={newsSectionRef} className="space-y-6 pt-4 scroll-mt-20">
               <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-2 border-b border-heading pb-3">
                 <h2 className="font-heading font-normal text-3xl sm:text-4xl text-heading tracking-normal">
-                  Berita Lainnya
+                  {t(halaman.beritaLainnya)}
                 </h2>
                 <span className="text-xs text-gray-500 font-medium">
                   Menampilkan {(currentPage - 1) * ITEMS_PER_PAGE + 1} -{" "}
@@ -224,11 +276,11 @@ export default function BeritaIndex() {
                   <button
                     onClick={() => handlePageChange(currentPage - 1)}
                     disabled={currentPage === 1}
-                    aria-label="Halaman Sebelumnya"
+                    aria-label={ui("previous")}
                     className="inline-flex items-center justify-center px-4 py-2 text-xs font-semibold rounded-xs border border-gray-300 bg-white text-gray-700 hover:bg-gray-50 hover:border-gray-400 hover:text-primary active:scale-98 disabled:opacity-40 disabled:pointer-events-none cursor-pointer transition-all shadow-2xs"
                   >
                     <FiChevronLeft className="mr-1 text-sm" />
-                    <span>Sebelumnya</span>
+                    <span>{ui("previous")}</span>
                   </button>
 
                   {/* Page Numbers */}
@@ -237,7 +289,7 @@ export default function BeritaIndex() {
                       <button
                         key={pageNum}
                         onClick={() => handlePageChange(pageNum)}
-                        aria-label={`Halaman ${pageNum}`}
+                        aria-label={`${ui("page")} ${pageNum}`}
                         aria-current={currentPage === pageNum ? "page" : undefined}
                         className={`min-w-[38px] h-9 flex items-center justify-center text-xs font-bold rounded-xs border transition-all cursor-pointer select-none ${
                           currentPage === pageNum
@@ -254,10 +306,10 @@ export default function BeritaIndex() {
                   <button
                     onClick={() => handlePageChange(currentPage + 1)}
                     disabled={currentPage === totalPages}
-                    aria-label="Halaman Selanjutnya"
+                    aria-label={ui("next")}
                     className="inline-flex items-center justify-center px-4 py-2 text-xs font-semibold rounded-xs border border-gray-300 bg-white text-gray-700 hover:bg-gray-50 hover:border-gray-400 hover:text-primary active:scale-98 disabled:opacity-40 disabled:pointer-events-none cursor-pointer transition-all shadow-2xs"
                   >
-                    <span>Selanjutnya</span>
+                    <span>{ui("next")}</span>
                     <FiChevronRight className="ml-1 text-sm" />
                   </button>
                 </div>
@@ -270,7 +322,7 @@ export default function BeritaIndex() {
             <section className="space-y-6">
               <div className="border-b border-heading pb-3">
                 <h2 className="font-heading font-normal text-3xl sm:text-4xl text-heading tracking-normal">
-                  Pengumuman
+                  {t(halaman.judulPengumuman)}
                 </h2>
               </div>
 
@@ -312,10 +364,10 @@ export default function BeritaIndex() {
               ) : (
                 <div className="border border-dashed border-gray-300 bg-white p-10 sm:p-14 text-center rounded-xs">
                   <p className="text-sm font-medium text-gray-500">
-                    Belum ada pengumuman yang diterbitkan.
+                    {t(halaman.pengumumanKosong)}
                   </p>
                   <p className="mt-1.5 text-xs text-gray-400 max-w-md mx-auto leading-relaxed">
-                    Pengumuman resmi program studi akan ditampilkan di sini.
+                    {t(halaman.pengumumanKosongDetail)}
                   </p>
                 </div>
               )}

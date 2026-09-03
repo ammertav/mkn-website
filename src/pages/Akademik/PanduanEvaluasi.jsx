@@ -1,4 +1,5 @@
 import { Helmet } from "react-helmet-async";
+import { useT } from "../../i18n/languageContext";
 import {
   KartuSorot,
   JudulSeksi,
@@ -30,17 +31,17 @@ import {
   ekuivalensiKolom,
   ekuivalensiBaris,
   ekuivalensiCatatan,
+  halaman,
 } from "../../data/akademik/panduanEvaluasiData";
 
 export default function PanduanEvaluasi() {
+  const t = useT();
+
   return (
     <>
       <Helmet>
-        <title>Panduan Evaluasi Pembelajaran | MKn UNISSULA</title>
-        <meta
-          name="description"
-          content="Panduan Evaluasi Pembelajaran Program Studi Magister Kenotariatan UNISSULA — bobot komponen penilaian, skala nilai, ketercapaian CPL, remidiasi, dan predikat kelulusan."
-        />
+        <title>{t(halaman.meta.title)}</title>
+        <meta name="description" content={t(halaman.meta.description)} />
       </Helmet>
 
       <div className="space-y-12 sm:space-y-14">
@@ -50,81 +51,77 @@ export default function PanduanEvaluasi() {
             ACADEMIC
           </span>
           <h1 className="text-3xl sm:text-4xl md:text-[42px] font-heading font-bold text-heading tracking-normal">
-            Panduan Evaluasi Pembelajaran
+            {t(halaman.judul)}
           </h1>
           <div className="w-full h-[2px] bg-primary mt-4 mb-5" />
-          <p className="text-base text-body leading-relaxed max-w-5xl">
-            Ketentuan pengukuran, analisis, dan tindak lanjut ketercapaian Capaian Pembelajaran
-            Lulusan pada Kurikulum OBE Tahun 2026, berlaku bagi seluruh mata kuliah teori, rumpun
-            Teknik Pembuatan Akta, Laboratorium Akta, mata kuliah pilihan, dan Tesis.
-          </p>
+          <p className="text-base text-body leading-relaxed max-w-5xl">{t(halaman.intro)}</p>
         </div>
 
         <KartuSorot butir={sorotEvaluasi} />
 
         <section className="space-y-5">
-          <JudulSeksi judul="Enam Prinsip Penilaian" />
+          <JudulSeksi judul={halaman.seksi.prinsip} />
           <KartuRingkas butir={prinsipPenilaian} kolom={3} />
         </section>
 
         <section className="space-y-5">
           <JudulSeksi
-            judul="Bobot Komponen Penilaian"
-            keterangan="Komponen dan bobot ditetapkan dalam Rencana Pembelajaran Semester masing-masing mata kuliah dengan mengacu pada pola berikut."
+            judul={halaman.seksi.bobot}
+            keterangan={halaman.seksi.bobotKeterangan}
           />
           <TabelPanduan kolom={bobotKolom} baris={bobotBaris} />
           <Klausul butir={bobotCatatan} />
         </section>
 
         <section className="space-y-5">
-          <JudulSeksi judul="Skala Nilai dan Batas Kelulusan" />
+          <JudulSeksi judul={halaman.seksi.skala} />
           <TabelPanduan kolom={skalaKolom} baris={skalaBaris} />
           <Klausul butir={batasKelulusan} />
         </section>
 
         <section className="space-y-5">
           <JudulSeksi
-            judul="Perhitungan Ketercapaian"
-            keterangan="Perhitungan dilakukan berjenjang dari butir penilaian sampai tingkat program studi."
+            judul={halaman.seksi.ketercapaian}
+            keterangan={halaman.seksi.ketercapaianKeterangan}
           />
           <AlurTahap tahap={langkahKetercapaian} />
           <Klausul butir={catatanKetercapaian} />
         </section>
 
         <section className="space-y-5">
-          <JudulSeksi judul="Kategori Ketercapaian dan Tindak Lanjut" />
+          <JudulSeksi judul={halaman.seksi.kategori} />
           <TabelPanduan kolom={kategoriKolom} baris={kategoriBaris} />
         </section>
 
         <section className="space-y-5">
-          <JudulSeksi judul="Remidiasi dan Perbaikan Nilai" />
+          <JudulSeksi judul={halaman.seksi.remidiasi} />
           <Klausul butir={remidiasi} />
         </section>
 
         <section className="space-y-5">
           <JudulSeksi
-            judul="Syarat Kelulusan dan Predikat"
-            keterangan="Mahasiswa berhak menyandang gelar Magister Kenotariatan (M.Kn.) apabila memenuhi seluruh syarat berikut."
+            judul={halaman.seksi.kelulusan}
+            keterangan={halaman.seksi.kelulusanKeterangan}
           />
           <DaftarSyarat butir={syaratKelulusan} />
           <TabelPanduan kolom={predikatKolom} baris={predikatBaris} />
         </section>
 
         <section className="space-y-5">
-          <JudulSeksi judul="Siklus Evaluasi dan Perbaikan Berkelanjutan" />
+          <JudulSeksi judul={halaman.seksi.siklus} />
           <TabelPanduan kolom={siklusKolom} baris={siklusBaris} />
         </section>
 
         <section className="space-y-5">
           <JudulSeksi
-            judul="Ekuivalensi Kurikulum 2021 ke Kurikulum OBE 2026"
-            keterangan="Berlaku bagi mahasiswa angkatan Kurikulum 2021 (36 sks) yang belum menyelesaikan studi. Mata kuliah yang dinyatakan setara diakui tanpa perlu ditempuh kembali; selisih beban studi dipenuhi dengan menempuh mata kuliah yang belum berpadanan."
+            judul={halaman.seksi.ekuivalensi}
+            keterangan={halaman.seksi.ekuivalensiKeterangan}
           />
           <TabelPanduan kolom={ekuivalensiKolom} baris={ekuivalensiBaris} />
           <Klausul butir={ekuivalensiCatatan} />
         </section>
 
-        <CatatanDokumen nama="Panduan Evaluasi Pembelajaran" />
+        <CatatanDokumen nama={halaman.namaDokumen} />
       </div>
     </>
   );

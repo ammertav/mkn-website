@@ -2,13 +2,15 @@ import { useState, useEffect } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { FiChevronRight } from "react-icons/fi";
+import { useT } from "../../i18n/languageContext";
 
 export default function SidebarLink({ menu }) {
+  const t = useT();
   const { pathname } = useLocation();
 
-  if (!menu) return null;
-
-  const hasChildren = Boolean(menu.children?.length);
+  // Seluruh hook dipanggil sebelum penjagaan `menu` kosong, supaya urutannya
+  // tetap sama pada tiap render (Rules of Hooks).
+  const hasChildren = Boolean(menu?.children?.length);
   const isParentActive =
     hasChildren &&
     (pathname === menu.href || pathname.startsWith(menu.href + "/"));
@@ -21,6 +23,8 @@ export default function SidebarLink({ menu }) {
       setIsOpen(true);
     }
   }, [isParentActive]);
+
+  if (!menu) return null;
 
   return (
     <div>
@@ -39,7 +43,7 @@ export default function SidebarLink({ menu }) {
             }`;
           }}
         >
-          <span>{menu.title}</span>
+          <span>{t(menu.title)}</span>
         </NavLink>
 
         {/* Indikator icon dan tombol toggle sub-menu */}
@@ -52,7 +56,7 @@ export default function SidebarLink({ menu }) {
               setIsOpen((prev) => !prev);
             }}
             className="p-1 text-gray-400 hover:text-primary transition-colors cursor-pointer"
-            aria-label={`Toggle submenu ${menu.title}`}
+            aria-label={`Toggle submenu ${t(menu.title)}`}
           >
             <motion.span
               animate={{ rotate: isOpen ? 90 : 0 }}
@@ -93,7 +97,7 @@ export default function SidebarLink({ menu }) {
                     }`
                   }
                 >
-                  {child.title}
+                  {t(child.title)}
                 </NavLink>
               ))}
             </div>

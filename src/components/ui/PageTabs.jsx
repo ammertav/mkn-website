@@ -2,11 +2,12 @@ import { useEffect, useRef } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { FiChevronUp, FiChevronDown } from "react-icons/fi";
 import clsx from "clsx";
+import { useT } from "../../i18n/languageContext";
 
 /**
  * Reusable PageTabs component for horizontal sub-navigation.
  *
- * @param {Array<{ label: string, path: string }>} tabs - Array of tab objects containing label and route path.
+ * @param {Array<{ label: string|{id: string, en: string}, path: string }>} tabs - Array of tab objects containing label and route path.
  * @param {string} [ariaLabel="Page Tabs"] - Accessible label for the navigation element.
  * @param {string} [className=""] - Extra classes for the outer sticky container.
  * @param {string} [containerClassName=""] - Extra classes for the inner width container.
@@ -25,6 +26,7 @@ export default function PageTabs({
   activeTabClassName = "",
   inactiveTabClassName = "",
 }) {
+  const t = useT();
   const location = useLocation();
   const navRef = useRef(null);
   const activeTabRef = useRef(null);
@@ -93,7 +95,7 @@ export default function PageTabs({
                   tabClassName
                 )}
               >
-                {tab.label}
+                {t(tab.label)}
               </NavLink>
             );
           })}

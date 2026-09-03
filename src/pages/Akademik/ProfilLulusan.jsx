@@ -1,7 +1,11 @@
 import { Helmet } from "react-helmet-async";
 import { useT } from "../../i18n/languageContext";
 import RichText from "../../components/ui/RichText";
-import { profilLulusanIntro, mainProfiles } from "../../data/akademik/profilLulusanData";
+import {
+  profilLulusanIntro,
+  mainProfiles,
+  halaman,
+} from "../../data/akademik/profilLulusanData";
 
 export default function ProfilLulusan() {
   const t = useT();
@@ -9,11 +13,8 @@ export default function ProfilLulusan() {
   return (
     <>
       <Helmet>
-        <title>Profil Lulusan | MKn UNISSULA</title>
-        <meta
-          name="description"
-          content="Profil lulusan Program Studi Magister Kenotariatan (MKn) UNISSULA — Notaris/PPAT, Aparatur Negara, Akademisi, dan Penggiat Masyarakat."
-        />
+        <title>{t(halaman.meta.title)}</title>
+        <meta name="description" content={t(halaman.meta.description)} />
       </Helmet>
 
       <div className="space-y-10">
@@ -23,7 +24,7 @@ export default function ProfilLulusan() {
             ACADEMIC
           </span>
           <h1 className="text-3xl sm:text-4xl md:text-[42px] font-heading font-bold text-heading tracking-normal">
-            Profil Lulusan
+            {t(halaman.judul)}
           </h1>
           <div className="w-full h-[2px] bg-primary mt-4 mb-5" />
           <p className="text-base text-body leading-relaxed max-w-5xl">
@@ -35,7 +36,7 @@ export default function ProfilLulusan() {
         <div className="space-y-4">
           <div>
             <h2 className="text-xl sm:text-2xl font-heading font-medium text-heading tracking-normal">
-              Empat Profil Utama
+              {t(halaman.judulSeksi)}
             </h2>
             <div className="w-full h-[1.5px] bg-heading mt-2.5" />
           </div>

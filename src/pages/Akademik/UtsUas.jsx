@@ -1,4 +1,5 @@
 import { Helmet } from "react-helmet-async";
+import { useT } from "../../i18n/languageContext";
 import {
   KartuSorot,
   JudulSeksi,
@@ -17,17 +18,17 @@ import {
   dilarangSaatUjian,
   sanksiRingkas,
   nilaiKeberatan,
+  halamanUtsUas,
 } from "../../data/akademik/panduanUtsUasData";
 
 export default function UtsUas() {
+  const t = useT();
+
   return (
     <>
       <Helmet>
-        <title>Panduan Ujian UTS & UAS | MKn UNISSULA</title>
-        <meta
-          name="description"
-          content="Pokok-pokok panduan Ujian Tengah Semester dan Ujian Akhir Semester Program Studi Magister Kenotariatan UNISSULA — jadwal, syarat, tata tertib, dan sanksi."
-        />
+        <title>{t(halamanUtsUas.meta.title)}</title>
+        <meta name="description" content={t(halamanUtsUas.meta.description)} />
       </Helmet>
 
       <div className="space-y-12 sm:space-y-14">
@@ -37,8 +38,8 @@ export default function UtsUas() {
         {/* Dua jenis ujian */}
         <section className="space-y-5">
           <JudulSeksi
-            judul="Dua Jenis Ujian Semester"
-            keterangan="Ujian semester dilaksanakan dua kali, masing-masing mengukur ketercapaian Sub-CPMK pada paruh yang berbeda."
+            judul={halamanUtsUas.seksi.jenis}
+            keterangan={halamanUtsUas.seksi.jenisKeterangan}
           />
           <KartuRingkas butir={jenisUjian} kolom={2} />
         </section>
@@ -46,8 +47,8 @@ export default function UtsUas() {
         {/* Syarat peserta */}
         <section className="space-y-5">
           <JudulSeksi
-            judul="Syarat Mengikuti Ujian"
-            keterangan="Seluruh syarat berikut harus dipenuhi sebelum peserta diperkenankan mengikuti ujian."
+            judul={halamanUtsUas.seksi.syarat}
+            keterangan={halamanUtsUas.seksi.syaratKeterangan}
           />
           <DaftarSyarat butir={syaratPeserta} />
         </section>
@@ -55,34 +56,34 @@ export default function UtsUas() {
         {/* Moda pelaksanaan */}
         <section className="space-y-5">
           <JudulSeksi
-            judul="Tiga Moda Pelaksanaan"
-            keterangan="Ujian dapat diselenggarakan secara luring, daring, maupun sebagai ujian praktik di Laboratorium Kenotariatan."
+            judul={halamanUtsUas.seksi.moda}
+            keterangan={halamanUtsUas.seksi.modaKeterangan}
           />
           <KartuRingkas butir={modaPelaksanaan} kolom={3} />
         </section>
 
         {/* Tata tertib */}
         <section className="space-y-5">
-          <JudulSeksi judul="Tata Tertib Selama Ujian" />
+          <JudulSeksi judul={halamanUtsUas.seksi.tataTertib} />
           <BolehDilarang wajib={wajibDipatuhi} dilarang={dilarangSaatUjian} />
         </section>
 
         {/* Sanksi */}
         <section className="space-y-5">
           <JudulSeksi
-            judul="Sanksi Pelanggaran"
-            keterangan="Sanksi dikenakan secara bertingkat sesuai berat pelanggaran."
+            judul={halamanUtsUas.seksi.sanksi}
+            keterangan={halamanUtsUas.seksi.sanksiKeterangan}
           />
           <SanksiTingkat tingkat={sanksiRingkas} />
         </section>
 
         {/* Nilai dan keberatan */}
         <section className="space-y-5">
-          <JudulSeksi judul="Nilai, Ujian Susulan, dan Keberatan" />
+          <JudulSeksi judul={halamanUtsUas.seksi.nilai} />
           <KartuRingkas butir={nilaiKeberatan} kolom={3} />
         </section>
 
-        <CatatanDokumen nama="Panduan Ujian Tengah Semester dan Ujian Akhir Semester" />
+        <CatatanDokumen nama={halamanUtsUas.namaDokumen} />
       </div>
     </>
   );

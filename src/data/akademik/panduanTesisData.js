@@ -89,50 +89,110 @@ export const dasarPenyusunan = [
   },
 ];
 
-export const tahapanKolom = ["No.", "Tahap", "Uraian", "Luaran"];
+export const tahapanKolom = [
+  { id: "No.", en: "No." },
+  { id: "Tahap", en: "Stage" },
+  { id: "Uraian", en: "Description" },
+  { id: "Luaran", en: "Output" },
+];
 export const tahapanBaris = [
   [
     "1",
-    "Pengajuan Judul",
-    "Mahasiswa yang telah menyelesaikan kuliah Semester II mengajukan judul usulan Proposal Tesis kepada Ketua Program Studi c.q. Sekretaris Program Studi",
-    "Judul disetujui Tim Penjamin Mutu Tesis",
+    { id: "Pengajuan Judul", en: "Submission of the Title" },
+    {
+      id:
+        "Mahasiswa yang telah menyelesaikan kuliah Semester II mengajukan judul usulan " +
+        "Proposal Tesis kepada Ketua Program Studi c.q. Sekretaris Program Studi",
+      en:
+        "Students who have completed Semester II submit a proposed thesis title to the Head of " +
+        "the Study Programme through the Secretary of the Study Programme",
+    },
+    {
+      id: "Judul disetujui Tim Penjamin Mutu Tesis",
+      en: "The title is approved by the Thesis Quality Assurance Team",
+    },
   ],
   [
     "2",
-    "Penetapan Pembimbing",
-    "Sekretaris Bidang Akademik menetapkan dosen pembimbing dan dimintakan persetujuan Ketua Program",
-    "Surat penetapan pembimbing",
+    { id: "Penetapan Pembimbing", en: "Appointment of the Supervisor" },
+    {
+      id:
+        "Sekretaris Bidang Akademik menetapkan dosen pembimbing dan dimintakan persetujuan " +
+        "Ketua Program",
+      en:
+        "The Secretary for Academic Affairs appoints the supervisor, subject to the approval of " +
+        "the Head of the Programme",
+    },
+    { id: "Surat penetapan pembimbing", en: "Letter appointing the supervisor" },
   ],
   [
     "3",
-    "Ujian Pra Proposal",
-    "Ujian berupa bimbingan atas kerangka berpikir proposal dan tesis",
-    "Berita acara dan catatan perbaikan",
+    { id: "Ujian Pra Proposal", en: "Pre-Proposal Examination" },
+    {
+      id: "Ujian berupa bimbingan atas kerangka berpikir proposal dan tesis",
+      en:
+        "An examination in the form of supervision on the conceptual framework of the proposal " +
+        "and thesis",
+    },
+    {
+      id: "Berita acara dan catatan perbaikan",
+      en: "Minutes of the examination and a record of revisions",
+    },
   ],
   [
     "4",
-    "Penyusunan Proposal",
-    "Mahasiswa menyusun usulan penelitian di bawah bimbingan dosen pembimbing",
-    "Draf proposal disetujui pembimbing",
+    { id: "Penyusunan Proposal", en: "Writing the Proposal" },
+    {
+      id: "Mahasiswa menyusun usulan penelitian di bawah bimbingan dosen pembimbing",
+      en: "The student writes the research proposal under the supervisor's guidance",
+    },
+    {
+      id: "Draf proposal disetujui pembimbing",
+      en: "A draft proposal approved by the supervisor",
+    },
   ],
   [
     "5",
-    "Ujian Usulan Proposal",
-    "Diseminarkan di hadapan sekurang-kurangnya 3 orang penguji",
-    "Berita acara dan nilai proposal",
+    { id: "Ujian Usulan Proposal", en: "Proposal Examination" },
+    {
+      id: "Diseminarkan di hadapan sekurang-kurangnya 3 orang penguji",
+      en: "Presented in a seminar before at least three examiners",
+    },
+    {
+      id: "Berita acara dan nilai proposal",
+      en: "Minutes of the examination and the proposal mark",
+    },
   ],
   [
     "6",
-    "Pelaksanaan Penelitian",
-    "Mahasiswa melakukan penelitian setelah usulan disetujui penguji dan mengurus perizinan penelitian",
-    "Data penelitian",
+    { id: "Pelaksanaan Penelitian", en: "Conducting the Research" },
+    {
+      id:
+        "Mahasiswa melakukan penelitian setelah usulan disetujui penguji dan mengurus " +
+        "perizinan penelitian",
+      en:
+        "The student conducts the research once the proposal is approved by the examiners, and " +
+        "obtains the necessary research permits",
+    },
+    { id: "Data penelitian", en: "Research data" },
   ],
-  ["7", "Penulisan Tesis", "Penulisan di bawah bimbingan dosen pembimbing", "Naskah Tesis"],
+  [
+    "7",
+    { id: "Penulisan Tesis", en: "Writing the Thesis" },
+    {
+      id: "Penulisan di bawah bimbingan dosen pembimbing",
+      en: "Writing carried out under the supervisor's guidance",
+    },
+    { id: "Naskah Tesis", en: "Thesis manuscript" },
+  ],
   [
     "8",
-    "Ujian Tesis",
-    "Seminar terbuka di hadapan sekurang-kurangnya 3 orang penguji",
-    "Berita acara dan nilai Tesis",
+    { id: "Ujian Tesis", en: "Thesis Examination" },
+    {
+      id: "Seminar terbuka di hadapan sekurang-kurangnya 3 orang penguji",
+      en: "An open seminar before at least three examiners",
+    },
+    { id: "Berita acara dan nilai Tesis", en: "Minutes of the examination and the thesis mark" },
   ],
 ];
 
@@ -339,12 +399,16 @@ export const lampiranA = {
    ══════════════════════════════════════════════════════════════════════════ */
 
 export const sorotTesis = [
-  { angka: "4 sks", label: "Bobot tesis" },
-  { angka: "IV", label: "Semester penempuhan" },
-  { angka: "2", label: "Semester waktu penyelesaian" },
-  { angka: "B", label: "Nilai minimum kelulusan" },
+  { angka: "4 sks", label: { id: "Bobot tesis", en: "Thesis credit weight" } },
+  { angka: "IV", label: { id: "Semester penempuhan", en: "Semester taken" } },
+  { angka: "2", label: { id: "Semester waktu penyelesaian", en: "Semesters to complete" } },
+  { angka: "B", label: { id: "Nilai minimum kelulusan", en: "Minimum pass mark" } },
 ];
 
+/**
+ * Alur delapan tahap diturunkan dari tabel tahapan pada transkripsi verbatim,
+ * sehingga terjemahannya cukup ditulis sekali di sana.
+ */
 export const alurTahap = tahapanBaris.map((r) => ({
   tahap: r[1],
   uraian: r[2],
@@ -354,95 +418,195 @@ export const alurTahap = tahapanBaris.map((r) => ({
 export const tigaUjian = [
   {
     tanda: "1",
-    judul: "Ujian Pra Proposal",
-    keterangan: "Bimbingan untuk membangun kerangka berpikir proposal dan tesis.",
-    rincian: ["Setelah judul disetujui Sekretaris Program Studi"],
+    judul: { id: "Ujian Pra Proposal", en: "Pre-Proposal Examination" },
+    keterangan: {
+      id: "Bimbingan untuk membangun kerangka berpikir proposal dan tesis.",
+      en: "Supervision aimed at building the conceptual framework for the proposal and thesis.",
+    },
+    rincian: [
+      {
+        id: "Setelah judul disetujui Sekretaris Program Studi",
+        en: "After the title is approved by the Secretary of the Study Programme",
+      },
+    ],
   },
   {
     tanda: "2",
-    judul: "Ujian Usulan Proposal",
-    keterangan: "Diseminarkan di hadapan sekurang-kurangnya tiga orang penguji.",
-    rincian: ["Lulus bila memperoleh nilai sekurang-kurangnya B"],
+    judul: { id: "Ujian Usulan Proposal", en: "Thesis Proposal Examination" },
+    keterangan: {
+      id: "Diseminarkan di hadapan sekurang-kurangnya tiga orang penguji.",
+      en: "Presented in a seminar before at least three examiners.",
+    },
+    rincian: [
+      {
+        id: "Lulus bila memperoleh nilai sekurang-kurangnya B",
+        en: "Passed on obtaining a mark of at least B",
+      },
+    ],
   },
   {
     tanda: "3",
-    judul: "Ujian Tesis",
-    keterangan: "Seminar terbuka di hadapan sekurang-kurangnya tiga orang penguji.",
-    rincian: ["Lulus bila memperoleh nilai sekurang-kurangnya B"],
+    judul: { id: "Ujian Tesis", en: "Thesis Examination" },
+    keterangan: {
+      id: "Seminar terbuka di hadapan sekurang-kurangnya tiga orang penguji.",
+      en: "An open seminar before at least three examiners.",
+    },
+    rincian: [
+      {
+        id: "Lulus bila memperoleh nilai sekurang-kurangnya B",
+        en: "Passed on obtaining a mark of at least B",
+      },
+    ],
   },
 ];
 
 export const praProposalRingkas = {
   isi: [
-    "Judul penelitian",
-    "Latar belakang singkat yang menjelaskan ketidaksesuaian *das sein* dan *das sollen*",
-    "Rumusan masalah",
-    "Kerangka teori",
-    "Metode pendekatan yang akan digunakan",
+    { id: "Judul penelitian", en: "The research title" },
+    {
+      id: "Latar belakang singkat yang menjelaskan ketidaksesuaian *das sein* dan *das sollen*",
+      en: "A brief background explaining the mismatch between das sein and das sollen",
+    },
+    { id: "Rumusan masalah", en: "The research questions" },
+    { id: "Kerangka teori", en: "The theoretical framework" },
+    { id: "Metode pendekatan yang akan digunakan", en: "The approach to be used" },
   ],
   catatan: [
     {
       tanda: "A",
-      judul: "Syarat Pelaksanaan",
-      keterangan:
-        "Judul penelitian telah disetujui Sekretaris Program Studi dan diketahui Ketua Program Studi.",
+      judul: { id: "Syarat Pelaksanaan", en: "Conditions for Holding the Examination" },
+      keterangan: {
+        id:
+          "Judul penelitian telah disetujui Sekretaris Program Studi dan diketahui Ketua " +
+          "Program Studi.",
+        en:
+          "The research title has been approved by the Secretary of the Study Programme and " +
+          "noted by the Head of the Study Programme.",
+      },
     },
     {
       tanda: "B",
-      judul: "Setelah Ujian",
-      keterangan:
-        "Sekretaris Program Studi menunjuk pembimbing yang akan membantu penulisan Proposal Tesis dan Tesis.",
+      judul: { id: "Setelah Ujian", en: "After the Examination" },
+      keterangan: {
+        id:
+          "Sekretaris Program Studi menunjuk pembimbing yang akan membantu penulisan Proposal " +
+          "Tesis dan Tesis.",
+        en:
+          "The Secretary of the Study Programme appoints the supervisor who will assist with " +
+          "writing the Thesis Proposal and the Thesis.",
+      },
     },
     {
       tanda: "C",
-      judul: "Jalur Khusus",
-      keterangan:
-        "Pemegang ijazah Spesialis Kenotariatan (Sp.N.) atau Notaris dapat mengajukan judul setelah Semester I.",
+      judul: { id: "Jalur Khusus", en: "Special Route" },
+      keterangan: {
+        id:
+          "Pemegang ijazah Spesialis Kenotariatan (Sp.N.) atau Notaris dapat mengajukan judul " +
+          "setelah Semester I.",
+        en:
+          "Holders of a Notarial Specialist (Sp.N.) qualification, or practising Notaries, may " +
+          "submit a title after Semester I.",
+      },
     },
   ],
 };
 
 export const proposalRingkas = {
-  penguji:
-    "Diseminarkan di hadapan sekurang-kurangnya 3 orang penguji: 2 orang bukan pembimbing sebagai Ketua Tim Penguji dan anggota, serta 1 orang pembimbing sebagai anggota.",
+  penguji: {
+    id:
+      "Diseminarkan di hadapan sekurang-kurangnya 3 orang penguji: 2 orang bukan pembimbing " +
+      "sebagai Ketua Tim Penguji dan anggota, serta 1 orang pembimbing sebagai anggota.",
+    en:
+      "Presented in a seminar before at least three examiners: two non-supervisors serving as " +
+      "Chair of the Examining Board and as a member, and one supervisor serving as a member.",
+  },
   dinilai: [
-    "Latar belakang dan rumusan masalah",
-    "Tujuan penulisan",
-    "Kerangka konseptual dan kerangka teori",
-    "Metode penelitian",
-    "Sistematika penulisan dan kepustakaan",
-    "Penguasaan materi Ilmu Kenotariatan",
+    {
+      id: "Latar belakang dan rumusan masalah",
+      en: "Background and formulation of the research questions",
+    },
+    { id: "Tujuan penulisan", en: "Aims of the study" },
+    {
+      id: "Kerangka konseptual dan kerangka teori",
+      en: "Conceptual and theoretical frameworks",
+    },
+    { id: "Metode penelitian", en: "Research methods" },
+    {
+      id: "Sistematika penulisan dan kepustakaan",
+      en: "Structure of the writing and the bibliography",
+    },
+    {
+      id: "Penguasaan materi Ilmu Kenotariatan",
+      en: "Command of the subject matter of notarial science",
+    },
   ],
 };
 
 export const tesisSyaratRingkas = [
-  "Seluruh mata kuliah telah lulus",
-  "Penulisan tesis disetujui pembimbing dan diketahui Ketua Program Studi",
-  "Sertifikat kegiatan ilmiah dan Kuliah Kerja Lapangan",
-  "Sertifikat TOEFL LIKE dengan nilai sekurang-kurangnya 525",
-  "Publikasi karya ilmiah pada jurnal cetak maupun daring",
-  "Rekomendasi Lembaga Penjamin Mutu Tesis",
-  "Kewajiban administrasi dan keuangan telah diselesaikan",
-  "Sertifikat Magang sesuai Panduan Magang dan Ujian Magang",
+  { id: "Seluruh mata kuliah telah lulus", en: "All courses have been passed" },
+  {
+    id: "Penulisan tesis disetujui pembimbing dan diketahui Ketua Program Studi",
+    en:
+      "The thesis has been approved by the supervisor and noted by the Head of the Study " +
+      "Programme",
+  },
+  {
+    id: "Sertifikat kegiatan ilmiah dan Kuliah Kerja Lapangan",
+    en: "Certificates for academic events and the field study programme",
+  },
+  {
+    id: "Sertifikat TOEFL LIKE dengan nilai sekurang-kurangnya 525",
+    en: "A TOEFL-LIKE certificate with a score of at least 525",
+  },
+  {
+    id: "Publikasi karya ilmiah pada jurnal cetak maupun daring",
+    en: "A scholarly publication in a print or online journal",
+  },
+  {
+    id: "Rekomendasi Lembaga Penjamin Mutu Tesis",
+    en: "A recommendation from the Thesis Quality Assurance Body",
+  },
+  {
+    id: "Kewajiban administrasi dan keuangan telah diselesaikan",
+    en: "Administrative and financial obligations have been settled",
+  },
+  {
+    id: "Sertifikat Magang sesuai Panduan Magang dan Ujian Magang",
+    en:
+      "An Internship Certificate in accordance with the Internship and Internship Examination " +
+      "Guidelines",
+  },
 ];
 
 export const timPengujiRingkas = [
   {
     tanda: "1",
-    judul: "Ketua Penguji",
-    keterangan:
-      "Berasal dari luar komisi pembimbing atau penguji eksternal yang sesuai kompetensi dan memenuhi syarat kepangkatan akademik.",
+    judul: { id: "Ketua Penguji", en: "Chair of Examiners" },
+    keterangan: {
+      id:
+        "Berasal dari luar komisi pembimbing atau penguji eksternal yang sesuai kompetensi dan " +
+        "memenuhi syarat kepangkatan akademik.",
+      en:
+        "Drawn from outside the supervisory committee, or an external examiner of appropriate " +
+        "competence meeting the academic rank requirements.",
+    },
   },
   {
     tanda: "2",
-    judul: "Dua Anggota",
-    keterangan: "Terdiri atas Pembimbing dan Penguji.",
+    judul: { id: "Dua Anggota", en: "Two Members" },
+    keterangan: {
+      id: "Terdiri atas Pembimbing dan Penguji.",
+      en: "Comprising the Supervisor and an Examiner.",
+    },
   },
   {
     tanda: "3",
-    judul: "Syarat Penguji",
-    keterangan:
-      "Jabatan fungsional sekurang-kurangnya Lektor dan bergelar Doktor (S3) Ilmu Hukum.",
+    judul: { id: "Syarat Penguji", en: "Examiner Requirements" },
+    keterangan: {
+      id: "Jabatan fungsional sekurang-kurangnya Lektor dan bergelar Doktor (S3) Ilmu Hukum.",
+      en:
+        "An academic rank of at least Lector and a Doctorate (S3) in Law.",
+    },
   },
 ];
 
@@ -450,51 +614,90 @@ export const komponenPenilaian = [
   // Urutan mengikuti Tabel 6.3 dokumen sumber, bukan diurutkan menurut bobot,
   // agar penomorannya tetap cocok saat dibandingkan dengan dokumen.
   {
-    nama: "Konsistensi konstruksi pemikiran",
+    nama: { id: "Konsistensi konstruksi pemikiran", en: "Consistency of reasoning" },
     bobot: 25,
-    aspek: "Keterhubungan latar belakang, rumusan masalah, pembahasan, dan simpulan",
+    aspek: {
+      id: "Keterhubungan latar belakang, rumusan masalah, pembahasan, dan simpulan",
+      en: "Coherence between background, research questions, discussion, and conclusions",
+    },
   },
   {
-    nama: "Orisinalitas hasil penelitian",
+    nama: { id: "Orisinalitas hasil penelitian", en: "Originality of findings" },
     bobot: 20,
-    aspek: "Kebaruan dan kontribusi terhadap ilmu kenotariatan",
+    aspek: {
+      id: "Kebaruan dan kontribusi terhadap ilmu kenotariatan",
+      en: "Novelty and contribution to notarial scholarship",
+    },
   },
   {
-    nama: "Metode penulisan",
+    nama: { id: "Metode penulisan", en: "Method and writing" },
     bobot: 15,
-    aspek: "Ketepatan metode penelitian hukum dan teknik penulisan ilmiah",
+    aspek: {
+      id: "Ketepatan metode penelitian hukum dan teknik penulisan ilmiah",
+      en: "Soundness of legal research method and scholarly writing technique",
+    },
   },
   {
-    nama: "Kajian pustaka",
+    nama: { id: "Kajian pustaka", en: "Literature review" },
     bobot: 15,
-    aspek: "Kemutakhiran, relevansi, dan kedalaman rujukan",
+    aspek: {
+      id: "Kemutakhiran, relevansi, dan kedalaman rujukan",
+      en: "Currency, relevance, and depth of the sources",
+    },
   },
   {
-    nama: "Penguasaan materi",
+    nama: { id: "Penguasaan materi", en: "Command of the subject" },
     bobot: 25,
-    aspek: "Ketepatan dan kedalaman jawaban atas pertanyaan penguji",
+    aspek: {
+      id: "Ketepatan dan kedalaman jawaban atas pertanyaan penguji",
+      en: "Accuracy and depth of answers to the examiners’ questions",
+    },
   },
 ];
 
 export const tataTertibRingkas = [
   {
     tanda: "L",
-    judul: "Ujian Luring",
+    judul: { id: "Ujian Luring", en: "On-campus Examination" },
     rincian: [
-      "Hadir 15 menit sebelum ujian dimulai",
-      "Pria: baju putih, berdasi, celana hitam, jas almamater",
-      "Wanita: baju putih, rok hitam, jas almamater, kerudung merah",
-      "Menyiapkan naskah tesis dan bahan presentasi bagi seluruh penguji",
+      {
+        id: "Hadir 15 menit sebelum ujian dimulai",
+        en: "Arrive 15 minutes before the examination begins",
+      },
+      {
+        id: "Pria: baju putih, berdasi, celana hitam, jas almamater",
+        en: "Men: white shirt, tie, black trousers, university blazer",
+      },
+      {
+        id: "Wanita: baju putih, rok hitam, jas almamater, kerudung merah",
+        en: "Women: white blouse, black skirt, university blazer, red headscarf",
+      },
+      {
+        id: "Menyiapkan naskah tesis dan bahan presentasi bagi seluruh penguji",
+        en: "Prepare the thesis manuscript and presentation materials for every examiner",
+      },
     ],
   },
   {
     tanda: "D",
-    judul: "Ujian Daring",
+    judul: { id: "Ujian Daring", en: "Online Examination" },
     rincian: [
-      "Jadwal diterima 3 hari sebelum ujian",
-      "Tautan *zoom meeting* diterima 30 menit sebelum ujian",
-      "Menggunakan nama lengkap dan wajib menyalakan video",
-      "Pakaian mengikuti ketentuan ujian luring",
+      {
+        id: "Jadwal diterima 3 hari sebelum ujian",
+        en: "The schedule is received three days before the examination",
+      },
+      {
+        id: "Tautan *zoom meeting* diterima 30 menit sebelum ujian",
+        en: "The Zoom meeting link is received 30 minutes before the examination",
+      },
+      {
+        id: "Menggunakan nama lengkap dan wajib menyalakan video",
+        en: "Use your full name and keep your camera on",
+      },
+      {
+        id: "Pakaian mengikuti ketentuan ujian luring",
+        en: "Dress follows the rules for on-campus examinations",
+      },
     ],
   },
 ];
@@ -502,20 +705,108 @@ export const tataTertibRingkas = [
 export const yudisiumRingkas = [
   {
     tanda: "1",
-    judul: "Perbaikan",
-    keterangan:
-      "Lulus dengan perbaikan wajib menyelesaikan revisi dan memperoleh tanda tangan seluruh penguji paling lambat 30 hari kalender setelah ujian.",
+    judul: { id: "Perbaikan", en: "Revisions" },
+    keterangan: {
+      id:
+        "Lulus dengan perbaikan wajib menyelesaikan revisi dan memperoleh tanda tangan seluruh " +
+        "penguji paling lambat 30 hari kalender setelah ujian.",
+      en:
+        "A pass with revisions requires the revisions to be completed and signed off by every " +
+        "examiner no later than 30 calendar days after the examination.",
+    },
   },
   {
     tanda: "2",
-    judul: "Yudisium",
-    keterangan:
-      "Keputusan rapat akademik tentang kelulusan beserta predikatnya, diumumkan setiap akhir semester.",
+    judul: { id: "Yudisium", en: "Yudisium (Final Assessment Board)" },
+    keterangan: {
+      id:
+        "Keputusan rapat akademik tentang kelulusan beserta predikatnya, diumumkan setiap akhir " +
+        "semester.",
+      en:
+        "The academic board’s decision on graduation and its distinction, announced at the end " +
+        "of each semester.",
+    },
   },
   {
     tanda: "3",
-    judul: "Predikat Cum Laude",
-    keterangan:
-      "Hanya bagi yang menyelesaikan studi paling lama 2 tahun dengan nilai Ujian Tesis A, dihitung sejak pendaftaran resmi.",
+    judul: { id: "Predikat Cum Laude", en: "Cum Laude Distinction" },
+    keterangan: {
+      id:
+        "Hanya bagi yang menyelesaikan studi paling lama 2 tahun dengan nilai Ujian Tesis A, " +
+        "dihitung sejak pendaftaran resmi.",
+      en:
+        "Only for those completing their studies within two years with a grade of A in the " +
+        "Thesis Examination, counted from official registration.",
+    },
   },
 ];
+
+/** Teks halaman Panduan Ujian Tesis dan ketiga tab anaknya. */
+export const halamanTesis = {
+  meta: {
+    title: {
+      id: "Panduan Ujian Tesis | MKn UNISSULA",
+      en: "Thesis Examination Guidelines | MKn UNISSULA",
+    },
+    description: {
+      id:
+        "Panduan ujian pra proposal, usulan proposal, dan tesis Program Studi Magister " +
+        "Kenotariatan UNISSULA — alur, syarat, tim penguji, dan penilaian.",
+      en:
+        "Guidelines for the pre-proposal, proposal, and thesis examinations at the UNISSULA " +
+        "Master of Notarial Law Study Programme — stages, requirements, examining board, and " +
+        "assessment.",
+    },
+  },
+  tab: {
+    praProposal: { id: "Pra Proposal", en: "Pre-Proposal" },
+    proposal: { id: "Proposal", en: "Proposal" },
+    tesis: { id: "Tesis", en: "Thesis" },
+  },
+  seksi: {
+    alur: { id: "Alur Delapan Tahap", en: "The Eight Stages" },
+    tigaUjian: { id: "Tiga Ujian", en: "Three Examinations" },
+    isiPraProposal: { id: "Isi Pra Proposal", en: "Contents of the Pre-Proposal" },
+    isiPraProposalKeterangan: {
+      id:
+        "Pra proposal adalah bimbingan untuk membangun kerangka berpikir sebelum proposal " +
+        "disusun. Naskahnya memuat lima hal berikut.",
+      en:
+        "The pre-proposal is a supervision stage for building the conceptual framework before " +
+        "the proposal is written. Its text covers the following five points.",
+    },
+    ketentuanPelaksanaan: { id: "Ketentuan Pelaksanaan", en: "Rules of Procedure" },
+    timPenguji: { id: "Susunan Tim Penguji", en: "Composition of the Examining Board" },
+    yangDinilai: { id: "Yang Dinilai", en: "What Is Assessed" },
+    yangDinilaiKeterangan: {
+      id:
+        "Penilaian mencakup kesatuan konstruksi pemikiran serta penguasaan materi. Mahasiswa " +
+        "dinyatakan lulus apabila memperoleh nilai sekurang-kurangnya B.",
+      en:
+        "Assessment covers the coherence of the reasoning and command of the subject matter. A " +
+        "student passes on obtaining a mark of at least B.",
+    },
+    syaratTesis: { id: "Delapan Syarat Ujian Tesis", en: "Eight Requirements for the Thesis Examination" },
+    syaratTesisKeterangan: {
+      id: "Ujian tesis hanya dapat dilaksanakan apabila seluruh syarat berikut telah dipenuhi.",
+      en: "The thesis examination may be held only once all of the following are satisfied.",
+    },
+    timPengujiTesis: { id: "Tim Penguji", en: "Examining Board" },
+    timPengujiTesisKeterangan: {
+      id: "Ujian berbentuk seminar terbuka di hadapan sekurang-kurangnya tiga orang penguji.",
+      en: "The examination takes the form of an open seminar before at least three examiners.",
+    },
+    komponen: { id: "Komponen Penilaian", en: "Assessment Components" },
+    komponenKeterangan: {
+      id:
+        "Lima komponen penilaian beserta bobotnya. Mahasiswa dinyatakan lulus apabila " +
+        "memperoleh nilai sekurang-kurangnya B.",
+      en:
+        "The five assessment components and their weights. A student passes on obtaining a mark " +
+        "of at least B.",
+    },
+    tataTertib: { id: "Tata Tertib Ujian", en: "Examination Rules" },
+    yudisium: { id: "Perbaikan, Yudisium, dan Predikat", en: "Revisions, Yudisium, and Distinction" },
+  },
+  namaDokumen: { id: "Panduan Ujian Tesis", en: "Thesis Examination Guidelines" },
+};

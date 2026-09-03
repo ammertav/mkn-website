@@ -1,4 +1,5 @@
 import { Helmet } from "react-helmet-async";
+import { useT } from "../../i18n/languageContext";
 import {
   KartuSorot,
   JudulSeksi,
@@ -27,17 +28,17 @@ import {
   contohCatatan,
   rubrikKolom,
   rubrikBaris,
+  halaman,
 } from "../../data/akademik/asesmenData";
 
 export default function Asesmen() {
+  const t = useT();
+
   return (
     <>
       <Helmet>
-        <title>Asesmen | MKn UNISSULA</title>
-        <meta
-          name="description"
-          content="Ketentuan penyusunan halaman asesmen Rencana Pembelajaran Semester Magister Kenotariatan UNISSULA — teknik asesmen, pemetaan CPL, rubrik, dan bukti asesmen."
-        />
+        <title>{t(halaman.meta.title)}</title>
+        <meta name="description" content={t(halaman.meta.description)} />
       </Helmet>
 
       <div className="space-y-12 sm:space-y-14">
@@ -47,44 +48,39 @@ export default function Asesmen() {
             ACADEMIC
           </span>
           <h1 className="text-3xl sm:text-4xl md:text-[42px] font-heading font-bold text-heading tracking-normal">
-            Asesmen
+            {t(halaman.judul)}
           </h1>
           <div className="w-full h-[2px] bg-primary mt-4 mb-5" />
-          <p className="text-base text-body leading-relaxed max-w-5xl">
-            Halaman asesmen merupakan bagian wajib Rencana Pembelajaran Semester. Ketentuan berikut
-            mengatur cara setiap mata kuliah merencanakan pengukuran Sub-CPMK dan CPL, mulai dari
-            pemilihan teknik, penyusunan rubrik, penetapan bobot, hingga bukti asesmen yang
-            dihimpun.
-          </p>
+          <p className="text-base text-body leading-relaxed max-w-5xl">{t(halaman.intro)}</p>
         </div>
 
         <KartuSorot butir={sorotAsesmen} />
 
         <section className="space-y-5">
-          <JudulSeksi judul="Kedudukan Halaman Asesmen" />
+          <JudulSeksi judul={halaman.seksi.kedudukan} />
           <Klausul butir={kedudukan} />
         </section>
 
         <section className="space-y-5">
           <JudulSeksi
-            judul="Delapan Komponen Halaman Asesmen"
-            keterangan="Setiap halaman asesmen sekurang-kurangnya memuat komponen berikut."
+            judul={halaman.seksi.komponen}
+            keterangan={halaman.seksi.komponenKeterangan}
           />
           <TabelPanduan kolom={komponenKolom} baris={komponenBaris} />
         </section>
 
         <section className="space-y-5">
           <JudulSeksi
-            judul="Teknik dan Instrumen Asesmen"
-            keterangan="Sembilan teknik yang digunakan pada Kurikulum OBE Tahun 2026 beserta instrumen dan penggunaannya."
+            judul={halaman.seksi.teknik}
+            keterangan={halaman.seksi.teknikKeterangan}
           />
           <TabelPanduan kolom={teknikKolom} baris={teknikBaris} />
         </section>
 
         <section className="space-y-5">
           <JudulSeksi
-            judul="Pemetaan Teknik Asesmen terhadap CPL"
-            keterangan="Teknik asesmen utama yang digunakan untuk mengukur setiap Capaian Pembelajaran Lulusan."
+            judul={halaman.seksi.pemetaan}
+            keterangan={halaman.seksi.pemetaanKeterangan}
           />
           <KartuRingkas butir={pemetaanCpl} kolom={2} />
           <Klausul butir={catatanBukti} />
@@ -92,43 +88,43 @@ export default function Asesmen() {
 
         <section className="space-y-5">
           <JudulSeksi
-            judul="Keselarasan Konstruktif"
-            keterangan="Kaidah yang menjaga agar penilaian benar-benar mengukur capaian yang dirumuskan."
+            judul={halaman.seksi.keselarasan}
+            keterangan={halaman.seksi.keselarasanKeterangan}
           />
           <Klausul butir={keselarasan} />
           <TabelPanduan kolom={bloomKolom} baris={bloomBaris} />
         </section>
 
         <section className="space-y-5">
-          <JudulSeksi judul="Ketentuan Rubrik" />
+          <JudulSeksi judul={halaman.seksi.rubrik} />
           <Klausul butir={ketentuanRubrik} />
         </section>
 
         <section className="space-y-5">
-          <JudulSeksi judul="Bobot dan Rekonsiliasi" />
+          <JudulSeksi judul={halaman.seksi.bobot} />
           <Klausul butir={bobotRekonsiliasi} />
         </section>
 
         <section className="space-y-5">
-          <JudulSeksi judul="Ketentuan Penulisan" />
+          <JudulSeksi judul={halaman.seksi.penulisan} />
           <Klausul butir={ketentuanPenulisan} />
         </section>
 
         <section className="space-y-5">
-          <JudulSeksi judul="Contoh Halaman Asesmen Mata Kuliah" keterangan={contohKeterangan} />
+          <JudulSeksi judul={halaman.seksi.contoh} keterangan={contohKeterangan} />
           <TabelPanduan kolom={contohKolom} baris={contohBaris} />
-          <p className="text-sm text-body leading-relaxed max-w-5xl">{contohCatatan}</p>
+          <p className="text-sm text-body leading-relaxed max-w-5xl">{t(contohCatatan)}</p>
         </section>
 
         <section className="space-y-5">
           <JudulSeksi
-            judul="Rubrik Analitik Penilaian Legal Drafting Akta"
-            keterangan="Berlaku seragam pada seluruh mata kuliah rumpun Teknik Pembuatan Akta dan Laboratorium Akta."
+            judul={halaman.seksi.rubrikAnalitik}
+            keterangan={halaman.seksi.rubrikAnalitikKeterangan}
           />
           <TabelPanduan kolom={rubrikKolom} baris={rubrikBaris} />
         </section>
 
-        <CatatanDokumen nama="Materi Halaman Asesmen" />
+        <CatatanDokumen nama={halaman.namaDokumen} />
       </div>
     </>
   );

@@ -6,6 +6,7 @@ import {
   kkniDescriptors,
   cplStats,
   cplItems,
+  halaman,
 } from "../../data/akademik/capaianPembelajaranData";
 
 export default function CapaianPembelajaran() {
@@ -14,11 +15,8 @@ export default function CapaianPembelajaran() {
   return (
     <>
       <Helmet>
-        <title>Capaian Pembelajaran Lulusan | MKn UNISSULA</title>
-        <meta
-          name="description"
-          content="Capaian Pembelajaran Lulusan (CPL) Program Studi Magister Kenotariatan (MKn) UNISSULA, disusun mengacu pada KKNI Level 8."
-        />
+        <title>{t(halaman.meta.title)}</title>
+        <meta name="description" content={t(halaman.meta.description)} />
       </Helmet>
 
       <div className="space-y-10">
@@ -28,7 +26,7 @@ export default function CapaianPembelajaran() {
             ACADEMIC
           </span>
           <h1 className="text-3xl sm:text-4xl md:text-[42px] font-heading font-bold text-heading tracking-normal">
-            Capaian Pembelajaran Lulusan
+            {t(halaman.judul)}
           </h1>
           <div className="w-full h-[2px] bg-primary mt-4 mb-5" />
           <p className="text-base text-body leading-relaxed max-w-5xl">
@@ -71,7 +69,7 @@ export default function CapaianPembelajaran() {
         <div className="space-y-4">
           <div>
             <h2 className="text-xl sm:text-2xl font-heading font-medium text-heading tracking-normal">
-              Rumusan Capaian Pembelajaran Lulusan
+              {t(halaman.judulTabel)}
             </h2>
             <div className="w-full h-[1.5px] bg-heading mt-2.5" />
           </div>
@@ -81,13 +79,13 @@ export default function CapaianPembelajaran() {
               <thead>
                 <tr className="border-b-2 border-heading">
                   <th className="py-3 px-5 sm:px-6 text-[11px] font-bold tracking-wider uppercase text-heading w-24">
-                    NO
+                    {t(halaman.kolom.no)}
                   </th>
                   <th className="py-3 px-5 sm:px-6 text-[11px] font-bold tracking-wider uppercase text-heading w-1/2">
-                    DESKRIPSI CAPAIAN PEMBELAJARAN LULUSAN
+                    {t(halaman.kolom.deskripsi)}
                   </th>
                   <th className="py-3 px-5 sm:px-6 text-[11px] font-bold tracking-wider uppercase text-heading">
-                    KKNI
+                    {t(halaman.kolom.kkni)}
                   </th>
                 </tr>
               </thead>

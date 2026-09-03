@@ -1,7 +1,7 @@
 import { Helmet } from "react-helmet-async";
 import { useT } from "../../i18n/languageContext";
 import RichText from "../../components/ui/RichText";
-import { timeline } from "../../data/profil/sejarahData";
+import { timeline, halaman } from "../../data/profil/sejarahData";
 
 export default function Sejarah() {
   const t = useT();
@@ -9,41 +9,30 @@ export default function Sejarah() {
   return (
     <>
       <Helmet>
-        <title>Sejarah & Latar Belakang | MKn UNISSULA</title>
-        <meta
-          name="description"
-          content="Sejarah pendirian dan perjalanan akreditasi Program Studi Magister Kenotariatan Fakultas Hukum UNISSULA — dari pendirian hingga peringkat Unggul BAN-PT dan ASIC Premier."
-        />
+        <title>{t(halaman.meta.title)}</title>
+        <meta name="description" content={t(halaman.meta.description)} />
       </Helmet>
 
       <div className="space-y-16 sm:space-y-20">
         {/* Latar belakang pendirian */}
         <section className="space-y-4">
           <span className="text-xs font-semibold tracking-wider text-primary uppercase block">
-            SEJARAH / LATAR BELAKANG
+            {t(halaman.eyebrow)}
           </span>
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-start pt-2">
             <div className="lg:col-span-5">
               <h2 className="font-heading font-normal text-3xl sm:text-4xl lg:text-[40px] text-heading leading-tight">
-                Latar Belakang Pendirian Program Studi
+                {t(halaman.judulLatar)}
               </h2>
             </div>
 
             <div className="lg:col-span-7 space-y-4 text-sm sm:text-base text-body leading-relaxed">
-              <p>
-                Gerakan sadar hukum yang dicanangkan pemerintah sejak era Orde Baru semakin
-                berimplikasi positif. Masyarakat semakin teliti dan sadar betapa hukum menjadi aspek
-                penting dalam membangun relasi, terutama menyangkut hal-hal yang bersifat kerja
-                kolektif dan bersentuhan dengan kepentingan publik, transaksi yang terkait dengan hak
-                dan kewajiban.
-              </p>
-              <p>
-                Oleh karena itu, kebutuhan akan SDM yang handal di bidang ilmu Kenotariatan, dengan
-                kualifikasi penguasaan pengetahuan teoretik dan keterampilan dalam pembuatan bermacam
-                perjanjian/kontrak dan akta semakin meningkat seiring dengan meningkatkan pemahaman
-                hukum masyarakat.
-              </p>
+              {halaman.latarBelakang.map((paragraf, idx) => (
+                <p key={idx}>
+                  <RichText>{t(paragraf)}</RichText>
+                </p>
+              ))}
             </div>
           </div>
         </section>
@@ -52,7 +41,7 @@ export default function Sejarah() {
         <section className="space-y-6">
           <div>
             <h2 className="font-heading font-normal text-3xl sm:text-4xl text-heading tracking-normal">
-              Perjalanan Program Studi
+              {t(halaman.judulLinimasa)}
             </h2>
             <div className="w-full h-[1.5px] bg-heading mt-3 mb-8" />
           </div>

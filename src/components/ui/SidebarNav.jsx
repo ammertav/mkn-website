@@ -1,8 +1,10 @@
 import { useLocation } from "react-router-dom";
 import SidebarLink from "./SidebarLink";
 import { navLinks } from "../../data/navLinks";
+import { useT } from "../../i18n/languageContext";
 
 export default function SidebarNav({ title, menus, contact, className = "" }) {
+  const t = useT();
   const { pathname } = useLocation();
 
   // Cari parent dari navLinks berdasarkan pathname (misal /akademik -> ACADEMIC)
@@ -12,7 +14,7 @@ export default function SidebarNav({ title, menus, contact, className = "" }) {
 
   // Jika title tidak diberikan, otomatis gunakan "MENU {CURRENT_PARENT_TITLE}"
   const displayTitle =
-    title ?? (currentParent ? `MENU ${currentParent.title.toUpperCase()}` : null);
+    title ?? (currentParent ? `MENU ${t(currentParent.title).toUpperCase()}` : null);
 
   // Ambil menu anak langsung dari struktur pohon navLinks
   const navItems = menus ?? currentParent?.children ?? [];
@@ -41,7 +43,7 @@ export default function SidebarNav({ title, menus, contact, className = "" }) {
       {contact && (
         <div className="pt-5 border-t border-gray-200 space-y-3">
           <p className="text-[11px] uppercase tracking-widest font-semibold text-subheading-sidebar">
-            {contact.title}
+            {t(contact.title)}
           </p>
           <div className="text-[13px] text-body space-y-1 leading-relaxed">
             {contact.lines.map((line, i) =>
