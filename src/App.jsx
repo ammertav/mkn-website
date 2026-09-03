@@ -21,12 +21,15 @@ const Kurikulum = lazy(() => import("./pages/Akademik/Kurikulum"));
 const ProfilLulusan = lazy(() => import("./pages/Akademik/ProfilLulusan"));
 const CapaianPembelajaran = lazy(() => import("./pages/Akademik/CapaianPembelajaran"));
 const Panduan = lazy(() => import("./pages/Akademik/Panduan"));
+const Rps = lazy(() => import("./pages/Akademik/Rps"));
 const PanduanEvaluasi = lazy(() => import("./pages/Akademik/PanduanEvaluasi"));
 const Asesmen = lazy(() => import("./pages/Akademik/Asesmen"));
 const PanduanUjian = lazy(() => import("./pages/Akademik/PanduanUjian"));
 const UtsUas = lazy(() => import("./pages/Akademik/UtsUas"));
-const Magang = lazy(() => import("./pages/Akademik/Magang"));
 const Tesis = lazy(() => import("./pages/Akademik/Tesis"));
+const TesisPraProposal = lazy(() => import("./pages/Akademik/TesisPraProposal"));
+const TesisProposal = lazy(() => import("./pages/Akademik/TesisProposal"));
+const TesisUjian = lazy(() => import("./pages/Akademik/TesisUjian"));
 const Kalender = lazy(() => import("./pages/Akademik/Kalender"));
 
 // Download page
@@ -106,18 +109,31 @@ export default function App() {
           <Route index element={<Navigate to="profil-lulusan" replace />} />
           <Route path="profil-lulusan" element={<ProfilLulusan />} />
           <Route path="capaian-pembelajaran" element={<CapaianPembelajaran />} />
-          <Route path="kurikulum" element={<Navigate to="reguler" replace />} />
-          <Route path="kurikulum/reguler" element={<Kurikulum />} />
-          <Route path="kurikulum/internasional" element={<Kurikulum />} />
-          <Route path="kurikulum/*" element={<Navigate to="reguler" replace />} />
+          <Route path="kurikulum" element={<Kurikulum />} />
+          {/* Alias lama: kurikulum tidak lagi dipisah reguler/internasional */}
+          <Route path="kurikulum/*" element={<Navigate to="../kurikulum" replace />} />
           <Route path="panduan-akademik" element={<Panduan />} />
-          <Route path="panduan-evaluasi" element={<PanduanEvaluasi />} />
-          <Route path="asesmen" element={<Asesmen />} />
+          {/* RPS & Evaluasi Pembelajaran — tiga halaman anak, tanpa tab */}
+          <Route path="pembelajaran">
+            <Route index element={<Navigate to="rps" replace />} />
+            <Route path="rps" element={<Rps />} />
+            <Route path="panduan-evaluasi" element={<PanduanEvaluasi />} />
+            <Route path="asesmen" element={<Asesmen />} />
+          </Route>
+          {/* Alias lama */}
+          <Route path="panduan-evaluasi" element={<Navigate to="../pembelajaran/panduan-evaluasi" replace />} />
+          <Route path="asesmen" element={<Navigate to="../pembelajaran/asesmen" replace />} />
           <Route path="panduan-ujian" element={<PanduanUjian />}>
             <Route index element={<Navigate to="uts-uas" replace />} />
             <Route path="uts-uas" element={<UtsUas />} />
-            <Route path="magang" element={<Magang />} />
-            <Route path="tesis" element={<Tesis />} />
+            <Route path="tesis" element={<Tesis />}>
+              <Route index element={<Navigate to="pra-proposal" replace />} />
+              <Route path="pra-proposal" element={<TesisPraProposal />} />
+              <Route path="proposal" element={<TesisProposal />} />
+              <Route path="ujian-tesis" element={<TesisUjian />} />
+            </Route>
+            {/* Alias lama: Magang tidak lagi menjadi sub-menu Panduan Ujian */}
+            <Route path="magang" element={<Navigate to="../tesis" replace />} />
             {/* Alias lama: istilah diubah dari Skripsi ke Tesis */}
             <Route path="skripsi" element={<Navigate to="../tesis" replace />} />
           </Route>
@@ -202,8 +218,8 @@ export default function App() {
         <Route path="/visi-misi" element={<Navigate to="/profil/visi-misi" replace />} />
         <Route path="/tujuan" element={<Navigate to="/profil/tujuan" replace />} />
         <Route path="/struktur-organisasi" element={<Navigate to="/profil/struktur-organisasi" replace />} />
-        <Route path="/kurikulum" element={<Navigate to="/akademik/kurikulum/reguler" replace />} />
-        <Route path="/kurikulum/*" element={<Navigate to="/akademik/kurikulum/reguler" replace />} />
+        <Route path="/kurikulum" element={<Navigate to="/akademik/kurikulum" replace />} />
+        <Route path="/kurikulum/*" element={<Navigate to="/akademik/kurikulum" replace />} />
         <Route path="/organisasi-mahasiswa" element={<Navigate to="/mahasiswa/organisasi" replace />} />
         <Route path="/unit-kegiatan-mahasiswa" element={<Navigate to="/mahasiswa/organisasi" replace />} />
         <Route path="/dosen" element={<Navigate to="/staff/dosen" replace />} />

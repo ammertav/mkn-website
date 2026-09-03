@@ -1,18 +1,14 @@
 import { Helmet } from "react-helmet-async";
-import { FiBookOpen, FiDownload } from "react-icons/fi";
-import skKurikulumPdf from "../../assets/pdf/SK-REKTOR-Kurikulum-MKN-2023.pdf";
-
-const curriculumDocuments = [
-  {
-    id: 1,
-    title: "Surat Keputusan Rektor tentang Kurikulum Program Studi Magister Kenotariatan",
-    desc: "Dokumen resmi Surat Keputusan (SK) Rektor Universitas Islam Sultan Agung tentang penetapan, struktur kurikulum, sebaran mata kuliah, beban SKS, dan silabus Program Studi Magister Kenotariatan (MKn).",
-    fileType: "PDF",
-    fileSize: "1.4 MB",
-    downloadUrl: skKurikulumPdf,
-    fileName: "SK-REKTOR-Kurikulum-MKN-2023.pdf",
-  },
-];
+import { Link } from "react-router-dom";
+import { FiArrowRight } from "react-icons/fi";
+import { KartuSorot, JudulSeksi } from "../../components/Akademik/panduan/PanduanSorot";
+import TabelSemester from "../../components/Akademik/TabelSemester";
+import {
+  sorotKurikulum,
+  kolomMataKuliah,
+  semester,
+  totalSks,
+} from "../../data/akademik/kurikulumData";
 
 export default function Kurikulum() {
   return (
@@ -21,67 +17,84 @@ export default function Kurikulum() {
         <title>Kurikulum Program Studi | MKn UNISSULA</title>
         <meta
           name="description"
-          content="Dokumen resmi SK Rektor penetapan struktur kurikulum, sebaran mata kuliah, dan silabus Program Studi Magister Kenotariatan (MKn) UNISSULA."
+          content="Tebaran mata kuliah Kurikulum 2026 Program Studi Magister Kenotariatan UNISSULA — 41 sks dalam empat semester, beserta mata kuliah pilihan."
         />
       </Helmet>
 
-      <div className="space-y-10 font-body text-body">
-        {/* Header Title Section */}
+      <div className="space-y-12 sm:space-y-14 font-body text-body">
+        {/* Kepala */}
         <div>
-          <span className="text-xs font-bold tracking-[0.18em] uppercase text-primary block mb-2">
+          <span className="text-[11px] font-bold tracking-[0.16em] uppercase text-primary block mb-2">
             ACADEMIC
           </span>
-          <h1 className="text-3xl sm:text-4xl lg:text-[42px] font-heading font-bold text-heading tracking-tight leading-tight">
+          <h1 className="text-3xl sm:text-4xl md:text-[42px] font-heading font-bold text-heading tracking-normal">
             Kurikulum
           </h1>
-          <div className="w-full h-[2px] bg-primary my-4" />
-          <p className="text-sm sm:text-base text-body leading-relaxed max-w-3xl">
-            Kurikulum Program Studi Magister Kenotariatan UNISSULA dirancang untuk membekali mahasiswa dengan keahlian hukum teoretis yang mendalam serta kemahiran praktis dalam pembuatan akta autentik dan hukum kenotariatan. Seluruh ketentuan kurikulum ditetapkan secara resmi melalui Surat Keputusan Rektor berikut.
+          <div className="w-full h-[2px] bg-primary mt-4 mb-5" />
+          <p className="text-base text-body leading-relaxed max-w-5xl">
+            Kurikulum Program Studi Magister Kenotariatan UNISSULA membekali mahasiswa dengan
+            penguasaan teori hukum yang mendalam sekaligus kemahiran praktis merancang akta
+            autentik. Beban studi 41 sks ditempuh dalam empat semester, memadukan mata kuliah teori,
+            rumpun Teknik Pembuatan Akta, Laboratorium Akta, mata kuliah pilihan, dan Tesis.
           </p>
         </div>
 
-        {/* List Card Dokumen Kurikulum */}
-        <div className="space-y-4">
-          {curriculumDocuments.map((item) => (
-            <div
-              key={item.id}
-              className="bg-white border border-gray-200 rounded-xs p-6 sm:p-7 flex flex-col sm:flex-row sm:items-center justify-between gap-6 lg:gap-12 hover:border-gray-300 transition-all duration-200 shadow-2xs group"
-            >
-              {/* Sisi Kiri: Ikon Buku + Judul + Deskripsi + File Info */}
-              <div className="flex items-start gap-4 sm:gap-5 flex-1 min-w-0">
-                <div className="text-primary text-2xl sm:text-3xl mt-0.5 shrink-0">
-                  <FiBookOpen />
-                </div>
+        <KartuSorot butir={sorotKurikulum} />
 
-                <div className="space-y-2 flex-1 min-w-0 max-w-2xl">
-                  <h2 className="font-heading font-bold text-base sm:text-[18px] text-heading leading-snug group-hover:text-primary transition-colors">
-                    {item.title}
-                  </h2>
-                  <p className="text-xs sm:text-sm text-body leading-relaxed">
-                    {item.desc}
-                  </p>
-                  <p className="text-[11px] sm:text-xs text-gray-400 font-medium tracking-wide pt-0.5">
-                    {item.fileType} ({item.fileSize})
-                  </p>
-                </div>
-              </div>
+        {/* Tebaran mata kuliah */}
+        <section className="space-y-5">
+          <JudulSeksi
+            judul="Tebaran Mata Kuliah Kurikulum 2026"
+            keterangan="Sebaran mata kuliah per semester beserta kode dan bobot sks."
+          />
 
-              {/* Sisi Kanan: Tombol Unduh Lebih Proporsional */}
-              <div className="shrink-0 flex items-center self-start sm:self-center pl-10 sm:pl-0">
-                <a
-                  href={item.downloadUrl}
-                  download={item.fileName}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-2 px-6 py-2.5 bg-white border border-gray-300 hover:border-primary hover:bg-primary hover:text-white text-heading rounded-xs text-xs sm:text-sm font-semibold transition-all duration-150 shadow-2xs cursor-pointer active:scale-98"
-                >
-                  <span>Unduh</span>
-                  <FiDownload className="text-sm" />
-                </a>
-              </div>
-            </div>
-          ))}
+          <div className="space-y-6">
+            {semester.map((s) => (
+              <TabelSemester
+                key={s.nama}
+                nama={s.nama}
+                jumlahSks={s.jumlahSks}
+                kolom={kolomMataKuliah}
+                baris={s.baris}
+                pilihan={s.pilihan}
+              />
+            ))}
+          </div>
+
+          {/* Total keseluruhan */}
+          <div className="flex items-baseline justify-between gap-4 border-2 border-primary bg-primary/5 px-5 sm:px-6 py-4 rounded-xs">
+            <span className="font-heading font-bold text-base sm:text-lg text-heading">
+              Total sks Program Studi
+            </span>
+            <span className="font-heading font-bold text-2xl sm:text-3xl text-primary tabular-nums">
+              {totalSks}
+            </span>
+          </div>
+        </section>
+
+        {/* Rujukan silang ke tabel ekuivalensi */}
+        <div className="border-l-3 border-l-primary border border-gray-200 bg-gray-50/70 p-5 sm:p-6 rounded-xs">
+          <p className="text-sm text-body leading-relaxed">
+            Mahasiswa angkatan Kurikulum 2021 yang belum menyelesaikan studi mengacu pada tabel
+            ekuivalensi mata kuliah untuk mengetahui padanan dan selisih beban studinya.
+          </p>
+          <Link
+            to="/akademik/pembelajaran/panduan-evaluasi"
+            className="mt-3 inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline"
+          >
+            Lihat tabel ekuivalensi Kurikulum 2021 ke Kurikulum OBE 2026
+            <FiArrowRight className="text-sm" />
+          </Link>
         </div>
+
+        {/* Dokumen kurikulum */}
+        <section className="space-y-5">
+          <JudulSeksi judul="Dokumen Kurikulum" />
+
+          <div className="border border-dashed border-gray-300 bg-white p-10 sm:p-14 text-center rounded-xs">
+            <p className="text-sm font-medium text-gray-500">Dokumen akan segera ditambahkan.</p>
+          </div>
+        </section>
       </div>
     </>
   );

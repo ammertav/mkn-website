@@ -1,13 +1,13 @@
 import { Helmet } from "react-helmet-async";
 
-export default function Kalender() {
+export default function Rps() {
   return (
     <>
       <Helmet>
-        <title>Kalender Akademik | MKn UNISSULA</title>
+        <title>Rencana Pembelajaran Semester | MKn UNISSULA</title>
         <meta
           name="description"
-          content="Jadwal penting kegiatan perkuliahan, registrasi, ujian semester, serta periode pendaftaran sidang tesis dan wisuda MKn UNISSULA."
+          content="Rencana Pembelajaran Semester (RPS) mata kuliah Program Studi Magister Kenotariatan UNISSULA."
         />
       </Helmet>
 
@@ -17,17 +17,19 @@ export default function Kalender() {
             ACADEMIC
           </span>
           <h1 className="text-3xl sm:text-4xl md:text-[42px] font-heading font-bold text-heading tracking-normal">
-            Kalender Akademik
+            Rencana Pembelajaran Semester
           </h1>
           <div className="w-full h-[2px] bg-primary mt-4 mb-5" />
           <p className="text-base text-body leading-relaxed max-w-5xl">
-            Jadwal penting kegiatan perkuliahan, her-registrasi, ujian semester, serta periode
-            pendaftaran sidang tesis dan wisuda Program Studi Magister Kenotariatan UNISSULA.
+            Rencana Pembelajaran Semester memuat capaian pembelajaran, bahan kajian, bentuk
+            pembelajaran, dan rencana asesmen setiap mata kuliah pada Kurikulum OBE Tahun 2026.
           </p>
         </div>
 
         <div className="border border-dashed border-gray-300 bg-white p-10 sm:p-14 text-center rounded-xs">
-          <p className="text-sm font-medium text-gray-500">Konten akan segera ditambahkan.</p>
+          <p className="text-sm font-medium text-gray-500">
+            Konten akan segera ditambahkan.
+          </p>
         </div>
       </div>
     </>

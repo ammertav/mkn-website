@@ -26,26 +26,36 @@ export const navLinks = [
     children: [
       { title: "Profil Lulusan", href: "/akademik/profil-lulusan" },
       { title: "Capaian Pembelajaran Lulusan", href: "/akademik/capaian-pembelajaran" },
+      { title: "Kurikulum", href: "/akademik/kurikulum" },
       {
-        title: "Kurikulum",
-        href: "/akademik/kurikulum",
+        title: "RPS & Evaluasi Pembelajaran",
+        href: "/akademik/pembelajaran",
         children: [
-          { title: "Reguler", href: "/akademik/kurikulum/reguler" },
-          { title: "Internasional", href: "/akademik/kurikulum/internasional" },
+          { title: "RPS", href: "/akademik/pembelajaran/rps" },
+          {
+            title: "Panduan Evaluasi Pembelajaran",
+            href: "/akademik/pembelajaran/panduan-evaluasi",
+          },
+          { title: "Asesmen", href: "/akademik/pembelajaran/asesmen" },
         ],
       },
       { title: "Panduan Akademik", href: "/akademik/panduan-akademik" },
-      { title: "Panduan Evaluasi Pembelajaran", href: "/akademik/panduan-evaluasi" },
       {
         title: "Panduan Ujian",
         href: "/akademik/panduan-ujian",
         children: [
           { title: "UTS/UAS", href: "/akademik/panduan-ujian/uts-uas" },
-          { title: "Magang", href: "/akademik/panduan-ujian/magang" },
-          { title: "Tesis", href: "/akademik/panduan-ujian/tesis" },
+          {
+            title: "Tesis",
+            href: "/akademik/panduan-ujian/tesis",
+            children: [
+              { title: "Pra Proposal", href: "/akademik/panduan-ujian/tesis/pra-proposal" },
+              { title: "Proposal", href: "/akademik/panduan-ujian/tesis/proposal" },
+              { title: "Tesis", href: "/akademik/panduan-ujian/tesis/ujian-tesis" },
+            ],
+          },
         ],
       },
-      { title: "Asesmen", href: "/akademik/asesmen" },
       { title: "Kalender Akademik", href: "/akademik/kalender" },
     ],
   },
