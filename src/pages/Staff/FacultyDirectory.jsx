@@ -1,7 +1,7 @@
 import { useState, useMemo } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
-import { FiSearch, FiChevronDown } from "react-icons/fi";
+import { FiSearch, FiChevronDown, FiUser } from "react-icons/fi";
 import { facultyData } from "../../data/facultyData";
 import Img from "../../components/ui/Img";
 
@@ -166,27 +166,36 @@ export default function FacultyDirectory() {
                                     to={`/staff/dosen/${faculty.slug || faculty.id}`}
                                     className="bg-white border border-gray-200 rounded-xs overflow-hidden flex flex-col hover:border-primary/40 hover:shadow-md transition-all duration-200 group cursor-pointer"
                                 >
-                                    {/* Grayscale Portrait Photo */}
-                                    <div className="w-full aspect-4/5 bg-gray-100 overflow-hidden relative">
-                                        <Img
-                                            src={faculty.image}
-                                            alt={faculty.name}
-                                            className="w-full h-full object-cover object-top grayscale contrast-110 group-hover:scale-103 transition-transform duration-300"
-                                        />
+                                    {/* Grayscale Portrait Photo / Placeholder */}
+                                    <div className="w-full aspect-4/5 bg-gray-100 overflow-hidden relative flex items-center justify-center">
+                                        {faculty.image ? (
+                                            <Img
+                                                src={faculty.image}
+                                                alt={faculty.name}
+                                                className="w-full h-full object-cover object-top grayscale contrast-110 group-hover:scale-103 transition-transform duration-300"
+                                            />
+                                        ) : (
+                                            <div className="w-full h-full flex flex-col items-center justify-center bg-gray-50 text-gray-400 group-hover:bg-gray-100 transition-colors p-4 text-center">
+                                                <FiUser className="text-5xl text-gray-300 mb-2" />
+                                                <span className="text-[11px] uppercase tracking-wider font-medium text-gray-400">
+                                                    Foto Belum Tersedia
+                                                </span>
+                                            </div>
+                                        )}
                                     </div>
 
                                     {/* Card Details */}
                                     <div className="p-5 text-center flex flex-col grow justify-between">
                                         <div className="space-y-1.5">
-                                            <h3 className="font-heading font-bold text-[17px] text-primary leading-tight group-hover:text-primary/90 transition-colors">
+                                            <h3 className="font-heading font-bold text-base sm:text-lg text-primary leading-tight group-hover:text-primary/90 transition-colors">
                                                 {faculty.name}
                                             </h3>
-                                            <p className="text-[11.5px] uppercase tracking-wider text-gray-500 font-medium">
+                                            <p className="text-xs uppercase tracking-wider text-gray-500 font-medium">
                                                 {faculty.title}
                                             </p>
                                         </div>
 
-                                        <p className="text-[12.5px] text-body leading-relaxed mt-4 line-clamp-3">
+                                        <p className="text-xs sm:text-sm text-body leading-relaxed mt-4 line-clamp-3">
                                             {faculty.bio}
                                         </p>
                                     </div>

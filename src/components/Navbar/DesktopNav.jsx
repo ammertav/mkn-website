@@ -23,7 +23,7 @@ export default function DesktopNav({ navLinks }) {
 
   // Class untuk menu utama navbar
   const getLinkClass = (isLinkOpen) => ({ isActive }) =>
-    `text-[11px] uppercase tracking-[0.16em] font-semibold transition-colors duration-150 flex items-center h-full border-b-2 ${
+    `text-[10px] xl:text-[11px] uppercase tracking-[0.11em] xl:tracking-[0.15em] font-semibold transition-colors duration-150 flex items-center h-full border-b-2 ${
       isActive || isLinkOpen
         ? "text-primary border-primary"
         : "text-navbar border-transparent hover:text-primary hover:border-primary/40"
@@ -31,7 +31,7 @@ export default function DesktopNav({ navLinks }) {
 
   return (
     <nav
-      className="hidden lg:flex self-stretch items-stretch space-x-6 xl:space-x-8"
+      className="hidden lg:flex self-stretch items-stretch space-x-3 xl:space-x-5 2xl:space-x-6.5"
       id="primary-nav"
     >
       {navLinks.map((link, i) => {

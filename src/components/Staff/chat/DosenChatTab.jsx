@@ -37,7 +37,7 @@ export default function DosenChatTab({ dosen }) {
               role="tab"
               aria-selected={aktif}
               onClick={() => setTab(t.key)}
-              className={`flex-1 px-3 py-3 text-[11px] font-bold tracking-[0.1em] uppercase transition-colors border-b-2 cursor-pointer ${
+              className={`flex-1 px-3 py-3 text-xs font-bold tracking-[0.1em] uppercase transition-colors border-b-2 cursor-pointer ${
                 aktif
                   ? "border-primary text-primary bg-white"
                   : "border-transparent text-body hover:text-heading bg-gray-50/70"

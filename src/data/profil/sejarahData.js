@@ -142,29 +142,15 @@ export const halaman = {
   latarBelakang: [
     {
       id:
-        "Gerakan sadar hukum yang dicanangkan pemerintah sejak era Orde Baru semakin " +
-        "berimplikasi positif. Masyarakat semakin teliti dan sadar betapa hukum menjadi " +
-        "aspek penting dalam membangun relasi, terutama menyangkut hal-hal yang bersifat " +
-        "kerja kolektif dan bersentuhan dengan kepentingan publik, transaksi yang terkait " +
-        "dengan hak dan kewajiban.",
+        "Dinamika ekonomi global dan pesatnya iklim investasi menuntut adanya infrastruktur hukum preventif dan responsif. Dalam ekosistem bisnis kontemporer, kepastian hukum bukan sekadar pelengkap administratif, melainkan pilar utama untuk memitigasi risiko dan menjamin keabsahan berbagai transaksi komersial maupun keperdataan. Kompleksitas ini secara langsung berimplikasi pada eskalasi kebutuhan akan profesi Notaris dan Pejabat Pembuat Akta Tanah (PPAT) yang kompeten, berintegritas, serta berwawasan luas. Di Indonesia, lonjakan pembangunan infrastruktur, dinamisnya lalu lintas pertanahan, serta masifnya aksi korporasi membuka lanskap potensi karier yang sangat prospektif dan strategis bagi profesi kenotariatan.",
       en:
-        "The legal-awareness movement launched by the government from the New Order era " +
-        "onwards has had an increasingly positive effect. Society has grown more careful " +
-        "and more conscious of how central law is to building relationships, particularly " +
-        "in matters of collective undertaking that touch the public interest, and in " +
-        "transactions bearing on rights and obligations.",
+        "The dynamics of the global economy and the rapid expansion of the investment climate demand a preventive and responsive legal infrastructure. In the contemporary business ecosystem, legal certainty is not merely an administrative formality, but a fundamental pillar for mitigating risks and ensuring the validity of diverse commercial and civil transactions. This complexity directly leads to an escalating demand for competent, high-integrity, and broad-minded Notaries and Land Deed Officials (PPAT). In Indonesia, surges in infrastructure development, dynamic land transactions, and massive corporate actions open up a highly prospective and strategic career landscape for the notarial profession.",
     },
     {
       id:
-        "Oleh karena itu, kebutuhan akan SDM yang handal di bidang ilmu Kenotariatan, " +
-        "dengan kualifikasi penguasaan pengetahuan teoretik dan keterampilan dalam " +
-        "pembuatan bermacam perjanjian/kontrak dan akta semakin meningkat seiring dengan " +
-        "meningkatkan pemahaman hukum masyarakat.",
+        "Menjawab semua kebutuhan tersebut, Fakultas Hukum Universitas Islam Sultan Agung mendirikan Program Studi Magister Kenotariatan, dimana program ini didesain secara komprehensif, tidak sekadar untuk mencetak praktisi yang andal dalam merumuskan akta autentik, tetapi juga untuk melahirkan intelektual hukum yang unggul, berdaya saing internasional dan adaptif dalam mengimplementasikan ilmu pengetahuan serta teknologi di bidang hukum kenotariatan yang dijiwai nilai-nilai etik profesi dan nilai-nilai akhlakul karimah. Kehadiran program studi ini menjadi wujud nyata kontribusi Universitas Islam Sultan Agung dalam mengawal kebutuhan pelaku bisnis, menegakan supremasi hukum, serta didedikasikan untuk membangun generasi khaira ummah yang berintegritas tinggi melalui penerapan Budaya Akademik Islami (BudAI).",
       en:
-        "As public understanding of the law has grown, so has the need for capable " +
-        "professionals in the field of notarial law, qualified both in theoretical " +
-        "knowledge and in the practical skill of drawing up the various agreements, " +
-        "contracts, and deeds.",
+        "In response to these critical needs, the Faculty of Law of Universitas Islam Sultan Agung established the Master of Notarial Law Study Programme. This programme is designed comprehensively, not only to produce skilled practitioners proficient in drafting authentic deeds, but also to cultivate outstanding legal intellectuals who are internationally competitive and adaptive in implementing science and technology in notarial law, guided by professional ethical values and noble Islamic character (akhlakul karimah). The presence of this study programme represents a concrete contribution of Universitas Islam Sultan Agung in safeguarding the needs of business actors, upholding the supremacy of law, and fostering an exemplary generation of high integrity (khaira ummah) through the implementation of Islamic Academic Culture (BudAI).",
     },
   ],
   judulLinimasa: { id: "Perjalanan Program Studi", en: "The Programme’s Journey" },

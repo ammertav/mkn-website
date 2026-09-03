@@ -58,7 +58,7 @@ export default function DosenChatFloating({ dosen }) {
                 )}
               </div>
               <div className="min-w-0 flex-grow">
-                <span className="text-[10px] font-bold tracking-[0.14em] uppercase text-primary block">
+                <span className="text-xs font-bold tracking-[0.14em] uppercase text-primary block">
                   Tanya Langsung
                 </span>
                 <p className="font-heading text-sm font-semibold text-heading truncate">
