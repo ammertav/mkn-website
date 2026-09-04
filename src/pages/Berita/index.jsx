@@ -12,6 +12,21 @@ import { getBeritaImage } from "../../utils/imageResolver";
 import { generateSlug } from "../../utils/slugHelper";
 import Img from "../../components/ui/Img";
 
+/** Konversi string tanggal format Indonesia ("30 Oktober 2022") ke Date. */
+const BULAN_ID = {
+  januari: 0, februari: 1, maret: 2, april: 3, mei: 4, juni: 5,
+  juli: 6, agustus: 7, september: 8, oktober: 9, november: 10, desember: 11,
+};
+function parseIndonesianDate(str) {
+  if (!str) return new Date(0);
+  const parts = str.trim().split(/\s+/);
+  if (parts.length !== 3) return new Date(0);
+  const [day, monthStr, year] = parts;
+  const month = BULAN_ID[monthStr.toLowerCase()];
+  if (month === undefined) return new Date(0);
+  return new Date(Number(year), month, Number(day));
+}
+
 const ITEMS_PER_PAGE = 10;
 
 /**
@@ -90,11 +105,17 @@ export default function BeritaIndex() {
   const isBerita = kategori === "berita";
 
   const beritaItems = useMemo(
-    () => beritaList.filter((item) => item.tags !== TAG_PENGUMUMAN),
+    () =>
+      beritaList
+        .filter((item) => item.tags !== TAG_PENGUMUMAN)
+        .sort((a, b) => parseIndonesianDate(b.tanggal) - parseIndonesianDate(a.tanggal)),
     []
   );
   const pengumumanItems = useMemo(
-    () => beritaList.filter((item) => item.tags === TAG_PENGUMUMAN),
+    () =>
+      beritaList
+        .filter((item) => item.tags === TAG_PENGUMUMAN)
+        .sort((a, b) => parseIndonesianDate(b.tanggal) - parseIndonesianDate(a.tanggal)),
     []
   );
 
