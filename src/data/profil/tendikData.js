@@ -55,7 +55,7 @@ export const tenagaKependidikan = [
   },
   {
     jabatan: "Bidang Keuangan",
-    name: "Laili Rohmah, S.Pd.",
+    name: "Laili Rohmah, S.E.",
     photo: imgKeuangan,
     tugas:
       "Administrasi keuangan mahasiswa, pembiayaan kegiatan akademik, dan pengelolaan anggaran program studi.",

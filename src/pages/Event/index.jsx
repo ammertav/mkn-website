@@ -210,7 +210,7 @@ export default function EventPage() {
                       className="inline-flex items-center gap-1 hover:text-primary transition-colors cursor-pointer"
                     >
                       <FiChevronLeft className="w-4 h-4" />
-                      <span>Prev</span>
+                      <span>Sebelumnya</span>
                     </button>
                     <span className="text-gray-300">|</span>
                     <button
@@ -218,14 +218,14 @@ export default function EventPage() {
                       onClick={() => handleStepDay(1)}
                       className="inline-flex items-center gap-1 hover:text-primary transition-colors cursor-pointer"
                     >
-                      <span>Next</span>
+                      <span>Berikutnya</span>
                       <FiChevronRight className="w-4 h-4" />
                     </button>
                   </div>
 
                   {/* Toggle Compact View */}
                   <div className="flex items-center gap-2 pl-2 border-l border-gray-200">
-                    <span className="text-gray-600 text-xs">Compact View</span>
+                    <span className="text-gray-600 text-xs">Tampilan Ringkas</span>
                     <button
                       type="button"
                       role="switch"

@@ -8,7 +8,7 @@ export default function QaForms() {
   return (
     <>
       <Helmet>
-        <title>QA Forms | MKn UNISSULA</title>
+        <title>Formulir Mutu | MKn UNISSULA</title>
         <meta
           name="description"
           content="Kumpulan formulir mutu dan berkas instrumen SPMI (QA Forms) Program Studi Magister Kenotariatan (MKn) UNISSULA."
@@ -21,10 +21,10 @@ export default function QaForms() {
         {/* ========================================================================= */}
         <div>
           <span className="text-xs font-bold tracking-[0.18em] uppercase text-primary block mb-2">
-            QA DOCUMENTS
+            DOKUMEN MUTU
           </span>
           <h1 className="text-3xl sm:text-4xl lg:text-[42px] font-heading font-bold text-heading tracking-tight leading-tight">
-            QA Forms
+            Formulir Mutu
           </h1>
           <div className="w-full h-[2px] bg-primary my-4" />
           <p className="text-sm sm:text-base text-body leading-relaxed max-w-3xl">

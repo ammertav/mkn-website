@@ -104,7 +104,7 @@ export default function JobVacancies() {
         <div className="space-y-6">
           <div className="space-y-2">
             <span className="text-xs font-bold tracking-wider uppercase text-primary">
-              Alumni &amp; Career
+              Alumni &amp; Karier
             </span>
             <h1 className="text-3xl sm:text-4xl lg:text-[40px] font-heading font-bold text-heading tracking-tight leading-tight">
               Lowongan Pekerjaan &amp; Magang

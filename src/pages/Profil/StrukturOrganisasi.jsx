@@ -8,9 +8,9 @@ import {
   FiHome,
 } from "react-icons/fi";
 
-import imgDekan from "../../assets/images/struktur-organisasi/Dekan Fakultas Hukum UNISSULA.jpg";
+import imgDekan from "../../assets/images/struktur-organisasi/prof-jawede-duduk.jpg";
 import imgKaprodi from "../../assets/images/dosen/Dr.NanangSriDarmadi,S.H.,M.H..jpg";
-import imgSekprodi from "../../assets/images/struktur-organisasi/Sekprodi a- Dr. Toni Triyanto, S.H., M.jpeg";
+import imgSekprodi from "../../assets/images/struktur-organisasi/dr-toni-duduk.png";
 import imgDenny from "../../assets/images/struktur-organisasi/dr-denny-suwondo.jpg";
 import imgSoegianto from "../../assets/images/struktur-organisasi/prof-dr-soegianto.jpg";
 import imgDirPerpus from "../../assets/images/struktur-organisasi/anugrah-surya-kusuma-2.jpg";

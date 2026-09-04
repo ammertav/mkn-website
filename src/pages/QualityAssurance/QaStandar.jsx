@@ -23,7 +23,7 @@ export default function QaStandar() {
         {/* ========================================================================= */}
         <div>
           <span className="text-xs font-bold tracking-[0.18em] uppercase text-primary block mb-2">
-            QA DOCUMENTS
+            DOKUMEN MUTU
           </span>
           <h1 className="text-3xl sm:text-4xl lg:text-[42px] font-heading font-bold text-heading tracking-tight leading-tight">
             QA Standar

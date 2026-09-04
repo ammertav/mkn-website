@@ -23,6 +23,10 @@ const halaman = {
         "Notarial Law Study Programme.",
     },
   },
+    label: {
+    id: "AKADEMIK",
+    en: "ACADEMIC",
+  },
   judul: { id: "Panduan Ujian", en: "Examination Guidelines" },
   intro: {
     id:
@@ -48,12 +52,12 @@ export default function PanduanUjian() {
 
       <div className="space-y-6">
         <div>
-          <h1 className="text-2xl md:text-[28px] font-heading font-normal text-heading tracking-normal">
+          <span className="text-xs font-bold tracking-[0.18em] uppercase text-primary block mb-2">
+            {t(halaman.label)}
+          </span>
+          <h1 className="text-3xl sm:text-4xl lg:text-[42px] font-heading font-bold text-heading tracking-tight leading-tight">
             {t(halaman.judul)}
           </h1>
-          <p className="mt-4 text-[14px] md:text-[15px] text-body leading-relaxed max-w-5xl">
-            {t(halaman.intro)}
-          </p>
         </div>
 
         {/* Sub-navigation */}

@@ -6,15 +6,15 @@ const testimonialData = [
   {
     id: 1,
     name: "Andi Wijaya, S.H.",
-    description: "The rigorous academic training and exposure to real legal cases prepared me perfectly for my career in corporate law.",
-    image: "https://images.unsplash.com/photo-1560250097-0b93528cba13?auto=format&fit=crop&w=800&q=80",
+    description: "Pendidikan yang menuntut dan pengalaman menangani kasus hukum nyata membekali saya dengan sangat baik untuk berkarier di bidang hukum korporasi.",
+    image: "https://images.unsplash.com/photo-1568602471122-7832951cc4c5?auto=format&fit=crop&w=800&q=80",
     role: "Alumni 2018",
     linkHref: "/alumni/andi-wijaya",
   },
   {
     id: 2,
     name: "Siti Aminah, S.H.",
-    description: "The mentorship from the professors and the supportive community made my journey in legal studies truly transformative.",
+    description: "Bimbingan para dosen dan lingkungan yang saling mendukung membuat perjalanan studi hukum saya benar-benar mengubah cara pandang.",
     image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80",
     role: "Alumni 2020",
     linkHref: "/alumni/siti-aminah",
@@ -22,16 +22,16 @@ const testimonialData = [
   {
     id: 3,
     name: "Budi Santoso",
-    description: "Engaging in the Moot Court competitions gave me the confidence and practical skills needed for the courtroom.",
+    description: "Mengikuti kompetisi peradilan semu memberi saya kepercayaan diri dan keterampilan praktis yang dibutuhkan di ruang sidang.",
     image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=800&q=80",
-    role: "Final Year Student",
+    role: "Mahasiswa Tingkat Akhir",
     linkHref: "/mahasiswa/budi-santoso",
   },
   {
     id: 4,
     name: "Diana Putri, S.H.",
-    description: "An institution that doesn't just teach law, but instills ethics, integrity, and a passion for justice in every student.",
-    image: "https://images.unsplash.com/photo-1580489944761-15a1946eb998?auto=format&fit=crop&w=800&q=80",
+    description: "Institusi yang tidak sekadar mengajarkan hukum, tetapi menanamkan etika, integritas, dan kepedulian pada keadilan kepada setiap mahasiswanya.",
+    image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=800&q=80",
     role: "Alumni 2015",
     linkHref: "/alumni/diana-putri",
   },
@@ -44,7 +44,7 @@ export default function Testimoni() {
         {/* Section Header */}
         <div className="text-center mb-12 sm:mb-16">
           <h2 className="text-3xl sm:text-4xl font-heading font-normal text-heading tracking-normal">
-            Testimoni
+            Kata Mereka
           </h2>
         </div>
 

@@ -10,7 +10,7 @@ export default function AlumniSurveyReport() {
   return (
     <>
       <Helmet>
-        <title>Alumni Survey Report | MKn UNISSULA</title>
+        <title>Laporan Survei Alumni | MKn UNISSULA</title>
         <meta
           name="description"
           content="Laporan Survei Alumni dan Pengguna Lulusan (Alumni Survey Report) Program Studi Magister Kenotariatan (MKn) UNISSULA: penilaian kompetensi lulusan dan dampak pada kurikulum."
@@ -23,10 +23,10 @@ export default function AlumniSurveyReport() {
         {/* ========================================================================= */}
         <div>
           <span className="text-xs font-bold tracking-[0.18em] uppercase text-primary block mb-2">
-            QUALITY ASSURANCE
+            PENJAMINAN MUTU
           </span>
           <h1 className="text-3xl sm:text-4xl lg:text-[42px] font-heading font-bold text-heading tracking-tight leading-tight">
-            Alumni Survey Report
+            Laporan Survei Alumni
           </h1>
           <div className="w-full h-[2px] bg-primary my-4" />
           <p className="text-sm sm:text-base text-body leading-relaxed max-w-3xl">

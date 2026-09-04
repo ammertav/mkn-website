@@ -1,31 +1,38 @@
 import { Link } from "react-router-dom";
 import { FiArrowRight, FiPlus } from "react-icons/fi";
+import faqImage from "../../assets/images/faq/faq.jpeg";
 
 const faqData = [
   {
     id: 1,
     category: "Pendaftaran",
-    question: "Bagaimana prosedur pendaftaran mahasiswa baru tahun akademik ini?",
-    answer: "Calon mahasiswa dapat melakukan pendaftaran secara daring melalui portal admisi kami. Proses meliputi pengisian formulir, unggah dokumen persyaratan, pembayaran biaya seleksi, dan mengikuti ujian masuk yang dijadwalkan.",
-    highlight: "Informasi Utama"
+    question:
+      "Bagaimana prosedur pendaftaran mahasiswa baru tahun akademik ini?",
+    answer:
+      "Calon mahasiswa dapat melakukan pendaftaran secara daring melalui portal admisi kami. Proses meliputi pengisian formulir, unggah dokumen persyaratan, pembayaran biaya seleksi, dan mengikuti ujian masuk yang dijadwalkan.",
+    highlight: "Informasi Utama",
   },
   {
     id: 2,
     category: "Beasiswa",
     question: "Apa saja jenis beasiswa yang tersedia untuk mahasiswa hukum?",
-    answer: "Kami menawarkan Beasiswa Prestasi, Beasiswa Kemitraan, dan bantuan biaya pendidikan bagi mahasiswa berprestasi namun kurang mampu.",
+    answer:
+      "Kami menawarkan Beasiswa Prestasi, Beasiswa Kemitraan, dan bantuan biaya pendidikan bagi mahasiswa berprestasi namun kurang mampu.",
   },
   {
     id: 3,
     category: "Fasilitas",
-    question: "Apakah kampus menyediakan akses ke database hukum internasional?",
-    answer: "Ya, perpustakaan kami berlangganan berbagai database legal global yang dapat diakses oleh seluruh mahasiswa aktif.",
+    question:
+      "Apakah kampus menyediakan akses ke database hukum internasional?",
+    answer:
+      "Ya, perpustakaan kami berlangganan berbagai database legal global yang dapat diakses oleh seluruh mahasiswa aktif.",
   },
   {
     id: 4,
     category: "Kurikulum",
     question: "Bagaimana sistem magang dan praktik kerja lapangan (PKL)?",
-    answer: "Mahasiswa diwajibkan mengikuti PKL pada semester 6 di kantor hukum, pengadilan, atau instansi pemerintahan yang terafiliasi.",
+    answer:
+      "Mahasiswa diwajibkan mengikuti PKL pada semester 6 di kantor hukum, pengadilan, atau instansi pemerintahan yang terafiliasi.",
   },
 ];
 
@@ -57,23 +64,28 @@ export default function FAQ() {
 
         {/* Content Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 pt-10 items-start">
-          
           {/* Main Featured FAQ (Left Side) */}
           <article className="lg:col-span-8 flex flex-col group">
-            {/* Decorative Visual Element instead of Image */}
-            <div className="relative w-full aspect-[16/9] sm:aspect-[16/8.5] bg-hero-heading overflow-hidden rounded-xs block flex items-center justify-center p-8 sm:p-16">
+            {/* Image Card Container with Overlay */}
+            <div className="relative w-full aspect-[16/9] sm:aspect-[16/8.5] overflow-hidden rounded-xs flex items-center justify-center p-8 sm:p-16">
+              {/* Background Image */}
+              <img
+                src={faqImage}
+                alt="FAQ Background"
+                className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+              />
+
+              {/* Dark Overlay for Text Contrast */}
+              <div className="absolute inset-0 bg-black/60 backdrop-blur-[1px]" />
+
+              {/* Text Content */}
               <div className="relative z-10 text-center">
                 <span className="text-primary font-heading text-sm uppercase tracking-[0.2em] block mb-4">
                   {featured.highlight}
                 </span>
-                <h3 className="text-white font-heading text-2xl sm:text-3xl lg:text-4xl leading-tight max-w-2xl">
+                <h3 className="text-white font-heading text-2xl sm:text-3xl lg:text-4xl leading-tight max-w-2xl drop-shadow-sm">
                   "{featured.question}"
                 </h3>
-              </div>
-              {/* Background Subtle Decoration */}
-              <div className="absolute inset-0 opacity-10">
-                <div className="absolute -top-24 -left-24 w-64 h-64 bg-white rounded-full blur-3xl"></div>
-                <div className="absolute -bottom-24 -right-24 w-64 h-64 bg-primary rounded-full blur-3xl"></div>
               </div>
             </div>
 
@@ -84,7 +96,8 @@ export default function FAQ() {
               </p>
               <div className="mt-6 pt-1">
                 <span className="text-xs font-medium tracking-widest text-gray-400 uppercase">
-                  Kategori: {featured.category} &nbsp;|&nbsp; Terakhir diperbarui: Jan 2024
+                  Kategori: {featured.category} &nbsp;|&nbsp; Terakhir
+                  diperbarui: Jan 2024
                 </span>
               </div>
             </div>

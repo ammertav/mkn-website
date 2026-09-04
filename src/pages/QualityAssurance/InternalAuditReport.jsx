@@ -9,7 +9,7 @@ export default function InternalAuditReport() {
   return (
     <>
       <Helmet>
-        <title>Internal Audit Report | MKn UNISSULA</title>
+        <title>Laporan Audit Mutu Internal | MKn UNISSULA</title>
         <meta
           name="description"
           content="Laporan hasil Audit Mutu Internal (AMI) berkala dan rekapitulasi temuan audit Program Studi Magister Kenotariatan (MKn) UNISSULA."
@@ -22,10 +22,10 @@ export default function InternalAuditReport() {
         {/* ========================================================================= */}
         <div>
           <span className="text-xs font-bold tracking-[0.18em] uppercase text-primary block mb-2">
-            QUALITY ASSURANCE
+            PENJAMINAN MUTU
           </span>
           <h1 className="text-3xl sm:text-4xl lg:text-[42px] font-heading font-bold text-heading tracking-tight leading-tight">
-            Internal Audit Report
+            Laporan Audit Mutu Internal
           </h1>
           <div className="w-full h-[2px] bg-primary my-4" />
           <p className="text-sm sm:text-base text-body leading-relaxed max-w-3xl">

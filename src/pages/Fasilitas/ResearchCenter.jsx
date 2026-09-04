@@ -18,13 +18,13 @@ export default function ResearchCenter() {
     return (
       <>
         <Helmet>
-          <title>Student Research Center | MKn UNISSULA</title>
+          <title>Pusat Riset Mahasiswa | MKn UNISSULA</title>
           <meta name="description" content="Informasi Student Research Center Program Studi Magister Kenotariatan UNISSULA." />
         </Helmet>
 
         <FacilityPlaceholder
           category="STUDENT RESEARCH CENTER"
-          title="Student Research Center"
+          title="Pusat Riset Mahasiswa"
           description="Halaman ini akan memuat keterangan Student Research Center, ruang kerja penelitian dan penulisan tesis bagi mahasiswa, beserta layanan pendampingan yang tersedia di dalamnya."
         />
       </>
@@ -34,7 +34,7 @@ export default function ResearchCenter() {
   return (
     <>
       <Helmet>
-        <title>Student Research Center | MKn UNISSULA</title>
+        <title>Pusat Riset Mahasiswa | MKn UNISSULA</title>
         <meta
           name="description"
           content="Student Research Center MKn UNISSULA menyediakan meja riset tetap, klinik metodologi, pendampingan publikasi, dan fasilitas penulisan tesis magister."

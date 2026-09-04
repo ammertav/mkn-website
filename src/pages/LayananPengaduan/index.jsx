@@ -17,7 +17,7 @@ const kategoriPengaduan = [
   {
     id: "keuangan",
     label: "Biaya kuliah, pembayaran & administrasi keuangan",
-    penanggungJawab: "Laili Rohmah, S.Pd.",
+    penanggungJawab: "Laili Rohmah, S.E.",
     jabatan: "Bidang Keuangan",
     telepon: null,
   },

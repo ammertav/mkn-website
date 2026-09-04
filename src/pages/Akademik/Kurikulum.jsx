@@ -34,7 +34,6 @@ export default function Kurikulum() {
             {t(halaman.judul)}
           </h1>
           <div className="w-full h-[2px] bg-primary mt-4 mb-5" />
-          <p className="text-base text-body leading-relaxed max-w-5xl">{t(halaman.intro)}</p>
         </div>
 
         <KartuSorot butir={sorotKurikulum} />

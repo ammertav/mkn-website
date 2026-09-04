@@ -1,14 +1,27 @@
 import { Link } from "react-router-dom";
 import { FiArrowRight } from "react-icons/fi";
+import Img from "../ui/Img";
+import bgKampus from "../../assets/images/gedung.jpg";
 
 export default function Ready() {
   return (
     <section className="w-full bg-white font-body py-16 sm:py-20 border-b border-gray-200">
       <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8">
         <div
-          className="relative w-full bg-hero-heading overflow-hidden rounded-xs py-16 sm:py-24 px-6 sm:px-12 text-center flex flex-col items-center justify-center"
+          className="relative w-full bg-neutral-900 overflow-hidden rounded-xs py-16 sm:py-24 px-6 sm:px-12 text-center flex flex-col items-center justify-center"
         >
-         
+          {/* Latar foto kampus. Seluruh teks di blok ini berwarna terang, jadi
+              foto ditutup lapisan gelap agar kontrasnya tetap terbaca — tanpa
+              itu judul putih menghilang di area foto yang cerah. */}
+          <Img
+            src={bgKampus}
+            alt=""
+            aria-hidden="true"
+            className="absolute inset-0 w-full h-full object-cover object-center"
+          />
+          <div className="absolute inset-0 bg-neutral-900/80" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/40" />
+
           {/* Background Subtle Decoration (Persis seperti pada komponen FAQ) */}
           <div className="absolute inset-0 opacity-10 pointer-events-none">
             <div className="absolute -top-24 -left-24 w-64 h-64 bg-white rounded-full blur-3xl"></div>
@@ -18,7 +31,7 @@ export default function Ready() {
           <div className="relative z-10 max-w-3xl mx-auto space-y-6">
             {/* Label Kategori / Eyebrow */}
             <span
-              className="text-xs font-semibold tracking-[0.2em] text-primary uppercase block"
+              className="text-xs font-semibold tracking-[0.2em] text-white/75 uppercase block"
             >
               PENDAFTARAN & ADMISI
             </span>

@@ -107,7 +107,7 @@ export default function FacultyDirectory() {
     return (
         <>
             <Helmet>
-                <title>Faculty & Research | MKn UNISSULA</title>
+                <title>Dosen & Penelitian | MKn UNISSULA</title>
                 <meta
                     name="description"
                     content="Jelajahi keahlian dan kontribusi penelitian dari staf pengajar Program Studi Magister Kenotariatan UNISSULA."
@@ -121,7 +121,7 @@ export default function FacultyDirectory() {
                         DIREKTORI AKADEMIK
                     </span>
                     <h1 className="text-3xl sm:text-4xl md:text-5xl font-heading text-heading font-normal tracking-tight">
-                        Faculty & Research
+                        Dosen & Penelitian
                     </h1>
                     <p className="mt-4 text-sm sm:text-base text-special leading-relaxed max-w-3xl">
                         Jelajahi keahlian dan kontribusi penelitian dari staf pengajar kami yang merupakan pakar

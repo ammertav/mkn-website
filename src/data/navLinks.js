@@ -128,7 +128,7 @@ export const navLinks = [
     href: "/alumni",
     children: [
       { title: { id: "Ikanotsula", en: "Ikanotsula" }, href: "/alumni/ikanotsula" },
-      { title: { id: "Tracer Study", en: "Tracer Study" }, href: "/alumni/tracer-study" },
+      { title: { id: "Penelusuran Alumni", en: "Tracer Study" }, href: "/alumni/tracer-study" },
       { title: { id: "Pusat Karir", en: "Career Centre" }, href: "/alumni/pusat-karir" },
       { title: { id: "Lowongan Pekerjaan", en: "Job Vacancies" }, href: "/alumni/lowongan" },
     ],
@@ -180,7 +180,7 @@ export const navLinks = [
         href: "/fasilitas/laboratorium-manajemen-kantor",
       },
       {
-        title: { id: "Student Research Center", en: "Student Research Center" },
+        title: { id: "Pusat Riset Mahasiswa", en: "Student Research Center" },
         href: "/fasilitas/student-research-center",
       },
       { title: { id: "Perpustakaan", en: "Library" }, href: "/fasilitas/perpustakaan" },
@@ -188,59 +188,59 @@ export const navLinks = [
     ],
   },
   {
-    title: { id: "EVENT", en: "EVENTS" },
+    title: { id: "AGENDA", en: "EVENTS" },
     href: "/event",
   },
   {
-    title: { id: "QUALITY ASSURANCE", en: "QUALITY ASSURANCE" },
+    title: { id: "PENJAMINAN MUTU", en: "QUALITY ASSURANCE" },
     href: "/quality-assurance",
     children: [
       {
-        title: { id: "Quality Assurance Unit", en: "Quality Assurance Unit" },
+        title: { id: "Gugus Penjaminan Mutu", en: "Quality Assurance Unit" },
         href: "/quality-assurance",
       },
       {
-        title: { id: "QA Documents", en: "QA Documents" },
+        title: { id: "Dokumen Mutu", en: "QA Documents" },
         href: "/quality-assurance/qa-documents",
         children: [
           {
-            title: { id: "QA Policy", en: "QA Policy" },
+            title: { id: "Kebijakan Mutu", en: "QA Policy" },
             href: "/quality-assurance/qa-documents/qa-policy",
           },
           {
-            title: { id: "QA Manual Standard", en: "QA Manual Standard" },
+            title: { id: "Manual Mutu", en: "QA Manual Standard" },
             href: "/quality-assurance/qa-documents/qa-manual-standard",
           },
           {
-            title: { id: "QA Standar", en: "QA Standards" },
+            title: { id: "Standar Mutu", en: "QA Standards" },
             href: "/quality-assurance/qa-documents/qa-standar",
           },
           {
-            title: { id: "QA Forms", en: "QA Forms" },
+            title: { id: "Formulir Mutu", en: "QA Forms" },
             href: "/quality-assurance/qa-documents/qa-forms",
           },
         ],
       },
       {
-        title: { id: "Internal Audit Report", en: "Internal Audit Report" },
+        title: { id: "Laporan Audit Mutu Internal", en: "Internal Audit Report" },
         href: "/quality-assurance/internal-audit-report",
       },
       {
-        title: { id: "Learning and Teaching Report", en: "Learning and Teaching Report" },
+        title: { id: "Laporan Pembelajaran", en: "Learning and Teaching Report" },
         href: "/quality-assurance/learning-teaching-report",
       },
       {
-        title: { id: "Student Survey Report", en: "Student Survey Report" },
+        title: { id: "Laporan Survei Mahasiswa", en: "Student Survey Report" },
         href: "/quality-assurance/student-survey-report",
       },
       {
-        title: { id: "Alumni Survey Report", en: "Alumni Survey Report" },
+        title: { id: "Laporan Survei Alumni", en: "Alumni Survey Report" },
         href: "/quality-assurance/alumni-survey-report",
       },
     ],
   },
   {
-    title: { id: "DOWNLOAD", en: "DOWNLOAD" },
+    title: { id: "UNDUHAN", en: "DOWNLOAD" },
     href: "/download",
   },
   {

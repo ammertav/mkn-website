@@ -49,7 +49,7 @@ export default function QaDocuments() {
   return (
     <>
       <Helmet>
-        <title>Quality Assurance Documents | MKn UNISSULA</title>
+        <title>Dokumen Penjaminan Mutu | MKn UNISSULA</title>
         <meta
           name="description"
           content="A comprehensive repository of institutional quality assurance policies, evaluation standards, and formal audit documentation to maintain international academic rigor."
@@ -60,7 +60,7 @@ export default function QaDocuments() {
         {/* Header */}
         <div className="space-y-3">
           <h1 className="text-3xl sm:text-4xl lg:text-[42px] font-heading font-bold text-heading tracking-tight leading-tight">
-            Quality Assurance Documents
+            Dokumen Penjaminan Mutu
           </h1>
           <p className="text-sm sm:text-base text-body leading-relaxed max-w-3xl">
             A comprehensive repository of institutional quality assurance policies, evaluation standards,
@@ -103,7 +103,7 @@ export default function QaDocuments() {
                 onClick={() => alert(`Mengunduh: ${doc.title}`)}
                 className="shrink-0 inline-flex items-center justify-center space-x-1.5 px-4 py-2 border border-gray-300 hover:border-primary text-heading hover:text-primary bg-white text-xs font-semibold rounded-xs shadow-2xs hover:shadow-xs transition-all cursor-pointer"
               >
-                <span>Download</span>
+                <span>Unduh</span>
                 <FiDownload className="text-sm" />
               </button>
             </div>

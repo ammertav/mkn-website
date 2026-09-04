@@ -24,7 +24,7 @@ export default function QualityAssuranceLayout() {
   return (
     <>
       <Helmet>
-        <title>Quality Assurance Unit | MKn UNISSULA</title>
+        <title>Gugus Penjaminan Mutu | MKn UNISSULA</title>
         <meta
           name="description"
           content="Gugus Penjaminan Mutu (Quality Assurance Unit) Program Studi Magister Kenotariatan (MKn) UNISSULA: Dokumen Kebijakan Mutu, Standar Manual, Laporan Audit Internal, dan Evaluasi Pembelajaran."
@@ -45,7 +45,7 @@ export default function QualityAssuranceLayout() {
             {/* Left Sidebar Navigation */}
             <aside className="lg:col-span-4 xl:col-span-3 lg:self-stretch">
               <SidebarNav
-                title="QUALITY ASSURANCE"
+                title="PENJAMINAN MUTU"
                 menus={qualityAssuranceMenus}
                 contact={qaContact}
               />

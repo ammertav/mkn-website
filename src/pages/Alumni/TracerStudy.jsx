@@ -4,7 +4,7 @@ export default function TracerStudy() {
   return (
     <>
       <Helmet>
-        <title>Tracer Study Alumni | MKn UNISSULA</title>
+        <title>Penelusuran Alumni | MKn UNISSULA</title>
         <meta
           name="description"
           content="Laporan Tracer Study, pelacakan jejak karir lulusan, dan survei alumni Magister Kenotariatan (MKn) UNISSULA."
@@ -14,10 +14,10 @@ export default function TracerStudy() {
       <div className="space-y-6">
         <div className="space-y-2">
           <span className="text-xs font-bold tracking-wider uppercase text-primary">
-            Alumni & Career
+            Alumni & Karier
           </span>
           <h1 className="text-3xl sm:text-4xl lg:text-[40px] font-heading font-bold text-heading tracking-tight leading-tight">
-            Tracer Study Alumni MKn UNISSULA
+            Penelusuran Alumni (Tracer Study) MKn UNISSULA
           </h1>
         </div>
 
@@ -30,7 +30,7 @@ export default function TracerStudy() {
 
         <div className="p-12 text-center text-gray-400 border border-dashed border-gray-200 rounded-sm bg-white">
           <p className="text-sm font-medium">
-            Informasi Tracer Study alumni akan segera diperbarui di sini.
+            Informasi penelusuran alumni akan segera diperbarui di sini.
           </p>
         </div>
       </div>

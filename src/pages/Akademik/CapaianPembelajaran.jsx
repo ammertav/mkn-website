@@ -31,23 +31,6 @@ export default function CapaianPembelajaran() {
             {t(halaman.judul)}
           </h1>
           <div className="w-full h-[2px] bg-primary mt-4 mb-5" />
-          <p className="text-base text-body leading-relaxed max-w-5xl">
-            <RichText>{t(cplIntro)}</RichText>
-          </p>
-
-          {/* Tiga deskriptor KKNI Level 8 */}
-          <ol className="mt-5 space-y-3 max-w-5xl list-none">
-            {kkniDescriptors.map((item, idx) => (
-              <li key={idx} className="flex gap-4">
-                <span className="text-sm font-bold text-primary shrink-0 pt-0.5 tabular-nums">
-                  {idx + 1}.
-                </span>
-                <p className="text-sm sm:text-base text-body leading-relaxed">
-                  <RichText>{t(item)}</RichText>
-                </p>
-              </li>
-            ))}
-          </ol>
         </div>
 
         {/* Stats Grid 4 Kolom */}

@@ -3,38 +3,41 @@ import { FiChevronRight } from "react-icons/fi";
 import Img from "../ui/Img";
 
 const campusCultureData = [
-  {
+    {
     id: 1,
-    title: "Perpustakaan",
-    description: "Extensive physical archives and access to leading global legal databases.",
-    image: "https://images.unsplash.com/photo-1568667256549-094345857637?auto=format&fit=crop&w=800&q=80",
-    linkText: "Explore Catalog",
-    linkHref: "/fasilitas/perpustakaan",
-  },
-  {
-    id: 2,
-    title: "Student Research Center (SRC)",
-    description: "Dedicated collaborative spaces for advanced jurisprudential analysis.",
-    image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80",
-    linkText: "View Initiatives",
-    linkHref: "/fasilitas/student-research-center",
-  },
-  {
-    id: 3,
-    title: "Laboratorium",
-    description: "Moot court and simulation labs designed for practical notarial drafting.",
-    image: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=800&q=80",
-    linkText: "Lab Schedules",
-    linkHref: "/fasilitas/laboratorium",
-  },
-  {
-    id: 4,
     title: "Organisasi Mahasiswa",
-    description: "Fostering leadership through academic guilds and student senates.",
+    description: "Wadah kepemimpinan mahasiswa melalui ikatan mahasiswa dan kegiatan keorganisasian.",
     image: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=800&q=80",
-    linkText: "Meet the Council",
+    linkText: "Kenali Pengurus",
     linkHref: "/mahasiswa/organisasi",
   },
+
+    {
+    id: 2,
+    title: "Laboratorium",
+    description: "Ruang peradilan semu dan laboratorium simulasi untuk praktik penyusunan akta.",
+    image: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=800&q=80",
+    linkText: "Jadwal Laboratorium",
+    linkHref: "/fasilitas/laboratorium",
+  },
+
+  {
+    id: 3,
+    title: "Pusat Riset Mahasiswa (SRC)",
+    description: "Ruang kerja bersama untuk kajian hukum tingkat lanjut.",
+    image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80",
+    linkText: "Lihat Kegiatan",
+    linkHref: "/fasilitas/student-research-center",
+  },
+    {
+    id: 4,
+    title: "Perpustakaan",
+    description: "Koleksi cetak yang luas serta akses ke basis data hukum internasional.",
+    image: "https://images.unsplash.com/photo-1568667256549-094345857637?auto=format&fit=crop&w=800&q=80",
+    linkText: "Jelajahi Katalog",
+    linkHref: "/fasilitas/perpustakaan",
+  },
+
 ];
 
 export default function CampusCulture() {
@@ -45,7 +48,7 @@ export default function CampusCulture() {
         {/* Section Header */}
         <div className="text-center mb-12 sm:mb-16">
           <h2 className="text-3xl sm:text-4xl font-heading font-normal text-heading tracking-normal">
-            Campus & Culture
+            Fasilitas & Budaya
           </h2>
         </div>
 

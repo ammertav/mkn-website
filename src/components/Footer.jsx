@@ -35,7 +35,7 @@ const footerSections = [
     ],
   },
   {
-    title: "ACADEMIC",
+    title: "AKADEMIK",
     links: [
       { name: "Profil Lulusan", href: "/akademik/profil-lulusan" },
       { name: "Capaian Pembelajaran", href: "/akademik/capaian-pembelajaran" },
@@ -50,7 +50,7 @@ const footerSections = [
       { name: "Organisasi Mahasiswa", href: "/mahasiswa/organisasi" },
       { name: "Akomodasi", href: "/mahasiswa/akomodasi" },
       { name: "Pengaduan & Bantuan", href: "/layanan-pengaduan" },
-      { name: "Tracer Study", href: "/alumni/tracer-study" },
+      { name: "Penelusuran Alumni", href: "/alumni/tracer-study" },
       { name: "Pusat Karir", href: "/alumni/pusat-karir" },
       { name: "Lowongan Pekerjaan", href: "/alumni/lowongan" },
     ],
@@ -76,13 +76,13 @@ const footerSections = [
     ],
   },
   {
-    title: "QUALITY ASSURANCE",
+    title: "PENJAMINAN MUTU",
     links: [
-      { name: "Quality Assurance Unit", href: "/quality-assurance" },
-      { name: "QA Documents", href: "/quality-assurance/qa-documents" },
-      { name: "Internal Audit Report", href: "/quality-assurance/internal-audit-report" },
-      { name: "Learning Report", href: "/quality-assurance/learning-teaching-report" },
-      { name: "Student Survey", href: "/quality-assurance/student-survey-report" },
+      { name: "Gugus Penjaminan Mutu", href: "/quality-assurance" },
+      { name: "Dokumen Mutu", href: "/quality-assurance/qa-documents" },
+      { name: "Laporan Audit Internal", href: "/quality-assurance/internal-audit-report" },
+      { name: "Laporan Pembelajaran", href: "/quality-assurance/learning-teaching-report" },
+      { name: "Survei Mahasiswa", href: "/quality-assurance/student-survey-report" },
       { name: "Pusat Unduhan", href: "/download" },
     ],
   },

@@ -20,7 +20,7 @@ export default function ResearchCommunity() {
           {/* Background Image */}
           <Img
             src="https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=1200&q=80"
-            alt="Legal Scholarship and Publications"
+            alt="Kajian ilmiah dan publikasi hukum"
             className="absolute inset-0 w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
           />
 
@@ -34,20 +34,20 @@ export default function ResearchCommunity() {
             <div className="w-10 h-1 bg-primary mb-6" />
 
             <h3 className="font-heading font-normal text-2xl sm:text-3xl text-white leading-snug">
-              Legal Scholarship & <br />
-              Publications
+              Kajian Ilmiah & <br />
+              Publikasi Hukum
             </h3>
 
             <p className="mt-4 text-sm sm:text-base text-hero-description leading-relaxed max-w-lg">
-              Exploring advancing jurisprudential thought through rigorous peer-reviewed research and
-              scholarly monographs authored by our distinguished faculty.
+              Mengembangkan pemikiran hukum melalui penelitian bereputasi yang ditelaah sejawat serta
+              monografi ilmiah karya para dosen program studi.
             </p>
 
             <Link
               to="/informasi/penelitian-dosen"
               className="mt-8 inline-flex items-center space-x-2 text-sm font-semibold text-white hover:text-hero-description group/btn transition-colors"
             >
-              <span>Access Journals</span>
+              <span>Lihat Penelitian</span>
               <FiArrowRight className="text-base transition-transform duration-200 group-hover/btn:translate-x-1" />
             </Link>
           </div>
@@ -58,7 +58,7 @@ export default function ResearchCommunity() {
           {/* Background Image */}
           <Img
             src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=1200&q=80"
-            alt="Community Legal Empowerment"
+            alt="Pengabdian dan pemberdayaan hukum masyarakat"
             className="absolute inset-0 w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
           />
 
@@ -72,20 +72,20 @@ export default function ResearchCommunity() {
             <div className="w-10 h-1 bg-white mb-6" />
 
             <h3 className="font-heading font-normal text-2xl sm:text-3xl text-white leading-snug">
-              Community Legal <br />
-              Empowerment
+              Pengabdian &amp; <br />
+              Pemberdayaan Hukum
             </h3>
 
             <p className="mt-4 text-sm sm:text-base text-hero-description leading-relaxed max-w-lg">
-              Translating legal theory into social impact through pro-bono consultation, legal
-              literacy programs, and community advocacy initiatives.
+              Menerjemahkan teori hukum menjadi manfaat nyata lewat konsultasi cuma-cuma, program
+              literasi hukum, dan pendampingan masyarakat.
             </p>
 
             <Link
               to="/informasi/pengabdian-dosen"
               className="mt-8 inline-flex items-center space-x-2 text-sm font-semibold text-white hover:text-hero-description group/btn transition-colors"
             >
-              <span>View Impact Reports</span>
+              <span>Lihat Pengabdian</span>
               <FiArrowRight className="text-base transition-transform duration-200 group-hover/btn:translate-x-1" />
             </Link>
           </div>

@@ -10,7 +10,7 @@ export default function LearningTeachingReport() {
   return (
     <>
       <Helmet>
-        <title>Learning and Teaching Report | MKn UNISSULA</title>
+        <title>Laporan Pembelajaran | MKn UNISSULA</title>
         <meta
           name="description"
           content="Laporan Pembelajaran dan Pengajaran (Learning and Teaching Report) Program Studi Magister Kenotariatan (MKn) UNISSULA: indikator ketercapaian CPMK dan rekomendasi perbaikan."
@@ -23,10 +23,10 @@ export default function LearningTeachingReport() {
         {/* ========================================================================= */}
         <div>
           <span className="text-xs font-bold tracking-[0.18em] uppercase text-primary block mb-2">
-            QUALITY ASSURANCE
+            PENJAMINAN MUTU
           </span>
           <h1 className="text-3xl sm:text-4xl lg:text-[42px] font-heading font-bold text-heading tracking-tight leading-tight">
-            Learning and Teaching Report
+            Laporan Pembelajaran
           </h1>
           <div className="w-full h-[2px] bg-primary my-4" />
           <p className="text-sm sm:text-base text-body leading-relaxed max-w-3xl">
