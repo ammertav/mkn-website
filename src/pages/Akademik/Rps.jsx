@@ -25,7 +25,7 @@ const halaman = {
     },
   },
   label: {
-    id: "ACADEMIC",
+    id: "AKADEMIK",
     en: "ACADEMIC",
   },
   judul: {

@@ -1,77 +1,149 @@
 const eventsData = [
   {
     id: 1,
-    title: "Alumni | Beyond the Green Lounge: Dean Chilton in Conversation with Professor Alison L. LaCroix, Washington, DC",
-    dateBadge: "9/23",
-    dateTime: "Wednesday, September 23, 2026 @ 6:00pm — 8:00pm",
-    faculty: "Participating faculty: Adam Chilton, Alison L. LaCroix",
-    link: "#",
+    slug: "seminar-nasional-pendaftaran-tanah-elektronik-2026",
+    title: "Seminar Nasional: Implikasi Yuridis Pendaftaran Tanah Elektronik bagi Notaris & PPAT",
+    date: "2026-09-01",
+    time: "09:00 - 12:00 WIB",
+    category: "Seminar & Konferensi",
+    venue: "Auditorium Utama Lantai 3 Gedung Pascasarjana / Hybrid Zoom",
+    speaker: "Prof. Dr. H. Ahmad Fauzan, S.H., M.Hum. & Dirjen Penetapan Hak dan Pendaftaran Tanah ATR/BPN",
+    organizer: "Program Studi Magister Kenotariatan UNISSULA",
+    description:
+      "Membahas secara mendalam pergeseran kewenangan PPAT dalam era sertifikat tanah elektronik serta mitigasi risiko hukum atas potensi sengketa kepemilikan dan pembuktian di pengadilan.",
+    fullDescription:
+      "Seminar nasional ini menghadirkan regulator dari Kementerian ATR/BPN serta pakar hukum pertanahan untuk mengkaji kesiapan profesi notaris/PPAT dalam mengimplementasikan peralihan hak secara digital, kepastian hukum warkah elektronik, dan perlindungan bagi pembeli beriktikad baik.",
+    image:
+      "https://images.unsplash.com/photo-1544531585-9847b68c8c86?auto=format&fit=crop&w=1200&q=80",
+    registrationUrl: "https://unissula.ac.id/pendaftaran-seminar",
+    cp: "Sekretariat MKn: 0812-3456-7890 (Ibu Fitri)",
+    isFeatured: true,
   },
   {
     id: 2,
-    title: "Alumni | Beyond the Green Lounge: Dean Chilton in Conversation with Professor William H.J. Hubbard, Chicago",
-    dateBadge: "9/24",
-    dateTime: "Thursday, September 24, 2026 @ 6:00pm — 8:00pm",
-    faculty: "Participating faculty: Adam Chilton, William H.J. Hubbard",
-    link: "#",
+    slug: "stadium-generale-etika-profesi-notaris-modern",
+    title: "Stadium Generale: Integritas & Tantangan Etika Profesi Notaris di Era Kecerdasan Buatan",
+    date: "2026-09-01",
+    time: "14:00 - 16:30 WIB",
+    category: "Kuliah Pakar",
+    venue: "Ruang Seminar MKn 3.01 / Live YouTube MKn UNISSULA",
+    speaker: "Dr. Toni Triyanto, S.H., M.H. & Pengurus Pusat Ikatan Notaris Indonesia (PP INI)",
+    organizer: "HMP MKn UNISSULA & Prodi MKn",
+    description:
+      "Kuliah umum perdana semester gasal yang mengupas tuntas batasan etik, kerahasiaan protokol notaris, dan penerapan teknologi AI tanpa melanggar Undang-Undang Jabatan Notaris (UUJN).",
+    fullDescription:
+      "Perkembangan teknologi generatif menuntut calon notaris memahami batasan antara otomasi administrasi dan keharusan kehadiran fisik para pihak serta pembacaan akta secara langsung di hadapan notaris.",
+    image:
+      "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=1200&q=80",
+    registrationUrl: "https://unissula.ac.id/stadium-generale",
+    cp: "HMP MKn: 0813-9876-5432 (Sdr. Rizky)",
+    isFeatured: true,
   },
   {
     id: 3,
-    title: "Spring 2026 Quarter Paper Deadline (non-grads)",
-    dateBadge: "9/28",
-    dateTime: "Monday, September 28, 2026 @ 5:00pm",
-    faculty: null,
-    link: "#",
+    slug: "workshop-bedah-kasus-akta-perbankan-syariah",
+    title: "Workshop & Praktik: Teknik Penyusunan Akta Pembiayaan Perbankan Syariah & Hak Tanggungan",
+    date: "2026-09-02",
+    time: "08:30 - 15:00 WIB",
+    category: "Workshop & Praktik",
+    venue: "Laboratorium Kenotariatan & Peradilan Semu MKn UNISSULA",
+    speaker: "Praktisi Notaris Mitra Perbankan Syariah & Dosen Pengampu Hukum Perbankan",
+    organizer: "Laboratorium Kenotariatan UNISSULA",
+    description:
+      "Sesi simulasi intensif penyusunan klausula perjanjian murabahah, musyarakah mutanaqisah, dan proses pemasangan APHT elektronik terintegrasi.",
+    fullDescription:
+      "Peserta dibimbing langsung oleh notaris senior perbankan syariah dalam menelaah draf minuta, memeriksa syarat formal dan materiil, serta mencegah celah cacat yuridis dalam akta jaminan syariah.",
+    image:
+      "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1200&q=80",
+    registrationUrl: "https://unissula.ac.id/workshop-akta",
+    cp: "Lab Kenotariatan: 0857-1234-5678",
+    isFeatured: false,
   },
 ];
 
 export default function Events() {
+  // Helper fungsi untuk format tanggal ISO ke badge (misal: "01 Sep")
+  const formatDateBadge = (dateString) => {
+    const dateObj = new Date(dateString);
+    const day = dateObj.getDate().toString().padStart(2, "0");
+    const month = dateObj.toLocaleDateString("id-ID", { month: "short" });
+    return `${day} ${month}`;
+  };
+
+  // Helper fungsi format tanggal lengkap dalam Bahasa Indonesia
+  const formatDateFull = (dateString) => {
+    return new Date(dateString).toLocaleDateString("id-ID", {
+      weekday: "long",
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+    });
+  };
 
   return (
     <section className="w-full bg-white font-body py-16 sm:py-24 border-b border-gray-200">
       <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Section Header */}
+        {/* Header Seksi */}
         <div className="text-center mb-14 sm:mb-20">
           <h2 className="text-3xl sm:text-4xl font-heading font-normal text-heading tracking-normal">
-            Events
+            Agenda & Kegiatan Mendatang
           </h2>
         </div>
 
-        {/* 3-Column Events Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 lg:gap-14 items-start">
+        {/* Grid 3-Kolom Acara */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 lg:gap-14 items-stretch">
           {eventsData.map((item) => (
-            <article key={item.id} className="flex flex-col justify-between h-full space-y-6 group">
-              
-              {/* Event Title */}
+            <article
+              key={item.id}
+              className="flex flex-col justify-between h-full bg-white rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow overflow-hidden group"
+            >
               <div>
-                <h3 className="font-heading font-bold text-base 2xl:text-lg text-heading leading-snug group-hover:text-primary transition-colors cursor-pointer">
-                  {item.title}
-                </h3>
-              </div>
-
-              {/* Event Date & Info Container */}
-              <div className="flex items-start space-x-4 sm:space-x-5 pt-2">
-                
-                {/* Circular Date Badge */}
-                <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full border border-gray-200 bg-white shadow-md flex items-center justify-center shrink-0">
-                  <span className="font-heading font-bold text-base 2xl:text-lg text-heading">
-                    {item.dateBadge}
+                {/* Visual Header / Gambar Acara */}
+                <div className="relative h-48 w-full overflow-hidden bg-gray-100">
+                  <img
+                    src={item.image}
+                    alt={item.title}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  />
+                  <span className="absolute top-3 left-3 bg-white/90 backdrop-blur-md text-xs font-semibold px-3 py-1 rounded-full text-heading shadow-sm">
+                    {item.category}
                   </span>
                 </div>
 
-                {/* Event Schedule & Details */}
-                <div className="space-y-1.5 pt-1 text-xs sm:text-sm text-body leading-relaxed">
-                  <p className="font-medium text-heading">
-                    {item.dateTime}
-                  </p>
-                  {item.faculty && (
-                    <p className="text-xs text-body">
-                      {item.faculty}
-                    </p>
-                  )}
-                </div>
+                <div className="p-6 space-y-4">
+                  {/* Judul Acara */}
+                  <h3 className="font-heading font-bold text-base lg:text-lg text-heading leading-snug group-hover:text-primary transition-colors cursor-pointer line-clamp-2">
+                    {item.title}
+                  </h3>
 
+                  {/* Ringkasan Deskripsi */}
+                  <p className="text-xs sm:text-sm text-body line-clamp-3 leading-relaxed">
+                    {item.description}
+                  </p>
+
+                  {/* Informasi Waktu & Tanggal */}
+                  <div className="flex items-start space-x-4 pt-2 border-t border-gray-100">
+                    {/* Badge Tanggal Melingkar */}
+                    <div className="w-14 h-14 rounded-full border border-gray-200 bg-white shadow-sm flex flex-col items-center justify-center shrink-0 text-center">
+                      <span className="font-heading font-bold text-xs sm:text-sm text-heading uppercase">
+                        {formatDateBadge(item.date)}
+                      </span>
+                    </div>
+
+                    {/* Rincian Jadwal & Lokasi */}
+                    <div className="space-y-1 text-xs text-body leading-relaxed">
+                      <p className="font-medium text-heading">
+                        {formatDateFull(item.date)}
+                      </p>
+                      <p className="text-gray-500">{item.time}</p>
+                      <p className="text-gray-500 font-medium line-clamp-1">
+                        📍 {item.venue}
+                      </p>
+                    </div>
+                  </div>
+
+                </div>
               </div>
 
             </article>

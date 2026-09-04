@@ -22,20 +22,56 @@ export default function Navbar() {
    * Baris identitas menyusut saat halaman digulir ke bawah dan muncul lagi
    * begitu digulir ke atas, supaya baris menu tetap dekat dengan konten.
    *
-   * Ambang 6px meredam getaran gulir (trackpad, scroll-anchoring) yang bisa
-   * membuat baris ini berkedip; ambang 80px menjaga identitas tetap terlihat
-   * di puncak halaman.
+   * Yang menentukan bukan satu peristiwa gulir, melainkan jarak yang sudah
+   * ditempuh ke satu arah: jaraknya diakumulasi dan direset setiap kali arah
+   * berbalik. Tanpa itu, gerakan kecil bolak-balik — trackpad, gulir lembam,
+   * scroll-anchoring saat gambar selesai dimuat — langsung membalik keadaan
+   * dan navbar terlihat berkedip.
+   *
+   * Ambang sembunyi dibuat lebih besar daripada ambang munculkan supaya
+   * identitas mudah dipanggil kembali, tetapi tidak gampang hilang.
    */
   useEffect(() => {
-    let lastY = window.scrollY;
+    const JARAK_SEMBUNYIKAN = 140; // px turun beruntun sebelum baris disembunyikan
+    const JARAK_MUNCULKAN = 60; // px naik beruntun sebelum baris ditampilkan
+    const BATAS_ATAS = 120; // di atas titik ini identitas selalu tampil
 
-    const onScroll = () => {
+    let lastY = window.scrollY;
+    let terkumpul = 0; // jarak searah sejak arah terakhir berubah
+    let ticking = false;
+
+    const evaluasi = () => {
+      ticking = false;
       const y = window.scrollY;
+      const delta = y - lastY;
+      lastY = y;
+
       setIsScrolled(y > 20);
 
-      if (Math.abs(y - lastY) < 6) return;
-      setIsBrandHidden(y > lastY && y > 80);
-      lastY = y;
+      if (y <= BATAS_ATAS) {
+        terkumpul = 0;
+        setIsBrandHidden(false);
+        return;
+      }
+
+      // Arah berbalik — mulai menghitung dari nol lagi.
+      if (delta * terkumpul < 0) terkumpul = 0;
+      terkumpul += delta;
+
+      if (terkumpul >= JARAK_SEMBUNYIKAN) {
+        terkumpul = 0;
+        setIsBrandHidden(true);
+      } else if (terkumpul <= -JARAK_MUNCULKAN) {
+        terkumpul = 0;
+        setIsBrandHidden(false);
+      }
+    };
+
+    // Gulir bisa memicu puluhan peristiwa per frame; cukup dievaluasi sekali.
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      window.requestAnimationFrame(evaluasi);
     };
 
     window.addEventListener("scroll", onScroll, { passive: true });

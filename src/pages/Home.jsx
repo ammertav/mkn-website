@@ -2,12 +2,14 @@ import { Helmet } from "react-helmet-async";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import Hero from "../components/Home/Hero";
-import ProfilVideo from "../components/Home/ProfilVideo";
 import AcademicFocus from "../components/Home/AcademicFocus";
 import ResearchCommunity from "../components/Home/ResearchCommunity";
 import ExpertSpotlight from "../components/Home/ExpertSpotlight";
 import CampusCulture from "../components/Home/CampusCulture";
 import Events from "../components/Home/Events";
+import Testimoni from "../components/Home/Testimoni";
+import FAQ from "../components/Home/Faq";
+import Ready from "../components/Home/Ready";
 
 export default function Home() {
   return (
@@ -38,9 +40,6 @@ export default function Home() {
         {/* Hero Section */}
         <Hero />
 
-        {/* Profil / Video Profil Section */}
-        <ProfilVideo />
-
         {/* Academic Focus / Berita & Wawasan Section */}
         <AcademicFocus />
 
@@ -55,6 +54,15 @@ export default function Home() {
 
         {/* Events Section */}
         <Events />
+
+        {/* Testimoni Section */}
+        <Testimoni />
+
+        {/* FAQ Section */}
+        <FAQ />
+
+        {/* Ready Section */}
+        <Ready />
 
         {/* Additional Content Area */}
         <div className="w-full flex-grow">

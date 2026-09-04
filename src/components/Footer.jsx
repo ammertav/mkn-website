@@ -42,7 +42,6 @@ const footerSections = [
       { name: "Kurikulum", href: "/akademik/kurikulum" },
       { name: "Panduan Evaluasi", href: "/akademik/panduan-evaluasi" },
       { name: "Panduan Ujian", href: "/akademik/panduan-ujian" },
-      { name: "Asesmen", href: "/akademik/asesmen" },
     ],
   },
   {

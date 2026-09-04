@@ -45,7 +45,7 @@ export const navLinks = [
     href: "/berita",
   },
   {
-    title: { id: "ACADEMIC", en: "ACADEMIC" },
+    title: { id: "AKADEMIK", en: "ACADEMIC" },
     href: "/akademik",
     children: [
       {
@@ -71,10 +71,6 @@ export const navLinks = [
               en: "Learning Evaluation Guidelines",
             },
             href: "/akademik/pembelajaran/panduan-evaluasi",
-          },
-          {
-            title: { id: "Asesmen", en: "Assessment" },
-            href: "/akademik/pembelajaran/asesmen",
           },
         ],
       },
@@ -131,6 +127,7 @@ export const navLinks = [
     title: { id: "ALUMNI", en: "ALUMNI" },
     href: "/alumni",
     children: [
+      { title: { id: "Ikanotsula", en: "Ikanotsula" }, href: "/alumni/ikanotsula" },
       { title: { id: "Tracer Study", en: "Tracer Study" }, href: "/alumni/tracer-study" },
       { title: { id: "Pusat Karir", en: "Career Centre" }, href: "/alumni/pusat-karir" },
       { title: { id: "Lowongan Pekerjaan", en: "Job Vacancies" }, href: "/alumni/lowongan" },

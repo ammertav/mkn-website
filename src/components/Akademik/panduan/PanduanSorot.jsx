@@ -52,11 +52,6 @@ export function JudulSeksi({ judul, keterangan }) {
         {t(judul)}
       </h2>
       <div className="w-full h-[1.5px] bg-heading" />
-      {keterangan && (
-        <p className="text-sm sm:text-base text-body leading-relaxed pt-2 max-w-5xl">
-          <RichText>{t(keterangan)}</RichText>
-        </p>
-      )}
     </div>
   );
 }
@@ -65,7 +60,7 @@ export function JudulSeksi({ judul, keterangan }) {
 export function KartuRingkas({ butir, kolom = 3 }) {
   const t = useT();
   const grid =
-    kolom === 2 ? "sm:grid-cols-2" : kolom === 4 ? "sm:grid-cols-2 lg:grid-cols-4" : "sm:grid-cols-3";
+    kolom === 2 ? "sm:grid-cols-2" : kolom === 4 ? "sm:grid-cols-2 lg:grid-cols-2" : "sm:grid-cols-2";
 
   return (
     <div className={`grid grid-cols-1 ${grid} gap-5`}>

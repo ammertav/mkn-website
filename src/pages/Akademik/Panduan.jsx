@@ -2,6 +2,7 @@ import { Fragment } from "react";
 import { Helmet } from "react-helmet-async";
 import { FiBookOpen, FiFileText, FiDownload } from "react-icons/fi";
 import { useT } from "../../i18n/languageContext";
+import { useUi } from "../../i18n/useUi";
 
 import pedomanAkademik from "../../assets/pdf/Pedoman Akademik 2021.pdf";
 import pedomanLaboratorium from "../../assets/pdf/Pedoman Praktek Laboratorium Manajemen Kantor Notaris & PPAT.pdf";
@@ -182,6 +183,7 @@ function PengajuanIzinRiset() {
 
 export default function Panduan() {
   const t = useT();
+  const ui = useUi();
 
   return (
     <>
@@ -194,7 +196,7 @@ export default function Panduan() {
         {/* Header Title Section */}
         <div>
           <span className="text-xs font-bold tracking-[0.18em] uppercase text-primary block mb-2">
-            ACADEMIC
+            {ui("sectionAcademic")}
           </span>
           <h1 className="text-3xl sm:text-4xl lg:text-[42px] font-heading font-bold text-heading tracking-tight leading-tight">
             {t(halaman.judul)}

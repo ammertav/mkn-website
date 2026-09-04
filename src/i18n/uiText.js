@@ -20,6 +20,9 @@ export const uiText = {
   readMore: { id: "Pelajari Lebih Lanjut", en: "Learn More" },
   viewAll: { id: "Lihat Semua", en: "View All" },
 
+  // Label seksi di kepala halaman (teks kecil di atas judul)
+  sectionAcademic: { id: "AKADEMIK", en: "ACADEMIC" },
+
   // Dokumen & unduhan
   download: { id: "Unduh", en: "Download" },
   notAvailable: { id: "Belum tersedia", en: "Not yet available" },

@@ -23,7 +23,6 @@ const CapaianPembelajaran = lazy(() => import("./pages/Akademik/CapaianPembelaja
 const Panduan = lazy(() => import("./pages/Akademik/Panduan"));
 const Rps = lazy(() => import("./pages/Akademik/Rps"));
 const PanduanEvaluasi = lazy(() => import("./pages/Akademik/PanduanEvaluasi"));
-const Asesmen = lazy(() => import("./pages/Akademik/Asesmen"));
 const PanduanUjian = lazy(() => import("./pages/Akademik/PanduanUjian"));
 const UtsUas = lazy(() => import("./pages/Akademik/UtsUas"));
 const Tesis = lazy(() => import("./pages/Akademik/Tesis"));
@@ -82,6 +81,7 @@ const EventDetailPage = lazy(() => import("./pages/Event/EventDetail"));
 // Alumni & Karir sub-pages
 const AlumniLayout = lazy(() => import("./pages/Alumni/index"));
 const TracerStudy = lazy(() => import("./pages/Alumni/TracerStudy"));
+const Ikanotsula = lazy(() => import("./pages/Alumni/Ikanotsula"));
 const CareerCenter = lazy(() => import("./pages/Alumni/CareerCenter"));
 const JobVacancies = lazy(() => import("./pages/Alumni/JobVacancies"));
 
@@ -121,7 +121,6 @@ export default function App() {
             <Route index element={<Navigate to="rps" replace />} />
             <Route path="rps" element={<Rps />} />
             <Route path="panduan-evaluasi" element={<PanduanEvaluasi />} />
-            <Route path="asesmen" element={<Asesmen />} />
           </Route>
           {/* Alias lama */}
           <Route path="panduan-evaluasi" element={<Navigate to="../pembelajaran/panduan-evaluasi" replace />} />
@@ -217,7 +216,8 @@ export default function App() {
 
         {/* Alumni & Karir — nested routes */}
         <Route path="/alumni" element={<AlumniLayout />}>
-          <Route index element={<Navigate to="tracer-study" replace />} />
+          <Route index element={<Navigate to="ikanotsula" replace />} />
+          <Route path="ikanotsula" element={<Ikanotsula />} />
           <Route path="tracer-study" element={<TracerStudy />} />
           <Route path="pusat-karir" element={<CareerCenter />} />
           <Route path="lowongan" element={<JobVacancies />} />

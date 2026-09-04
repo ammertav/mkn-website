@@ -11,7 +11,7 @@ export default function ExpertSpotlight() {
           
           {/* Left Column: Portrait Photo with Border Frame */}
           <div className="lg:col-span-5 flex justify-center lg:justify-start">
-            <div className="p-2.5 sm:p-3.5 bg-white border border-gray-200 shadow-sm w-full max-w-sm sm:max-w-md">
+            <div className="bg-white w-full max-w-sm sm:max-w-md">
               <div className="aspect-[4/5] w-full overflow-hidden bg-gray-100">
                 <Img
                   src={professorImg}

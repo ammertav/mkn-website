@@ -1,5 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import { useT } from "../../i18n/languageContext";
+import { useUi } from "../../i18n/useUi";
 
 const halaman = {
   meta: {
@@ -28,6 +29,7 @@ const halaman = {
 
 export default function Kalender() {
   const t = useT();
+  const ui = useUi();
 
   return (
     <>
@@ -39,7 +41,7 @@ export default function Kalender() {
       <div className="space-y-6">
         <div>
           <span className="text-[11px] font-bold tracking-[0.16em] uppercase text-primary block mb-2">
-            ACADEMIC
+            {ui("sectionAcademic")}
           </span>
           <h1 className="text-3xl sm:text-4xl md:text-[42px] font-heading font-bold text-heading tracking-normal">
             {t(halaman.judul)}
