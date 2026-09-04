@@ -1,8 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import {
-  researchMetrics,
   featuredPublications,
-  fundingSchemes,
   supportingDocuments,
 } from "../../data/informasi/lecturerResearchData";
 
@@ -32,20 +30,6 @@ export default function LecturerResearch() {
           <p className="text-sm sm:text-base text-body leading-relaxed max-w-3xl">
             Penelitian dosen diarahkan pada empat peta jalan program studi: kepastian hukum akta autentik, pendaftaran tanah dan hukum agraria, hukum perusahaan dan kepailitan, serta digitalisasi jabatan notaris. Setiap penelitian diwajibkan menghasilkan luaran publikasi dan bahan ajar.
           </p>
-
-          {/* Metric Stats Cards */}
-          <div className="grid grid-cols-2 md:grid-cols-4 bg-white border border-gray-200 divide-x divide-y md:divide-y-0 divide-gray-200 mt-8 rounded-xs shadow-2xs">
-            {researchMetrics.map((metric, idx) => (
-              <div key={idx} className="p-5 sm:p-6 text-left flex flex-col justify-center">
-                <span className="font-heading italic font-normal text-3xl sm:text-4xl text-primary block leading-none">
-                  {metric.value}
-                </span>
-                <span className="text-[11px] sm:text-xs font-semibold tracking-wider uppercase text-body mt-2 block">
-                  {metric.label}
-                </span>
-              </div>
-            ))}
-          </div>
         </div>
 
         {/* ========================================================================= */}
@@ -79,48 +63,6 @@ export default function LecturerResearch() {
         </section>
 
         {/* ========================================================================= */}
-        {/* SKEMA PENDANAAN */}
-        {/* ========================================================================= */}
-        <section className="space-y-4">
-          <div className="pb-2 border-b-2 border-heading">
-            <h2 className="text-2xl font-heading font-normal text-heading tracking-tight">
-              Skema Pendanaan
-            </h2>
-          </div>
-
-          <div className="border border-gray-200 bg-white overflow-x-auto shadow-2xs">
-            <table className="w-full text-left border-collapse text-xs sm:text-sm">
-              <thead>
-                <tr className="border-b-2 border-heading text-xs font-bold tracking-wider text-heading uppercase">
-                  <th className="py-3.5 px-5 font-bold w-1/3">SKEMA</th>
-                  <th className="py-3.5 px-5 font-bold w-1/4">SUMBER DANA</th>
-                  <th className="py-3.5 px-5 font-bold">JUMLAH 2024</th>
-                  <th className="py-3.5 px-5 font-bold w-1/4">LUARAN WAJIB</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-gray-200">
-                {fundingSchemes.map((item, idx) => (
-                  <tr key={idx} className="hover:bg-gray-50/50 transition-colors">
-                    <td className="py-4 px-5 text-heading whitespace-nowrap">
-                      {item.scheme}
-                    </td>
-                    <td className="py-4 px-5 text-body">
-                      {item.source}
-                    </td>
-                    <td className="py-4 px-5 text-body whitespace-nowrap">
-                      {item.amount2024}
-                    </td>
-                    <td className="py-4 px-5 text-body">
-                      {item.mandatoryOutput}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </section>
-
-        {/* ========================================================================= */}
         {/* DOKUMEN PENDUKUNG */}
         {/* ========================================================================= */}
         <section className="space-y-4">
@@ -134,25 +76,21 @@ export default function LecturerResearch() {
             <table className="w-full text-left border-collapse text-xs sm:text-sm">
               <thead>
                 <tr className="border-b-2 border-heading text-xs font-bold tracking-wider text-heading uppercase">
-                  <th className="py-3.5 px-5 font-bold w-1/2">JUDUL DOKUMEN</th>
-                  <th className="py-3.5 px-5 font-bold">VERSI</th>
-                  <th className="py-3.5 px-5 font-bold">TANGGAL</th>
-                  <th className="py-3.5 px-5 font-bold">UNDUH</th>
+                  <th className="py-3.5 px-5 font-bold">JUDUL DOKUMEN</th>
+                  <th className="py-3.5 px-5 font-bold w-36 whitespace-nowrap">TANGGAL</th>
+                  <th className="py-3.5 px-5 font-bold w-28 whitespace-nowrap">UNDUH</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-200">
                 {supportingDocuments.map((doc) => (
                   <tr key={doc.id} className="hover:bg-gray-50/50 transition-colors">
-                    <td className="py-4 px-5 text-heading">
+                    <td className="py-4 px-5 text-heading font-medium">
                       {doc.title}
-                    </td>
-                    <td className="py-4 px-5 text-body">
-                      {doc.version}
                     </td>
                     <td className="py-4 px-5 text-body whitespace-nowrap">
                       {doc.date}
                     </td>
-                    <td className="py-4 px-5">
+                    <td className="py-4 px-5 whitespace-nowrap">
                       <a
                         href={doc.fileUrl}
                         download={doc.fileName}

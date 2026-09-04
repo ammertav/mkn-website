@@ -1,4 +1,4 @@
-import samplePdf from "../../assets/pdf/2. Pedoman Akademik MKN.pdf";
+import daftarPengabdianPdf from "../../assets/pdf/DAFTAR PENGABDIAN MASYARAKAT.pdf";
 
 export const serviceMetrics = [
   {
@@ -21,34 +21,54 @@ export const serviceMetrics = [
 
 export const featuredActivities = [
   {
-    activity: "Penyuluhan pendaftaran tanah sistematis lengkap",
-    partner: "Pemerintah Desa Bandungrejo",
-    location: "Kab. Demak",
-    lead: "Dr. Widhi Handoko",
+    activity: '"Pentingnya Pencatatan Peristiwa Hukum dalam Notaris/PPAT #4" - Penyuluhan Hukum',
+    location: "Kecamatan Magelang Tengah, Kota Magelang, Jawa Tengah",
+    lead: "Dr. Nanang Sri Darmadi, S.H., M.H.",
   },
   {
-    activity: "Pendampingan legalitas usaha mikro dan koperasi",
-    partner: "Dinas Koperasi dan UKM",
-    location: "Kota Semarang",
-    lead: "Dr. Aryani Witasari",
+    activity: '"Pentingnya Pencatatan Peristiwa Hukum dalam Notaris/PPAT #4" - Pembuatan Akta Notaris dan PPAT secara Gratis',
+    location: "Kecamatan Magelang Tengah, Kota Magelang, Jawa Tengah",
+    lead: "Prof. Dr. Widhi Handoko, S.H., Sp.N.",
   },
   {
-    activity: "Klinik perjanjian bagi pelaku usaha kecil",
-    partner: "Kamar Dagang dan Industri",
-    location: "Kota Semarang",
-    lead: "Dr. Achmad Arifullah",
+    activity: '"Pentingnya Pencatatan Peristiwa Hukum dalam Notaris/PPAT #4" - Pendaftaran PT Perorangan secara Gratis',
+    location: "Kecamatan Magelang Tengah, Kota Magelang, Jawa Tengah",
+    lead: "Prof. Dr. Widhi Handoko, S.H., Sp.N.",
   },
   {
-    activity: "Literasi hukum waris bagi majelis taklim",
-    partner: "Masjid Agung Jawa Tengah",
-    location: "Kota Semarang",
-    lead: "Dr. Maryanto",
+    activity: '"Pentingnya Pencatatan Peristiwa Hukum dalam Notaris/PPAT #4" - Penanaman Pohon di Kawasan Hutan Kiai Langgeng',
+    location: "Kecamatan Magelang Tengah, Kota Magelang, Jawa Tengah",
+    lead: "Prof. Dr. Widhi Handoko, S.H., Sp.N.",
   },
   {
-    activity: "Pelatihan administrasi protokol bagi staf",
-    partner: "Pengurus Wilayah INI",
-    location: "Kota Semarang",
-    lead: "Dr. Sri Endah Wahyuningsih",
+    activity: '"Pentingnya Pencatatan Peristiwa Hukum dalam Notaris/PPAT #4" - Penyerahan Laptop, LCD Proyektor dan Screen ke Taman Pendidikan Al Qur\'an (TPQ)',
+    location: "Kecamatan Magelang Tengah, Kota Magelang, Jawa Tengah",
+    lead: "Prof. Dr. Widhi Handoko, S.H., Sp.N.",
+  },
+  {
+    activity: "Narasumber Seminar Perbankan (Perubahan KUHP & KUHAP, Business Judgment Rule, dan Kriminalisasi Kredit Macet - DPW Perbamida Jateng & DIY)",
+    location: "PT BPR Bank Klaten (Perseroda), Jl. Veteran No 140 Klaten, Jawa Tengah",
+    lead: "Dr. Dahniarti Hasana, S.H., M.Kn.",
+  },
+  {
+    activity: "Narasumber dan Penguji Seleksi Anggota Luar Biasa (ALB) Ikatan Notaris Indonesia (Pengda Kab. Semarang INI)",
+    location: "Melva Balemong Resort, Jl. Patimura Krajan, Ungaran Barat",
+    lead: "Dr. Dahniarti Hasana, S.H., M.Kn.",
+  },
+  {
+    activity: "Mediator Dewan Sengketa Indonesia (Periode 2021-2026)",
+    location: "Lingkup Nasional / Institusional",
+    lead: "Prof. Dr. Widhi Handoko, S.H., Sp.N.",
+  },
+  {
+    activity: "Memberikan Keterangan Ahli di Pengadilan",
+    location: "Pengadilan Negeri Semarang",
+    lead: "Prof. Dr. Widhi Handoko, S.H., Sp.N.",
+  },
+  {
+    activity: "Ketua Bidang Diklatsar dan Pembekalan Kode Etik PP IPPAT (Periode 2024-2027)",
+    location: "Pengurus Pusat Ikatan Pejabat Pembuat Akta Tanah (PP IPPAT)",
+    lead: "Dr. Taufan Fajar Riyanto, S.H., M.Kn.",
   },
 ];
 
@@ -82,29 +102,10 @@ export const reportsAndOutputs = [
 export const supportingDocuments = [
   {
     id: 1,
-    title: "Peta Jalan Pengabdian MKn 2024–2028",
-    version: "v1.0",
-    date: "16 Feb 2024",
+    title: "Daftar Pengabdian Masyarakat Dosen MKn",
+    date: "5 Sep 2026",
     fileType: "PDF",
-    fileUrl: samplePdf,
-    fileName: "Peta-Jalan-Pengabdian-MKn-2024-2028.pdf",
-  },
-  {
-    id: 2,
-    title: "Laporan Kinerja Pengabdian 2024",
-    version: "v1.0",
-    date: "20 Des 2024",
-    fileType: "PDF",
-    fileUrl: samplePdf,
-    fileName: "Laporan-Kinerja-Pengabdian-2024-MKn.pdf",
-  },
-  {
-    id: 3,
-    title: "Formulir Pengajuan Kerja Sama Pengabdian",
-    version: "v1.3",
-    date: "05 Jan 2024",
-    fileType: "DOCX",
-    fileUrl: samplePdf,
-    fileName: "Formulir-Pengajuan-Kerjasama-Pengabdian-MKn.docx",
+    fileUrl: daftarPengabdianPdf,
+    fileName: "DAFTAR PENGABDIAN MASYARAKAT.pdf",
   },
 ];

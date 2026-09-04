@@ -1,8 +1,7 @@
 import { Helmet } from "react-helmet-async";
 import {
-  serviceMetrics,
   featuredActivities,
-  reportsAndOutputs,
+  // reportsAndOutputs, // di-hide sementara
   supportingDocuments,
 } from "../../data/informasi/communityServiceData";
 
@@ -32,29 +31,15 @@ export default function CommunityService() {
           <p className="text-sm sm:text-base text-body leading-relaxed max-w-3xl">
             Pengabdian kepada masyarakat diselenggarakan sebagai penerjemahan keilmuan kenotariatan ke dalam layanan hukum yang dapat diakses masyarakat: penyuluhan pertanahan desa, pendampingan legalitas usaha mikro, dan konsultasi pembuatan perjanjian.
           </p>
-
-          {/* Metric Stats Cards */}
-          <div className="grid grid-cols-2 md:grid-cols-4 bg-white border border-gray-200 divide-x divide-y md:divide-y-0 divide-gray-200 mt-8 rounded-xs shadow-2xs">
-            {serviceMetrics.map((metric, idx) => (
-              <div key={idx} className="p-5 sm:p-6 text-left flex flex-col justify-center">
-                <span className="font-heading italic font-normal text-3xl sm:text-4xl text-primary block leading-none">
-                  {metric.value}
-                </span>
-                <span className="text-[11px] sm:text-xs font-semibold tracking-wider uppercase text-body mt-2 block">
-                  {metric.label}
-                </span>
-              </div>
-            ))}
-          </div>
         </div>
 
         {/* ========================================================================= */}
-        {/* KEGIATAN TERPILIH 2024 */}
+        {/* KEGIATAN TERPILIH */}
         {/* ========================================================================= */}
         <section className="space-y-4">
           <div className="pb-2 border-b-2 border-heading">
             <h2 className="text-2xl font-heading font-normal text-heading tracking-tight">
-              Kegiatan Terpilih 2024
+              Kegiatan Terpilih
             </h2>
           </div>
 
@@ -62,22 +47,18 @@ export default function CommunityService() {
             <table className="w-full text-left border-collapse text-xs sm:text-sm">
               <thead>
                 <tr className="border-b-2 border-heading text-xs font-bold tracking-wider text-heading uppercase">
-                  <th className="py-3.5 px-5 font-bold w-2/5">KEGIATAN</th>
-                  <th className="py-3.5 px-5 font-bold w-1/4">MITRA</th>
-                  <th className="py-3.5 px-5 font-bold w-1/6">LOKASI</th>
-                  <th className="py-3.5 px-5 font-bold w-1/4">KETUA PELAKSANA</th>
+                  <th className="py-3.5 px-5 font-bold">KEGIATAN</th>
+                  <th className="py-3.5 px-5 font-bold w-1/4 sm:w-1/3">LOKASI</th>
+                  <th className="py-3.5 px-5 font-bold w-1/4 whitespace-nowrap">KETUA PELAKSANA</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-200">
                 {featuredActivities.map((item, idx) => (
                   <tr key={idx} className="hover:bg-gray-50/50 transition-colors">
-                    <td className="py-4 px-5 text-heading leading-relaxed">
+                    <td className="py-4 px-5 text-heading leading-relaxed font-medium">
                       {item.activity}
                     </td>
                     <td className="py-4 px-5 text-body">
-                      {item.partner}
-                    </td>
-                    <td className="py-4 px-5 text-body whitespace-nowrap">
                       {item.location}
                     </td>
                     <td className="py-4 px-5 text-body whitespace-nowrap">
@@ -91,8 +72,9 @@ export default function CommunityService() {
         </section>
 
         {/* ========================================================================= */}
-        {/* LAPORAN DAN LUARAN */}
+        {/* LAPORAN DAN LUARAN (DI-HIDE SEMENTARA) */}
         {/* ========================================================================= */}
+        {/*
         <section className="space-y-4">
           <div className="pb-2 border-b-2 border-heading">
             <h2 className="text-2xl font-heading font-normal text-heading tracking-tight">
@@ -119,6 +101,7 @@ export default function CommunityService() {
             ))}
           </div>
         </section>
+        */}
 
         {/* ========================================================================= */}
         {/* DOKUMEN PENDUKUNG */}
@@ -134,25 +117,21 @@ export default function CommunityService() {
             <table className="w-full text-left border-collapse text-xs sm:text-sm">
               <thead>
                 <tr className="border-b-2 border-heading text-xs font-bold tracking-wider text-heading uppercase">
-                  <th className="py-3.5 px-5 font-bold w-1/2">JUDUL DOKUMEN</th>
-                  <th className="py-3.5 px-5 font-bold">VERSI</th>
-                  <th className="py-3.5 px-5 font-bold">TANGGAL</th>
-                  <th className="py-3.5 px-5 font-bold">UNDUH</th>
+                  <th className="py-3.5 px-5 font-bold">JUDUL DOKUMEN</th>
+                  <th className="py-3.5 px-5 font-bold w-36 whitespace-nowrap">TANGGAL</th>
+                  <th className="py-3.5 px-5 font-bold w-28 whitespace-nowrap">UNDUH</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-200">
                 {supportingDocuments.map((doc) => (
                   <tr key={doc.id} className="hover:bg-gray-50/50 transition-colors">
-                    <td className="py-4 px-5 text-heading">
+                    <td className="py-4 px-5 text-heading font-medium">
                       {doc.title}
-                    </td>
-                    <td className="py-4 px-5 text-body">
-                      {doc.version}
                     </td>
                     <td className="py-4 px-5 text-body whitespace-nowrap">
                       {doc.date}
                     </td>
-                    <td className="py-4 px-5">
+                    <td className="py-4 px-5 whitespace-nowrap">
                       <a
                         href={doc.fileUrl}
                         download={doc.fileName}
