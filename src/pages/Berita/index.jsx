@@ -57,7 +57,6 @@ const halaman = {
     id: "Kategori Berita dan Pengumuman",
     en: "News and Announcements categories",
   },
-  fotoUtama: { id: "Foto berita utama", en: "Featured news photo" },
   beritaUtama: { id: "BERITA UTAMA", en: "FEATURED" },
   bacaSelengkapnya: { id: "BACA SELENGKAPNYA", en: "READ MORE" },
   beritaLainnya: { id: "Berita Lainnya", en: "More News" },
@@ -197,11 +196,6 @@ export default function BeritaIndex() {
                       e.currentTarget.style.display = "none";
                     }}
                   />
-                  <div className="absolute inset-0 bg-black/15 flex items-center justify-center p-4">
-                    <span className="text-xs sm:text-sm text-gray-700 bg-white/90 px-4 py-2 rounded-xs shadow-xs backdrop-blur-xs font-medium">
-                      {t(halaman.fotoUtama)}
-                    </span>
-                  </div>
                 </Link>
               </div>
 

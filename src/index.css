@@ -24,6 +24,29 @@
     --header-h: 148px;
 }
 
+/* Tinggi header saat berada di puncak halaman beranda, dipakai Hero untuk
+   mengisi sisa layar dengan tepat. Berbeda dari --header-h karena di lg baris
+   identitas disembunyikan di puncak (TopBar 40px + border 1px + menu 44px),
+   sedangkan di mobile baris identitas tetap tampil (40 + 1 + 64). */
+:root {
+    --hero-offset: 105px;
+}
+
+@media (min-width: 1024px) {
+    :root {
+        --hero-offset: 85px;
+    }
+}
+
+/* Hero setinggi sisa layar. Dua deklarasi: yang pertama jadi cadangan untuk
+   peramban tanpa unit svh. svh dipakai supaya bilah alamat mobile yang muncul
+   dan hilang tidak membuat halaman ikut melar. Ambang 520px menjaga isi hero
+   tetap muat di layar lanskap yang sangat pendek. */
+.hero-viewport {
+    min-height: max(520px, calc(100vh - var(--hero-offset)));
+    min-height: max(520px, calc(100svh - var(--hero-offset)));
+}
+
 /* ── Placeholder gambar ─────────────────────────────────────────────
    Skeleton digambar sebagai background pada <img> itu sendiri, bukan
    sebagai elemen terpisah. Konsekuensinya <Img> bisa menggantikan <img>

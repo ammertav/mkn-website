@@ -24,9 +24,9 @@ export default function FasilitasHero() {
             Ruang untuk Belajar dan Meneliti
           </h1>
           <p className="text-sm sm:text-base lg:text-lg text-hero-description font-normal leading-relaxed pt-2">
-            Empat kelompok fasilitas menopang penyelenggaraan pendidikan Magister
-            Kenotariatan, dari ruang kelas dan laboratorium akta hingga pusat
-            riset mahasiswa dan perpustakaan hukum.
+            Enam kelompok fasilitas menopang penyelenggaraan pendidikan Magister
+            Kenotariatan, dari ruang kelas dan laboratorium hingga pusat riset
+            mahasiswa, perpustakaan hukum, dan ruang moot court.
           </p>
         </div>
       </div>

@@ -1,10 +1,35 @@
 import { Helmet } from "react-helmet-async";
+import FacilityPlaceholder from "../../components/Fasilitas/FacilityPlaceholder";
 import FacilitySectionHeader from "../../components/Fasilitas/FacilitySectionHeader";
 import FacilitySpecSection from "../../components/Fasilitas/FacilitySpecSection";
 import { researchCenterData } from "../../data/fasilitasData";
 
+/**
+ * Susunan halaman di bawah sudah jadi, tetapi datanya masih data sementara,
+ * jadi untuk saat ini yang tayang adalah placeholder. Isinya sengaja ditahan,
+ * bukan dibuang — ubah konstanta ini menjadi true begitu data asli masuk.
+ */
+const KONTEN_SIAP = false;
+
 export default function ResearchCenter() {
   const { header, servicesSection, scheduleList } = researchCenterData;
+
+  if (!KONTEN_SIAP) {
+    return (
+      <>
+        <Helmet>
+          <title>Student Research Center | MKn UNISSULA</title>
+          <meta name="description" content="Informasi Student Research Center Program Studi Magister Kenotariatan UNISSULA." />
+        </Helmet>
+
+        <FacilityPlaceholder
+          category="STUDENT RESEARCH CENTER"
+          title="Student Research Center"
+          description="Halaman ini akan memuat keterangan Student Research Center, ruang kerja penelitian dan penulisan tesis bagi mahasiswa, beserta layanan pendampingan yang tersedia di dalamnya."
+        />
+      </>
+    );
+  }
 
   return (
     <>

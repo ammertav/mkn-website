@@ -1,11 +1,44 @@
 import { Helmet } from "react-helmet-async";
+import FacilityPlaceholder from "../../components/Fasilitas/FacilityPlaceholder";
 import FacilitySectionHeader from "../../components/Fasilitas/FacilitySectionHeader";
 import FacilitySpecSection from "../../components/Fasilitas/FacilitySpecSection";
 import { laboratoriumData } from "../../data/fasilitasData";
 import Img from "../../components/ui/Img";
 
+/**
+ * Halaman ini tidak lagi terpasang pada rute mana pun: tab "Laboratorium"
+ * sudah dipecah menjadi Laboratorium Akta dan Laboratorium Manajemen Kantor,
+ * dan /fasilitas/laboratorium kini dialihkan ke Laboratorium Akta. Berkasnya
+ * dipertahankan sebagai sumber susunan dan isi ketika kedua halaman baru itu
+ * diisi data asli, lalu boleh dihapus.
+ */
+
+/**
+ * Susunan halaman di bawah sudah jadi, tetapi datanya masih data sementara,
+ * jadi untuk saat ini yang tayang adalah placeholder. Isinya sengaja ditahan,
+ * bukan dibuang — ubah konstanta ini menjadi true begitu data asli masuk.
+ */
+const KONTEN_SIAP = false;
+
 export default function Laboratorium() {
   const { header, standard, labList, gallery } = laboratoriumData;
+
+  if (!KONTEN_SIAP) {
+    return (
+      <>
+        <Helmet>
+          <title>Laboratorium | MKn UNISSULA</title>
+          <meta name="description" content="Informasi laboratorium Program Studi Magister Kenotariatan UNISSULA." />
+        </Helmet>
+
+        <FacilityPlaceholder
+          category="LABORATORIUM"
+          title="Laboratorium"
+          description="Halaman ini akan memuat keterangan laboratorium Program Studi Magister Kenotariatan UNISSULA beserta perangkat dan jadwal penggunaannya."
+        />
+      </>
+    );
+  }
 
   return (
     <>

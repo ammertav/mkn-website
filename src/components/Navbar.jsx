@@ -9,14 +9,21 @@ import DesktopNav from "./Navbar/DesktopNav";
 import MobileNav from "./Navbar/MobileNav";
 import Img from "./ui/Img";
 
+const JARAK_SEMBUNYIKAN = 140; // px turun beruntun sebelum baris disembunyikan
+const JARAK_MUNCULKAN = 60; // px naik beruntun sebelum baris ditampilkan
+const BATAS_ATAS = 120; // di bawah titik ini halaman dianggap masih di puncak
+
 export default function Navbar() {
   const location = useLocation();
+  const isHome = location.pathname === "/";
 
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isBrandHidden, setIsBrandHidden] = useState(false);
+  const [isBrandHidden, setIsBrandHidden] = useState(
+    () => location.pathname === "/" && window.scrollY <= BATAS_ATAS
+  );
 
   /**
    * Baris identitas menyusut saat halaman digulir ke bawah dan muncul lagi
@@ -30,12 +37,11 @@ export default function Navbar() {
    *
    * Ambang sembunyi dibuat lebih besar daripada ambang munculkan supaya
    * identitas mudah dipanggil kembali, tetapi tidak gampang hilang.
+   *
+   * Perkecualian di puncak halaman: di beranda identitas disembunyikan agar
+   * video hero terlihat penuh, di halaman lain identitas selalu ditampilkan.
    */
   useEffect(() => {
-    const JARAK_SEMBUNYIKAN = 140; // px turun beruntun sebelum baris disembunyikan
-    const JARAK_MUNCULKAN = 60; // px naik beruntun sebelum baris ditampilkan
-    const BATAS_ATAS = 120; // di atas titik ini identitas selalu tampil
-
     let lastY = window.scrollY;
     let terkumpul = 0; // jarak searah sejak arah terakhir berubah
     let ticking = false;
@@ -50,7 +56,10 @@ export default function Navbar() {
 
       if (y <= BATAS_ATAS) {
         terkumpul = 0;
-        setIsBrandHidden(false);
+        // Di puncak beranda hero sudah menampilkan lambang dan nama program
+        // berukuran besar, jadi identitas navbar justru mengulang dan menutupi
+        // video — sembunyikan. Di halaman lain identitas harus tetap tampil.
+        setIsBrandHidden(isHome);
         return;
       }
 
@@ -74,9 +83,14 @@ export default function Navbar() {
       window.requestAnimationFrame(evaluasi);
     };
 
+    // Pindah halaman tidak selalu memicu peristiwa gulir — dari puncak beranda
+    // ke halaman lain posisinya sama-sama nol — jadi aturannya diterapkan
+    // sekali di sini agar identitas tidak tertinggal dalam keadaan tersembunyi.
+    evaluasi();
+
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  }, [isHome]);
 
   const checkIsActive = (href) => {
     if (href.startsWith("/#") || href.startsWith("#")) return false;

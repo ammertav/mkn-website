@@ -171,12 +171,20 @@ export const navLinks = [
     href: "/fasilitas",
     children: [
       { title: { id: "Ruang Kelas", en: "Classrooms" }, href: "/fasilitas/ruang-kelas" },
-      { title: { id: "Laboratorium", en: "Laboratory" }, href: "/fasilitas/laboratorium" },
+      {
+        title: { id: "Laboratorium Akta", en: "Deed Laboratory" },
+        href: "/fasilitas/laboratorium-akta",
+      },
+      {
+        title: { id: "Laboratorium Manajemen Kantor", en: "Office Management Laboratory" },
+        href: "/fasilitas/laboratorium-manajemen-kantor",
+      },
       {
         title: { id: "Student Research Center", en: "Student Research Center" },
         href: "/fasilitas/student-research-center",
       },
       { title: { id: "Perpustakaan", en: "Library" }, href: "/fasilitas/perpustakaan" },
+      { title: { id: "Moot Court", en: "Moot Court" }, href: "/fasilitas/moot-court" },
     ],
   },
   {

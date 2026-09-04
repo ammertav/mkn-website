@@ -1,12 +1,13 @@
 import { useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import Img from "../../components/ui/Img";
+import imgIkanotsula from "../../assets/images/ikanotsula-1.jpeg";
 
 // Data resmi IKANOTSULA & Lowongan Pekerjaan
 const ikanotsulaData = {
   title: "IKANOTSULA (Ikatan Alumni Magister Kenotariatan UNISSULA)",
   category: "ORGANISASI ALUMNI",
-  image: "/images/alumni/ikanotsula-hero.jpg",
+  image: imgIkanotsula,
   meta: [
     { label: "Tanggal Berdiri", value: "21 November 2015" },
     { label: "SK Pengesahan", value: "1056/A.1/SA-H/V/2024" },

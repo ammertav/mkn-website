@@ -74,7 +74,7 @@ export default function Hero() {
       {/* =========================================================
           HERO
       ========================================================== */}
-      <div className="relative min-h-[600px] sm:min-h-[680px] lg:min-h-[780px] w-full flex items-center justify-center bg-neutral-900 overflow-hidden">
+      <div className="hero-viewport relative w-full flex items-center justify-center bg-neutral-900 overflow-hidden">
 
         {/* =====================================================
             BACKGROUND VIDEO
@@ -90,7 +90,7 @@ export default function Hero() {
           onPlay={() => setIsPlaying(true)}
           onPause={() => setIsPlaying(false)}
           aria-hidden="true"
-          className="absolute inset-0 w-full h-full object-cover object-center filter brightness-[0.75] contrast-105"
+          className="absolute inset-0 w-full h-full object-cover object-bottom filter brightness-[0.75] contrast-105"
         />
 
         {/* =====================================================

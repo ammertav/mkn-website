@@ -1,10 +1,35 @@
 import { Helmet } from "react-helmet-async";
+import FacilityPlaceholder from "../../components/Fasilitas/FacilityPlaceholder";
 import FacilitySectionHeader from "../../components/Fasilitas/FacilitySectionHeader";
 import { perpustakaanData } from "../../data/fasilitasData";
 import Img from "../../components/ui/Img";
 
+/**
+ * Susunan halaman di bawah sudah jadi, tetapi datanya masih data sementara,
+ * jadi untuk saat ini yang tayang adalah placeholder. Isinya sengaja ditahan,
+ * bukan dibuang — ubah konstanta ini menjadi true begitu data asli masuk.
+ */
+const KONTEN_SIAP = false;
+
 export default function Perpustakaan() {
   const { header, bannerImage, stats, servicesList } = perpustakaanData;
+
+  if (!KONTEN_SIAP) {
+    return (
+      <>
+        <Helmet>
+          <title>Perpustakaan | MKn UNISSULA</title>
+          <meta name="description" content="Informasi perpustakaan Program Studi Magister Kenotariatan UNISSULA." />
+        </Helmet>
+
+        <FacilityPlaceholder
+          category="PERPUSTAKAAN"
+          title="Perpustakaan"
+          description="Halaman ini akan memuat keterangan perpustakaan Program Studi Magister Kenotariatan UNISSULA, mencakup koleksi rujukan hukum, langganan pangkalan data, dan ketentuan layanannya."
+        />
+      </>
+    );
+  }
 
   return (
     <>
