@@ -1,22 +1,19 @@
 import { Helmet } from "react-helmet-async";
-import FacilityPlaceholder from "../../components/Fasilitas/FacilityPlaceholder";
+import FacilityContent from "../../components/Fasilitas/FacilityContent";
+import { laboratoriumManajemenKantorData } from "../../data/fasilitasData";
 
 export default function LaboratoriumManajemenKantor() {
   return (
     <>
       <Helmet>
-        <title>Laboratorium Manajemen Kantor | MKn UNISSULA</title>
+        <title>Laboratorium Manajemen Kantor Notaris/PPAT | MKn UNISSULA</title>
         <meta
           name="description"
-          content="Informasi Laboratorium Manajemen Kantor Program Studi Magister Kenotariatan UNISSULA."
+          content="Laboratorium Manajemen Kantor Notaris/PPAT Magister Kenotariatan UNISSULA: simulasi tata kelola administrasi, kearsipan protokol, dan pelayanan klien."
         />
       </Helmet>
 
-      <FacilityPlaceholder
-        category="LABORATORIUM MANAJEMEN KANTOR"
-        title="Laboratorium Manajemen Kantor"
-        description="Halaman ini akan memuat keterangan Laboratorium Manajemen Kantor, tempat mahasiswa berlatih tata kelola administrasi kantor notaris, beserta perangkat dan jadwal penggunaannya."
-      />
+      <FacilityContent data={laboratoriumManajemenKantorData} />
     </>
   );
 }

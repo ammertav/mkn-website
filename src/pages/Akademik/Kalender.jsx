@@ -17,10 +17,10 @@ export default function Kalender() {
       <div className="space-y-8">
         {/* Kepala halaman */}
         <div>
-          <span className="text-[11px] font-bold tracking-[0.16em] uppercase text-primary block mb-2">
+          <span className="text-xs font-bold tracking-[0.16em] uppercase text-primary block">
             {ui("sectionAcademic")}
           </span>
-          <h1 className="text-3xl sm:text-4xl md:text-[42px] font-heading font-bold text-heading tracking-normal">
+          <h1 className="text-3xl sm:text-4xl lg:text-[40px] font-heading font-bold text-heading tracking-tight leading-tight">
             {t(halaman.judul)}
           </h1>
           <p className="mt-2 text-sm sm:text-base font-heading font-semibold text-special">
