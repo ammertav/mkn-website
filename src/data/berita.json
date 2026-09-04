@@ -27,6 +27,29 @@
     }
   },
   {
+    "id": "27",
+    "title": "Tertarik Dengan Pengelolaan Kenotariatan, MKn UI Gelar Studi Banding Ke MKn Unissula",
+    "author": "admkn",
+    "tags": "Hukum & Kampus",
+    "tanggal": "10 February 2023",
+    "gambar": "nama-file-gambar-utama",
+    "content": "Paragraf pertama isi berita...\n\nParagraf kedua isi berita...\n\nParagraf ketiga isi berita...",
+    "galeri": [
+      {
+        "gambar": "nama-gambar-1",
+        "keterangan": "Keterangan foto 1"
+      },
+      {
+        "gambar": "nama-gambar-2",
+        "keterangan": "Keterangan foto 2"
+      }
+    ],
+    "sumber": {
+      "nama": "Nama Media / Website",
+      "url": "https://example.com/link-berita-asli"
+    }
+  },
+  {
     "id": "1",
     "title": "IKANOTSULA Sukses gelar Bimbel Ujian PPAT Pengda IPPAT Kabupaten Pekalongan Bersama",
     "author": "admkn",
