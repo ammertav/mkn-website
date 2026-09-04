@@ -36,7 +36,7 @@ export default function KartuRpsAccordion({ mk }) {
       {/* Sisi Kanan: Tombol Unduh Berkas */}
       <div className="shrink-0 flex items-center self-start sm:self-center pl-14 sm:pl-0">
         <a
-          href={mk.gdriveFolderUrl}
+          href={mk.folderUrl}
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex items-center gap-2 px-5 py-2.5 bg-primary text-white hover:bg-primary/90 rounded-xs text-xs sm:text-sm font-semibold transition-colors shadow-2xs group/btn"
