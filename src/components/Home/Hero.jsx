@@ -81,9 +81,9 @@ export default function Hero() {
         ====================================================== */}
         <video
           ref={videoRef}
-          src="/videos/profile-mkn-terbaru.mp4"
+          src="/videos/profile-mkn-terbaru-4.mp4"
           autoPlay
-          muted
+          
           loop
           playsInline
           preload="auto"
