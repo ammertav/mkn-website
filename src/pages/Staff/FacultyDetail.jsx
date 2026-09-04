@@ -216,7 +216,7 @@ export default function FacultyDetail() {
               )}
 
               {/* Publikasi Terpilih */}
-              {faculty.publications && (
+              {faculty.publications?.length > 0 && (
                 <section className="space-y-4">
                   <div className="pb-2 border-b-2 border-heading">
                     <h2 className="text-2xl sm:text-3xl font-heading font-normal text-heading tracking-tight">
@@ -224,32 +224,26 @@ export default function FacultyDetail() {
                     </h2>
                   </div>
 
-                  {faculty.publications.length > 0 ? (
-                    <div className="divide-y divide-gray-100">
-                      {faculty.publications.map((pub, idx) => (
-                        <div key={idx} className="py-5 space-y-1.5">
-                          <span className="text-xs font-bold text-primary tracking-wider block">
-                            {pub.year}
-                          </span>
-                          <h3 className="font-heading italic text-base sm:text-lg text-heading leading-snug">
-                            {pub.title}
-                          </h3>
-                          <p className="text-xs sm:text-sm text-body leading-relaxed">
-                            {pub.journal}
-                          </p>
-                        </div>
-                      ))}
-                    </div>
-                  ) : (
-                    <p className="py-4 text-sm text-gray-400 italic">
-                      Belum ada data publikasi artikel ilmiah dalam jurnal.
-                    </p>
-                  )}
+                  <div className="divide-y divide-gray-100">
+                    {faculty.publications.map((pub, idx) => (
+                      <div key={idx} className="py-5 space-y-1.5">
+                        <span className="text-xs font-bold text-primary tracking-wider block">
+                          {pub.year}
+                        </span>
+                        <h3 className="font-heading italic text-base sm:text-lg text-heading leading-snug">
+                          {pub.title}
+                        </h3>
+                        <p className="text-xs sm:text-sm text-body leading-relaxed">
+                          {pub.journal}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
                 </section>
               )}
 
               {/* Pengalaman Penelitian */}
-              {faculty.researches && (
+              {faculty.researches?.length > 0 && (
                 <section className="space-y-4">
                   <h2 className="text-2xl sm:text-3xl font-heading font-normal text-heading tracking-tight">
                     Pengalaman Penelitian
@@ -265,30 +259,22 @@ export default function FacultyDetail() {
                         </tr>
                       </thead>
                       <tbody className="divide-y divide-gray-200">
-                        {faculty.researches.length > 0 ? (
-                          faculty.researches.map((res, idx) => (
-                            <tr key={idx} className="text-body">
-                              <td className="py-3.5 pr-4 font-medium text-heading">
-                                {res.title}
-                              </td>
-                              <td className="py-3.5 px-4 whitespace-nowrap">
-                                <div>{res.funder}</div>
-                                {res.amount && (
-                                  <div className="text-xs text-primary font-medium">{res.amount}</div>
-                                )}
-                              </td>
-                              <td className="py-3.5 pl-4 text-right sm:text-left font-medium">
-                                {res.year}
-                              </td>
-                            </tr>
-                          ))
-                        ) : (
-                          <tr className="text-gray-400">
-                            <td colSpan={3} className="py-4 text-center italic">
-                              Belum ada data pengalaman penelitian.
+                        {faculty.researches.map((res, idx) => (
+                          <tr key={idx} className="text-body">
+                            <td className="py-3.5 pr-4 font-medium text-heading">
+                              {res.title}
+                            </td>
+                            <td className="py-3.5 px-4 whitespace-nowrap">
+                              <div>{res.funder}</div>
+                              {res.amount && (
+                                <div className="text-xs text-primary font-medium">{res.amount}</div>
+                              )}
+                            </td>
+                            <td className="py-3.5 pl-4 text-right sm:text-left font-medium">
+                              {res.year}
                             </td>
                           </tr>
-                        )}
+                        ))}
                       </tbody>
                     </table>
                   </div>
@@ -296,7 +282,7 @@ export default function FacultyDetail() {
               )}
 
               {/* Pengabdian dan Penugasan */}
-              {faculty.communityServices && (
+              {faculty.communityServices?.length > 0 && (
                 <section className="space-y-4">
                   <h2 className="text-2xl sm:text-3xl font-heading font-normal text-heading tracking-tight">
                     Pengabdian dan Penugasan
@@ -312,25 +298,17 @@ export default function FacultyDetail() {
                         </tr>
                       </thead>
                       <tbody className="divide-y divide-gray-200">
-                        {faculty.communityServices.length > 0 ? (
-                          faculty.communityServices.map((service, idx) => (
-                            <tr key={idx} className="text-body">
-                              <td className="py-3.5 pr-4 font-medium text-heading">
-                                {service.role}
-                              </td>
-                              <td className="py-3.5 px-4">{service.institution}</td>
-                              <td className="py-3.5 pl-4 text-right sm:text-left">
-                                {service.period}
-                              </td>
-                            </tr>
-                          ))
-                        ) : (
-                          <tr className="text-gray-400">
-                            <td colSpan={3} className="py-4 text-center italic">
-                              Belum ada data pengabdian dan penugasan.
+                        {faculty.communityServices.map((service, idx) => (
+                          <tr key={idx} className="text-body">
+                            <td className="py-3.5 pr-4 font-medium text-heading">
+                              {service.role}
+                            </td>
+                            <td className="py-3.5 px-4">{service.institution}</td>
+                            <td className="py-3.5 pl-4 text-right sm:text-left">
+                              {service.period}
                             </td>
                           </tr>
-                        )}
+                        ))}
                       </tbody>
                     </table>
                   </div>
@@ -338,7 +316,7 @@ export default function FacultyDetail() {
               )}
 
               {/* Pemakalah Seminar Ilmiah */}
-              {faculty.seminars && (
+              {faculty.seminars?.length > 0 && (
                 <section className="space-y-4">
                   <h2 className="text-2xl sm:text-3xl font-heading font-normal text-heading tracking-tight">
                     Pemakalah Seminar Ilmiah (Oral Presentation)
@@ -354,25 +332,17 @@ export default function FacultyDetail() {
                         </tr>
                       </thead>
                       <tbody className="divide-y divide-gray-200">
-                        {faculty.seminars.length > 0 ? (
-                          faculty.seminars.map((sem, idx) => (
-                            <tr key={idx} className="text-body">
-                              <td className="py-3.5 pr-4 font-medium text-heading">
-                                {sem.event}
-                              </td>
-                              <td className="py-3.5 px-4">{sem.title}</td>
-                              <td className="py-3.5 pl-4 text-right sm:text-left">
-                                {sem.timePlace}
-                              </td>
-                            </tr>
-                          ))
-                        ) : (
-                          <tr className="text-gray-400">
-                            <td colSpan={3} className="py-4 text-center italic">
-                              Belum ada data pemakalah seminar ilmiah.
+                        {faculty.seminars.map((sem, idx) => (
+                          <tr key={idx} className="text-body">
+                            <td className="py-3.5 pr-4 font-medium text-heading">
+                              {sem.event}
+                            </td>
+                            <td className="py-3.5 px-4">{sem.title}</td>
+                            <td className="py-3.5 pl-4 text-right sm:text-left">
+                              {sem.timePlace}
                             </td>
                           </tr>
-                        )}
+                        ))}
                       </tbody>
                     </table>
                   </div>
@@ -380,7 +350,8 @@ export default function FacultyDetail() {
               )}
 
               {/* Karya Buku */}
-              {faculty.books && (
+              {/* Seksi disembunyikan sepenuhnya bila dosen belum punya karya buku */}
+              {faculty.books?.length > 0 && (
                 <section className="space-y-4">
                   <h2 className="text-2xl sm:text-3xl font-heading font-normal text-heading tracking-tight">
                     Karya Buku
@@ -397,28 +368,20 @@ export default function FacultyDetail() {
                         </tr>
                       </thead>
                       <tbody className="divide-y divide-gray-200">
-                        {faculty.books.length > 0 ? (
-                          faculty.books.map((book, idx) => (
-                            <tr key={idx} className="text-body">
-                              <td className="py-3.5 pr-4 font-medium text-heading">
-                                {book.title}
-                              </td>
-                              <td className="py-3.5 px-4">{book.publisher}</td>
-                              <td className="py-3.5 px-4 text-center">
-                                {book.pages || "—"}
-                              </td>
-                              <td className="py-3.5 pl-4 text-right sm:text-left font-medium">
-                                {book.year}
-                              </td>
-                            </tr>
-                          ))
-                        ) : (
-                          <tr className="text-gray-400">
-                            <td colSpan={4} className="py-4 text-center italic">
-                              Belum ada data karya buku.
+                        {faculty.books.map((book, idx) => (
+                          <tr key={idx} className="text-body">
+                            <td className="py-3.5 pr-4 font-medium text-heading">
+                              {book.title}
+                            </td>
+                            <td className="py-3.5 px-4">{book.publisher}</td>
+                            <td className="py-3.5 px-4 text-center">
+                              {book.pages || "—"}
+                            </td>
+                            <td className="py-3.5 pl-4 text-right sm:text-left font-medium">
+                              {book.year}
                             </td>
                           </tr>
-                        )}
+                        ))}
                       </tbody>
                     </table>
                   </div>
@@ -426,7 +389,8 @@ export default function FacultyDetail() {
               )}
 
               {/* Perolehan HKI */}
-              {faculty.hki && (
+              {/* Begitu pula HKI: tanpa data, seksinya tidak dirender */}
+              {faculty.hki?.length > 0 && (
                 <section className="space-y-4">
                   <h2 className="text-2xl sm:text-3xl font-heading font-normal text-heading tracking-tight">
                     Perolehan HKI (Hak Kekayaan Intelektual)
@@ -443,28 +407,20 @@ export default function FacultyDetail() {
                         </tr>
                       </thead>
                       <tbody className="divide-y divide-gray-200">
-                        {faculty.hki.length > 0 ? (
-                          faculty.hki.map((item, idx) => (
-                            <tr key={idx} className="text-body">
-                              <td className="py-3.5 pr-4 font-medium text-heading">
-                                {item.title}
-                              </td>
-                              <td className="py-3.5 px-4">{item.type}</td>
-                              <td className="py-3.5 px-4 font-mono text-xs">
-                                {item.number}
-                              </td>
-                              <td className="py-3.5 pl-4 text-right sm:text-left font-medium">
-                                {item.year}
-                              </td>
-                            </tr>
-                          ))
-                        ) : (
-                          <tr className="text-gray-400">
-                            <td colSpan={4} className="py-4 text-center italic">
-                              Belum ada data perolehan HKI.
+                        {faculty.hki.map((item, idx) => (
+                          <tr key={idx} className="text-body">
+                            <td className="py-3.5 pr-4 font-medium text-heading">
+                              {item.title}
+                            </td>
+                            <td className="py-3.5 px-4">{item.type}</td>
+                            <td className="py-3.5 px-4 font-mono text-xs">
+                              {item.number}
+                            </td>
+                            <td className="py-3.5 pl-4 text-right sm:text-left font-medium">
+                              {item.year}
                             </td>
                           </tr>
-                        )}
+                        ))}
                       </tbody>
                     </table>
                   </div>

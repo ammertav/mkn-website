@@ -1,4 +1,4 @@
-import imgJawade from "../assets/images/struktur-organisasi/Dekan Fakultas Hukum UNISSULA.jpg";
+import imgJawade from "../assets/images/struktur-organisasi/prof-jawede.jpg";
 import imgRozihan from "../assets/images/struktur-organisasi/Prof. HC. Dr. Drs. H. Rozihan, SH., M.Ag.png";
 import imgGunarto from "../assets/images/struktur-organisasi/3.PROF. DR. GUNARTO, S.H.., M.HUM.png";
 import imgToni from "../assets/images/struktur-organisasi/Sekprodi a- Dr. Toni Triyanto, S.H., M.jpeg";
@@ -132,7 +132,7 @@ export const facultyData = [
       "Prof. HC. Dr. Drs. H. Rozihan, SH., M.Ag adalah Guru Besar dan akademisi senior di Universitas Islam Sultan Agung (UNISSULA) Semarang. Beliau lahir di Jepara pada 25 Januari 1957 dan mendedikasikan pengabdian akademisnya pada penguatan hukum Islam, integrasi keilmuan berbasis syariah, dan pembinaan Budaya Akademik Islami (BudAI).",
       "Dalam kurikulum perkuliahan, beliau mengampu mata kuliah Islam Disiplin Ilmu dan Peradaban Islam. Jejak publikasi ilmiah beliau meliputi kajian mendalam mengenai fatwa hukum Islam, pembaharuan hukum keluarga (perkawinan, perceraian, nusyuz), istihsan, dinamika manajemen aset wakaf, hingga relevansi hukum Islam progresif.",
     ],
-    image: imgRozihan,
+    image: null,
     imageCaption: "Potret Prof. HC. Dr. Drs. H. Rozihan, SH., M.Ag",
     courses: [
       { name: "Islam Disiplin Ilmu", placement: "Semester 1", sks: 2 },
@@ -2706,7 +2706,7 @@ export const facultyData = [
     slug: "nanang-sri-darmadi",
     name: "Dr. Nanang Sri Darmadi, S.H., M.H.",
     shortName: "Nanang Sri Darmadi",
-    title: "Lektor / Dosen Hukum Tata Negara & Teori Hukum",
+    title: "Lektor / Ketua Program Studi MKn",
     expertise: "Hukum Tata Negara",
     type: "Dosen Tetap",
     gender: "Laki-Laki",

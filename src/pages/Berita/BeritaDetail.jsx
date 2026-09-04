@@ -263,6 +263,42 @@ export default function BeritaDetail() {
               )}
             </div>
 
+            {/* Galeri foto tambahan — hanya untuk artikel yang menyertakannya */}
+            {article.galeri?.length > 0 && (
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pb-6">
+                {article.galeri.map((foto) => (
+                  <figure
+                    key={foto.gambar}
+                    className="border border-gray-200 bg-white rounded-xs overflow-hidden"
+                  >
+                    <Img
+                      src={getBeritaImage(foto.gambar)}
+                      alt={foto.keterangan}
+                      className="w-full aspect-4/3 object-cover object-center"
+                    />
+                    <figcaption className="p-3 text-xs text-gray-500 leading-relaxed border-t border-gray-100">
+                      {foto.keterangan}
+                    </figcaption>
+                  </figure>
+                ))}
+              </div>
+            )}
+
+            {/* Sumber berita — wajib disebut untuk artikel yang bersumber dari media luar */}
+            {article.sumber && (
+              <p className="pb-6 text-sm text-body">
+                Sumber:{" "}
+                <a
+                  href={article.sumber.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-semibold text-primary hover:underline underline-offset-4"
+                >
+                  {article.sumber.nama}
+                </a>
+              </p>
+            )}
+
             {/* Tags Section */}
             {article.tags && article.tags.length > 0 && (
               <div className="pt-6 border-t border-gray-200 flex flex-wrap items-center gap-2">

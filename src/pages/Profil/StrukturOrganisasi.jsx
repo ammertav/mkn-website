@@ -13,16 +13,9 @@ import imgKaprodi from "../../assets/images/dosen/Dr.NanangSriDarmadi,S.H.,M.H..
 import imgSekprodi from "../../assets/images/struktur-organisasi/Sekprodi a- Dr. Toni Triyanto, S.H., M.jpeg";
 import imgDenny from "../../assets/images/struktur-organisasi/dr-denny-suwondo.jpg";
 import imgSoegianto from "../../assets/images/struktur-organisasi/prof-dr-soegianto.jpg";
-import imgIkrom from "../../assets/images/struktur-organisasi/ikrom.jpg";
-import imgDirLab from "../../assets/images/struktur-organisasi/doni-catur-saefudin.jpg";
 import imgDirPerpus from "../../assets/images/struktur-organisasi/anugrah-surya-kusuma-2.jpg";
-import imgAkademik from "../../assets/images/struktur-organisasi/sumain.jpg";
-import imgKeuangan from "../../assets/images/struktur-organisasi/laili-rohmah.jpg";
-import imgPromosi1 from "../../assets/images/struktur-organisasi/muhammad-mutohar.jpg";
-import imgPromosi2 from "../../assets/images/struktur-organisasi/aidha-nabila-mustikaweni.jpg";
-import imgSarpras1 from "../../assets/images/struktur-organisasi/ahmad-kuswardoyo.jpg";
-import imgSarpras2 from "../../assets/images/struktur-organisasi/nur-alamsyah.jpg";
 import Img from "../../components/ui/Img";
+import { tenagaKependidikan } from "../../data/profil/tendikData";
 
 const strukturPejabat = [
   {
@@ -138,53 +131,9 @@ const pejabatPelaksana = [
   },
   {
     title: "TATA USAHA DAN ADMINISTRASI",
-    members: [
-      {
-        jabatan: "Kepala Tata Usaha",
-        name: "Ikrom, S.H., M.H.",
-        photo: imgIkrom,
-      },
-      {
-        jabatan: "Direktur Laboratorium Akta & Manajemen Kantor Notaris",
-        name: "Doni Catur Saefudin, S.H., M.Kn.",
-        photo: imgDirLab,
-      },
-      {
-        jabatan: "Direktur Perpustakaan",
-        name: "Anugrah Surya Kusuma, S.H., M.H.",
-        photo: imgDirPerpus,
-      },
-      {
-        jabatan: "Bidang Akademik",
-        name: "Suma'in, S.Pd.",
-        photo: imgAkademik,
-      },
-      {
-        jabatan: "Bidang Keuangan",
-        name: "Laili Rohmah, S.Pd.",
-        photo: imgKeuangan,
-      },
-      {
-        jabatan: "Bidang Promosi & Humas",
-        name: "Muhammad Mutohar, S.H., M.Kn.",
-        photo: imgPromosi1,
-      },
-      {
-        jabatan: "Bidang Promosi & Humas",
-        name: "Aidha Nabila Mustikaweni, S.Kom.",
-        photo: imgPromosi2,
-      },
-      {
-        jabatan: "Bidang Sarana Prasarana",
-        name: "Ahmad Kuswardoyo, S.E.",
-        photo: imgSarpras1,
-      },
-      {
-        jabatan: "Bidang Sarana Prasarana",
-        name: "Nur Alamsyah",
-        photo: imgSarpras2,
-      },
-    ],
+    // Dibaca dari sumber tunggal; halaman Tenaga Kependidikan memakai daftar
+    // yang sama persis, jadi pembaruan cukup dilakukan di satu berkas.
+    members: tenagaKependidikan.map(({ jabatan, name, photo }) => ({ jabatan, name, photo })),
   },
 ];
 
