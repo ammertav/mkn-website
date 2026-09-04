@@ -1,7 +1,7 @@
-import gedungUnissula from "../assets/images/gedung.jpg";
 import imgIMANU1 from "../assets/images/imanu-1.jpeg";
-import imgIMANU3 from "../assets/images/imanu-2.jpeg";
-import imgIMANU2 from "../assets/images/imanu-3.jpeg";
+import imgIMANU2 from "../assets/images/imanu-2.jpeg";
+import imgIMANU3 from "../assets/images/imanu-3.jpeg";
+import imgIMANU4 from "../assets/images/imanu-4.jpeg";
 
 
 export const studentOrganizationsData = [
@@ -16,7 +16,7 @@ export const studentOrganizationsData = [
       "IMANU UNISSULA adalah lembaga kemahasiswaan formal intra kampus di tingkat Program " +
       "Studi Magister Kenotariatan. Organisasi ini bersifat akademis, kekeluargaan, dan " +
       "independen tanpa berafiliasi pada kekuatan politik mana pun.",
-    image: gedungUnissula,
+    image: imgIMANU4,
     imageCaption: "Kampus Universitas Islam Sultan Agung, Semarang",
 
     meta: [

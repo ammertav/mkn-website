@@ -16,12 +16,16 @@
  * Rujukan: lp3m.unissula.ac.id/akpro · unissula.ac.id/sebelas-prodi-unissula-terakreditasi-internasional
  */
 
-import skUnggul2023 from "../../assets/pdf/SK-BAN-PT-Akreditasi-Unggul-MKn-2023.pdf";
-import sertifikatUnggul2023 from "../../assets/pdf/Sertifikat-Akreditasi-Unggul-MKn-2023.pdf";
-import sertifikatAsic2020 from "../../assets/pdf/Sertifikat-ASIC-Premier-MKn-2020.pdf";
-import skUnggul2021 from "../../assets/pdf/SK-BAN-PT-Konversi-Unggul-MKn-2021.pdf";
-import sertifikatUnggul2021 from "../../assets/pdf/Sertifikat-Akreditasi-Unggul-MKn-2021.pdf";
-import skAkreditasiA2018 from "../../assets/pdf/SK-BAN-PT-Akreditasi-A-MKn-2018.pdf";
+// Sertifikat (gambar) dan SK (PDF) yang ditampilkan langsung pada linimasa.
+import gambarSertifikatA2018 from "../../assets/images/akreditasi/sertifikat-akreditasi-A-2018.jpg";
+import gambarSertifikatAsic2020 from "../../assets/images/akreditasi/sertifikat-asic-2020.jpg";
+import gambarSertifikatUnggul2021 from "../../assets/images/akreditasi/sertifikat-akreditasi-unggul-2021.jpg";
+import gambarSertifikatUnggul2023 from "../../assets/images/akreditasi/sertifikat-akreditasi-unggul-2023.jpg";
+
+import berkasSkA2018 from "../../assets/pdf/akreditasi/sk-hasil-akreditasi-2018.pdf";
+import berkasSertifikatAsic2020 from "../../assets/pdf/akreditasi/sertifikat-asic-2020.pdf";
+import berkasSkUnggul2021 from "../../assets/pdf/akreditasi/sk-unggul-2021.pdf";
+import berkasSkUnggul2023 from "../../assets/pdf/akreditasi/sk-unggul-2023.pdf";
 
 export const timeline = [
   {
@@ -75,6 +79,17 @@ export const timeline = [
       "Decree No. 1696/SK/BAN-PT/Akred/M/VII/2018 · 9 July 2018",
     },
     needsConfirmation: false,
+    sertifikat: {
+      gambar: gambarSertifikatA2018,
+      alt: {
+        id: "Sertifikat akreditasi BAN-PT peringkat A tahun 2018",
+        en: "BAN-PT grade A accreditation certificate, 2018",
+      },
+      dokumen: {
+        label: { id: "SK Hasil Akreditasi", en: "Accreditation Decree" },
+        fileUrl: berkasSkA2018,
+      },
+    },
   },
   {
     year: "2020",
@@ -91,21 +106,78 @@ export const timeline = [
     },
     meta: { id: "Diumumkan Januari 2020 · ASIC, Inggris", en: "Announced January 2020 · ASIC, United Kingdom" },
     needsConfirmation: false,
+    sertifikat: {
+      gambar: gambarSertifikatAsic2020,
+      alt: {
+        id: "Sertifikat akreditasi internasional ASIC level Premier tahun 2020",
+        en: "ASIC Premier level international accreditation certificate, 2020",
+      },
+      dokumen: {
+        label: { id: "Sertifikat ASIC", en: "ASIC Certificate" },
+        fileUrl: berkasSertifikatAsic2020,
+      },
+    },
+  },
+  {
+    year: "2021",
+    title: {
+      id: "Konversi Peringkat menjadi Unggul",
+      en: "Conversion of Grade to Unggul (Excellent)",
+    },
+    desc: {
+      id:
+        "BAN-PT mengonversi peringkat A menjadi Unggul melalui mekanisme Instrumen Suplemen " +
+        "Konversi (ISK). Inilah pertama kalinya program studi menyandang peringkat Unggul, " +
+        "berlaku sampai berakhirnya masa akreditasi sebelumnya pada 9 Juli 2023.",
+      en:
+        "BAN-PT converted the grade A into Unggul (Excellent) through the Conversion " +
+        "Supplement Instrument (ISK) mechanism. This was the first time the programme held " +
+        "the Unggul grade, valid until the previous accreditation period ended on 9 July 2023.",
+    },
+    meta: {
+      id: "SK No. 2818/SK/BAN-PT/AK-ISK/M/V/2021 · Nilai 361 · 11 Mei 2021",
+      en: "Decree No. 2818/SK/BAN-PT/AK-ISK/M/V/2021 · Score 361 · 11 May 2021",
+    },
+    needsConfirmation: false,
+    sertifikat: {
+      gambar: gambarSertifikatUnggul2021,
+      alt: {
+        id: "Sertifikat akreditasi BAN-PT peringkat Unggul tahun 2021",
+        en: "BAN-PT Unggul accreditation certificate, 2021",
+      },
+      dokumen: {
+        label: { id: "SK Konversi Peringkat", en: "Grade Conversion Decree" },
+        fileUrl: berkasSkUnggul2021,
+      },
+    },
   },
   {
     year: "2023",
     title: { id: "Akreditasi BAN-PT Peringkat Unggul", en: "BAN-PT Accreditation, Grade Unggul (Excellent)" },
     desc: {
       id:
-        "Peringkat akreditasi meningkat dari A menjadi Unggul, peringkat tertinggi dalam " +
-        "sistem akreditasi nasional yang berlaku saat ini. Berlaku hingga 10 Juli 2028.",
+        "Melalui reakreditasi penuh, peringkat Unggul ditetapkan kembali untuk kedua kalinya — " +
+        "peringkat tertinggi dalam sistem akreditasi nasional yang berlaku saat ini. Berlaku " +
+        "hingga 10 Juli 2028.",
       en: 
-        "The accreditation grade rose from A to Unggul (Excellent), the highest grade in " +
-        "the national accreditation system currently in force. Valid until 10 July 2028.",
+        "Through a full reaccreditation, the Unggul (Excellent) grade was awarded for the " +
+        "second time — the highest grade in the national accreditation system currently in " +
+        "force. Valid until 10 July 2028.",
     },
-    meta: { id: "SK No. 2512/SK/BAN-PT/Ak.Ppj/M/VI/2023", en: "Decree No. 2512/SK/BAN-PT/Ak.Ppj/M/VI/2023" },
+    meta: { id: "SK No. 2512/SK/BAN-PT/Ak.Ppj/M/VI/2023 · 27 Juni 2023", en: "Decree No. 2512/SK/BAN-PT/Ak.Ppj/M/VI/2023 · 27 June 2023" },
     needsConfirmation: false,
     highlight: true,
+    sertifikat: {
+      gambar: gambarSertifikatUnggul2023,
+      alt: {
+        id: "Sertifikat akreditasi BAN-PT peringkat Unggul tahun 2023",
+        en: "BAN-PT Unggul accreditation certificate, 2023",
+      },
+      dokumen: {
+        label: { id: "SK Penetapan Akreditasi", en: "Accreditation Decree" },
+        fileUrl: berkasSkUnggul2023,
+      },
+    },
   },
 ];
 
@@ -120,91 +192,6 @@ export const statusAkreditasi = [
     label: { id: "Akreditasi Internasional", en: "" },
     value: "ASIC Premier",
     detail: { id: "ASIC London, sejak Januari 2020", en: "" },
-  },
-];
-
-/**
- * Dokumen resmi akreditasi — SK dan sertifikat, diurutkan dari yang terbaru.
- * `berlaku: true` menandai dokumen yang masa berlakunya masih berjalan.
- */
-export const dokumenAkreditasi = [
-  {
-    id: "sertifikat-unggul-2023",
-    title: {
-      id: "Sertifikat Akreditasi Unggul BAN-PT",
-      en: "BAN-PT Unggul (Excellent) Accreditation Certificate",
-    },
-    meta: {
-      id: "Berlaku 10 Juli 2023 – 10 Juli 2028",
-      en: "Valid 10 July 2023 – 10 July 2028",
-    },
-    fileUrl: sertifikatUnggul2023,
-    berlaku: true,
-  },
-  {
-    id: "sk-unggul-2023",
-    title: {
-      id: "SK Penetapan Akreditasi Unggul BAN-PT",
-      en: "BAN-PT Decree on Unggul (Excellent) Accreditation",
-    },
-    meta: {
-      id: "No. 2512/SK/BAN-PT/Ak.Ppj/M/VI/2023 · Nilai 361 · 27 Juni 2023",
-      en: "No. 2512/SK/BAN-PT/Ak.Ppj/M/VI/2023 · Score 361 · 27 June 2023",
-    },
-    fileUrl: skUnggul2023,
-    berlaku: true,
-  },
-  {
-    id: "sertifikat-asic-2020",
-    title: {
-      id: "Sertifikat Akreditasi Internasional ASIC — Premier Institution",
-      en: "ASIC International Accreditation Certificate — Premier Institution",
-    },
-    meta: {
-      id: "No. AS75883/0720 · Berlaku 13 Juli 2020 – 12 Juli 2024",
-      en: "No. AS75883/0720 · Valid 13 July 2020 – 12 July 2024",
-    },
-    fileUrl: sertifikatAsic2020,
-    berlaku: false,
-  },
-  {
-    id: "sertifikat-unggul-2021",
-    title: {
-      id: "Sertifikat Akreditasi Unggul BAN-PT (Konversi)",
-      en: "BAN-PT Unggul Accreditation Certificate (Conversion)",
-    },
-    meta: {
-      id: "Berlaku 11 Mei 2021 – 9 Juli 2023",
-      en: "Valid 11 May 2021 – 9 July 2023",
-    },
-    fileUrl: sertifikatUnggul2021,
-    berlaku: false,
-  },
-  {
-    id: "sk-unggul-2021",
-    title: {
-      id: "SK Konversi Peringkat Akreditasi menjadi Unggul",
-      en: "Decree on Conversion of Accreditation Grade to Unggul",
-    },
-    meta: {
-      id: "No. 2818/SK/BAN-PT/AK-ISK/M/V/2021 · Nilai 361 · 11 Mei 2021",
-      en: "No. 2818/SK/BAN-PT/AK-ISK/M/V/2021 · Score 361 · 11 May 2021",
-    },
-    fileUrl: skUnggul2021,
-    berlaku: false,
-  },
-  {
-    id: "sk-akreditasi-a-2018",
-    title: {
-      id: "SK Status dan Peringkat Akreditasi A BAN-PT",
-      en: "BAN-PT Decree on Accreditation Status and Grade A",
-    },
-    meta: {
-      id: "No. 1696/SK/BAN-PT/Akred/M/VII/2018 · Nilai 361 · 9 Juli 2018",
-      en: "No. 1696/SK/BAN-PT/Akred/M/VII/2018 · Score 361 · 9 July 2018",
-    },
-    fileUrl: skAkreditasiA2018,
-    berlaku: false,
   },
 ];
 
@@ -246,18 +233,6 @@ export const halaman = {
     },
   ],
   judulLinimasa: { id: "Perjalanan Program Studi", en: "The Programme’s Journey" },
-  judulDokumen: {
-    id: "Dokumen Akreditasi",
-    en: "Accreditation Documents",
-  },
-  pengantarDokumen: {
-    id:
-      "Salinan surat keputusan dan sertifikat akreditasi yang pernah diterima Program Studi " +
-      "Magister Kenotariatan, diurutkan dari yang terbaru.",
-    en:
-      "Copies of the accreditation decrees and certificates awarded to the Master of Notarial " +
-      "Law Study Programme, listed newest first.",
-  },
-  labelBerlaku: { id: "Masih berlaku", en: "Currently valid" },
-  labelLihat: { id: "Lihat dokumen", en: "View document" },
+  labelSertifikat: { id: "Sertifikat", en: "Certificate" },
+  labelPerbesar: { id: "Klik untuk memperbesar", en: "Click to enlarge" },
 };

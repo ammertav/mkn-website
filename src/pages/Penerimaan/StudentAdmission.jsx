@@ -55,7 +55,7 @@ export default function StudentAdmission() {
         <div className="p-6 border border-primary/20 bg-primary/5 rounded-xs flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <div className="space-y-1">
             <h3 className="font-heading font-semibold text-base text-heading">
-              Pendaftaran Online PMB UNISSULA 2024/2025 Telah Dibuka
+              Pendaftaran Online PMB UNISSULA 2025/2026 Telah Dibuka
             </h3>
             <p className="text-xs sm:text-sm text-body">
               Daftarkan diri Anda sekarang melalui portal resmi penerimaan mahasiswa baru UNISSULA.

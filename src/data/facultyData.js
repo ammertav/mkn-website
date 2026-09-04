@@ -2,6 +2,7 @@ import imgJawade from "../assets/images/struktur-organisasi/Dekan Fakultas Hukum
 import imgRozihan from "../assets/images/struktur-organisasi/Prof. HC. Dr. Drs. H. Rozihan, SH., M.Ag.png";
 import imgGunarto from "../assets/images/struktur-organisasi/3.PROF. DR. GUNARTO, S.H.., M.HUM.png";
 import imgToni from "../assets/images/struktur-organisasi/Sekprodi a- Dr. Toni Triyanto, S.H., M.jpeg";
+import imgNanang from "../assets/images/dosen/Dr.NanangSriDarmadi,S.H.,M.H..jpg";
 
 export const facultyData = [
   {
@@ -515,7 +516,7 @@ export const facultyData = [
       "Prof. Dr. Widhi Handoko, S.H., Sp.N. adalah Guru Besar dalam bidang Ilmu Hukum Kenotariatan di Fakultas Hukum Universitas Islam Sultan Agung (UNISSULA) Semarang. Beliau lahir di Wonogiri pada 20 Januari 1970 dan memiliki reputasi terkemuka sebagai akademisi sekaligus praktisi senior notaris dan PPAT.",
       "Beliau mengampu mata kuliah inti kenotariatan, antara lain Teknik Pembuatan Akta Umum (TPA I), Laboratorium Akta 1, Teknik Pembuatan Akta Khusus (TPA III), dan Laboratorium Akta 3. Di luar aktivitas kampus, beliau aktif menjabat sebagai Mediator pada Dewan Sengketa Indonesia (2021–2026), Ketua Pengurus Wilayah Jawa Tengah Ikatan Pejabat Pembuat Akta Tanah (IPPAT) periode 2021–2024, serta kerap dipercaya sebagai saksi ahli hukum kenotariatan.",
     ],
-    image: "https://images.unsplash.com/photo-1556157382-97eda2d62296?auto=format&fit=crop&crop=faces,top&w=1200&h=1000&q=85",
+    image: null,
     imageCaption: "Potret Prof. Dr. Widhi Handoko, S.H., Sp.N.",
     courses: [
       { name: "Teknik Pembuatan Akta Umum (TPA I)", placement: "Semester 1", sks: 2 },
@@ -2724,7 +2725,7 @@ export const facultyData = [
       "Menyelesaikan pendidikan Sarjana Hukum (2007) dan Magister Hukum (2011) di UNISSULA Semarang, kemudian meraih gelar Doktor Ilmu Hukum dari Universitas Diponegoro (UNDIP) Semarang pada tahun 2022 di bawah bimbingan Prof. Dr. F.X. Adji Samekto dengan disertasi mendalam berjudul 'Welfare Constitution (Membedah Gagasan Kesejahteraan Sosial Dalam Sejarah Konstitusi yang Pernah Berlaku di Indonesia)'.",
       "Dalam Program Studi Magister Kenotariatan (MKn), beliau mengampu mata kuliah Teori Hukum, Penemuan Hukum dan Metode Penelitian Hukum. Publikasi dan aktivitas ilmiah beliau berfokus pada hak konstitusional masyarakat hukum adat, perlindungan kesejahteraan sosial, serta efektivitas majelis pengawas daerah notaris.",
     ],
-    image: null,
+    image: imgNanang,
     imageCaption: "Potret Dr. Nanang Sri Darmadi, S.H., M.H.",
     courses: [
       { name: "Teori Hukum, Penemuan Hukum dan Metode Penelitian Hukum", placement: "Semester 1", sks: 2 },

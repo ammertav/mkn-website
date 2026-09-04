@@ -15,6 +15,17 @@ const akomodasiTabs = [
   { label: "GUEST HOUSE", path: "/mahasiswa/akomodasi/guest-house" },
 ];
 
+/**
+ * Saklar tampilnya isi halaman.
+ *
+ * Program studi meminta isi halaman akomodasi disembunyikan dulu, jadi halaman
+ * ini sementara hanya menampilkan pemberitahuan. Seluruh susunan aslinya —
+ * hero, tab, galeri, fasilitas, kontak — sengaja dibiarkan utuh di bawah:
+ * ubah nilainya menjadi `true` untuk menayangkannya kembali, tanpa perlu
+ * menulis ulang apa pun.
+ */
+const KONTEN_SIAP = false;
+
 export default function Accommodation() {
   const { tab } = useParams();
 
@@ -26,6 +37,61 @@ export default function Accommodation() {
   // Validasi tab: default ke asrama jika slug tidak valid atau kosong
   const currentKey = tab === "guest-house" ? "guestHouse" : "asrama";
   const item = akomodasiData[currentKey] || akomodasiData.asrama;
+
+  if (!KONTEN_SIAP) {
+    return (
+      <>
+        <Helmet>
+          <title>Akomodasi | MKn UNISSULA</title>
+          <meta
+            name="description"
+            content="Informasi akomodasi mahasiswa Program Studi Magister Kenotariatan UNISSULA."
+          />
+        </Helmet>
+
+        <main className="flex flex-col min-h-screen bg-banner font-body text-body">
+          <Navbar />
+
+          <div className="w-full flex-grow max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
+            <div className="space-y-8 max-w-3xl">
+              <div>
+                <span className="text-[11px] font-bold tracking-[0.16em] uppercase text-primary block mb-2">
+                  MAHASISWA
+                </span>
+                <h1 className="text-3xl sm:text-4xl md:text-[42px] font-heading font-bold text-heading tracking-normal">
+                  Akomodasi
+                </h1>
+                <div className="w-full h-[2px] bg-primary mt-4" />
+              </div>
+
+              <div className="border border-dashed border-gray-300 bg-white p-10 sm:p-14 text-center rounded-xs">
+                <p className="text-sm font-medium text-gray-500">
+                  Konten akan segera ditambahkan.
+                </p>
+              </div>
+
+              <div className="pt-4 border-t border-gray-200 flex flex-wrap gap-4 items-center justify-between text-xs sm:text-sm">
+                <Link
+                  to="/mahasiswa/organisasi"
+                  className="inline-flex items-center font-semibold text-primary hover:underline transition-colors"
+                >
+                  ← Organisasi Mahasiswa (IMANU)
+                </Link>
+                <Link
+                  to="/"
+                  className="inline-flex items-center font-medium text-body hover:text-primary transition-colors"
+                >
+                  Kembali ke Beranda →
+                </Link>
+              </div>
+            </div>
+          </div>
+
+          <Footer />
+        </main>
+      </>
+    );
+  }
 
   return (
     <>

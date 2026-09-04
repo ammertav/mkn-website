@@ -4,11 +4,8 @@ import { FiExternalLink } from "react-icons/fi";
 
 import { useT } from "../../i18n/languageContext";
 import RichText from "../../components/ui/RichText";
-import {
-  timeline,
-  dokumenAkreditasi,
-  halaman,
-} from "../../data/profil/sejarahData";
+import Img from "../../components/ui/Img";
+import { timeline, halaman } from "../../data/profil/sejarahData";
 
 export default function Sejarah() {
   const t = useT();
@@ -66,78 +63,69 @@ export default function Sejarah() {
                   }`}
                 />
 
-                <div className="font-heading font-bold text-xl sm:text-2xl text-primary leading-none tabular-nums">
-                  {item.year}
+                {/* Naskah di kiri, sertifikat di kanan pada layar lebar */}
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-10 items-start">
+                  <div className={item.sertifikat ? "lg:col-span-7" : "lg:col-span-12"}>
+                    <div className="font-heading font-bold text-xl sm:text-2xl text-primary leading-none tabular-nums">
+                      {item.year}
+                    </div>
+
+                    <h3 className="mt-2 font-heading font-semibold text-base sm:text-lg text-heading leading-snug">
+                      <RichText>{t(item.title)}</RichText>
+                    </h3>
+
+                    <p className="mt-1.5 text-sm sm:text-base text-body leading-relaxed max-w-3xl">
+                      <RichText>{t(item.desc)}</RichText>
+                    </p>
+
+                    {item.meta && (
+                      <p className="mt-2.5 text-xs text-gray-500 leading-relaxed">
+                        {t(item.meta)}
+                      </p>
+                    )}
+                  </div>
+
+                  {/* Kartu sertifikat: gambar dibuka ukuran penuh di tab baru,
+                      SK-nya menyusul sebagai tautan PDF di bawahnya. Orientasi
+                      sertifikat berbeda-beda (potret & lanskap), jadi gambar
+                      dipasang object-contain di dalam bingkai berukuran tetap. */}
+                  {item.sertifikat && (
+                    <figure className="lg:col-span-5 w-full max-w-sm lg:max-w-none border border-gray-200 bg-white rounded-xs shadow-2xs overflow-hidden">
+                      <a
+                        href={item.sertifikat.gambar}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        title={t(halaman.labelPerbesar)}
+                        className="block bg-gray-50 aspect-3/2 p-3 group"
+                      >
+                        <Img
+                          src={item.sertifikat.gambar}
+                          alt={t(item.sertifikat.alt)}
+                          className="w-full h-full object-contain group-hover:scale-[1.03] transition-transform duration-300"
+                        />
+                      </a>
+
+                      <figcaption className="border-t border-gray-100 divide-y divide-gray-100">
+                        <p className="px-4 py-2 text-[11px] uppercase tracking-[0.14em] font-bold text-gray-400">
+                          {t(halaman.labelSertifikat)} {item.year}
+                        </p>
+                        <a
+                          href={item.sertifikat.dokumen.fileUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center gap-2.5 px-4 py-3 text-xs sm:text-sm font-semibold text-heading hover:text-primary hover:bg-gray-50/70 transition-colors group/pdf"
+                        >
+                          <FaFilePdf className="text-base text-primary shrink-0" />
+                          <span className="flex-1">{t(item.sertifikat.dokumen.label)}</span>
+                          <FiExternalLink className="text-sm text-gray-400 group-hover/pdf:text-primary transition-colors" />
+                        </a>
+                      </figcaption>
+                    </figure>
+                  )}
                 </div>
-
-                <h3 className="mt-2 font-heading font-semibold text-base sm:text-lg text-heading leading-snug">
-                  <RichText>{t(item.title)}</RichText>
-                </h3>
-
-                <p className="mt-1.5 text-sm sm:text-base text-body leading-relaxed max-w-3xl">
-                  <RichText>{t(item.desc)}</RichText>
-                </p>
-
-                {item.meta && (
-                  <p className="mt-2.5 text-xs text-gray-500 leading-relaxed">
-                    {t(item.meta)}
-                  </p>
-                )}
               </li>
             ))}
           </ol>
-        </section>
-
-        {/* Dokumen akreditasi: SK dan sertifikat resmi */}
-        <section className="space-y-6">
-          <div>
-            <h2 className="font-heading font-normal text-3xl sm:text-4xl text-heading tracking-normal">
-              {t(halaman.judulDokumen)}
-            </h2>
-            <div className="w-full h-[1.5px] bg-heading mt-3 mb-6" />
-            <p className="text-sm sm:text-base text-body leading-relaxed max-w-3xl">
-              {t(halaman.pengantarDokumen)}
-            </p>
-          </div>
-
-          <div className="border border-gray-200 bg-white rounded-xs shadow-2xs divide-y divide-gray-100">
-            {dokumenAkreditasi.map((doc) => (
-              <a
-                key={doc.id}
-                href={doc.fileUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="py-5 px-4 sm:px-6 flex flex-col sm:flex-row sm:items-center justify-between gap-3 group hover:bg-gray-50/60 transition-colors"
-              >
-                <div className="flex items-start gap-4">
-                  <div className="p-2.5 bg-red-50 text-primary rounded shrink-0 mt-0.5 group-hover:bg-primary group-hover:text-white transition-colors">
-                    <FaFilePdf className="text-xl" />
-                  </div>
-
-                  <div className="space-y-1">
-                    <h3 className="font-heading font-semibold text-base sm:text-[17px] text-heading group-hover:text-primary transition-colors leading-snug">
-                      {t(doc.title)}
-                    </h3>
-                    <p className="text-xs text-gray-500 leading-relaxed">
-                      {t(doc.meta)}
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-3 shrink-0 sm:pl-4">
-                  {doc.berlaku && (
-                    <span className="text-[10px] font-bold tracking-wider uppercase text-primary bg-red-50 border border-primary/30 px-2.5 py-1 rounded-full">
-                      {t(halaman.labelBerlaku)}
-                    </span>
-                  )}
-                  <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-heading group-hover:text-primary transition-colors">
-                    {t(halaman.labelLihat)}
-                    <FiExternalLink className="text-sm" />
-                  </span>
-                </div>
-              </a>
-            ))}
-          </div>
         </section>
       </div>
     </>

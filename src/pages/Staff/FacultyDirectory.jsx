@@ -172,7 +172,7 @@ export default function FacultyDirectory() {
                                             <Img
                                                 src={faculty.image}
                                                 alt={faculty.name}
-                                                className="w-full h-full object-cover object-top grayscale contrast-110 group-hover:scale-103 transition-transform duration-300"
+                                                className="w-full h-full object-cover object-top contrast-105 group-hover:scale-103 transition-transform duration-300"
                                             />
                                         ) : (
                                             <div className="w-full h-full flex flex-col items-center justify-center bg-gray-50 text-gray-400 group-hover:bg-gray-100 transition-colors p-4 text-center">
@@ -227,7 +227,7 @@ export default function FacultyDirectory() {
                     {visibleCount < filteredFaculty.length && (
                         <div className="flex justify-center mt-12">
                             <button
-                                onClick={() => setVisibleCount((prev) => prev + 4)}
+                                onClick={() => setVisibleCount(filteredFaculty.length)}
                                 className="bg-white border border-gray-300 text-heading hover:bg-gray-50 hover:border-gray-400 text-xs font-medium py-2.5 px-8 rounded-sm shadow-2xs transition-all duration-150 cursor-pointer"
                             >
                                 Muat Lebih Banyak

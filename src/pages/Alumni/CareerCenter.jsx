@@ -45,6 +45,15 @@ const initialJobs = [
   },
 ];
 
+/**
+ * Saklar tampilnya isi halaman.
+ *
+ * Daftar lowongan di bawah masih data contoh, jadi halaman ini untuk sementara
+ * menampilkan empty state seperti halaman Tracer Study. Susunan aslinya sengaja
+ * dibiarkan utuh: ubah nilainya menjadi `true` untuk menayangkannya kembali.
+ */
+const KONTEN_SIAP = false;
+
 export default function CareerCenter() {
   const [visibleCount, setVisibleCount] = useState(3);
 
@@ -55,6 +64,40 @@ export default function CareerCenter() {
       setVisibleCount(initialJobs.length);
     }
   };
+
+  if (!KONTEN_SIAP) {
+    return (
+      <>
+        <Helmet>
+          <title>Pusat Karir &amp; Bursa Kerja | MKn UNISSULA</title>
+          <meta name="description" content="Menghubungkan lulusan Magister Kenotariatan UNISSULA dengan jejaring kantor Notaris/PPAT, firma hukum, perbankan, dan institusi pemerintahan terkemuka di Indonesia." />
+        </Helmet>
+
+        <div className="space-y-6">
+          <div className="space-y-2">
+            <span className="text-xs font-bold tracking-wider uppercase text-primary">
+              Alumni &amp; Career
+            </span>
+            <h1 className="text-3xl sm:text-4xl lg:text-[40px] font-heading font-bold text-heading tracking-tight leading-tight">
+              Pusat Karir &amp; Jejaring Alumni
+            </h1>
+          </div>
+
+          <hr className="border-t border-gray-800 my-4" />
+
+          <p className="text-sm sm:text-base text-body leading-relaxed max-w-4xl">
+            Menghubungkan lulusan Magister Kenotariatan UNISSULA dengan jejaring kantor Notaris/PPAT, firma hukum, perbankan, dan institusi pemerintahan terkemuka di Indonesia.
+          </p>
+
+          <div className="p-12 text-center text-gray-400 border border-dashed border-gray-200 rounded-sm bg-white">
+            <p className="text-sm font-medium">
+              Informasi pusat karir dan jejaring alumni akan segera diperbarui di sini.
+            </p>
+          </div>
+        </div>
+      </>
+    );
+  }
 
   return (
     <>
