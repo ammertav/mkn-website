@@ -9,13 +9,24 @@ import { navLinks } from "../../data/navLinks";
 // Single source of truth — ambil langsung dari navLinks
 const akademikMenus = navLinks.find((n) => n.href === "/akademik")?.children ?? [];
 
+/** Narahubung akademik dan PMB, dikelompokkan agar terbaca rapi di sidebar. */
 const akademikContact = {
-  title: "Kontak Akademik",
-  lines: [
-    { text: "Sekretariat MKn" },
-    { text: "Gedung Pascasarjana Lt. 3" },
-    { text: "+62 24 6583584 ext. 512" },
-    { text: "mkn@unissula.ac.id", href: "mailto:mkn@unissula.ac.id" },
+  title: "KONTAK",
+  groups: [
+    {
+      label: "Akademik",
+      items: [
+        { name: "Suma’in, S.Pd.", phone: "+62 823-1222-8282" },
+        { name: "Ikrom, S.H., M.H.", phone: "+62 823-1222-8181" },
+      ],
+    },
+    {
+      label: "PMB",
+      items: [
+        { name: "Admin 1", phone: "+62 822-2362-2236" },
+        { name: "Admin 2", phone: "+62 822-2000-9889" },
+      ],
+    },
   ],
 };
 

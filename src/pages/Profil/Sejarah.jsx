@@ -1,7 +1,14 @@
 import { Helmet } from "react-helmet-async";
+import { FaFilePdf } from "react-icons/fa";
+import { FiExternalLink } from "react-icons/fi";
+
 import { useT } from "../../i18n/languageContext";
 import RichText from "../../components/ui/RichText";
-import { timeline, halaman } from "../../data/profil/sejarahData";
+import {
+  timeline,
+  dokumenAkreditasi,
+  halaman,
+} from "../../data/profil/sejarahData";
 
 export default function Sejarah() {
   const t = useT();
@@ -79,6 +86,58 @@ export default function Sejarah() {
               </li>
             ))}
           </ol>
+        </section>
+
+        {/* Dokumen akreditasi: SK dan sertifikat resmi */}
+        <section className="space-y-6">
+          <div>
+            <h2 className="font-heading font-normal text-3xl sm:text-4xl text-heading tracking-normal">
+              {t(halaman.judulDokumen)}
+            </h2>
+            <div className="w-full h-[1.5px] bg-heading mt-3 mb-6" />
+            <p className="text-sm sm:text-base text-body leading-relaxed max-w-3xl">
+              {t(halaman.pengantarDokumen)}
+            </p>
+          </div>
+
+          <div className="border border-gray-200 bg-white rounded-xs shadow-2xs divide-y divide-gray-100">
+            {dokumenAkreditasi.map((doc) => (
+              <a
+                key={doc.id}
+                href={doc.fileUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="py-5 px-4 sm:px-6 flex flex-col sm:flex-row sm:items-center justify-between gap-3 group hover:bg-gray-50/60 transition-colors"
+              >
+                <div className="flex items-start gap-4">
+                  <div className="p-2.5 bg-red-50 text-primary rounded shrink-0 mt-0.5 group-hover:bg-primary group-hover:text-white transition-colors">
+                    <FaFilePdf className="text-xl" />
+                  </div>
+
+                  <div className="space-y-1">
+                    <h3 className="font-heading font-semibold text-base sm:text-[17px] text-heading group-hover:text-primary transition-colors leading-snug">
+                      {t(doc.title)}
+                    </h3>
+                    <p className="text-xs text-gray-500 leading-relaxed">
+                      {t(doc.meta)}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-3 shrink-0 sm:pl-4">
+                  {doc.berlaku && (
+                    <span className="text-[10px] font-bold tracking-wider uppercase text-primary bg-red-50 border border-primary/30 px-2.5 py-1 rounded-full">
+                      {t(halaman.labelBerlaku)}
+                    </span>
+                  )}
+                  <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-heading group-hover:text-primary transition-colors">
+                    {t(halaman.labelLihat)}
+                    <FiExternalLink className="text-sm" />
+                  </span>
+                </div>
+              </a>
+            ))}
+          </div>
         </section>
       </div>
     </>

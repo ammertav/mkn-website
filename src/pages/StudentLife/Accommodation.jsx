@@ -234,7 +234,7 @@ export default function Accommodation() {
                 to="/mahasiswa/organisasi"
                 className="inline-flex items-center font-semibold text-primary hover:underline transition-colors"
               >
-                ← Organisasi Mahasiswa (HMP MKn)
+                ← Organisasi Mahasiswa (IMANU)
               </Link>
               <Link
                 to="/"

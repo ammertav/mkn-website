@@ -41,7 +41,7 @@ export const eventData = [
     category: "Kuliah Pakar",
     venue: "Ruang Seminar MKn 3.01 / Live YouTube MKn UNISSULA",
     speaker: "Dr. Toni Triyanto, S.H., M.H. & Pengurus Pusat Ikatan Notaris Indonesia (PP INI)",
-    organizer: "HMP MKn UNISSULA & Prodi MKn",
+    organizer: "IMANU UNISSULA & Prodi MKn",
     description:
       "Kuliah umum perdana semester gasal yang mengupas tuntas batasan etik, kerahasiaan protokol notaris, dan penerapan teknologi AI tanpa melanggar Undang-Undang Jabatan Notaris (UUJN).",
     fullDescription:
@@ -49,7 +49,7 @@ export const eventData = [
     image:
       "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=1200&q=80",
     registrationUrl: "https://unissula.ac.id/stadium-generale",
-    cp: "HMP MKn: 0813-9876-5432 (Sdr. Rizky)",
+    cp: "IMANU UNISSULA: 0813-9876-5432 (Sdr. Rizky)",
     isFeatured: true,
   },
   {

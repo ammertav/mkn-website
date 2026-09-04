@@ -1,7 +1,9 @@
 import { Helmet } from "react-helmet-async";
 import {
+  FiBook,
   FiBookOpen,
   FiDollarSign,
+  FiEdit3,
   FiGlobe,
   FiHome,
 } from "react-icons/fi";
@@ -9,79 +11,235 @@ import {
 import imgDekan from "../../assets/images/struktur-organisasi/Dekan Fakultas Hukum UNISSULA.jpg";
 import imgKaprodi from "../../assets/images/dosen/Dr.NanangSriDarmadi,S.H.,M.H..jpg";
 import imgSekprodi from "../../assets/images/struktur-organisasi/Sekprodi a- Dr. Toni Triyanto, S.H., M.jpeg";
+import imgDenny from "../../assets/images/struktur-organisasi/dr-denny-suwondo.jpg";
+import imgSoegianto from "../../assets/images/struktur-organisasi/prof-dr-soegianto.jpg";
+import imgIkrom from "../../assets/images/struktur-organisasi/ikrom.jpg";
+import imgDirLab from "../../assets/images/struktur-organisasi/doni-catur-saefudin.jpg";
+import imgDirPerpus from "../../assets/images/struktur-organisasi/anugrah-surya-kusuma-2.jpg";
+import imgAkademik from "../../assets/images/struktur-organisasi/sumain.jpg";
+import imgKeuangan from "../../assets/images/struktur-organisasi/laili-rohmah.jpg";
+import imgPromosi1 from "../../assets/images/struktur-organisasi/muhammad-mutohar.jpg";
+import imgPromosi2 from "../../assets/images/struktur-organisasi/aidha-nabila-mustikaweni.jpg";
+import imgSarpras1 from "../../assets/images/struktur-organisasi/ahmad-kuswardoyo.jpg";
+import imgSarpras2 from "../../assets/images/struktur-organisasi/nur-alamsyah.jpg";
 import Img from "../../components/ui/Img";
 
 const strukturPejabat = [
   {
     jabatan: "Dekan Fakultas Hukum UNISSULA",
-    pejabat: "Prof. Dr. H. Jawade Hafidz, S.H., M.H.",
     tanggungJawab:
       "Penanggung jawab utama kebijakan dan penyelenggaraan pendidikan Fakultas Hukum dan Pascasarjana Kenotariatan.",
   },
   {
     jabatan: "Ketua Program Studi Magister (S2) Kenotariatan",
-    pejabat: "Dr. Nanang Sri Darmadi, S.H., M.H.",
     tanggungJawab:
       "Kebijakan akademik, penetapan standar mutu, kurikulum, kepemimpinan prodi, dan hubungan kelembagaan.",
   },
   {
     jabatan: "Sekretaris Program Studi Magister (S2) Kenotariatan",
-    pejabat: "Dr. Toni Triyanto, S.H., M.H.",
     tanggungJawab:
       "Penyelenggaraan perkuliahan harian, penjadwalan dosen/mahasiswa, ujian, dan dokumentasi akademik.",
   },
   {
+    jabatan: "Gugus Penjaminan Mutu",
+    tanggungJawab:
+      "Pengawalan mutu akademik, audit mutu internal, dan pendampingan akreditasi program studi.",
+  },
+  {
     jabatan: "Koordinator Tata Usaha",
-    pejabat: "Ikrom, S.H., M.H.",
     tanggungJawab:
       "Koordinasi operasional ketatausahaan, layanan administratif terpadu, dan pengelolaan staf.",
   },
   {
-    jabatan: "Bidang Akademik",
-    pejabat: "—",
-    tanggungJawab:
-      "Layanan administrasi akademik mahasiswa, registrasi, penjadwalan perkuliahan, dan dokumentasi ujian.",
-  },
-  {
     jabatan: "Direktur Laboratorium Akta & Manajemen Kantor Notaris",
-    pejabat: "—",
     tanggungJawab:
       "Pengelolaan laboratorium akta, pembinaan praktik pembuatan akta, dan simulasi manajemen kantor notaris.",
   },
   {
     jabatan: "Direktur Perpustakaan",
-    pejabat: "—",
     tanggungJawab:
       "Pengelolaan koleksi pustaka hukum kenotariatan, layanan referensi, dan dukungan literatur penelitian tesis.",
   },
   {
+    jabatan: "Bidang Akademik",
+    tanggungJawab:
+      "Layanan administrasi akademik mahasiswa, registrasi, penjadwalan perkuliahan, dan dokumentasi ujian.",
+  },
+  {
     jabatan: "Bidang Keuangan",
-    pejabat: "—",
     tanggungJawab:
       "Administrasi keuangan mahasiswa, pembiayaan kegiatan akademik, dan pengelolaan anggaran program studi.",
   },
   {
     jabatan: "Bidang Promosi & Humas",
-    pejabat: "—",
     tanggungJawab:
       "Sosialisasi program studi, promosi penerimaan mahasiswa baru, serta pengelolaan publikasi dan media.",
   },
   {
     jabatan: "Bidang Sarana Prasarana",
-    pejabat: "—",
     tanggungJawab:
       "Pengelolaan ruang kuliah, laboratorium kenotariatan, dan fasilitas penunjang program studi.",
   },
 ];
 
+/**
+ * Sumber untuk section "Pejabat dan Pelaksana" di bawah bagan. Dikelompokkan
+ * per unit, bukan per baris tabel, karena beberapa unit beranggota lebih dari
+ * satu orang (mis. GPM, Promosi & Humas, Sarana Prasarana).
+ *
+ * `photo: null` berarti foto belum tersedia — kartu jatuh ke inisial nama
+ * sebagai gantinya (lihat komponen InitialsAvatar).
+ */
+const pejabatPelaksana = [
+  {
+    title: "DEKAN",
+    members: [
+      {
+        jabatan: "Dekan Fakultas Hukum UNISSULA",
+        name: "Prof. Dr. H. Jawade Hafidz, S.H., M.H.",
+        photo: imgDekan,
+      },
+    ],
+  },
+  {
+    title: "KETUA DAN SEKRETARIS PROGRAM STUDI",
+    members: [
+      {
+        jabatan: "Ketua Program Studi Magister (S2) Kenotariatan",
+        name: "Dr. Nanang Sri Darmadi, S.H., M.H.",
+        photo: imgKaprodi,
+      },
+      {
+        jabatan: "Sekretaris Program Studi Magister (S2) Kenotariatan",
+        name: "Dr. Toni Triyanto, S.H., M.H.",
+        photo: imgSekprodi,
+      },
+    ],
+  },
+  {
+    title: "GUGUS PENJAMINAN MUTU",
+    members: [
+      {
+        jabatan: "Gugus Penjaminan Mutu",
+        name: "Anugrah Surya Kusuma, S.H., M.H.",
+        photo: imgDirPerpus,
+      },
+      {
+        jabatan: "Gugus Penjaminan Mutu",
+        name: "Dr. Denny Suwondo, S.H., M.H.",
+        photo: imgDenny,
+      },
+      {
+        jabatan: "Gugus Penjaminan Mutu",
+        name: "Prof. Dr. Soegianto, S.H., M.Kn.",
+        photo: imgSoegianto,
+      },
+    ],
+  },
+  {
+    title: "TATA USAHA DAN ADMINISTRASI",
+    members: [
+      {
+        jabatan: "Kepala Tata Usaha",
+        name: "Ikrom, S.H., M.H.",
+        photo: imgIkrom,
+      },
+      {
+        jabatan: "Direktur Laboratorium Akta & Manajemen Kantor Notaris",
+        name: "Doni Catur Saefudin, S.H., M.Kn.",
+        photo: imgDirLab,
+      },
+      {
+        jabatan: "Direktur Perpustakaan",
+        name: "Anugrah Surya Kusuma, S.H., M.H.",
+        photo: imgDirPerpus,
+      },
+      {
+        jabatan: "Bidang Akademik",
+        name: "Suma'in, S.Pd.",
+        photo: imgAkademik,
+      },
+      {
+        jabatan: "Bidang Keuangan",
+        name: "Laili Rohmah, S.Pd.",
+        photo: imgKeuangan,
+      },
+      {
+        jabatan: "Bidang Promosi & Humas",
+        name: "Muhammad Mutohar, S.H., M.Kn.",
+        photo: imgPromosi1,
+      },
+      {
+        jabatan: "Bidang Promosi & Humas",
+        name: "Aidha Nabila Mustikaweni, S.Kom.",
+        photo: imgPromosi2,
+      },
+      {
+        jabatan: "Bidang Sarana Prasarana",
+        name: "Ahmad Kuswardoyo, S.E.",
+        photo: imgSarpras1,
+      },
+      {
+        jabatan: "Bidang Sarana Prasarana",
+        name: "Nur Alamsyah",
+        photo: imgSarpras2,
+      },
+    ],
+  },
+];
+
+/** Gelar akademik/jabatan yang diabaikan saat menyusun inisial fallback. */
+const GELAR = new Set([
+  "dr", "prof", "hc", "drs", "dra", "h", "hj", "ir",
+  "sh", "mh", "mkn", "spd", "se", "skom",
+]);
+
+function initialsOf(name) {
+  const words = name
+    .replace(/[.,]/g, " ")
+    .split(/\s+/)
+    .filter((w) => w && !GELAR.has(w.toLowerCase()));
+  return (words.slice(0, 2).map((w) => w[0]) || ["?"]).join("").toUpperCase();
+}
+
+function PersonCard({ jabatan, name, photo }) {
+  return (
+    <div className="w-32 sm:w-36 lg:w-40 border border-gray-200 bg-white rounded-xs shadow-2xs p-3 flex flex-col items-center text-center hover:border-primary/40 transition-colors">
+      <div className="w-20 h-24 sm:w-24 sm:h-28 rounded-xs overflow-hidden bg-gray-100 mb-3 border border-gray-200 flex items-center justify-center shrink-0">
+        {photo ? (
+          <Img
+            src={photo}
+            alt={name}
+            className="w-full h-full object-cover object-top"
+          />
+        ) : (
+          <span className="font-heading text-lg sm:text-xl font-bold text-gray-400">
+            {initialsOf(name)}
+          </span>
+        )}
+      </div>
+      <span className="text-[10px] font-bold tracking-[0.1em] uppercase text-primary block mb-1 leading-snug">
+        {jabatan}
+      </span>
+      <p className="font-heading text-xs sm:text-sm font-bold text-heading leading-snug">
+        {name}
+      </p>
+    </div>
+  );
+}
+
 const adminUnits = [
+  {
+    icon: FiEdit3,
+    name: "Direktur Laboratorium Akta & Manajemen Kantor Notaris",
+  },
+  {
+    icon: FiBook,
+    name: "Direktur Perpustakaan",
+  },
   {
     icon: FiBookOpen,
     name: "Akademik",
-    children: [
-      "Direktur Laboratorium Akta & Manajemen Kantor Notaris",
-      "Direktur Perpustakaan",
-    ],
   },
   {
     icon: FiDollarSign,
@@ -161,21 +319,38 @@ export default function StrukturOrganisasi() {
               {/* Connecting Line 1 */}
               <div className="w-px h-8 bg-gray-300" />
 
-              {/* Level 2: Kaprodi */}
-              <div className="w-full max-w-sm bg-white border-2 border-primary p-6 text-center rounded-xs shadow-sm flex flex-col items-center">
-                <div className="w-28 h-36 sm:w-32 sm:h-40 rounded-xs overflow-hidden bg-gray-100 mb-4 border border-gray-200 shadow-2xs">
-                  <Img
-                    src={imgKaprodi}
-                    alt="Dr. Nanang Sri Darmadi, S.H., M.H."
-                    className="w-full h-full object-cover object-top"
-                  />
+              {/* Level 2: Kaprodi, dengan Gugus Penjaminan Mutu menempel di
+                  kanannya lewat garis putus-putus (hubungan koordinatif, bukan
+                  garis komando). Kedua sisi flex-1 menjaga Kaprodi tetap
+                  terpusat pada spine. */}
+              <div className="w-full max-w-7xl flex flex-col items-center md:flex-row md:items-center md:justify-center">
+                <div className="hidden md:block md:flex-1" />
+
+                <div className="w-full max-w-sm bg-white border-2 border-primary p-6 text-center rounded-xs shadow-sm flex flex-col items-center">
+                  <div className="w-28 h-36 sm:w-32 sm:h-40 rounded-xs overflow-hidden bg-gray-100 mb-4 border border-gray-200 shadow-2xs">
+                    <Img
+                      src={imgKaprodi}
+                      alt="Dr. Nanang Sri Darmadi, S.H., M.H."
+                      className="w-full h-full object-cover object-top"
+                    />
+                  </div>
+                  <span className="text-[10px] font-bold tracking-[0.14em] uppercase text-primary block mb-1">
+                    KETUA PROGRAM STUDI MAGISTER (S2) KENOTARIATAN
+                  </span>
+                  <p className="font-heading text-base sm:text-lg font-bold text-heading">
+                    Dr. Nanang Sri Darmadi, S.H., M.H.
+                  </p>
                 </div>
-                <span className="text-[10px] font-bold tracking-[0.14em] uppercase text-primary block mb-1">
-                  KETUA PROGRAM STUDI MAGISTER (S2) KENOTARIATAN
-                </span>
-                <p className="font-heading text-base sm:text-lg font-bold text-heading">
-                  Dr. Nanang Sri Darmadi, S.H., M.H.
-                </p>
+
+                {/* Cabang kanan: Gugus Penjaminan Mutu */}
+                <div className="w-full md:flex-1 flex flex-col items-center md:flex-row md:items-center">
+                  <div className="h-8 w-0 border-l border-dashed border-gray-400 md:h-0 md:w-10 lg:w-16 md:border-l-0 md:border-t shrink-0" />
+                  <div className="w-full max-w-md bg-white border border-dashed border-primary/50 p-4 text-center rounded-xs shadow-2xs">
+                    <span className="text-md font-bold tracking-[0.14em] uppercase text-primary block">
+                      GUGUS PENJAMINAN MUTU
+                    </span>
+                  </div>
+                </div>
               </div>
 
               {/* Persimpangan: garis Kaprodi → Koordinator TU, dengan Sekprodi
@@ -187,7 +362,7 @@ export default function StrukturOrganisasi() {
                 {/* Mobile: cabang mendatar tidak muat, jadi dirantai vertikal biasa */}
                 <div className="md:hidden w-px h-8 bg-gray-300" />
 
-                <div className="w-full flex md:py-8">
+                <div className="w-full flex flex-col md:flex-row md:items-center md:py-8">
                   {/* Separuh kiri: kartu Sekprodi menempel ke spine lewat garis mendatar */}
                   <div className="w-full md:w-1/2 flex items-center justify-center md:justify-end">
                     <div className="w-full max-w-sm bg-white border-2 border-primary/70 p-6 text-center rounded-xs shadow-sm flex flex-col items-center">
@@ -207,6 +382,7 @@ export default function StrukturOrganisasi() {
                     </div>
                     <div className="hidden md:block w-10 lg:w-16 h-px bg-gray-300 shrink-0" />
                   </div>
+
                   <div className="hidden md:block md:w-1/2" />
                 </div>
 
@@ -216,7 +392,7 @@ export default function StrukturOrganisasi() {
               {/* Level 3: Koordinator Tata Usaha */}
               <div className="w-full max-w-md bg-red-50/70 border border-primary/30 p-4 text-center rounded-xs shadow-2xs">
                 <span className="text-[10px] font-bold tracking-[0.14em] uppercase text-primary block mb-0.5">
-                  KOORDINATOR TATA USAHA
+                  KEPALA TATA USAHA
                 </span>
                 <p className="font-heading text-sm sm:text-base font-semibold text-heading">
                   Ikrom, S.H., M.H.
@@ -226,54 +402,67 @@ export default function StrukturOrganisasi() {
               {/* Connecting Line 3 */}
               <div className="w-px h-8 bg-gray-300" />
 
-              {/* Level 4: 4 Bidang Pelaksana */}
-              <div className="w-full max-w-5xl">
+              {/* Level 4: 6 Unit Pelaksana */}
+              <div className="w-full max-w-7xl">
                 <div className="text-center mb-3">
                   <span className="text-[11px] font-bold tracking-widest uppercase text-gray-400 bg-gray-50 px-3 py-1 border border-gray-200 rounded-full">
                     PELAKSANA ADMINISTRASI
                   </span>
                 </div>
 
-                <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 pt-2 items-start">
+                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4 pt-2">
                   {adminUnits.map((unit, idx) => {
                     const Icon = unit.icon;
                     return (
-                      <div key={idx} className="flex flex-col items-center">
-                        <div className="w-full min-h-[104px] border border-gray-200 bg-white p-4 text-center rounded-xs shadow-2xs space-y-2 hover:border-primary/40 transition-colors flex flex-col items-center justify-center">
-                          <div className="w-9 h-9 rounded-full bg-primary/10 text-primary flex items-center justify-center text-base shrink-0">
-                            <Icon />
-                          </div>
-                          <p className="font-heading text-xs sm:text-sm font-bold text-heading">
-                            {unit.name}
-                          </p>
+                      <div
+                        key={idx}
+                        className="h-full min-h-[104px] border border-gray-200 bg-white p-4 text-center rounded-xs shadow-2xs space-y-2 hover:border-primary/40 transition-colors flex flex-col items-center justify-center"
+                      >
+                        <div className="w-9 h-9 rounded-full bg-primary/10 text-primary flex items-center justify-center text-base shrink-0">
+                          <Icon />
                         </div>
-
-                        {/* Sub-unit di bawah bidang ini. Ditumpuk vertikal agar
-                            lebarnya tetap sama dengan kotak bidang dan barisan
-                            bidang tetap simetris terhadap garis di atasnya. */}
-                        {unit.children && (
-                          <>
-                            <div className="w-px h-4 bg-gray-300" />
-                            <div className="w-full space-y-3">
-                              {unit.children.map((child) => (
-                                <div
-                                  key={child}
-                                  className="border border-gray-200 bg-gray-50/70 p-4 text-center rounded-xs shadow-2xs"
-                                >
-                                  <p className="font-heading text-xs sm:text-sm font-bold text-heading leading-snug">
-                                    {child}
-                                  </p>
-                                </div>
-                              ))}
-                            </div>
-                          </>
-                        )}
+                        <p className="font-heading text-[11px] sm:text-xs font-bold text-heading leading-snug">
+                          {unit.name}
+                        </p>
                       </div>
                     );
                   })}
                 </div>
               </div>
             </div>
+          </div>
+        </section>
+
+        {/* Section Pejabat dan Pelaksana: foto per orang, dikelompokkan per
+            unit. Terpisah dari bagan di atas — bagan menunjukkan garis
+            komando, section ini menunjukkan orangnya. */}
+        <section className="space-y-6">
+          <div>
+            <h2 className="font-heading font-normal text-3xl sm:text-4xl text-heading tracking-normal">
+              Pejabat dan Pelaksana
+            </h2>
+            <div className="w-full h-[1.5px] bg-heading mt-3 mb-8" />
+          </div>
+
+          <div className="space-y-10">
+            {pejabatPelaksana.map((group) => (
+              <div key={group.title}>
+                <span className="text-lg flex justify-center font-bold tracking-wider text-primary uppercase mb-4">
+                  {group.title}
+                </span>
+                {/* flex-wrap + justify-center: grup 1-3 anggota tampil
+                    terpusat, grup besar (Tata Usaha & Administrasi) mengalir
+                    ke baris berikutnya tanpa perlu penanganan khusus. */}
+                <div className="flex flex-wrap justify-center gap-3">
+                  {group.members.map((member) => (
+                    <PersonCard
+                      key={`${member.jabatan}-${member.name}`}
+                      {...member}
+                    />
+                  ))}
+                </div>
+              </div>
+            ))}
           </div>
         </section>
 
@@ -290,11 +479,8 @@ export default function StrukturOrganisasi() {
             <table className="w-full text-left border-collapse">
               <thead>
                 <tr className="border-b border-gray-200 bg-gray-50/50">
-                  <th className="py-3.5 px-5 sm:px-6 text-[11px] font-bold tracking-wider uppercase text-heading w-1/4">
-                    JABATAN
-                  </th>
                   <th className="py-3.5 px-5 sm:px-6 text-[11px] font-bold tracking-wider uppercase text-heading w-1/3">
-                    PEJABAT / UNIT
+                    JABATAN
                   </th>
                   <th className="py-3.5 px-5 sm:px-6 text-[11px] font-bold tracking-wider uppercase text-heading">
                     TANGGUNG JAWAB UTAMA
@@ -309,9 +495,6 @@ export default function StrukturOrganisasi() {
                   >
                     <td className="py-4 px-5 sm:px-6 font-semibold text-heading align-top">
                       {item.jabatan}
-                    </td>
-                    <td className="py-4 px-5 sm:px-6 text-heading font-medium align-top">
-                      {item.pejabat}
                     </td>
                     <td className="py-4 px-5 sm:px-6 text-body leading-relaxed align-top">
                       {item.tanggungJawab}

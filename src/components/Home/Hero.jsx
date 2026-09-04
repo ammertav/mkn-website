@@ -57,7 +57,7 @@ export default function Hero() {
               MAGISTER KENOTARIATAN
             </span>
             <span className="block text-2xl sm:text-4xl md:text-5xl tracking-wide">
-              UNISSULA
+              FAKULTAS HUKUM UNISSULA
             </span>
           </h1>
 

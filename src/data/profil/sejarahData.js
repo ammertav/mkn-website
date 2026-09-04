@@ -16,6 +16,13 @@
  * Rujukan: lp3m.unissula.ac.id/akpro · unissula.ac.id/sebelas-prodi-unissula-terakreditasi-internasional
  */
 
+import skUnggul2023 from "../../assets/pdf/SK-BAN-PT-Akreditasi-Unggul-MKn-2023.pdf";
+import sertifikatUnggul2023 from "../../assets/pdf/Sertifikat-Akreditasi-Unggul-MKn-2023.pdf";
+import sertifikatAsic2020 from "../../assets/pdf/Sertifikat-ASIC-Premier-MKn-2020.pdf";
+import skUnggul2021 from "../../assets/pdf/SK-BAN-PT-Konversi-Unggul-MKn-2021.pdf";
+import sertifikatUnggul2021 from "../../assets/pdf/Sertifikat-Akreditasi-Unggul-MKn-2021.pdf";
+import skAkreditasiA2018 from "../../assets/pdf/SK-BAN-PT-Akreditasi-A-MKn-2018.pdf";
+
 export const timeline = [
   {
     year: "2012",
@@ -116,6 +123,91 @@ export const statusAkreditasi = [
   },
 ];
 
+/**
+ * Dokumen resmi akreditasi — SK dan sertifikat, diurutkan dari yang terbaru.
+ * `berlaku: true` menandai dokumen yang masa berlakunya masih berjalan.
+ */
+export const dokumenAkreditasi = [
+  {
+    id: "sertifikat-unggul-2023",
+    title: {
+      id: "Sertifikat Akreditasi Unggul BAN-PT",
+      en: "BAN-PT Unggul (Excellent) Accreditation Certificate",
+    },
+    meta: {
+      id: "Berlaku 10 Juli 2023 – 10 Juli 2028",
+      en: "Valid 10 July 2023 – 10 July 2028",
+    },
+    fileUrl: sertifikatUnggul2023,
+    berlaku: true,
+  },
+  {
+    id: "sk-unggul-2023",
+    title: {
+      id: "SK Penetapan Akreditasi Unggul BAN-PT",
+      en: "BAN-PT Decree on Unggul (Excellent) Accreditation",
+    },
+    meta: {
+      id: "No. 2512/SK/BAN-PT/Ak.Ppj/M/VI/2023 · Nilai 361 · 27 Juni 2023",
+      en: "No. 2512/SK/BAN-PT/Ak.Ppj/M/VI/2023 · Score 361 · 27 June 2023",
+    },
+    fileUrl: skUnggul2023,
+    berlaku: true,
+  },
+  {
+    id: "sertifikat-asic-2020",
+    title: {
+      id: "Sertifikat Akreditasi Internasional ASIC — Premier Institution",
+      en: "ASIC International Accreditation Certificate — Premier Institution",
+    },
+    meta: {
+      id: "No. AS75883/0720 · Berlaku 13 Juli 2020 – 12 Juli 2024",
+      en: "No. AS75883/0720 · Valid 13 July 2020 – 12 July 2024",
+    },
+    fileUrl: sertifikatAsic2020,
+    berlaku: false,
+  },
+  {
+    id: "sertifikat-unggul-2021",
+    title: {
+      id: "Sertifikat Akreditasi Unggul BAN-PT (Konversi)",
+      en: "BAN-PT Unggul Accreditation Certificate (Conversion)",
+    },
+    meta: {
+      id: "Berlaku 11 Mei 2021 – 9 Juli 2023",
+      en: "Valid 11 May 2021 – 9 July 2023",
+    },
+    fileUrl: sertifikatUnggul2021,
+    berlaku: false,
+  },
+  {
+    id: "sk-unggul-2021",
+    title: {
+      id: "SK Konversi Peringkat Akreditasi menjadi Unggul",
+      en: "Decree on Conversion of Accreditation Grade to Unggul",
+    },
+    meta: {
+      id: "No. 2818/SK/BAN-PT/AK-ISK/M/V/2021 · Nilai 361 · 11 Mei 2021",
+      en: "No. 2818/SK/BAN-PT/AK-ISK/M/V/2021 · Score 361 · 11 May 2021",
+    },
+    fileUrl: skUnggul2021,
+    berlaku: false,
+  },
+  {
+    id: "sk-akreditasi-a-2018",
+    title: {
+      id: "SK Status dan Peringkat Akreditasi A BAN-PT",
+      en: "BAN-PT Decree on Accreditation Status and Grade A",
+    },
+    meta: {
+      id: "No. 1696/SK/BAN-PT/Akred/M/VII/2018 · Nilai 361 · 9 Juli 2018",
+      en: "No. 1696/SK/BAN-PT/Akred/M/VII/2018 · Score 361 · 9 July 2018",
+    },
+    fileUrl: skAkreditasiA2018,
+    berlaku: false,
+  },
+];
+
 /** Teks halaman Sejarah — judul, pengantar, dan label seksi. */
 export const halaman = {
   meta: {
@@ -154,4 +246,18 @@ export const halaman = {
     },
   ],
   judulLinimasa: { id: "Perjalanan Program Studi", en: "The Programme’s Journey" },
+  judulDokumen: {
+    id: "Dokumen Akreditasi",
+    en: "Accreditation Documents",
+  },
+  pengantarDokumen: {
+    id:
+      "Salinan surat keputusan dan sertifikat akreditasi yang pernah diterima Program Studi " +
+      "Magister Kenotariatan, diurutkan dari yang terbaru.",
+    en:
+      "Copies of the accreditation decrees and certificates awarded to the Master of Notarial " +
+      "Law Study Programme, listed newest first.",
+  },
+  labelBerlaku: { id: "Masih berlaku", en: "Currently valid" },
+  labelLihat: { id: "Lihat dokumen", en: "View document" },
 };

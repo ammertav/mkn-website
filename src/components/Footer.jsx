@@ -1,8 +1,27 @@
 import { Link } from "react-router-dom";
-import { FaInstagram, FaTwitter, FaYoutube, FaLinkedinIn } from "react-icons/fa";
+import { FaInstagram, FaTiktok, FaYoutube } from "react-icons/fa";
 
 import logoUnissula from "../assets/images/logo-unissula-crest.png";
 import Img from "./ui/Img";
+
+/** Akun media sosial resmi Program Studi Magister Kenotariatan UNISSULA. */
+const socialLinks = [
+  {
+    label: "Instagram",
+    href: "https://www.instagram.com/notariatunissula",
+    Icon: FaInstagram,
+  },
+  {
+    label: "TikTok",
+    href: "https://www.tiktok.com/@notariatunissula",
+    Icon: FaTiktok,
+  },
+  {
+    label: "YouTube",
+    href: "https://www.youtube.com/@kenotariatanunissula",
+    Icon: FaYoutube,
+  },
+];
 
 const footerSections = [
   {
@@ -99,42 +118,18 @@ export default function Footer() {
 
             {/* Social Media Icons — Solid gray buttons with white icons */}
             <div className="flex items-center space-x-2 pt-2">
-              <a
-                href="https://instagram.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Instagram"
-                className="w-7 h-7 rounded-xs bg-gray-400 text-white flex items-center justify-center hover:bg-primary transition-colors duration-150"
-              >
-                <FaInstagram className="text-sm" />
-              </a>
-              <a
-                href="https://twitter.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Twitter"
-                className="w-7 h-7 rounded-xs bg-gray-400 text-white flex items-center justify-center hover:bg-primary transition-colors duration-150"
-              >
-                <FaTwitter className="text-xs" />
-              </a>
-              <a
-                href="https://youtube.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="YouTube"
-                className="w-7 h-7 rounded-xs bg-gray-400 text-white flex items-center justify-center hover:bg-primary transition-colors duration-150"
-              >
-                <FaYoutube className="text-xs" />
-              </a>
-              <a
-                href="https://linkedin.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="LinkedIn"
-                className="w-7 h-7 rounded-xs bg-gray-400 text-white flex items-center justify-center hover:bg-primary transition-colors duration-150"
-              >
-                <FaLinkedinIn className="text-xs" />
-              </a>
+              {socialLinks.map(({ label, href, Icon }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={label}
+                  className="w-7 h-7 rounded-xs bg-gray-400 text-white flex items-center justify-center hover:bg-primary transition-colors duration-150"
+                >
+                  <Icon className="text-sm" />
+                </a>
+              ))}
             </div>
           </div>
 

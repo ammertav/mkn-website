@@ -151,7 +151,7 @@ export default function EventPage() {
         <div className="w-full flex-grow flex flex-col lg:flex-row items-stretch border-t border-gray-200">
           {/* Kolom Kiri: Sidebar Dark Panel (Mentok Kiri Layar Penuh) */}
           <div className="w-full lg:w-[380px] xl:w-[420px] shrink-0 bg-[#111c24] border-r border-black/20">
-            <div className="lg:sticky lg:top-28 lg:max-h-[calc(100vh-7rem)] lg:overflow-y-auto scrollbar-thin">
+            <div className="lg:sticky lg:top-[calc(var(--header-h)+0.5rem)] lg:max-h-[calc(100vh-var(--header-h)-1rem)] lg:overflow-y-auto scrollbar-thin">
               <EventCalendarSidebar
                 currentMonthDate={currentMonthDate}
                 onChangeMonth={handleChangeMonth}

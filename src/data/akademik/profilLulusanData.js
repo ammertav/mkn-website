@@ -9,27 +9,6 @@
  * resmi bila terjadi perbedaan penafsiran.
  */
 
-export const profilLulusanIntro = {
-  id:
-    "Profil lulusan Program Magister Kenotariatan UNISSULA adalah menjadi Magister " +
-    "Kenotariatan yang bertaqwa kepada Allah SWT, berakhlak mulia, berintegritas, dan " +
-    "profesional dalam menjalankan jabatan publik, serta memiliki kompetensi akademik dan " +
-    "praktis di bidang kenotariatan dan pertanahan. Lulusan Magister Kenotariatan UNISSULA " +
-    "berorientasi pada profesionalisme berbasis *Outcome-Based Education* (OBE), adaptif " +
-    "terhadap perkembangan regulasi dan transformasi digital layanan hukum, serta mampu " +
-    "berkontribusi secara nasional dan global tanpa meninggalkan identitas keislaman dan " +
-    "nilai-nilai perjuangan UNISSULA.",
-  en: 
-    "The graduate profile of the UNISSULA Master of Notarial Law programme is a Master " +
-    "of Notarial Law who is devoted to Allah SWT, of noble character, of integrity, and " +
-    "professional in holding public office, with both academic and practical competence " +
-    "in notarial law and land law. Graduates of the UNISSULA Master of Notarial Law " +
-    "programme are oriented towards professionalism grounded in Outcome-Based Education " +
-    "(OBE), adaptive to regulatory change and to the digital transformation of legal " +
-    "services, and able to contribute nationally and globally without relinquishing " +
-    "their Islamic identity and the founding values of UNISSULA.",
-};
-
 /** Tabel 1 pada dokumen sumber — Profil Lulusan dan deskripsinya. */
 export const mainProfiles = [
   {

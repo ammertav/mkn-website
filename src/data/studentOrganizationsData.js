@@ -1,148 +1,157 @@
+import gedungUnissula from "../assets/images/gedung.jpg";
+import imgIMANU1 from "../assets/images/imanu-1.jpeg";
+import imgIMANU3 from "../assets/images/imanu-2.jpeg";
+import imgIMANU2 from "../assets/images/imanu-3.jpeg";
+
+
 export const studentOrganizationsData = [
   {
     id: 1,
-    slug: "himpunan-mahasiswa",
-    alternateSlugs: ["immk", "hmp-mkn"],
-    title: "Himpunan Mahasiswa Magister Kenotariatan",
-    shortName: "HMP MKn",
+    slug: "imanu",
+    title: "Ikatan Mahasiswa Kenotariatan Universitas Islam Sultan Agung",
+    shortName: "IMANU UNISSULA",
     category: "ORGANISASI MAHASISWA",
+    periode: "2026/2027",
     description:
-      "Wadah resmi seluruh mahasiswa program studi. Pengurus dipilih melalui musyawarah anggota setiap tahun dan bertanggung jawab atas kegiatan akademik, penalaran, dan kesejahteraan mahasiswa selama satu periode kepengurusan.",
-    image: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1200&q=80",
-    imageCaption: "Foto pengurus himpunan atau kegiatan musyawarah anggota",
+      "IMANU UNISSULA adalah lembaga kemahasiswaan formal intra kampus di tingkat Program " +
+      "Studi Magister Kenotariatan. Organisasi ini bersifat akademis, kekeluargaan, dan " +
+      "independen tanpa berafiliasi pada kekuatan politik mana pun.",
+    image: gedungUnissula,
+    imageCaption: "Kampus Universitas Islam Sultan Agung, Semarang",
+
     meta: [
-      { label: "Berdiri", value: "2008" },
-      { label: "Periode berjalan", value: "2026 / 2027" },
-      { label: "Dosen pendamping", value: "Dr. Achmad Arifullah" },
-      { label: "Sekretariat", value: "Gedung Pascasarjana Lt. 2" },
+      { label: "Nama singkat", value: "IMANU UNISSULA" },
+      { label: "Didirikan", value: "18 Agustus 2026, Kota Semarang" },
+      { label: "Kedudukan", value: "Program Studi Magister Kenotariatan" },
+      { label: "Periode kepengurusan", value: "2026 / 2027" },
     ],
+
+    /** Fungsi organisasi sebagaimana dirumuskan pada dokumen sumber. */
+    fungsi: [
+      "Wadah komunikasi antaranggota dan dengan program studi",
+      "Penjaring aspirasi mahasiswa Magister Kenotariatan",
+      "Sarana pengembangan keilmuan dan kompetensi mahasiswa",
+    ],
+
+    /** Landasan nilai organisasi. */
+    landasan: ["Nilai-nilai keislaman", "Pancasila", "Tri Dharma Perguruan Tinggi"],
+
+    tujuan:
+      "Berlandaskan nilai-nilai tersebut, IMANU UNISSULA didedikasikan untuk menjembatani " +
+      "sinergi antara civitas academica, alumni, masyarakat, serta organisasi profesi hukum. " +
+      "Tujuannya adalah membentuk calon praktisi hukum dan Notaris/PPAT yang berintegritas, " +
+      "beretika luhur, profesional, dan bertakwa.",
+
     narrative: [
-      "Himpunan berdiri pada 2008, dua tahun setelah program studi menerima angkatan pertamanya. Kebutuhannya sederhana: mahasiswa magister yang sebagian besar sudah bekerja memerlukan satu pintu untuk menyampaikan persoalan akademik kepada program studi, dan satu wadah untuk menyelenggarakan kegiatan di luar perkuliahan.",
-      "Kepengurusan berjalan satu tahun dan dipilih melalui musyawarah anggota pada awal semester gasal. Ketua terpilih menyusun kabinet bersama empat koordinator bidang, kemudian mengajukan rencana kerja dan anggaran kepada Ketua Program Studi untuk disahkan.",
+      "Sejarah berdirinya IMANU UNISSULA berawal dari kesadaran mendalam bahwa mahasiswa " +
+        "Program Studi Magister Kenotariatan merupakan bagian integral dari civitas academica. " +
+        "Mahasiswa dituntut untuk mengemban amanah keilmuan, kepemimpinan, serta etika profesi " +
+        "luhur yang senantiasa berlandaskan pada nilai-nilai ajaran Islam. Berangkat dari " +
+        "pemikiran filosofis dan kebutuhan taktis tersebut, IMANU UNISSULA secara resmi " +
+        "didirikan di Kota Semarang pada tanggal 18 Agustus 2026.",
+      "Pembentukan organisasi ini tidak terlepas dari urgensi untuk menyediakan sebuah wadah " +
+        "formal yang mampu mengakomodasi aspirasi mahasiswa sekaligus mempererat tali " +
+        "silaturahmi. Lebih jauh, para pendiri IMANU UNISSULA memandang pentingnya sebuah " +
+        "institusi kemahasiswaan yang secara terstruktur berupaya mengembangkan integritas dan " +
+        "kapasitas keilmuan di bidang kenotariatan.",
+      "Kehadiran organisasi ini dirancang sebagai instrumen strategis guna mempersiapkan " +
+        "calon-calon praktisi hukum, yang tidak hanya memiliki kapabilitas serta keahlian hukum " +
+        "tinggi, tetapi juga menjunjung tinggi nilai ketakwaan kepada Allah SWT. Melalui pijakan " +
+        "historis yang kuat ini, IMANU UNISSULA terus bergerak sebagai jembatan komunikasi antara " +
+        "dunia akademik dan realitas profesi hukum.",
     ],
-    quote: {
-      text: "Sebagian besar anggota kami sudah bekerja. Kegiatan yang berhasil adalah yang menghormati waktu mereka.",
-      author: "Rangga Adiputra, Ketua Himpunan 2026/2027",
-    },
-    summary: [
-      { number: "186", label: "Anggota terdaftar" },
-      { number: "4", label: "Bidang kerja" },
-      { number: "7", label: "Program kerja setahun" },
-      { number: "19", label: "Periode kepengurusan" },
-    ],
-    contact: {
-      lines: [
-        "Sekretariat Himpunan",
-        "Gedung Pascasarjana Lt. 2",
-        "hmp.mkn@unissula.ac.id",
-        "Instagram @hmpmkn.unissula",
-      ],
-      email: "hmp.mkn@unissula.ac.id",
-      instagram: "hmpmkn.unissula",
-    },
-    bidangKerja: [
-      {
-        bidang: "Akademik",
-        lingkupKerja: "Menyalurkan keluhan perkuliahan, mengelola bank soal, menyelenggarakan kelas persiapan ujian",
-        koordinator: "Yoga Pratama",
-      },
-      {
-        bidang: "Penalaran dan Riset",
-        lingkupKerja: "Diskusi bulanan, pendampingan penulisan artikel, delegasi kompetisi",
-        koordinator: "Bayu Saputra",
-      },
-      {
-        bidang: "Kesejahteraan Anggota",
-        lingkupKerja: "Informasi beasiswa, advokasi keringanan biaya, layanan konsultasi anggota",
-        koordinator: "Intan Permata",
-      },
-      {
-        bidang: "Hubungan Luar",
-        lingkupKerja: "Kerja sama dengan himpunan lain, alumni, dan organisasi profesi",
-        koordinator: "Gilang Ramadhan",
-      },
-    ],
+
+    /**
+     * Program kerja satu periode kepengurusan, hasil Rapat Kerja (RAKER).
+     * Dokumen sumber menyusunnya per divisi tanpa penanggalan, sehingga
+     * ditampilkan sebagai daftar per divisi — bukan tabel berjadwal.
+     */
     programKerja: [
       {
-        kegiatan: "Orientasi dan temu angkatan baru",
-        waktu: "September 2026",
-        bidang: "Hubungan Luar",
+        divisi: "Hubungan Masyarakat & Jejaring Organisasi",
+        items: [
+          "Melaksanakan kunjungan dan menjalin relasi kelembagaan dengan Pengurus Wilayah/Daerah INI dan IPPAT.",
+          "Membangun komunikasi strategis dengan instansi pemerintahan terkait, seperti ATR/BPN dan Kementerian Hukum dan HAM.",
+          "Membentuk serta mengelola forum jejaring komunikasi yang solid dengan alumni Magister Kenotariatan.",
+        ],
       },
       {
-        kegiatan: "Kelas persiapan ujian tengah semester",
-        waktu: "Oktober 2026",
-        bidang: "Akademik",
+        divisi: "Pengembangan Sumber Daya Manusia (PSDM) & Minat Bakat",
+        items: [
+          "Menyelenggarakan kegiatan kaderisasi dan forum keakraban bagi mahasiswa baru untuk membangun ukhuwah.",
+          "Memfasilitasi penyelenggaraan pelatihan kemahiran hukum praktis, seperti kegiatan bedah akta bagi anggota.",
+          "Menyelenggarakan kegiatan olahraga dan seni secara berkala guna mewadahi minat dan bakat mahasiswa.",
+        ],
       },
       {
-        kegiatan: "Diskusi bulanan isu kenotariatan",
-        waktu: "Setiap bulan",
-        bidang: "Penalaran dan Riset",
-      },
-      {
-        kegiatan: "Pendampingan penulisan artikel ilmiah",
-        waktu: "November 2026",
-        bidang: "Penalaran dan Riset",
-      },
-      {
-        kegiatan: "Bursa informasi beasiswa dan keringanan biaya",
-        waktu: "Januari 2027",
-        bidang: "Kesejahteraan Anggota",
-      },
-      {
-        kegiatan: "Studi banding ke program magister kenotariatan lain",
-        waktu: "Maret 2027",
-        bidang: "Hubungan Luar",
-      },
-      {
-        kegiatan: "Malam apresiasi dan musyawarah anggota",
-        waktu: "Agustus 2027",
-        bidang: "Seluruh bidang",
+        divisi: "Pengabdian Masyarakat & Keislaman",
+        items: [
+          "Melaksanakan program bakti sosial dan kegiatan kemasyarakatan sebagai wujud implementasi Tri Dharma Perguruan Tinggi.",
+          "Menyediakan layanan konsultasi hukum gratis bagi masyarakat yang membutuhkan pendampingan atau literasi hukum.",
+          "Menyelenggarakan forum diskusi dan kajian keislaman secara rutin guna memperkuat nilai-nilai religius para calon Notaris.",
+        ],
       },
     ],
-    aspirasi:
-      "Keluhan akademik disampaikan melalui koordinator bidang Akademik, dibahas pada rapat pengurus dua pekan sekali, lalu diteruskan kepada program studi dalam bentuk catatan tertulis. Anggota dapat menghadiri rapat pengurus sebagai peninjau tanpa perlu mendaftar sebelumnya.",
-    gallery: [
-      {
-        id: 1,
-        title: "Musyawarah anggota",
-        image: "https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=800&q=80",
-      },
-      {
-        id: 2,
-        title: "Diskusi bulanan",
-        image: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=800&q=80",
-      },
-      {
-        id: 3,
-        title: "Temu angkatan baru",
-        image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80",
-      },
-    ],
+
+    /** Susunan pengurus periode 2026-2027. */
     pengurusInti: [
+      { role: "Ketua", name: "Hasnan Habib Dwicahya", nim: "21302500052" },
+      { role: "Wakil Ketua", name: "Raka Faathir Wicaksana", nim: "21302500104" },
+      { role: "Sekretaris", name: "Arika Dian Astuti", nim: "21302500185" },
+      { role: "Wakil Sekretaris", name: "Evelyn Rumondang Angelica", nim: "21302500283" },
+      { role: "Bendahara", name: "Mila Oktavia Pratiwi", nim: "21302500278" },
+      { role: "Wakil Bendahara", name: "Rizki Diah Yustikawati", nim: "21302500237" },
+    ],
+
+    divisi: [
       {
-        id: 1,
-        name: "Rangga Adiputra",
-        role: "KETUA",
-        image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=500&q=80",
+        nama: "Divisi Hubungan Masyarakat",
+        koordinator: { name: "Lilianti", nim: "21302500068" },
+        anggota: [
+          { name: "Ma'iya Zulfiana Aisyah", nim: "21302500071" },
+          { name: "Muhammad Asyrof Khabibi", nim: "21302500079" },
+          { name: "Nurjanna Frasasti", nim: "21302500098" },
+          { name: "Indra Bayu Lekso", nim: "21302500211" },
+          { name: "Najid Farhan Abdillah", nim: "21302500257" },
+          { name: "Dodi Anggalena Triasukma", nim: "21302400031" },
+        ],
       },
       {
-        id: 2,
-        name: "Dinda Ayu Lestari",
-        role: "WAKIL KETUA",
-        image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=500&q=80",
+        nama: "Divisi Pengembangan Sumber Daya Manusia (PSDM)",
+        koordinator: { name: "Agus Jumianto", nim: "" },
+        anggota: [
+          { name: "Ari Puguh Sudi Hartono", nim: "21302500186" },
+          { name: "Fawwaz Nabil", nim: "" },
+          { name: "Priyambodo Adi Saputro", nim: "21302500273" },
+          { name: "Nur Hidayat Aji Utomo", nim: "21302500266" },
+        ],
       },
       {
-        id: 3,
-        name: "Retno Wulandari",
-        role: "SEKRETARIS",
-        image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=500&q=80",
+        nama: "Divisi Pengabdian Masyarakat & Keislaman",
+        koordinator: { name: "Mai Ranti", nim: "21302500070" },
+        anggota: [
+          { name: "Anis Wahdi", nim: "21302500017" },
+          { name: "Frans Oprandi Jaok", nim: "21302500049" },
+          { name: "Afrian Maulana Syaputra", nim: "21302500004" },
+          { name: "Arsyad Fakhri Zainuddin", nim: "21302500022" },
+          { name: "Iis Fatimah", nim: "21302500054" },
+          { name: "Nur Inzani", nim: "21302500096" },
+          { name: "Khairunnisaa", nim: "" },
+          { name: "Canda Dewi Oksa Yuristiyanti", nim: "21302500324" },
+        ],
       },
-      {
-        id: 4,
-        name: "Fajar Nugroho",
-        role: "BENDAHARA",
-        image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=500&q=80",
-      },
+    ],
+
+    gallery: [
+      { id: 1, title: " ", image: imgIMANU1 },
+      { id: 2, title: " ", image: imgIMANU2 },
+      { id: 3, title: " ", image: imgIMANU3 },
+    ],
+
+    summary: [
+      { number: "3", label: "Divisi kerja" },
+      { number: "27", label: "Pengurus periode 2026/2027" },
+      { number: "9", label: "Program kerja satu periode" },
     ],
   },
 ];

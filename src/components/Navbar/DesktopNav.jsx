@@ -23,15 +23,17 @@ export default function DesktopNav({ navLinks }) {
 
   // Class untuk menu utama navbar
   const getLinkClass = (isLinkOpen) => ({ isActive }) =>
-    `text-[10px] xl:text-[11px] uppercase tracking-[0.11em] xl:tracking-[0.15em] font-semibold transition-colors duration-150 flex items-center h-full border-b-2 ${
+    `text-[10px] xl:text-[11px] uppercase tracking-[0.06em] xl:tracking-[0.12em] font-semibold whitespace-nowrap transition-colors duration-150 flex items-center h-full border-b-2 ${
       isActive || isLinkOpen
         ? "text-primary border-primary"
         : "text-navbar border-transparent hover:text-primary hover:border-primary/40"
     }`;
 
   return (
+    // justify-between: item pertama & terakhir mepet tepi kontainer, sisa ruang
+    // dibagi rata sehingga jarak antarmenu sama besar.
     <nav
-      className="hidden lg:flex self-stretch items-stretch space-x-3 xl:space-x-5 2xl:space-x-6.5"
+      className="flex h-full w-full items-stretch justify-between gap-x-2"
       id="primary-nav"
     >
       {navLinks.map((link, i) => {
@@ -43,7 +45,8 @@ export default function DesktopNav({ navLinks }) {
         if (!hasChildren) {
           return (
             <div key={link.href} className="relative flex items-stretch">
-              <NavLink to={link.href} className={getLinkClass(false)}>
+              {/* `end` khusus Beranda; tanpa itu "/" cocok dengan semua rute */}
+              <NavLink to={link.href} end={link.href === "/"} className={getLinkClass(false)}>
                 {t(link.title)}
               </NavLink>
             </div>

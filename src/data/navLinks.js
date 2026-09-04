@@ -18,6 +18,10 @@
  */
 export const navLinks = [
   {
+    title: { id: "BERANDA", en: "HOME" },
+    href: "/",
+  },
+  {
     title: { id: "PROFIL", en: "PROFILE" },
     href: "/profil",
     children: [

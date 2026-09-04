@@ -17,6 +17,13 @@
     --color-subheading-sidebar: #767676
 }
 
+/* Tinggi header sticky di layar lg ke atas: TopBar (40px) + baris identitas
+   (64px) + baris menu (44px). Dipakai sebagai offset elemen sticky di
+   halaman-halaman bersidebar — ubah di sini bila tinggi navbar berubah. */
+:root {
+    --header-h: 148px;
+}
+
 /* ── Placeholder gambar ─────────────────────────────────────────────
    Skeleton digambar sebagai background pada <img> itu sendiri, bukan
    sebagai elemen terpisah. Konsekuensinya <Img> bisa menggantikan <img>

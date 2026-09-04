@@ -3,6 +3,14 @@ import { useT } from "../../i18n/languageContext";
 import RichText from "../../components/ui/RichText";
 import { visi, halaman } from "../../data/profil/visiData";
 
+/**
+ * Halaman Visi.
+ *
+ * Isinya hanya satu kalimat, jadi tata letaknya sengaja dibuat tanpa kartu,
+ * kotak, maupun kolom pendamping: rumusan visi diberi ruang lapang dan ukuran
+ * besar supaya ia sendiri yang menjadi isi halaman. Menambah pembungkus di
+ * sekelilingnya justru membuat halaman terasa kosong, bukan penuh.
+ */
 export default function VisiMisi() {
   const t = useT();
 
@@ -13,32 +21,37 @@ export default function VisiMisi() {
         <meta name="description" content={t(halaman.meta.description)} />
       </Helmet>
 
-      <div className="space-y-16 sm:space-y-20">
-        <section className="space-y-4">
-          <span className="text-xs font-semibold tracking-wider text-primary uppercase block">
-            {t(halaman.eyebrow)}
-          </span>
+      <section className="py-4 sm:py-10 lg:py-16">
+        <span className="text-xl font-semibold tracking-wider text-primary uppercase block">
+          {t(halaman.eyebrow)}
+        </span>
+        <h1 className="mt-2 font-heading font-normal text-2xl sm:text-3xl text-heading/60 tracking-normal">
+          {t(halaman.judul)}
+        </h1>
+        <div className="w-full h-[2px] bg-primary mt-4" />
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-start pt-2">
-            <div className="lg:col-span-4">
-              <h2 className="font-heading font-normal text-3xl sm:text-4xl lg:text-[40px] text-heading leading-tight">
-                {t(halaman.judul)}
-              </h2>
-            </div>
+        <blockquote className="mt-10 sm:mt-14 lg:mt-16 max-w-6xl">
+          <p className="font-heading font-normal text-heading text-[26px] sm:text-4xl lg:text-[46px] leading-[1.35] tracking-normal text-balance">
+            <RichText>{t(visi)}</RichText>
+          </p>
+        </blockquote>
 
-            <div className="lg:col-span-8">
-              <div className="bg-white border-l-4 border-l-primary border-y border-r border-gray-200 p-6 sm:p-8 shadow-2xs">
-                <span className="text-xs font-bold tracking-widest text-primary uppercase block mb-3">
-                  {t(halaman.labelKutipan)}
-                </span>
-                <blockquote className="font-heading text-lg sm:text-2xl text-heading leading-relaxed">
-                  &ldquo;<RichText>{t(visi)}</RichText>&rdquo;
-                </blockquote>
-              </div>
-            </div>
-          </div>
-        </section>
-      </div>
+        <div className="mt-10 sm:mt-14">
+          <div className="w-14 h-[2px] bg-primary" />
+          <footer className="mt-4 space-y-0.5">
+            {halaman.atribusi.map((baris, idx) => (
+              <p
+                key={idx}
+                className={`text-sm sm:text-[15px] leading-relaxed ${
+                  idx === 0 ? "font-semibold text-heading" : "text-body"
+                }`}
+              >
+                {t(baris)}
+              </p>
+            ))}
+          </footer>
+        </div>
+      </section>
     </>
   );
 }

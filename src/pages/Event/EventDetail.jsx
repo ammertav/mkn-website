@@ -81,7 +81,7 @@ export default function EventDetail() {
         <div className="w-full flex-grow flex flex-col lg:flex-row items-stretch border-t border-gray-200">
           {/* Kolom Kiri: Dark Sidebar (Upcoming Events) */}
           <div className="w-full lg:w-[380px] xl:w-[420px] shrink-0 bg-[#111c24] border-r border-black/20">
-            <div className="lg:sticky lg:top-28 lg:max-h-[calc(100vh-7rem)] lg:overflow-y-auto scrollbar-thin px-6 sm:px-8 lg:px-10 pt-10 sm:pt-14 lg:pt-16 pb-16 space-y-8 text-white">
+            <div className="lg:sticky lg:top-[calc(var(--header-h)+0.5rem)] lg:max-h-[calc(100vh-var(--header-h)-1rem)] lg:overflow-y-auto scrollbar-thin px-6 sm:px-8 lg:px-10 pt-10 sm:pt-14 lg:pt-16 pb-16 space-y-8 text-white">
               {/* Header Sidebar Kiri */}
               <div className="border-b border-white/10 pb-4">
                 <Link
