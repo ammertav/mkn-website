@@ -26,19 +26,19 @@ export function getBeritaImage(gambarPath) {
     return beritaImages[normalized];
   }
 
-  // 3. Ambil nama file dasar tanpa ekstensi
-  // Contoh: "src/assets/images/berita/news/berita4.jpg" -> "berita4"
-  // Contoh: "berita4.jpeg" -> "berita4"
-  // Contoh: "berita4" -> "berita4"
-  const rawFileName = gambarPath.split("/").pop() || "";
-  const baseName = rawFileName.replace(/\.[^/.]+$/, "").trim().toLowerCase();
+  // 3. Ambil nama file dasar tanpa ekstensi gambar
+  // Hanya potong jika merupakan ekstensi gambar yang valid (.jpg, .jpeg, .png, dsb.)
+  // agar nama file yang mengandung titik seperti "mkn-1.1" tidak terpotong menjadi "mkn-1"
+  const IMAGE_EXT_REGEX = /\.(jpe?g|png|webp|avif|gif|svg)$/i;
+  const rawFileName = (gambarPath.split("/").pop() || "").trim().toLowerCase();
+  const baseName = rawFileName.replace(IMAGE_EXT_REGEX, "");
 
   if (!baseName) return "";
 
-  // 4. Cari file di folder aset yang nama dasarnya sama (abaikan ekstensi .jpg / .jpeg / .png / .webp)
+  // 4. Cari file di folder aset yang nama dasarnya sama
   for (const assetPath in beritaImages) {
-    const assetFileName = assetPath.split("/").pop() || "";
-    const assetBaseName = assetFileName.replace(/\.[^/.]+$/, "").trim().toLowerCase();
+    const assetFileName = (assetPath.split("/").pop() || "").trim().toLowerCase();
+    const assetBaseName = assetFileName.replace(IMAGE_EXT_REGEX, "");
 
     if (assetBaseName === baseName) {
       return beritaImages[assetPath];
