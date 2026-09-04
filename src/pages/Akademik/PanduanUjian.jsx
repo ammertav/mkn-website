@@ -52,10 +52,10 @@ export default function PanduanUjian() {
 
       <div className="space-y-6">
         <div>
-          <span className="text-xs font-bold tracking-[0.18em] uppercase text-primary block mb-2">
+          <span className="text-xs font-bold tracking-[0.16em] uppercase text-primary block">
             {t(halaman.label)}
           </span>
-          <h1 className="text-3xl sm:text-4xl lg:text-[42px] font-heading font-bold text-heading tracking-tight leading-tight">
+          <h1 className="text-3xl sm:text-4xl lg:text-[40px] font-heading font-bold text-heading tracking-tight leading-tight">
             {t(halaman.judul)}
           </h1>
         </div>

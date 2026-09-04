@@ -98,10 +98,10 @@ export default function Rps() {
       <div className="space-y-10 font-body text-body">
         {/* Header Title Section */}
         <div>
-          <span className="text-xs font-bold tracking-[0.18em] uppercase text-primary block mb-2">
+          <span className="text-xs font-bold tracking-[0.16em] uppercase text-primary block">
             {t(halaman.label)}
           </span>
-          <h1 className="text-3xl sm:text-4xl lg:text-[42px] font-heading font-bold text-heading tracking-tight leading-tight">
+          <h1 className="text-3xl sm:text-4xl lg:text-[40px] font-heading font-bold text-heading tracking-tight leading-tight">
             {t(halaman.judul)}
           </h1>
           <div className="w-full h-[2px] bg-primary my-4" />

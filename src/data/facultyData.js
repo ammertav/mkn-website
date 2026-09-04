@@ -2,7 +2,28 @@ import imgJawade from "../assets/images/struktur-organisasi/prof-jawede.jpg";
 import imgRozihan from "../assets/images/struktur-organisasi/Prof. HC. Dr. Drs. H. Rozihan, SH., M.Ag.png";
 import imgGunarto from "../assets/images/struktur-organisasi/3.PROF. DR. GUNARTO, S.H.., M.HUM.png";
 import imgToni from "../assets/images/struktur-organisasi/Sekprodi a- Dr. Toni Triyanto, S.H., M.jpeg";
-import imgNanang from "../assets/images/dosen/Dr.NanangSriDarmadi,S.H.,M.H..jpg";
+import imgNanang from "../assets/images/dosen/Dr. Nanang Sri Darmadi, S.H.,M.H..png";
+import imgWidayati from "../assets/images/dosen/Prof. Dr., Dr. Widayati, S.H..png";
+import imgAnis from "../assets/images/dosen/Prof. Dr. Anis Mashdurohatun, SH., M.Hum.png";
+import imgRatih from "../assets/images/dosen/DR., RATIH MEGA PUSPA SARI, S.H.., M.KN.png";
+import imgUmar from "../assets/images/dosen/DR. UMAR MA RUF, S.H.., M.HUM.png";
+import imgTaufan from "../assets/images/dosen/Dr. Taufan Fajar Riyanto, S.H., M.Kn..png";
+import imgDias from "../assets/images/dosen/Dr. Muhammad Dias Saktiawan, SH,MKn.png";
+import imgLathifah from "../assets/images/dosen/Dr. Lathifah Hanim, S.H., M.Hum., M.Kn..png";
+import imgSitiUmmu from "../assets/images/dosen/Dr. Hj. Siti Ummu Adillah, S.H., M.Hum..png";
+import imgAryani from "../assets/images/dosen/Dr. Hj. Aryani Witasari, S.H., M.Hum..png";
+import imgAmin from "../assets/images/dosen/Dr. H. Amin Purnawan, S.H., Sp.N., M.Hum..png";
+import imgDenny from "../assets/images/dosen/Dr. Denny Suwondo, S.H., M.H..png";
+import imgDahniarti from "../assets/images/dosen/Dr. Dahniarti Hasana, SH., M.Kn.jpg";
+import imgAndri from "../assets/images/dosen/Dr.Andri Winjaya Laksana,SH,.MH.png";
+import imgAndiAina from "../assets/images/dosen/Dr. Andi Aina Ilmih, S.H., M.H..png";
+import imgAchmad from "../assets/images/dosen/Dr. Achmad Arifulloh, S.H., M.H..png";
+import imgDjunaedi from "../assets/images/dosen/Dr. H. D. Djunaedi, S.H., Sp.N..png";
+import imgSriEndah from "../assets/images/dosen/Prof. Dr. Hj. Sri Endah Wahyuningsih, SH., M.Hum.png";
+import imgBambang from "../assets/images/dosen/Prof. Dr. Bambang Tri Bawono, S.H.., M.H..png";
+import imgArpangi from "../assets/images/dosen/Prof. Dr. Arpangi S.H.,M.H..png";
+import imgAris from "../assets/images/dosen/Dr. Moh. Aris Siswanto, S.H., M.H..png";
+import imgSriKusriyah from "../assets/images/dosen/Dr. Hj. Sri Kusriyah, S.H., M.Hum..png";
 
 export const facultyData = [
   {
@@ -132,7 +153,7 @@ export const facultyData = [
       "Prof. HC. Dr. Drs. H. Rozihan, SH., M.Ag adalah Guru Besar dan akademisi senior di Universitas Islam Sultan Agung (UNISSULA) Semarang. Beliau lahir di Jepara pada 25 Januari 1957 dan mendedikasikan pengabdian akademisnya pada penguatan hukum Islam, integrasi keilmuan berbasis syariah, dan pembinaan Budaya Akademik Islami (BudAI).",
       "Dalam kurikulum perkuliahan, beliau mengampu mata kuliah Islam Disiplin Ilmu dan Peradaban Islam. Jejak publikasi ilmiah beliau meliputi kajian mendalam mengenai fatwa hukum Islam, pembaharuan hukum keluarga (perkawinan, perceraian, nusyuz), istihsan, dinamika manajemen aset wakaf, hingga relevansi hukum Islam progresif.",
     ],
-    image: null,
+    image: imgRozihan,
     imageCaption: "Potret Prof. HC. Dr. Drs. H. Rozihan, SH., M.Ag",
     courses: [
       { name: "Islam Disiplin Ilmu", placement: "Semester 1", sks: 2 },
@@ -606,7 +627,7 @@ export const facultyData = [
       "Prof. Dr., Dr. Widayati, S.H. adalah akademisi senior dan Guru Besar di Fakultas Hukum Universitas Islam Sultan Agung (UNISSULA) Semarang. Beliau lahir di Grobogan pada 20 Juni 1968 dan mendedikasikan keahliannya dalam bidang hukum tata negara, kepastian hukum konstitusional, serta peraturan jabatan dan kode etik kenotariatan.",
       "Dalam program studi Magister Kenotariatan (MKn), beliau mengampu mata kuliah inti Peraturan Jabatan Notaris dan Kode Etik Notaris. Beliau aktif memimpin berbagai riset strategis mengenai kelembagaan demokrasi, pemindahan ibukota negara berbasis kepastian hukum, serta implementasi pembentukan perundang-undangan.",
     ],
-    image: null,
+    image: imgWidayati,
     imageCaption: "Potret Prof. Dr., Dr. Widayati, S.H.",
     courses: [
       { name: "Peraturan Jabatan Notaris dan Kode Etik Notaris", placement: "Semester 1", sks: 2 },
@@ -677,7 +698,7 @@ export const facultyData = [
       "Prof. Dr. Anis Mashdurohatun, SH., M.Hum adalah Guru Besar di Fakultas Hukum Universitas Islam Sultan Agung (UNISSULA) Semarang. Beliau lahir di Semarang pada 21 Juni 1976 dan menyelesaikan pendidikan Sarjana Hukum di UNISSULA (1999), Magister Ilmu Hukum di Universitas Diponegoro (2003), serta meraih gelar Doktor Ilmu Hukum dari Universitas Sebelas Maret (UNS) Surakarta pada tahun 2013.",
       "Dalam kurikulum Program Studi Magister Kenotariatan (MKn), beliau mengampu mata kuliah Hukum Perbankan dan Perbankan Syariah serta Islam Disiplin Ilmu. Rekam jejak penelitian beliau mencakup hibah riset DIKTI, model merek dagang sebagai objek jaminan fidusia pada perbankan, valuasi HKI UMKM, hingga kolaborasi riset internasional bersama Universiti Utara Malaysia (UUM) dan Thammasat University Thailand.",
     ],
-    image: null,
+    image: imgAnis,
     imageCaption: "Potret Prof. Dr. Anis Mashdurohatun, SH., M.Hum",
     courses: [
       { name: "Hukum Perbankan dan Perbankan Syariah", placement: "Semester 1", sks: 2 },
@@ -942,7 +963,7 @@ export const facultyData = [
       "Beliau menempuh pendidikan Sarjana Ilmu Hukum di Universitas Swadaya Gunung Djati, serta menyelesaikan program Magister Kenotariatan (M.Kn.) dan Program Doktor Ilmu Hukum di Universitas Islam Sultan Agung (UNISSULA).",
       "Dalam bidang pengajaran, beliau mengampu mata kuliah Peraturan Jabatan Notaris dan Kode Etik Notaris. Selain itu, beliau aktif melaksanakan penelitian dan pengabdian masyarakat dalam aspek perlindungan hukum saksi anak dan penanganan kekerasan dalam rumah tangga.",
     ],
-    image: null,
+    image: imgRatih,
     imageCaption: "Potret Dr. Ratih Mega Puspa Sari, S.H., M.Kn.",
     courses: [
       { name: "Peraturan Jabatan Notaris dan Kode Etik Notaris", placement: "Semester 1", sks: 2 },
@@ -1007,7 +1028,7 @@ export const facultyData = [
       "Beliau menempuh pendidikan Sarjana Ilmu Hukum di Universitas Islam Sultan Agung (UNISSULA), Magister Ilmu Hukum di Universitas Gadjah Mada (UGM) Yogyakarta, dan menyelesaikan pendidikan Doktor Ilmu Hukum di Universitas Diponegoro (UNDIP) Semarang.",
       "Dalam Program Studi Magister Kenotariatan (MKn), beliau mengampu mata kuliah inti Hukum Pertanahan. Penelitian beliau berfokus pada dinamika hukum pertanahan, perlindungan hak anak dalam peralihan hak atas tanah, serta optimalisasi pemanfaatan tanah kas desa dalam pembangunan berkelanjutan.",
     ],
-    image: null,
+    image: imgUmar,
     imageCaption: "Potret Dr. Umar Ma'ruf, S.H., M.Hum.",
     courses: [
       { name: "Hukum Pertanahan", placement: "Semester 2", sks: 2 },
@@ -1282,7 +1303,7 @@ export const facultyData = [
       "Dr. Taufan Fajar Riyanto, S.H., M.Kn. adalah dosen dan Lektor di Fakultas Hukum Universitas Islam Sultan Agung (UNISSULA) Semarang. Beliau lahir di Cirebon pada 17 Oktober 1979.",
       "Dalam Program Studi Magister Kenotariatan (MKn), beliau mengampu serangkaian mata kuliah aplikatif kenotariatan dan ke-PPAT-an, meliputi Teknik Pembuatan Akta Badan Hukum (TPA II), Politik Hukum kePPATan dan Kode Etik PPAT, Laboratorium Akta 2, Hukum Pertanahan, dan Teknik Pembuatan Akta PPAT.",
     ],
-    image: null,
+    image: imgTaufan,
     imageCaption: "Potret Dr. Taufan Fajar Riyanto, S.H., M.Kn.",
     courses: [
       { name: "Teknik Pembuatan Akta Badan Hukum (TPA II)", placement: "Semester 2", sks: 2 },
@@ -1396,7 +1417,7 @@ export const facultyData = [
       "Beliau mendedikasikan keahliannya dalam rumpun hukum agraria dan pertanahan. Dalam Program Studi Magister Kenotariatan (MKn), beliau mengampu mata kuliah Hukum Pertanahan.",
       "Aktivitas riset beliau meliputi kajian pencegahan wanprestasi perjanjian jual beli rumah KPR, integrasi nilai kearifan lokal hukum adat dalam hukum tanah nasional, problematika penetapan BPHTB daerah, hingga hukum pengadaan barang dan jasa e-procurement.",
     ],
-    image: null,
+    image: imgDias,
     imageCaption: "Potret Dr. Muhammad Dias Saktiawan, S.H., M.Kn.",
     courses: [
       { name: "Hukum Pertanahan", placement: "Semester 2", sks: 2 },
@@ -1468,7 +1489,7 @@ export const facultyData = [
       "Beliau memiliki kompetensi multidisipliner dalam ilmu hukum, humaniora, dan kenotariatan. Dalam Program Studi Magister Kenotariatan (MKn), beliau mengampu mata kuliah inti Hukum Perikatan/ Perjanjian dan Jaminan.",
       "Rekam jejak penelitian beliau sangat menonjol dalam pengembangan regulasi jaminan fidusia di Indonesia, mencakup pembiayaan ekonomi kreatif berbasis hak kekayaan intelektual (HKI), sistem digitalisasi fidusia, perlindungan konsumen sektor jasa keuangan, serta analisis legalitas perjanjian kredit berbasis kecerdasan buatan (AI).",
     ],
-    image: null,
+    image: imgLathifah,
     imageCaption: "Potret Dr. Lathifah Hanim, S.H., M.Hum., M.Kn.",
     courses: [
       { name: "Hukum Perikatan/ Perjanjian dan Jaminan", placement: "Semester 1", sks: 2 },
@@ -1556,7 +1577,7 @@ export const facultyData = [
       "Menyelesaikan pendidikan Sarjana Ilmu Hukum di UNISSULA (1994), Magister Ilmu Hukum di Universitas Gadjah Mada (1999), dan meraih gelar Doktor Ilmu Hukum dari Universitas Sebelas Maret (UNS) Surakarta pada tahun 2020.",
       "Dalam Program Studi Magister Kenotariatan (MKn), beliau mengampu mata kuliah inti Hukum Keluarga dan Waris. Beliau sangat aktif memimpin penelitian strategis dan pengabdian masyarakat di berbagai daerah, berfokus pada jaminan sosial ketenagakerjaan bagi pekerja sektor informal, advokasi sertifikasi halal UMKM, serta perlindungan hak anak dan perempuan.",
     ],
-    image: null,
+    image: imgSitiUmmu,
     imageCaption: "Potret Dr. Hj. Siti Ummu Adillah, S.H., M.Hum.",
     courses: [
       { name: "Hukum Keluarga dan Waris", placement: "Semester 1", sks: 2 },
@@ -1800,7 +1821,7 @@ export const facultyData = [
       "Menyelesaikan pendidikan Sarjana Ilmu Hukum di UNISSULA (1990), Magister Ilmu Hukum di Universitas Diponegoro (2004), dan meraih gelar Doktor Ilmu Hukum dari UNISSULA pada tahun 2018.",
       "Dalam Program Studi Magister Kenotariatan (MKn), beliau mengampu mata kuliah Hukum Perbankan dan Perbankan Syariah. Beliau memiliki rekam jejak riset yang kaya mencakup pembiayaan sindikasi tol syariah, mediasi sengketa e-commerce, honorarium PPAT, serta perlindungan hukum anak dan perempuan.",
     ],
-    image: null,
+    image: imgAryani,
     imageCaption: "Potret Dr. Hj. Aryani Witasari, S.H., M.Hum.",
     courses: [
       { name: "Hukum Perbankan dan Perbankan Syariah", placement: "Semester 1", sks: 2 },
@@ -2020,7 +2041,7 @@ export const facultyData = [
       "Menyelesaikan studi Sarjana Hukum (1990), Program Spesialis Notariat (Sp.N.), Magister Ilmu Hukum (2003), hingga meraih gelar Doktor Ilmu Hukum (2011) di Universitas Diponegoro Semarang.",
       "Dalam Program Studi Magister Kenotariatan (MKn), beliau mengampu mata kuliah Hukum Pajak, Kepailitan, & Lelang. Aktivitas penelitian beliau menaruh perhatian besar pada dinamika kepatuhan pajak UMKM, efektivitas pajak karbon dalam ekonomi hijau, dan perlindungan jaminan sosial pekerja informal.",
     ],
-    image: null,
+    image: imgAmin,
     imageCaption: "Potret Dr. H. Amin Purnawan, S.H., Sp.N., M.Hum.",
     courses: [
       { name: "Hukum Pajak, Kepailitan, & Lelang", placement: "Semester 1", sks: 2 },
@@ -2267,7 +2288,7 @@ export const facultyData = [
       "Menyelesaikan seluruh jenjang pendidikan tinggi dalam bidang Ilmu Hukum dari Sarjana Hukum (S.H.), Magister Hukum (M.H.), hingga meraih gelar Doktor Ilmu Hukum.",
       "Dalam Program Studi Magister Kenotariatan (MKn), beliau mengampu mata kuliah inti Hukum Perikatan/ Perjanjian dan Jaminan. Bidang keahlian dan riset beliau berfokus pada perkembangan hukum perikatan modern, implementasi prinsip itikad baik pada transaksi digital e-commerce, perlindungan konsumen pada skema pembiayaan paylater, serta pencatatan akta otentik notaris dan PPAT.",
     ],
-    image: null,
+    image: imgDenny,
     imageCaption: "Potret Dr. Denny Suwondo, S.H., M.H.",
     courses: [
       { name: "Hukum Perikatan/ Perjanjian dan Jaminan", placement: "Semester 1", sks: 2 },
@@ -2363,7 +2384,7 @@ export const facultyData = [
       "Menyelesaikan seluruh rangkaian pendidikan tinggi hukum mulai dari Sarjana Hukum (S.H.), Magister Kenotariatan (M.Kn.), hingga meraih gelar Doktor Ilmu Hukum.",
       "Dalam Program Studi Magister Kenotariatan (MKn), beliau mengampu serangkaian mata kuliah inti keahlian dan kemahiran praktik akta notaris, meliputi Teknik Pembuatan Akta Umum (TPA I), Laboratorium Akta 1, Teknik Pembuatan Akta Khusus (TPA III), serta Laboratorium Akta 3.",
     ],
-    image: null,
+    image: imgDahniarti,
     imageCaption: "Potret Dr. Dahniarti Hasana, SH., M.Kn.",
     courses: [
       { name: "Teknik Pembuatan Akta Umum (TPA I)", placement: "Semester 1", sks: 2 },
@@ -2407,7 +2428,7 @@ export const facultyData = [
       "Menyelesaikan pendidikan Sarjana Ilmu Hukum (2007) dan Magister Ilmu Hukum (2011) di UNISSULA Semarang, kemudian meraih gelar Doktor Ilmu Hukum dari Universitas Sebelas Maret (UNS) Surakarta pada tahun 2022 dengan disertasi bertema rekonstruksi penegakan hukum rehabilitasi religius berbasis keadilan Pancasila.",
       "Dalam Program Studi Magister Kenotariatan (MKn), beliau mengampu mata kuliah dasar keahlian hukum tingkat lanjut yaitu Teori Hukum, Penemuan Hukum dan Metode Penelitian Hukum. Beliau aktif mempublikasikan kajian hukum pidana positif, kejahatan siber (cybercrime), dan metodologi riset hukum.",
     ],
-    image: null,
+    image: imgAndri,
     imageCaption: "Potret Dr. Andri Winjaya Laksana, S.H., M.H.",
     courses: [
       { name: "Teori Hukum, Penemuan Hukum dan Metode Penelitian Hukum", placement: "Semester 1", sks: 2 },
@@ -2460,7 +2481,7 @@ export const facultyData = [
       "Meraih gelar Sarjana Hukum (2010) dan Magister Hukum (2013) dari Universitas Hasanuddin Makassar, serta menuntaskan program Doktor Ilmu Hukum di Universitas Diponegoro Semarang pada tahun 2021.",
       "Dalam Program Studi Magister Kenotariatan (MKn), beliau mengampu mata kuliah Hukum Perikatan/ Perjanjian dan Jaminan. Rekam jejak penelitian dan pengabdian masyarakat beliau berfokus pada adaptasi hukum perikatan dalam ekonomi digital, model kontrak elektronik ideal, perlindungan data pribadi, dan perizinan berusaha berbasis risiko bagi UMKM.",
     ],
-    image: null,
+    image: imgAndiAina,
     imageCaption: "Potret Dr. Andi Aina Ilmih, S.H., M.H.",
     courses: [
       { name: "Hukum Perikatan/ Perjanjian dan Jaminan", placement: "Semester 1", sks: 2 },
@@ -2651,7 +2672,7 @@ export const facultyData = [
       "Menyelesaikan pendidikan tinggi hukum secara berjenjang dari Sarjana Hukum (S.H.), Magister Hukum (M.H.), hingga meraih gelar Doktor Ilmu Hukum.",
       "Dalam Program Studi Magister Kenotariatan (MKn), beliau mengampu mata kuliah inti keahlian profesi yaitu Politik Hukum kePPATan dan Kode Etik PPAT. Kajian ilmiah beliau berfokus pada advokasi dan perlindungan hukum bagi pejabat pembuat akta tanah (PPAT) dan notaris dari risiko kriminalisasi, sinergi pencegahan mafia tanah bersama BPN, serta mediasi sengketa perdata berbasis keadilan restoratif.",
     ],
-    image: null,
+    image: imgAchmad,
     imageCaption: "Potret Dr. Achmad Arifulloh, S.H., M.H.",
     courses: [
       { name: "Politik Hukum kePPATan dan Kode Etik PPAT", placement: "Semester 1", sks: 2 },
@@ -2834,7 +2855,7 @@ export const facultyData = [
       "Menyelesaikan pendidikan Sarjana Hukum (S.H.), Program Spesialis Notariat (Sp.N.), hingga menuntaskan studi Doktor Ilmu Hukum.",
       "Dalam Program Studi Magister Kenotariatan (MKn), beliau mengampu mata kuliah Hukum Perikatan, Perjanjian dan Jaminan. Fokus riset dan keahlian beliau mencakup hukum acara perdata dan eksekusi putusan, keabsahan eksekutorial beslag aset lembaga keuangan, pemeriksaan setempat (descente) pengadilan, serta perlindungan hukum jabatan notaris/PPAT dalam pembuatan akta jual beli dan kuasa menjual tanah bersertifikat.",
     ],
-    image: null,
+    image: imgDjunaedi,
     imageCaption: "Potret Dr. H. D. Djunaedi, S.H., Sp.N.",
     courses: [
       { name: "Hukum Perikatan, Perjanjian dan Jaminan", placement: "Semester 1", sks: 2 },
@@ -2915,7 +2936,7 @@ export const facultyData = [
       "Menyelesaikan pendidikan Sarjana Hukum (1988), Magister Ilmu Hukum (2002), dan meraih gelar Doktor Ilmu Hukum (2011) seluruhnya di Universitas Diponegoro Semarang.",
       "Dalam Program Studi Magister Kenotariatan (MKn), beliau mengampu mata kuliah tingkat lanjut Teori Hukum, Penemuan Hukum dan Metode Penelitian Hukum serta Penulisan Karya Ilmiah. Beliau merupakan akademisi bereputasi internasional dengan puluhan publikasi terindeks Scopus yang berfokus pada rekonstruksi sanksi pidana korporasi, keadilan restoratif, perlindungan hukum anak dan saksi, serta formulasi pemaafan hakim (rechterlijk pardon) berbasis nilai-nilai keadilan Islam.",
     ],
-    image: null,
+    image: imgSriEndah,
     imageCaption: "Potret Prof. Dr. Hj. Sri Endah Wahyuningsih, S.H., M.Hum.",
     courses: [
       { name: "Teori Hukum, Penemuan Hukum dan Metode Penelitian Hukum", placement: "Semester 1", sks: 2 },
@@ -3163,7 +3184,7 @@ export const facultyData = [
       "Menyelesaikan pendidikan Sarjana Hukum di UNISSULA (2001), Magister Ilmu Hukum di Universitas Diponegoro (2010), dan meraih gelar Doktor Ilmu Hukum di Universitas Jayabaya Jakarta pada tahun 2019.",
       "Dalam Program Studi Magister Kenotariatan (MKn), beliau mengampu mata kuliah Hukum Keluarga dan Waris, Politik Hukum kePPATan dan Kode Etik PPAT, serta Hukum Pertanahan. Rekam jejak riset beliau mencakup pembaharuan sistem pengadaan tanah bagi kepentingan umum bebas korupsi, kepastian hukum lembaga penilai kerugian negara, kedudukan sita umum vs sita pidana dalam kepailitan, serta perlindungan hak keperdataan berbasis nilai-nilai keadilan Islam.",
     ],
-    image: null,
+    image: imgBambang,
     imageCaption: "Potret Prof. Dr. Bambang Tri Bawono, S.H., M.H.",
     courses: [
       { name: "Hukum Keluarga dan Waris", placement: "Semester 1", sks: 2 },
@@ -3405,7 +3426,7 @@ export const facultyData = [
       "Menyelesaikan pendidikan Sarjana Hukum di UNISSULA (1997), Magister Ilmu Hukum di Universitas Airlangga Surabaya (2001) dengan fokus perlindungan kreditur kepailitan, serta meraih gelar Doktor Ilmu Hukum di UNISSULA (2019) di bawah bimbingan Rektor Prof. Dr. Gunarto dengan disertasi rekonstruksi regulasi eksekusi putusan Pengadilan Hubungan Industrial (PHI) berbasis nilai keadilan.",
       "Dalam Program Studi Magister Kenotariatan (MKn), beliau mengampu mata kuliah Hukum Keluarga dan Waris. Beliau sangat produktif menghasilkan buku referensi dan kajian hukum ketenagakerjaan, perlindungan hak pekerja PKWT pasca UU Cipta Kerja, pencegahan diskriminasi usia pencari kerja, serta mediasi sengketa hukum bisnis.",
     ],
-    image: null,
+    image: imgArpangi,
     imageCaption: "Potret Prof. Dr. Arpangi, S.H., M.H.",
     courses: [
       { name: "Hukum Keluarga dan Waris", placement: "Semester 1", sks: 2 },
@@ -3589,7 +3610,7 @@ export const facultyData = [
       "Menyelesaikan seluruh jenjang pendidikan tingginya di UNISSULA Semarang, mulai dari Sarjana Hukum (2004), Magister Ilmu Hukum (2013), hingga menuntaskan Program Doktor Ilmu Hukum (2024).",
       "Dalam Program Studi Magister Kenotariatan (MKn), beliau mengampu mata kuliah Hukum Keluarga dan Waris. Beliau aktif dalam pengabdian pembentukan paralegal dan advokasi pertanahan, serta penelitian seputar status harta waris anak luar kawin menurut KHI dan KUHPerdata, konsep ideal pengawasan MPW Notaris dalam hukum administrasi, dan perlindungan hukum di era digital.",
     ],
-    image: null,
+    image: imgAris,
     imageCaption: "Potret Dr. Moh. Aris Siswanto, S.H., M.H.",
     courses: [
       { name: "Hukum Keluarga dan Waris", placement: "Semester 1", sks: 2 },
@@ -3735,7 +3756,7 @@ export const facultyData = [
       "Menempuh pendidikan Sarjana Hukum di Universitas Gadjah Mada (UGM) Yogyakarta (1987), Magister Ilmu Hukum di Universitas Airlangga (UNAIR) Surabaya (1997), dan menyelesaikan program Doktor Ilmu Hukum di Universitas Islam Indonesia (UII) Yogyakarta pada tahun 2015.",
       "Dalam Program Studi Magister Kenotariatan (MKn), beliau mengampu mata kuliah Peradaban Islam. Rekam jejak penelitian dan pengabdian masyarakat beliau berfokus pada integrasi nilai-nilai keislaman dan konstitusi, analisis regulasi jabatan dan honorarium PPAT (PP No. 24/2016), perlindungan hak anak dalam peralihan hak atas tanah, serta pemahaman hak tanggungan atas tanah di masyarakat.",
     ],
-    image: null,
+    image: imgSriKusriyah,
     imageCaption: "Potret Dr. Hj. Sri Kusriyah, S.H., M.Hum.",
     courses: [
       { name: "Peradaban Islam", placement: "Semester 1", sks: 2 },

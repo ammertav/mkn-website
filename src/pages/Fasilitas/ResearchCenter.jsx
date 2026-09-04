@@ -1,102 +1,19 @@
 import { Helmet } from "react-helmet-async";
-import FacilityPlaceholder from "../../components/Fasilitas/FacilityPlaceholder";
-import FacilitySectionHeader from "../../components/Fasilitas/FacilitySectionHeader";
-import FacilitySpecSection from "../../components/Fasilitas/FacilitySpecSection";
+import FacilityContent from "../../components/Fasilitas/FacilityContent";
 import { researchCenterData } from "../../data/fasilitasData";
 
-/**
- * Susunan halaman di bawah sudah jadi, tetapi datanya masih data sementara,
- * jadi untuk saat ini yang tayang adalah placeholder. Isinya sengaja ditahan,
- * bukan dibuang — ubah konstanta ini menjadi true begitu data asli masuk.
- */
-const KONTEN_SIAP = false;
-
 export default function ResearchCenter() {
-  const { header, servicesSection, scheduleList } = researchCenterData;
-
-  if (!KONTEN_SIAP) {
-    return (
-      <>
-        <Helmet>
-          <title>Pusat Riset Mahasiswa | MKn UNISSULA</title>
-          <meta name="description" content="Informasi Student Research Center Program Studi Magister Kenotariatan UNISSULA." />
-        </Helmet>
-
-        <FacilityPlaceholder
-          category="STUDENT RESEARCH CENTER"
-          title="Pusat Riset Mahasiswa"
-          description="Halaman ini akan memuat keterangan Student Research Center, ruang kerja penelitian dan penulisan tesis bagi mahasiswa, beserta layanan pendampingan yang tersedia di dalamnya."
-        />
-      </>
-    );
-  }
-
   return (
     <>
       <Helmet>
         <title>Pusat Riset Mahasiswa | MKn UNISSULA</title>
         <meta
           name="description"
-          content="Student Research Center MKn UNISSULA menyediakan meja riset tetap, klinik metodologi, pendampingan publikasi, dan fasilitas penulisan tesis magister."
+          content="Pusat Riset Mahasiswa (Student Research Center) Magister Kenotariatan UNISSULA: ruang inkubator riset, penulisan tesis, dan publikasi artikel ilmiah."
         />
       </Helmet>
 
-      <div className="space-y-16 sm:space-y-20 lg:space-y-24">
-        {/* Section 1: Intro Heading (Reusable Component) */}
-        <section>
-          <FacilitySectionHeader
-            number={header.number}
-            category={header.category}
-            title={header.title}
-            paragraphs={header.paragraphs}
-          />
-        </section>
-
-        {/* Section 2: Services & Photo (Reusable Component, Image on Right) */}
-        <FacilitySpecSection
-          title={servicesSection.title}
-          services={servicesSection.services}
-          image={servicesSection.image}
-          imagePosition="right"
-        />
-
-        {/* Section 3: Schedule & Terms Table */}
-        <section className="space-y-6 sm:space-y-8">
-          <h3 className="text-2xl sm:text-3xl lg:text-4xl font-heading font-normal text-heading">
-            Jadwal dan Ketentuan Penggunaan
-          </h3>
-
-          <div className="overflow-x-auto">
-            <table className="w-full text-left border-collapse">
-              <thead>
-                <tr className="border-t-2 border-b border-heading text-xs font-bold text-heading uppercase tracking-wider">
-                  <th className="py-4 px-3 sm:px-4 w-1/4">Layanan</th>
-                  <th className="py-4 px-3 sm:px-4 w-1/4">Waktu</th>
-                  <th className="py-4 px-3 sm:px-4 w-1/2">Ketentuan</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-gray-200 text-xs sm:text-sm text-body">
-                {scheduleList.map((item, index) => (
-                  <tr
-                    key={index}
-                    className="hover:bg-gray-50/80 transition-colors"
-                  >
-                    <td className="py-4 px-3 sm:px-4 font-semibold text-heading whitespace-nowrap">
-                      {item.layanan}
-                    </td>
-                    <td className="py-4 px-3 sm:px-4 whitespace-nowrap text-heading">
-                      {item.waktu}
-                    </td>
-                    <td className="py-4 px-3 sm:px-4 text-body">
-                      {item.ketentuan}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </section>
-      </div>
+      <FacilityContent data={researchCenterData} />
     </>
   );
 }

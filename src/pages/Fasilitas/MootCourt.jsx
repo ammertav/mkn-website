@@ -1,22 +1,19 @@
 import { Helmet } from "react-helmet-async";
-import FacilityPlaceholder from "../../components/Fasilitas/FacilityPlaceholder";
+import FacilityContent from "../../components/Fasilitas/FacilityContent";
+import { mootCourtData } from "../../data/fasilitasData";
 
 export default function MootCourt() {
   return (
     <>
       <Helmet>
-        <title>Moot Court | MKn UNISSULA</title>
+        <title>Laboratorium Peradilan Semu | MKn UNISSULA</title>
         <meta
           name="description"
-          content="Informasi ruang Moot Court Program Studi Magister Kenotariatan UNISSULA."
+          content="Laboratorium Peradilan Semu (Moot Court) Magister Kenotariatan UNISSULA: replika ruang sidang untuk simulasi sengketa perdata atas akta."
         />
       </Helmet>
 
-      <FacilityPlaceholder
-        category="MOOT COURT"
-        title="Moot Court"
-        description="Halaman ini akan memuat keterangan ruang Moot Court, tempat simulasi persidangan dan pembacaan akta, beserta perangkat dan jadwal penggunaannya."
-      />
+      <FacilityContent data={mootCourtData} />
     </>
   );
 }
