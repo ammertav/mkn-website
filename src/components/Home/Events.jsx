@@ -96,7 +96,7 @@ export default function Events() {
           {eventsData.map((item) => (
             <article
               key={item.id}
-              className="flex flex-col justify-between h-full bg-white rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow overflow-hidden group"
+              className="flex flex-col justify-between h-full bg-white rounded-md border border-gray-100 shadow-sm hover:shadow-md transition-shadow overflow-hidden group"
             >
               <div>
                 {/* Visual Header / Gambar Acara */}
@@ -121,27 +121,6 @@ export default function Events() {
                   <p className="text-xs sm:text-sm text-body line-clamp-3 leading-relaxed">
                     {item.description}
                   </p>
-
-                  {/* Informasi Waktu & Tanggal */}
-                  <div className="flex items-start space-x-4 pt-2 border-t border-gray-100">
-                    {/* Badge Tanggal Melingkar */}
-                    <div className="w-14 h-14 rounded-full border border-gray-200 bg-white shadow-sm flex flex-col items-center justify-center shrink-0 text-center">
-                      <span className="font-heading font-bold text-xs sm:text-sm text-heading uppercase">
-                        {formatDateBadge(item.date)}
-                      </span>
-                    </div>
-
-                    {/* Rincian Jadwal & Lokasi */}
-                    <div className="space-y-1 text-xs text-body leading-relaxed">
-                      <p className="font-medium text-heading">
-                        {formatDateFull(item.date)}
-                      </p>
-                      <p className="text-gray-500">{item.time}</p>
-                      <p className="text-gray-500 font-medium line-clamp-1">
-                        📍 {item.venue}
-                      </p>
-                    </div>
-                  </div>
 
                 </div>
               </div>

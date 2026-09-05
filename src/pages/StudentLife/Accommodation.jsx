@@ -50,7 +50,7 @@ export default function Accommodation() {
             <img
               src="https://images.unsplash.com/photo-1541829070764-84a7d30dd3f3?auto=format&fit=crop&w=2000&q=80"
               alt="Kampus UNISSULA"
-              className="w-full h-full object-cover object-center filter brightness-50 contrast-105"
+              className="w-full h-full object-cover object-center filter brightness-50 contrast-105 rounded-md hover:scale-105 transition-transform duration-500"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-black/70" />
           </div>

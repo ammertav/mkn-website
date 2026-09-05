@@ -206,13 +206,13 @@ export default function BeritaIndex() {
               <div className="lg:col-span-6">
                 <Link
                   to={`/berita/${generateSlug(featuredNews.title, featuredNews.slug)}`}
-                  className="block w-full aspect-[4/3] bg-[#E8E6E1] rounded-xs relative overflow-hidden border border-gray-200 group"
+                  className="block w-full aspect-[4/3] bg-[#E8E6E1] rounded-xs relative overflow-hidden group"
                 >
                   <Img
                     eager
                     src={getBeritaImage(featuredNews.gambar)}
                     alt={featuredNews.title}
-                    className="w-full h-full object-cover object-center group-hover:scale-102 transition-transform duration-500"
+                    className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500 rounded-md"
                     onError={(e) => {
                       e.currentTarget.style.display = "none";
                     }}

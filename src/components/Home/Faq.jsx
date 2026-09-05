@@ -72,7 +72,7 @@ export default function FAQ() {
               <img
                 src={faqImage}
                 alt="FAQ Background"
-                className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 rounded-md"
               />
 
               {/* Dark Overlay for Text Contrast */}

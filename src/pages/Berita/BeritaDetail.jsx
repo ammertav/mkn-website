@@ -364,7 +364,7 @@ export default function BeritaDetail() {
                       <Img
                         src={rel.image}
                         alt={rel.title}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 rounded-md"
                         onError={(e) => {
                           e.currentTarget.style.display = "none";
                         }}

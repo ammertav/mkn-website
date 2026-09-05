@@ -8,7 +8,7 @@ export default function Ready() {
     <section className="w-full bg-white font-body py-16 sm:py-20 border-b border-gray-200">
       <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8">
         <div
-          className="relative w-full bg-neutral-900 overflow-hidden rounded-xs py-16 sm:py-24 px-6 sm:px-12 text-center flex flex-col items-center justify-center"
+          className="relative w-full bg-neutral-900 overflow-hidden rounded-xs py-16 sm:py-24 px-6 sm:px-12 text-center flex flex-col items-center justify-center "
         >
           {/* Latar foto kampus. Seluruh teks di blok ini berwarna terang, jadi
               foto ditutup lapisan gelap agar kontrasnya tetap terbaca — tanpa
@@ -17,7 +17,7 @@ export default function Ready() {
             src={bgKampus}
             alt=""
             aria-hidden="true"
-            className="absolute inset-0 w-full h-full object-cover object-center"
+            className="absolute inset-0 w-full h-full object-cover object-center rounded-md "
           />
           <div className="absolute inset-0 bg-neutral-900/80" />
           <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/40" />
@@ -58,7 +58,7 @@ export default function Ready() {
                 to="/pendaftaran"
                 className="inline-flex items-center space-x-2 px-8 py-3.5 bg-primary hover:bg-[#680000] text-white text-xs font-bold tracking-wider uppercase transition-colors rounded-xs group shadow-md"
               >
-                <span>HUBUNGI ADMISI / DAFTAR SEKARANG</span>
+                <span>DAFTAR SEKARANG</span>
                 <FiArrowRight className="text-sm transition-transform duration-200 group-hover:translate-x-1" />
               </Link>
             </div>

@@ -10,6 +10,7 @@ import Events from "../components/Home/Events";
 import Testimoni from "../components/Home/Testimoni";
 import FAQ from "../components/Home/Faq";
 import Ready from "../components/Home/Ready";
+import Highlight from "../components/Home/Highlight";
 
 export default function Home() {
   return (
@@ -43,6 +44,9 @@ export default function Home() {
         {/* Academic Focus / Berita & Wawasan Section */}
         <AcademicFocus />
 
+
+        <Highlight />
+
         {/* Research & Community Service Section */}
         <ResearchCommunity />
 
@@ -63,10 +67,6 @@ export default function Home() {
 
         {/* Ready Section */}
         <Ready />
-
-        {/* Additional Content Area */}
-        <div className="w-full flex-grow">
-        </div>
 
         {/* Footer */}
         <Footer />

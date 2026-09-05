@@ -10,7 +10,7 @@ export default function ProfilHero() {
           eager
           src={gedungImg}
           alt="Gedung Fakultas Hukum & Pascasarjana UNISSULA"
-          className="w-full h-full object-cover object-center filter contrast-[1.02] brightness-95"
+          className="w-full h-full object-cover object-center filter contrast-[1.02] brightness-95 hover:scale-105 transition-transform duration-500"
         />
         {/* Subtle Overlay */}
         <div className="absolute inset-0 bg-black/15 pointer-events-none" />
