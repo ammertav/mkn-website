@@ -47,14 +47,15 @@ const kategoriPengaduan = [
 
 const daftarStatus = ["Mahasiswa", "Alumni", "Calon mahasiswa", "Dosen / tenaga kependidikan", "Umum"];
 
-const surel = { alamat: "mkn@unissula.ac.id" };
+const surel = { alamat: "mkn.fh@unissula.ac.id" };
 
 const nomorUmum = {
   tampilan: "+62 823-1222-8181",
   telepon: "6282312228181",
 };
 
-const jamKonsultasi = "Senin – Jumat, pukul 09.00 – 15.00 WIB";
+const jamKonsultasi = "Senin – Jumat, pukul 08.00 – 17.00 WIB";
+const jamKonsultasi2 = "Sabtu, pukul 08.00 – 15.00 WIB";
 
 const isianAwal = {
   kategori: "",
@@ -431,8 +432,9 @@ export default function LayananPengaduan() {
                 <div className="flex items-start gap-3">
                   <FiClock className="text-base text-primary mt-0.5 shrink-0" />
                   <div>
-                    <p className="text-xs font-semibold text-heading">Jam konsultasi</p>
+                    <p className="text-xs font-semibold text-heading">Jam operasional</p>
                     <p className="text-sm text-body leading-relaxed">{jamKonsultasi}</p>
+                    <p className="text-sm text-body leading-relaxed">{jamKonsultasi2}</p>
                   </div>
                 </div>
 

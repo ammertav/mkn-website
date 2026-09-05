@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import { useParams, Link } from "react-router-dom";
 import { FiCheck } from "react-icons/fi";
@@ -23,11 +22,6 @@ const akomodasiTabs = [
 
 export default function Accommodation() {
   const { tab } = useParams();
-
-  // Scroll to top when tab changes
-  useEffect(() => {
-    window.scrollTo({ top: 0, left: 0, behavior: "instant" });
-  }, [tab]);
 
   // Validasi tab: default ke asrama jika slug tidak valid atau kosong
   const currentKey = tab === "guest-house" ? "guestHouse" : "asrama";

@@ -2,6 +2,10 @@ import { useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import Img from "../../components/ui/Img";
 import imgIkanotsula from "../../assets/images/ikanotsula-1.jpeg";
+import Keg1 from "../../assets/images/ikanot/keg1.jpeg";
+import Keg2 from "../../assets/images/ikanot/keg2.jpeg";
+import Keg3 from "../../assets/images/ikanot/keg3.jpeg";
+import Keg4 from "../../assets/images/ikanot/keg4.jpeg";
 
 // Data resmi IKANOTSULA & Lowongan Pekerjaan
 const ikanotsulaData = {
@@ -78,9 +82,10 @@ const ikanotsulaData = {
     { number: "2024–2028", label: "Masa Bakti Kepengurusan" },
   ],
   gallery: [
-    { id: 1, title: "Kegiatan Pelatihan Ujian PPAT", image: "/images/alumni/gallery-1.jpg" },
-    { id: 2, title: "Bakti Sosial Alumni UNISSULA", image: "/images/alumni/gallery-2.jpg" },
-    { id: 3, title: "Silaturahmi Pengurus IKANOTSULA", image: "/images/alumni/gallery-3.jpg" },
+    { id: 1, image: Keg1 },
+    { id: 2, image: Keg2 },
+    { id: 3, image: Keg3 },
+    { id: 4, image: Keg4 },
   ],
   pengurusInti: [
     {
@@ -262,7 +267,7 @@ export default function IkanotsulaDetail() {
           )}
 
           {/* PENGURUS INTI */}
-          {organization.pengurusInti && organization.pengurusInti.length > 0 && (
+          {/* {organization.pengurusInti && organization.pengurusInti.length > 0 && (
             <section className="space-y-6">
               <h2 className="text-2xl sm:text-3xl font-heading font-bold text-heading pb-3 border-b-2 border-gray-900">
                 Pengurus Inti Periode 2024–2028
@@ -292,7 +297,7 @@ export default function IkanotsulaDetail() {
                 ))}
               </div>
             </section>
-          )}
+          )} */}
 
           {/* GALERI FOTO */}
           {organization.gallery && organization.gallery.length > 0 && (
@@ -311,11 +316,6 @@ export default function IkanotsulaDetail() {
                       alt={item.title}
                       className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex items-end p-5">
-                      <span className="text-sm font-medium text-white tracking-wide drop-shadow-md">
-                        {item.title}
-                      </span>
-                    </div>
                   </div>
                 ))}
               </div>

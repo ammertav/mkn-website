@@ -29,12 +29,6 @@ export default function Ready() {
           </div>
 
           <div className="relative z-10 max-w-3xl mx-auto space-y-6">
-            {/* Label Kategori / Eyebrow */}
-            <span
-              className="text-xs font-semibold tracking-[0.2em] text-white/75 uppercase block"
-            >
-              PENDAFTARAN & ADMISI
-            </span>
 
             {/* Judul Utama */}
             <h2

@@ -1,76 +1,162 @@
+import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { FiChevronRight } from "react-icons/fi";
 import Img from "../ui/Img";
 
+const viewportSettings = {
+  once: true,
+  amount: 0.2,
+};
+
 const campusCultureData = [
-    {
+  {
     id: 1,
     title: "Organisasi Mahasiswa",
-    description: "Wadah kepemimpinan mahasiswa melalui ikatan mahasiswa dan kegiatan keorganisasian.",
-    image: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=800&q=80",
+    description:
+      "Wadah kepemimpinan mahasiswa melalui ikatan mahasiswa dan kegiatan keorganisasian.",
+    image:
+      "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=800&q=80",
     linkText: "Kenali Pengurus",
     linkHref: "/mahasiswa/organisasi",
   },
-
-    {
+  {
     id: 2,
     title: "Laboratorium",
-    description: "Ruang peradilan semu dan laboratorium simulasi untuk praktik penyusunan akta.",
-    image: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=800&q=80",
+    description:
+      "Ruang peradilan semu dan laboratorium simulasi untuk praktik penyusunan akta.",
+    image:
+      "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=800&q=80",
     linkText: "Jadwal Laboratorium",
     linkHref: "/fasilitas/laboratorium",
   },
-
   {
     id: 3,
     title: "Pusat Riset Mahasiswa (SRC)",
-    description: "Ruang kerja bersama untuk kajian hukum tingkat lanjut.",
-    image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80",
+    description:
+      "Ruang kerja bersama untuk kajian hukum tingkat lanjut.",
+    image:
+      "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80",
     linkText: "Lihat Kegiatan",
     linkHref: "/fasilitas/student-research-center",
   },
-    {
+  {
     id: 4,
     title: "Perpustakaan",
-    description: "Koleksi cetak yang luas serta akses ke basis data hukum internasional.",
-    image: "https://images.unsplash.com/photo-1568667256549-094345857637?auto=format&fit=crop&w=800&q=80",
+    description:
+      "Koleksi cetak yang luas serta akses ke basis data hukum internasional.",
+    image:
+      "https://images.unsplash.com/photo-1568667256549-094345857637?auto=format&fit=crop&w=800&q=80",
     linkText: "Jelajahi Katalog",
     linkHref: "/fasilitas/perpustakaan",
   },
-
 ];
 
 export default function CampusCulture() {
   return (
-    <section className="w-full bg-hero-heading font-body py-16 sm:py-24 border-b border-gray-200">
+    <section className="w-full bg-hero-heading font-body py-16 sm:py-24 border-b border-gray-200 overflow-hidden">
       <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8">
-        
+
         {/* Section Header */}
-        <div className="text-center mb-12 sm:mb-16">
+        <motion.div
+          initial={{
+            opacity: 0,
+            y: 20,
+          }}
+          whileInView={{
+            opacity: 1,
+            y: 0,
+          }}
+          transition={{
+            duration: 0.8,
+            ease: "easeOut",
+          }}
+          viewport={viewportSettings}
+          className="text-center mb-12 sm:mb-16"
+        >
           <h2 className="text-3xl sm:text-4xl font-heading font-normal text-heading tracking-normal">
             Fasilitas & Budaya
           </h2>
-        </div>
+        </motion.div>
 
         {/* 4 Cards Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 items-start">
-          {campusCultureData.map((item) => (
-            <article key={item.id} className="flex flex-col group h-full">
-              {/* Image Container (Grayscale Aspect 16/10) */}
+          {campusCultureData.map((item, index) => (
+            <motion.article
+              key={item.id}
+              initial={{
+                opacity: 0,
+                y: 40,
+              }}
+              whileInView={{
+                opacity: 1,
+                y: 0,
+              }}
+              transition={{
+                duration: 0.8,
+                ease: "easeOut",
+                delay: index * 0.12,
+              }}
+              viewport={viewportSettings}
+              className="flex flex-col group h-full"
+            >
+              {/* Image */}
               <div className="relative w-full aspect-[16/10] bg-gray-100 overflow-hidden rounded-md">
-                <Img
-                  src={item.image}
-                  alt={item.title}
-                  className="w-full h-full object-cover object-center grayscale contrast-110 transition-transform duration-500 group-hover:scale-105 rounded-md"
-                />
+                <motion.div
+                  initial={{
+                    filter: "grayscale(100%)",
+                  }}
+                  whileInView={{
+                    filter: "grayscale(0%)",
+                  }}
+                  transition={{
+                    duration: 1.5,
+                    ease: "easeOut",
+                    delay: 0.2 + index * 0.12,
+                  }}
+                  viewport={viewportSettings}
+                  className="w-full h-full"
+                >
+                  <Img
+                    src={item.image}
+                    alt={item.title}
+                    className="
+                      w-full
+                      h-full
+                      object-cover
+                      object-center
+                      contrast-110
+                      transition-transform
+                      duration-500
+                      group-hover:scale-105
+                      rounded-md
+                    "
+                  />
+                </motion.div>
               </div>
 
               {/* Card Content */}
-              <div className="pt-5 flex flex-col flex-grow justify-between">
+              <motion.div
+                initial={{
+                  opacity: 0,
+                  y: 20,
+                }}
+                whileInView={{
+                  opacity: 1,
+                  y: 0,
+                }}
+                transition={{
+                  duration: 0.7,
+                  ease: "easeOut",
+                  delay: 0.3 + index * 0.12,
+                }}
+                viewport={viewportSettings}
+                className="pt-5 flex flex-col flex-grow justify-between"
+              >
                 <div>
                   <h3 className="font-heading font-normal text-xl sm:text-2xl text-heading leading-snug group-hover:text-primary transition-colors">
                     {item.title}
                   </h3>
+
                   <p className="mt-3 text-sm text-body leading-relaxed">
                     {item.description}
                   </p>
@@ -83,11 +169,12 @@ export default function CampusCulture() {
                     className="inline-flex items-center space-x-1 text-xs font-semibold tracking-wider text-primary hover:text-[#680000] uppercase transition-colors group/link"
                   >
                     <span>{item.linkText}</span>
+
                     <FiChevronRight className="text-sm transition-transform duration-150 group-hover/link:translate-x-0.5" />
                   </Link>
                 </div>
-              </div>
-            </article>
+              </motion.div>
+            </motion.article>
           ))}
         </div>
 

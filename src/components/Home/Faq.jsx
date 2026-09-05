@@ -1,129 +1,342 @@
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
 import { FiArrowRight, FiPlus } from "react-icons/fi";
-import faqImage from "../../assets/images/faq/faq.jpeg";
+import faqImage from "../../assets/images/faq/faq.jpg";
+
+const viewportSettings = {
+  once: true,
+  amount: 0.2,
+};
 
 const faqData = [
   {
     id: 1,
-    category: "Pendaftaran",
-    question:
-      "Bagaimana prosedur pendaftaran mahasiswa baru tahun akademik ini?",
+    category: "Beasiswa",
+    question: "Apa saja jenis beasiswa yang tersedia untuk mahasiswa?",
     answer:
-      "Calon mahasiswa dapat melakukan pendaftaran secara daring melalui portal admisi kami. Proses meliputi pengisian formulir, unggah dokumen persyaratan, pembayaran biaya seleksi, dan mengikuti ujian masuk yang dijadwalkan.",
-    highlight: "Informasi Utama",
+      "Tersedia berbagai program beasiswa seperti Beasiswa Prestasi, Beasiswa Kemitraan, serta bantuan biaya pendidikan bagi mahasiswa yang memenuhi persyaratan akademik maupun non-akademik.",
   },
   {
     id: 2,
-    category: "Beasiswa",
-    question: "Apa saja jenis beasiswa yang tersedia untuk mahasiswa hukum?",
+    category: "Fasilitas",
+    question: "Apa saja fasilitas yang dapat digunakan oleh mahasiswa?",
     answer:
-      "Kami menawarkan Beasiswa Prestasi, Beasiswa Kemitraan, dan bantuan biaya pendidikan bagi mahasiswa berprestasi namun kurang mampu.",
+      "Mahasiswa dapat memanfaatkan perpustakaan, ruang diskusi, laboratorium, akses database hukum, fasilitas akademik, serta berbagai fasilitas pendukung kegiatan pembelajaran.",
   },
   {
     id: 3,
-    category: "Fasilitas",
-    question:
-      "Apakah kampus menyediakan akses ke database hukum internasional?",
+    category: "Kurikulum",
+    question: "Bagaimana sistem pembelajaran dan kurikulum yang diterapkan?",
     answer:
-      "Ya, perpustakaan kami berlangganan berbagai database legal global yang dapat diakses oleh seluruh mahasiswa aktif.",
+      "Kurikulum dirancang untuk menggabungkan pemahaman teori dengan praktik melalui perkuliahan, studi kasus, diskusi, simulasi, penelitian, serta kegiatan praktik lapangan.",
   },
   {
     id: 4,
-    category: "Kurikulum",
-    question: "Bagaimana sistem magang dan praktik kerja lapangan (PKL)?",
+    category: "Praktik",
+    question: "Apakah mahasiswa mendapatkan kesempatan magang atau PKL?",
     answer:
-      "Mahasiswa diwajibkan mengikuti PKL pada semester 6 di kantor hukum, pengadilan, atau instansi pemerintahan yang terafiliasi.",
+      "Ya. Mahasiswa mendapatkan kesempatan untuk mengikuti praktik kerja lapangan di berbagai institusi seperti kantor hukum, pengadilan, lembaga pemerintahan, maupun organisasi mitra.",
+  },
+  {
+    id: 5,
+    category: "Pendaftaran",
+    question: "Bagaimana prosedur pendaftaran mahasiswa baru?",
+    answer:
+      "Pendaftaran dilakukan secara daring melalui jalur penerimaan yang tersedia. Informasi mengenai persyaratan, jadwal, biaya, dan tahapan seleksi dapat dilihat pada halaman penerimaan mahasiswa baru.",
   },
 ];
 
 export default function FAQ() {
-  const featured = faqData[0];
-  const sideFAQs = faqData.slice(1);
+  const [openFAQ, setOpenFAQ] = useState(null);
+
+  const toggleFAQ = (id) => {
+    setOpenFAQ((current) => (current === id ? null : id));
+  };
 
   return (
-    <section className="w-full bg-white font-body py-16 sm:py-20 border-b border-gray-200">
+    <section className="w-full bg-white font-body py-16 sm:py-20 lg:py-24 border-b border-gray-200 overflow-hidden">
       <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between pb-6 border-b border-gray-200 gap-4">
-          <div>
-            <span className="text-xs font-semibold tracking-wider text-primary uppercase block mb-1.5">
-              BANTUAN & INFORMASI
+
+        {/* ================= HEADER ================= */}
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          viewport={viewportSettings}
+          className="
+            flex flex-col
+            lg:flex-row
+            lg:items-end
+            justify-between
+            gap-6
+            pb-7
+            border-b border-gray-200
+          "
+        >
+          <div className="max-w-2xl">
+            <span className="text-xs font-semibold tracking-[0.18em] text-primary uppercase">
+              Bantuan & Informasi
             </span>
-            <h2 className="text-3xl sm:text-4xl md:text-[38px] font-heading font-normal text-heading tracking-normal">
-              Pertanyaan Umum
+
+            <h2 className="mt-2 text-3xl sm:text-4xl md:text-[42px] font-heading font-normal text-heading leading-tight">
+              Pertanyaan yang
+              <br className="hidden sm:block" />
+              Sering Ditanyakan
             </h2>
           </div>
-          <Link
-            to="/kontak"
-            className="inline-flex items-center space-x-1 text-xs font-bold tracking-wider text-primary hover:text-[#680000] uppercase transition-colors group pb-1"
-          >
-            <span>HUBUNGI ADMINSASI</span>
-            <FiArrowRight className="text-sm transition-transform duration-200 group-hover:translate-x-1" />
-          </Link>
-        </div>
+        </motion.div>
 
-        {/* Content Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 pt-10 items-start">
-          {/* Main Featured FAQ (Left Side) */}
-          <article className="lg:col-span-8 flex flex-col group">
-            {/* Image Card Container with Overlay */}
-            <div className="relative w-full aspect-[16/9] sm:aspect-[16/8.5] overflow-hidden rounded-xs flex items-center justify-center p-8 sm:p-16">
-              {/* Background Image */}
-              <img
+        {/* ================= CONTENT ================= */}
+        <div className="
+          grid
+          grid-cols-1
+          lg:grid-cols-12
+          gap-10
+          lg:gap-16
+          pt-10
+          lg:pt-14
+          items-start
+        ">
+
+          {/* ================= IMAGE ================= */}
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.9, ease: "easeOut" }}
+            viewport={viewportSettings}
+            className="lg:col-span-5"
+          >
+            <div className="
+              relative
+              overflow-hidden
+              rounded-md
+              h-[420px]
+              sm:h-[500px]
+              lg:h-[650px]
+              group
+            ">
+              <motion.img
                 src={faqImage}
-                alt="FAQ Background"
-                className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 rounded-md"
+                alt="Mahasiswa fakultas hukum sedang berdiskusi"
+                initial={{
+                  filter: "grayscale(100%)",
+                  scale: 1.06,
+                }}
+                whileInView={{
+                  filter: "grayscale(0%)",
+                  scale: 1,
+                }}
+                transition={{
+                  duration: 1.5,
+                  ease: "easeOut",
+                }}
+                viewport={viewportSettings}
+                className="
+                  absolute
+                  inset-0
+                  w-full
+                  h-full
+                  object-cover
+                  transition-transform
+                  duration-700
+                  group-hover:scale-105
+                "
               />
 
-              {/* Dark Overlay for Text Contrast */}
-              <div className="absolute inset-0 bg-black/60 backdrop-blur-[1px]" />
+              {/* Image overlay */}
+              <div className="
+                absolute
+                inset-0
+                bg-gradient-to-t
+                from-black/70
+                via-black/10
+                to-transparent
+              " />
 
-              {/* Text Content */}
-              <div className="relative z-10 text-center">
-                <span className="text-primary font-heading text-sm uppercase tracking-[0.2em] block mb-4">
-                  {featured.highlight}
-                </span>
-                <h3 className="text-white font-heading text-2xl sm:text-3xl lg:text-4xl leading-tight max-w-2xl drop-shadow-sm">
-                  "{featured.question}"
-                </h3>
-              </div>
-            </div>
+              {/* Image caption */}
+              <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-8">
+                <div className="w-10 h-px bg-white/70 mb-4" />
 
-            {/* Featured Answer */}
-            <div className="pt-6">
-              <p className="text-lg sm:text-xl text-body leading-relaxed max-w-3xl text-gray-700">
-                {featured.answer}
-              </p>
-              <div className="mt-6 pt-1">
-                <span className="text-xs font-medium tracking-widest text-gray-400 uppercase">
-                  Kategori: {featured.category} &nbsp;|&nbsp; Terakhir
-                  diperbarui: Jan 2024
-                </span>
-              </div>
-            </div>
-          </article>
-
-          {/* Side FAQ List (Right Side) */}
-          <div className="lg:col-span-4 space-y-7 lg:border-l lg:border-gray-200 lg:pl-10">
-            {sideFAQs.map((item) => (
-              <article
-                key={item.id}
-                className="space-y-3 group pb-7 border-b border-gray-100 last:border-b-0 last:pb-0"
-              >
-                <div className="flex items-center justify-between">
-                  <span className="text-xs font-bold tracking-wider text-primary uppercase block">
-                    {item.category}
-                  </span>
-                  <FiPlus className="text-gray-300 group-hover:text-primary transition-colors" />
-                </div>
-                <h4 className="font-heading font-normal text-lg text-heading leading-snug group-hover:text-primary transition-colors cursor-pointer">
-                  {item.question}
-                </h4>
-                <p className="text-sm text-body leading-relaxed line-clamp-2 text-gray-600">
-                  {item.answer}
+                <p className="
+                  text-white
+                  text-sm
+                  sm:text-base
+                  font-heading
+                  leading-relaxed
+                  max-w-sm
+                ">
+                  Temukan informasi seputar akademik, fasilitas,
+                  pendaftaran, dan kehidupan mahasiswa.
                 </p>
-              </article>
-            ))}
+              </div>
+            </div>
+          </motion.div>
+
+          {/* ================= QUESTIONS ================= */}
+          <div className="lg:col-span-7 lg:pl-2">
+
+            <div className="divide-y divide-gray-200 border-t border-gray-200">
+
+              {faqData.map((item, index) => {
+                const isOpen = openFAQ === item.id;
+
+                return (
+                  <motion.article
+                    key={item.id}
+                    initial={{
+                      opacity: 0,
+                      x: 35,
+                    }}
+                    whileInView={{
+                      opacity: 1,
+                      x: 0,
+                    }}
+                    transition={{
+                      duration: 0.7,
+                      ease: "easeOut",
+                      delay: index * 0.08,
+                    }}
+                    viewport={viewportSettings}
+                  >
+                    <button
+                      type="button"
+                      onClick={() => toggleFAQ(item.id)}
+                      aria-expanded={isOpen}
+                      className="
+                        w-full
+                        text-left
+                        py-7
+                        sm:py-8
+                        group
+                      "
+                    >
+                      <div className="flex items-start gap-5 sm:gap-8">
+
+                        {/* Number */}
+                        <span className={`
+                          shrink-0
+                          pt-1
+                          text-xs
+                          font-semibold
+                          tracking-wider
+                          transition-colors
+                          duration-300
+                          ${isOpen
+                            ? "text-primary"
+                            : "text-gray-300 group-hover:text-primary"
+                          }
+                        `}>
+                          {String(index + 1).padStart(2, "0")}
+                        </span>
+
+                        {/* Question */}
+                        <div className="flex-1 min-w-0">
+
+                          <span className="
+                            text-[10px]
+                            sm:text-xs
+                            font-bold
+                            tracking-[0.16em]
+                            text-primary
+                            uppercase
+                          ">
+                            {item.category}
+                          </span>
+
+                          <h3 className={`
+                            mt-2.5
+                            font-heading
+                            font-normal
+                            text-lg
+                            sm:text-xl
+                            lg:text-[22px]
+                            leading-snug
+                            transition-colors
+                            duration-300
+                            ${isOpen
+                              ? "text-primary"
+                              : "text-heading group-hover:text-primary"
+                            }
+                          `}>
+                            {item.question}
+                          </h3>
+
+                          {/* Answer */}
+                          <AnimatePresence initial={false}>
+                            {isOpen && (
+                              <motion.div
+                                initial={{
+                                  height: 0,
+                                  opacity: 0,
+                                }}
+                                animate={{
+                                  height: "auto",
+                                  opacity: 1,
+                                }}
+                                exit={{
+                                  height: 0,
+                                  opacity: 0,
+                                }}
+                                transition={{
+                                  duration: 0.35,
+                                  ease: "easeOut",
+                                }}
+                                className="overflow-hidden"
+                              >
+                                <p className="
+                                  pt-4
+                                  pr-4
+                                  text-sm
+                                  sm:text-[15px]
+                                  text-gray-500
+                                  leading-7
+                                  max-w-2xl
+                                ">
+                                  {item.answer}
+                                </p>
+                              </motion.div>
+                            )}
+                          </AnimatePresence>
+                        </div>
+
+                        {/* Plus */}
+                        <span className="
+                          shrink-0
+                          flex
+                          items-center
+                          justify-center
+                          w-8
+                          h-8
+                          mt-0.5
+                          border
+                          border-gray-200
+                          rounded-full
+                          transition-all
+                          duration-300
+                          group-hover:border-primary
+                        ">
+                          <FiPlus
+                            className={`
+                              text-sm
+                              transition-all
+                              duration-300
+                              ${isOpen
+                                ? "rotate-45 text-primary"
+                                : "text-gray-400 group-hover:text-primary"
+                              }
+                            `}
+                          />
+                        </span>
+
+                      </div>
+                    </button>
+                  </motion.article>
+                );
+              })}
+
+            </div>
+
           </div>
         </div>
       </div>

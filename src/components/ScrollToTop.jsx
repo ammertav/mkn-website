@@ -8,7 +8,12 @@ import { useLocation } from "react-router-dom";
  * sama — sehingga memaksa gulir kembali ke atas justru menyulitkan pembacaan.
  * Halaman yang bersangkutan mengatur posisi gulirnya sendiri.
  */
-const GRUP_TAB = ["/akademik/panduan-ujian/tesis"];
+const GRUP_TAB = [
+  "/akademik/panduan-ujian/tesis",
+  "/profil",
+  "/fasilitas",
+  "/mahasiswa/akomodasi",
+];
 
 function seGrupTab(a, b) {
   return GRUP_TAB.some((awalan) => a.startsWith(awalan) && b.startsWith(awalan));

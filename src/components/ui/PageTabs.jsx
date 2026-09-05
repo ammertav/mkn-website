@@ -31,15 +31,22 @@ export default function PageTabs({
   const navRef = useRef(null);
   const activeTabRef = useRef(null);
 
-  // Auto-scroll active tab into center view on route change (especially on mobile/tablets)
+  /**
+   * Tab aktif digeser ke tengah bilahnya sendiri saat rute berubah — penting di
+   * layar sempit ketika tab tidak muat seluruhnya.
+   *
+   * Digeser lewat scrollLeft, bukan scrollIntoView: scrollIntoView ikut
+   * menggulir halaman secara vertikal bila bilah tab sedang di luar layar,
+   * padahal berpindah tab justru harus mempertahankan posisi baca.
+   */
   useEffect(() => {
-    if (activeTabRef.current) {
-      activeTabRef.current.scrollIntoView({
-        behavior: "smooth",
-        block: "nearest",
-        inline: "center",
-      });
-    }
+    const bilah = navRef.current;
+    const tabAktif = activeTabRef.current;
+    if (!bilah || !tabAktif) return;
+
+    const tujuan =
+      tabAktif.offsetLeft - bilah.clientWidth / 2 + tabAktif.clientWidth / 2;
+    bilah.scrollTo({ left: Math.max(0, tujuan), behavior: "smooth" });
   }, [location.pathname]);
 
   if (!tabs || tabs.length === 0) return null;
@@ -47,7 +54,10 @@ export default function PageTabs({
   return (
     <div
       className={clsx(
-        "w-full bg-white border-y border-gray-200 sticky top-16 z-30 shadow-2xs",
+        // Sengaja tidak sticky: navbar sudah menempel dan tingginya berubah
+        // saat baris identitas menyusut, sehingga tab yang ikut menempel
+        // akan tumpang tindih dengan navbar pada sebagian keadaan.
+        "w-full bg-white border-y border-gray-200 shadow-2xs",
         className
       )}
     >

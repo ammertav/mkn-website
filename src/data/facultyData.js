@@ -1,8 +1,10 @@
-import imgJawade from "../assets/images/struktur-organisasi/prof-jawede.jpg";
-import imgRozihan from "../assets/images/struktur-organisasi/Prof. HC. Dr. Drs. H. Rozihan, SH., M.Ag.png";
-import imgGunarto from "../assets/images/struktur-organisasi/3.PROF. DR. GUNARTO, S.H.., M.HUM.png";
-import imgToni from "../assets/images/struktur-organisasi/Sekprodi a- Dr. Toni Triyanto, S.H., M.jpeg";
+import imgJawade from "../assets/images/dosen/Prof. Dr. H. Jawade Hafidz,S.H. M.H.png";
+import imgRozihan from "../assets/images/dosen/Prof. HC. Dr. Drs. H. Rozihan, SH., M.Ag.png";
+import imgGunarto from "../assets/images/dosen/Prof.Dr. Gunarto, SH,MH.png";
+import imgToni from "../assets/images/dosen/Dr. Toni Triyanto, SH MH.png";
 import imgNanang from "../assets/images/dosen/Dr. Nanang Sri Darmadi, S.H.,M.H..png";
+import imgMutamimah from "../assets/images/dosen/Prof. Dr.Hj. Mutamimah, S.E., M.Si..png";
+import imgSoegianto from "../assets/images/dosen/Prof. Dr. Soegianto, S.H.,M.Kn.png";
 import imgWidayati from "../assets/images/dosen/Prof. Dr., Dr. Widayati, S.H..png";
 import imgAnis from "../assets/images/dosen/Prof. Dr. Anis Mashdurohatun, SH., M.Hum.png";
 import imgRatih from "../assets/images/dosen/DR., RATIH MEGA PUSPA SARI, S.H.., M.KN.png";
@@ -24,6 +26,7 @@ import imgBambang from "../assets/images/dosen/Prof. Dr. Bambang Tri Bawono, S.H
 import imgArpangi from "../assets/images/dosen/Prof. Dr. Arpangi S.H.,M.H..png";
 import imgAris from "../assets/images/dosen/Dr. Moh. Aris Siswanto, S.H., M.H..png";
 import imgSriKusriyah from "../assets/images/dosen/Dr. Hj. Sri Kusriyah, S.H., M.Hum..png";
+import imgWidhiHandoko from "../assets/images/dosen/Prof. Dr. Widhi Handoko, S.H., Sp.N.png";
 
 export const facultyData = [
   {
@@ -528,7 +531,7 @@ export const facultyData = [
     nip: "8987740022",
     sintaId: "6754712",
     scopusId: "",
-    scholarId: "1kFRFokAAAAJ",
+    scholarId: "lkFRFokAAAAJ",
     phone: "0812-1350-1970",
     birthPlaceDate: "Wonogiri, 20 Januari 1970",
     email: "widhihandoko@unissula.ac.id",
@@ -537,7 +540,7 @@ export const facultyData = [
       "Prof. Dr. Widhi Handoko, S.H., Sp.N. adalah Guru Besar dalam bidang Ilmu Hukum Kenotariatan di Fakultas Hukum Universitas Islam Sultan Agung (UNISSULA) Semarang. Beliau lahir di Wonogiri pada 20 Januari 1970 dan memiliki reputasi terkemuka sebagai akademisi sekaligus praktisi senior notaris dan PPAT.",
       "Beliau mengampu mata kuliah inti kenotariatan, antara lain Teknik Pembuatan Akta Umum (TPA I), Laboratorium Akta 1, Teknik Pembuatan Akta Khusus (TPA III), dan Laboratorium Akta 3. Di luar aktivitas kampus, beliau aktif menjabat sebagai Mediator pada Dewan Sengketa Indonesia (2021–2026), Ketua Pengurus Wilayah Jawa Tengah Ikatan Pejabat Pembuat Akta Tanah (IPPAT) periode 2021–2024, serta kerap dipercaya sebagai saksi ahli hukum kenotariatan.",
     ],
-    image: null,
+    image: imgWidhiHandoko,
     imageCaption: "Potret Prof. Dr. Widhi Handoko, S.H., Sp.N.",
     courses: [
       { name: "Teknik Pembuatan Akta Umum (TPA I)", placement: "Semester 1", sks: 2 },
@@ -3907,6 +3910,84 @@ export const facultyData = [
         publisher: "—",
       },
     ],
+    hki: [],
+  },
+  {
+    id: 29,
+    slug: "mutamimah",
+    name: "Prof. Dr. Hj. Mutamimah, S.E., M.Si.",
+    shortName: "Mutamimah",
+    title: "Guru Besar / Dosen Hukum Perusahaan & Pasar Modal",
+    expertise: "Hukum Bisnis & Pasar Modal",
+    type: "Guru Besar",
+    gender: "Perempuan",
+    nidn: "0613106701",
+    nip: "210491026",
+    sintaId: "6022329",
+    scopusId: "36634760000",
+    scholarId: "ViplPvgAAAAJ",
+    birthPlaceDate: "Pacitan, 13 September 1967",
+    email: "mutamimah@unissula.ac.id",
+    bio: "Pengampu mata kuliah Hukum Perusahaan dan Perkembangan Pasar Modal pada Program Studi Magister Kenotariatan UNISSULA, dengan latar keilmuan ekonomi dan manajemen.",
+    fullBio: [
+      "Prof. Dr. Hj. Mutamimah, S.E., M.Si. adalah akademisi Universitas Islam Sultan Agung (UNISSULA) Semarang. Beliau lahir di Pacitan pada 13 September 1967.",
+      "Pada Program Studi Magister Kenotariatan, beliau mengampu mata kuliah Hukum Perusahaan dan Perkembangan Pasar Modal — memadukan perspektif ekonomi dan manajemen dengan kebutuhan praktik kenotariatan di bidang korporasi dan pasar modal.",
+    ],
+    image: imgMutamimah,
+    imageCaption: "Potret Prof. Dr. Hj. Mutamimah, S.E., M.Si.",
+    courses: [
+      {
+        name: "Hukum Perusahaan dan Perkembangan Pasar Modal",
+        placement: "Semester 1",
+        sks: 2,
+      },
+    ],
+    education: [],
+    researches: [],
+    communityServices: [],
+    publications: [],
+    seminars: [],
+    books: [],
+    hki: [],
+  },
+  {
+    id: 30,
+    slug: "soegianto",
+    name: "Prof. (HC) Dr. Soegianto, S.H., M.Kn., M.H.",
+    shortName: "Soegianto",
+    title: "Guru Besar / Dosen Hukum Pajak, Kepailitan & Lelang",
+    expertise: "Hukum Pajak Kenotariatan",
+    type: "Guru Besar",
+    gender: "Laki-Laki",
+    nidn: "0625096601",
+    nip: "210326103",
+    sintaId: "6647543",
+    scopusId: "",
+    scholarId: "hXWa71UAAAAJ",
+    birthPlaceDate: "Kudus, 25 September 1966",
+    email: "",
+    bio: "Pengampu Teknik Pembuatan Akta Badan Hukum (TPA II), Laboratorium Akta 2, serta Hukum Pajak, Kepailitan, dan Lelang pada Program Studi Magister Kenotariatan UNISSULA. Beliau juga tercatat sebagai anggota Gugus Penjaminan Mutu program studi.",
+    fullBio: [
+      "Prof. (HC) Dr. Soegianto, S.H., M.Kn., M.H. adalah akademisi Universitas Islam Sultan Agung (UNISSULA) Semarang. Beliau lahir di Kudus pada 25 September 1966.",
+      "Pada Program Studi Magister Kenotariatan, beliau mengampu Teknik Pembuatan Akta Badan Hukum (TPA II) dan Laboratorium Akta 2, serta mata kuliah Hukum Pajak, Kepailitan, dan Lelang. Di luar pengajaran, beliau menjadi bagian dari Gugus Penjaminan Mutu program studi.",
+    ],
+    image: imgSoegianto,
+    imageCaption: "Potret Prof. (HC) Dr. Soegianto, S.H., M.Kn., M.H.",
+    courses: [
+      {
+        name: "Teknik Pembuatan Akta Badan Hukum (TPA II)",
+        placement: "Semester 2",
+        sks: 2,
+      },
+      { name: "Laboratorium Akta 2", placement: "Semester 2", sks: 2 },
+      { name: "Hukum Pajak, Kepailitan, & Lelang", placement: "Semester 2", sks: 2 },
+    ],
+    education: [],
+    researches: [],
+    communityServices: [],
+    publications: [],
+    seminars: [],
+    books: [],
     hki: [],
   },
 ];
