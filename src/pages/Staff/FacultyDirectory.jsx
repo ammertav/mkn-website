@@ -229,7 +229,7 @@ export default function FacultyDirectory() {
                                             <Img
                                                 src={faculty.image}
                                                 alt={faculty.name}
-                                                className="w-full h-full object-cover object-top contrast-105 group-hover:scale-103 transition-transform duration-300"
+                                                className="w-full h-full object-cover object-top contrast-105 group-hover:scale-103 transition-transform duration-500 rounded-md"
                                             />
                                         ) : (
                                             <div className="w-full h-full flex flex-col items-center justify-center bg-gray-50 text-gray-400 group-hover:bg-gray-100 transition-colors p-4 text-center">

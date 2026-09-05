@@ -47,7 +47,7 @@ export default function StudentAdmission() {
           <Img
             src="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?auto=format&fit=crop&w=1200&q=80"
             alt="Penerimaan Mahasiswa Baru MKn UNISSULA"
-            className="w-full h-full object-cover object-center"
+            className="w-full h-full object-cover object-center rounded-md hover:scale-105 transition-transform duration-500"
           />
         </div>
 

@@ -57,11 +57,11 @@ export default function CampusCulture() {
           {campusCultureData.map((item) => (
             <article key={item.id} className="flex flex-col group h-full">
               {/* Image Container (Grayscale Aspect 16/10) */}
-              <div className="relative w-full aspect-[16/10] bg-gray-100 overflow-hidden rounded-xs">
+              <div className="relative w-full aspect-[16/10] bg-gray-100 overflow-hidden rounded-md">
                 <Img
                   src={item.image}
                   alt={item.title}
-                  className="w-full h-full object-cover object-center grayscale contrast-110 transition-transform duration-500 group-hover:scale-105"
+                  className="w-full h-full object-cover object-center grayscale contrast-110 transition-transform duration-500 group-hover:scale-105 rounded-md"
                 />
               </div>
 

@@ -149,7 +149,7 @@ export default function FacultyDetail() {
                 <Img
                   src={faculty.image}
                   alt={faculty.name}
-                  className="w-full h-full object-cover object-[center_15%] contrast-105"
+                  className="w-full h-full object-cover object-[center_15%] contrast-105 rounded-md hover:scale-105 transition-transform duration-500"
                   eager
                 />
               ) : (

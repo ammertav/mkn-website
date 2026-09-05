@@ -141,7 +141,7 @@ export default function IkanotsulaDetail() {
               <Img
                 src={organization.image}
                 alt={organization.title}
-                className="w-full h-full object-cover object-center"
+                className="w-full h-full object-cover object-center rounded-md hover:scale-105 transition-transform duration-500"
                 eager
               />
             </div>

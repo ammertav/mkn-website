@@ -65,7 +65,7 @@ export default function Tendik() {
                     <Img
                       src={orang.photo}
                       alt={orang.name}
-                      className="w-full h-full object-cover object-top"
+                      className="w-full h-full object-cover object-top rounded-md hover:scale-105 transition-transform duration-500"
                     />
                   ) : (
                     <span className="font-heading text-lg font-bold text-gray-400">

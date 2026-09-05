@@ -16,7 +16,7 @@ export default function ExpertSpotlight() {
                 <Img
                   src={professorImg}
                   alt="Prof. Dr. Nanang Sri Darmadi, S.H., M.H."
-                  className="w-full h-full object-cover object-top"
+                  className="w-full h-full object-cover object-top rounded-md hover:scale-105 transition-transform duration-500"
                 />
               </div>
             </div>

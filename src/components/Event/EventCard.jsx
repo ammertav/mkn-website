@@ -34,11 +34,11 @@ export default function EventCard({ event, onSelect, compact = false }) {
 
         {/* Kolom Kanan: Thumbnail Gambar Bersih */}
         {!compact && event.image && (
-          <div className="w-full md:w-48 lg:w-56 aspect-[4/3] shrink-0 bg-gray-50 rounded-xs overflow-hidden border border-gray-200/90 shadow-2xs group-hover:shadow-xs transition-all">
+          <div className="w-full md:w-48 lg:w-56 aspect-[4/3] shrink-0 bg-gray-50 rounded-xs overflow-hidden transition-all">
             <img
               src={event.image}
               alt={event.title}
-              className="w-full h-full object-cover object-center group-hover:scale-103 transition-transform duration-500"
+              className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500 rounded-md"
               loading="lazy"
             />
           </div>

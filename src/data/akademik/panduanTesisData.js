@@ -112,21 +112,9 @@ export const tahapanBaris = [
       en: "The title is approved by the Thesis Quality Assurance Team",
     },
   ],
+  
   [
     "2",
-    { id: "Penetapan Pembimbing", en: "Appointment of the Supervisor" },
-    {
-      id:
-        "Sekretaris Bidang Akademik menetapkan dosen pembimbing dan dimintakan persetujuan " +
-        "Ketua Program",
-      en:
-        "The Secretary for Academic Affairs appoints the supervisor, subject to the approval of " +
-        "the Head of the Programme",
-    },
-    { id: "Surat penetapan pembimbing", en: "Letter appointing the supervisor" },
-  ],
-  [
-    "3",
     { id: "Ujian Pra Proposal", en: "Pre-Proposal Examination" },
     {
       id: "Ujian berupa bimbingan atas kerangka berpikir proposal dan tesis",
@@ -138,6 +126,19 @@ export const tahapanBaris = [
       id: "Berita acara dan catatan perbaikan",
       en: "Minutes of the examination and a record of revisions",
     },
+  ],
+  [
+    "3",
+    { id: "Penetapan Pembimbing", en: "Appointment of the Supervisor" },
+    {
+      id:
+        "Sekretaris Bidang Akademik menetapkan dosen pembimbing dan dimintakan persetujuan " +
+        "Ketua Program",
+      en:
+        "The Secretary for Academic Affairs appoints the supervisor, subject to the approval of " +
+        "the Head of the Programme",
+    },
+    { id: "Surat penetapan pembimbing", en: "Letter appointing the supervisor" },
   ],
   [
     "4",
@@ -153,7 +154,7 @@ export const tahapanBaris = [
   ],
   [
     "5",
-    { id: "Ujian Usulan Proposal", en: "Proposal Examination" },
+    { id: "Ujian Proposal", en: "Proposal Examination" },
     {
       id: "Diseminarkan di hadapan sekurang-kurangnya 3 orang penguji",
       en: "Presented in a seminar before at least three examiners",

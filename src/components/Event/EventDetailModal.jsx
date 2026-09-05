@@ -32,7 +32,7 @@ export default function EventDetailModal({ event, onClose }) {
             <img
               src={event.image}
               alt={event.title}
-              className="w-full h-full object-cover object-center filter brightness-90"
+              className="w-full h-full object-cover object-center filter brightness-90 rounded-md hover:scale-105 transition-transform duration-500"
             />
             <button
               type="button"

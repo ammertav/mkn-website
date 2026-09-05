@@ -53,7 +53,7 @@ export default function DosenChatFloating({ dosen }) {
                   <img
                     src={dosen.image}
                     alt=""
-                    className="w-full h-full object-cover object-top"
+                    className="w-full h-full object-cover object-top rounded-md hover:scale-105 transition-transform duration-500"
                   />
                 )}
               </div>

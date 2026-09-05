@@ -40,14 +40,14 @@ export default function AcademicFocus() {
             {/* Image Container with Badge */}
             <Link
               to={`/berita/${generateSlug(featured.title, featured.slug)}`}
-              className="relative w-full aspect-[16/9] sm:aspect-[16/8.5] bg-gray-100 overflow-hidden rounded-xs block"
+              className="relative w-full aspect-[16/9] sm:aspect-[16/8.5] bg-gray-100 overflow-hidden block"
             >
               <Img
                 src={getBeritaImage(featured.gambar)}
                 alt={featured.title}
-                className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-102"
+                className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105 rounded-md"
               />
-              <span className="absolute top-4 left-4 bg-black/85 text-white text-xs font-semibold px-3 py-1.5 uppercase tracking-wider rounded-none">
+              <span className="absolute top-4 left-4 bg-black/85 text-white text-xs font-semibold px-3 py-1.5 uppercase tracking-wider">
                 BERITA UTAMA
               </span>
             </Link>
