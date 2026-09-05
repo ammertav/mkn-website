@@ -31,7 +31,7 @@ export default function Sejarah() {
               </h2>
             </div>
 
-            <div className="lg:col-span-7 space-y-4 text-sm sm:text-base text-body leading-relaxed">
+            <div className="lg:col-span-7 space-y-4 text-sm sm:text-base text-body text-justify leading-relaxed">
               {halaman.latarBelakang.map((paragraf, idx) => (
                 <p key={idx}>
                   <RichText>{t(paragraf)}</RichText>
@@ -89,39 +89,7 @@ export default function Sejarah() {
                       SK-nya menyusul sebagai tautan PDF di bawahnya. Orientasi
                       sertifikat berbeda-beda (potret & lanskap), jadi gambar
                       dipasang object-contain di dalam bingkai berukuran tetap. */}
-                  {item.sertifikat && (
-                    <figure className="lg:col-span-5 w-full max-w-sm lg:max-w-none border border-gray-200 bg-white rounded-xs shadow-2xs overflow-hidden">
-                      <a
-                        href={item.sertifikat.gambar}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        title={t(halaman.labelPerbesar)}
-                        className="block bg-gray-50 aspect-3/2 p-3 group"
-                      >
-                        <Img
-                          src={item.sertifikat.gambar}
-                          alt={t(item.sertifikat.alt)}
-                          className="w-full h-full object-contain group-hover:scale-[1.03] transition-transform duration-300"
-                        />
-                      </a>
-
-                      <figcaption className="border-t border-gray-100 divide-y divide-gray-100">
-                        <p className="px-4 py-2 text-[11px] uppercase tracking-[0.14em] font-bold text-gray-400">
-                          {t(halaman.labelSertifikat)} {item.year}
-                        </p>
-                        <a
-                          href={item.sertifikat.dokumen.fileUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="flex items-center gap-2.5 px-4 py-3 text-xs sm:text-sm font-semibold text-heading hover:text-primary hover:bg-gray-50/70 transition-colors group/pdf"
-                        >
-                          <FaFilePdf className="text-base text-primary shrink-0" />
-                          <span className="flex-1">{t(item.sertifikat.dokumen.label)}</span>
-                          <FiExternalLink className="text-sm text-gray-400 group-hover/pdf:text-primary transition-colors" />
-                        </a>
-                      </figcaption>
-                    </figure>
-                  )}
+                  
                 </div>
               </li>
             ))}

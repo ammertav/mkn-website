@@ -12,12 +12,12 @@ const viewportSettings = {
   amount: 0.2,
 };
 
-export default function AcademicFocus() {
+export default function Announcement() {
   const featured = beritaList[0];
   const sideArticles = beritaList.slice(1, 4);
 
   return (
-    <section className="w-full bg-hero-heading font-body py-16 sm:py-20 border-b border-gray-200 overflow-hidden">
+    <section className="w-full bg-hero-headingy font-body py-16 sm:py-20 border-b border-gray-200 overflow-hidden">
       <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* Section Header */}
@@ -38,9 +38,12 @@ export default function AcademicFocus() {
           className="flex flex-col sm:flex-row sm:items-end justify-between pb-6 border-b border-gray-200 gap-4"
         >
           <div>
+            {/* <span className="text-xs font-semibold tracking-wider text-primary uppercase block mb-1.5">
+              BERITA & WAWASAN
+            </span> */}
 
             <h2 className="text-3xl sm:text-4xl md:text-[38px] font-heading font-normal text-heading tracking-normal">
-              Berita Terbaru
+              Pengumuman Terbaru
             </h2>
           </div>
 
@@ -48,7 +51,7 @@ export default function AcademicFocus() {
             to="/berita"
             className="inline-flex items-center space-x-1 text-xs font-bold tracking-wider text-primary hover:text-[#680000] uppercase transition-colors group pb-1"
           >
-            <span>LIHAT SEMUA BERITA</span>
+            <span>LIHAT SEMUA PENGUMUMAN</span>
 
             <FiArrowRight className="text-sm transition-transform duration-200 group-hover:translate-x-1" />
           </Link>
@@ -74,46 +77,6 @@ export default function AcademicFocus() {
             viewport={viewportSettings}
             className="lg:col-span-8 flex flex-col group"
           >
-            {/* Image */}
-            <Link
-              to={`/berita/${generateSlug(featured.title, featured.slug)}`}
-              className="relative w-full aspect-[16/9] sm:aspect-[16/8.5] bg-gray-100 overflow-hidden block"
-            >
-              <motion.div
-                initial={{
-                  filter: "grayscale(100%)",
-                }}
-                whileInView={{
-                  filter: "grayscale(0%)",
-                }}
-                transition={{
-                  duration: 1.5,
-                  ease: "easeOut",
-                  delay: 0.2,
-                }}
-                viewport={viewportSettings}
-                className="w-full h-full"
-              >
-                <Img
-                  src={getBeritaImage(featured.gambar)}
-                  alt={featured.title}
-                  className="
-                    w-full
-                    h-full
-                    object-cover
-                    object-center
-                    transition-transform
-                    duration-500
-                    group-hover:scale-105
-                    rounded-md
-                  "
-                />
-              </motion.div>
-
-              <span className="absolute top-4 left-4 bg-black/85 text-white text-xs font-semibold px-3 py-1.5 uppercase tracking-wider">
-                BERITA UTAMA
-              </span>
-            </Link>
 
             {/* Article Content */}
             <motion.div
@@ -154,7 +117,7 @@ export default function AcademicFocus() {
           </motion.article>
 
           {/* Side Articles */}
-          <div className="lg:col-span-4 space-y-7 lg:border-l lg:border-gray-200 lg:pl-10">
+          {/* <div className="lg:col-span-4 space-y-7 lg:border-l lg:border-gray-200 lg:pl-10">
             {sideArticles.map((article, index) => (
               <motion.article
                 key={article.id}
@@ -195,7 +158,7 @@ export default function AcademicFocus() {
                 </span>
               </motion.article>
             ))}
-          </div>
+          </div> */}
 
         </div>
       </div>

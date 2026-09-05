@@ -30,8 +30,8 @@ export default function VisiMisi() {
         </h1>
         <div className="w-full h-[2px] bg-primary mt-4" />
 
-        <blockquote className="mt-10 sm:mt-14 lg:mt-16 max-w-6xl">
-          <p className="font-heading font-normal text-heading text-[26px] sm:text-4xl lg:text-[46px] leading-[1.35] tracking-normal text-balance">
+        <blockquote className="mt-10 sm:mt-14 lg:mt-16 w-full">
+          <p className="font-heading font-normal text-heading text-[26px] sm:text-4xl lg:text-[46px] leading-[1.35] tracking-normal text-justify text-balance">
             <RichText>{t(visi)}</RichText>
           </p>
         </blockquote>

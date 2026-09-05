@@ -2,6 +2,7 @@ import PageTabs from "../ui/PageTabs";
 
 export const fasilitasTabs = [
   { label: { id: "RUANG KELAS", en: "CLASSROOMS" }, path: "/fasilitas/ruang-kelas" },
+  { label: { id: "RUANG SEMINAR", en: "SEMINAR ROOMS" }, path: "/fasilitas/ruang-seminar" },
   {
     label: { id: "LABORATORIUM AKTA", en: "DEED LABORATORY" },
     path: "/fasilitas/laboratorium-akta",
@@ -17,8 +18,12 @@ export const fasilitasTabs = [
     label: { id: "PUSAT RISET MAHASISWA", en: "STUDENT RESEARCH CENTER" },
     path: "/fasilitas/student-research-center",
   },
+  {
+    label: { id: "PODCAST KENOTARIATAN", en: "NOTARY PODCAST" },
+    path: "/fasilitas/podcast-kenotarian",
+  },
   { label: { id: "PERPUSTAKAAN", en: "LIBRARY" }, path: "/fasilitas/perpustakaan" },
-  { label: { id: "PERADILAN SEMU", en: "MOOT COURT" }, path: "/fasilitas/moot-court" },
+
 ];
 
 export default function FasilitasTabs({

@@ -1,6 +1,7 @@
 /**
  * Data Event & Kalender Agenda Magister Kenotariatan UNISSULA
  */
+import yudisium from "../assets/images/agenda/yudisium.jpeg";
 
 export const eventCategories = [
   "Semua Kategori",
@@ -14,22 +15,22 @@ export const eventCategories = [
 export const eventData = [
   {
     id: 1,
-    slug: "seminar-nasional-pendaftaran-tanah-elektronik-2026",
-    title: "Seminar Nasional: Implikasi Yuridis Pendaftaran Tanah Elektronik bagi Notaris & PPAT",
-    date: "2026-09-01",
-    time: "09:00 - 12:00 WIB",
+    slug: "yudisium-ke-98",
+    title: "Yudisium ke-98",
+    date: "2026-09-18",
+    time: "02:00 - Selesai",
     category: "Seminar & Konferensi",
-    venue: "Auditorium Utama Lantai 3 Gedung Pascasarjana / Hybrid Zoom",
+    venue: "Gedung MAC (Majapahit Convention) atau MAC Ballroom Jl. Majapahit No.168, Gayamsari, Kota Semarang",
     speaker: "Prof. Dr. H. Ahmad Fauzan, S.H., M.Hum. & Dirjen Penetapan Hak dan Pendaftaran Tanah ATR/BPN",
     organizer: "Program Studi Magister Kenotariatan UNISSULA",
     description:
-      "Membahas secara mendalam pergeseran kewenangan PPAT dalam era sertifikat tanah elektronik serta mitigasi risiko hukum atas potensi sengketa kepemilikan dan pembuktian di pengadilan.",
+      "Yudisium ke-98 akan menghadirkan para ahli dan regulator untuk membahas kesiapan profesi notaris/PPAT dalam mengimplementasikan peralihan hak secara digital, kepastian hukum warkah elektronik, dan perlindungan bagi pembeli beriktikad baik.",
     fullDescription:
       "Seminar nasional ini menghadirkan regulator dari Kementerian ATR/BPN serta pakar hukum pertanahan untuk mengkaji kesiapan profesi notaris/PPAT dalam mengimplementasikan peralihan hak secara digital, kepastian hukum warkah elektronik, dan perlindungan bagi pembeli beriktikad baik.",
     image:
-      "https://images.unsplash.com/photo-1544531585-9847b68c8c86?auto=format&fit=crop&w=1200&q=80",
+      yudisium,
     registrationUrl: "https://unissula.ac.id/pendaftaran-seminar",
-    cp: "Sekretariat MKn: 0812-3456-7890 (Ibu Fitri)",
+    cp: "+62 823-1222-8181 (Ikrom, S.H., M.H.)",
     isFeatured: true,
   },
   {

@@ -41,8 +41,8 @@ export const tenagaKependidikan = [
   },
   {
     jabatan: "Direktur Perpustakaan",
-    name: "Anugrah Surya Kusuma, S.H., M.H.",
-    photo: imgDirPerpus,
+    name: "R. Hengky Aditya Wibisono S.E.",
+    photo: null,
     tugas:
       "Pengelolaan koleksi pustaka hukum kenotariatan, layanan referensi, dan dukungan literatur penelitian tesis.",
   },

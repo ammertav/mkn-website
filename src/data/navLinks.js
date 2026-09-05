@@ -110,6 +110,14 @@ export const navLinks = [
         title: { id: "Kalender Akademik", en: "Academic Calendar" },
         href: "/akademik/kalender",
       },
+      {
+        title: { id: "Sistem Informasi", en: "Academic Information System" },
+        href: "/akademik/sistem-informasi",
+      },
+      {
+        title: { id: "E-Jurnal", en: "Journals" },
+        href: "/akademik/jurnal",
+      },
     ],
   },
   {

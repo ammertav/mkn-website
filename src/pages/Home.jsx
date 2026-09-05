@@ -11,6 +11,7 @@ import Testimoni from "../components/Home/Testimoni";
 import FAQ from "../components/Home/Faq";
 import Ready from "../components/Home/Ready";
 import Highlight from "../components/Home/Highlight";
+import Announcement from "../components/Home/Announcement";
 
 export default function Home() {
   return (
@@ -41,23 +42,26 @@ export default function Home() {
         {/* Hero Section */}
         <Hero />
 
-        {/* Academic Focus / Berita & Wawasan Section */}
-        <AcademicFocus />
-
+        {/* Expert Spotlight Section */}
+        <ExpertSpotlight />
 
         <Highlight />
 
-        {/* Research & Community Service Section */}
-        <ResearchCommunity />
+        <Events />
+        {/* Academic Focus / Berita & Wawasan Section */}
+        <AcademicFocus />
+        <Announcement />
 
-        {/* Expert Spotlight Section */}
-        <ExpertSpotlight />
+
+
+        {/* Research & Community Service Section */}
+        {/* <ResearchCommunity /> */}
+
 
         {/* Campus & Culture Section */}
         <CampusCulture />
 
         {/* Events Section */}
-        <Events />
 
         {/* Testimoni Section */}
         <Testimoni />

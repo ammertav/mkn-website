@@ -9,6 +9,19 @@ import { navLinks } from "../../data/navLinks";
 const informasiMenus =
   navLinks.find((n) => n.href === "/informasi" || n.href === "/penerimaan")?.children ?? [];
 
+const akademikContact = {
+  title: "KONTAK",
+  groups: [
+    {
+      label: "PMB",
+      items: [
+        { name: "Hotline", phone: "+62 822-2362-2236" },
+        { name: " ", phone: "+62 822-2000-9889" },
+      ],
+    },
+  ],
+};
+
 export default function PenerimaanLayout() {
   return (
     <>
@@ -33,7 +46,7 @@ export default function PenerimaanLayout() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
             {/* Left Sidebar Navigation */}
             <aside className="lg:col-span-4 xl:col-span-3 lg:self-stretch">
-              <SidebarNav />
+              <SidebarNav contact={akademikContact} />
             </aside>
 
             {/* Right Main Dynamic Route Content */}

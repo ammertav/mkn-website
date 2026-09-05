@@ -114,9 +114,9 @@ const pejabatPelaksana = [
     members: [
       {
         jabatan: "Gugus Penjaminan Mutu",
-        name: "Anugrah Surya Kusuma, S.H., M.H.",
-        photo: imgDirPerpus,
-      },
+        name: "Prof. Dr. Soegianto, S.H., M.Kn.",
+        photo: imgSoegianto,
+      }, 
       {
         jabatan: "Gugus Penjaminan Mutu",
         name: "Dr. Denny Suwondo, S.H., M.H.",
@@ -124,9 +124,10 @@ const pejabatPelaksana = [
       },
       {
         jabatan: "Gugus Penjaminan Mutu",
-        name: "Prof. Dr. Soegianto, S.H., M.Kn.",
-        photo: imgSoegianto,
+        name: "Anugrah Surya Kusuma, S.H., M.H.",
+        photo: imgDirPerpus,
       },
+      
     ],
   },
   {

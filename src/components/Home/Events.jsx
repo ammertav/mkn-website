@@ -1,9 +1,9 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { FiArrowRight } from "react-icons/fi";
-
 import Img from "../ui/Img";
 import { eventData } from "../../data/eventData";
+
 
 const viewportSettings = {
   once: true,
@@ -24,9 +24,10 @@ export default function Events() {
     return `${day} ${month}`;
   };
 
+
   return (
     <section className="w-full bg-white font-body py-16 sm:py-24 border-b border-gray-200 overflow-hidden">
-      <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
 
         {/* Section Header */}
         <motion.div
@@ -108,9 +109,6 @@ export default function Events() {
                     />
                   </motion.div>
 
-                  <span className="absolute top-3 left-3 bg-white/90 backdrop-blur-md text-xs font-semibold px-3 py-1 rounded-full text-heading shadow-sm">
-                    {item.category}
-                  </span>
                 </div>
 
                 {/* Card Content */}
@@ -152,10 +150,10 @@ export default function Events() {
         </div>
 
         {/* Tautan ke halaman agenda lengkap */}
-        <div className="mt-12 sm:mt-16 flex justify-center">
+        <div className="mt-12 sm:mt-16 flex justify-start">
           <Link
             to="/event"
-            className="inline-flex items-center gap-2 text-xs font-bold tracking-wider text-primary hover:text-[#680000] uppercase transition-colors group/all"
+            className="inline-flex  gap-2 text-xs font-bold tracking-wider text-primary hover:text-[#680000] uppercase transition-colors group/all"
           >
             <span>LIHAT SEMUA AGENDA</span>
             <FiArrowRight className="text-sm transition-transform duration-200 group-hover/all:translate-x-1" />

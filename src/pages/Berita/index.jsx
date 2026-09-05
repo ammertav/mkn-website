@@ -50,7 +50,7 @@ const halaman = {
     },
     description: {
       id:
-        "Kabar terbaru, hasil penelitian, agenda kegiatan, dan pengumuman resmi Program " +
+        "Kabar terbaru, hasil penelitian, agenda kegiatan, pengabdian masyarakat,  dan pengumuman resmi Program " +
         "Studi Magister Kenotariatan (MKn) UNISSULA.",
       en:
         "Latest news, research findings, activities, and official announcements of the " +
@@ -62,7 +62,7 @@ const halaman = {
   judul: { id: "Kabar Terbaru", en: "Latest Updates" },
   intro: {
     id:
-      "Kegiatan akademik, hasil penelitian, agenda, dan pengumuman resmi Program Studi " +
+      "Kegiatan akademik, hasil penelitian, pengabdian masyarakat, agenda, dan pengumuman resmi Program Studi " +
       "Magister Kenotariatan.",
     en:
       "Academic activities, research findings, events, and official announcements of the " +

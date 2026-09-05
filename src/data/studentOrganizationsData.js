@@ -1,15 +1,15 @@
-import imgIMANU1 from "../assets/images/imanu-1.jpeg";
-import imgIMANU2 from "../assets/images/imanu-2.jpeg";
-import imgIMANU3 from "../assets/images/imanu-3.jpeg";
-import imgIMANU4 from "../assets/images/imanu-4.jpeg";
+import imgIMANU1 from "../assets/images/imanu-4.jpeg";
+import imgIMANU3 from "../assets/images/pohon.jpg";
+import imgIMANU4 from "../assets/images/imanu-kegiatan.jpeg";
+import imgIMANU5 from "../assets/images/lomba-imanu.jpg";
 
 
 export const studentOrganizationsData = [
   {
     id: 1,
     slug: "imanu",
-    title: "Ikatan Mahasiswa Kenotariatan Universitas Islam Sultan Agung",
-    shortName: "IMANU UNISSULA",
+    title: "Ikatan Mahasiswa Notariat UNISSULA",
+    shortName: "IMANU",
     category: "ORGANISASI MAHASISWA",
     periode: "2026/2027",
     description:
@@ -21,7 +21,7 @@ export const studentOrganizationsData = [
 
     meta: [
       { label: "Nama singkat", value: "IMANU UNISSULA" },
-      { label: "Didirikan", value: "18 Agustus 2026, Kota Semarang" },
+      { label: "Didirikan", value: "18 November 2018, Kota Semarang" },
       { label: "Kedudukan", value: "Program Studi Magister Kenotariatan" },
       { label: "Periode kepengurusan", value: "2026 / 2027" },
     ],
@@ -48,7 +48,7 @@ export const studentOrganizationsData = [
         "Mahasiswa dituntut untuk mengemban amanah keilmuan, kepemimpinan, serta etika profesi " +
         "luhur yang senantiasa berlandaskan pada nilai-nilai ajaran Islam. Berangkat dari " +
         "pemikiran filosofis dan kebutuhan taktis tersebut, IMANU UNISSULA secara resmi " +
-        "didirikan di Kota Semarang pada tanggal 18 Agustus 2026.",
+        "didirikan di Kota Semarang pada tanggal 18 November 2018.",
       "Pembentukan organisasi ini tidak terlepas dari urgensi untuk menyediakan sebuah wadah " +
         "formal yang mampu mengakomodasi aspirasi mahasiswa sekaligus mempererat tali " +
         "silaturahmi. Lebih jauh, para pendiri IMANU UNISSULA memandang pentingnya sebuah " +
@@ -121,7 +121,6 @@ export const studentOrganizationsData = [
         koordinator: { name: "Agus Jumianto", nim: "" },
         anggota: [
           { name: "Ari Puguh Sudi Hartono", nim: "21302500186" },
-          { name: "Fawwaz Nabil", nim: "" },
           { name: "Priyambodo Adi Saputro", nim: "21302500273" },
           { name: "Nur Hidayat Aji Utomo", nim: "21302500266" },
         ],
@@ -136,7 +135,6 @@ export const studentOrganizationsData = [
           { name: "Arsyad Fakhri Zainuddin", nim: "21302500022" },
           { name: "Iis Fatimah", nim: "21302500054" },
           { name: "Nur Inzani", nim: "21302500096" },
-          { name: "Khairunnisaa", nim: "" },
           { name: "Canda Dewi Oksa Yuristiyanti", nim: "21302500324" },
         ],
       },
@@ -144,7 +142,7 @@ export const studentOrganizationsData = [
 
     gallery: [
       { id: 1, title: " ", image: imgIMANU1 },
-      { id: 2, title: " ", image: imgIMANU2 },
+      { id: 2, title: " ", image: imgIMANU5 },
       { id: 3, title: " ", image: imgIMANU3 },
     ],
 

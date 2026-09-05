@@ -54,7 +54,7 @@ export default function GraduationRate() {
         <section className="space-y-4">
           <div className="pb-2 border-b-2 border-heading">
             <h2 className="text-2xl font-heading font-normal text-heading tracking-tight">
-              Rekapitulasi per Tahun Akademik
+              Rekapitulasi per Periode Akademik
             </h2>
           </div>
 
@@ -62,7 +62,7 @@ export default function GraduationRate() {
             <table className="w-full text-left border-collapse text-xs sm:text-sm">
               <thead>
                 <tr className="border-b-2 border-heading text-xs font-bold tracking-wider text-heading uppercase">
-                  <th className="py-3.5 px-5 font-bold">TAHUN AKADEMIK</th>
+                  <th className="py-3.5 px-5 font-bold">PERIODE AKADEMIK</th>
                   <th className="py-3.5 px-5 font-bold">MAHASISWA</th>
                   <th className="py-3.5 px-5 font-bold">LULUS</th>
                   <th className="py-3.5 px-5 font-bold">TEPAT WAKTU</th>

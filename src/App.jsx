@@ -30,6 +30,8 @@ const TesisPraProposal = lazy(() => import("./pages/Akademik/TesisPraProposal"))
 const TesisProposal = lazy(() => import("./pages/Akademik/TesisProposal"));
 const TesisUjian = lazy(() => import("./pages/Akademik/TesisUjian"));
 const Kalender = lazy(() => import("./pages/Akademik/Kalender"));
+const SistemInformasi = lazy(() => import("./pages/Akademik/SistemInformasi"));
+const Jurnal = lazy(() => import("./pages/Akademik/Jurnal"));
 
 // Download page
 const Download = lazy(() => import("./pages/Download/index"));
@@ -144,6 +146,8 @@ export default function App() {
             <Route path="skripsi" element={<Navigate to="../tesis" replace />} />
           </Route>
           <Route path="kalender" element={<Kalender />} />
+          <Route path="sistem-informasi" element={<SistemInformasi />} />
+          <Route path="jurnal" element={<Jurnal />} />
         </Route>
 
         {/* Informasi — nested routes */}

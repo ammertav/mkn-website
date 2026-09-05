@@ -20,13 +20,7 @@ const akademikContact = {
         { name: "Ikrom, S.H., M.H.", phone: "+62 823-1222-8181" },
       ],
     },
-    {
-      label: "PMB",
-      items: [
-        { name: "Admin 1", phone: "+62 822-2362-2236" },
-        { name: "Admin 2", phone: "+62 822-2000-9889" },
-      ],
-    },
+
   ],
 };
 

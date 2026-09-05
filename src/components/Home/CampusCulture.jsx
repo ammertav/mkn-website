@@ -2,6 +2,10 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { FiChevronRight } from "react-icons/fi";
 import Img from "../ui/Img";
+import Ormawa from "../../assets/images/beranda/ormawa.jpg"
+import Lab from "../../assets/images/fasilitas/lab-akta/lab-akta-1.png"
+import Stude from "../../assets/images/fasilitas/student/student.jpeg"
+import Perpus from "../../assets/images/fasilitas/perpus/perpus1.png"
 
 const viewportSettings = {
   once: true,
@@ -15,7 +19,7 @@ const campusCultureData = [
     description:
       "Wadah kepemimpinan mahasiswa melalui ikatan mahasiswa dan kegiatan keorganisasian.",
     image:
-      "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=800&q=80",
+      Ormawa,
     linkText: "Kenali Pengurus",
     linkHref: "/mahasiswa/organisasi",
   },
@@ -23,9 +27,9 @@ const campusCultureData = [
     id: 2,
     title: "Laboratorium",
     description:
-      "Ruang peradilan semu dan laboratorium simulasi untuk praktik penyusunan akta.",
+      "Laboratorium Akta merupakan pusat simulasi taktis bagi mahasiswa Magister Kenotariatan UNISSULA untuk mematangkan keahlian dalam merancang, membuat, hingga membacakan draf akta autentik.",
     image:
-      "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=800&q=80",
+      Lab,
     linkText: "Jadwal Laboratorium",
     linkHref: "/fasilitas/laboratorium",
   },
@@ -35,7 +39,7 @@ const campusCultureData = [
     description:
       "Ruang kerja bersama untuk kajian hukum tingkat lanjut.",
     image:
-      "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80",
+      Stude,
     linkText: "Lihat Kegiatan",
     linkHref: "/fasilitas/student-research-center",
   },
@@ -45,7 +49,7 @@ const campusCultureData = [
     description:
       "Koleksi cetak yang luas serta akses ke basis data hukum internasional.",
     image:
-      "https://images.unsplash.com/photo-1568667256549-094345857637?auto=format&fit=crop&w=800&q=80",
+      Perpus,
     linkText: "Jelajahi Katalog",
     linkHref: "/fasilitas/perpustakaan",
   },

@@ -20,7 +20,7 @@ const testimonialData = [
     description:
       "Pendidikan yang menuntut dan pengalaman menangani kasus hukum nyata membekali saya dengan sangat baik untuk berkarier di bidang hukum korporasi.",
     image: Fatiroh,
-    role: "Alumni 2018",
+    role: "Alumni 2013",
     linkHref: "/alumni/andi-wijaya",
   },
   {
@@ -54,7 +54,7 @@ const testimonialData = [
 
 export default function Testimoni() {
   return (
-    <section className="w-full bg-hero-heading font-body py-16 sm:py-24 border-b border-gray-200 overflow-hidden">
+    <section className="w-full bg-white font-body py-16 sm:py-24 border-b border-gray-200 overflow-hidden">
       <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* Section Header */}
@@ -163,14 +163,13 @@ export default function Testimoni() {
 
                 {/* Link */}
                 <div className="pt-4 mt-auto">
-                  <Link
-                    to={item.linkHref}
+                  <div
                     className="inline-flex items-center space-x-1 text-xs font-semibold tracking-wider text-primary hover:text-[#680000] uppercase transition-colors group/link"
                   >
                     <span>{item.role}</span>
 
                     <FiChevronRight className="text-sm transition-transform duration-150 group-hover/link:translate-x-0.5" />
-                  </Link>
+                  </div>
                 </div>
               </motion.div>
             </motion.article>

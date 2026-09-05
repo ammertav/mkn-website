@@ -3,6 +3,7 @@ import { FiPause, FiPlay } from "react-icons/fi";
 
 import logoUnissula from "../../assets/images/logo-unissula-crest.png";
 import Img from "../ui/Img";
+import Bg from "../../assets/images/beranda/hero.jpg"
 
 export default function Hero() {
   const videoRef = useRef(null);
@@ -79,7 +80,7 @@ export default function Hero() {
         {/* =====================================================
             BACKGROUND VIDEO
         ====================================================== */}
-        <video
+        {/* <video
           ref={videoRef}
           src="/videos/profile-mkn-terbaru-4.mp4"
           autoPlay
@@ -91,7 +92,9 @@ export default function Hero() {
           onPause={() => setIsPlaying(false)}
           aria-hidden="true"
           className="absolute inset-0 w-full h-full object-cover object-bottom filter brightness-[0.75] contrast-105"
-        />
+        /> */}
+
+        <img className="absolute inset-0 w-full h-full object-cover" src={Bg} alt="" />
 
         {/* =====================================================
             DARK OVERLAY
@@ -123,29 +126,12 @@ export default function Hero() {
           </h1>
 
           {/* Subtitle */}
-          <p className="mt-6 text-sm sm:text-base md:text-lg text-hero-description font-normal max-w-2xl leading-relaxed tracking-wide drop-shadow-sm">
-            Fostering legal excellence through rigorous scholarship, ethical
-            practice, and an unwavering commitment to justice.
+          <p className="mt-6 text-sm sm:text-base md:text-3xl font-sans text-white max-w-3xl leading-relaxed tracking-wide drop-shadow-sm">
+            Unggul, Berintegritas dan Berdaya Saing Global
+
           </p>
         </div>
 
-        {/* =====================================================
-            VIDEO PLAY / PAUSE BUTTON
-        ====================================================== */}
-        <button
-          type="button"
-          onClick={toggleVideo}
-          aria-label={
-            isPlaying ? "Jeda video latar" : "Putar video latar"
-          }
-          className="absolute bottom-5 right-5 sm:bottom-6 sm:right-6 z-20 w-11 h-11 rounded-full border border-white/70 bg-black/30 backdrop-blur-sm text-white flex items-center justify-center hover:bg-black/55 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white transition-colors duration-200 cursor-pointer"
-        >
-          {isPlaying ? (
-            <FiPause className="w-5 h-5" />
-          ) : (
-            <FiPlay className="w-5 h-5 ml-0.5" />
-          )}
-        </button>
       </div>
 
       {/* =========================================================

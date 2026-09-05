@@ -2,7 +2,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
 import { FiArrowRight, FiPlus } from "react-icons/fi";
-import faqImage from "../../assets/images/faq/faq.jpg";
+import faqImage from "../../assets/images/beranda/faq-1.jpeg";
 
 const viewportSettings = {
   once: true,
@@ -55,7 +55,7 @@ export default function FAQ() {
   };
 
   return (
-    <section className="w-full bg-white font-body py-16 sm:py-20 lg:py-24 border-b border-gray-200 overflow-hidden">
+    <section className="w-full bg-hero-heading font-body py-16 sm:py-20 lg:py-24 border-b border-gray-200 overflow-hidden">
       <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* ================= HEADER ================= */}
@@ -91,7 +91,7 @@ export default function FAQ() {
         <div className="
           grid
           grid-cols-1
-          lg:grid-cols-12
+          md:grid-cols-12
           gap-10
           lg:gap-16
           pt-10
@@ -105,7 +105,7 @@ export default function FAQ() {
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.9, ease: "easeOut" }}
             viewport={viewportSettings}
-            className="lg:col-span-5"
+            className="md:col-span-7 my-auto"
           >
             <div className="
               relative
@@ -114,7 +114,8 @@ export default function FAQ() {
               h-[420px]
               sm:h-[500px]
               lg:h-[650px]
-              group
+              my-auto
+      
             ">
               <motion.img
                 src={faqImage}
@@ -174,7 +175,7 @@ export default function FAQ() {
           </motion.div>
 
           {/* ================= QUESTIONS ================= */}
-          <div className="lg:col-span-7 lg:pl-2">
+          <div className="md:col-span-5 lg:pl-2">
 
             <div className="divide-y divide-gray-200 border-t border-gray-200">
 
