@@ -1,81 +1,17 @@
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
+import { FiArrowRight } from "react-icons/fi";
+
+import Img from "../ui/Img";
+import { eventData } from "../../data/eventData";
 
 const viewportSettings = {
   once: true,
   amount: 0.2,
 };
 
-const eventsData = [
-  {
-    id: 1,
-    slug: "seminar-nasional-pendaftaran-tanah-elektronik-2026",
-    title:
-      "Seminar Nasional: Implikasi Yuridis Pendaftaran Tanah Elektronik bagi Notaris & PPAT",
-    date: "2026-09-01",
-    time: "09:00 - 12:00 WIB",
-    category: "Seminar & Konferensi",
-    venue:
-      "Auditorium Utama Lantai 3 Gedung Pascasarjana / Hybrid Zoom",
-    speaker:
-      "Prof. Dr. H. Ahmad Fauzan, S.H., M.Hum. & Dirjen Penetapan Hak dan Pendaftaran Tanah ATR/BPN",
-    organizer: "Program Studi Magister Kenotariatan UNISSULA",
-    description:
-      "Membahas secara mendalam pergeseran kewenangan PPAT dalam era sertifikat tanah elektronik serta mitigasi risiko hukum atas potensi sengketa kepemilikan dan pembuktian di pengadilan.",
-    fullDescription:
-      "Seminar nasional ini menghadirkan regulator dari Kementerian ATR/BPN serta pakar hukum pertanahan untuk mengkaji kesiapan profesi notaris/PPAT dalam mengimplementasikan peralihan hak secara digital, kepastian hukum warkah elektronik, dan perlindungan bagi pembeli beriktikad baik.",
-    image:
-      "https://images.unsplash.com/photo-1544531585-9847b68c8c86?auto=format&fit=crop&w=1200&q=80",
-    registrationUrl: "https://unissula.ac.id/pendaftaran-seminar",
-    cp: "Sekretariat MKn: 0812-3456-7890 (Ibu Fitri)",
-    isFeatured: true,
-  },
-  {
-    id: 2,
-    slug: "stadium-generale-etika-profesi-notaris-modern",
-    title:
-      "Stadium Generale: Integritas & Tantangan Etika Profesi Notaris di Era Kecerdasan Buatan",
-    date: "2026-09-01",
-    time: "14:00 - 16:30 WIB",
-    category: "Kuliah Pakar",
-    venue:
-      "Ruang Seminar MKn 3.01 / Live YouTube MKn UNISSULA",
-    speaker:
-      "Dr. Toni Triyanto, S.H., M.H. & Pengurus Pusat Ikatan Notaris Indonesia (PP INI)",
-    organizer: "HMP MKn UNISSULA & Prodi MKn",
-    description:
-      "Kuliah umum perdana semester gasal yang mengupas tuntas batasan etik, kerahasiaan protokol notaris, dan penerapan teknologi AI tanpa melanggar Undang-Undang Jabatan Notaris (UUJN).",
-    fullDescription:
-      "Perkembangan teknologi generatif menuntut calon notaris memahami batasan antara otomasi administrasi dan keharusan kehadiran fisik para pihak serta pembacaan akta secara langsung di hadapan notaris.",
-    image:
-      "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=1200&q=80",
-    registrationUrl: "https://unissula.ac.id/stadium-generale",
-    cp: "HMP MKn: 0813-9876-5432 (Sdr. Rizky)",
-    isFeatured: true,
-  },
-  {
-    id: 3,
-    slug: "workshop-bedah-kasus-akta-perbankan-syariah",
-    title:
-      "Workshop & Praktik: Teknik Penyusunan Akta Pembiayaan Perbankan Syariah & Hak Tanggungan",
-    date: "2026-09-02",
-    time: "08:30 - 15:00 WIB",
-    category: "Workshop & Praktik",
-    venue:
-      "Laboratorium Kenotariatan & Peradilan Semu MKn UNISSULA",
-    speaker:
-      "Praktisi Notaris Mitra Perbankan Syariah & Dosen Pengampu Hukum Perbankan",
-    organizer: "Laboratorium Kenotariatan UNISSULA",
-    description:
-      "Sesi simulasi intensif penyusunan klausula perjanjian murabahah, musyarakah mutanaqisah, dan proses pemasangan APHT elektronik terintegrasi.",
-    fullDescription:
-      "Peserta dibimbing langsung oleh notaris senior perbankan syariah dalam menelaah draf minuta, memeriksa syarat formal dan materiil, serta mencegah celah cacat yuridis dalam akta jaminan syariah.",
-    image:
-      "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1200&q=80",
-    registrationUrl: "https://unissula.ac.id/workshop-akta",
-    cp: "Lab Kenotariatan: 0857-1234-5678",
-    isFeatured: false,
-  },
-];
+/* Tiga agenda terdekat; selebihnya ada di halaman /event. */
+const eventsData = eventData.slice(0, 3);
 
 export default function Events() {
   const formatDateBadge = (dateString) => {
@@ -86,15 +22,6 @@ export default function Events() {
     });
 
     return `${day} ${month}`;
-  };
-
-  const formatDateFull = (dateString) => {
-    return new Date(dateString).toLocaleDateString("id-ID", {
-      weekday: "long",
-      day: "numeric",
-      month: "long",
-      year: "numeric",
-    });
   };
 
   return (
@@ -142,9 +69,12 @@ export default function Events() {
                 delay: index * 0.15,
               }}
               viewport={viewportSettings}
-              className="flex flex-col justify-between h-full bg-white rounded-md border border-gray-100 shadow-sm hover:shadow-md transition-shadow overflow-hidden group"
+              className="h-full"
             >
-              <div>
+              <Link
+                to={`/event/${item.slug}`}
+                className="flex flex-col justify-between h-full bg-white rounded-md border border-gray-100 shadow-sm hover:shadow-md transition-shadow overflow-hidden group"
+              >
                 {/* Visual Header / Gambar Acara */}
                 <div className="relative h-48 w-full overflow-hidden bg-gray-100">
                   <motion.div
@@ -164,7 +94,7 @@ export default function Events() {
                     viewport={viewportSettings}
                     className="w-full h-full"
                   >
-                    <img
+                    <Img
                       src={item.image}
                       alt={item.title}
                       className="
@@ -216,9 +146,20 @@ export default function Events() {
                     {item.description}
                   </p>
                 </motion.div>
-              </div>
+              </Link>
             </motion.article>
           ))}
+        </div>
+
+        {/* Tautan ke halaman agenda lengkap */}
+        <div className="mt-12 sm:mt-16 flex justify-center">
+          <Link
+            to="/event"
+            className="inline-flex items-center gap-2 text-xs font-bold tracking-wider text-primary hover:text-[#680000] uppercase transition-colors group/all"
+          >
+            <span>LIHAT SEMUA AGENDA</span>
+            <FiArrowRight className="text-sm transition-transform duration-200 group-hover/all:translate-x-1" />
+          </Link>
         </div>
 
       </div>

@@ -1,114 +1,95 @@
 import { Helmet } from "react-helmet-async";
-import { FiDownload } from "react-icons/fi";
-import { FaFilePdf } from "react-icons/fa6";
-
-const documents = [
-  {
-    id: 1,
-    title: "MKn Internal Audit Report 2023",
-    type: "PDF Document",
-    size: "1.2 MB",
-    updated: "Updated Jan 15, 2024",
-    url: "#",
-  },
-  {
-    id: 2,
-    title: "ACQUIN Self-Evaluation Report",
-    type: "PDF Document",
-    size: "4.5 MB",
-    updated: "Updated Dec 01, 2023",
-    url: "#",
-  },
-  {
-    id: 3,
-    title: "Standard Operating Procedures for Quality Monitoring",
-    type: "PDF Document",
-    size: "850 KB",
-    updated: "Updated Nov 10, 2023",
-    url: "#",
-  },
-  {
-    id: 4,
-    title: "Buku Kebijakan SPMI Magister Kenotariatan",
-    type: "PDF Document",
-    size: "2.1 MB",
-    updated: "Updated Feb 20, 2024",
-    url: "#",
-  },
-  {
-    id: 5,
-    title: "Pedoman Evaluasi & Pengendalian Standar Pendidikan",
-    type: "PDF Document",
-    size: "1.8 MB",
-    updated: "Updated Mar 12, 2024",
-    url: "#",
-  },
-];
+import { Link } from "react-router-dom";
+import { FiArrowRight } from "react-icons/fi";
+import { KepalaMutu, JudulMutu } from "../../components/QualityAssurance/MutuBagian";
+import {
+  documentArchitecture,
+  qualityCycles,
+} from "../../data/qualityAssurance/qaOverviewData";
 
 export default function QaDocuments() {
   return (
     <>
       <Helmet>
-        <title>Dokumen Penjaminan Mutu | MKn UNISSULA</title>
+        <title>Dokumen Mutu | MKn UNISSULA</title>
         <meta
           name="description"
-          content="A comprehensive repository of institutional quality assurance policies, evaluation standards, and formal audit documentation to maintain international academic rigor."
+          content="Dokumen mutu Fakultas Hukum UNISSULA — kebijakan mutu, manual mutu, 21 standar mutu, dan 19 formulir mutu yang disahkan Keputusan Dekan Nomor 1098/A.1/SA-H/X/2025."
         />
       </Helmet>
 
-      <div className="space-y-6">
-        {/* Header */}
-        <div className="space-y-3">
-          <h1 className="text-3xl sm:text-4xl lg:text-[42px] font-heading font-bold text-heading tracking-tight leading-tight">
-            Dokumen Penjaminan Mutu
-          </h1>
-          <p className="text-sm sm:text-base text-body leading-relaxed max-w-3xl">
-            A comprehensive repository of institutional quality assurance policies, evaluation standards,
-            and formal audit documentation to maintain international academic rigor.
-          </p>
-        </div>
+      <div className="space-y-12 sm:space-y-14 font-body text-body">
+        <KepalaMutu
+          judul="Dokumen Mutu"
+          pengantar="Dokumen mutu Fakultas Hukum UNISSULA Tahun 2025 terdiri atas 23 dokumen yang disahkan melalui Keputusan Dekan Nomor 1098/A.1/SA-H/X/2025 tanggal 2 Oktober 2025. Keempat jenis dokumen berikut saling terkait: kebijakan menjadi payung, manual menjelaskan cara kerjanya, standar menetapkan tolok ukurnya, dan formulir merekam buktinya."
+        />
 
-        {/* Divider */}
-        <hr className="border-t border-gray-800 my-4" />
-
-        {/* Document Items List */}
-        <div className="divide-y divide-gray-200 pt-2">
-          {documents.map((doc) => (
-            <div
-              key={doc.id}
-              className="py-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 group hover:bg-gray-50/50 px-2 sm:px-3 rounded transition-colors"
-            >
-              <div className="flex items-start space-x-4">
-                {/* PDF Red Badge Icon */}
-                <div className="p-2.5 bg-red-50 text-primary rounded shrink-0 mt-0.5 group-hover:bg-primary group-hover:text-white transition-colors">
-                  <FaFilePdf className="text-xl" />
-                </div>
-
-                <div className="space-y-1">
-                  <h3 className="font-heading font-semibold text-base sm:text-[17px] text-heading group-hover:text-primary transition-colors leading-snug">
-                    {doc.title}
-                  </h3>
-                  <p className="text-xs text-gray-500 flex items-center gap-1.5 flex-wrap">
-                    <span>{doc.type}</span>
-                    <span>•</span>
-                    <span>{doc.size}</span>
-                    <span>•</span>
-                    <span>{doc.updated}</span>
-                  </p>
-                </div>
-              </div>
-
-              {/* Download Action Button */}
-              <button
-                onClick={() => alert(`Mengunduh: ${doc.title}`)}
-                className="shrink-0 inline-flex items-center justify-center space-x-1.5 px-4 py-2 border border-gray-300 hover:border-primary text-heading hover:text-primary bg-white text-xs font-semibold rounded-xs shadow-2xs hover:shadow-xs transition-all cursor-pointer"
+        <section className="space-y-5">
+          <JudulMutu judul="Empat Jenis Dokumen" />
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+            {documentArchitecture.map((d) => (
+              <Link
+                key={d.code}
+                to={d.href}
+                className="group bg-white border border-gray-200 rounded-xs p-5 sm:p-6 space-y-2.5 hover:border-primary/50 transition-colors shadow-2xs"
               >
-                <span>Unduh</span>
-                <FiDownload className="text-sm" />
-              </button>
-            </div>
-          ))}
-        </div>
+                <div className="flex items-baseline justify-between gap-3">
+                  <span className="font-mono text-[11px] text-primary tracking-wide">
+                    {d.code}
+                  </span>
+                  <span className="text-[11px] font-semibold text-gray-400 tabular-nums">
+                    {d.count}
+                  </span>
+                </div>
+                <h3 className="font-heading font-semibold text-base text-heading leading-snug group-hover:text-primary transition-colors">
+                  {d.name}
+                </h3>
+                <p className="text-sm text-body leading-relaxed">{d.desc}</p>
+                <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-primary pt-1">
+                  Buka
+                  <FiArrowRight className="text-xs transition-transform group-hover:translate-x-0.5" />
+                </span>
+              </Link>
+            ))}
+          </div>
+        </section>
+
+        <section className="space-y-5">
+          <JudulMutu
+            judul="Penomoran Dokumen"
+            keterangan="Kode dokumen mengikuti pola JENIS/SA-FH/BIDANG-NOMOR. Khusus formulir, huruf setelah SA-FH menandai tahap siklus PPEPP tempat formulir itu dipakai."
+          />
+          <div className="border border-gray-200 bg-white rounded-xs overflow-x-auto">
+            <table className="w-full text-left border-collapse text-sm min-w-[520px]">
+              <thead>
+                <tr className="border-b border-gray-200 bg-gray-50/70">
+                  <th className="py-3 px-4 sm:px-5 text-[11px] font-bold tracking-wider uppercase text-heading w-24">
+                    Kode
+                  </th>
+                  <th className="py-3 px-4 sm:px-5 text-[11px] font-bold tracking-wider uppercase text-heading w-44">
+                    Tahap
+                  </th>
+                  <th className="py-3 px-4 sm:px-5 text-[11px] font-bold tracking-wider uppercase text-heading">
+                    Cakupan
+                  </th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-gray-100">
+                {qualityCycles.map((c) => (
+                  <tr key={c.code} className="hover:bg-gray-50/50 transition-colors">
+                    <td className="py-3.5 px-4 sm:px-5 font-mono text-xs text-primary align-top">
+                      {c.code}
+                    </td>
+                    <td className="py-3.5 px-4 sm:px-5 font-semibold text-heading align-top">
+                      {c.stage}
+                    </td>
+                    <td className="py-3.5 px-4 sm:px-5 text-body leading-relaxed">{c.desc}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </section>
       </div>
     </>
   );

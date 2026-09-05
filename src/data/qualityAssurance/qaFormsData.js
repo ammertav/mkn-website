@@ -1,77 +1,92 @@
-import samplePdf from "../../assets/pdf/2. Pedoman Akademik MKN.pdf";
+/**
+ * Formulir Mutu — Fakultas Hukum UNISSULA.
+ *
+ * SUMBER: dokumen "Formulir SPMI Fakultas Hukum UNISSULA", Kode
+ * FRM/SA-FH/MUTU-02, Revisi 03, 30 September 2025, 31 halaman.
+ *
+ * Formulir dikelompokkan mengikuti siklus PPEPP: Penetapan (kode A),
+ * Pelaksanaan (B), Evaluasi (C), Pengendalian (D), dan Peningkatan (E).
+ *
+ * CATATAN TRANSKRIPSI: pada daftar isi dokumen sumber, kolom "Tahap" tergeser
+ * satu baris sehingga FRM/SA-FH/D-01 tampak tanpa tahap dan FRM/SA-FH/E-01
+ * tampak bertahap "Pengendalian". Pengelompokan di bawah ini mengikuti awalan
+ * kode formulir, yang konsisten dengan penjelasan tahap pada pengantar dokumen.
+ */
 
-export const formList = [
-  {
-    code: "FM-01",
-    name: "Formulir monitoring perkuliahan",
-    user: "Koordinator mata kuliah",
-    period: "Tiap pertemuan",
-  },
-  {
-    code: "FM-02",
-    name: "Formulir berita acara ujian",
-    user: "Pengawas ujian",
-    period: "UTS dan UAS",
-  },
-  {
-    code: "FM-03",
-    name: "Formulir bimbingan tesis",
-    user: "Dosen pembimbing",
-    period: "Tiap bimbingan",
-  },
-  {
-    code: "FM-04",
-    name: "Formulir tindak lanjut temuan audit",
-    user: "Ketua Program Studi",
-    period: "Setelah audit",
-  },
-  {
-    code: "FM-05",
-    name: "Formulir survei kepuasan mahasiswa",
-    user: "Gugus Penjaminan Mutu",
-    period: "Akhir semester",
-  },
-  {
-    code: "FM-06",
-    name: "Formulir survei pengguna lulusan",
-    user: "Gugus Penjaminan Mutu",
-    period: "Tahunan",
-  },
-  {
-    code: "FM-07",
-    name: "Formulir peninjauan kurikulum",
-    user: "Tim kurikulum",
-    period: "Dua tahunan",
-  },
-];
+import { BERKAS } from "./berkas";
 
-export const downloadableForms = [
+export const formsMeta = {
+  code: "FRM/SA-FH/MUTU-02",
+  revisi: "Revisi 03",
+  tanggal: "30 September 2025",
+  halaman: "31 halaman",
+  total: 19,
+  fileUrl: BERKAS + "FRM-SA-FH-MUTU-02-Formulir-SPMI.pdf",
+};
+
+export const formsPengantar =
+  "Formulir SPMI adalah naskah tertulis yang dipakai saat standar SPMI dijalankan, berfungsi " +
+  "merekam hal, informasi, atau kegiatan tertentu. Setiap formulir dilengkapi kode, petunjuk " +
+  "pengisian, kolom isian, dan blok pengesahan sehingga dapat langsung dipakai unit kerja dan " +
+  "program studi.";
+
+export const formsPengguna =
+  "Formulir digunakan oleh Dekan, para Wakil Dekan, Ketua Program Studi, Unit Penjaminan Mutu, " +
+  "Gugus Penjaminan Mutu, Manajer Program Audit Mutu Internal, auditor internal, dosen, dan " +
+  "tenaga kependidikan sesuai kewenangan masing-masing.";
+
+export const formsArsip =
+  "Formulir yang telah diisi merupakan rekaman mutu yang wajib diarsipkan sekurang-kurangnya " +
+  "5 (lima) tahun sebagai bukti pelaksanaan SPMI dan bahan penilaian akreditasi.";
+
+export const formGroups = [
   {
-    id: 1,
-    title: "Paket Formulir Mutu Lengkap (FM-01 s.d. FM-07)",
-    meta: "ZIP • 1,4 MB • Diperbarui 22 Jul 2024",
-    fileUrl: samplePdf,
-    fileName: "Paket-Formulir-Mutu-MKn.zip",
+    code: "A",
+    stage: "Penetapan",
+    items: [
+      { code: "FRM/SA-FH/A-01", name: "Formulir Usulan Penetapan/Revisi Standar SPMI" },
+      { code: "FRM/SA-FH/A-02", name: "Formulir Berita Acara Rapat Penetapan Standar" },
+      { code: "FRM/SA-FH/A-03", name: "Formulir Daftar Hadir Kegiatan SPMI" },
+    ],
   },
   {
-    id: 2,
-    title: "Formulir Monitoring Perkuliahan (FM-01)",
-    meta: "DOCX • 0,1 MB • Diperbarui 22 Jul 2024",
-    fileUrl: samplePdf,
-    fileName: "FM-01-Monitoring-Perkuliahan.docx",
+    code: "B",
+    stage: "Pelaksanaan",
+    items: [
+      { code: "FRM/SA-FH/B-01", name: "Formulir Sosialisasi Standar SPMI" },
+      { code: "FRM/SA-FH/B-02", name: "Formulir Rencana Pemenuhan Standar (Program Kerja)" },
+      { code: "FRM/SA-FH/B-03", name: "Formulir Berita Acara Perkuliahan" },
+      { code: "FRM/SA-FH/B-04", name: "Formulir Rekaman Pelaksanaan Kegiatan" },
+    ],
   },
   {
-    id: 3,
-    title: "Formulir Tindak Lanjut Temuan Audit (FM-04)",
-    meta: "DOCX • 0,2 MB • Diperbarui 15 Jan 2024",
-    fileUrl: samplePdf,
-    fileName: "FM-04-Tindak-Lanjut-Audit.docx",
+    code: "C",
+    stage: "Evaluasi",
+    items: [
+      { code: "FRM/SA-FH/C-01", name: "Formulir Evaluasi Diri Program Studi/Unit Kerja" },
+      { code: "FRM/SA-FH/C-02", name: "Formulir Daftar Tilik (Checklist) Audit Mutu Internal" },
+      { code: "FRM/SA-FH/C-03", name: "Formulir Temuan Audit Mutu Internal" },
+      { code: "FRM/SA-FH/C-04", name: "Formulir Survei Kepuasan Pemangku Kepentingan" },
+      { code: "FRM/SA-FH/C-05", name: "Formulir Evaluasi Dosen oleh Mahasiswa (EDOM)" },
+    ],
   },
   {
-    id: 4,
-    title: "Formulir Survei Kepuasan Mahasiswa (FM-05)",
-    meta: "DOCX • 0,2 MB • Diperbarui 10 Jan 2024",
-    fileUrl: samplePdf,
-    fileName: "FM-05-Survei-Kepuasan-Mahasiswa.docx",
+    code: "D",
+    stage: "Pengendalian",
+    items: [
+      { code: "FRM/SA-FH/D-01", name: "Formulir Permintaan Tindakan Koreksi (PTK)" },
+      { code: "FRM/SA-FH/D-02", name: "Formulir Rencana Tindak Lanjut (RTL)" },
+      { code: "FRM/SA-FH/D-03", name: "Formulir Notulen Rapat Tinjauan Manajemen" },
+      { code: "FRM/SA-FH/D-04", name: "Formulir Verifikasi Tindak Lanjut dan Status Temuan" },
+    ],
+  },
+  {
+    code: "E",
+    stage: "Peningkatan",
+    items: [
+      { code: "FRM/SA-FH/E-01", name: "Formulir Usulan Peningkatan Standar (Kaizen)" },
+      { code: "FRM/SA-FH/E-02", name: "Formulir Benchmarking Standar" },
+      { code: "FRM/SA-FH/E-03", name: "Formulir Laporan Pelaksanaan SPMI Tahunan" },
+    ],
   },
 ];

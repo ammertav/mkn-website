@@ -1,202 +1,94 @@
 import { Helmet } from "react-helmet-async";
+import { FiDownload } from "react-icons/fi";
 import {
-  educationStandards,
-  researchStandards,
-  communityServiceStandards,
-  standardDocuments,
+  KepalaMutu,
+  JudulMutu,
+  DaftarNomor,
+} from "../../components/QualityAssurance/MutuBagian";
+import {
+  standarMeta,
+  standarStructure,
+  standarGroups,
 } from "../../data/qualityAssurance/qaStandarData";
 
 export default function QaStandar() {
   return (
     <>
       <Helmet>
-        <title>QA Standar | MKn UNISSULA</title>
+        <title>Standar Mutu | MKn UNISSULA</title>
         <meta
           name="description"
-          content="Standar Penjaminan Mutu (QA Standar) Program Studi Magister Kenotariatan (MKn) UNISSULA: 24 Standar Mutu Pendidikan, Penelitian, dan Pengabdian kepada Masyarakat."
+          content="Dua puluh satu standar mutu Fakultas Hukum UNISSULA — standar pendidikan, penelitian, pengabdian kepada masyarakat, dan non-akademik beserta kodenya."
         />
       </Helmet>
 
-      <div className="space-y-12 sm:space-y-16 font-body text-body">
-        {/* ========================================================================= */}
-        {/* HEADER SECTION */}
-        {/* ========================================================================= */}
-        <div>
-          <span className="text-xs font-bold tracking-[0.18em] uppercase text-primary block mb-2">
-            DOKUMEN MUTU
-          </span>
-          <h1 className="text-3xl sm:text-4xl lg:text-[42px] font-heading font-bold text-heading tracking-tight leading-tight">
-            QA Standar
-          </h1>
-          <div className="w-full h-[2px] bg-primary my-4" />
-          <p className="text-sm sm:text-base text-body leading-relaxed max-w-3xl">
-            Dua puluh empat standar mutu program studi terbagi atas delapan standar pendidikan, delapan standar penelitian, dan delapan standar pengabdian kepada masyarakat. Setiap standar memuat pernyataan, indikator, dan target capaian yang diukur setiap tahun.
-          </p>
-        </div>
+      <div className="space-y-12 sm:space-y-14 font-body text-body">
+        <KepalaMutu
+          eyebrow="DOKUMEN MUTU"
+          judul="Standar Mutu"
+          pengantar="Standar mutu adalah tolok ukur yang harus dipenuhi dalam penyelenggaraan pendidikan, penelitian, pengabdian kepada masyarakat, dan pengelolaan fakultas. Fakultas Hukum UNISSULA menetapkan 21 standar yang terbagi ke dalam empat kelompok."
+        />
 
-        {/* ========================================================================= */}
-        {/* STANDAR PENDIDIKAN */}
-        {/* ========================================================================= */}
-        <section className="space-y-4">
-          <div className="pb-2 border-b-2 border-heading">
-            <h2 className="text-2xl font-heading font-normal text-heading tracking-tight">
-              Standar Pendidikan
-            </h2>
-          </div>
+        {standarGroups.map((g) => (
+          <section key={g.code} className="space-y-5">
+            <JudulMutu judul={`${g.group} · ${g.code}`} keterangan={g.desc} />
 
-          <div className="border border-gray-200 bg-white overflow-x-auto shadow-2xs">
-            <table className="w-full text-left border-collapse text-xs sm:text-sm">
-              <thead>
-                <tr className="border-b-2 border-heading text-xs font-bold tracking-wider text-heading uppercase">
-                  <th className="py-3.5 px-5 font-bold w-1/6">KODE</th>
-                  <th className="py-3.5 px-5 font-bold w-1/2">STANDAR</th>
-                  <th className="py-3.5 px-5 font-bold w-1/3">INDIKATOR UTAMA</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-gray-200">
-                {educationStandards.map((item, idx) => (
-                  <tr key={idx} className="hover:bg-gray-50/50 transition-colors">
-                    <td className="py-4 px-5 font-semibold text-heading whitespace-nowrap">
-                      {item.code}
-                    </td>
-                    <td className="py-4 px-5 text-body">
-                      {item.name}
-                    </td>
-                    <td className="py-4 px-5 text-body leading-relaxed">
-                      {item.indicator}
-                    </td>
+            <div className="border border-gray-200 bg-white rounded-xs overflow-x-auto">
+              <table className="w-full text-left border-collapse text-sm min-w-[720px]">
+                <thead>
+                  <tr className="border-b border-gray-200 bg-gray-50/70">
+                    <th className="py-3 px-4 sm:px-5 text-[11px] font-bold tracking-wider uppercase text-heading w-52">
+                      Kode
+                    </th>
+                    <th className="py-3 px-4 sm:px-5 text-[11px] font-bold tracking-wider uppercase text-heading">
+                      Nama Standar
+                    </th>
+                    <th className="py-3 px-4 sm:px-5 text-[11px] font-bold tracking-wider uppercase text-heading w-40">
+                      Rumpun
+                    </th>
+                    <th className="py-3 px-4 sm:px-5 text-[11px] font-bold tracking-wider uppercase text-heading w-24 text-right">
+                      Berkas
+                    </th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </section>
+                </thead>
+                <tbody className="divide-y divide-gray-100">
+                  {g.items.map((s) => (
+                    <tr key={s.code} className="hover:bg-gray-50/50 transition-colors">
+                      <td className="py-3.5 px-4 sm:px-5 font-mono text-xs text-primary align-top whitespace-nowrap">
+                        {s.code}
+                      </td>
+                      <td className="py-3.5 px-4 sm:px-5 font-medium text-heading leading-relaxed">
+                        {s.name}
+                      </td>
+                      <td className="py-3.5 px-4 sm:px-5 text-body text-xs sm:text-sm leading-relaxed align-top">
+                        {s.cluster}
+                      </td>
+                      <td className="py-3.5 px-4 sm:px-5 align-top text-right">
+                        <a
+                          href={s.file}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          aria-label={`Unduh ${s.name}`}
+                          className="inline-flex items-center gap-1.5 text-xs font-semibold text-primary hover:underline"
+                        >
+                          PDF
+                          <FiDownload className="text-xs" />
+                        </a>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </section>
+        ))}
 
-        {/* ========================================================================= */}
-        {/* STANDAR PENELITIAN */}
-        {/* ========================================================================= */}
-        <section className="space-y-4">
-          <div className="pb-2 border-b-2 border-heading">
-            <h2 className="text-2xl font-heading font-normal text-heading tracking-tight">
-              Standar Penelitian
-            </h2>
-          </div>
-
-          <div className="border border-gray-200 bg-white overflow-x-auto shadow-2xs">
-            <table className="w-full text-left border-collapse text-xs sm:text-sm">
-              <thead>
-                <tr className="border-b-2 border-heading text-xs font-bold tracking-wider text-heading uppercase">
-                  <th className="py-3.5 px-5 font-bold w-1/6">KODE</th>
-                  <th className="py-3.5 px-5 font-bold w-1/2">STANDAR</th>
-                  <th className="py-3.5 px-5 font-bold w-1/3">INDIKATOR UTAMA</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-gray-200">
-                {researchStandards.map((item, idx) => (
-                  <tr key={idx} className="hover:bg-gray-50/50 transition-colors">
-                    <td className="py-4 px-5 font-semibold text-heading whitespace-nowrap">
-                      {item.code}
-                    </td>
-                    <td className="py-4 px-5 text-body">
-                      {item.name}
-                    </td>
-                    <td className="py-4 px-5 text-body leading-relaxed">
-                      {item.indicator}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </section>
-
-        {/* ========================================================================= */}
-        {/* STANDAR PENGABDIAN KEPADA MASYARAKAT */}
-        {/* ========================================================================= */}
-        <section className="space-y-4">
-          <div className="pb-2 border-b-2 border-heading">
-            <h2 className="text-2xl font-heading font-normal text-heading tracking-tight">
-              Standar Pengabdian kepada Masyarakat
-            </h2>
-          </div>
-
-          <div className="border border-gray-200 bg-white overflow-x-auto shadow-2xs">
-            <table className="w-full text-left border-collapse text-xs sm:text-sm">
-              <thead>
-                <tr className="border-b-2 border-heading text-xs font-bold tracking-wider text-heading uppercase">
-                  <th className="py-3.5 px-5 font-bold w-1/6">KODE</th>
-                  <th className="py-3.5 px-5 font-bold w-1/2">STANDAR</th>
-                  <th className="py-3.5 px-5 font-bold w-1/3">INDIKATOR UTAMA</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-gray-200">
-                {communityServiceStandards.map((item, idx) => (
-                  <tr key={idx} className="hover:bg-gray-50/50 transition-colors">
-                    <td className="py-4 px-5 font-semibold text-heading whitespace-nowrap">
-                      {item.code}
-                    </td>
-                    <td className="py-4 px-5 text-body">
-                      {item.name}
-                    </td>
-                    <td className="py-4 px-5 text-body leading-relaxed">
-                      {item.indicator}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </section>
-
-        {/* ========================================================================= */}
-        {/* DOKUMEN */}
-        {/* ========================================================================= */}
-        <section className="space-y-4">
-          <div className="pb-2 border-b-2 border-heading">
-            <h2 className="text-2xl font-heading font-normal text-heading tracking-tight">
-              Dokumen
-            </h2>
-          </div>
-
-          <div className="divide-y divide-gray-200 bg-white border border-gray-200 shadow-2xs">
-            {standardDocuments.map((doc) => (
-              <div
-                key={doc.id}
-                className="p-5 sm:p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 hover:bg-gray-50/60 transition-colors group"
-              >
-                {/* Sisi Kiri: Ikon + Judul + Info */}
-                <div className="flex items-start gap-4 flex-1 min-w-0">
-                  <div className="w-8 h-9 border-2 border-primary text-primary rounded-xs flex flex-col justify-between p-1 shrink-0 mt-0.5 group-hover:bg-primary/5 transition-colors">
-                    <div className="w-3 h-0.5 bg-primary rounded-full"></div>
-                    <div className="w-full h-3 bg-primary/80 rounded-2xs"></div>
-                  </div>
-
-                  <div className="space-y-1 flex-1 min-w-0">
-                    <h3 className="font-heading font-normal text-base sm:text-[17px] text-heading leading-snug group-hover:text-primary transition-colors">
-                      {doc.title}
-                    </h3>
-                    <p className="text-xs text-body">
-                      {doc.meta}
-                    </p>
-                  </div>
-                </div>
-
-                {/* Sisi Kanan: Tombol Unduh */}
-                <div className="shrink-0 flex items-center self-start sm:self-center pl-12 sm:pl-0">
-                  <a
-                    href={doc.fileUrl}
-                    download={doc.fileName}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 px-4 py-1.5 bg-white border border-gray-300 hover:border-primary hover:bg-primary hover:text-white text-heading rounded-xs text-xs font-medium transition-all duration-150 shadow-2xs cursor-pointer active:scale-98"
-                  >
-                    <span>Unduh</span>
-                    <span className="text-xs">↓</span>
-                  </a>
-                </div>
-              </div>
-            ))}
-          </div>
+        <section className="space-y-5">
+          <JudulMutu
+            judul="Isi Setiap Dokumen Standar"
+            keterangan="Seluruh dokumen standar disusun dengan kerangka yang sama."
+          />
+          <DaftarNomor butir={standarStructure} />
         </section>
       </div>
     </>

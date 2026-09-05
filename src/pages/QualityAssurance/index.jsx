@@ -10,13 +10,19 @@ import { navLinks } from "../../data/navLinks";
 const qualityAssuranceMenus =
   navLinks.find((n) => n.href === "/quality-assurance" || n.href === "/download")?.children ?? [];
 
+/**
+ * Kontak diambil dari kop surat resmi Program Magister Kenotariatan.
+ * Nomor ekstensi dan alamat ruang gugus belum diterima dari prodi, jadi tidak
+ * dicantumkan daripada menampilkan data yang tidak terverifikasi.
+ */
 const qaContact = {
   title: "Kontak Penjaminan Mutu",
   lines: [
     { text: "Gugus Penjaminan Mutu MKn" },
-    { text: "Gedung Pascasarjana Lt. 2" },
-    { text: "+62 24 6583584 ext. 520" },
-    { text: "gpm.mkn@unissula.ac.id", href: "mailto:gpm.mkn@unissula.ac.id" },
+    { text: "Fakultas Hukum UNISSULA" },
+    { text: "Jl. Raya Kaligawe Km. 4, Semarang 50112" },
+    { text: "(024) 6583584" },
+    { text: "mkn.fh@unissula.ac.id", href: "mailto:mkn.fh@unissula.ac.id" },
   ],
 };
 

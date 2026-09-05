@@ -196,7 +196,7 @@ export default function App() {
         {/* Quality Assurance Unit — nested routes */}
         <Route path="/quality-assurance" element={<QualityAssuranceLayout />}>
           <Route index element={<QualityAssuranceOverview />} />
-          <Route path="qa-documents" element={<Navigate to="/quality-assurance/qa-documents/qa-policy" replace />} />
+          <Route path="qa-documents" element={<QaDocuments />} />
           <Route path="qa-documents/qa-policy" element={<QaPolicy />} />
           <Route path="qa-documents/qa-manual-standard" element={<QaManualStandard />} />
           <Route path="qa-documents/qa-standar" element={<QaStandar />} />

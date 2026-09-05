@@ -1,183 +1,18 @@
 import { Helmet } from "react-helmet-async";
-import {
-  alumniMetrics,
-  competencyRatings,
-  curriculumImpacts,
-  surveyReports,
-} from "../../data/qualityAssurance/alumniSurveyData";
+import { KepalaMutu, BelumTersedia } from "../../components/QualityAssurance/MutuBagian";
 
 export default function AlumniSurveyReport() {
   return (
     <>
       <Helmet>
         <title>Laporan Survei Alumni | MKn UNISSULA</title>
-        <meta
-          name="description"
-          content="Laporan Survei Alumni dan Pengguna Lulusan (Alumni Survey Report) Program Studi Magister Kenotariatan (MKn) UNISSULA: penilaian kompetensi lulusan dan dampak pada kurikulum."
-        />
+        <meta name="description" content="Hasil survei alumni dan pengguna lulusan Program Studi Magister Kenotariatan UNISSULA." />
       </Helmet>
 
-      <div className="space-y-12 sm:space-y-16 font-body text-body">
-        {/* ========================================================================= */}
-        {/* HEADER SECTION */}
-        {/* ========================================================================= */}
-        <div>
-          <span className="text-xs font-bold tracking-[0.18em] uppercase text-primary block mb-2">
-            PENJAMINAN MUTU
-          </span>
-          <h1 className="text-3xl sm:text-4xl lg:text-[42px] font-heading font-bold text-heading tracking-tight leading-tight">
-            Laporan Survei Alumni
-          </h1>
-          <div className="w-full h-[2px] bg-primary my-4" />
-          <p className="text-sm sm:text-base text-body leading-relaxed max-w-3xl">
-            Survei alumni dan pengguna lulusan mengukur relevansi kurikulum terhadap kebutuhan praktik kenotariatan. Responden menilai tujuh kompetensi lulusan, dan hasilnya dipakai bersama data tracer study sebagai dasar peninjauan kurikulum dua tahunan.
-          </p>
+      <div className="space-y-8 font-body text-body">
+        <KepalaMutu judul="Laporan Survei Alumni" pengantar="Laporan survei alumni memuat masa tunggu kerja, kesesuaian bidang kerja, dan penilaian pengguna lulusan. Instrumen yang dipakai adalah formulir Survei Kepuasan Pemangku Kepentingan (C-04) serta penelusuran alumni." />
 
-          {/* Metric Stats Cards */}
-          <div className="grid grid-cols-2 md:grid-cols-4 bg-white border border-gray-200 divide-x divide-y md:divide-y-0 divide-gray-200 mt-8 rounded-xs shadow-2xs">
-            {alumniMetrics.map((metric, idx) => (
-              <div key={idx} className="p-5 sm:p-6 text-left flex flex-col justify-center">
-                <span className="font-heading italic font-normal text-3xl sm:text-4xl text-primary block leading-none">
-                  {metric.value}
-                </span>
-                <span className="text-[11px] sm:text-xs font-semibold tracking-wider uppercase text-body mt-2 block">
-                  {metric.label}
-                </span>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* ========================================================================= */}
-        {/* PENILAIAN KOMPETENSI LULUSAN */}
-        {/* ========================================================================= */}
-        <section className="space-y-4">
-          <div className="pb-2 border-b-2 border-heading">
-            <h2 className="text-2xl font-heading font-normal text-heading tracking-tight">
-              Penilaian Kompetensi Lulusan
-            </h2>
-          </div>
-
-          <div className="border border-gray-200 bg-white overflow-x-auto shadow-2xs">
-            <table className="w-full text-left border-collapse text-xs sm:text-sm">
-              <thead>
-                <tr className="border-b-2 border-heading text-xs font-bold tracking-wider text-heading uppercase">
-                  <th className="py-3.5 px-5 font-bold w-1/2">KOMPETENSI</th>
-                  <th className="py-3.5 px-5 font-bold text-center">ALUMNI</th>
-                  <th className="py-3.5 px-5 font-bold text-center">PENGGUNA LULUSAN</th>
-                  <th className="py-3.5 px-5 font-bold text-center">SELISIH</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-gray-200">
-                {competencyRatings.map((item, idx) => (
-                  <tr key={idx} className="hover:bg-gray-50/50 transition-colors">
-                    <td className="py-4 px-5 font-medium text-heading">
-                      {item.competency}
-                    </td>
-                    <td className="py-4 px-5 text-body text-center font-medium">
-                      {item.alumni}
-                    </td>
-                    <td className="py-4 px-5 text-body text-center font-medium">
-                      {item.employer}
-                    </td>
-                    <td className="py-4 px-5 text-body text-center font-medium">
-                      {item.difference}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </section>
-
-        {/* ========================================================================= */}
-        {/* DAMPAK PADA KURIKULUM */}
-        {/* ========================================================================= */}
-        <section className="space-y-4">
-          <div className="pb-2 border-b-2 border-heading">
-            <h2 className="text-2xl font-heading font-normal text-heading tracking-tight">
-              Dampak pada Kurikulum
-            </h2>
-          </div>
-
-          <div className="border border-gray-200 bg-white overflow-x-auto shadow-2xs">
-            <table className="w-full text-left border-collapse text-xs sm:text-sm">
-              <thead>
-                <tr className="border-b-2 border-heading text-xs font-bold tracking-wider text-heading uppercase">
-                  <th className="py-3.5 px-5 font-bold w-1/3">MASUKAN</th>
-                  <th className="py-3.5 px-5 font-bold w-1/2">PENYESUAIAN KURIKULUM</th>
-                  <th className="py-3.5 px-5 font-bold w-1/6">BERLAKU</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-gray-200">
-                {curriculumImpacts.map((item, idx) => (
-                  <tr key={idx} className="hover:bg-gray-50/50 transition-colors">
-                    <td className="py-4 px-5 font-medium text-heading leading-relaxed">
-                      {item.feedback}
-                    </td>
-                    <td className="py-4 px-5 text-body leading-relaxed">
-                      {item.adjustment}
-                    </td>
-                    <td className="py-4 px-5 text-body whitespace-nowrap">
-                      {item.effective}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </section>
-
-        {/* ========================================================================= */}
-        {/* LAPORAN */}
-        {/* ========================================================================= */}
-        <section className="space-y-4">
-          <div className="pb-2 border-b-2 border-heading">
-            <h2 className="text-2xl font-heading font-normal text-heading tracking-tight">
-              Laporan
-            </h2>
-          </div>
-
-          <div className="divide-y divide-gray-200 bg-white border border-gray-200 shadow-2xs">
-            {surveyReports.map((doc) => (
-              <div
-                key={doc.id}
-                className="p-5 sm:p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 hover:bg-gray-50/60 transition-colors group"
-              >
-                {/* Sisi Kiri: Ikon + Judul + Info */}
-                <div className="flex items-start gap-4 flex-1 min-w-0">
-                  <div className="w-8 h-9 border-2 border-primary text-primary rounded-xs flex flex-col justify-between p-1 shrink-0 mt-0.5 group-hover:bg-primary/5 transition-colors">
-                    <div className="w-3 h-0.5 bg-primary rounded-full"></div>
-                    <div className="w-full h-3 bg-primary/80 rounded-2xs"></div>
-                  </div>
-
-                  <div className="space-y-1 flex-1 min-w-0">
-                    <h3 className="font-heading font-normal text-base sm:text-[17px] text-heading leading-snug group-hover:text-primary transition-colors">
-                      {doc.title}
-                    </h3>
-                    <p className="text-xs text-body">
-                      {doc.meta}
-                    </p>
-                  </div>
-                </div>
-
-                {/* Sisi Kanan: Tombol Unduh */}
-                <div className="shrink-0 flex items-center self-start sm:self-center pl-12 sm:pl-0">
-                  <a
-                    href={doc.fileUrl}
-                    download={doc.fileName}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 px-4 py-1.5 bg-white border border-gray-300 hover:border-primary hover:bg-primary hover:text-white text-heading rounded-xs text-xs font-medium transition-all duration-150 shadow-2xs cursor-pointer active:scale-98"
-                  >
-                    <span>Unduh</span>
-                    <span className="text-xs">↓</span>
-                  </a>
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
+        <BelumTersedia keterangan="Laporan survei alumni belum diterima dari Gugus Penjaminan Mutu." />
       </div>
     </>
   );
