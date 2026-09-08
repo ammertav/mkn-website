@@ -29,9 +29,42 @@ function GaleriGeser({ foto }) {
   const trekRef = useRef(null);
   const [disorot, setDisorot] = useState(false);
   const [sedangGeser, setSedangGeser] = useState(false);
+  const [posisi, setPosisi] = useState({ indeks: 0, jumlah: 1 });
   const seret = useRef({ aktif: false, mulaiX: 0, mulaiGulir: 0 });
 
   const lebarKartu = () => trekRef.current?.firstElementChild?.offsetWidth ?? 0;
+
+  /**
+   * Menghitung titik halaman dari posisi gulir.
+   *
+   * Galeri ini memakai gulir asli, jadi tidak ada nomor halaman yang bisa
+   * dibaca langsung: jumlah titik diturunkan dari sisa ruang gulir dibagi
+   * lebar satu kartu, dan titik aktifnya dari posisi gulir saat ini.
+   */
+  const perbaruiPosisi = useCallback(() => {
+    const el = trekRef.current;
+    const langkah = lebarKartu();
+    if (!el || langkah <= 0) return;
+
+    const maksimum = el.scrollWidth - el.clientWidth;
+    const jumlah = Math.max(Math.round(maksimum / langkah) + 1, 1);
+    const indeks = Math.min(Math.round(el.scrollLeft / langkah), jumlah - 1);
+
+    setPosisi((kini) =>
+      kini.indeks === indeks && kini.jumlah === jumlah ? kini : { indeks, jumlah }
+    );
+  }, []);
+
+  useEffect(() => {
+    perbaruiPosisi();
+    window.addEventListener("resize", perbaruiPosisi);
+    return () => window.removeEventListener("resize", perbaruiPosisi);
+  }, [perbaruiPosisi, foto]);
+
+  const keHalaman = (i) => {
+    const el = trekRef.current;
+    if (el) el.scrollTo({ left: i * lebarKartu(), behavior: "smooth" });
+  };
 
   // Berputar: sampai ujung kanan kembali ke awal, begitu pula sebaliknya.
   // Dibungkus useCallback agar acuannya tetap, sehingga interval geser otomatis
@@ -106,6 +139,7 @@ function GaleriGeser({ foto }) {
         onPointerMove={selamaSeret}
         onPointerUp={akhiriSeret}
         onPointerCancel={akhiriSeret}
+        onScroll={perbaruiPosisi}
         className={`flex w-full overflow-x-auto snap-x snap-mandatory scrollbar-none select-none outline-none ${
           sedangGeser ? "cursor-grabbing" : "cursor-grab"
         }`}
@@ -142,24 +176,43 @@ function GaleriGeser({ foto }) {
         ))}
       </div>
 
-      {/* Tombol arah — cadangan bagi yang tidak menyeret; muncul hanya bila
-          fotonya memang lebih banyak daripada yang muat sekali tampil. */}
-      {foto.length > 3 && (
+      {/* Navigasi — bentuknya disamakan dengan galeri testimoni di beranda:
+          panah kiri/kanan mengapit titik halaman. Muncul hanya bila fotonya
+          memang lebih banyak daripada yang muat sekali tampil. */}
+      {posisi.jumlah > 1 && (
         <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="mt-6 flex items-center justify-center gap-3">
+          <div className="mt-6 flex items-center justify-center gap-5">
             <button
               type="button"
               onClick={() => geser(-1)}
               aria-label="Foto sebelumnya"
-              className="w-10 h-10 flex items-center justify-center border border-gray-300 bg-white text-heading hover:border-primary hover:bg-primary hover:text-white rounded-xs transition-colors cursor-pointer active:scale-95"
+              className="w-10 h-10 flex items-center justify-center border border-gray-300 text-heading hover:border-primary hover:bg-primary hover:text-white rounded-xs transition-colors cursor-pointer active:scale-95"
             >
               <FiChevronLeft className="text-lg" />
             </button>
+
+            <div className="flex items-center gap-2.5">
+              {Array.from({ length: posisi.jumlah }, (_, i) => (
+                <button
+                  key={i}
+                  type="button"
+                  onClick={() => keHalaman(i)}
+                  aria-label={`Halaman galeri ${i + 1} dari ${posisi.jumlah}`}
+                  aria-current={i === posisi.indeks ? "true" : undefined}
+                  className={`h-1.5 rounded-full transition-all duration-300 cursor-pointer ${
+                    i === posisi.indeks
+                      ? "w-8 bg-primary"
+                      : "w-3 bg-gray-300 hover:bg-gray-400"
+                  }`}
+                />
+              ))}
+            </div>
+
             <button
               type="button"
               onClick={() => geser(1)}
               aria-label="Foto berikutnya"
-              className="w-10 h-10 flex items-center justify-center border border-gray-300 bg-white text-heading hover:border-primary hover:bg-primary hover:text-white rounded-xs transition-colors cursor-pointer active:scale-95"
+              className="w-10 h-10 flex items-center justify-center border border-gray-300 text-heading hover:border-primary hover:bg-primary hover:text-white rounded-xs transition-colors cursor-pointer active:scale-95"
             >
               <FiChevronRight className="text-lg" />
             </button>
@@ -232,7 +285,7 @@ export default function StudentOrganizationDetail() {
         {/* ========================================================================= */}
         {/* BREADCRUMB (Aligned with 1600px Max-Width) */}
         {/* ========================================================================= */}
-        <div className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 pt-6 sm:pt-8 pb-2">
+        <div className="w-full flex-grow max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 pt-8 sm:pt-12">
           <Breadcrumb />
         </div>
 
@@ -254,7 +307,7 @@ export default function StudentOrganizationDetail() {
                   {organization.title}
                 </p>
                 <div className="w-full max-w-xl h-[2px] bg-primary mt-4 mb-5" />
-                <p className="text-sm sm:text-base text-body leading-relaxed max-w-xl">
+                <p className="text-sm sm:text-base text-body text-justify leading-relaxed max-w-xl">
                   {organization.description}
                 </p>
               </div>
@@ -295,7 +348,7 @@ export default function StudentOrganizationDetail() {
               {organization.narrative?.length > 0 && (
                 <div>
                   <JudulSeksi>Sejarah</JudulSeksi>
-                  <div className="space-y-5">
+                  <div className="space-y-5 text-justify">
                     {organization.narrative.map((paragraph, idx) => (
                       <p key={idx}>{paragraph}</p>
                     ))}
@@ -321,7 +374,7 @@ export default function StudentOrganizationDetail() {
                     ))}
                   </div>
                   {organization.tujuan && (
-                    <p className="mt-6 text-sm sm:text-base leading-relaxed">
+                    <p className="mt-6 text-sm sm:text-base text-justify leading-relaxed">
                       {organization.tujuan}
                     </p>
                   )}

@@ -9,32 +9,43 @@
  * besar: berkas di public disalin apa adanya dan dialirkan saat diputar,
  * sedangkan berkas di src ikut diproses bundler pada setiap build.
  *
- * Pusat Riset Mahasiswa belum menyerahkan foto, jadi halamannya sengaja tanpa
- * galeri daripada memakai foto fasilitas lain yang bukan miliknya.
+ * Keterangan galeri ditulis mengikuti isi fotonya, jadi setiap penggantian
+ * berkas foto perlu diikuti penyesuaian keterangannya.
  */
 
 import labAkta1 from "../assets/images/fasilitas/lab-akta/lab-akta-1.png";
 import labAkta2 from "../assets/images/fasilitas/lab-akta/lab-akta-2.png";
 import labAkta3 from "../assets/images/fasilitas/lab-akta/lab-akta-3.png";
 import labAkta4 from "../assets/images/fasilitas/lab-akta/lab-akta-4.png";
-import labAkta5 from "../assets/images/fasilitas/lab-akta/lab-akta-5.png";
+import labAkta5 from "../assets/images/fasilitas/lab-akta/lab-akta-5.jpg";
+import labAkta6 from "../assets/images/fasilitas/lab-akta/lab-akta-6.png";
+import labAkta7 from "../assets/images/fasilitas/lab-akta/lab-akta-7.jpg";
 import pdfPerlengkapanLabAkta from "../assets/pdf/fasilitas/lab-akta/daftar-perlengkapan-lab-akta.pdf";
 
-import labKantorFrontOffice from "../assets/images/fasilitas/lab-manajemen-kantor/ruang-front-office.png";
-import labKantorNotaris from "../assets/images/fasilitas/lab-manajemen-kantor/ruang-notaris.png";
-import labKantorPembacaan from "../assets/images/fasilitas/lab-manajemen-kantor/ruang-pembacaan-akta.png";
-import labKantorTamu from "../assets/images/fasilitas/lab-manajemen-kantor/ruang-tamu.png";
+import labMan1 from "../assets/images/fasilitas/lab-manajemen-kantor/lab-man-1.png";
+import labMan2 from "../assets/images/fasilitas/lab-manajemen-kantor/lab-man-2.png";
+import labMan3 from "../assets/images/fasilitas/lab-manajemen-kantor/lab-man-3.png";
+import labMan4 from "../assets/images/fasilitas/lab-manajemen-kantor/lab-man-4.png";
+import labMan5 from "../assets/images/fasilitas/lab-manajemen-kantor/lab-man-5.png";
 
-import perpus1 from "../assets/images/fasilitas/perpus/perpustakaan-1.jpg";
-import perpus2 from "../assets/images/fasilitas/perpus/perpustakaan-2.jpg";
-import perpus3 from "../assets/images/fasilitas/perpus/perpustakaan-3.jpg";
-import perpus4 from "../assets/images/fasilitas/perpus/perpustakaan-4.jpg";
-import perpus5 from "../assets/images/fasilitas/perpus/perpustakaan-5.jpg";
+
+import perpus1 from "../assets/images/fasilitas/perpus/perpus-1.png";
+import perpus2 from "../assets/images/fasilitas/perpus/perpus-2.png";
+import perpus3 from "../assets/images/fasilitas/perpus/perpus-3.jpg";
+import perpus4 from "../assets/images/fasilitas/perpus/perpus-4.jpg";
+import perpus6 from "../assets/images/fasilitas/perpus/perpus-6.jpg";
+
+import src1 from "../assets/images/fasilitas/student/src-1.png";
+import src2 from "../assets/images/fasilitas/student/src-2.jpg";
+import src3 from "../assets/images/fasilitas/student/src-3.jpg";
+import src4 from "../assets/images/fasilitas/student/src-4.jpg";
 
 import kelas2C from "../assets/images/fasilitas/ruang-kelas/ruang-kelas-2c.jpg";
 import kelas2D from "../assets/images/fasilitas/ruang-kelas/ruang-kelas-2d.jpg";
+import kelas2D2 from "../assets/images/fasilitas/ruang-kelas/ruang-kelas-2d-2.jpg";
 import kelas3F from "../assets/images/fasilitas/ruang-kelas/ruang-kelas-3f.jpg";
 import kelas3F2 from "../assets/images/fasilitas/ruang-kelas/ruang-kelas-3f-2.jpg";
+import kelas3B from "../assets/images/fasilitas/ruang-kelas/ruang-kelas-2b.jpg";
 
 import seminarLt3 from "../assets/images/fasilitas/ruang-seminar/lt3/seminar-lt3.jpg";
 import seminarLt3Kegiatan from "../assets/images/fasilitas/ruang-seminar/lt3/seminar-lt3-2.jpg";
@@ -64,11 +75,17 @@ export const laboratoriumAktaData = {
     "Tata ruang yang memenuhi standar Kesehatan, Keselamatan Kerja, dan Lingkungan (K3L).",
   ],
   galeri: [
-    { src: labAkta1, keterangan: "Ruang praktik Laboratorium Akta" },
-    { src: labAkta2, keterangan: "Meja simulasi penandatanganan akta" },
-    { src: labAkta3, keterangan: "Perangkat kerja penyusunan draf akta" },
-    { src: labAkta4, keterangan: "Suasana praktikum mahasiswa" },
-    { src: labAkta5, keterangan: "Peralatan pengikatan dan pencetakan akta" },
+    { src: labAkta1, keterangan: "Praktik penyusunan draf akta pada perangkat laboratorium" },
+    {
+      src: labAkta6,
+      keterangan:
+        "Laboratorium Kenotariatan dan Biro Konsultasi Bantuan Hukum Pertanahan",
+    },
+    { src: labAkta2, keterangan: "Tata ruang laboratorium dengan meja praktik berbentuk U" },
+    { src: labAkta3, keterangan: "Pendampingan dosen praktisi saat sesi praktikum" },
+    { src: labAkta4, keterangan: "Bimbingan penggunaan perangkat praktik kepada mahasiswa" },
+    { src: labAkta5, keterangan: "Pembahasan dokumen bersama melalui layar proyeksi" },
+    { src: labAkta7, keterangan: "Suasana kelas praktikum di Laboratorium Akta" },
   ],
   video: {
     // Ditaruh di public/videos, dirujuk lewat URL — lihat catatan di kepala berkas.
@@ -99,10 +116,14 @@ export const laboratoriumManajemenKantorData = {
     "Ruang tunggu dan meja konsultasi privat untuk simulasi penanganan klien.",
   ],
   galeri: [
-    { src: labKantorFrontOffice, keterangan: "Ruang front office pelayanan klien" },
-    { src: labKantorTamu, keterangan: "Ruang tamu" },
-    { src: labKantorNotaris, keterangan: "Ruang notaris" },
-    { src: labKantorPembacaan, keterangan: "Ruang pembacaan akta atau akad" },
+    { src: labMan1, keterangan: "Simulasi penerimaan klien di meja front office" },
+    { src: labMan2, keterangan: "Simulasi konsultasi klien di ruang kerja notaris" },
+    { src: labMan3, keterangan: "Simulasi pertemuan para pihak di ruang konsultasi" },
+    { src: labMan4, keterangan: "Simulasi penandatanganan dokumen di meja pelayanan" },
+    {
+      src: labMan5,
+      keterangan: "Laboratorium Administrasi Kantor Notaris/PPAT",
+    },
   ],
 };
 
@@ -122,7 +143,12 @@ export const researchCenterData = {
     "Akses ke portal e-journal hukum, basis data literatur internasional, serta direktori putusan pengadilan.",
     "Papan tulis dan medium curah gagasan untuk merumuskan kerangka penelitian.",
   ],
-  galeri: [],
+  galeri: [
+    { src: src1, keterangan: "Mahasiswa mengerjakan riset dengan laptop dan literatur" },
+    { src: src2, keterangan: "Diskusi kelompok mengelilingi meja baca" },
+    { src: src3, keterangan: "Ruang riset bersama yang dikelilingi rak rujukan" },
+    { src: src4, keterangan: "Penelusuran literatur di sela kegiatan riset" },
+  ],
 };
 
 export const perpustakaanData = {
@@ -143,11 +169,14 @@ export const perpustakaanData = {
   ],
   galeri: [
     // Butir pertama tampil sebagai foto sorotan berukuran lebar penuh.
-    { src: perpus2, keterangan: "Koleksi literatur hukum" },
-    { src: perpus1, keterangan: "Ruang baca perpustakaan" },
-    { src: perpus3, keterangan: "Area penelusuran katalog" },
-    { src: perpus4, keterangan: "Ruang belajar mandiri" },
-    { src: perpus5, keterangan: "Fasilitas sirkulasi dan keanggotaan" },
+    {
+      src: perpus1,
+      keterangan: "Stasiun penelusuran katalog digital di Perpustakaan Fakultas Hukum",
+    },
+    { src: perpus2, keterangan: "Membaca literatur di area koleksi terbitan berkala" },
+    { src: perpus3, keterangan: "Ruang baca dengan rak koleksi hukum" },
+    { src: perpus4, keterangan: "Penataan koleksi di antara rak buku" },
+    { src: perpus6, keterangan: "Diskusi literatur di area baca" },
   ],
 };
 
@@ -169,9 +198,11 @@ export const ruangKelasData = {
   ],
   galeri: [
     { src: kelas2C, keterangan: "Ruang kelas 2C" },
+    { src: kelas2D2, keterangan: "Ruang kelas 2D" },
     { src: kelas2D, keterangan: "Ruang kelas 2D" },
     { src: kelas3F, keterangan: "Ruang kelas 3F" },
-    { src: kelas3F2, keterangan: "Ruang kelas 3F dari sisi lain" },
+    { src: kelas3F2, keterangan: "Ruang kelas 3F" },
+    { src: kelas3B, keterangan: "Ruang kelas 3B" },
   ],
 };
 

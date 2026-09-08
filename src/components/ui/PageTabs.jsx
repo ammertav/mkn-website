@@ -1,6 +1,5 @@
 import { useEffect, useRef } from "react";
 import { NavLink, useLocation } from "react-router-dom";
-import { FiChevronUp, FiChevronDown } from "react-icons/fi";
 import clsx from "clsx";
 import { useT } from "../../i18n/languageContext";
 
@@ -122,12 +121,6 @@ export default function PageTabs({
             );
           })}
         </nav>
-
-        {/* Right Tab Switcher Indicator Icons */}
-        <div className="hidden sm:flex items-center flex-col justify-center text-gray-400 pl-4 py-2 select-none shrink-0">
-          <FiChevronUp className="w-3.5 h-3.5 -mb-1" />
-          <FiChevronDown className="w-3.5 h-3.5 -mt-1" />
-        </div>
       </div>
     </div>
   );

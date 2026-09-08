@@ -19,7 +19,7 @@ export default function StaffLayout() {
         <Navbar />
 
         {/* Breadcrumb container aligns with Navbar */}
-        <div className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 pt-6 sm:pt-8 pb-2">
+        <div className="w-full flex-grow max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 pt-8 sm:pt-12">
           <Breadcrumb />
         </div>
 

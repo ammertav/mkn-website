@@ -78,7 +78,7 @@ export function KartuRingkas({ butir, kolom = 3 }) {
             {t(b.judul)}
           </h3>
           {b.keterangan && (
-            <p className="text-sm text-body leading-relaxed">
+            <p className="text-sm text-body text-justify leading-relaxed">
               <RichText>{t(b.keterangan)}</RichText>
             </p>
           )}

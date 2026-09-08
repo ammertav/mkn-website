@@ -163,7 +163,7 @@ export default function LayananPengaduan() {
       <main className="flex flex-col min-h-screen bg-banner font-body text-body">
         <Navbar />
 
-        <div className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 pt-6 sm:pt-8">
+        <div className="w-full flex-grow max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 pt-8 sm:pt-12">
           <Breadcrumb />
         </div>
 

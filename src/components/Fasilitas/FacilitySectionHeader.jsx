@@ -21,7 +21,7 @@ export default function FacilitySectionHeader({
       </div>
 
       {/* Right Column: Paragraph Descriptions */}
-      <div className="lg:col-span-7 space-y-4 text-sm sm:text-base text-body leading-relaxed">
+      <div className="lg:col-span-7 space-y-4 text-sm sm:text-base text-body text-justify leading-relaxed">
         {paragraphs && paragraphs.length > 0
           ? paragraphs.map((text, idx) => (
               <p key={idx} className="leading-relaxed">

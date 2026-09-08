@@ -161,7 +161,7 @@ export default function ProfilLulusan() {
 
                 <motion.p
                   variants={cardVariants}
-                  className="text-sm text-body leading-relaxed"
+                  className="text-sm text-body text-justify leading-relaxed"
                 >
                   <RichText>{t(item.desc)}</RichText>
                 </motion.p>

@@ -5,8 +5,8 @@ import Img from "../ui/Img";
 
 import Ormawa from "../../assets/images/beranda/ormawa.jpg";
 import Lab from "../../assets/images/fasilitas/lab-akta/lab-akta-1.png";
-import Stude from "../../assets/images/fasilitas/student/student.jpeg";
-import Perpus from "../../assets/images/fasilitas/perpus/perpus1.png";
+import Stude from "../../assets/images/fasilitas/student/src-1.png";
+import Perpus from "../../assets/images/fasilitas/perpus/perpus-1.png";
 
 const viewportSettings = {
   once: true,

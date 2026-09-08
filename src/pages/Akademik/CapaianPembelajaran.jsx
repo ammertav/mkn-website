@@ -244,11 +244,11 @@ export default function CapaianPembelajaran() {
                       {item.code}
                     </td>
 
-                    <td className="py-4 px-5 sm:px-6 text-sm text-body leading-relaxed align-top">
+                    <td className="py-4 px-5 sm:px-6 text-sm text-body text-justify leading-relaxed align-top">
                       <RichText>{t(item.desc)}</RichText>
                     </td>
 
-                    <td className="py-4 px-5 sm:px-6 text-sm text-body leading-relaxed align-top">
+                    <td className="py-4 px-5 sm:px-6 text-sm text-body text-justify leading-relaxed align-top">
                       <RichText>{t(item.kkni)}</RichText>
                     </td>
                   </motion.tr>
