@@ -78,7 +78,7 @@ const vacancies = [
  * menampilkan empty state seperti halaman Tracer Study. Susunan aslinya sengaja
  * dibiarkan utuh: ubah nilainya menjadi `true` untuk menayangkannya kembali.
  */
-const KONTEN_SIAP = false;
+const KONTEN_SIAP = true;
 
 export default function JobVacancies() {
   const [searchTerm, setSearchTerm] = useState("");

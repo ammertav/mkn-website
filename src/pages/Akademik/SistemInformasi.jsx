@@ -71,18 +71,18 @@ const linkSistem = [
   {
     id: 1,
     title: {
-      id: "E Learning ",
-      en: "UNISSULA Information System",
+      id: "SIM UNISSULA (E-Learning)",
+      en: "UNISSULA Information System (E-Learning)",
     },
-    link: "https://sim.unissula.ac.id/gate/login",
+    link: "https://sim.unissula.ac.id/",
   },
   {
     id: 2,
     title: {
-      id: "E Learning ",
-      en: "UNISSULA Information System",
+      id: "SAKU MKN (Sistem Akademik Magister Kenotariatan)",
+      en: "SAKU MKN (Master of Notary Academic System)",
     },
-    link: "https://sim.unissula.ac.id/gate/login",
+    link: "https://sakumkn.unissula.ac.id/",
   },
 ];
 

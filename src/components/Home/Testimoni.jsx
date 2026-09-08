@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useLayoutEffect } from "react";
 import { motion } from "framer-motion";
 import { FiChevronRight, FiChevronLeft } from "react-icons/fi";
 import Img from "../ui/Img";
@@ -64,6 +64,95 @@ const cardVariants = {
  * tetap rata kiri karena grid-nya berkolom tetap.
  */
 const PER_HALAMAN = 5;
+
+/**
+ * Isi kartu testimoni: nama, jabatan, tahun alumni, dan pesan.
+ *
+ * Saat tertutup, nama dan jabatan dipotong satu baris sedangkan pesannya
+ * delapan baris, supaya tinggi kartu antar-alumni seragam. Satu tombol
+ * "Baca selengkapnya" membuka ketiganya sekaligus, dan tombol itu hanya
+ * muncul bila memang ada yang terpotong — jadi kartu dengan isi pendek tetap
+ * bersih. Pengukuran dilakukan selagi kartu tertutup, karena setelah dibuka
+ * tinggi isi dan tinggi kotaknya otomatis sama.
+ */
+function IsiKartu({ item }) {
+  const [terbuka, setTerbuka] = useState(false);
+  const [terpotong, setTerpotong] = useState(false);
+  const namaRef = useRef(null);
+  const jabatanRef = useRef(null);
+  const pesanRef = useRef(null);
+
+  useLayoutEffect(() => {
+    if (terbuka) return undefined;
+
+    const cek = () => {
+      const adaYangTerpotong = [namaRef, jabatanRef, pesanRef].some(
+        ({ current }) => current && current.scrollHeight > current.clientHeight + 1
+      );
+      setTerpotong(adaYangTerpotong);
+    };
+
+    cek();
+    window.addEventListener("resize", cek);
+    return () => window.removeEventListener("resize", cek);
+  }, [item, terbuka]);
+
+  return (
+    <div>
+      {/* Nama */}
+      <motion.div variants={itemVariants}>
+        <h3
+          ref={namaRef}
+          className={`font-heading font-normal text-lg text-heading leading-snug group-hover:text-primary transition-colors ${
+            terbuka ? "" : "line-clamp-1"
+          }`}
+        >
+          {item.name}
+        </h3>
+      </motion.div>
+
+      {/* Jabatan / pekerjaan */}
+      <motion.p
+        ref={jabatanRef}
+        variants={itemVariants}
+        className={`mt-1 text-sm text-body leading-snug ${
+          terbuka ? "" : "line-clamp-1"
+        }`}
+      >
+        {item.occupation}
+      </motion.p>
+
+      {/* Tahun alumni */}
+      <motion.div variants={itemVariants}>
+        <span className="mt-2 inline-block text-[11px] font-semibold tracking-wider text-primary uppercase">
+          {item.role}
+        </span>
+      </motion.div>
+
+      {/* Pesan testimoni */}
+      <motion.div variants={itemVariants} className="mt-3">
+        <p
+          ref={pesanRef}
+          className={`text-sm text-body text-justify leading-relaxed italic ${
+            terbuka ? "" : "line-clamp-8"
+          }`}
+        >
+          &ldquo;{item.description}&rdquo;
+        </p>
+
+        {terpotong && (
+          <button
+            type="button"
+            onClick={() => setTerbuka((kini) => !kini)}
+            className="mt-1.5 text-xs font-semibold text-primary hover:text-[#680000] transition-colors cursor-pointer"
+          >
+            {terbuka ? "Tutup" : "Baca selengkapnya"}
+          </button>
+        )}
+      </motion.div>
+    </div>
+  );
+}
 
 const testimonialData = [
   {
@@ -225,43 +314,8 @@ export default function Testimoni() {
                 variants={containerVariants}
                 className="pt-5 flex flex-col flex-grow justify-between"
               >
-                <div>
-                  {/* Name */}
-                  <motion.div variants={itemVariants}>
-                    <h3 className="font-heading font-normal text-xl sm:text-lg text-heading leading-snug group-hover:text-primary transition-colors line-clamp-1
-                    ">
-                      {item.name}
-                    </h3>
-                    
-                  </motion.div>
-                  <div className="inline-flex items-center space-x-1 text-xs font-semibold tracking-wider text-primary hover:text-[#680000] uppercase transition-colors group/link">
-                    <span>{item.occupation}</span>
-                  </div>
+                <IsiKartu item={item} />
 
-                  <div className="inline-flex items-center space-x-1 text-xs font-semibold tracking-wider text-primary hover:text-[#680000] uppercase transition-colors group/link">
-                    <span>{item.role}</span>
-                  </div>
-
-                  {/* Testimonial */}
-                  <motion.p
-                    variants={itemVariants}
-                    className="mt-3 text-sm text-body text-justify leading-relaxed italic line-clamp-8"
-                  >
-                    &ldquo;{item.description}&rdquo;
-                  </motion.p>
-                </div>
-
-                {/* Role */}
-                <motion.div
-                  variants={itemVariants}
-                  className="pt-4 mt-auto"
-                >
-                  {/* <div className="inline-flex items-center space-x-1 text-xs font-semibold tracking-wider text-primary hover:text-[#680000] uppercase transition-colors group/link">
-                    <span>{item.role}</span>
-
-                    <FiChevronRight className="text-sm transition-transform duration-150 group-hover/link:translate-x-0.5" />
-                  </div> */}
-                </motion.div>
               </motion.div>
             </motion.article>
           ))}
