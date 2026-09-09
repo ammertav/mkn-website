@@ -2,6 +2,7 @@ import { useState, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { FiCalendar, FiChevronLeft, FiChevronRight, FiCheck } from "react-icons/fi";
+import { motion, AnimatePresence } from "framer-motion";
 
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
@@ -10,6 +11,48 @@ import EventCard from "../../components/Event/EventCard";
 import EventDetailModal from "../../components/Event/EventDetailModal";
 import SubmitEventModal from "../../components/Event/SubmitEventModal";
 import { eventData, formatIndoDate, getIndoDayName } from "../../data/eventData";
+
+const viewportSettings = {
+  once: true,
+  amount: 0.15,
+};
+
+const topControlVariants = {
+  hidden: { opacity: 0, y: 14 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.48,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  },
+};
+
+const dateGroupVariants = {
+  hidden: { opacity: 0, y: 22 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.52,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  },
+};
+
+const compactRowVariants = {
+  hidden: { opacity: 0, y: 14 },
+  visible: (i = 0) => ({
+    opacity: 1,
+    y: 0,
+    transition: {
+      delay: typeof i === "number" ? i * 0.05 : 0,
+      duration: 0.42,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  }),
+};
 
 export default function EventPage() {
   const navigate = useNavigate();
@@ -171,20 +214,29 @@ export default function EventPage() {
           {/* Kolom Kanan: Feed Acara (Mentok Kanan Layar Penuh) */}
           <div className="flex-grow min-w-0 bg-white px-4 sm:px-8 lg:px-12 xl:px-16 py-8 sm:py-10 space-y-8">
             {/* Bar Kontrol Atas (Persis Baris Atas di Screenshot Harvard) */}
-            <div className="pb-4 border-b border-gray-200 flex flex-wrap items-center justify-between gap-4">
+            <motion.div
+              variants={topControlVariants}
+              initial="hidden"
+              animate="visible"
+              className="pb-4 border-b border-gray-200 flex flex-wrap items-center justify-between gap-4"
+            >
               {/* Bagian Kiri: Tombol Today */}
               <div className="flex items-center gap-3">
-                <button
+                <motion.button
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
                   type="button"
                   onClick={handleTodayClick}
-                  className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xs border border-gray-300 hover:border-primary hover:text-primary text-heading text-xs sm:text-sm font-medium transition-colors cursor-pointer bg-white"
+                  className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xs border border-gray-300 hover:border-primary hover:text-primary text-heading text-xs sm:text-sm font-medium transition-colors cursor-pointer bg-white shadow-2xs"
                 >
                   <FiCalendar className="w-4 h-4 text-primary" />
                   <span>Hari Ini (Today)</span>
-                </button>
+                </motion.button>
 
                 {/* Tombol Tampilkan Semua */}
-                <button
+                <motion.button
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
                   type="button"
                   onClick={() => {
                     setSelectedDate(null);
@@ -192,62 +244,68 @@ export default function EventPage() {
                   }}
                   className={`text-xs sm:text-sm px-3.5 py-1.5 rounded-xs font-medium transition-colors cursor-pointer ${
                     !selectedDate
-                      ? "bg-primary text-white"
+                      ? "bg-primary text-white shadow-2xs"
                       : "text-body hover:text-heading bg-gray-100 hover:bg-gray-200"
                   }`}
                 >
                   Semua Agenda Mendatang
-                </button>
+                </motion.button>
               </div>
 
-                {/* Bagian Kanan: Navigasi Prev/Next & Toggle Compact View */}
-                <div className="flex items-center gap-5 text-xs sm:text-sm">
-                  {/* Panah Prev / Next */}
-                  <div className="flex items-center gap-3 text-heading font-medium">
-                    <button
-                      type="button"
-                      onClick={() => handleStepDay(-1)}
-                      className="inline-flex items-center gap-1 hover:text-primary transition-colors cursor-pointer"
-                    >
-                      <FiChevronLeft className="w-4 h-4" />
-                      <span>Sebelumnya</span>
-                    </button>
-                    <span className="text-gray-300">|</span>
-                    <button
-                      type="button"
-                      onClick={() => handleStepDay(1)}
-                      className="inline-flex items-center gap-1 hover:text-primary transition-colors cursor-pointer"
-                    >
-                      <span>Berikutnya</span>
-                      <FiChevronRight className="w-4 h-4" />
-                    </button>
-                  </div>
+              {/* Bagian Kanan: Navigasi Prev/Next & Toggle Compact View */}
+              <div className="flex items-center gap-5 text-xs sm:text-sm">
+                {/* Panah Prev / Next */}
+                <div className="flex items-center gap-3 text-heading font-medium">
+                  <button
+                    type="button"
+                    onClick={() => handleStepDay(-1)}
+                    className="inline-flex items-center gap-1 hover:text-primary transition-colors cursor-pointer"
+                  >
+                    <FiChevronLeft className="w-4 h-4" />
+                    <span>Sebelumnya</span>
+                  </button>
+                  <span className="text-gray-300">|</span>
+                  <button
+                    type="button"
+                    onClick={() => handleStepDay(1)}
+                    className="inline-flex items-center gap-1 hover:text-primary transition-colors cursor-pointer"
+                  >
+                    <span>Berikutnya</span>
+                    <FiChevronRight className="w-4 h-4" />
+                  </button>
+                </div>
 
-                  {/* Toggle Compact View */}
-                  <div className="flex items-center gap-2 pl-2 border-l border-gray-200">
-                    <span className="text-gray-600 text-xs">Tampilan Ringkas</span>
-                    <button
-                      type="button"
-                      role="switch"
-                      aria-checked={isCompactView}
-                      onClick={() => setIsCompactView(!isCompactView)}
-                      className={`relative inline-flex h-5 w-9 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none ${
-                        isCompactView ? "bg-primary" : "bg-gray-300"
+                {/* Toggle Compact View */}
+                <div className="flex items-center gap-2 pl-2 border-l border-gray-200">
+                  <span className="text-gray-600 text-xs">Tampilan Ringkas</span>
+                  <button
+                    type="button"
+                    role="switch"
+                    aria-checked={isCompactView}
+                    onClick={() => setIsCompactView(!isCompactView)}
+                    className={`relative inline-flex h-5 w-9 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none ${
+                      isCompactView ? "bg-primary" : "bg-gray-300"
+                    }`}
+                  >
+                    <span
+                      className={`pointer-events-none inline-block h-4 w-4 transform rounded-full bg-white shadow-xs ring-0 transition duration-200 ease-in-out ${
+                        isCompactView ? "translate-x-4" : "translate-x-0"
                       }`}
-                    >
-                      <span
-                        className={`pointer-events-none inline-block h-4 w-4 transform rounded-full bg-white shadow-xs ring-0 transition duration-200 ease-in-out ${
-                          isCompactView ? "translate-x-4" : "translate-x-0"
-                        }`}
-                      />
-                    </button>
-                  </div>
+                    />
+                  </button>
                 </div>
               </div>
+            </motion.div>
 
-              {/* Status Filter Aktif (jika ada filter yang sedang aktif) */}
+            {/* Status Filter Aktif (jika ada filter yang sedang aktif) */}
+            <AnimatePresence>
               {(selectedDate || searchKeyword) && (
-                <div className="flex flex-wrap items-center gap-2 text-xs">
+                <motion.div
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: "auto" }}
+                  exit={{ opacity: 0, height: 0 }}
+                  className="flex flex-wrap items-center gap-2 text-xs overflow-hidden"
+                >
                   <span className="text-gray-500">Filter aktif:</span>
                   {selectedDate && (
                     <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-red-50 text-primary border border-red-200 rounded-full font-medium">
@@ -280,106 +338,127 @@ export default function EventPage() {
                   >
                     Reset semua
                   </button>
-                </div>
+                </motion.div>
               )}
+            </AnimatePresence>
 
-              {/* Feed Agenda (Dikelompokkan Berdasarkan Tanggal) */}
-              {groupedEvents.length > 0 ? (
-                isCompactView ? (
-                  /* COMPACT VIEW: Persis Sesuai Screenshot yang Dikirimkan */
-                  <div className="divide-y divide-gray-200 border-t border-b border-gray-200">
-                    {groupedEvents.map((group) => (
-                      <div
-                        key={group.date}
-                        className="py-5 grid grid-cols-1 md:grid-cols-12 gap-4 lg:gap-8 items-start"
-                      >
-                        {/* Kolom 1: Tanggal & Jumlah Acara */}
-                        <div className="md:col-span-3 lg:col-span-3 space-y-0.5">
-                          <h3 className="font-heading font-bold text-sm sm:text-base text-heading">
-                            {formatIndoDate(group.date)}
-                          </h3>
-                          <p className="text-xs text-gray-500">
-                            {getIndoDayName(group.date)} • {group.events.length} events
-                          </p>
-                        </div>
-
-                        {/* Kolom 2 & 3: Jam dan Judul Acara Berdampingan */}
-                        <div className="md:col-span-9 lg:col-span-9 space-y-3">
-                          {group.events.map((event) => (
-                            <div
-                              key={event.id}
-                              onClick={() => navigate(`/event/${event.slug}`)}
-                              className="flex flex-col sm:flex-row sm:items-baseline gap-2 sm:gap-8 group cursor-pointer"
-                            >
-                              <span className="text-xs sm:text-sm text-body sm:w-44 shrink-0 font-medium">
-                                {event.time}
-                              </span>
-                              <h4 className="font-heading font-bold text-xs sm:text-sm text-heading group-hover:text-primary transition-colors leading-relaxed">
-                                {event.title}
-                              </h4>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                ) : (
-                  /* STANDARD VIEW: Persis Sesuai Screenshot (Tanggal di Kiri, Acara di Kanan) */
-                  <div className="space-y-14 divide-y divide-gray-200/80">
-                    {groupedEvents.map((group) => (
-                      <div
-                        key={group.date}
-                        className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12 pt-12 first:pt-2 items-start"
-                      >
-                        {/* Kolom Kiri: Tanggal & Jumlah Event (Persis Screenshot) */}
-                        <div className="lg:col-span-3 lg:sticky lg:top-32 space-y-1">
-                          <h2 className="text-2xl sm:text-3xl font-heading font-medium text-heading tracking-tight">
-                            {formatIndoDate(group.date)}
-                          </h2>
-                          <p className="text-xs sm:text-sm text-gray-500 font-normal">
-                            {getIndoDayName(group.date)} • {group.events.length} events
-                          </p>
-                        </div>
-
-                        {/* Kolom Kanan: Daftar Acara di Tanggal Ini */}
-                        <div className="lg:col-span-9 space-y-12 sm:space-y-14">
-                          {group.events.map((event) => (
-                            <EventCard
-                              key={event.id}
-                              event={event}
-                              onSelect={() => navigate(`/event/${event.slug}`)}
-                              compact={false}
-                            />
-                          ))}
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                )
-              ) : (
-                /* Empty State Ketika Tidak Ada Event yang Sesuai */
-                <div className="bg-white border border-gray-200 rounded-sm p-12 text-center space-y-4">
-                  <div className="w-12 h-12 rounded-full bg-gray-100 text-gray-400 mx-auto flex items-center justify-center">
-                    <FiCalendar className="w-6 h-6" />
-                  </div>
-                  <h3 className="text-lg font-heading font-bold text-heading">
-                    Tidak Ada Agenda Ditemukan
-                  </h3>
-                  <p className="text-xs sm:text-sm text-gray-500 max-w-md mx-auto">
-                    Tidak ada agenda kegiatan yang cocok dengan kriteria filter atau tanggal yang Anda pilih.
-                  </p>
-                  <div className="pt-2">
-                    <button
-                      type="button"
-                      onClick={handleResetAll}
-                      className="px-5 py-2.5 bg-primary hover:bg-[#680000] text-white text-xs sm:text-sm font-semibold rounded-xs transition-colors cursor-pointer"
+            {/* Feed Agenda (Dikelompokkan Berdasarkan Tanggal) */}
+            {groupedEvents.length > 0 ? (
+              isCompactView ? (
+                /* COMPACT VIEW: Persis Sesuai Screenshot yang Dikirimkan */
+                <div className="divide-y divide-gray-200 border-t border-b border-gray-200">
+                  {groupedEvents.map((group) => (
+                    <motion.div
+                      key={group.date}
+                      initial="hidden"
+                      whileInView="visible"
+                      viewport={viewportSettings}
+                      variants={dateGroupVariants}
+                      className="py-5 grid grid-cols-1 md:grid-cols-12 gap-4 lg:gap-8 items-start hover:bg-gray-50/70 transition-colors px-2 rounded-xs"
                     >
-                      Tampilkan Semua Agenda
-                    </button>
-                  </div>
+                      {/* Kolom 1: Tanggal & Jumlah Acara */}
+                      <div className="md:col-span-3 lg:col-span-3 space-y-0.5">
+                        <h3 className="font-heading font-bold text-sm sm:text-base text-heading">
+                          {formatIndoDate(group.date)}
+                        </h3>
+                        <p className="text-xs text-gray-500">
+                          {getIndoDayName(group.date)} • {group.events.length} events
+                        </p>
+                      </div>
+
+                      {/* Kolom 2 & 3: Jam dan Judul Acara Berdampingan */}
+                      <div className="md:col-span-9 lg:col-span-9 space-y-3">
+                        {group.events.map((event, idx) => (
+                          <motion.div
+                            key={event.id}
+                            custom={idx}
+                            variants={compactRowVariants}
+                            whileHover={{ x: 4, transition: { duration: 0.2 } }}
+                            onClick={() => navigate(`/event/${event.slug}`)}
+                            className="flex flex-col sm:flex-row sm:items-baseline gap-2 sm:gap-8 group cursor-pointer py-1"
+                          >
+                            <span className="text-xs sm:text-sm text-body sm:w-44 shrink-0 font-medium">
+                              {event.time}
+                            </span>
+                            <h4 className="font-heading font-bold text-xs sm:text-sm text-heading group-hover:text-primary transition-colors leading-relaxed">
+                              {event.title}
+                            </h4>
+                          </motion.div>
+                        ))}
+                      </div>
+                    </motion.div>
+                  ))}
                 </div>
-              )}
-            </div>
+              ) : (
+                /* STANDARD VIEW: Persis Sesuai Screenshot (Tanggal di Kiri, Acara di Kanan) */
+                <div className="space-y-14 divide-y divide-gray-200/80">
+                  {groupedEvents.map((group) => (
+                    <motion.div
+                      key={group.date}
+                      initial="hidden"
+                      whileInView="visible"
+                      viewport={viewportSettings}
+                      variants={dateGroupVariants}
+                      className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12 pt-12 first:pt-2 items-start"
+                    >
+                      {/* Kolom Kiri: Tanggal & Jumlah Event (Persis Screenshot) */}
+                      <div className="lg:col-span-3 lg:sticky lg:top-32 space-y-1">
+                        <h2 className="text-2xl sm:text-3xl font-heading font-medium text-heading tracking-tight">
+                          {formatIndoDate(group.date)}
+                        </h2>
+                        <p className="text-xs sm:text-sm text-gray-500 font-normal">
+                          {getIndoDayName(group.date)} • {group.events.length} events
+                        </p>
+                        <div className="w-12 h-[2px] bg-primary mt-3" />
+                      </div>
+
+                      {/* Kolom Kanan: Daftar Acara di Tanggal Ini */}
+                      <div className="lg:col-span-9 space-y-10 sm:space-y-12">
+                        {group.events.map((event, idx) => (
+                          <EventCard
+                            key={event.id}
+                            event={event}
+                            index={idx}
+                            onSelect={() => navigate(`/event/${event.slug}`)}
+                            compact={false}
+                          />
+                        ))}
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
+              )
+            ) : (
+              /* Empty State Ketika Tidak Ada Event yang Sesuai */
+              <motion.div
+                initial={{ opacity: 0, scale: 0.96 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+                className="bg-white border border-gray-200 rounded-sm p-12 text-center space-y-4 shadow-2xs"
+              >
+                <div className="w-12 h-12 rounded-full bg-gray-100 text-gray-400 mx-auto flex items-center justify-center">
+                  <FiCalendar className="w-6 h-6" />
+                </div>
+                <h3 className="text-lg font-heading font-bold text-heading">
+                  Tidak Ada Agenda Ditemukan
+                </h3>
+                <p className="text-xs sm:text-sm text-gray-500 max-w-md mx-auto">
+                  Tidak ada agenda kegiatan yang cocok dengan kriteria filter atau tanggal yang Anda pilih.
+                </p>
+                <div className="pt-2">
+                  <motion.button
+                    whileHover={{ scale: 1.03 }}
+                    whileTap={{ scale: 0.97 }}
+                    type="button"
+                    onClick={handleResetAll}
+                    className="px-5 py-2.5 bg-primary hover:bg-[#680000] text-white text-xs sm:text-sm font-semibold rounded-xs transition-colors cursor-pointer shadow-xs"
+                  >
+                    Tampilkan Semua Agenda
+                  </motion.button>
+                </div>
+              </motion.div>
+            )}
+          </div>
           </div>
 
         {/* Modal Detail Event */}

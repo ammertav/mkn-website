@@ -1,6 +1,30 @@
 import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 
 const JEDA_MS = 3000;
+
+const textContainerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.22,
+      delayChildren: 0.15,
+    },
+  },
+};
+
+const textItemVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.6,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  },
+};
 
 /**
  * Hero halaman dengan latar foto yang berganti sendiri.
@@ -62,19 +86,33 @@ export default function HeroSlideshow({
 
       {/* Content */}
       <div className="relative z-10 max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-16 sm:pt-20 sm:pb-20 lg:pt-24 lg:pb-24">
-        <div className="max-w-3xl space-y-4">
-          <span className="inline-block text-xs font-semibold tracking-widest uppercase text-gray-300">
+        <motion.div
+          variants={textContainerVariants}
+          initial="hidden"
+          animate="visible"
+          className="max-w-3xl space-y-4"
+        >
+          <motion.span
+            variants={textItemVariants}
+            className="inline-block text-xs font-semibold tracking-widest uppercase text-gray-300"
+          >
             {eyebrow}
-          </span>
+          </motion.span>
 
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-heading font-medium text-hero-heading leading-tight tracking-tight">
+          <motion.h1
+            variants={textItemVariants}
+            className="text-4xl sm:text-5xl lg:text-6xl font-heading font-medium text-hero-heading leading-tight tracking-tight"
+          >
             {judul}
-          </h1>
+          </motion.h1>
 
-          <p className="text-sm sm:text-base lg:text-lg text-hero-description font-normal leading-relaxed pt-2">
+          <motion.p
+            variants={textItemVariants}
+            className="text-sm sm:text-base lg:text-lg text-hero-description font-normal leading-relaxed pt-2"
+          >
             {deskripsi}
-          </p>
-        </div>
+          </motion.p>
+        </motion.div>
       </div>
 
       {/* Indicators */}

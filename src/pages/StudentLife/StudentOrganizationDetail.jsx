@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import { FiImage, FiChevronLeft, FiChevronRight } from "react-icons/fi";
+import { motion } from "framer-motion";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import Breadcrumb from "../../components/ui/Breadcrumb";
@@ -12,6 +13,92 @@ import { useLightbox } from "../../components/ui/Lightbox";
 
 /** Jeda geser otomatis galeri, dalam milidetik. */
 const JEDA_GESER = 4000;
+
+const viewportSettings = {
+  once: true,
+  amount: 0.15,
+};
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.05,
+    },
+  },
+};
+
+const heroContentContainer = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.16,
+      delayChildren: 0.1,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.6,
+      ease: [0.16, 1, 0.3, 1],
+    },
+  },
+};
+
+const scaleIn = {
+  hidden: { opacity: 0, scale: 0.96 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: {
+      duration: 0.7,
+      ease: [0.16, 1, 0.3, 1],
+    },
+  },
+};
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.5,
+      ease: "easeOut",
+    },
+  },
+};
+
+const lineVariants = {
+  hidden: { scaleX: 0, originX: 0 },
+  visible: {
+    scaleX: 1,
+    originX: 0,
+    transition: {
+      duration: 0.7,
+      ease: [0.16, 1, 0.3, 1],
+    },
+  },
+};
+
+const galleryCarouselContainer = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.18,
+      delayChildren: 0.1,
+    },
+  },
+};
 
 /**
  * Galeri geser mendatar.
@@ -112,10 +199,14 @@ function GaleriGeser({ foto }) {
       aria-roledescription="carousel"
       aria-label="Galeri kegiatan"
     >
-      <div
+      <motion.div
         ref={trekRef}
         tabIndex={0}
         onScroll={perbaruiPosisi}
+        variants={galleryCarouselContainer}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
         // Klik didelegasikan dari trek: kartu yang diklik dicari lewat
         // data-indeks, yang sekaligus menyaring kartu tanpa foto.
         onClick={(e) => {
@@ -127,8 +218,9 @@ function GaleriGeser({ foto }) {
         className="flex w-full overflow-x-auto snap-x snap-mandatory scrollbar-none select-none outline-none"
       >
         {foto.map((item) => (
-          <div
+          <motion.div
             key={item.id}
+            variants={cardVariants}
             data-indeks={
               item.image
                 ? grupFoto.findIndex((f) => f.src === item.image)
@@ -161,9 +253,9 @@ function GaleriGeser({ foto }) {
                 </span>
               </div>
             )}
-          </div>
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
 
       {/* Navigasi — bentuknya disamakan dengan galeri testimoni di beranda:
           panah kiri/kanan mengapit titik halaman. Muncul hanya bila fotonya
@@ -171,14 +263,16 @@ function GaleriGeser({ foto }) {
       {posisi.jumlah > 1 && (
         <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mt-6 flex items-center justify-center gap-5">
-            <button
+            <motion.button
               type="button"
               onClick={() => geser(-1)}
+              whileHover={{ scale: 1.08 }}
+              whileTap={{ scale: 0.95 }}
               aria-label="Foto sebelumnya"
-              className="w-10 h-10 flex items-center justify-center border border-gray-300 text-heading hover:border-primary hover:bg-primary hover:text-white rounded-xs transition-colors cursor-pointer active:scale-95"
+              className="w-10 h-10 flex items-center justify-center border border-gray-300 text-heading hover:border-primary hover:bg-primary hover:text-white rounded-xs transition-colors cursor-pointer"
             >
               <FiChevronLeft className="text-lg" />
-            </button>
+            </motion.button>
 
             <div className="flex items-center gap-2.5">
               {Array.from({ length: posisi.jumlah }, (_, i) => (
@@ -197,14 +291,16 @@ function GaleriGeser({ foto }) {
               ))}
             </div>
 
-            <button
+            <motion.button
               type="button"
               onClick={() => geser(1)}
+              whileHover={{ scale: 1.08 }}
+              whileTap={{ scale: 0.95 }}
               aria-label="Foto berikutnya"
-              className="w-10 h-10 flex items-center justify-center border border-gray-300 text-heading hover:border-primary hover:bg-primary hover:text-white rounded-xs transition-colors cursor-pointer active:scale-95"
+              className="w-10 h-10 flex items-center justify-center border border-gray-300 text-heading hover:border-primary hover:bg-primary hover:text-white rounded-xs transition-colors cursor-pointer"
             >
               <FiChevronRight className="text-lg" />
-            </button>
+            </motion.button>
           </div>
         </div>
       )}
@@ -215,9 +311,12 @@ function GaleriGeser({ foto }) {
 /** Judul seksi dengan garis tebal, dipakai berulang di kolom utama. */
 function JudulSeksi({ children }) {
   return (
-    <h2 className="text-2xl sm:text-3xl font-heading font-bold text-heading pb-3 mb-6 border-b-2 border-gray-900">
+    <motion.h2
+      variants={itemVariants}
+      className="text-2xl sm:text-3xl font-heading font-bold text-heading pb-3 mb-6 border-b-2 border-gray-900"
+    >
       {children}
-    </h2>
+    </motion.h2>
   );
 }
 
@@ -274,9 +373,14 @@ export default function StudentOrganizationDetail() {
         {/* ========================================================================= */}
         {/* BREADCRUMB (Aligned with 1600px Max-Width) */}
         {/* ========================================================================= */}
-        <div className="w-full flex-grow max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 pt-8 sm:pt-12">
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
+          className="w-full flex-grow max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 pt-8 sm:pt-12"
+        >
           <Breadcrumb />
-        </div>
+        </motion.div>
 
         {/* ========================================================================= */}
         {/* HERO SECTION: Asymmetrical Layout (Left in Container, Right Full Bleed) */}
@@ -284,38 +388,66 @@ export default function StudentOrganizationDetail() {
         <section className="w-full border-b border-gray-100/80">
           <div className="grid grid-cols-1 lg:grid-cols-12 items-stretch">
             {/* Left Info Column (7 cols): Aligned with 1600px grid margin */}
-            <div className="lg:col-span-7 pl-4 sm:pl-6 lg:pl-[max(2rem,calc((100vw-1600px)/2+2rem))] pr-4 sm:pr-8 lg:pr-14 py-6 sm:py-10 space-y-6 flex flex-col justify-center">
-              <div>
-                <span className="text-[11px] sm:text-xs font-bold tracking-[0.16em] uppercase text-primary block mb-2">
+            <motion.div
+              variants={heroContentContainer}
+              initial="hidden"
+              animate="visible"
+              className="lg:col-span-7 pl-4 sm:pl-6 lg:pl-[max(2rem,calc((100vw-1600px)/2+2rem))] pr-4 sm:pr-8 lg:pr-14 py-6 sm:py-10 space-y-6 flex flex-col justify-center"
+            >
+              <motion.div variants={heroContentContainer}>
+                <motion.span
+                  variants={itemVariants}
+                  className="text-[11px] sm:text-xs font-bold tracking-[0.16em] uppercase text-primary block mb-2"
+                >
                   {organization.category}
-                </span>
-                <h1 className="text-3xl sm:text-4xl lg:text-[44px] font-heading font-bold text-heading leading-[1.15] tracking-normal">
+                </motion.span>
+                <motion.h1
+                  variants={itemVariants}
+                  className="text-3xl sm:text-4xl lg:text-[44px] font-heading font-bold text-heading leading-[1.15] tracking-normal"
+                >
                   {organization.shortName}
-                </h1>
-                <p className="mt-2 text-sm sm:text-base font-heading text-special leading-snug max-w-xl">
+                </motion.h1>
+                <motion.p
+                  variants={itemVariants}
+                  className="mt-2 text-sm sm:text-base font-heading text-special leading-snug max-w-xl"
+                >
                   {organization.title}
-                </p>
-                <div className="w-full max-w-xl h-[2px] bg-primary mt-4 mb-5" />
-                <p className="text-sm sm:text-base text-body text-justify leading-relaxed max-w-xl">
+                </motion.p>
+                <motion.div
+                  variants={lineVariants}
+                  className="w-full max-w-xl h-[2px] bg-primary mt-4 mb-5"
+                />
+                <motion.p
+                  variants={itemVariants}
+                  className="text-sm sm:text-base text-body text-justify leading-relaxed max-w-xl"
+                >
                   {organization.description}
-                </p>
-              </div>
+                </motion.p>
+              </motion.div>
 
               {/* Metadata Table */}
               {organization.meta?.length > 0 && (
-                <div className="w-full max-w-xl border-t border-gray-200 divide-y divide-gray-200 text-xs sm:text-sm pt-1">
+                <motion.div
+                  variants={itemVariants}
+                  className="w-full max-w-xl border-t border-gray-200 divide-y divide-gray-200 text-xs sm:text-sm pt-1"
+                >
                   {organization.meta.map((m) => (
                     <div key={m.label} className="py-2.5 flex items-center justify-between gap-4">
                       <span className="text-body font-normal">{m.label}</span>
                       <span className="font-semibold text-heading text-right">{m.value}</span>
                     </div>
                   ))}
-                </div>
+                </motion.div>
               )}
-            </div>
+            </motion.div>
 
             {/* Right Photo Column (5 cols): Full Bleed Right */}
-            <div className="lg:col-span-5 w-full bg-[#eaeaea] relative min-h-[300px] sm:min-h-[380px] lg:min-h-full overflow-hidden flex items-center justify-center">
+            <motion.div
+              variants={scaleIn}
+              initial="hidden"
+              animate="visible"
+              className="lg:col-span-5 w-full bg-[#eaeaea] relative min-h-[300px] sm:min-h-[380px] lg:min-h-full overflow-hidden flex items-center justify-center"
+            >
               <ZoomableImg
                 src={organization.image}
                 alt={organization.imageCaption || organization.title}
@@ -323,7 +455,7 @@ export default function StudentOrganizationDetail() {
                 className="w-full h-full object-cover object-center rounded-md hover:scale-105 transition-transform duration-500"
                 eager
               />
-            </div>
+            </motion.div>
           </div>
         </section>
 
@@ -336,48 +468,75 @@ export default function StudentOrganizationDetail() {
             <div className="lg:col-span-8 space-y-12 sm:space-y-16 text-sm sm:text-base text-body leading-relaxed">
               {/* SEJARAH */}
               {organization.narrative?.length > 0 && (
-                <div>
+                <motion.div
+                  variants={containerVariants}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={viewportSettings}
+                >
                   <JudulSeksi>Sejarah</JudulSeksi>
-                  <div className="space-y-5 text-justify">
+                  <motion.div variants={itemVariants} className="space-y-5 text-justify">
                     {organization.narrative.map((paragraph, idx) => (
                       <p key={idx}>{paragraph}</p>
                     ))}
-                  </div>
-                </div>
+                  </motion.div>
+                </motion.div>
               )}
 
               {/* FUNGSI DAN TUJUAN */}
               {organization.fungsi?.length > 0 && (
-                <div>
+                <motion.div
+                  variants={containerVariants}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={viewportSettings}
+                >
                   <JudulSeksi>Fungsi dan Tujuan</JudulSeksi>
-                  <div className="grid grid-cols-1 sm:grid-cols-3 border-t border-l border-gray-200 bg-white">
+                  <motion.div
+                    variants={containerVariants}
+                    className="grid grid-cols-1 sm:grid-cols-3 border-t border-l border-gray-200 bg-white"
+                  >
                     {organization.fungsi.map((fungsi, idx) => (
-                      <div
+                      <motion.div
                         key={fungsi}
-                        className="p-5 sm:p-6 border-r border-b border-gray-200 space-y-2"
+                        variants={cardVariants}
+                        whileHover={{ y: -3, transition: { duration: 0.2 } }}
+                        className="p-5 sm:p-6 border-r border-b border-gray-200 space-y-2 transition-colors hover:bg-neutral-50/70"
                       >
                         <span className="text-sm font-bold text-primary tabular-nums">
                           {String(idx + 1).padStart(2, "0")}
                         </span>
                         <p className="text-sm text-body leading-relaxed">{fungsi}</p>
-                      </div>
+                      </motion.div>
                     ))}
-                  </div>
+                  </motion.div>
                   {organization.tujuan && (
-                    <p className="mt-6 text-sm sm:text-base text-justify leading-relaxed">
+                    <motion.p
+                      variants={itemVariants}
+                      className="mt-6 text-sm sm:text-base text-justify leading-relaxed"
+                    >
                       {organization.tujuan}
-                    </p>
+                    </motion.p>
                   )}
-                </div>
+                </motion.div>
               )}
 
               {/* PROGRAM KERJA — dikelompokkan per divisi, sesuai hasil RAKER */}
               {organization.programKerja?.length > 0 && (
-                <div>
+                <motion.div
+                  variants={containerVariants}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={viewportSettings}
+                >
                   <JudulSeksi>Program Kerja {organization.periode}</JudulSeksi>
                   <div className="space-y-8">
                     {organization.programKerja.map((group, idx) => (
-                      <div key={group.divisi}>
+                      <motion.div
+                        key={group.divisi}
+                        variants={cardVariants}
+                        className="p-4 sm:p-5 rounded-xs bg-white border border-gray-100 hover:border-gray-200 hover:shadow-2xs transition-all"
+                      >
                         <div className="flex items-baseline gap-3 pb-2 mb-3 border-b border-gray-200">
                           <span className="font-heading text-lg font-bold text-primary tabular-nums leading-none">
                             {String(idx + 1).padStart(2, "0")}
@@ -394,10 +553,10 @@ export default function StudentOrganizationDetail() {
                             </li>
                           ))}
                         </ul>
-                      </div>
+                      </motion.div>
                     ))}
                   </div>
-                </div>
+                </motion.div>
               )}
             </div>
 
@@ -405,40 +564,65 @@ export default function StudentOrganizationDetail() {
             <aside className="lg:col-span-4 space-y-8 pl-0 lg:pl-6 lg:border-l border-gray-200 lg:sticky lg:top-[calc(var(--header-h)+0.5rem)] lg:self-start">
               {/* RINGKASAN */}
               {organization.summary?.length > 0 && (
-                <div className="space-y-4">
-                  <h3 className="text-[11px] font-bold tracking-[0.16em] uppercase text-body pb-3 border-b border-gray-200">
+                <motion.div
+                  variants={containerVariants}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={viewportSettings}
+                  className="space-y-4"
+                >
+                  <motion.h3
+                    variants={itemVariants}
+                    className="text-[11px] font-bold tracking-[0.16em] uppercase text-body pb-3 border-b border-gray-200"
+                  >
                     RINGKASAN
-                  </h3>
+                  </motion.h3>
                   <div className="space-y-5">
                     {organization.summary.map((stat) => (
-                      <div key={stat.label} className="space-y-0.5">
+                      <motion.div
+                        key={stat.label}
+                        variants={itemVariants}
+                        whileHover={{ x: 3, transition: { duration: 0.2 } }}
+                        className="space-y-0.5"
+                      >
                         <div className="font-heading text-3xl sm:text-4xl font-bold text-primary leading-none">
                           {stat.number}
                         </div>
                         <div className="text-xs sm:text-sm text-body">{stat.label}</div>
-                      </div>
+                      </motion.div>
                     ))}
                   </div>
-                </div>
+                </motion.div>
               )}
 
               {/* LANDASAN */}
               {organization.landasan?.length > 0 && (
-                <div className="space-y-4 pt-2">
-                  <h3 className="text-[11px] font-bold tracking-[0.16em] uppercase text-body pb-3 border-b border-gray-200">
+                <motion.div
+                  variants={containerVariants}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={viewportSettings}
+                  className="space-y-4 pt-2"
+                >
+                  <motion.h3
+                    variants={itemVariants}
+                    className="text-[11px] font-bold tracking-[0.16em] uppercase text-body pb-3 border-b border-gray-200"
+                  >
                     LANDASAN
-                  </h3>
+                  </motion.h3>
                   <ul className="space-y-2">
                     {organization.landasan.map((nilai) => (
-                      <li
+                      <motion.li
                         key={nilai}
-                        className="text-xs sm:text-sm text-heading font-medium border-l-2 border-primary pl-3 py-0.5"
+                        variants={itemVariants}
+                        whileHover={{ x: 4, transition: { duration: 0.2 } }}
+                        className="text-xs sm:text-sm text-heading font-medium border-l-2 border-primary pl-3 py-0.5 transition-colors"
                       >
                         {nilai}
-                      </li>
+                      </motion.li>
                     ))}
                   </ul>
-                </div>
+                </motion.div>
               )}
             </aside>
           </div>
@@ -453,30 +637,45 @@ export default function StudentOrganizationDetail() {
         {/* STRUKTUR ORGANISASI (Pengurus Inti & Divisi) */}
         {/* ========================================================================= */}
         <div className="w-full flex-grow max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 pb-12 sm:pb-16">
-          <section>
+          <motion.section
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportSettings}
+          >
             <JudulSeksi>Struktur Organisasi {organization.periode}</JudulSeksi>
 
             {/* Pengurus Inti — tanpa foto, program studi belum menyerahkan pas foto */}
             {organization.pengurusInti?.length > 0 && (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 border-t border-l border-gray-200 bg-white">
+              <motion.div
+                variants={containerVariants}
+                className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 border-t border-l border-gray-200 bg-white"
+              >
                 {organization.pengurusInti.map((member) => (
-                  <div
+                  <motion.div
                     key={member.role}
-                    className="px-5 py-4 sm:px-6 sm:py-5 border-r border-b border-gray-200"
+                    variants={cardVariants}
+                    whileHover={{ y: -2, transition: { duration: 0.2 } }}
+                    className="px-5 py-4 sm:px-6 sm:py-5 border-r border-b border-gray-200 transition-colors hover:bg-neutral-50/70"
                   >
                     <BarisNama {...member} />
-                  </div>
+                  </motion.div>
                 ))}
-              </div>
+              </motion.div>
             )}
 
             {/* Divisi beserta koordinator dan anggotanya */}
             {organization.divisi?.length > 0 && (
-              <div className="mt-10 grid grid-cols-1 lg:grid-cols-3 gap-6">
+              <motion.div
+                variants={containerVariants}
+                className="mt-10 grid grid-cols-1 lg:grid-cols-3 gap-6"
+              >
                 {organization.divisi.map((div) => (
-                  <div
+                  <motion.div
                     key={div.nama}
-                    className="bg-white border border-gray-200 rounded-xs p-6 flex flex-col"
+                    variants={cardVariants}
+                    whileHover={{ y: -4, transition: { duration: 0.25 } }}
+                    className="bg-white border border-gray-200 rounded-xs p-6 flex flex-col hover:shadow-sm hover:border-gray-300 transition-all"
                   >
                     <h3 className="font-heading font-bold text-base sm:text-lg text-heading leading-snug pb-3 border-b-2 border-primary">
                       {div.nama}
@@ -507,21 +706,29 @@ export default function StudentOrganizationDetail() {
                         ))}
                       </ol>
                     </div>
-                  </div>
+                  </motion.div>
                 ))}
-              </div>
+              </motion.div>
             )}
-          </section>
+          </motion.section>
 
           {/* Navigasi Kemahasiswaan Lainnya */}
-          <div className="mt-14 pt-8 border-t border-gray-200 flex flex-wrap gap-4 items-center justify-end text-xs sm:text-sm">
-            <Link
-              to="/mahasiswa/akomodasi"
-              className="inline-flex items-center font-semibold text-primary hover:underline transition-colors"
-            >
-              Informasi Akomodasi Mahasiswa →
-            </Link>
-          </div>
+          <motion.div
+            variants={itemVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportSettings}
+            className="mt-14 pt-8 border-t border-gray-200 flex flex-wrap gap-4 items-center justify-end text-xs sm:text-sm"
+          >
+            <motion.div whileHover={{ x: 4 }} transition={{ duration: 0.2 }}>
+              <Link
+                to="/mahasiswa/akomodasi"
+                className="inline-flex items-center font-semibold text-primary hover:underline transition-colors"
+              >
+                Informasi Akomodasi Mahasiswa →
+              </Link>
+            </motion.div>
+          </motion.div>
         </div>
 
         <Footer />
@@ -529,3 +736,4 @@ export default function StudentOrganizationDetail() {
     </>
   );
 }
+

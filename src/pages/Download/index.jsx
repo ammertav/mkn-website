@@ -1,5 +1,6 @@
 import { useState, useMemo } from "react";
 import { Helmet } from "react-helmet-async";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   FiDownload,
   FiSearch,
@@ -13,6 +14,84 @@ import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import Breadcrumb from "../../components/ui/Breadcrumb";
 import { downloadHeader, downloadGroups } from "../../data/downloadData";
+
+/* =========================
+   Animation Settings
+========================= */
+
+const viewportSettings = {
+  once: true,
+  amount: 0.15,
+};
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.12,
+    },
+  },
+};
+
+const headerItemVariants = {
+  hidden: { opacity: 0, x: -30 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: { duration: 0.8, ease: "easeOut" },
+  },
+};
+
+const fadeUpVariants = {
+  hidden: { opacity: 0, y: 24 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.65, ease: "easeOut" },
+  },
+};
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 28 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: "easeOut" },
+  },
+};
+
+const accordionContentVariants = {
+  hidden: { opacity: 0, height: 0 },
+  visible: {
+    opacity: 1,
+    height: "auto",
+    transition: { duration: 0.35, ease: "easeOut" },
+  },
+  exit: {
+    opacity: 0,
+    height: 0,
+    transition: { duration: 0.25, ease: "easeIn" },
+  },
+};
+
+const tbodyVariants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.07,
+    },
+  },
+};
+
+const tableRowVariants = {
+  hidden: { opacity: 0, x: -16 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: { duration: 0.45, ease: "easeOut" },
+  },
+};
 
 export default function Download() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -86,7 +165,7 @@ export default function Download() {
     <>
       <Helmet>
         <html lang="id" />
-        <title>Pusat Unduhan & Dokumen Hukum | MKn UNISSULA</title>
+        <title>Pusat Unduhan &amp; Dokumen Hukum | MKn UNISSULA</title>
         <meta
           name="description"
           content="Repositori resmi unduhan dokumen akademik MKn UNISSULA dan kompilasi lengkap Peraturan Perundang-undangan Notaris dan PPAT (UU, PP, Permen, Fatwa, Peraturan Perkumpulan INI-IPPAT)."
@@ -101,21 +180,48 @@ export default function Download() {
           <Breadcrumb />
 
           {/* Header Title Section */}
-          <div className="mb-10 sm:mb-12">
-            <span className="text-[11px] font-bold tracking-[0.16em] uppercase text-primary block mb-2">
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportSettings}
+            className="mb-10 sm:mb-12"
+          >
+            <motion.span
+              variants={headerItemVariants}
+              className="text-[11px] font-bold tracking-[0.16em] uppercase text-primary block mb-2"
+            >
               {downloadHeader.category}
-            </span>
-            <h1 className="text-3xl sm:text-4xl md:text-[42px] font-heading font-bold text-heading tracking-normal">
+            </motion.span>
+            <motion.h1
+              variants={headerItemVariants}
+              className="text-3xl sm:text-4xl md:text-[42px] font-heading font-bold text-heading tracking-normal"
+            >
               {downloadHeader.title}
-            </h1>
-            <div className="w-full h-[2px] bg-primary mt-4 mb-5" />
-            <p className="text-sm sm:text-base text-body leading-relaxed">
+            </motion.h1>
+            <motion.div
+              initial={{ width: 0 }}
+              whileInView={{ width: "100%" }}
+              transition={{ duration: 0.9, ease: "easeOut", delay: 0.15 }}
+              viewport={viewportSettings}
+              className="h-[2px] bg-primary mt-4 mb-5"
+            />
+            <motion.p
+              variants={fadeUpVariants}
+              className="text-sm sm:text-base text-body leading-relaxed"
+            >
               {downloadHeader.description}
-            </p>
-          </div>
+            </motion.p>
+          </motion.div>
 
           {/* Search, Filter Bar & Stats */}
-          <div className="bg-white border border-gray-200 rounded-sm p-4 sm:p-6 mb-8 shadow-sm space-y-4">
+          <motion.div
+            variants={fadeUpVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportSettings}
+            className="bg-white border border-gray-200 rounded-sm p-4 sm:p-6 mb-8 shadow-sm space-y-4"
+          >
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
               {/* Search Box */}
               <div className="relative flex-1 max-w-xl">
@@ -166,9 +272,11 @@ export default function Download() {
                   { id: "peraturan-menteri", label: "Peraturan Menteri" },
                   { id: "peraturan-perkumpulan", label: "INI & IPPAT" },
                 ].map((tab) => (
-                  <button
+                  <motion.button
                     key={tab.id}
                     onClick={() => setSelectedTab(tab.id)}
+                    whileHover={{ scale: 1.03 }}
+                    whileTap={{ scale: 0.97 }}
                     className={`px-3 py-1 text-xs font-semibold rounded-sm transition-colors ${
                       selectedTab === tab.id
                         ? "bg-primary text-white"
@@ -176,7 +284,7 @@ export default function Download() {
                     }`}
                   >
                     {tab.label}
-                  </button>
+                  </motion.button>
                 ))}
               </div>
 
@@ -184,12 +292,15 @@ export default function Download() {
                 Menampilkan <strong className="text-heading font-bold">{totalFilteredCount}</strong> dari {totalDocsCount} dokumen
               </div>
             </div>
-          </div>
+          </motion.div>
 
           {/* Groups & Documents Accordion */}
           <div className="space-y-6 sm:space-y-8">
             {filteredGroups.length === 0 ? (
-              <div className="bg-white border border-gray-200 rounded-sm p-12 text-center space-y-3">
+              <motion.div
+                variants={fadeUpVariants}
+                className="bg-white border border-gray-200 rounded-sm p-12 text-center space-y-3"
+              >
                 <FiInfo className="w-8 h-8 text-gray-400 mx-auto" />
                 <h3 className="text-base font-heading font-bold text-heading">
                   Dokumen Tidak Ditemukan
@@ -206,17 +317,21 @@ export default function Download() {
                 >
                   Reset Pencarian
                 </button>
-              </div>
+              </motion.div>
             ) : (
               filteredGroups.map((group) => {
                 const isOpen = openSections[group.id] ?? true;
                 const isAkademik = group.id === "akademik";
 
                 return (
-                  <div
+                  <motion.div
                     key={group.id}
                     id={group.id}
-                    className="bg-white border border-gray-200 rounded-sm shadow-sm overflow-hidden transition-all"
+                    variants={cardVariants}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, amount: 0.08 }}
+                    className="bg-white border border-gray-200 rounded-sm shadow-sm overflow-hidden"
                   >
                     {/* Accordion Header */}
                     <button
@@ -255,119 +370,147 @@ export default function Download() {
                         <span className="text-xs text-gray-500 font-medium hidden sm:inline">
                           {isOpen ? "Sembunyikan" : "Tampilkan"}
                         </span>
-                        <FiChevronDown
-                          className={`w-5 h-5 text-gray-500 transition-transform duration-200 ${
-                            isOpen ? "rotate-180 text-primary" : ""
-                          }`}
-                        />
+                        <motion.span
+                          animate={{ rotate: isOpen ? 180 : 0 }}
+                          transition={{ duration: 0.25, ease: "easeInOut" }}
+                          className={`flex items-center ${isOpen ? "text-primary" : "text-gray-500"}`}
+                        >
+                          <FiChevronDown className="w-5 h-5" />
+                        </motion.span>
                       </div>
                     </button>
 
                     {/* Accordion Content Table */}
-                    {isOpen && (
-                      <div className="overflow-x-auto">
-                        <table className="w-full text-left border-collapse">
-                          <thead>
-                            <tr className="border-b border-gray-200 bg-gray-50/40 text-[11px] font-bold text-heading uppercase tracking-wider">
-                              <th className="py-3 px-5 sm:px-6 w-1/2">
-                                NAMA DOKUMEN / REGULASI
-                              </th>
-                              <th className="py-3 px-5 sm:px-6 w-36">
-                                KATEGORI
-                              </th>
-                              <th className="py-3 px-5 sm:px-6 w-28 text-center sm:text-left">
-                                FORMAT / UKURAN
-                              </th>
-                              <th className="py-3 px-5 sm:px-6 w-24">
-                                TAHUN
-                              </th>
-                              <th className="py-3 px-5 sm:px-6 w-40 text-center sm:text-right">
-                                UNDUH
-                              </th>
-                            </tr>
-                          </thead>
-                          <tbody className="divide-y divide-gray-100 text-xs sm:text-sm">
-                            {group.documents.map((doc) => (
-                              <tr
-                                key={doc.id}
-                                className="hover:bg-gray-50/80 transition-colors"
+                    <AnimatePresence initial={false}>
+                      {isOpen && (
+                        <motion.div
+                          key="content"
+                          variants={accordionContentVariants}
+                          initial="hidden"
+                          animate="visible"
+                          exit="exit"
+                          className="overflow-hidden"
+                        >
+                          <div className="overflow-x-auto">
+                            <table className="w-full text-left border-collapse">
+                              <thead>
+                                <tr className="border-b border-gray-200 bg-gray-50/40 text-[11px] font-bold text-heading uppercase tracking-wider">
+                                  <th className="py-3 px-5 sm:px-6 w-1/2">
+                                    NAMA DOKUMEN / REGULASI
+                                  </th>
+                                  <th className="py-3 px-5 sm:px-6 w-36">
+                                    KATEGORI
+                                  </th>
+                                  <th className="py-3 px-5 sm:px-6 w-28 text-center sm:text-left">
+                                    FORMAT / UKURAN
+                                  </th>
+                                  <th className="py-3 px-5 sm:px-6 w-24">
+                                    TAHUN
+                                  </th>
+                                  <th className="py-3 px-5 sm:px-6 w-40 text-center sm:text-right">
+                                    UNDUH
+                                  </th>
+                                </tr>
+                              </thead>
+                              <motion.tbody
+                                className="divide-y divide-gray-100 text-xs sm:text-sm"
+                                variants={tbodyVariants}
+                                initial="hidden"
+                                whileInView="visible"
+                                viewport={{ once: true, amount: 0.1 }}
                               >
-                                {/* Title */}
-                                <td className="py-4 px-5 sm:px-6 font-medium text-heading">
-                                  <div className="flex items-start gap-2.5">
-                                    <span className="text-primary font-bold text-xs mt-0.5 shrink-0">
-                                      •
-                                    </span>
-                                    <span className="leading-snug">
-                                      {doc.title}
-                                    </span>
-                                  </div>
-                                </td>
+                                {group.documents.map((doc) => (
+                                  <motion.tr
+                                    key={doc.id}
+                                    variants={tableRowVariants}
+                                    className="hover:bg-gray-50/80 transition-colors"
+                                  >
+                                    {/* Title */}
+                                    <td className="py-4 px-5 sm:px-6 font-medium text-heading">
+                                      <div className="flex items-start gap-2.5">
+                                        <span className="text-primary font-bold text-xs mt-0.5 shrink-0">
+                                          •
+                                        </span>
+                                        <span className="leading-snug">
+                                          {doc.title}
+                                        </span>
+                                      </div>
+                                    </td>
 
-                                {/* Category */}
-                                <td className="py-4 px-5 sm:px-6 text-body whitespace-nowrap">
-                                  <span className="inline-block px-2 py-0.5 bg-stone-100 text-gray-700 text-[11px] font-medium rounded">
-                                    {doc.category}
-                                  </span>
-                                </td>
+                                    {/* Category */}
+                                    <td className="py-4 px-5 sm:px-6 text-body whitespace-nowrap">
+                                      <span className="inline-block px-2 py-0.5 bg-stone-100 text-gray-700 text-[11px] font-medium rounded">
+                                        {doc.category}
+                                      </span>
+                                    </td>
 
-                                {/* Format & Size */}
-                                <td className="py-4 px-5 sm:px-6 text-body whitespace-nowrap text-center sm:text-left">
-                                  <span className="font-semibold text-heading uppercase text-xs">
-                                    {doc.format}
-                                  </span>
-                                  {doc.size && (
-                                    <span className="text-gray-400 text-xs ml-1.5">
-                                      ({doc.size})
-                                    </span>
-                                  )}
-                                </td>
+                                    {/* Format & Size */}
+                                    <td className="py-4 px-5 sm:px-6 text-body whitespace-nowrap text-center sm:text-left">
+                                      <span className="font-semibold text-heading uppercase text-xs">
+                                        {doc.format}
+                                      </span>
+                                      {doc.size && (
+                                        <span className="text-gray-400 text-xs ml-1.5">
+                                          ({doc.size})
+                                        </span>
+                                      )}
+                                    </td>
 
-                                {/* Year */}
-                                <td className="py-4 px-5 sm:px-6 text-body whitespace-nowrap text-xs">
-                                  {doc.updatedAt || "-"}
-                                </td>
+                                    {/* Year */}
+                                    <td className="py-4 px-5 sm:px-6 text-body whitespace-nowrap text-xs">
+                                      {doc.updatedAt || "-"}
+                                    </td>
 
-                                {/* Action Download Button */}
-                                <td className="py-4 px-5 sm:px-6 whitespace-nowrap text-center sm:text-right">
-                                  {doc.url ? (
-                                    <a
-                                      href={doc.url}
-                                      target="_blank"
-                                      rel="noopener noreferrer"
-                                      download
-                                      className="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-primary text-white text-xs font-semibold rounded hover:bg-primary-dark transition-colors shadow-sm"
-                                    >
-                                      <FiDownload className="w-3.5 h-3.5" />
-                                      <span>Unduh {doc.format}</span>
-                                    </a>
-                                  ) : (
-                                    <button
-                                      type="button"
-                                      disabled
-                                      aria-disabled="true"
-                                      className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-gray-100 text-gray-400 text-xs font-medium rounded border border-gray-200 cursor-not-allowed select-none"
-                                      title="Dokumen berkas belum tersedia untuk diunduh"
-                                    >
-                                      <FiDownload className="w-3.5 h-3.5 text-gray-400" />
-                                      <span>Belum tersedia</span>
-                                    </button>
-                                  )}
-                                </td>
-                              </tr>
-                            ))}
-                          </tbody>
-                        </table>
-                      </div>
-                    )}
-                  </div>
+                                    {/* Action Download Button */}
+                                    <td className="py-4 px-5 sm:px-6 whitespace-nowrap text-center sm:text-right">
+                                      {doc.url ? (
+                                        <motion.a
+                                          href={doc.url}
+                                          target="_blank"
+                                          rel="noopener noreferrer"
+                                          download
+                                          whileHover={{ scale: 1.05 }}
+                                          whileTap={{ scale: 0.96 }}
+                                          className="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-primary text-white text-xs font-semibold rounded hover:bg-primary-dark transition-colors shadow-sm"
+                                        >
+                                          <FiDownload className="w-3.5 h-3.5" />
+                                          <span>Unduh {doc.format}</span>
+                                        </motion.a>
+                                      ) : (
+                                        <button
+                                          type="button"
+                                          disabled
+                                          aria-disabled="true"
+                                          className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-gray-100 text-gray-400 text-xs font-medium rounded border border-gray-200 cursor-not-allowed select-none"
+                                          title="Dokumen berkas belum tersedia untuk diunduh"
+                                        >
+                                          <FiDownload className="w-3.5 h-3.5 text-gray-400" />
+                                          <span>Belum tersedia</span>
+                                        </button>
+                                      )}
+                                    </td>
+                                  </motion.tr>
+                                ))}
+                              </motion.tbody>
+                            </table>
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </motion.div>
                 );
               })
             )}
           </div>
 
           {/* Help & Information Callout Banner */}
-          <div className="mt-12 p-6 bg-white border border-gray-200 rounded-sm shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <motion.div
+            variants={fadeUpVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportSettings}
+            className="mt-12 p-6 bg-white border border-gray-200 rounded-sm shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4"
+          >
             <div className="flex items-start gap-3.5">
               <span className="w-10 h-10 rounded-full bg-red-50 text-primary flex items-center justify-center shrink-0">
                 <FiFolder className="w-5 h-5" />
@@ -382,13 +525,15 @@ export default function Download() {
               </div>
             </div>
 
-            <a
+            <motion.a
               href="mailto:mkn@unissula.ac.id"
+              whileHover={{ scale: 1.04 }}
+              whileTap={{ scale: 0.97 }}
               className="inline-flex items-center justify-center px-5 py-2.5 bg-primary text-white text-xs font-bold rounded uppercase tracking-wider hover:bg-primary-dark transition-colors shrink-0"
             >
               Hubungi Sekretariat
-            </a>
-          </div>
+            </motion.a>
+          </motion.div>
         </div>
 
         <Footer />

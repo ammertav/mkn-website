@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import { useParams, Link, Navigate, useSearchParams } from "react-router-dom";
+import { motion } from "framer-motion";
 import { facultyData } from "../../data/facultyData";
 import Img from "../../components/ui/Img";
 import DosenChatSidebar from "../../components/Staff/chat/DosenChatSidebar";
@@ -8,6 +9,78 @@ import DosenChatInline from "../../components/Staff/chat/DosenChatInline";
 import DosenChatFloating from "../../components/Staff/chat/DosenChatFloating";
 import DosenChatDrawer from "../../components/Staff/chat/DosenChatDrawer";
 import DosenChatTab from "../../components/Staff/chat/DosenChatTab";
+
+const viewportSettings = {
+  once: true,
+  amount: 0.15,
+};
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.12,
+      delayChildren: 0.05,
+    },
+  },
+};
+
+const listContainerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.08,
+      delayChildren: 0.05,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 16 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.5,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  },
+};
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 18 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.45,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  },
+};
+
+const rowVariants = {
+  hidden: { opacity: 0, y: 12 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.4,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  },
+};
+
+const lineVariants = {
+  hidden: { scaleX: 0, originX: 0 },
+  visible: {
+    scaleX: 1,
+    originX: 0,
+    transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
+  },
+};
 
 export default function FacultyDetail() {
   const { slug } = useParams();
@@ -58,35 +131,58 @@ export default function FacultyDetail() {
         <section className="w-full">
           <div className="grid grid-cols-1 lg:grid-cols-12 items-stretch">
             {/* Kolom Kiri (7 Cols): Teks & Data Rapat Sejajar Margin Container 1600px */}
-            <div className="lg:col-span-7 pl-4 sm:pl-6 lg:pl-[max(2rem,calc((100vw-1600px)/2+2rem))] pr-4 sm:pr-8 lg:pr-14 py-6 sm:py-8 space-y-6">
+            <motion.div
+              variants={containerVariants}
+              initial="hidden"
+              animate="visible"
+              className="lg:col-span-7 pl-4 sm:pl-6 lg:pl-[max(2rem,calc((100vw-1600px)/2+2rem))] pr-4 sm:pr-8 lg:pr-14 py-6 sm:py-8 space-y-6"
+            >
               <div className="space-y-2.5">
-                <span className="text-xs font-bold tracking-[0.16em] uppercase text-primary block">
+                <motion.span
+                  variants={itemVariants}
+                  className="text-xs font-bold tracking-[0.16em] uppercase text-primary block"
+                >
                   STAF · DOSEN
-                </span>
+                </motion.span>
 
-                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-heading font-bold text-heading tracking-tight leading-tight">
+                <motion.h1
+                  variants={itemVariants}
+                  className="text-3xl sm:text-4xl lg:text-5xl font-heading font-bold text-heading tracking-tight leading-tight"
+                >
                   {faculty.name}
-                </h1>
+                </motion.h1>
 
-                <p className="font-heading italic text-lg sm:text-xl text-special">
+                <motion.p
+                  variants={itemVariants}
+                  className="font-heading italic text-lg sm:text-xl text-special"
+                >
                   {faculty.title}
-                </p>
+                </motion.p>
 
-                <div className="w-full max-w-xl h-[2px] bg-primary my-3.5" />
+                <motion.div
+                  variants={lineVariants}
+                  className="w-full max-w-xl h-[2px] bg-primary my-3.5"
+                />
 
-                <p className="text-sm sm:text-base text-body leading-relaxed max-w-xl">
+                <motion.p
+                  variants={itemVariants}
+                  className="text-sm sm:text-base text-body leading-relaxed max-w-xl"
+                >
                   {faculty.bio}
-                </p>
+                </motion.p>
               </div>
 
               {varianChat === "drawer" && (
-                <div className="pt-1">
+                <motion.div variants={itemVariants} className="pt-1">
                   <DosenChatDrawer dosen={faculty} />
-                </div>
+                </motion.div>
               )}
 
               {/* Metadata Rows - Dibatasi max-w-xl agar tidak melebar mendekati foto */}
-              <div className="w-full max-w-xl pt-2 divide-y border-gray-100 border-t text-xs sm:text-sm">
+              <motion.div
+                variants={itemVariants}
+                className="w-full max-w-xl pt-2 divide-y border-gray-100 border-t text-xs sm:text-sm"
+              >
                 {faculty.nidn && (
                   <div className="py-2.5 flex items-center justify-between">
                     <span className="text-body font-medium">NIDN</span>
@@ -140,11 +236,16 @@ export default function FacultyDetail() {
                     <span className="font-semibold text-heading">{faculty.scholarId}</span>
                   </div>
                 )}
-              </div>
-            </div>
+              </motion.div>
+            </motion.div>
 
             {/* Kolom Kanan (5 Cols): Mentok sampai Ujung Kanan Layar (Full Bleed Right) */}
-            <div className="lg:col-span-5 w-full bg-[#eaeaea] relative min-h-75 sm:min-h-90 lg:min-h-full overflow-hidden flex items-center justify-center">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.98 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+              className="lg:col-span-5 w-full bg-[#eaeaea] relative min-h-75 sm:min-h-90 lg:min-h-full overflow-hidden flex items-center justify-center"
+            >
               {faculty.image ? (
                 <Img
                   src={faculty.image}
@@ -157,7 +258,7 @@ export default function FacultyDetail() {
                   {faculty.imageCaption || `Potret ${faculty.shortName || faculty.name}`}
                 </span>
               )}
-            </div>
+            </motion.div>
           </div>
         </section>
 
@@ -170,25 +271,40 @@ export default function FacultyDetail() {
             <div className="lg:col-span-8 space-y-12 sm:space-y-16">
               {/* Paragraf Biografi Lengkap */}
               {faculty.fullBio && faculty.fullBio.length > 0 && (
-                <div className="space-y-4 text-sm sm:text-base text-body leading-relaxed">
+                <motion.div
+                  variants={containerVariants}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={viewportSettings}
+                  className="space-y-4 text-sm sm:text-base text-body leading-relaxed"
+                >
                   {faculty.fullBio.map((paragraph, idx) => (
-                    <p key={idx} className="leading-relaxed">
+                    <motion.p variants={itemVariants} key={idx} className="leading-relaxed">
                       {paragraph}
-                    </p>
+                    </motion.p>
                   ))}
-                </div>
+                </motion.div>
               )}
 
               {varianChat === "inline" && <DosenChatInline dosen={faculty} />}
 
               {/* Mata Kuliah yang Diampu */}
               {faculty.courses && faculty.courses.length > 0 && (
-                <section className="space-y-4">
-                  <h2 className="text-2xl sm:text-3xl font-heading font-normal text-heading tracking-tight">
+                <motion.section
+                  variants={containerVariants}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={viewportSettings}
+                  className="space-y-4"
+                >
+                  <motion.h2
+                    variants={itemVariants}
+                    className="text-2xl sm:text-3xl font-heading font-normal text-heading tracking-tight"
+                  >
                     Mata Kuliah yang Diampu
-                  </h2>
+                  </motion.h2>
 
-                  <div className="overflow-x-auto">
+                  <motion.div variants={itemVariants} className="overflow-x-auto">
                     <table className="w-full text-left border-collapse text-xs sm:text-sm">
                       <thead>
                         <tr className="border-b-2 border-heading text-xs font-bold tracking-wider text-heading uppercase">
@@ -197,9 +313,16 @@ export default function FacultyDetail() {
                           <th className="py-3 pl-4 font-bold text-right">SKS</th>
                         </tr>
                       </thead>
-                      <tbody className="divide-y divide-gray-200">
+                      <motion.tbody
+                        variants={listContainerVariants}
+                        className="divide-y divide-gray-200"
+                      >
                         {faculty.courses.map((course, idx) => (
-                          <tr key={idx} className="text-body">
+                          <motion.tr
+                            key={idx}
+                            variants={rowVariants}
+                            className="text-body hover:bg-gray-50/50 transition-colors"
+                          >
                             <td className="py-3.5 pr-4 font-medium text-heading">
                               {course.name}
                             </td>
@@ -207,26 +330,40 @@ export default function FacultyDetail() {
                             <td className="py-3.5 pl-4 text-right font-medium">
                               {course.sks}
                             </td>
-                          </tr>
+                          </motion.tr>
                         ))}
-                      </tbody>
+                      </motion.tbody>
                     </table>
-                  </div>
-                </section>
+                  </motion.div>
+                </motion.section>
               )}
 
               {/* Publikasi Terpilih */}
               {faculty.publications?.length > 0 && (
-                <section className="space-y-4">
-                  <div className="pb-2 border-b-2 border-heading">
+                <motion.section
+                  variants={containerVariants}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={viewportSettings}
+                  className="space-y-4"
+                >
+                  <motion.div variants={itemVariants} className="pb-2 border-b-2 border-heading">
                     <h2 className="text-2xl sm:text-3xl font-heading font-normal text-heading tracking-tight">
                       Publikasi Terpilih
                     </h2>
-                  </div>
+                  </motion.div>
 
-                  <div className="divide-y divide-gray-100">
+                  <motion.div
+                    variants={listContainerVariants}
+                    className="divide-y divide-gray-100"
+                  >
                     {faculty.publications.map((pub, idx) => (
-                      <div key={idx} className="py-5 space-y-1.5">
+                      <motion.div
+                        key={idx}
+                        variants={cardVariants}
+                        whileHover={{ x: 4, transition: { duration: 0.2 } }}
+                        className="py-5 space-y-1.5 transition-colors"
+                      >
                         <span className="text-xs font-bold text-primary tracking-wider block">
                           {pub.year}
                         </span>
@@ -236,20 +373,29 @@ export default function FacultyDetail() {
                         <p className="text-xs sm:text-sm text-body leading-relaxed">
                           {pub.journal}
                         </p>
-                      </div>
+                      </motion.div>
                     ))}
-                  </div>
-                </section>
+                  </motion.div>
+                </motion.section>
               )}
 
               {/* Pengalaman Penelitian */}
               {faculty.researches?.length > 0 && (
-                <section className="space-y-4">
-                  <h2 className="text-2xl sm:text-3xl font-heading font-normal text-heading tracking-tight">
+                <motion.section
+                  variants={containerVariants}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={viewportSettings}
+                  className="space-y-4"
+                >
+                  <motion.h2
+                    variants={itemVariants}
+                    className="text-2xl sm:text-3xl font-heading font-normal text-heading tracking-tight"
+                  >
                     Pengalaman Penelitian
-                  </h2>
+                  </motion.h2>
 
-                  <div className="overflow-x-auto">
+                  <motion.div variants={itemVariants} className="overflow-x-auto">
                     <table className="w-full text-left border-collapse text-xs sm:text-sm">
                       <thead>
                         <tr className="border-b-2 border-heading text-xs font-bold tracking-wider text-heading uppercase">
@@ -258,9 +404,16 @@ export default function FacultyDetail() {
                           <th className="py-3 pl-4 font-bold text-right sm:text-left">TAHUN</th>
                         </tr>
                       </thead>
-                      <tbody className="divide-y divide-gray-200">
+                      <motion.tbody
+                        variants={listContainerVariants}
+                        className="divide-y divide-gray-200"
+                      >
                         {faculty.researches.map((res, idx) => (
-                          <tr key={idx} className="text-body">
+                          <motion.tr
+                            key={idx}
+                            variants={rowVariants}
+                            className="text-body hover:bg-gray-50/50 transition-colors"
+                          >
                             <td className="py-3.5 pr-4 font-medium text-heading">
                               {res.title}
                             </td>
@@ -273,22 +426,31 @@ export default function FacultyDetail() {
                             <td className="py-3.5 pl-4 text-right sm:text-left font-medium">
                               {res.year}
                             </td>
-                          </tr>
+                          </motion.tr>
                         ))}
-                      </tbody>
+                      </motion.tbody>
                     </table>
-                  </div>
-                </section>
+                  </motion.div>
+                </motion.section>
               )}
 
               {/* Pengabdian dan Penugasan */}
               {faculty.communityServices?.length > 0 && (
-                <section className="space-y-4">
-                  <h2 className="text-2xl sm:text-3xl font-heading font-normal text-heading tracking-tight">
+                <motion.section
+                  variants={containerVariants}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={viewportSettings}
+                  className="space-y-4"
+                >
+                  <motion.h2
+                    variants={itemVariants}
+                    className="text-2xl sm:text-3xl font-heading font-normal text-heading tracking-tight"
+                  >
                     Pengabdian dan Penugasan
-                  </h2>
+                  </motion.h2>
 
-                  <div className="overflow-x-auto">
+                  <motion.div variants={itemVariants} className="overflow-x-auto">
                     <table className="w-full text-left border-collapse text-xs sm:text-sm">
                       <thead>
                         <tr className="border-b-2 border-heading text-xs font-bold tracking-wider text-heading uppercase">
@@ -297,9 +459,16 @@ export default function FacultyDetail() {
                           <th className="py-3 pl-4 font-bold text-right sm:text-left">PERIODE</th>
                         </tr>
                       </thead>
-                      <tbody className="divide-y divide-gray-200">
+                      <motion.tbody
+                        variants={listContainerVariants}
+                        className="divide-y divide-gray-200"
+                      >
                         {faculty.communityServices.map((service, idx) => (
-                          <tr key={idx} className="text-body">
+                          <motion.tr
+                            key={idx}
+                            variants={rowVariants}
+                            className="text-body hover:bg-gray-50/50 transition-colors"
+                          >
                             <td className="py-3.5 pr-4 font-medium text-heading">
                               {service.role}
                             </td>
@@ -307,22 +476,31 @@ export default function FacultyDetail() {
                             <td className="py-3.5 pl-4 text-right sm:text-left">
                               {service.period}
                             </td>
-                          </tr>
+                          </motion.tr>
                         ))}
-                      </tbody>
+                      </motion.tbody>
                     </table>
-                  </div>
-                </section>
+                  </motion.div>
+                </motion.section>
               )}
 
               {/* Pemakalah Seminar Ilmiah */}
               {faculty.seminars?.length > 0 && (
-                <section className="space-y-4">
-                  <h2 className="text-2xl sm:text-3xl font-heading font-normal text-heading tracking-tight">
+                <motion.section
+                  variants={containerVariants}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={viewportSettings}
+                  className="space-y-4"
+                >
+                  <motion.h2
+                    variants={itemVariants}
+                    className="text-2xl sm:text-3xl font-heading font-normal text-heading tracking-tight"
+                  >
                     Pemakalah Seminar Ilmiah (Oral Presentation)
-                  </h2>
+                  </motion.h2>
 
-                  <div className="overflow-x-auto">
+                  <motion.div variants={itemVariants} className="overflow-x-auto">
                     <table className="w-full text-left border-collapse text-xs sm:text-sm">
                       <thead>
                         <tr className="border-b-2 border-heading text-xs font-bold tracking-wider text-heading uppercase">
@@ -331,9 +509,16 @@ export default function FacultyDetail() {
                           <th className="py-3 pl-4 font-bold text-right sm:text-left">WAKTU & TEMPAT</th>
                         </tr>
                       </thead>
-                      <tbody className="divide-y divide-gray-200">
+                      <motion.tbody
+                        variants={listContainerVariants}
+                        className="divide-y divide-gray-200"
+                      >
                         {faculty.seminars.map((sem, idx) => (
-                          <tr key={idx} className="text-body">
+                          <motion.tr
+                            key={idx}
+                            variants={rowVariants}
+                            className="text-body hover:bg-gray-50/50 transition-colors"
+                          >
                             <td className="py-3.5 pr-4 font-medium text-heading">
                               {sem.event}
                             </td>
@@ -341,23 +526,32 @@ export default function FacultyDetail() {
                             <td className="py-3.5 pl-4 text-right sm:text-left">
                               {sem.timePlace}
                             </td>
-                          </tr>
+                          </motion.tr>
                         ))}
-                      </tbody>
+                      </motion.tbody>
                     </table>
-                  </div>
-                </section>
+                  </motion.div>
+                </motion.section>
               )}
 
               {/* Karya Buku */}
               {/* Seksi disembunyikan sepenuhnya bila dosen belum punya karya buku */}
               {faculty.books?.length > 0 && (
-                <section className="space-y-4">
-                  <h2 className="text-2xl sm:text-3xl font-heading font-normal text-heading tracking-tight">
+                <motion.section
+                  variants={containerVariants}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={viewportSettings}
+                  className="space-y-4"
+                >
+                  <motion.h2
+                    variants={itemVariants}
+                    className="text-2xl sm:text-3xl font-heading font-normal text-heading tracking-tight"
+                  >
                     Karya Buku
-                  </h2>
+                  </motion.h2>
 
-                  <div className="overflow-x-auto">
+                  <motion.div variants={itemVariants} className="overflow-x-auto">
                     <table className="w-full text-left border-collapse text-xs sm:text-sm">
                       <thead>
                         <tr className="border-b-2 border-heading text-xs font-bold tracking-wider text-heading uppercase">
@@ -367,9 +561,16 @@ export default function FacultyDetail() {
                           <th className="py-3 pl-4 font-bold text-right sm:text-left">TAHUN</th>
                         </tr>
                       </thead>
-                      <tbody className="divide-y divide-gray-200">
+                      <motion.tbody
+                        variants={listContainerVariants}
+                        className="divide-y divide-gray-200"
+                      >
                         {faculty.books.map((book, idx) => (
-                          <tr key={idx} className="text-body">
+                          <motion.tr
+                            key={idx}
+                            variants={rowVariants}
+                            className="text-body hover:bg-gray-50/50 transition-colors"
+                          >
                             <td className="py-3.5 pr-4 font-medium text-heading">
                               {book.title}
                             </td>
@@ -380,23 +581,32 @@ export default function FacultyDetail() {
                             <td className="py-3.5 pl-4 text-right sm:text-left font-medium">
                               {book.year}
                             </td>
-                          </tr>
+                          </motion.tr>
                         ))}
-                      </tbody>
+                      </motion.tbody>
                     </table>
-                  </div>
-                </section>
+                  </motion.div>
+                </motion.section>
               )}
 
               {/* Perolehan HKI */}
               {/* Begitu pula HKI: tanpa data, seksinya tidak dirender */}
               {faculty.hki?.length > 0 && (
-                <section className="space-y-4">
-                  <h2 className="text-2xl sm:text-3xl font-heading font-normal text-heading tracking-tight">
+                <motion.section
+                  variants={containerVariants}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={viewportSettings}
+                  className="space-y-4"
+                >
+                  <motion.h2
+                    variants={itemVariants}
+                    className="text-2xl sm:text-3xl font-heading font-normal text-heading tracking-tight"
+                  >
                     Perolehan HKI (Hak Kekayaan Intelektual)
-                  </h2>
+                  </motion.h2>
 
-                  <div className="overflow-x-auto">
+                  <motion.div variants={itemVariants} className="overflow-x-auto">
                     <table className="w-full text-left border-collapse text-xs sm:text-sm">
                       <thead>
                         <tr className="border-b-2 border-heading text-xs font-bold tracking-wider text-heading uppercase">
@@ -406,9 +616,16 @@ export default function FacultyDetail() {
                           <th className="py-3 pl-4 font-bold text-right sm:text-left">TAHUN</th>
                         </tr>
                       </thead>
-                      <tbody className="divide-y divide-gray-200">
+                      <motion.tbody
+                        variants={listContainerVariants}
+                        className="divide-y divide-gray-200"
+                      >
                         {faculty.hki.map((item, idx) => (
-                          <tr key={idx} className="text-body">
+                          <motion.tr
+                            key={idx}
+                            variants={rowVariants}
+                            className="text-body hover:bg-gray-50/50 transition-colors"
+                          >
                             <td className="py-3.5 pr-4 font-medium text-heading">
                               {item.title}
                             </td>
@@ -419,30 +636,39 @@ export default function FacultyDetail() {
                             <td className="py-3.5 pl-4 text-right sm:text-left font-medium">
                               {item.year}
                             </td>
-                          </tr>
+                          </motion.tr>
                         ))}
-                      </tbody>
+                      </motion.tbody>
                     </table>
-                  </div>
-                </section>
+                  </motion.div>
+                </motion.section>
               )}
             </div>
 
             {/* Kolom Kanan / Sidebar (4 Cols): Riwayat Pendidikan & Dosen Lain */}
-            <aside className="lg:col-span-4 space-y-10 lg:pl-2">
+            <motion.aside
+              variants={containerVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={viewportSettings}
+              className="lg:col-span-4 space-y-10 lg:pl-2"
+            >
               {varianChat === "sidebar" && <DosenChatSidebar dosen={faculty} />}
               {varianChat === "tab" && <DosenChatTab dosen={faculty} />}
 
               {/* Riwayat Pendidikan — disembunyikan pada varian tab karena
                   sudah tampil di dalam komponen bertab di atas. */}
               {varianChat !== "tab" && faculty.education && faculty.education.length > 0 && (
-                <div className="space-y-4">
+                <motion.div variants={itemVariants} className="space-y-4">
                   <h3 className="text-xs font-bold tracking-[0.14em] uppercase text-body pb-2 border-b border-gray-200">
                     RIWAYAT PENDIDIKAN
                   </h3>
-                  <div className="space-y-5 pt-1">
+                  <motion.div
+                    variants={listContainerVariants}
+                    className="space-y-5 pt-1"
+                  >
                     {faculty.education.map((edu, idx) => (
-                      <div key={idx} className="space-y-0.5">
+                      <motion.div key={idx} variants={cardVariants} className="space-y-0.5">
                         {edu.year && edu.year !== "—" && (
                           <span className="text-xs sm:text-sm font-bold text-primary block">
                             {edu.year}
@@ -459,34 +685,38 @@ export default function FacultyDetail() {
                             "{edu.thesis}"
                           </p>
                         )}
-                      </div>
+                      </motion.div>
                     ))}
-                  </div>
-                </div>
+                  </motion.div>
+                </motion.div>
               )}
 
               {/* Dosen Lain */}
               {otherLecturers.length > 0 && (
-                <div className="space-y-4 pt-2">
+                <motion.div variants={itemVariants} className="space-y-4 pt-2">
                   <h3 className="text-xs font-bold tracking-[0.14em] uppercase text-body pb-2 border-b border-gray-200">
                     DOSEN LAIN
                   </h3>
-                  <div className="space-y-4 pt-1">
+                  <motion.div
+                    variants={listContainerVariants}
+                    className="space-y-4 pt-1"
+                  >
                     {otherLecturers.map((other) => (
-                      <Link
-                        key={other.id}
-                        to={`/staff/dosen/${other.slug || other.id}`}
-                        className="block group"
-                      >
-                        <h4 className="text-xs sm:text-sm font-semibold text-heading group-hover:text-primary transition-colors">
-                          {other.shortName || other.name}
-                        </h4>
-                        <p className="text-xs text-body mt-0.5">
-                          {other.title}
-                        </p>
-                      </Link>
+                      <motion.div key={other.id} variants={cardVariants}>
+                        <Link
+                          to={`/staff/dosen/${other.slug || other.id}`}
+                          className="block group"
+                        >
+                          <h4 className="text-xs sm:text-sm font-semibold text-heading group-hover:text-primary transition-colors">
+                            {other.shortName || other.name}
+                          </h4>
+                          <p className="text-xs text-body mt-0.5">
+                            {other.title}
+                          </p>
+                        </Link>
+                      </motion.div>
                     ))}
-                  </div>
+                  </motion.div>
 
                   <div className="pt-2">
                     <Link
@@ -496,9 +726,9 @@ export default function FacultyDetail() {
                       Semua dosen
                     </Link>
                   </div>
-                </div>
+                </motion.div>
               )}
-            </aside>
+            </motion.aside>
           </div>
         </div>
       </div>

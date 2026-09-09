@@ -1,7 +1,8 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import { FiSearch, FiChevronDown, FiUser } from "react-icons/fi";
+import { motion } from "framer-motion";
 import { facultyData } from "../../data/facultyData";
 import Img from "../../components/ui/Img";
 
@@ -62,11 +63,85 @@ function bandingkanDosen(a, b) {
     return (a.shortName || a.name).localeCompare(b.shortName || b.name, "id");
 }
 
+const viewportSettings = {
+  once: true,
+  amount: 0.15,
+};
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.12,
+      delayChildren: 0.05,
+    },
+  },
+};
+
+const listContainerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.08,
+      delayChildren: 0.05,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 16 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.5,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  },
+};
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 26 },
+  visible: (args = 0) => {
+    const idx =
+      typeof args === "object" && args !== null
+        ? args.idx ?? 0
+        : typeof args === "number"
+        ? args
+        : 0;
+    const hasLoaded =
+      typeof args === "object" && args !== null ? !!args.hasLoaded : false;
+
+    // Saat awal muat halaman, baris pertama menunggu hero selesai sedikit
+    const baseDelay = !hasLoaded && idx < 4 ? 0.35 : 0.04;
+    // Stagger horizontal per 4 kolom dalam satu baris:
+    const colDelay = (idx % 4) * 0.09;
+
+    return {
+      opacity: 1,
+      y: 0,
+      transition: {
+        delay: baseDelay + colDelay,
+        duration: 0.48,
+        ease: [0.22, 1, 0.36, 1],
+      },
+    };
+  },
+};
+
 export default function FacultyDirectory() {
     const [searchQuery, setSearchQuery] = useState("");
     const [selectedExpertise, setSelectedExpertise] = useState("Semua Keahlian");
     const [selectedType, setSelectedType] = useState("Semua Tipe");
     const [visibleCount, setVisibleCount] = useState(4);
+    const [hasLoaded, setHasLoaded] = useState(false);
+
+    useEffect(() => {
+        const timer = setTimeout(() => setHasLoaded(true), 800);
+        return () => clearTimeout(timer);
+    }, []);
 
     // Active filter state triggered by "Terapkan Filter"
     const [appliedFilters, setAppliedFilters] = useState({
@@ -116,22 +191,41 @@ export default function FacultyDirectory() {
 
             <div className="w-full font-body text-body">
                 {/* Hero Title Section */}
-                <div className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 pt-4 sm:pt-6 pb-8">
-                    <span className="text-xs font-semibold tracking-widest text-primary uppercase block mb-2">
+                <motion.div
+                    variants={containerVariants}
+                    initial="hidden"
+                    animate="visible"
+                    className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 pt-4 sm:pt-6 pb-8"
+                >
+                    <motion.span
+                        variants={itemVariants}
+                        className="text-xs font-semibold tracking-widest text-primary uppercase block mb-2"
+                    >
                         DIREKTORI AKADEMIK
-                    </span>
-                    <h1 className="text-3xl sm:text-4xl md:text-5xl font-heading text-heading font-normal tracking-tight">
+                    </motion.span>
+                    <motion.h1
+                        variants={itemVariants}
+                        className="text-3xl sm:text-4xl md:text-5xl font-heading text-heading font-normal tracking-tight"
+                    >
                         Dosen & Penelitian
-                    </h1>
-                    <p className="mt-4 text-sm sm:text-base text-special leading-relaxed max-w-3xl">
+                    </motion.h1>
+                    <motion.p
+                        variants={itemVariants}
+                        className="mt-4 text-sm sm:text-base text-special leading-relaxed max-w-3xl"
+                    >
                         Jelajahi keahlian dan kontribusi penelitian dari staf pengajar kami yang merupakan pakar
                         terkemuka di bidang ilmu kenotariatan dan hukum, berkomitmen pada keunggulan akademis dan
                         integritas profesional.
-                    </p>
-                </div>
+                    </motion.p>
+                </motion.div>
 
                 {/* Filter & Search Bar Section */}
-                <div className="w-full border-y border-gray-200 bg-white">
+                <motion.div
+                    initial={{ opacity: 0, y: 12 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
+                    className="w-full border-y border-gray-200 bg-white"
+                >
                     <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 py-5">
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-4 items-end">
 
@@ -200,63 +294,78 @@ export default function FacultyDirectory() {
 
                             {/* Submit Filter Button */}
                             <div className="lg:col-span-2">
-                                <button
+                                <motion.button
+                                    whileHover={{ scale: 1.02 }}
+                                    whileTap={{ scale: 0.98 }}
                                     onClick={handleApplyFilter}
                                     className="w-full bg-btn hover:opacity-90 text-white text-xs sm:text-[13px] font-semibold py-2.5 px-4 rounded-sm transition-opacity cursor-pointer text-center"
                                 >
                                     Terapkan Filter
-                                </button>
+                                </motion.button>
                             </div>
 
 
                         </div>
                     </div>
-                </div>
+                </motion.div>
 
                 {/* Faculty Grid Cards */}
                 <div className="w-full flex-grow max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 py-12">
                     {displayedFaculty.length > 0 ? (
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                            {displayedFaculty.map((faculty) => (
-                                <Link
+                        <div
+                            key={appliedFilters.search + appliedFilters.expertise + appliedFilters.type}
+                            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
+                        >
+                            {displayedFaculty.map((faculty, index) => (
+                                <motion.div
                                     key={faculty.id}
-                                    to={`/staff/dosen/${faculty.slug || faculty.id}`}
-                                    className="bg-white border border-gray-200 rounded-xs overflow-hidden flex flex-col hover:border-primary/40 hover:shadow-md transition-all duration-200 group cursor-pointer"
+                                    custom={{ idx: index, hasLoaded }}
+                                    variants={cardVariants}
+                                    initial="hidden"
+                                    whileInView="visible"
+                                    viewport={{ once: true, amount: 0.12 }}
+                                    whileHover={{ y: -4, transition: { duration: 0.2 } }}
+                                    className="h-full flex flex-col"
                                 >
-                                    {/* Grayscale Portrait Photo / Placeholder */}
-                                    <div className="w-full aspect-4/5 bg-gray-100 overflow-hidden relative flex items-center justify-center">
-                                        {faculty.image ? (
-                                            <Img
-                                                src={faculty.image}
-                                                alt={faculty.name}
-                                                className="w-full h-full object-cover object-top contrast-105 group-hover:scale-103 transition-transform duration-500 rounded-md"
-                                            />
-                                        ) : (
-                                            <div className="w-full h-full flex flex-col items-center justify-center bg-gray-50 text-gray-400 group-hover:bg-gray-100 transition-colors p-4 text-center">
-                                                <FiUser className="text-5xl text-gray-300 mb-2" />
-                                                <span className="text-[11px] uppercase tracking-wider font-medium text-gray-400">
-                                                    Foto Belum Tersedia
-                                                </span>
-                                            </div>
-                                        )}
-                                    </div>
-
-                                    {/* Card Details */}
-                                    <div className="p-5 text-center flex flex-col grow justify-between">
-                                        <div className="space-y-1.5">
-                                            <h3 className="font-heading font-bold text-base sm:text-lg text-primary leading-tight group-hover:text-primary/90 transition-colors">
-                                                {faculty.name}
-                                            </h3>
-                                            <p className="text-xs uppercase tracking-wider text-gray-500 font-medium">
-                                                {faculty.title}
-                                            </p>
+                                    <Link
+                                        to={`/staff/dosen/${faculty.slug || faculty.id}`}
+                                        className="bg-white border border-gray-200 rounded-xs overflow-hidden flex flex-col hover:border-primary/40 hover:shadow-md transition-all duration-200 group cursor-pointer h-full"
+                                    >
+                                        {/* Grayscale Portrait Photo / Placeholder */}
+                                        <div className="w-full aspect-4/5 bg-gray-100 overflow-hidden relative flex items-center justify-center">
+                                            {faculty.image ? (
+                                                <Img
+                                                    src={faculty.image}
+                                                    alt={faculty.name}
+                                                    className="w-full h-full object-cover object-top contrast-105 group-hover:scale-103 transition-transform duration-500 rounded-md"
+                                                />
+                                            ) : (
+                                                <div className="w-full h-full flex flex-col items-center justify-center bg-gray-50 text-gray-400 group-hover:bg-gray-100 transition-colors p-4 text-center">
+                                                    <FiUser className="text-5xl text-gray-300 mb-2" />
+                                                    <span className="text-[11px] uppercase tracking-wider font-medium text-gray-400">
+                                                        Foto Belum Tersedia
+                                                    </span>
+                                                </div>
+                                            )}
                                         </div>
 
-                                        <p className="text-xs sm:text-sm text-body leading-relaxed mt-4 line-clamp-3">
-                                            {faculty.bio}
-                                        </p>
-                                    </div>
-                                </Link>
+                                        {/* Card Details */}
+                                        <div className="p-5 text-center flex flex-col grow justify-between">
+                                            <div className="space-y-1.5">
+                                                <h3 className="font-heading font-bold text-base sm:text-lg text-primary leading-tight group-hover:text-primary/90 transition-colors">
+                                                    {faculty.name}
+                                                </h3>
+                                                <p className="text-xs uppercase tracking-wider text-gray-500 font-medium">
+                                                    {faculty.title}
+                                                </p>
+                                            </div>
+
+                                            <p className="text-xs sm:text-sm text-body leading-relaxed mt-4 line-clamp-3">
+                                                {faculty.bio}
+                                            </p>
+                                        </div>
+                                    </Link>
+                                </motion.div>
                             ))}
                         </div>
                     ) : (
@@ -282,14 +391,22 @@ export default function FacultyDirectory() {
 
                     {/* Load More Button */}
                     {visibleCount < filteredFaculty.length && (
-                        <div className="flex justify-center mt-12">
-                            <button
+                        <motion.div
+                            initial={{ opacity: 0, y: 15 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true, amount: 0.2 }}
+                            transition={{ duration: 0.45 }}
+                            className="flex justify-center mt-12"
+                        >
+                            <motion.button
+                                whileHover={{ scale: 1.03 }}
+                                whileTap={{ scale: 0.97 }}
                                 onClick={() => setVisibleCount(filteredFaculty.length)}
                                 className="bg-white border border-gray-300 text-heading hover:bg-gray-50 hover:border-gray-400 text-xs font-medium py-2.5 px-8 rounded-sm shadow-2xs transition-all duration-150 cursor-pointer"
                             >
                                 Muat Lebih Banyak
-                            </button>
-                        </div>
+                            </motion.button>
+                        </motion.div>
                     )}
                 </div>
             </div>
