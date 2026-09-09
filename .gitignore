@@ -32,3 +32,8 @@ rps-*.md
 template-berita.md
 berita.md
 input-berita/*
+
+# Variabel lingkungan lokal (endpoint API chatbot, dsb.)
+.env
+.env.local
+.env.*.local

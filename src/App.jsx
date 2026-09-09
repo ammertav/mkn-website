@@ -2,6 +2,7 @@ import { Suspense, lazy } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import Loading from "./components/Loading";
 import ScrollToTop from "./components/ScrollToTop";
+import LembarTanya from "./components/chat/LembarTanya";
 
 const Home = lazy(() => import("./pages/Home"));
 
@@ -97,6 +98,8 @@ export default function App() {
   return (
     <>
       <ScrollToTop />
+      {/* Asisten cakupan program studi — hadir di seluruh halaman. */}
+      <LembarTanya />
       <Suspense fallback={<Loading />}>
         <Routes>
         <Route path="/" element={<Home />} />
