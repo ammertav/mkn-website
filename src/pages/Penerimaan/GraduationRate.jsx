@@ -29,7 +29,7 @@ export default function GraduationRate() {
             Tingkat Kelulusan
           </h1>
           <div className="w-full h-[2px] bg-primary my-4" />
-          <p className="text-sm sm:text-base text-body leading-relaxed max-w-3xl">
+          <p className="text-sm sm:text-base text-body text-justify leading-relaxed">
             Data kelulusan dihimpun setiap akhir tahun akademik oleh Gugus Penjaminan Mutu dari basis data akademik program studi. Indikator yang dipantau meliputi ketepatan masa studi, indeks prestasi kumulatif, predikat kelulusan, dan lama penyelesaian tesis.
           </p>
 

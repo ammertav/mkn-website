@@ -36,12 +36,21 @@ const kategoriPengaduan = [
     telepon: null,
   },
   {
+    // Satu-satunya kategori yang tertuju ke pimpinan prodi, bukan ke bidang
+    // pelaksana, sehingga sengaja ditempatkan sesudah keempat bidang dan
+    // dibuat selebar penuh agar terbaca sebagai jalur tersendiri.
+    id: "bimbingan",
+    label: "Bimbingan akademik, konsultasi studi & tesis",
+    penanggungJawab: "Dr. Nanang Sri Darmadi, S.H., M.H.",
+    jabatan: "Ketua Program Studi",
+    telepon: null,
+  },
+  {
     id: "tata-usaha",
     label: "Urusan lain, atau belum yakin harus ke bidang mana",
     penanggungJawab: "Ikrom, S.H., M.H.",
     jabatan: "Kepala Tata Usaha",
     telepon: "6282312228181",
-    lebar: true,
   },
 ];
 
@@ -167,15 +176,16 @@ export default function LayananPengaduan() {
           <Breadcrumb />
         </div>
 
-        <div className="w-full flex-grow max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+        <div className="w-full flex-grow max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 pb-8 sm:pb-12">
           {/* Kepala halaman */}
-          <div className="max-w-3xl">
+          <div>
             <span className="text-[11px] font-bold tracking-[0.18em] uppercase text-primary block mb-2">
               Layanan Program Studi
             </span>
             <h1 className="font-heading font-bold text-3xl sm:text-4xl lg:text-[44px] text-heading leading-[1.12] tracking-tight">
               Formulir Pengaduan &amp; Bantuan
             </h1>
+            <div className="w-full h-[2px] bg-primary mt-4 mb-5" />
             <p className="mt-4 text-sm sm:text-base text-body leading-relaxed">
               Isi keterangan di bawah ini. Pengaduan Anda akan dirangkai menjadi satu pesan
               lengkap dan diteruskan kepada staf yang menangani kategori tersebut.

@@ -129,6 +129,8 @@ export const policyDocuments = [
     title: "Kebijakan Sistem Penjaminan Mutu Internal Fakultas Hukum UNISSULA",
     meta: "Revisi 03 · 30 September 2025 · 41 halaman",
     fileUrl: BERKAS + "KBJ-SA-FH-MUTU-01-Kebijakan-Mutu.pdf",
+    // Ditampilkan juga lewat pembaca layar penuh berefek balik halaman.
+    flipbook: true,
   },
   {
     id: 2,

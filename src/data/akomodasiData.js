@@ -13,9 +13,11 @@
  * nama ruangan maupun tipe kamar.
  */
 
-import asrama1 from "../assets/images/akomodasi/asrama-1.png";
-import asrama2 from "../assets/images/akomodasi/asrama-2.png";
+import asrama1 from "../assets/images/akomodasi/asrama-1.jpg";
+import asrama2 from "../assets/images/akomodasi/asrama-2.jpg";
 import asrama3 from "../assets/images/akomodasi/asrama-3.png";
+import asrama4 from "../assets/images/akomodasi/asrama-4.png";
+import asrama5 from "../assets/images/akomodasi/asrama-5.png";
 
 import guestHouse1 from "../assets/images/akomodasi/bh-1.jpg";
 import guestHouse2 from "../assets/images/akomodasi/bh-2.jpg";
@@ -39,15 +41,11 @@ export const akomodasiData = {
       ],
     },
     galeri: [
-      { src: asrama1, keterangan: "Koridor unit kamar di lantai atas asrama." },
-      {
-        src: asrama2,
-        keterangan: "Kamar asrama berisi empat tempat tidur dengan jendela ke arah luar.",
-      },
-      {
-        src: asrama3,
-        keterangan: "Kamar asrama dengan meja belajar dan kursi untuk tiap penghuni.",
-      },
+      { src: asrama1, keterangan: "Tampak depan gedung asrama." },
+      { src: asrama2, keterangan: "Halaman depan gedung asrama." },
+      { src: asrama3, keterangan: "Koridor lantai atas asrama." },
+      { src: asrama4, keterangan: "Kamar empat tempat tidur." },
+      { src: asrama5, keterangan: "Kamar dengan meja belajar." },
     ],
     fasilitas: [
       "Kamar asrama yang didesain nyaman untuk kebutuhan istirahat mahasiswa.",

@@ -1,4 +1,4 @@
-import Img from "../ui/Img";
+import ZoomableImg from "../ui/ZoomableImg";
 
 export default function FacilitySpecSection({
   title,
@@ -73,14 +73,15 @@ export default function FacilitySpecSection({
           }`}
         >
           <div className="relative w-full aspect-[4/3] sm:aspect-[16/10] bg-neutral-100 overflow-hidden shadow-sm group">
-            <Img
+            <ZoomableImg
               src={image.src}
               alt={image.alt || title}
+              caption={image.caption}
               className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-80" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-80 pointer-events-none" />
             {image.caption && (
-              <div className="absolute bottom-4 left-4 right-4 text-white text-xs sm:text-sm font-medium drop-shadow-md">
+              <div className="absolute bottom-4 left-4 right-4 text-white text-xs sm:text-sm font-medium drop-shadow-md pointer-events-none">
                 {image.caption}
               </div>
             )}

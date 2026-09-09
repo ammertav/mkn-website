@@ -23,7 +23,7 @@ export default function Dosen() {
 
         <hr className="border-t border-gray-800 my-4" />
 
-        <p className="text-sm sm:text-base text-body leading-relaxed max-w-4xl">
+        <p className="text-sm sm:text-base text-body text-justify leading-relaxed">
           Dosen dan pakar hukum kenotariatan Program Studi Magister Kenotariatan (MKn) UNISSULA yang berpengalaman di bidang akademis dan praktisi.
         </p>
 

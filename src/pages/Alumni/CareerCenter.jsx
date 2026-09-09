@@ -406,7 +406,7 @@ function TampilanLama() {
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-heading font-bold text-heading tracking-tight leading-tight">
             Pusat Karir &amp; Jejaring Alumni
           </h1>
-          <p className="text-sm sm:text-base text-body leading-relaxed max-w-4xl">
+          <p className="text-sm sm:text-base text-body text-justify leading-relaxed">
             Menghubungkan lulusan Magister Kenotariatan UNISSULA dengan jejaring kantor Notaris/PPAT,
             firma hukum, perbankan, dan institusi pemerintahan terkemuka di Indonesia.
           </p>

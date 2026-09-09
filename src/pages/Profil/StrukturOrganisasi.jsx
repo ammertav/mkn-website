@@ -13,8 +13,8 @@ import imgKaprodi from "../../assets/images/struktur-organisasi/kaprodi.png";
 import imgSekprodi from "../../assets/images/struktur-organisasi/sekprodi.png";
 import imgDenny from "../../assets/images/struktur-organisasi/denny.png";
 import imgSoegianto from "../../assets/images/struktur-organisasi/soegianto.png";
-import imgSurya from "../../assets/images/struktur-organisasi/anugrah-surya-kusuma-2.jpg";
-import Img from "../../components/ui/Img";
+import imgSurya from "../../assets/images/struktur-organisasi/anugrah-surya-kusuma.png";
+import ZoomableImg from "../../components/ui/ZoomableImg";
 import { tenagaKependidikan } from "../../data/profil/tendikData";
 
 const strukturPejabat = [
@@ -157,9 +157,10 @@ function PersonCard({ jabatan, name, photo }) {
     <div className="w-32 sm:w-36 lg:w-40 border border-gray-200 bg-white rounded-xs shadow-2xs p-3 flex flex-col items-center text-center hover:border-primary/40 transition-colors">
       <div className="w-20 h-24 sm:w-24 sm:h-28 rounded-xs overflow-hidden bg-gray-100 mb-3 border border-gray-200 flex items-center justify-center shrink-0">
         {photo ? (
-          <Img
+          <ZoomableImg
             src={photo}
             alt={name}
+            caption={`${name} — ${jabatan}`}
             className="w-full h-full object-cover object-top"
           />
         ) : (

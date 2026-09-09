@@ -1,21 +1,33 @@
 import { useEffect } from "react";
 import { Helmet } from "react-helmet-async";
-import Img from "../../components/ui/Img";
-import imgIkanotsula from "../../assets/images/ikanotsula-1.jpeg";
-import Keg1 from "../../assets/images/ikanot/keg1.jpeg";
-import Keg2 from "../../assets/images/ikanot/keg2.jpeg";
-import Keg3 from "../../assets/images/ikanot/keg3.jpeg";
-import Keg4 from "../../assets/images/ikanot/keg4.jpeg";
-import Keg5 from "../../assets/images/ikanot/keg5.jpg";
-import Keg6 from "../../assets/images/ikanot/keg6.jpg";
-import Keg7 from "../../assets/images/ikanot/keg7.jpg";
-import Keg8 from "../../assets/images/ikanot/keg8.jpg";
-import Keg9 from "../../assets/images/ikanot/keg9.jpg";
-import Keg10 from "../../assets/images/ikanot/keg10.jpg"
-import Keg11 from "../../assets/images/ikanot/keg11.jpg"
-import Keg12 from "../../assets/images/ikanot/keg12.jpg"
-import Keg13 from "../../assets/images/ikanot/keg13.jpg"
-import Logo from "../../assets/images/ikanot/logo.jpg"
+import ZoomableImg from "../../components/ui/ZoomableImg";
+import Logo from "../../assets/images/ikanot/logo.jpg";
+
+/**
+ * Foto galeri dibaca langsung dari struktur folder di
+ * `assets/images/ikanot/<kegiatan>/`, bukan lewat impor satu per satu.
+ *
+ * Dengan begitu menambah atau mengganti foto satu kegiatan cukup dilakukan di
+ * folder asetnya — tidak perlu menyentuh berkas ini. Pola glob ini sama dengan
+ * yang sudah dipakai `utils/imageResolver` untuk gambar berita.
+ */
+const berkasKegiatan = import.meta.glob(
+  "../../assets/images/ikanot/*/*.{jpg,jpeg,png,webp}",
+  { eager: true, import: "default" }
+);
+
+/**
+ * Mengambil seluruh foto satu folder kegiatan, diurutkan menurut nama berkas.
+ *
+ * Perbandingannya numerik supaya "foto-10" jatuh setelah "foto-9", bukan
+ * setelah "foto-1" seperti pada pengurutan teks biasa.
+ */
+function fotoKegiatan(folder) {
+  return Object.entries(berkasKegiatan)
+    .filter(([path]) => path.includes(`/ikanot/${folder}/`))
+    .sort(([a], [b]) => a.localeCompare(b, "id", { numeric: true }))
+    .map(([, url]) => url);
+}
 
 // Data resmi IKANOTSULA & Lowongan Pekerjaan
 const ikanotsulaData = {
@@ -64,20 +76,20 @@ const ikanotsulaData = {
     { number: "50+", label: "Koordinator Daerah Se-Indonesia" },
     { number: "2024–2028", label: "Masa Bakti Kepengurusan" },
   ],
-  gallery: [
-    { id: 1, image: Keg1 },
-    // { id: 2, image: Keg2 },
-    { id: 3, image: Keg3 },
-    // { id: 4, image: Keg4 },
-    // { id: 5, image: Keg5 },
-    { id: 6, image: Keg6 },
-    { id: 7, image: Keg7 },
-    // { id: 8, image: Keg8 },
-    { id: 9, image: Keg9 },
-    { id: 13, image: Keg13 },
-    { id: 10, image: Keg10 },
-    { id: 11, image: Keg11 },
-    { id: 12, image: Keg12 },
+  // Galeri dikelompokkan per kegiatan dan diurutkan kronologis, dari yang
+  // paling awal ke yang terbaru. `folder` menunjuk ke direktori asetnya.
+  galeri: [
+    { judul: "Bimbingan UKEN", tahun: "2022", folder: "bim-uken-2022" },
+    { judul: "Penyuluhan Hukum IKANOTSULA", tahun: "2023", folder: "penyuluhan-hukum-2023" },
+    { judul: "Bimbingan UKEN", tahun: "2024", folder: "bim-uken-2024" },
+    { judul: "Jalan Sehat", tahun: "2024", folder: "jalan-sehat-2024" },
+    { judul: "Pelantikan Pengurus IKANOTSULA", tahun: "2024", folder: "pelantikan-2024" },
+    { judul: "Pengabdian Masyarakat Pekalongan", tahun: "2024", folder: "pm-pekalongan-2024" },
+    { judul: "Workshop Bimbel Habib Adjie", tahun: "2024", folder: "workshop-2024" },
+    { judul: "Bimbingan UKEN", tahun: "2025", folder: "bimbel-uken-2025" },
+    { judul: "Reuni Milad 62", tahun: "2025", folder: "reuni-2025" },
+    { judul: "Diklat PPAT", tahun: "2026", folder: "diklat-ppat-2026" },
+    { judul: "Halal Bihalal", tahun: "2026", folder: "halal-bihalal-2026" },
   ],
   strukturOrganisasi: {
     dasar:
@@ -336,6 +348,27 @@ export default function IkanotsulaDetail() {
 
   const organization = ikanotsulaData;
 
+  // Tiap kegiatan menjadi satu grup lightbox tersendiri, sehingga tombol panah
+  // menelusuri foto dalam kegiatan yang sama saja — tidak melompat ke acara
+  // lain di tahun berbeda.
+  //
+  // Kegiatan yang folder asetnya kosong disaring di sini, supaya judulnya tidak
+  // muncul sebagai bagian tanpa isi.
+  const galeri = (organization.galeri ?? [])
+    .map((kegiatan) => {
+      const namaLengkap = `${kegiatan.judul} ${kegiatan.tahun}`;
+
+      return {
+        ...kegiatan,
+        foto: fotoKegiatan(kegiatan.folder).map((src, idx) => ({
+          src,
+          alt: `${namaLengkap} — foto ${idx + 1}`,
+          caption: `${namaLengkap} — foto ${idx + 1}`,
+        })),
+      };
+    })
+    .filter((kegiatan) => kegiatan.foto.length > 0);
+
   // Dipakai pada ringkasan blok Koordinator Daerah.
   const jumlahKoordinator =
     organization.strukturOrganisasi?.koordinatorDaerah.reduce(
@@ -364,7 +397,7 @@ export default function IkanotsulaDetail() {
 
             {/* Gambar Utama Memanjang Full-Width */}
             <div className="w-full h-[300px] sm:h-[420px] lg:h-[480px] overflow-hidden rounded-md flex items-center justify-center">
-              <Img
+              <ZoomableImg
                 src={organization.image}
                 alt={organization.title}
                 className="max-w-full max-h-full w-auto h-full object-contain object-center rounded-md hover:scale-105 transition-transform duration-500"
@@ -616,26 +649,48 @@ export default function IkanotsulaDetail() {
             </section>
           )} */}
 
-          {/* GALERI FOTO */}
-          {organization.gallery && organization.gallery.length > 0 && (
-            <section className="space-y-6">
+          {/* GALERI FOTO — dikelompokkan per kegiatan */}
+          {galeri.length > 0 && (
+            <section className="space-y-10">
               <h2 className="text-2xl sm:text-3xl font-heading font-bold text-heading pb-3 border-b-2 border-gray-900">
                 Galeri Kegiatan
               </h2>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                {organization.gallery.map((item, idx) => (
-                  <div
-                    key={item.id || idx}
-                    className="group relative aspect-[4/3] rounded-md bg-gray-200 overflow-hidden border border-gray-200"
-                  >
-                    <Img
-                      src={item.image}
-                      alt={item.title}
-                      className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out"
-                    />
+
+              {galeri.map((kegiatan) => (
+                <div key={kegiatan.folder} className="space-y-4">
+                  {/* Kepala kegiatan: nama acara, tahun, dan jumlah foto */}
+                  <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1 pb-2 border-b border-gray-200">
+                    <h3 className="font-heading font-bold text-lg sm:text-xl text-heading leading-snug">
+                      {kegiatan.judul}
+                    </h3>
+
+                    <span className="text-[11px] font-bold tracking-wider text-primary uppercase bg-red-50 border border-primary/20 px-2 py-0.5 rounded-xs tabular-nums">
+                      {kegiatan.tahun}
+                    </span>
+
+                    <span className="text-xs text-gray-400 ml-auto tabular-nums">
+                      {kegiatan.foto.length} foto
+                    </span>
                   </div>
-                ))}
-              </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                    {kegiatan.foto.map((foto, idx) => (
+                      <div
+                        key={foto.src}
+                        className="group relative aspect-[4/3] rounded-md bg-gray-200 overflow-hidden border border-gray-200"
+                      >
+                        <ZoomableImg
+                          src={foto.src}
+                          alt={foto.alt}
+                          group={kegiatan.foto}
+                          index={idx}
+                          className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out"
+                        />
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ))}
             </section>
           )}
 

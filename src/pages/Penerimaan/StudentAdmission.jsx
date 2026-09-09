@@ -36,7 +36,7 @@ export default function StudentAdmission() {
         <hr className="border-t border-gray-800 my-4" />
 
         {/* Description */}
-        <p className="text-sm sm:text-base text-body leading-relaxed max-w-4xl">
+        <p className="text-sm sm:text-base text-body text-justify leading-relaxed">
           Program Studi Magister Kenotariatan (MKn) Universitas Islam Sultan Agung (UNISSULA)
           menyelenggarakan penerimaan mahasiswa baru bagi sarjana hukum yang ingin mendalami keilmuan dan
           profesi kenotariatan dengan standar akademik yang ketat dan berwawasan global.

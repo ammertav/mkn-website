@@ -159,7 +159,7 @@ const testimonialData = [
     id: 1,
     name: "Fatiroh, S.H., M.Hum., M.Kn.",
     description:
-      "Pendidikan yang menuntut dan pengalaman menangani kasus hukum nyata membekali saya dengan sangat baik untuk berkarier di bidang hukum korporasi.",
+      "M.Kn. Unissula bukan sekadar mengajarkan ketelitian merangkai akta, kepatutan hukum, melainkan menanamkan pertanggungjawaban moral dan keteguhan Nurani profesi. Di sini, saya ditempa bahwa memahami kepastian hukum hanya bermakna jika dilandasi integritas dan kehati-hatian demi melindungi hak para pihak secara adil. Bekal berharga yang menjaga integritas dan keluhuran martabat profesi saya hari ini sebagai seorang Notaris dan PPAT",
     image: Fatiroh,
     occupation: "Notaris-PPAT Kabupaten Pekalongan",
     role: "Alumni Tahun 2015",

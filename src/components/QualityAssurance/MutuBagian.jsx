@@ -1,5 +1,9 @@
-import { FiDownload } from "react-icons/fi";
+import { lazy, Suspense, useState } from "react";
+import { FiDownload, FiBookOpen } from "react-icons/fi";
 import { useT } from "../../i18n/languageContext";
+
+// Pembaca PDF membawa pdf.js; dimuat hanya ketika tombol Baca ditekan.
+const FlipbookModal = lazy(() => import("../ui/FlipbookModal"));
 
 /**
  * Potongan tampilan bersama untuk menu Penjaminan Mutu.
@@ -99,6 +103,9 @@ export function IdentitasDokumen({ baris }) {
  */
 export function DaftarDokumen({ butir }) {
   const t = useT();
+  // Dokumen yang sedang dibuka di pembaca layar penuh; null berarti tertutup.
+  const [dokumenDibaca, setDokumenDibaca] = useState(null);
+
   return (
     <div className="space-y-3">
       {butir.map((d, idx) => (
@@ -116,7 +123,23 @@ export function DaftarDokumen({ butir }) {
             {d.meta && <p className="text-xs text-gray-500 leading-relaxed">{t(d.meta)}</p>}
           </div>
 
-          <div className="shrink-0">
+          <div className="shrink-0 flex items-center gap-2">
+            {/*
+              Tombol baca hanya muncul untuk dokumen yang ditandai `flipbook`.
+              Pembacanya berat (pdf.js ± 300 KB gzip), jadi jangan dinyalakan
+              untuk berkas yang lazimnya cukup diunduh lalu dicetak.
+            */}
+            {d.fileUrl && d.flipbook && (
+              <button
+                type="button"
+                onClick={() => setDokumenDibaca(d)}
+                className="inline-flex items-center justify-center gap-2 px-5 py-2 bg-primary border border-primary hover:bg-[#570000] hover:border-[#570000] text-white rounded-xs text-xs font-semibold transition-colors shadow-2xs cursor-pointer"
+              >
+                <span>Baca</span>
+                <FiBookOpen className="text-sm" />
+              </button>
+            )}
+
             {d.fileUrl ? (
               <a
                 href={d.fileUrl}
@@ -135,6 +158,16 @@ export function DaftarDokumen({ butir }) {
           </div>
         </div>
       ))}
+
+      {dokumenDibaca && (
+        <Suspense fallback={null}>
+          <FlipbookModal
+            fileUrl={dokumenDibaca.fileUrl}
+            judul={t(dokumenDibaca.title)}
+            onClose={() => setDokumenDibaca(null)}
+          />
+        </Suspense>
+      )}
     </div>
   );
 }

@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { FiArrowRight } from "react-icons/fi";
 import Img from "../ui/Img";
+import ZoomableImg from "../ui/ZoomableImg";
 
 export default function StudentLifeSection({
   category = "MAHASISWA",
@@ -39,6 +40,8 @@ export default function StudentLifeSection({
               {/* Card Image */}
               <div className="relative w-full aspect-[16/10] bg-gray-100 overflow-hidden">
                 {isInternal ? (
+                  // Gambar di dalam tautan sengaja tidak dibuat zoomable:
+                  // klik pada kartu ini bermaksud membuka halaman detailnya.
                   <Link to={item.linkHref} className="block w-full h-full">
                     <Img
                       src={item.image}
@@ -47,7 +50,7 @@ export default function StudentLifeSection({
                     />
                   </Link>
                 ) : (
-                  <Img
+                  <ZoomableImg
                     src={item.image}
                     alt={item.title}
                     className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105"

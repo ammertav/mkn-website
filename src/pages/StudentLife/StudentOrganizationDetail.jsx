@@ -7,6 +7,8 @@ import Footer from "../../components/Footer";
 import Breadcrumb from "../../components/ui/Breadcrumb";
 import { studentOrganizationsData } from "../../data/studentOrganizationsData";
 import Img from "../../components/ui/Img";
+import ZoomableImg from "../../components/ui/ZoomableImg";
+import { useLightbox } from "../../components/ui/Lightbox";
 
 /** Jeda geser otomatis galeri, dalam milidetik. */
 const JEDA_GESER = 4000;
@@ -18,19 +20,24 @@ const JEDA_GESER = 4000;
  * tata letak "tiga foto sekaligus" cukup diatur lewat `basis`, gulir sentuh
  * dan papan ketik bekerja apa adanya, dan tidak perlu mengukur lebar elemen.
  *
- * Geser tetikus ditangani sendiri lewat pointer event karena gulir asli hanya
- * merespons roda dan sentuhan, bukan seretan tetikus. Sentuhan sengaja
- * dilewatkan agar tidak bentrok dengan gulir bawaan.
+ * Seretan tetikus sengaja tidak didukung: perpindahan foto dilakukan lewat
+ * geser otomatis dan tombol panah di bawah galeri. Seretan sebelumnya memakai
+ * setPointerCapture pada trek, yang membuat peramban mengarahkan sasaran event
+ * click ke trek sehingga foto tidak bisa diklik untuk diperbesar. Gulir bawaan
+ * (roda, trackpad, sentuhan) tetap bekerja apa adanya.
  *
- * Geser otomatis berhenti saat kursor berada di atas galeri, saat foto sedang
- * diseret, dan saat pengguna memilih "kurangi gerakan" di sistemnya.
+ * Geser otomatis berhenti saat kursor berada di atas galeri dan saat pengguna
+ * memilih "kurangi gerakan" di sistemnya.
  */
 function GaleriGeser({ foto }) {
   const trekRef = useRef(null);
   const [disorot, setDisorot] = useState(false);
-  const [sedangGeser, setSedangGeser] = useState(false);
   const [posisi, setPosisi] = useState({ indeks: 0, jumlah: 1 });
-  const seret = useRef({ aktif: false, mulaiX: 0, mulaiGulir: 0 });
+  const { open } = useLightbox();
+
+  const grupFoto = foto
+    .filter((item) => item.image)
+    .map((item) => ({ src: item.image, alt: item.title, caption: item.title }));
 
   const lebarKartu = () => trekRef.current?.firstElementChild?.offsetWidth ?? 0;
 
@@ -90,39 +97,12 @@ function GaleriGeser({ foto }) {
 
   // Geser otomatis.
   useEffect(() => {
-    if (disorot || sedangGeser) return;
+    if (disorot) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
     const id = setInterval(() => geser(1), JEDA_GESER);
     return () => clearInterval(id);
-  }, [disorot, sedangGeser, geser]);
-
-  const mulaiSeret = (e) => {
-    if (e.pointerType !== "mouse") return;
-    const el = trekRef.current;
-    if (!el) return;
-
-    seret.current = { aktif: true, mulaiX: e.clientX, mulaiGulir: el.scrollLeft };
-    setSedangGeser(true);
-    el.setPointerCapture(e.pointerId);
-  };
-
-  const selamaSeret = (e) => {
-    if (!seret.current.aktif) return;
-    const el = trekRef.current;
-    if (!el) return;
-
-    el.scrollLeft = seret.current.mulaiGulir - (e.clientX - seret.current.mulaiX);
-  };
-
-  const akhiriSeret = (e) => {
-    if (!seret.current.aktif) return;
-    seret.current.aktif = false;
-    setSedangGeser(false);
-
-    const el = trekRef.current;
-    if (el?.hasPointerCapture?.(e.pointerId)) el.releasePointerCapture(e.pointerId);
-  };
+  }, [disorot, geser]);
 
   return (
     <section
@@ -135,19 +115,28 @@ function GaleriGeser({ foto }) {
       <div
         ref={trekRef}
         tabIndex={0}
-        onPointerDown={mulaiSeret}
-        onPointerMove={selamaSeret}
-        onPointerUp={akhiriSeret}
-        onPointerCancel={akhiriSeret}
         onScroll={perbaruiPosisi}
-        className={`flex w-full overflow-x-auto snap-x snap-mandatory scrollbar-none select-none outline-none ${
-          sedangGeser ? "cursor-grabbing" : "cursor-grab"
-        }`}
+        // Klik didelegasikan dari trek: kartu yang diklik dicari lewat
+        // data-indeks, yang sekaligus menyaring kartu tanpa foto.
+        onClick={(e) => {
+          const kartu = e.target.closest("[data-indeks]");
+          if (!kartu) return;
+
+          open(grupFoto, Number(kartu.dataset.indeks));
+        }}
+        className="flex w-full overflow-x-auto snap-x snap-mandatory scrollbar-none select-none outline-none"
       >
         {foto.map((item) => (
           <div
             key={item.id}
-            className="group relative shrink-0 basis-full md:basis-1/3 snap-start aspect-[4/3] sm:aspect-[16/10] lg:aspect-auto lg:h-[380px] xl:h-[440px] bg-gray-200 overflow-hidden border-r border-white/20 last:border-r-0"
+            data-indeks={
+              item.image
+                ? grupFoto.findIndex((f) => f.src === item.image)
+                : undefined
+            }
+            className={`group relative shrink-0 basis-full md:basis-1/3 snap-start aspect-[4/3] sm:aspect-[16/10] lg:aspect-auto lg:h-[380px] xl:h-[440px] bg-gray-200 overflow-hidden border-r border-white/20 last:border-r-0 ${
+              item.image ? "cursor-zoom-in" : ""
+            }`}
           >
             {item.image ? (
               <>
@@ -327,9 +316,10 @@ export default function StudentOrganizationDetail() {
 
             {/* Right Photo Column (5 cols): Full Bleed Right */}
             <div className="lg:col-span-5 w-full bg-[#eaeaea] relative min-h-[300px] sm:min-h-[380px] lg:min-h-full overflow-hidden flex items-center justify-center">
-              <Img
+              <ZoomableImg
                 src={organization.image}
                 alt={organization.imageCaption || organization.title}
+                caption={organization.imageCaption}
                 className="w-full h-full object-cover object-center rounded-md hover:scale-105 transition-transform duration-500"
                 eager
               />

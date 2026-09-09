@@ -27,7 +27,7 @@ export default function LecturerResearch() {
             Penelitian Dosen
           </h1>
           <div className="w-full h-[2px] bg-primary my-4" />
-          <p className="text-sm sm:text-base text-body leading-relaxed max-w-3xl">
+          <p className="text-sm sm:text-base text-body text-justify leading-relaxed">
             Penelitian dosen diarahkan pada empat peta jalan program studi: kepastian hukum akta autentik, pendaftaran tanah dan hukum agraria, hukum perusahaan dan kepailitan, serta digitalisasi jabatan notaris. Setiap penelitian diwajibkan menghasilkan luaran publikasi dan bahan ajar.
           </p>
         </div>

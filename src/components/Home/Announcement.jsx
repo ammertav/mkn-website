@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { FiArrowRight } from "react-icons/fi";
 
-import beritaList from "../../data/berita.json";
+import { berita, pengumuman } from "../../data/beritaSelectors";
 import { getBeritaImage } from "../../utils/imageResolver";
 import { generateSlug } from "../../utils/slugHelper";
 import Img from "../ui/Img";
@@ -53,12 +53,9 @@ const cardVariants = {
 };
 
 export default function Announcement() {
-  const announcements = beritaList.filter(
-    (item) => item.tags === "Pengumuman"
-  );
-
-  const displayList =
-    announcements.length > 0 ? announcements : beritaList;
+  // Bila belum ada pengumuman terbit, section ini jatuh ke berita terbaru agar
+  // tidak menyisakan blok kosong di Beranda.
+  const displayList = pengumuman.length > 0 ? pengumuman : berita;
 
   const featured = displayList[0];
   const sideArticles = displayList.slice(1, 4);

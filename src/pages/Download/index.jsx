@@ -109,7 +109,7 @@ export default function Download() {
               {downloadHeader.title}
             </h1>
             <div className="w-full h-[2px] bg-primary mt-4 mb-5" />
-            <p className="text-sm sm:text-base text-body leading-relaxed max-w-4xl">
+            <p className="text-sm sm:text-base text-body leading-relaxed">
               {downloadHeader.description}
             </p>
           </div>

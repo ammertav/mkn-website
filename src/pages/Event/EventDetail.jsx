@@ -5,6 +5,7 @@ import { FiArrowLeft, FiPlus, FiExternalLink } from "react-icons/fi";
 
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
+import ZoomableImg from "../../components/ui/ZoomableImg";
 import {
   eventData,
   formatIndoDate,
@@ -145,10 +146,11 @@ export default function EventDetail() {
                 header + jarak + judul, supaya judul acara tetap ikut terlihat
                 tanpa perlu menggulir. */}
             {event.image && (
-              <figure className="w-full overflow-hidden rounded-xs border border-gray-200 bg-gray-50 shadow-2xs">
-                <img
+              <figure className="w-full overflow-hidden">
+                <ZoomableImg
                   src={event.image}
                   alt={event.title}
+                  caption={event.title}
                   className="w-full h-auto max-h-[calc(100vh-var(--header-h)-18rem)] object-contain mx-auto"
                 />
               </figure>

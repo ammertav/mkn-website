@@ -59,30 +59,8 @@ export const eventData = [
     isFeatured: true,
   },
   {
-    id: 2,
-    slug: "stadium-generale-etika-profesi-notaris-modern",
-    title: "Stadium Generale: Integritas & Tantangan Etika Profesi Notaris di Era Kecerdasan Buatan",
-    date: "2026-09-01",
-    time: "14:00 - 16:30 WIB",
-    category: "Kuliah Pakar",
-    venue: "Ruang Seminar MKn 3.01 / Live YouTube MKn UNISSULA",
-    speaker: "Dr. Toni Triyanto, S.H., M.H. & Pengurus Pusat Ikatan Notaris Indonesia (PP INI)",
-    organizer: "IMANU UNISSULA & Prodi MKn",
-    description:
-      "Kuliah umum perdana semester gasal yang mengupas tuntas batasan etik, kerahasiaan protokol notaris, dan penerapan teknologi AI tanpa melanggar Undang-Undang Jabatan Notaris (UUJN).",
-    fullDescription:
-      "Perkembangan teknologi generatif menuntut calon notaris memahami batasan antara otomasi administrasi dan keharusan kehadiran fisik para pihak serta pembacaan akta secara langsung di hadapan notaris.",
-    image:
-      "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=1200&q=80",
-    registrationUrl: "https://unissula.ac.id/stadium-generale",
-    cp: "IMANU UNISSULA: 0813-9876-5432 (Sdr. Rizky)",
-    isFeatured: true,
-  },
-  {
-    id: 9,
+    id: 3,
     slug: "sultan-agung-fun-run-2026",
-    // Naskah diambil dari dokumen prodi "Deskripsi Sultan Agung Fun Run 5.5K
-    // MKn UNISSULA", disiapkan khusus untuk publikasi di situs ini.
     title: "Sultan Agung Fun Run 5.5K",
     date: "2026-09-27",
     time: "05.00 WIB sampai selesai",
@@ -121,43 +99,49 @@ export const eventData = [
     isFeatured: true,
   },
   {
-    id: 10,
-    slug: "kuliah-umum-bersertifkat",
-    // Naskah diambil dari dokumen prodi "Deskripsi Sultan Agung Fun Run 5.5K
-    // MKn UNISSULA", disiapkan khusus untuk publikasi di situs ini.
-    title: "Kuliah Umum Bersertifikat",
+    id: 2,
+    slug: "kuliah-umum-bersertifikat-september-2026",
+    title: "Kuliah Umum Bersertifikat MKn UNISSULA 2026",
     date: "2026-09-26",
-    time: "05.00 WIB sampai selesai",
-    category: "Akademik & Kemahasiswaan",
-    venue:
-      "Halaman Kantor Gubernur Jawa Tengah, Jl. Pahlawan No.9, Kota Semarang",
-    organizer: "Universitas Islam Sultan Agung (UNISSULA)",
+    time: "13.00–15.00 WIB",
+    category: "Kuliah Pakar",
+    // Lokasi belum disebutkan pada pengumuman resmi; diisi sementara agar
+    // halaman tidak menampilkan lokasi acara lain.
+    venue: "Akan diinformasikan lebih lanjut oleh panitia",
+    organizer: "Program Studi Magister Kenotariatan Fakultas Hukum UNISSULA",
+    speaker:
+      "Dr. Arief Muliawan, S.H., M.H., QGIA — Direktur Jenderal Pengadaan Tanah dan " +
+      "Pengembangan Pertanahan Kementerian ATR/BPN",
+    registrationUrl: "https://bit.ly/kuliahumum-sept2026",
     description:
-      "Lari bersama sejauh 5,5 kilometer bertajuk “Bergerak Tanpa Batas”, dengan titik " +
-      "start dan finis di Kantor Gubernur Jawa Tengah, Kota Semarang.",
+      "Kuliah umum bersertifikat bersama Direktur Jenderal Pengadaan Tanah dan Pengembangan " +
+      "Pertanahan Kementerian ATR/BPN, membahas mitigasi risiko hukum dalam peralihan dan " +
+      "pembebanan hak atas tanah.",
     fullDescription:
-      "Dalam rangka membangun semangat hidup sehat, kebersamaan, dan mempererat silaturahmi " +
-      "keluarga besar Sultan Agung bersama masyarakat, Sultan Agung Fun Run 5.5K akan " +
-      "diselenggarakan pada Minggu, 27 September 2026, mulai pukul 05.00 WIB hingga selesai, " +
-      "dengan titik start dan finish di Kantor Gubernur Jawa Tengah, Kota Semarang. Mengusung " +
-      "semangat “Bergerak Tanpa Batas”, kegiatan ini mengajak seluruh peserta menikmati " +
-      "olahraga lari sejauh 5,5 kilometer dalam suasana yang sehat, menyenangkan, dan penuh " +
-      "kebersamaan.\n\n" +
-      "Rute Fun Run akan melintasi sejumlah ruas utama Kota Semarang, dimulai dari Kantor " +
-      "Gubernur Jawa Tengah menuju Jl. Gajah Mada, Jl. Depok, Jl. Pemuda, Tugu Muda, " +
-      "Jl. Pandanaran, Jl. Tri Lomba Juang, Taman Indonesia Kaya, Jl. Pahlawan, kemudian " +
-      "kembali finis di Kantor Gubernur Jawa Tengah.\n\n" +
-      "Dengan biaya pendaftaran sebesar Rp125.000, peserta akan memperoleh berbagai fasilitas, " +
-      "antara lain jersey, medali, BIB, goodie bag, voucher MCU, refreshment, official photo, " +
-      "serta kesempatan mendapatkan beragam doorprize menarik. Hadiah yang disiapkan antara lain " +
-      "2 tiket umrah, 5 motor Scoopy, 10 sepeda listrik, 10 kulkas, 10 mesin cuci, 10 rice " +
-      "cooker, 10 LED TV, serta 10 logam mulia.\n\n" +
-      "Program Studi Magister Kenotariatan Fakultas Hukum UNISSULA turut mendukung semangat " +
-      "Sultan Agung Fun Run sebagai bagian dari upaya membangun budaya hidup sehat, memperkuat " +
-      "kebersamaan, serta menghadirkan interaksi positif antara sivitas akademika dan " +
-      "masyarakat. Melalui kegiatan ini, diharapkan semangat “Bergerak Tanpa Batas” " +
-      "tidak hanya diwujudkan melalui aktivitas olahraga, tetapi juga menjadi inspirasi untuk " +
-      "terus bergerak, berkarya, dan memberikan manfaat bagi sesama.",
+      "Program Magister Kenotariatan Fakultas Hukum UNISSULA menyelenggarakan Kuliah Umum " +
+      "Bersertifikat pada Sabtu, 26 September 2026, pukul 13.00–15.00 WIB.\n\n" +
+      "Kuliah umum ini menghadirkan Dr. Arief Muliawan, S.H., M.H., QGIA, Direktur Jenderal " +
+      "Pengadaan Tanah dan Pengembangan Pertanahan Kementerian ATR/BPN, dengan tema " +
+      "“Mitigasi Risiko Hukum dalam Peralihan dan Pembebanan Hak: Sinergi ATR/BPN dan " +
+      "Notaris/PPAT dalam Pencegahan Sengketa dan Mafia Tanah.”\n\n" +
+      "Kegiatan ini bertujuan memperkuat pemahaman mahasiswa mengenai risiko hukum dalam " +
+      "praktik pertanahan, pentingnya asas kehati-hatian, serta sinergi antara ATR/BPN dan " +
+      "Notaris/PPAT dalam mewujudkan kepastian hukum dan mencegah sengketa pertanahan.\n\n" +
+      "Biaya pendaftaran sebesar Rp250.000,- dengan fasilitas peserta sebagai berikut:\n\n" +
+      "• Sertifikat kegiatan (syarat wisuda)\n\n" +
+      "• Materi dalam bentuk PDF\n\n" +
+      "• Snack\n\n" +
+      "• Terdaftar sebagai peserta Sultan Agung Fun Run 2026\n\n" +
+      "Sultan Agung Fun Run 2026 akan dilaksanakan pada Minggu, 27 September 2026, di Kantor " +
+      "Gubernur Jawa Tengah, Kota Semarang, untuk kategori 5,5K, dengan benefit berupa jersey, " +
+      "medali, BIB, goodie bag, refreshment, official photo, dan doorprize.\n\n" +
+      "Pendaftaran dilakukan melalui dua langkah:\n\n" +
+      "• Transfer biaya Rp250.000,- ke rekening BSI nomor 8383885575 atas nama Magister " +
+      "Kenotariatan UNISSULA.\n\n" +
+      "• Mengisi data pendaftaran melalui tautan https://bit.ly/kuliahumum-sept2026 secara " +
+      "lengkap dan benar, serta mengunggah bukti pembayaran pada formulir yang tersedia.\n\n" +
+      "Catatan: pendaftaran Fun Run paling lambat tanggal 20 September 2026. Pendaftar Kuliah " +
+      "Umum setelah tanggal tersebut tidak memperoleh fasilitas Fun Run.",
     image: kuliah,
     cp: "+62 823-1222-8181 (Ikrom, S.H., M.H.)",
     isFeatured: true,

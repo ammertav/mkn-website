@@ -14,19 +14,19 @@ import Img from "./ui/Img";
 /** Akun media sosial resmi Program Studi Magister Kenotariatan UNISSULA. */
 const socialLinks = [
   {
-    label: "Instagram",
+    label: "notariatunissula",
     handle: "@notariatunissula",
     href: "https://www.instagram.com/notariatunissula",
     Icon: FaInstagram,
   },
   {
-    label: "TikTok",
+    label: "Magister Kenotariatan Unissula",
     handle: "@notariatunissula",
     href: "https://www.tiktok.com/@notariatunissula",
     Icon: FaTiktok,
   },
   {
-    label: "YouTube",
+    label: "NOTARIAT TV",
     handle: "@kenotariatanunissula",
     href: "https://www.youtube.com/@kenotariatanunissula",
     Icon: FaYoutube,

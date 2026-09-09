@@ -119,7 +119,7 @@ export const navLinks = [
         href: "/akademik/jurnal",
       },
       {
-        title: { id: "E-Library", en: "Journals" },
+        title: { id: "E-Library", en: "Library" },
         href: "/akademik/perpustakaan",
       },
     ],

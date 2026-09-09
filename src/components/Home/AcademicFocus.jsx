@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { FiArrowRight } from "react-icons/fi";
 
-import beritaList from "../../data/berita.json";
+import { berita } from "../../data/beritaSelectors";
 import { getBeritaImage } from "../../utils/imageResolver";
 import { generateSlug } from "../../utils/slugHelper";
 import Img from "../ui/Img";
@@ -53,8 +53,10 @@ const cardVariants = {
 };
 
 export default function AcademicFocus() {
-  const featured = beritaList[0];
-  const sideArticles = beritaList.slice(1, 4);
+  // Sumber dan urutannya sama persis dengan halaman Berita, sehingga entri
+  // teratas di sini selalu berita terbaru yang sama.
+  const featured = berita[0];
+  const sideArticles = berita.slice(1, 4);
 
   return (
     <section className="w-full bg-hero-heading font-body py-16 sm:py-20 border-b border-gray-200 overflow-hidden">

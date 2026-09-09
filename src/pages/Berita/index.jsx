@@ -15,7 +15,7 @@ import Footer from "../../components/Footer";
 import Breadcrumb from "../../components/ui/Breadcrumb";
 import { useT } from "../../i18n/languageContext";
 import { useUi } from "../../i18n/useUi";
-import beritaList from "../../data/berita.json";
+import { berita as beritaTerurut, pengumuman as pengumumanTerurut } from "../../data/beritaSelectors";
 import { getBeritaImage } from "../../utils/imageResolver";
 import { generateSlug } from "../../utils/slugHelper";
 import Img from "../../components/ui/Img";
@@ -86,43 +86,7 @@ const rightVariants = {
   },
 };
 
-/** Konversi string tanggal format Indonesia ("30 Oktober 2022") ke Date. */
-const BULAN_ID = {
-  januari: 0,
-  februari: 1,
-  maret: 2,
-  april: 3,
-  mei: 4,
-  juni: 5,
-  juli: 6,
-  agustus: 7,
-  september: 8,
-  oktober: 9,
-  november: 10,
-  desember: 11,
-};
-
-function parseIndonesianDate(str) {
-  if (!str) return new Date(0);
-
-  const parts = str.trim().split(/\s+/);
-
-  if (parts.length !== 3) return new Date(0);
-
-  const [day, monthStr, year] = parts;
-  const month = BULAN_ID[monthStr.toLowerCase()];
-
-  if (month === undefined) return new Date(0);
-
-  return new Date(Number(year), month, Number(day));
-}
-
 const ITEMS_PER_PAGE = 10;
-
-/**
- * Kategori dibedakan lewat kolom `tags` di src/data/berita.json.
- */
-const TAG_PENGUMUMAN = "Pengumuman";
 
 /**
  * Teks antarmuka halaman Berita.
@@ -389,29 +353,10 @@ export default function BeritaIndex() {
 
   const isBerita = kategori === "berita";
 
-  const beritaItems = useMemo(
-    () =>
-      beritaList
-        .filter((item) => item.tags !== TAG_PENGUMUMAN)
-        .sort(
-          (a, b) =>
-            parseIndonesianDate(b.tanggal) -
-            parseIndonesianDate(a.tanggal)
-        ),
-    []
-  );
-
-  const pengumumanItems = useMemo(
-    () =>
-      beritaList
-        .filter((item) => item.tags === TAG_PENGUMUMAN)
-        .sort(
-          (a, b) =>
-            parseIndonesianDate(b.tanggal) -
-            parseIndonesianDate(a.tanggal)
-        ),
-    []
-  );
+  // Pemilahan dan pengurutannya kini tinggal di data/beritaSelectors, dipakai
+  // bersama section Berita dan Pengumuman di Beranda.
+  const beritaItems = beritaTerurut;
+  const pengumumanItems = pengumumanTerurut;
 
   const handleKategoriChange = (key) => {
     setSearchParams(key === "berita" ? {} : { kategori: key });
@@ -524,7 +469,7 @@ export default function BeritaIndex() {
 
               <motion.p
                 variants={itemVariants}
-                className="text-base sm:text-lg text-body leading-relaxed max-w-3xl"
+                className="text-base sm:text-lg text-body text-justify leading-relaxed"
               >
                 {t(halaman.intro)}
               </motion.p>

@@ -28,7 +28,7 @@ export default function CommunityService() {
             Pengabdian Dosen
           </h1>
           <div className="w-full h-[2px] bg-primary my-4" />
-          <p className="text-sm sm:text-base text-body leading-relaxed max-w-3xl">
+          <p className="text-sm sm:text-base text-body text-justify leading-relaxed">
             Pengabdian kepada masyarakat diselenggarakan sebagai penerjemahan keilmuan kenotariatan ke dalam layanan hukum yang dapat diakses masyarakat: penyuluhan pertanahan desa, pendampingan legalitas usaha mikro, dan konsultasi pembuatan perjanjian.
           </p>
         </div>

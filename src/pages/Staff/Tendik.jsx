@@ -1,5 +1,5 @@
 import { Helmet } from "react-helmet-async";
-import Img from "../../components/ui/Img";
+import ZoomableImg from "../../components/ui/ZoomableImg";
 import { tenagaKependidikan } from "../../data/profil/tendikData";
 
 /** Gelar akademik yang diabaikan saat menyusun inisial pengganti foto. */
@@ -62,9 +62,10 @@ export default function Tendik() {
               >
                 <div className="w-20 h-24 rounded-xs overflow-hidden bg-gray-100 border border-gray-200 flex items-center justify-center shrink-0">
                   {orang.photo ? (
-                    <Img
+                    <ZoomableImg
                       src={orang.photo}
                       alt={orang.name}
+                      caption={`${orang.name} — ${orang.jabatan}`}
                       className="w-full h-full object-cover object-top rounded-md hover:scale-105 transition-transform duration-500"
                     />
                   ) : (

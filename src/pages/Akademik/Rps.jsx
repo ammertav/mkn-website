@@ -267,13 +267,23 @@ export default function Rps() {
           </motion.div>
         </motion.div>
 
-        {/* Daftar Kartu Mata Kuliah */}
+        {/* Daftar Kartu Mata Kuliah
+
+            Daftar ini memakai `animate`, bukan `whileInView`, dan diberi `key`
+            dari filter aktif.
+
+            Dengan `whileInView` + `once: true`, animasinya hanya berjalan satu
+            kali seumur hidup elemen. Begitu pengguna berganti semester, kartu
+            yang keynya baru ikut mewarisi state awal "hidden" (opacity 0) tapi
+            tidak pernah lagi disuruh menjadi "visible" — jadi daftarnya kosong
+            walau datanya ada. `key` membuat daftarnya dianimasikan ulang tiap
+            filter berganti, dan `animate` melepasnya dari posisi gulir. */}
         {mataKuliahTerfilter.length > 0 ? (
           <motion.div
+            key={`${semesterAktif}-${kataKunci}`}
             variants={containerVariants}
             initial="hidden"
-            whileInView="visible"
-            viewport={viewportSettings}
+            animate="visible"
             className="space-y-4"
           >
             {mataKuliahTerfilter.map((mk) => (
@@ -288,22 +298,20 @@ export default function Rps() {
         ) : (
           <motion.div
             initial={{ opacity: 0, y: 30, scale: 0.98 }}
-            whileInView={{ opacity: 1, y: 0, scale: 1 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
             transition={{
               duration: 0.7,
               ease: "easeOut",
             }}
-            viewport={viewportSettings}
             className="bg-white border border-dashed border-gray-300 rounded-xs p-10 text-center space-y-4"
           >
             <motion.div
               initial={{ opacity: 0, scale: 0.7 }}
-              whileInView={{ opacity: 1, scale: 1 }}
+              animate={{ opacity: 1, scale: 1 }}
               transition={{
                 duration: 0.6,
                 ease: "easeOut",
               }}
-              viewport={viewportSettings}
               className="w-12 h-12 rounded-full bg-gray-100 text-gray-400 flex items-center justify-center mx-auto text-xl"
             >
               <FiSearch />
