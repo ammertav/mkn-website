@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Helmet } from "react-helmet-async";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   FiExternalLink,
   FiCheck,
@@ -20,6 +21,61 @@ import {
   biaya,
   dasarHukum,
 } from "../../data/alumni/pusatKarirData";
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.12,
+      delayChildren: 0.05,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 16 },
+  visible: (i = 0) => ({
+    opacity: 1,
+    y: 0,
+    transition: {
+      delay: typeof i === "number" ? i * 0.12 : 0,
+      duration: 0.5,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  }),
+};
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 24 },
+  visible: (args = 0) => {
+    const idx =
+      typeof args === "object" && args !== null
+        ? args.idx ?? 0
+        : typeof args === "number"
+        ? args
+        : 0;
+    const hasLoaded =
+      typeof args === "object" && args !== null ? !!args.hasLoaded : false;
+    return {
+      opacity: 1,
+      y: 0,
+      transition: {
+        delay: !hasLoaded ? 0.38 + idx * 0.12 : (idx % 3) * 0.1,
+        duration: 0.5,
+        ease: [0.22, 1, 0.36, 1],
+      },
+    };
+  },
+};
+
+const lineVariants = {
+  hidden: { scaleX: 0, originX: 0 },
+  visible: {
+    scaleX: 1,
+    transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
+  },
+};
 
 /**
  * Saklar tampilan halaman Pusat Karir.
@@ -99,27 +155,52 @@ function TampilanBaru() {
         />
       </Helmet>
 
-      <div className="space-y-6">
+      <motion.div
+        className="space-y-6"
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+      >
         {/* Header */}
-        <div className="space-y-2">
-          <span className="text-xs font-bold tracking-wider uppercase text-primary">
+        <motion.div variants={itemVariants} className="space-y-2">
+          <motion.span
+            variants={itemVariants}
+            className="inline-block text-xs font-bold tracking-wider uppercase text-primary"
+          >
             Alumni &amp; Karier
-          </span>
-          <h1 className="text-3xl sm:text-4xl lg:text-[40px] font-heading font-bold text-heading tracking-tight leading-tight">
+          </motion.span>
+          <motion.h1
+            variants={itemVariants}
+            className="text-3xl sm:text-4xl lg:text-[40px] font-heading font-bold text-heading tracking-tight leading-tight"
+          >
             Pusat Karir &amp; Jejaring Alumni
-          </h1>
-        </div>
+          </motion.h1>
+        </motion.div>
 
-        <hr className="border-t border-gray-800 my-4" />
+        <motion.hr variants={lineVariants} className="border-t border-gray-800 my-4" />
 
-        <p className="text-sm sm:text-base text-body text-justify leading-relaxed">{pengantar}</p>
+        <motion.p
+          variants={itemVariants}
+          className="text-sm sm:text-base text-body text-justify leading-relaxed"
+        >
+          {pengantar}
+        </motion.p>
 
         {/* Angka kunci */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 pt-2">
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          className="grid grid-cols-2 lg:grid-cols-4 gap-4 pt-2"
+        >
           {angkaKunci.map((a, idx) => (
-            <div
+            <motion.div
               key={idx}
-              className="p-5 border border-gray-200 bg-white rounded-xs shadow-2xs space-y-1"
+              custom={idx}
+              variants={cardVariants}
+              whileHover={{ y: -3 }}
+              className="p-5 border border-gray-200 bg-white rounded-xs shadow-2xs space-y-1 transition-colors hover:border-primary/40"
             >
               <div className="flex items-baseline gap-1.5">
                 <span className="font-heading font-bold text-2xl sm:text-3xl text-primary leading-none">
@@ -130,21 +211,33 @@ function TampilanBaru() {
               <p className="text-[11px] font-medium tracking-wide uppercase text-gray-500 leading-snug">
                 {a.label}
               </p>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
 
         {/* Prasyarat */}
-        <section className="space-y-4 pt-6">
-          <h2 className="font-heading font-bold text-xl sm:text-2xl text-heading tracking-tight">
+        <motion.section
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.15 }}
+          className="space-y-4 pt-6"
+        >
+          <motion.h2
+            variants={itemVariants}
+            className="font-heading font-bold text-xl sm:text-2xl text-heading tracking-tight"
+          >
             Tiga Prasyarat Sebelum Mendaftar
-          </h2>
+          </motion.h2>
 
           <div className="space-y-4">
-            {prasyarat.map((p) => (
-              <div
+            {prasyarat.map((p, idx) => (
+              <motion.div
                 key={p.nomor}
-                className="p-6 border border-gray-200 bg-white rounded-xs space-y-3 shadow-2xs hover:border-primary/40 transition-colors"
+                custom={idx}
+                variants={cardVariants}
+                whileHover={{ y: -2 }}
+                className="p-6 border border-gray-200 bg-white rounded-xs space-y-3 shadow-2xs hover:border-primary/40 transition-all"
               >
                 <div className="flex items-start gap-4">
                   <span className="shrink-0 w-8 h-8 flex items-center justify-center rounded-xs bg-primary/10 text-primary font-heading font-bold text-sm">
@@ -154,63 +247,93 @@ function TampilanBaru() {
                     <h3 className="font-heading font-bold text-lg text-heading leading-snug">
                       {p.judul}
                     </h3>
-                    <p className="text-xs sm:text-sm text-body leading-relaxed text-justify hyphens-auto text-justify">{p.desc}</p>
+                    <p className="text-xs sm:text-sm text-body leading-relaxed text-justify hyphens-auto">{p.desc}</p>
                   </div>
                 </div>
                 <p className="text-[11px] text-gray-500 pt-2 border-t border-gray-100">{p.dasar}</p>
-              </div>
+              </motion.div>
             ))}
           </div>
 
           {/* Ketentuan magang, dikutip dari peraturan */}
-          <div className="p-6 border-l-3 border-l-primary border border-gray-200 bg-gray-50/70 rounded-xs space-y-4">
+          <motion.div
+            variants={cardVariants}
+            className="p-6 border-l-3 border-l-primary border border-gray-200 bg-gray-50/70 rounded-xs space-y-4"
+          >
             <p className="text-xs font-bold tracking-wider uppercase text-heading">
               {catatanMagang.judul}
             </p>
             {catatanMagang.butir.map((b, idx) => (
-              <div key={idx} className="space-y-1.5">
+              <motion.div key={idx} custom={idx} variants={itemVariants} className="space-y-1.5">
                 <p className="text-xs sm:text-sm text-body text-justify leading-relaxed">{b.isi}</p>
                 <p className="text-[11px] text-gray-500">{b.dasar}</p>
-              </div>
+              </motion.div>
             ))}
-          </div>
-        </section>
+          </motion.div>
+        </motion.section>
 
         {/* Syarat pengangkatan */}
-        <section className="space-y-4 pt-6">
-          <h2 className="font-heading font-bold text-xl sm:text-2xl text-heading tracking-tight">
+        <motion.section
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.15 }}
+          className="space-y-4 pt-6"
+        >
+          <motion.h2
+            variants={itemVariants}
+            className="font-heading font-bold text-xl sm:text-2xl text-heading tracking-tight"
+          >
             Delapan Syarat Pengangkatan
-          </h2>
-          <p className="text-xs sm:text-sm text-body leading-relaxed text-justify hyphens-auto max-w-4xl">
+          </motion.h2>
+          <motion.p
+            variants={itemVariants}
+            className="text-xs sm:text-sm text-body leading-relaxed text-justify hyphens-auto max-w-4xl"
+          >
             Seluruh syarat berikut harus dipenuhi calon Notaris menurut Pasal 2 ayat (1) Permenkum
             22/2025.
-          </p>
+          </motion.p>
 
-          <div className="p-6 border border-gray-200 bg-white rounded-xs shadow-2xs">
+          <motion.div
+            variants={cardVariants}
+            className="p-6 border border-gray-200 bg-white rounded-xs shadow-2xs"
+          >
             <ul className="space-y-3">
               {syaratPengangkatan.map((s, idx) => (
-                <li key={idx} className="flex items-start gap-3">
+                <motion.li key={idx} custom={idx} variants={itemVariants} className="flex items-start gap-3">
                   <span className="shrink-0 mt-0.5 w-5 h-5 rounded-full bg-red-50 text-primary flex items-center justify-center">
                     <FiCheck className="w-3 h-3 stroke-[2.5]" />
                   </span>
                   <span className="text-xs sm:text-sm text-body leading-relaxed text-justify hyphens-auto">{s}</span>
-                </li>
+                </motion.li>
               ))}
             </ul>
-          </div>
-        </section>
+          </motion.div>
+        </motion.section>
 
         {/* Dokumen */}
-        <section className="space-y-4 pt-6">
-          <h2 className="font-heading font-bold text-xl sm:text-2xl text-heading tracking-tight">
+        <motion.section
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.15 }}
+          className="space-y-4 pt-6"
+        >
+          <motion.h2
+            variants={itemVariants}
+            className="font-heading font-bold text-xl sm:text-2xl text-heading tracking-tight"
+          >
             Dokumen yang Dilampirkan
-          </h2>
+          </motion.h2>
 
           <div className="space-y-4">
-            {dokumenKelompok.map((k) => (
-              <div
+            {dokumenKelompok.map((k, idx) => (
+              <motion.div
                 key={k.judul}
-                className="p-6 border border-gray-200 bg-white rounded-xs space-y-4 shadow-2xs"
+                custom={idx}
+                variants={cardVariants}
+                whileHover={{ y: -2 }}
+                className="p-6 border border-gray-200 bg-white rounded-xs space-y-4 shadow-2xs hover:border-primary/40 transition-all"
               >
                 <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3">
                   <h3 className="font-heading font-bold text-lg text-heading leading-snug">
@@ -222,10 +345,10 @@ function TampilanBaru() {
                 </div>
 
                 <ol className="space-y-2.5">
-                  {k.butir.map((b, idx) => (
-                    <li key={idx} className="flex gap-3">
+                  {k.butir.map((b, bIdx) => (
+                    <li key={bIdx} className="flex gap-3">
                       <span className="shrink-0 tabular-nums text-gray-400 text-xs pt-0.5 select-none">
-                        {idx + 1}.
+                        {bIdx + 1}.
                       </span>
                       <span className="text-xs sm:text-sm text-body leading-relaxed text-justify hyphens-auto">{b}</span>
                     </li>
@@ -233,24 +356,41 @@ function TampilanBaru() {
                 </ol>
 
                 <p className="text-[11px] text-gray-500 pt-2 border-t border-gray-100">{k.dasar}</p>
-              </div>
+              </motion.div>
             ))}
           </div>
-        </section>
+        </motion.section>
 
         {/* Tahapan pendaftaran */}
-        <section className="space-y-4 pt-6">
-          <h2 className="font-heading font-bold text-xl sm:text-2xl text-heading tracking-tight">
+        <motion.section
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.15 }}
+          className="space-y-4 pt-6"
+        >
+          <motion.h2
+            variants={itemVariants}
+            className="font-heading font-bold text-xl sm:text-2xl text-heading tracking-tight"
+          >
             Tahapan Pendaftaran Daring
-          </h2>
-          <p className="text-xs sm:text-sm text-body leading-relaxed text-justify hyphens-auto max-w-4xl">
+          </motion.h2>
+          <motion.p
+            variants={itemVariants}
+            className="text-xs sm:text-sm text-body leading-relaxed text-justify hyphens-auto max-w-4xl"
+          >
             Seluruh permohonan diajukan secara elektronik melalui ahu.go.id. Jadwal tiap tahap
             ditetapkan Ditjen AHU pada setiap pembukaan pendaftaran.
-          </p>
+          </motion.p>
 
           <ol className="relative border-l-2 border-gray-200 ml-3 space-y-6">
-            {tahapanPendaftaran.map((t) => (
-              <li key={t.nomor} className="relative pl-7 sm:pl-9">
+            {tahapanPendaftaran.map((t, idx) => (
+              <motion.li
+                key={t.nomor}
+                custom={idx}
+                variants={itemVariants}
+                className="relative pl-7 sm:pl-9"
+              >
                 <span
                   aria-hidden="true"
                   className="absolute -left-[15px] top-0 w-7 h-7 rounded-full bg-primary text-white text-xs font-heading font-bold flex items-center justify-center border-4 border-banner tabular-nums"
@@ -263,18 +403,30 @@ function TampilanBaru() {
                 <p className="mt-1.5 text-xs sm:text-sm text-body leading-relaxed text-justify hyphens-auto max-w-4xl">
                   {t.desc}
                 </p>
-              </li>
+              </motion.li>
             ))}
           </ol>
-        </section>
+        </motion.section>
 
         {/* Pindah wilayah */}
-        <section className="space-y-4 pt-6">
-          <h2 className="font-heading font-bold text-xl sm:text-2xl text-heading tracking-tight">
+        <motion.section
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.15 }}
+          className="space-y-4 pt-6"
+        >
+          <motion.h2
+            variants={itemVariants}
+            className="font-heading font-bold text-xl sm:text-2xl text-heading tracking-tight"
+          >
             Pindah Wilayah Jabatan
-          </h2>
+          </motion.h2>
 
-          <div className="p-6 border border-gray-200 bg-white rounded-xs space-y-4 shadow-2xs">
+          <motion.div
+            variants={cardVariants}
+            className="p-6 border border-gray-200 bg-white rounded-xs space-y-4 shadow-2xs"
+          >
             <p className="text-xs sm:text-sm text-body leading-relaxed text-justify hyphens-auto">{pindahWilayah.ringkas}</p>
 
             <div className="pt-2 border-t border-gray-100 space-y-2.5">
@@ -283,12 +435,12 @@ function TampilanBaru() {
               </p>
               <ol className="space-y-2.5">
                 {pindahWilayah.dokumen.map((d, idx) => (
-                  <li key={idx} className="flex gap-3">
+                  <motion.li key={idx} custom={idx} variants={itemVariants} className="flex gap-3">
                     <span className="shrink-0 tabular-nums text-gray-400 text-xs pt-0.5 select-none">
                       {idx + 1}.
                     </span>
                     <span className="text-xs sm:text-sm text-body leading-relaxed text-justify hyphens-auto">{d}</span>
-                  </li>
+                  </motion.li>
                 ))}
               </ol>
             </div>
@@ -296,16 +448,28 @@ function TampilanBaru() {
             <p className="text-[11px] text-gray-500 pt-2 border-t border-gray-100">
               {pindahWilayah.dasar}
             </p>
-          </div>
-        </section>
+          </motion.div>
+        </motion.section>
 
         {/* Biaya */}
-        <section className="space-y-4 pt-6">
-          <h2 className="font-heading font-bold text-xl sm:text-2xl text-heading tracking-tight">
+        <motion.section
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.15 }}
+          className="space-y-4 pt-6"
+        >
+          <motion.h2
+            variants={itemVariants}
+            className="font-heading font-bold text-xl sm:text-2xl text-heading tracking-tight"
+          >
             Biaya
-          </h2>
+          </motion.h2>
 
-          <div className="border border-gray-200 bg-white rounded-xs overflow-x-auto shadow-2xs">
+          <motion.div
+            variants={cardVariants}
+            className="border border-gray-200 bg-white rounded-xs overflow-x-auto shadow-2xs"
+          >
             <table className="w-full text-left border-collapse text-xs sm:text-sm">
               <thead>
                 <tr className="border-b border-gray-200 bg-gray-50/70">
@@ -319,39 +483,51 @@ function TampilanBaru() {
               </thead>
               <tbody className="divide-y divide-gray-100">
                 {biaya.butir.map((b, idx) => (
-                  <tr key={idx} className="hover:bg-gray-50/50 transition-colors">
+                  <motion.tr key={idx} custom={idx} variants={itemVariants} className="hover:bg-gray-50/50 transition-colors">
                     <td className="py-3.5 px-5 text-body leading-relaxed">{b.jenis}</td>
                     <td className="py-3.5 px-5 text-right font-semibold text-heading tabular-nums whitespace-nowrap">
                       {b.tarif}
                     </td>
-                  </tr>
+                  </motion.tr>
                 ))}
               </tbody>
             </table>
-          </div>
+          </motion.div>
 
-          <p className="text-xs text-body leading-relaxed text-justify hyphens-auto">{biaya.catatan}</p>
-          <p className="text-[11px] text-gray-500 leading-relaxed">{biaya.dasar}</p>
-        </section>
+          <motion.p variants={itemVariants} className="text-xs text-body leading-relaxed text-justify hyphens-auto">{biaya.catatan}</motion.p>
+          <motion.p variants={itemVariants} className="text-[11px] text-gray-500 leading-relaxed">{biaya.dasar}</motion.p>
+        </motion.section>
 
         {/* Dasar hukum & rujukan resmi */}
-        <section className="space-y-4 pt-6">
-          <h2 className="font-heading font-bold text-xl sm:text-2xl text-heading tracking-tight">
+        <motion.section
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.15 }}
+          className="space-y-4 pt-6"
+        >
+          <motion.h2
+            variants={itemVariants}
+            className="font-heading font-bold text-xl sm:text-2xl text-heading tracking-tight"
+          >
             Dasar Hukum
-          </h2>
+          </motion.h2>
 
           <ol className="space-y-2.5">
             {dasarHukum.map((d, idx) => (
-              <li key={idx} className="flex gap-3">
+              <motion.li key={idx} custom={idx} variants={itemVariants} className="flex gap-3">
                 <span className="shrink-0 tabular-nums text-gray-400 text-xs pt-0.5 select-none">
                   {idx + 1}.
                 </span>
                 <span className="text-xs sm:text-sm text-body leading-relaxed text-justify hyphens-auto">{d}</span>
-              </li>
+              </motion.li>
             ))}
           </ol>
 
-          <div className="p-6 border-l-3 border-l-primary border border-gray-200 bg-gray-50/70 rounded-xs space-y-3">
+          <motion.div
+            variants={cardVariants}
+            className="p-6 border-l-3 border-l-primary border border-gray-200 bg-gray-50/70 rounded-xs space-y-3"
+          >
             <p className="text-xs sm:text-sm text-body leading-relaxed text-justify hyphens-auto">
               Halaman ini merupakan rangkuman yang disusun program studi dari {sumberResmi.dokumen}.
               Persyaratan, jadwal, formasi wilayah, dan tarif dapat berubah mengikuti peraturan
@@ -361,14 +537,14 @@ function TampilanBaru() {
               href={sumberResmi.laman}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center space-x-1.5 text-primary hover:text-[#570000] font-semibold text-xs sm:text-sm"
+              className="inline-flex items-center space-x-1.5 text-primary hover:text-[#570000] font-semibold text-xs sm:text-sm group"
             >
-              <span>Buka ahu.go.id</span>
+              <span className="group-hover:underline">Buka ahu.go.id</span>
               <FiExternalLink />
             </a>
-          </div>
-        </section>
-      </div>
+          </motion.div>
+        </motion.section>
+      </motion.div>
     </>
   );
 }
@@ -381,6 +557,12 @@ function TampilanBaru() {
  */
 function TampilanLama() {
   const [visibleCount, setVisibleCount] = useState(3);
+  const [hasLoaded, setHasLoaded] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setHasLoaded(true), 900);
+    return () => clearTimeout(timer);
+  }, []);
 
   const handleLoadMore = () => {
     if (visibleCount >= lowonganContoh.length) {
@@ -401,74 +583,108 @@ function TampilanLama() {
       </Helmet>
 
       <div className="space-y-6">
-        {/* Header */}
-        <div className="space-y-4">
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-heading font-bold text-heading tracking-tight leading-tight">
-            Pusat Karir &amp; Jejaring Alumni
-          </h1>
-          <p className="text-sm sm:text-base text-body text-justify leading-relaxed">
-            Menghubungkan lulusan Magister Kenotariatan UNISSULA dengan jejaring kantor Notaris/PPAT,
-            firma hukum, perbankan, dan institusi pemerintahan terkemuka di Indonesia.
-          </p>
-        </div>
+        {/* Header Container */}
+        <motion.div
+          className="space-y-6"
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+        >
+          {/* Header */}
+          <motion.div variants={itemVariants} className="space-y-4">
+            <motion.h1
+              variants={itemVariants}
+              className="text-3xl sm:text-4xl lg:text-5xl font-heading font-bold text-heading tracking-tight leading-tight"
+            >
+              Pusat Karir &amp; Jejaring Alumni
+            </motion.h1>
+            <motion.p
+              variants={itemVariants}
+              className="text-sm sm:text-base text-body text-justify leading-relaxed"
+            >
+              Menghubungkan lulusan Magister Kenotariatan UNISSULA dengan jejaring kantor Notaris/PPAT,
+              firma hukum, perbankan, dan institusi pemerintahan terkemuka di Indonesia.
+            </motion.p>
+          </motion.div>
 
-        <hr className="border-t border-gray-800 my-4" />
+          <motion.hr variants={lineVariants} className="border-t border-gray-800 my-4" />
+        </motion.div>
 
         {/* Featured Listings */}
         <div className="space-y-4 pt-2">
-          {lowonganContoh.slice(0, visibleCount).map((job) => (
-            <div
-              key={job.id}
-              className="p-6 border border-gray-200 bg-white rounded-xs space-y-4 shadow-2xs hover:border-primary/40 transition-colors"
-            >
-              <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3">
-                <div className="space-y-1">
-                  <h3 className="font-heading font-bold text-lg sm:text-xl text-heading leading-snug">
-                    {job.title}
-                  </h3>
-                  <p className="text-xs sm:text-sm font-semibold text-primary">{job.company}</p>
-                </div>
-                <span className="self-start px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wider bg-gray-100 text-gray-600 rounded-xs">
-                  {job.type}
-                </span>
-              </div>
-
-              <p className="text-xs sm:text-sm text-body leading-relaxed">{job.desc}</p>
-
-              <div className="flex flex-wrap items-center justify-between gap-3 pt-2 border-t border-gray-100 text-xs text-gray-500">
-                <div className="flex items-center space-x-4">
-                  <span className="flex items-center space-x-1">
-                    <FiMapPin className="text-primary" />
-                    <span>{job.location}</span>
-                  </span>
-                  <span className="flex items-center space-x-1">
-                    <FiClock className="text-primary" />
-                    <span>{job.posted}</span>
+          <AnimatePresence mode="popLayout">
+            {lowonganContoh.slice(0, visibleCount).map((job, idx) => (
+              <motion.div
+                key={job.id}
+                layout
+                custom={{ idx, hasLoaded }}
+                variants={cardVariants}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.15 }}
+                exit={{ opacity: 0, scale: 0.95, transition: { duration: 0.25 } }}
+                whileHover={{ y: -3 }}
+                className="p-6 border border-gray-200 bg-white rounded-xs space-y-4 shadow-2xs hover:border-primary/40 hover:shadow-md transition-all duration-300"
+              >
+                <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3">
+                  <div className="space-y-1">
+                    <h3 className="font-heading font-bold text-lg sm:text-xl text-heading leading-snug">
+                      {job.title}
+                    </h3>
+                    <p className="text-xs sm:text-sm font-semibold text-primary">{job.company}</p>
+                  </div>
+                  <span className="self-start px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wider bg-gray-100 text-gray-600 rounded-xs">
+                    {job.type}
                   </span>
                 </div>
-                <a
-                  href={job.link}
-                  className="inline-flex items-center space-x-1 text-primary hover:text-[#570000] font-semibold"
-                >
-                  <span>Lihat Detail</span>
-                  <FiArrowRight />
-                </a>
-              </div>
-            </div>
-          ))}
+
+                <p className="text-xs sm:text-sm text-body leading-relaxed">{job.desc}</p>
+
+                <div className="flex flex-wrap items-center justify-between gap-3 pt-2 border-t border-gray-100 text-xs text-gray-500">
+                  <div className="flex items-center space-x-4">
+                    <span className="flex items-center space-x-1">
+                      <FiMapPin className="text-primary" />
+                      <span>{job.location}</span>
+                    </span>
+                    <span className="flex items-center space-x-1">
+                      <FiClock className="text-primary" />
+                      <span>{job.posted}</span>
+                    </span>
+                  </div>
+                  <motion.a
+                    href={job.link}
+                    whileHover={{ x: 4 }}
+                    transition={{ type: "spring", stiffness: 300 }}
+                    className="inline-flex items-center space-x-1 text-primary hover:text-[#570000] font-semibold"
+                  >
+                    <span>Lihat Detail</span>
+                    <FiArrowRight />
+                  </motion.a>
+                </div>
+              </motion.div>
+            ))}
+          </AnimatePresence>
         </div>
 
         {/* Load More Button */}
-        <div className="pt-8 text-center">
-          <button
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.45 }}
+          className="pt-8 text-center"
+        >
+          <motion.button
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
             onClick={handleLoadMore}
-            className="inline-block border border-primary text-primary hover:bg-primary hover:text-white px-8 py-2.5 text-xs font-semibold tracking-wider uppercase transition-all duration-200 cursor-pointer"
+            className="inline-block border border-primary text-primary hover:bg-primary hover:text-white px-8 py-2.5 text-xs font-semibold tracking-wider uppercase transition-all duration-200 cursor-pointer shadow-xs"
           >
             {visibleCount >= lowonganContoh.length
               ? "TAMPILKAN LEBIH SEDIKIT"
               : "MUAT LEBIH BANYAK"}
-          </button>
-        </div>
+          </motion.button>
+        </motion.div>
       </div>
     </>
   );
@@ -477,3 +693,4 @@ function TampilanLama() {
 export default function CareerCenter() {
   return TAMPILAN === "old" ? <TampilanLama /> : <TampilanBaru />;
 }
+

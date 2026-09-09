@@ -1,10 +1,13 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
+import { motion } from "framer-motion";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import Breadcrumb from "../../components/ui/Breadcrumb";
 
 export default function StaffLayout() {
+  const location = useLocation();
+
   return (
     <>
       <Helmet>
@@ -19,14 +22,25 @@ export default function StaffLayout() {
         <Navbar />
 
         {/* Breadcrumb container aligns with Navbar */}
-        <div className="w-full flex-grow max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 pt-8 sm:pt-12">
+        <motion.div
+          initial={{ opacity: 0, y: -6 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+          className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 pt-8 sm:pt-12"
+        >
           <Breadcrumb />
-        </div>
+        </motion.div>
 
         {/* Full-width container for outlet so child sections can go full-bleed */}
-        <div className="w-full flex-grow">
+        <motion.div
+          key={location.pathname}
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+          className="w-full flex-grow"
+        >
           <Outlet />
-        </div>
+        </motion.div>
 
         <Footer />
       </main>

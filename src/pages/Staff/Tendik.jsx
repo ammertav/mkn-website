@@ -1,4 +1,5 @@
 import { Helmet } from "react-helmet-async";
+import { motion } from "framer-motion";
 import ZoomableImg from "../../components/ui/ZoomableImg";
 import { tenagaKependidikan } from "../../data/profil/tendikData";
 
@@ -16,6 +17,78 @@ function inisial(nama) {
   return kata.slice(0, 2).map((k) => k[0]).join("").toUpperCase() || "?";
 }
 
+const viewportSettings = {
+  once: true,
+  amount: 0.15,
+};
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.12,
+      delayChildren: 0.05,
+    },
+  },
+};
+
+const listContainerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.08,
+      delayChildren: 0.05,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 16 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.5,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  },
+};
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.45,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  },
+};
+
+const rowVariants = {
+  hidden: { opacity: 0, y: 14 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.45,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  },
+};
+
+const lineVariants = {
+  hidden: { scaleX: 0, originX: 0 },
+  visible: {
+    scaleX: 1,
+    originX: 0,
+    transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
+  },
+};
+
 export default function Tendik() {
   return (
     <>
@@ -29,35 +102,59 @@ export default function Tendik() {
 
       <div className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 pt-4 sm:pt-6 pb-12 sm:pb-16 space-y-10">
         {/* Kepala halaman */}
-        <div>
-          <span className="text-[11px] font-bold tracking-[0.16em] uppercase text-primary block mb-2">
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+        >
+          <motion.span
+            variants={itemVariants}
+            className="text-[11px] font-bold tracking-[0.16em] uppercase text-primary block mb-2"
+          >
             STAF
-          </span>
-          <h1 className="text-3xl sm:text-4xl md:text-[42px] font-heading font-bold text-heading tracking-normal">
+          </motion.span>
+          <motion.h1
+            variants={itemVariants}
+            className="text-3xl sm:text-4xl md:text-[42px] font-heading font-bold text-heading tracking-normal"
+          >
             Tenaga Kependidikan
-          </h1>
-          <div className="w-full h-[2px] bg-primary mt-4 mb-5" />
-          <p className="text-base text-body leading-relaxed max-w-3xl">
+          </motion.h1>
+          <motion.div variants={lineVariants} className="w-full h-[2px] bg-primary mt-4 mb-5" />
+          <motion.p
+            variants={itemVariants}
+            className="text-base text-body leading-relaxed max-w-3xl"
+          >
             Tenaga kependidikan menopang penyelenggaraan akademik program studi: ketatausahaan
             dan layanan administratif, pengelolaan laboratorium akta dan perpustakaan, serta
             empat bidang pelaksana — akademik, keuangan, promosi &amp; humas, dan sarana
             prasarana.
-          </p>
-        </div>
+          </motion.p>
+        </motion.div>
 
         {/* Direktori — kartu berfoto, dikelompokkan mengikuti struktur organisasi */}
-        <div className="space-y-4">
+        <motion.section
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportSettings}
+          className="space-y-4"
+        >
           <div>
             <h2 className="text-xl sm:text-2xl font-heading font-medium text-heading tracking-normal">
               Direktori Tenaga Kependidikan
             </h2>
-            <div className="w-full h-[1.5px] bg-heading mt-2.5" />
+            <motion.div variants={lineVariants} className="w-full h-[1.5px] bg-heading mt-2.5" />
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          <motion.div
+            variants={listContainerVariants}
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5"
+          >
             {tenagaKependidikan.map((orang) => (
-              <div
+              <motion.div
                 key={`${orang.jabatan}-${orang.name}`}
+                variants={cardVariants}
+                whileHover={{ y: -3, transition: { duration: 0.2 } }}
                 className="border border-gray-200 bg-white rounded-xs shadow-2xs p-5 flex gap-4 hover:border-primary/40 transition-colors"
               >
                 <div className="w-20 h-24 rounded-xs overflow-hidden bg-gray-100 border border-gray-200 flex items-center justify-center shrink-0">
@@ -84,21 +181,27 @@ export default function Tendik() {
                   </h3>
                   <p className="text-xs text-body leading-relaxed">{orang.tugas}</p>
                 </div>
-              </div>
+              </motion.div>
             ))}
-          </div>
-        </div>
+          </motion.div>
+        </motion.section>
 
         {/* Ringkasan tugas per jabatan */}
-        <div className="space-y-4">
+        <motion.section
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportSettings}
+          className="space-y-4"
+        >
           <div>
             <h2 className="text-xl sm:text-2xl font-heading font-medium text-heading tracking-normal">
               Pembagian Tugas
             </h2>
-            <div className="w-full h-[1.5px] bg-heading mt-2.5" />
+            <motion.div variants={lineVariants} className="w-full h-[1.5px] bg-heading mt-2.5" />
           </div>
 
-          <div className="border border-gray-200 bg-white overflow-x-auto">
+          <motion.div variants={itemVariants} className="border border-gray-200 bg-white overflow-x-auto shadow-2xs">
             <table className="w-full text-left border-collapse min-w-[560px]">
               <thead>
                 <tr className="border-b-2 border-heading">
@@ -113,10 +216,14 @@ export default function Tendik() {
                   </th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-100 text-sm">
+              <motion.tbody
+                variants={listContainerVariants}
+                className="divide-y divide-gray-100 text-sm"
+              >
                 {tenagaKependidikan.map((orang) => (
-                  <tr
+                  <motion.tr
                     key={`${orang.jabatan}-${orang.name}`}
+                    variants={rowVariants}
                     className="hover:bg-gray-50/50 transition-colors"
                   >
                     <td className="py-4 px-5 sm:px-6 font-bold text-heading align-top leading-snug">
@@ -128,12 +235,12 @@ export default function Tendik() {
                     <td className="py-4 px-5 sm:px-6 text-body align-top leading-relaxed">
                       {orang.tugas}
                     </td>
-                  </tr>
+                  </motion.tr>
                 ))}
-              </tbody>
+              </motion.tbody>
             </table>
-          </div>
-        </div>
+          </motion.div>
+        </motion.section>
       </div>
     </>
   );

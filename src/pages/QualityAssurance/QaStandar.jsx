@@ -1,5 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import { FiDownload } from "react-icons/fi";
+import { motion } from "framer-motion";
 import {
   KepalaMutu,
   JudulMutu,
@@ -10,6 +11,21 @@ import {
   standarStructure,
   standarGroups,
 } from "../../data/qualityAssurance/qaStandarData";
+
+const stagger = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.07, delayChildren: 0.05 } },
+};
+
+const rowVar = {
+  hidden: { opacity: 0, x: -14 },
+  visible: { opacity: 1, x: 0, transition: { duration: 0.4, ease: [0.22, 1, 0.36, 1] } },
+};
+
+const sectionVar = {
+  hidden: { opacity: 0, y: 24 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] } },
+};
 
 export default function QaStandar() {
   return (
@@ -30,10 +46,23 @@ export default function QaStandar() {
         />
 
         {standarGroups.map((g) => (
-          <section key={g.code} className="space-y-5">
+          <motion.section
+            key={g.code}
+            className="space-y-5"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.08 }}
+            variants={sectionVar}
+          >
             <JudulMutu judul={`${g.group} · ${g.code}`} keterangan={g.desc} />
 
-            <div className="border border-gray-200 bg-white rounded-xs overflow-x-auto">
+            <motion.div
+              className="border border-gray-200 bg-white rounded-xs overflow-x-auto"
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.05 }}
+              variants={stagger}
+            >
               <table className="w-full text-left border-collapse text-sm min-w-[720px]">
                 <thead>
                   <tr className="border-b border-gray-200 bg-gray-50/70">
@@ -53,7 +82,7 @@ export default function QaStandar() {
                 </thead>
                 <tbody className="divide-y divide-gray-100">
                   {g.items.map((s) => (
-                    <tr key={s.code} className="hover:bg-gray-50/50 transition-colors">
+                    <motion.tr key={s.code} variants={rowVar} className="hover:bg-gray-50/50 transition-colors">
                       <td className="py-3.5 px-4 sm:px-5 font-mono text-xs text-primary align-top whitespace-nowrap">
                         {s.code}
                       </td>
@@ -75,12 +104,12 @@ export default function QaStandar() {
                           <FiDownload className="text-xs" />
                         </a>
                       </td>
-                    </tr>
+                    </motion.tr>
                   ))}
                 </tbody>
               </table>
-            </div>
-          </section>
+            </motion.div>
+          </motion.section>
         ))}
 
         <section className="space-y-5">

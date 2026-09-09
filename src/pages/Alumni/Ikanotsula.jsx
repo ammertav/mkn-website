@@ -1,7 +1,53 @@
 import { useEffect } from "react";
 import { Helmet } from "react-helmet-async";
+import { motion } from "framer-motion";
 import ZoomableImg from "../../components/ui/ZoomableImg";
 import Logo from "../../assets/images/ikanot/logo.jpg";
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.12,
+      delayChildren: 0.05,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 16 },
+  visible: (i = 0) => ({
+    opacity: 1,
+    y: 0,
+    transition: {
+      delay: typeof i === "number" ? i * 0.12 : 0,
+      duration: 0.5,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  }),
+};
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 24 },
+  visible: (i = 0) => ({
+    opacity: 1,
+    y: 0,
+    transition: {
+      delay: typeof i === "number" ? i * 0.12 : 0,
+      duration: 0.55,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  }),
+};
+
+const lineVariants = {
+  hidden: { scaleX: 0, originX: 0 },
+  visible: {
+    scaleX: 1,
+    transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
+  },
+};
 
 /**
  * Foto galeri dibaca langsung dari struktur folder di
@@ -376,7 +422,6 @@ export default function IkanotsulaDetail() {
       0
     ) ?? 0;
 
-
   return (
     <>
       <Helmet>
@@ -384,317 +429,392 @@ export default function IkanotsulaDetail() {
         <meta name="description" content={organization.description} />
       </Helmet>
 
-        <section className="w-full">
-          <div className="mx-auto space-y-6">
-            <div className="space-y-2">
-              <span className="text-xs font-bold tracking-wider uppercase text-primary">
-                {organization.category || "ORGANISASI ALUMNI"}
-              </span>
-              <h1 className="text-3xl sm:text-4xl lg:text-[40px] font-heading font-bold text-heading tracking-tight leading-tight">
-                {organization.title}
-              </h1>
-            </div>
+      <motion.section
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+        className="w-full"
+      >
+        <div className="mx-auto space-y-6">
+          <motion.div variants={itemVariants} className="space-y-2">
+            <motion.span
+              variants={itemVariants}
+              className="inline-block text-xs font-bold tracking-wider uppercase text-primary"
+            >
+              {organization.category || "ORGANISASI ALUMNI"}
+            </motion.span>
+            <motion.h1
+              variants={itemVariants}
+              className="text-3xl sm:text-4xl lg:text-[40px] font-heading font-bold text-heading tracking-tight leading-tight"
+            >
+              {organization.title}
+            </motion.h1>
+          </motion.div>
 
-            {/* Gambar Utama Memanjang Full-Width */}
-            <div className="w-full h-[300px] sm:h-[420px] lg:h-[480px] overflow-hidden rounded-md flex items-center justify-center">
-              <ZoomableImg
-                src={organization.image}
-                alt={organization.title}
-                className="max-w-full max-h-full w-auto h-full object-contain object-center rounded-md hover:scale-105 transition-transform duration-500"
-                eager
-              />
-            </div>
+          {/* Gambar Utama Memanjang Full-Width */}
+          <motion.div
+            variants={cardVariants}
+            className="w-full h-[300px] sm:h-[420px] lg:h-[480px] overflow-hidden rounded-md flex items-center justify-center bg-gray-50/50 border border-gray-100"
+          >
+            <ZoomableImg
+              src={organization.image}
+              alt={organization.title}
+              className="max-w-full max-h-full w-auto h-full object-contain object-center rounded-md hover:scale-105 transition-transform duration-500"
+              eager
+            />
+          </motion.div>
 
-            {/* Metadata Bar Horizontal */}
-            {organization.meta && organization.meta.length > 0 && (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-4 border-t border-gray-200">
-                {organization.meta.map((m, idx) => (
-                  <div key={idx} className="p-3 bg-gray-50/80 rounded border border-gray-100 flex flex-col justify-between">
-                    <span className="text-xs text-body font-normal uppercase tracking-wider mb-1">{m.label}</span>
-                    <span className="font-semibold text-heading text-sm sm:text-base">{m.value}</span>
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
-        </section>
-
-        {/* ========================================================================= */}
-        {/* KONTEN UTAMA (1 KOLOM TUNGGAL MEMANJANG) */}
-        {/* ========================================================================= */}
-        <div className="w-full mx-auto py-10 sm:py-14 space-y-12 sm:space-y-16">
-          
-          {/* RINGKASAN ORGANISASI (STRIP STATISTIK HORIZONTAL) */}
-          {organization.summary && organization.summary.length > 0 && (
-            <section className="bg-white p-6 sm:p-8 rounded-lg border border-gray-200 shadow-2xs">
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 divide-y sm:divide-y-0 sm:divide-x divide-gray-200">
-                {organization.summary.map((stat, idx) => (
-                  <div key={idx} className={`space-y-1 ${idx !== 0 ? "pt-4 sm:pt-0 sm:pl-6" : ""}`}>
-                    <div className="font-heading text-3xl sm:text-4xl font-bold text-primary">
-                      {stat.number}
-                    </div>
-                    <div className="text-xs sm:text-sm text-body font-medium">
-                      {stat.label}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </section>
+          {/* Metadata Bar Horizontal */}
+          {organization.meta && organization.meta.length > 0 && (
+            <motion.div
+              variants={containerVariants}
+              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-4 border-t border-gray-200"
+            >
+              {organization.meta.map((m, idx) => (
+                <motion.div
+                  key={idx}
+                  custom={idx}
+                  variants={cardVariants}
+                  whileHover={{ y: -2 }}
+                  className="p-3 bg-gray-50/80 rounded border border-gray-100 flex flex-col justify-between shadow-2xs hover:border-primary/40 transition-colors"
+                >
+                  <span className="text-xs text-body font-normal uppercase tracking-wider mb-1">{m.label}</span>
+                  <span className="font-semibold text-heading text-sm sm:text-base">{m.value}</span>
+                </motion.div>
+              ))}
+            </motion.div>
           )}
+        </div>
+      </motion.section>
 
-          {/* NARASI & KUTIPAN */}
-          <section className="space-y-6 text-sm sm:text-base text-body text-justify leading-relaxed">
-            {organization.narrative?.map((paragraph, idx) => (
-              <p key={idx}>{paragraph}</p>
-            ))}
+      {/* ========================================================================= */}
+      {/* KONTEN UTAMA (1 KOLOM TUNGGAL MEMANJANG) */}
+      {/* ========================================================================= */}
+      <div className="w-full mx-auto py-10 sm:py-14 space-y-12 sm:space-y-16">
+        
+        {/* RINGKASAN ORGANISASI (STRIP STATISTIK HORIZONTAL) */}
+        {organization.summary && organization.summary.length > 0 && (
+          <motion.section
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+            className="bg-white p-6 sm:p-8 rounded-lg border border-gray-200 shadow-2xs"
+          >
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 divide-y sm:divide-y-0 sm:divide-x divide-gray-200">
+              {organization.summary.map((stat, idx) => (
+                <motion.div
+                  key={idx}
+                  custom={idx}
+                  variants={cardVariants}
+                  whileHover={{ y: -2 }}
+                  className={`space-y-1 transition-transform ${idx !== 0 ? "pt-4 sm:pt-0 sm:pl-6" : ""}`}
+                >
+                  <div className="font-heading text-3xl sm:text-4xl font-bold text-primary">
+                    {stat.number}
+                  </div>
+                  <div className="text-xs sm:text-sm text-body font-medium">
+                    {stat.label}
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </motion.section>
+        )}
 
-            {organization.quote && (
-              <blockquote className="border-l-4 border-primary pl-6 py-3 my-8 bg-white/50 rounded-r-lg">
-                <p className="font-heading italic text-lg sm:text-xl md:text-2xl text-special leading-snug">
-                  “{organization.quote.text}”
-                </p>
-                {organization.quote.author && (
-                  <footer className="text-xs sm:text-sm text-body font-normal mt-2">
-                    — {organization.quote.author}
-                  </footer>
-                )}
-              </blockquote>
-            )}
-          </section>
+        {/* NARASI & KUTIPAN */}
+        <motion.section
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.15 }}
+          className="space-y-6 text-sm sm:text-base text-body text-justify leading-relaxed"
+        >
+          {organization.narrative?.map((paragraph, idx) => (
+            <motion.p key={idx} custom={idx} variants={itemVariants}>
+              {paragraph}
+            </motion.p>
+          ))}
 
-          {organization.strukturOrganisasi && (
-            <section className="space-y-6">
+          {organization.quote && (
+            <motion.blockquote
+              variants={cardVariants}
+              className="border-l-4 border-primary pl-6 py-3 my-8 bg-white/50 rounded-r-lg shadow-2xs"
+            >
+              <p className="font-heading italic text-lg sm:text-xl md:text-2xl text-special leading-snug">
+                “{organization.quote.text}”
+              </p>
+              {organization.quote.author && (
+                <footer className="text-xs sm:text-sm text-body font-normal mt-2">
+                  — {organization.quote.author}
+                </footer>
+              )}
+            </motion.blockquote>
+          )}
+        </motion.section>
+
+        {organization.strukturOrganisasi && (
+          <motion.section
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.1 }}
+            className="space-y-6"
+          >
+            <motion.div variants={itemVariants} className="space-y-2">
               <h2 className="text-2xl sm:text-3xl font-heading font-bold text-heading pb-3 border-b-2 border-gray-900">
                 Struktur Organisasi
               </h2>
-
               <p className="text-xs sm:text-sm text-body leading-relaxed">
                 {organization.strukturOrganisasi.dasar}
               </p>
+            </motion.div>
 
-              {/* Dewan Pelindung, Pembina, Penasehat & Pertimbangan */}
-              <div className="overflow-x-auto bg-white rounded-lg border border-gray-200">
-                <table className="w-full text-left border-collapse min-w-[520px]">
-                  <thead>
-                    <tr className="border-b border-gray-200 bg-gray-50 text-[11px] font-bold tracking-[0.14em] uppercase text-heading">
-                      <th className="py-3 px-4 w-1/3">Kedudukan</th>
-                      <th className="py-3 px-4 w-2/3">Nama</th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-gray-200 text-xs sm:text-sm">
-                    {organization.strukturOrganisasi.dewan.map((row) => (
-                      <tr key={row.jabatan} className="hover:bg-gray-50/60 transition-colors">
-                        <td className="py-4 px-4 font-bold text-heading align-top">
-                          {row.jabatan}
-                        </td>
-                        <td className="py-4 px-4 text-body align-top space-y-1">
-                          {row.anggota.map((orang) => (
-                            <div key={orang.nama} className="font-medium text-heading">
-                              {orang.nama}
-                            </div>
-                          ))}
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
+            {/* Dewan Pelindung, Pembina, Penasehat & Pertimbangan */}
+            <motion.div
+              variants={cardVariants}
+              className="overflow-x-auto bg-white rounded-lg border border-gray-200 shadow-2xs"
+            >
+              <table className="w-full text-left border-collapse min-w-[520px]">
+                <thead>
+                  <tr className="border-b border-gray-200 bg-gray-50 text-[11px] font-bold tracking-[0.14em] uppercase text-heading">
+                    <th className="py-3 px-4 w-1/3">Kedudukan</th>
+                    <th className="py-3 px-4 w-2/3">Nama</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-gray-200 text-xs sm:text-sm">
+                  {organization.strukturOrganisasi.dewan.map((row, idx) => (
+                    <motion.tr key={row.jabatan} custom={idx} variants={itemVariants} className="hover:bg-gray-50/60 transition-colors">
+                      <td className="py-4 px-4 font-bold text-heading align-top">
+                        {row.jabatan}
+                      </td>
+                      <td className="py-4 px-4 text-body align-top space-y-1">
+                        {row.anggota.map((orang) => (
+                          <div key={orang.nama} className="font-medium text-heading">
+                            {orang.nama}
+                          </div>
+                        ))}
+                      </td>
+                    </motion.tr>
+                  ))}
+                </tbody>
+              </table>
+            </motion.div>
 
-              {/* Dewan Pengurus Harian */}
-              <h3 className="font-heading font-bold text-lg sm:text-xl text-heading pt-2">
+            {/* Dewan Pengurus Harian */}
+            <motion.div variants={itemVariants} className="pt-2">
+              <h3 className="font-heading font-bold text-lg sm:text-xl text-heading">
                 Dewan Pengurus Harian
               </h3>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                {organization.strukturOrganisasi.pengurusHarian.map((orang) => (
-                  <div
-                    key={orang.jabatan}
-                    className="bg-white border border-gray-200 rounded-md p-4 shadow-2xs hover:border-gray-300 transition-colors"
-                  >
-                    <p className="text-[11px] font-bold text-primary tracking-wider uppercase">
-                      {orang.jabatan}
-                    </p>
-                    <p className="font-heading font-bold text-sm sm:text-base text-heading leading-snug mt-1">
-                      {orang.nama}
-                    </p>
-                  </div>
-                ))}
-              </div>
+            </motion.div>
+            <motion.div
+              variants={containerVariants}
+              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
+            >
+              {organization.strukturOrganisasi.pengurusHarian.map((orang, idx) => (
+                <motion.div
+                  key={orang.jabatan}
+                  custom={idx}
+                  variants={cardVariants}
+                  whileHover={{ y: -3 }}
+                  className="bg-white border border-gray-200 rounded-md p-4 shadow-2xs hover:border-primary/40 hover:shadow-md transition-all"
+                >
+                  <p className="text-[11px] font-bold text-primary tracking-wider uppercase">
+                    {orang.jabatan}
+                  </p>
+                  <p className="font-heading font-bold text-sm sm:text-base text-heading leading-snug mt-1">
+                    {orang.nama}
+                  </p>
+                </motion.div>
+              ))}
+            </motion.div>
 
-              {/* Bidang-bidang */}
-              <h3 className="font-heading font-bold text-lg sm:text-xl text-heading pt-2">
+            {/* Bidang-bidang */}
+            <motion.div variants={itemVariants} className="pt-2">
+              <h3 className="font-heading font-bold text-lg sm:text-xl text-heading">
                 Bidang
               </h3>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                {organization.strukturOrganisasi.bidang.map((bidang) => (
-                  <div
-                    key={bidang.nama}
-                    className="bg-white border border-gray-200 rounded-md p-4 shadow-2xs hover:border-gray-300 transition-colors"
-                  >
-                    <h4 className="font-heading font-bold text-sm sm:text-base text-heading leading-snug pb-2 mb-2 border-b border-gray-200">
-                      {bidang.nama}
-                    </h4>
-                    <ol className="list-decimal list-inside space-y-1 text-xs sm:text-sm text-body marker:text-primary marker:font-semibold">
-                      {bidang.anggota.map((nama) => (
-                        <li key={nama}>{nama}</li>
-                      ))}
-                    </ol>
-                  </div>
-                ))}
-              </div>
-
-              {/* Koordinator Daerah — dilipat agar halaman tidak terlalu panjang */}
-              <details className="group bg-white border border-gray-200 rounded-lg overflow-hidden">
-                <summary className="flex items-center justify-between gap-4 p-4 sm:p-5 cursor-pointer list-none hover:bg-gray-50/60 transition-colors">
-                  <span>
-                    <span className="block font-heading font-bold text-lg sm:text-xl text-heading">
-                      Koordinator Daerah
-                    </span>
-                    <span className="block text-xs sm:text-sm text-body mt-0.5">
-                      {jumlahKoordinator} koordinator di{" "}
-                      {organization.strukturOrganisasi.koordinatorDaerah.length} provinsi
-                    </span>
-                  </span>
-                  <span className="shrink-0 text-[11px] font-bold tracking-wider uppercase text-primary">
-                    <span className="group-open:hidden">Lihat</span>
-                    <span className="hidden group-open:inline">Tutup</span>
-                  </span>
-                </summary>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-4 sm:p-5 pt-0 border-t border-gray-200">
-                  {organization.strukturOrganisasi.koordinatorDaerah.map((prov) => (
-                    <div key={prov.provinsi} className="pt-4">
-                      <h4 className="text-[11px] font-bold tracking-[0.14em] uppercase text-primary pb-2 mb-2 border-b border-gray-200">
-                        Provinsi {prov.provinsi}
-                      </h4>
-                      <ul className="divide-y divide-gray-100 text-xs sm:text-sm">
-                        {prov.daerah.map((d) => (
-                          <li
-                            key={d.wilayah}
-                            className="py-2 flex flex-col sm:flex-row sm:items-baseline sm:gap-3"
-                          >
-                            <span className="font-semibold text-heading sm:w-44 sm:shrink-0">
-                              {d.wilayah}
-                            </span>
-                            <span className="text-body">{d.nama}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  ))}
-                </div>
-              </details>
-            </section>
-          )}
-
-
-          {/* PROGRAM KERJA UTAMA */}
-          {organization.programKerja && organization.programKerja.length > 0 && (
-            <section className="space-y-6">
-              <h2 className="text-2xl sm:text-3xl font-heading font-bold text-heading pb-3 border-b-2 border-gray-900">
-                Program Kerja Utama
-              </h2>
-              <div className="overflow-x-auto bg-white rounded-lg border border-gray-200">
-                <table className="w-full text-left border-collapse min-w-[550px]">
-                  <thead>
-                    <tr className="border-b border-gray-200 bg-gray-50 text-[11px] font-bold tracking-[0.14em] uppercase text-heading">
-                      <th className="py-3 px-4 w-5/12">Kegiatan</th>
-                      <th className="py-3 px-4 w-3/12">Waktu / Pelaksanaan</th>
-                      <th className="py-3 px-4 w-4/12">Bidang</th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-gray-200 text-xs sm:text-sm">
-                    {organization.programKerja.map((row, idx) => (
-                      <tr key={idx} className="hover:bg-gray-50/60 transition-colors">
-                        <td className="py-4 px-4 font-bold text-heading align-top">{row.kegiatan}</td>
-                        <td className="py-4 px-4 text-body align-top">{row.waktu}</td>
-                        <td className="py-4 px-4 text-body align-top">{row.bidang}</td>
-                      </tr>
+            </motion.div>
+            <motion.div
+              variants={containerVariants}
+              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
+            >
+              {organization.strukturOrganisasi.bidang.map((bidang, idx) => (
+                <motion.div
+                  key={bidang.nama}
+                  custom={idx}
+                  variants={cardVariants}
+                  whileHover={{ y: -3 }}
+                  className="bg-white border border-gray-200 rounded-md p-4 shadow-2xs hover:border-primary/40 hover:shadow-md transition-all"
+                >
+                  <h4 className="font-heading font-bold text-sm sm:text-base text-heading leading-snug pb-2 mb-2 border-b border-gray-200">
+                    {bidang.nama}
+                  </h4>
+                  <ol className="list-decimal list-inside space-y-1 text-xs sm:text-sm text-body marker:text-primary marker:font-semibold">
+                    {bidang.anggota.map((nama) => (
+                      <li key={nama}>{nama}</li>
                     ))}
-                  </tbody>
-                </table>
-              </div>
-            </section>
-          )}
-
-          {/* PENGURUS INTI */}
-          {/* {organization.pengurusInti && organization.pengurusInti.length > 0 && (
-            <section className="space-y-6">
-              <h2 className="text-2xl sm:text-3xl font-heading font-bold text-heading pb-3 border-b-2 border-gray-900">
-                Pengurus Inti Periode 2024–2028
-              </h2>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                {organization.pengurusInti.map((member) => (
-                  <div
-                    key={member.id}
-                    className="flex flex-col bg-white border border-gray-200 rounded-md overflow-hidden shadow-2xs hover:shadow-sm transition-all duration-300 group"
-                  >
-                    <div className="aspect-[3/4] bg-[#eaeaea] overflow-hidden relative">
-                      <Img
-                        src={member.image}
-                        alt={member.name}
-                        className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
-                      />
-                    </div>
-                    <div className="p-4 space-y-1">
-                      <h3 className="font-heading font-bold text-base sm:text-lg text-heading leading-tight">
-                        {member.name}
-                      </h3>
-                      <p className="text-[11px] font-bold text-primary tracking-wider uppercase">
-                        {member.role}
-                      </p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </section>
-          )} */}
-
-          {/* GALERI FOTO — dikelompokkan per kegiatan */}
-          {galeri.length > 0 && (
-            <section className="space-y-10">
-              <h2 className="text-2xl sm:text-3xl font-heading font-bold text-heading pb-3 border-b-2 border-gray-900">
-                Galeri Kegiatan
-              </h2>
-
-              {galeri.map((kegiatan) => (
-                <div key={kegiatan.folder} className="space-y-4">
-                  {/* Kepala kegiatan: nama acara, tahun, dan jumlah foto */}
-                  <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1 pb-2 border-b border-gray-200">
-                    <h3 className="font-heading font-bold text-lg sm:text-xl text-heading leading-snug">
-                      {kegiatan.judul}
-                    </h3>
-
-                    <span className="text-[11px] font-bold tracking-wider text-primary uppercase bg-red-50 border border-primary/20 px-2 py-0.5 rounded-xs tabular-nums">
-                      {kegiatan.tahun}
-                    </span>
-
-                    <span className="text-xs text-gray-400 ml-auto tabular-nums">
-                      {kegiatan.foto.length} foto
-                    </span>
-                  </div>
-
-                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-                    {kegiatan.foto.map((foto, idx) => (
-                      <div
-                        key={foto.src}
-                        className="group relative aspect-[4/3] rounded-md bg-gray-200 overflow-hidden border border-gray-200"
-                      >
-                        <ZoomableImg
-                          src={foto.src}
-                          alt={foto.alt}
-                          group={kegiatan.foto}
-                          index={idx}
-                          className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out"
-                        />
-                      </div>
-                    ))}
-                  </div>
-                </div>
+                  </ol>
+                </motion.div>
               ))}
-            </section>
-          )}
+            </motion.div>
 
-        </div>
+            {/* Koordinator Daerah — dilipat agar halaman tidak terlalu panjang */}
+            <motion.details
+              variants={cardVariants}
+              className="group bg-white border border-gray-200 rounded-lg overflow-hidden shadow-2xs hover:border-gray-300 transition-colors"
+            >
+              <summary className="flex items-center justify-between gap-4 p-4 sm:p-5 cursor-pointer list-none hover:bg-gray-50/60 transition-colors">
+                <span>
+                  <span className="block font-heading font-bold text-lg sm:text-xl text-heading">
+                    Koordinator Daerah
+                  </span>
+                  <span className="block text-xs sm:text-sm text-body mt-0.5">
+                    {jumlahKoordinator} koordinator di{" "}
+                    {organization.strukturOrganisasi.koordinatorDaerah.length} provinsi
+                  </span>
+                </span>
+                <span className="shrink-0 text-[11px] font-bold tracking-wider uppercase text-primary">
+                  <span className="group-open:hidden">Lihat</span>
+                  <span className="hidden group-open:inline">Tutup</span>
+                </span>
+              </summary>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-4 sm:p-5 pt-0 border-t border-gray-200">
+                {organization.strukturOrganisasi.koordinatorDaerah.map((prov, idx) => (
+                  <motion.div key={prov.provinsi} custom={idx} variants={itemVariants} className="pt-4">
+                    <h4 className="text-[11px] font-bold tracking-[0.14em] uppercase text-primary pb-2 mb-2 border-b border-gray-200">
+                      Provinsi {prov.provinsi}
+                    </h4>
+                    <ul className="divide-y divide-gray-100 text-xs sm:text-sm">
+                      {prov.daerah.map((d) => (
+                        <li
+                          key={d.wilayah}
+                          className="py-2 flex flex-col sm:flex-row sm:items-baseline sm:gap-3"
+                        >
+                          <span className="font-semibold text-heading sm:w-44 sm:shrink-0">
+                            {d.wilayah}
+                          </span>
+                          <span className="text-body">{d.nama}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.details>
+          </motion.section>
+        )}
+
+        {/* PROGRAM KERJA UTAMA */}
+        {organization.programKerja && organization.programKerja.length > 0 && (
+          <motion.section
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.15 }}
+            className="space-y-6"
+          >
+            <motion.h2
+              variants={itemVariants}
+              className="text-2xl sm:text-3xl font-heading font-bold text-heading pb-3 border-b-2 border-gray-900"
+            >
+              Program Kerja Utama
+            </motion.h2>
+            <motion.div
+              variants={cardVariants}
+              className="overflow-x-auto bg-white rounded-lg border border-gray-200 shadow-2xs"
+            >
+              <table className="w-full text-left border-collapse min-w-[550px]">
+                <thead>
+                  <tr className="border-b border-gray-200 bg-gray-50 text-[11px] font-bold tracking-[0.14em] uppercase text-heading">
+                    <th className="py-3 px-4 w-5/12">Kegiatan</th>
+                    <th className="py-3 px-4 w-3/12">Waktu / Pelaksanaan</th>
+                    <th className="py-3 px-4 w-4/12">Bidang</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-gray-200 text-xs sm:text-sm">
+                  {organization.programKerja.map((row, idx) => (
+                    <motion.tr key={idx} custom={idx} variants={itemVariants} className="hover:bg-gray-50/60 transition-colors">
+                      <td className="py-4 px-4 font-bold text-heading align-top">{row.kegiatan}</td>
+                      <td className="py-4 px-4 text-body align-top">{row.waktu}</td>
+                      <td className="py-4 px-4 text-body align-top">{row.bidang}</td>
+                    </motion.tr>
+                  ))}
+                </tbody>
+              </table>
+            </motion.div>
+          </motion.section>
+        )}
+
+        {/* GALERI FOTO — dikelompokkan per kegiatan */}
+        {galeri.length > 0 && (
+          <section className="space-y-10">
+            <motion.h2
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+              className="text-2xl sm:text-3xl font-heading font-bold text-heading pb-3 border-b-2 border-gray-900"
+            >
+              Galeri Kegiatan
+            </motion.h2>
+
+            {galeri.map((kegiatan) => (
+              <motion.div
+                key={kegiatan.folder}
+                variants={containerVariants}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.15 }}
+                className="space-y-4"
+              >
+                {/* Kepala kegiatan: nama acara, tahun, dan jumlah foto */}
+                <motion.div
+                  variants={itemVariants}
+                  className="flex flex-wrap items-baseline gap-x-3 gap-y-1 pb-2 border-b border-gray-200"
+                >
+                  <h3 className="font-heading font-bold text-lg sm:text-xl text-heading leading-snug">
+                    {kegiatan.judul}
+                  </h3>
+
+                  <span className="text-[11px] font-bold tracking-wider text-primary uppercase bg-red-50 border border-primary/20 px-2 py-0.5 rounded-xs tabular-nums">
+                    {kegiatan.tahun}
+                  </span>
+
+                  <span className="text-xs text-gray-400 ml-auto tabular-nums">
+                    {kegiatan.foto.length} foto
+                  </span>
+                </motion.div>
+
+                <motion.div
+                  variants={containerVariants}
+                  className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4"
+                >
+                  {kegiatan.foto.map((foto, idx) => (
+                    <motion.div
+                      key={foto.src}
+                      custom={idx}
+                      variants={cardVariants}
+                      whileHover={{ y: -3 }}
+                      className="group relative aspect-[4/3] rounded-md bg-gray-200 overflow-hidden border border-gray-200 shadow-2xs hover:shadow-md transition-shadow"
+                    >
+                      <ZoomableImg
+                        src={foto.src}
+                        alt={foto.alt}
+                        group={kegiatan.foto}
+                        index={idx}
+                        className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out"
+                      />
+                    </motion.div>
+                  ))}
+                </motion.div>
+              </motion.div>
+            ))}
+          </section>
+        )}
+
+      </div>
     </>
   );
 }

@@ -1,10 +1,83 @@
 import { Helmet } from "react-helmet-async";
+import { motion } from "framer-motion";
 import {
   graduationMetrics,
   academicYearRecap,
   predicateAndDurationDistribution,
   supportingDocuments,
 } from "../../data/informasi/graduationRateData";
+
+const viewportSettings = {
+  once: true,
+  amount: 0.15,
+};
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.12,
+      delayChildren: 0.05,
+    },
+  },
+};
+
+const listContainerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.08,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 16 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.5,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  },
+};
+
+const statCardVariants = {
+  hidden: { opacity: 0, y: 16 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.45,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  },
+};
+
+const rowVariants = {
+  hidden: { opacity: 0, y: 14 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.45,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  },
+};
+
+const lineVariants = {
+  hidden: { scaleX: 0, originX: 0 },
+  visible: {
+    scaleX: 1,
+    originX: 0,
+    transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
+  },
+};
 
 export default function GraduationRate() {
   return (
@@ -21,45 +94,73 @@ export default function GraduationRate() {
         {/* ========================================================================= */}
         {/* HEADER SECTION */}
         {/* ========================================================================= */}
-        <div>
-          <span className="text-xs font-bold tracking-[0.18em] uppercase text-primary block mb-2">
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+          className="space-y-4"
+        >
+          <motion.span
+            variants={itemVariants}
+            className="text-xs font-bold tracking-[0.18em] uppercase text-primary block mb-2"
+          >
             INFORMASI
-          </span>
-          <h1 className="text-3xl sm:text-4xl lg:text-[42px] font-heading font-bold text-heading tracking-tight leading-tight">
+          </motion.span>
+          <motion.h1
+            variants={itemVariants}
+            className="text-3xl sm:text-4xl lg:text-[42px] font-heading font-bold text-heading tracking-tight leading-tight"
+          >
             Tingkat Kelulusan
-          </h1>
-          <div className="w-full h-[2px] bg-primary my-4" />
-          <p className="text-sm sm:text-base text-body text-justify leading-relaxed">
+          </motion.h1>
+          <motion.div variants={lineVariants} className="w-full h-[2px] bg-primary my-4" />
+          <motion.p
+            variants={itemVariants}
+            className="text-sm sm:text-base text-body text-justify leading-relaxed"
+          >
             Data kelulusan dihimpun setiap akhir tahun akademik oleh Gugus Penjaminan Mutu dari basis data akademik program studi. Indikator yang dipantau meliputi ketepatan masa studi, indeks prestasi kumulatif, predikat kelulusan, dan lama penyelesaian tesis.
-          </p>
+          </motion.p>
 
           {/* Metric Stats Cards */}
-          <div className="grid grid-cols-2 md:grid-cols-4 bg-white border border-gray-200 divide-x divide-y md:divide-y-0 divide-gray-200 mt-8 rounded-xs shadow-2xs">
+          <motion.div
+            variants={listContainerVariants}
+            className="grid grid-cols-2 md:grid-cols-4 bg-white border border-gray-200 divide-x divide-y md:divide-y-0 divide-gray-200 mt-8 rounded-xs shadow-2xs overflow-hidden"
+          >
             {graduationMetrics.map((metric, idx) => (
-              <div key={idx} className="p-5 sm:p-6 text-left flex flex-col justify-center">
+              <motion.div
+                key={idx}
+                variants={statCardVariants}
+                whileHover={{ y: -2 }}
+                className="p-5 sm:p-6 text-left flex flex-col justify-center transition-colors hover:bg-gray-50/70"
+              >
                 <span className="font-heading italic font-normal text-3xl sm:text-4xl text-primary block leading-none">
                   {metric.value}
                 </span>
                 <span className="text-[11px] sm:text-xs font-semibold tracking-wider uppercase text-body mt-2 block">
                   {metric.label}
                 </span>
-              </div>
+              </motion.div>
             ))}
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
 
         {/* ========================================================================= */}
         {/* REKAPITULASI PER TAHUN AKADEMIK */}
         {/* ========================================================================= */}
-        <section className="space-y-4">
-          <div className="pb-2 border-b-2 border-heading">
+        <motion.section
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportSettings}
+          className="space-y-4"
+        >
+          <motion.div variants={itemVariants} className="pb-2 border-b-2 border-heading">
             <h2 className="text-2xl font-heading font-normal text-heading tracking-tight">
               Rekapitulasi per Periode Akademik
             </h2>
-          </div>
+          </motion.div>
 
-          <div className="border border-gray-200 bg-white overflow-x-auto shadow-2xs">
-            <table className="w-full text-left border-collapse text-xs sm:text-sm">
+          <motion.div variants={itemVariants} className="border border-gray-200 bg-white overflow-x-auto shadow-2xs">
+            <table className="w-full text-left border-collapse text-xs sm:text-sm min-w-[600px]">
               <thead>
                 <tr className="border-b-2 border-heading text-xs font-bold tracking-wider text-heading uppercase">
                   <th className="py-3.5 px-5 font-bold">PERIODE AKADEMIK</th>
@@ -70,9 +171,16 @@ export default function GraduationRate() {
                   <th className="py-3.5 px-5 font-bold">MASA STUDI</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-200">
+              <motion.tbody
+                variants={listContainerVariants}
+                className="divide-y divide-gray-200"
+              >
                 {academicYearRecap.map((item, idx) => (
-                  <tr key={idx} className="hover:bg-gray-50/50 transition-colors">
+                  <motion.tr
+                    key={idx}
+                    variants={rowVariants}
+                    className="hover:bg-gray-50/50 transition-colors"
+                  >
                     <td className="py-4 px-5 text-heading whitespace-nowrap">
                       {item.year}
                     </td>
@@ -91,25 +199,31 @@ export default function GraduationRate() {
                     <td className="py-4 px-5 text-body whitespace-nowrap">
                       {item.studyDuration}
                     </td>
-                  </tr>
+                  </motion.tr>
                 ))}
-              </tbody>
+              </motion.tbody>
             </table>
-          </div>
-        </section>
+          </motion.div>
+        </motion.section>
 
         {/* ========================================================================= */}
         {/* SEBARAN PREDIKAT DAN MASA STUDI */}
         {/* ========================================================================= */}
-        <section className="space-y-4">
-          <div className="pb-2 border-b-2 border-heading">
+        <motion.section
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportSettings}
+          className="space-y-4"
+        >
+          <motion.div variants={itemVariants} className="pb-2 border-b-2 border-heading">
             <h2 className="text-2xl font-heading font-normal text-heading tracking-tight">
               Sebaran Predikat dan Masa Studi
             </h2>
-          </div>
+          </motion.div>
 
-          <div className="border border-gray-200 bg-white overflow-x-auto shadow-2xs">
-            <table className="w-full text-left border-collapse text-xs sm:text-sm">
+          <motion.div variants={itemVariants} className="border border-gray-200 bg-white overflow-x-auto shadow-2xs">
+            <table className="w-full text-left border-collapse text-xs sm:text-sm min-w-[550px]">
               <thead>
                 <tr className="border-b-2 border-heading text-xs font-bold tracking-wider text-heading uppercase">
                   <th className="py-3.5 px-5 font-bold w-1/4">KELOMPOK</th>
@@ -118,9 +232,16 @@ export default function GraduationRate() {
                   <th className="py-3.5 px-5 font-bold w-2/5">KETERANGAN</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-200">
+              <motion.tbody
+                variants={listContainerVariants}
+                className="divide-y divide-gray-200"
+              >
                 {predicateAndDurationDistribution.map((item, idx) => (
-                  <tr key={idx} className="hover:bg-gray-50/50 transition-colors">
+                  <motion.tr
+                    key={idx}
+                    variants={rowVariants}
+                    className="hover:bg-gray-50/50 transition-colors"
+                  >
                     <td className="py-4 px-5 text-heading whitespace-nowrap">
                       {item.group}
                     </td>
@@ -133,25 +254,31 @@ export default function GraduationRate() {
                     <td className="py-4 px-5 text-body leading-relaxed">
                       {item.notes}
                     </td>
-                  </tr>
+                  </motion.tr>
                 ))}
-              </tbody>
+              </motion.tbody>
             </table>
-          </div>
-        </section>
+          </motion.div>
+        </motion.section>
 
         {/* ========================================================================= */}
         {/* DOKUMEN PENDUKUNG */}
         {/* ========================================================================= */}
-        <section className="space-y-4">
-          <div className="pb-2 border-b-2 border-heading">
+        <motion.section
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportSettings}
+          className="space-y-4"
+        >
+          <motion.div variants={itemVariants} className="pb-2 border-b-2 border-heading">
             <h2 className="text-2xl font-heading font-normal text-heading tracking-tight">
               Dokumen Pendukung
             </h2>
-          </div>
+          </motion.div>
 
-          <div className="border border-gray-200 bg-white overflow-x-auto shadow-2xs">
-            <table className="w-full text-left border-collapse text-xs sm:text-sm">
+          <motion.div variants={itemVariants} className="border border-gray-200 bg-white overflow-x-auto shadow-2xs">
+            <table className="w-full text-left border-collapse text-xs sm:text-sm min-w-[500px]">
               <thead>
                 <tr className="border-b-2 border-heading text-xs font-bold tracking-wider text-heading uppercase">
                   <th className="py-3.5 px-5 font-bold w-1/2">JUDUL DOKUMEN</th>
@@ -160,9 +287,16 @@ export default function GraduationRate() {
                   <th className="py-3.5 px-5 font-bold">UNDUH</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-200">
+              <motion.tbody
+                variants={listContainerVariants}
+                className="divide-y divide-gray-200"
+              >
                 {supportingDocuments.map((doc) => (
-                  <tr key={doc.id} className="hover:bg-gray-50/50 transition-colors">
+                  <motion.tr
+                    key={doc.id}
+                    variants={rowVariants}
+                    className="hover:bg-gray-50/50 transition-colors"
+                  >
                     <td className="py-4 px-5 text-heading">
                       {doc.title}
                     </td>
@@ -173,23 +307,25 @@ export default function GraduationRate() {
                       {doc.date}
                     </td>
                     <td className="py-4 px-5">
-                      <a
+                      <motion.a
                         href={doc.fileUrl}
                         download={doc.fileName}
                         target="_blank"
                         rel="noopener noreferrer"
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
                         className="text-primary font-bold hover:underline inline-flex items-center gap-1 cursor-pointer transition-colors"
                       >
                         <span>{doc.fileType}</span>
                         <span className="text-xs">↓</span>
-                      </a>
+                      </motion.a>
                     </td>
-                  </tr>
+                  </motion.tr>
                 ))}
-              </tbody>
+              </motion.tbody>
             </table>
-          </div>
-        </section>
+          </motion.div>
+        </motion.section>
       </div>
     </>
   );

@@ -1,5 +1,29 @@
 import { useState } from "react";
 import { FiSearch, FiChevronLeft, FiChevronRight, FiPlus } from "react-icons/fi";
+import { motion } from "framer-motion";
+
+const sidebarContainerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.05,
+    },
+  },
+};
+
+const sidebarItemVariants = {
+  hidden: { opacity: 0, y: 16 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.5,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  },
+};
 
 export default function EventCalendarSidebar({
   currentMonthDate, // Date object representing the currently viewed month in the calendar
@@ -72,9 +96,17 @@ export default function EventCalendarSidebar({
   }
 
   return (
-    <aside className="w-full h-full bg-[#111c24] text-white px-6 sm:px-8 lg:px-10 pt-12 sm:pt-16 lg:pt-20 pb-16 space-y-8 font-body">
+    <motion.aside
+      variants={sidebarContainerVariants}
+      initial="hidden"
+      animate="visible"
+      className="w-full h-full bg-[#111c24] text-white px-6 sm:px-8 lg:px-10 pt-12 sm:pt-16 lg:pt-20 pb-16 space-y-8 font-body"
+    >
       {/* Header: Judul & Reset All */}
-      <div className="flex items-baseline justify-between gap-4 border-b border-white/10 pb-4">
+      <motion.div
+        variants={sidebarItemVariants}
+        className="flex items-baseline justify-between gap-4 border-b border-white/10 pb-4"
+      >
         <h2 className="text-2xl sm:text-3xl font-heading font-normal tracking-tight text-white">
           Events Calendar
         </h2>
@@ -85,10 +117,10 @@ export default function EventCalendarSidebar({
         >
           Reset all
         </button>
-      </div>
+      </motion.div>
 
       {/* Input Pencarian Keyword */}
-      <div className="space-y-2">
+      <motion.div variants={sidebarItemVariants} className="space-y-2">
         <div className="relative">
           <input
             type="text"
@@ -99,10 +131,10 @@ export default function EventCalendarSidebar({
           />
           <FiSearch className="absolute right-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" />
         </div>
-      </div>
+      </motion.div>
 
       {/* Kalender Mini Interaktif */}
-      <div className="space-y-4 pt-1">
+      <motion.div variants={sidebarItemVariants} className="space-y-4 pt-1">
         {/* Header Bulan & Navigasi Panah */}
         <div className="flex items-center justify-between">
           <div className="font-heading font-semibold text-base sm:text-lg text-white">
@@ -110,22 +142,26 @@ export default function EventCalendarSidebar({
           </div>
 
           <div className="flex items-center gap-1 text-gray-300">
-            <button
+            <motion.button
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
               type="button"
               onClick={() => onChangeMonth(-1)}
               title="Bulan Sebelumnya"
               className="p-1.5 hover:text-white hover:bg-white/10 rounded-full transition-colors cursor-pointer"
             >
               <FiChevronLeft className="w-4 h-4" />
-            </button>
-            <button
+            </motion.button>
+            <motion.button
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
               type="button"
               onClick={() => onChangeMonth(1)}
               title="Bulan Berikutnya"
               className="p-1.5 hover:text-white hover:bg-white/10 rounded-full transition-colors cursor-pointer"
             >
               <FiChevronRight className="w-4 h-4" />
-            </button>
+            </motion.button>
           </div>
         </div>
 
@@ -150,11 +186,13 @@ export default function EventCalendarSidebar({
             }
 
             return (
-              <button
+              <motion.button
                 key={idx}
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
                 type="button"
                 onClick={() => onSelectDate(cell.dateStr)}
-                className={`relative py-2 mx-auto w-8 h-8 flex items-center justify-center rounded-full transition-all cursor-pointer ${
+                className={`relative py-2 mx-auto w-8 h-8 flex items-center justify-center rounded-full transition-colors cursor-pointer ${
                   cell.isSelected
                     ? "bg-primary text-white font-bold shadow-xs ring-2 ring-white/20"
                     : cell.hasEvents
@@ -167,23 +205,25 @@ export default function EventCalendarSidebar({
                 {cell.hasEvents && !cell.isSelected && (
                   <span className="absolute bottom-1 w-1 h-1 rounded-full bg-primary" />
                 )}
-              </button>
+              </motion.button>
             );
           })}
         </div>
-      </div>
+      </motion.div>
 
       {/* Tombol Submit an Event (Ajukan Agenda) */}
-      <div className="pt-2">
-        <button
+      <motion.div variants={sidebarItemVariants} className="pt-2">
+        <motion.button
+          whileHover={{ scale: 1.02, backgroundColor: "#f3f4f6" }}
+          whileTap={{ scale: 0.98 }}
           type="button"
           onClick={onSubmitEventClick}
-          className="w-full py-3 px-5 bg-white hover:bg-gray-100 text-[#111c24] font-heading font-semibold text-xs sm:text-sm rounded-full transition-colors flex items-center justify-center gap-2 shadow-sm cursor-pointer"
+          className="w-full py-3 px-5 bg-white text-[#111c24] font-heading font-semibold text-xs sm:text-sm rounded-full transition-colors flex items-center justify-center gap-2 shadow-sm cursor-pointer"
         >
           <FiPlus className="w-4 h-4" />
           <span>Submit an Event</span>
-        </button>
-      </div>
-    </aside>
+        </motion.button>
+      </motion.div>
+    </motion.aside>
   );
 }

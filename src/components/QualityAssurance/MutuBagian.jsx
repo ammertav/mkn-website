@@ -1,6 +1,7 @@
 import { lazy, Suspense, useState } from "react";
 import { FiDownload, FiBookOpen } from "react-icons/fi";
 import { useT } from "../../i18n/languageContext";
+import { motion } from "framer-motion";
 
 // Pembaca PDF membawa pdf.js; dimuat hanya ketika tombol Baca ditekan.
 const FlipbookModal = lazy(() => import("../ui/FlipbookModal"));
@@ -13,22 +14,79 @@ const FlipbookModal = lazy(() => import("../ui/FlipbookModal"));
  * menjaga kelima halaman tampil seragam.
  */
 
+// Shared animation variants
+const fadeUp = {
+  hidden: { opacity: 0, y: 28 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] },
+  },
+};
+
+const staggerContainer = {
+  hidden: {},
+  visible: {
+    transition: { staggerChildren: 0.1, delayChildren: 0.05 },
+  },
+};
+
+const itemVariant = {
+  hidden: { opacity: 0, y: 22 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] },
+  },
+};
+
+const rowVariant = {
+  hidden: { opacity: 0, x: -14 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: { duration: 0.45, ease: [0.22, 1, 0.36, 1] },
+  },
+};
+
 /** Kepala halaman: eyebrow, judul, garis, dan pengantar. */
 export function KepalaMutu({ eyebrow = "PENJAMINAN MUTU", judul, pengantar }) {
   const t = useT();
   return (
-    <div>
-      <span className="text-[11px] font-bold tracking-[0.16em] uppercase text-primary block mb-2">
+    <motion.div
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.2 }}
+      variants={staggerContainer}
+    >
+      <motion.span
+        variants={fadeUp}
+        className="text-[11px] font-bold tracking-[0.16em] uppercase text-primary block mb-2"
+      >
         {t(eyebrow)}
-      </span>
-      <h1 className="text-3xl sm:text-4xl md:text-[42px] font-heading font-bold text-heading tracking-normal">
+      </motion.span>
+      <motion.h1
+        variants={fadeUp}
+        className="text-3xl sm:text-4xl md:text-[42px] font-heading font-bold text-heading tracking-normal"
+      >
         {t(judul)}
-      </h1>
-      <div className="w-full h-[2px] bg-primary mt-4 mb-5" />
+      </motion.h1>
+      <motion.div
+        variants={{
+          hidden: { scaleX: 0, originX: 0 },
+          visible: {
+            scaleX: 1,
+            transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0.1 },
+          },
+        }}
+        className="w-full h-[2px] bg-primary mt-4 mb-5"
+      />
       {pengantar && (
-        <p className="text-base text-body leading-relaxed max-w-5xl">{t(pengantar)}</p>
+        <motion.p variants={fadeUp} className="text-base text-body leading-relaxed max-w-5xl">
+          {t(pengantar)}
+        </motion.p>
       )}
-    </div>
+    </motion.div>
   );
 }
 
@@ -36,17 +94,38 @@ export function KepalaMutu({ eyebrow = "PENJAMINAN MUTU", judul, pengantar }) {
 export function JudulMutu({ judul, keterangan }) {
   const t = useT();
   return (
-    <div className="space-y-2">
-      <h2 className="text-xl sm:text-2xl font-heading font-semibold text-heading tracking-normal">
+    <motion.div
+      className="space-y-2"
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.3 }}
+      variants={staggerContainer}
+    >
+      <motion.h2
+        variants={fadeUp}
+        className="text-xl sm:text-2xl font-heading font-semibold text-heading tracking-normal"
+      >
         {t(judul)}
-      </h2>
-      <div className="w-full h-[1.5px] bg-heading/80" />
+      </motion.h2>
+      <motion.div
+        variants={{
+          hidden: { scaleX: 0, originX: 0 },
+          visible: {
+            scaleX: 1,
+            transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] },
+          },
+        }}
+        className="w-full h-[1.5px] bg-heading/80"
+      />
       {keterangan && (
-        <p className="text-sm sm:text-[15px] text-body leading-relaxed pt-2 max-w-5xl">
+        <motion.p
+          variants={fadeUp}
+          className="text-sm sm:text-[15px] text-body leading-relaxed pt-2 max-w-5xl"
+        >
           {t(keterangan)}
-        </p>
+        </motion.p>
       )}
-    </div>
+    </motion.div>
   );
 }
 
@@ -54,18 +133,28 @@ export function JudulMutu({ judul, keterangan }) {
 export function AngkaMutu({ butir }) {
   const t = useT();
   return (
-    <div className="grid grid-cols-2 lg:grid-cols-4 border-t border-l border-gray-200 bg-white">
+    <motion.div
+      className="grid grid-cols-2 lg:grid-cols-4 border-t border-l border-gray-200 bg-white"
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.2 }}
+      variants={staggerContainer}
+    >
       {butir.map((b, idx) => (
-        <div key={idx} className="p-5 sm:p-6 border-r border-b border-gray-200">
+        <motion.div
+          key={idx}
+          variants={itemVariant}
+          className="p-5 sm:p-6 border-r border-b border-gray-200"
+        >
           <div className="font-heading font-bold text-2xl sm:text-3xl text-primary leading-none">
             {t(b.value)}
           </div>
           <p className="mt-2 text-[11px] font-semibold tracking-wider uppercase text-gray-500 leading-snug">
             {t(b.label)}
           </p>
-        </div>
+        </motion.div>
       ))}
-    </div>
+    </motion.div>
   );
 }
 
@@ -75,11 +164,17 @@ export function AngkaMutu({ butir }) {
 export function IdentitasDokumen({ baris }) {
   const t = useT();
   return (
-    <div className="border border-gray-200 bg-white rounded-xs overflow-hidden">
+    <motion.div
+      className="border border-gray-200 bg-white rounded-xs overflow-hidden"
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.2 }}
+      variants={staggerContainer}
+    >
       <table className="w-full text-left border-collapse text-sm">
         <tbody className="divide-y divide-gray-200">
           {baris.map((b, idx) => (
-            <tr key={idx}>
+            <motion.tr key={idx} variants={rowVariant}>
               <th
                 scope="row"
                 className="align-top py-3 px-4 sm:px-5 w-2/5 sm:w-1/3 bg-gray-50/70 font-semibold text-heading text-xs sm:text-sm"
@@ -87,11 +182,11 @@ export function IdentitasDokumen({ baris }) {
                 {t(b.label)}
               </th>
               <td className="py-3 px-4 sm:px-5 text-body leading-relaxed">{t(b.value)}</td>
-            </tr>
+            </motion.tr>
           ))}
         </tbody>
       </table>
-    </div>
+    </motion.div>
   );
 }
 
@@ -107,10 +202,18 @@ export function DaftarDokumen({ butir }) {
   const [dokumenDibaca, setDokumenDibaca] = useState(null);
 
   return (
-    <div className="space-y-3">
+    <motion.div
+      className="space-y-3"
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.1 }}
+      variants={staggerContainer}
+    >
       {butir.map((d, idx) => (
-        <div
+        <motion.div
           key={idx}
+          variants={itemVariant}
+          whileHover={{ y: -2, transition: { duration: 0.2 } }}
           className="bg-white border border-gray-200 rounded-xs p-5 sm:p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 sm:gap-8 hover:border-gray-300 transition-colors shadow-2xs"
         >
           <div className="space-y-1.5 min-w-0 flex-1">
@@ -156,7 +259,7 @@ export function DaftarDokumen({ butir }) {
               </span>
             )}
           </div>
-        </div>
+        </motion.div>
       ))}
 
       {dokumenDibaca && (
@@ -168,7 +271,7 @@ export function DaftarDokumen({ butir }) {
           />
         </Suspense>
       )}
-    </div>
+    </motion.div>
   );
 }
 
@@ -183,10 +286,18 @@ export function KartuMutu({ butir, kolom = 3 }) {
       : "sm:grid-cols-2 lg:grid-cols-3";
 
   return (
-    <div className={`grid grid-cols-1 ${grid} gap-5`}>
+    <motion.div
+      className={`grid grid-cols-1 ${grid} gap-5`}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.1 }}
+      variants={staggerContainer}
+    >
       {butir.map((b, idx) => (
-        <div
+        <motion.div
           key={idx}
+          variants={itemVariant}
+          whileHover={{ y: -3, scale: 1.01, transition: { duration: 0.2 } }}
           className="bg-white border border-gray-200 rounded-xs p-5 sm:p-6 space-y-3 hover:border-primary/40 transition-colors shadow-2xs"
         >
           {b.code && (
@@ -203,9 +314,9 @@ export function KartuMutu({ butir, kolom = 3 }) {
               {b.ayat}
             </p>
           )}
-        </div>
+        </motion.div>
       ))}
-    </div>
+    </motion.div>
   );
 }
 
@@ -213,16 +324,26 @@ export function KartuMutu({ butir, kolom = 3 }) {
 export function DaftarNomor({ butir }) {
   const t = useT();
   return (
-    <ol className="space-y-2.5">
+    <motion.ol
+      className="space-y-2.5"
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.1 }}
+      variants={staggerContainer}
+    >
       {butir.map((b, idx) => (
-        <li key={idx} className="flex gap-3 text-sm sm:text-[15px] text-body leading-relaxed">
+        <motion.li
+          key={idx}
+          variants={rowVariant}
+          className="flex gap-3 text-sm sm:text-[15px] text-body leading-relaxed"
+        >
           <span className="shrink-0 tabular-nums text-gray-400 select-none min-w-[1.75rem]">
             {idx + 1}.
           </span>
           <span>{t(b)}</span>
-        </li>
+        </motion.li>
       ))}
-    </ol>
+    </motion.ol>
   );
 }
 
@@ -230,13 +351,19 @@ export function DaftarNomor({ butir }) {
 export function BelumTersedia({ keterangan }) {
   const t = useT();
   return (
-    <div className="border border-dashed border-gray-300 bg-white p-10 sm:p-14 text-center rounded-xs">
+    <motion.div
+      className="border border-dashed border-gray-300 bg-white p-10 sm:p-14 text-center rounded-xs"
+      initial={{ opacity: 0, scale: 0.97 }}
+      whileInView={{ opacity: 1, scale: 1 }}
+      viewport={{ once: true, amount: 0.3 }}
+      transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+    >
       <p className="text-sm font-medium text-gray-500">Konten akan segera ditambahkan.</p>
       {keterangan && (
         <p className="mt-1.5 text-xs text-gray-400 max-w-lg mx-auto leading-relaxed">
           {t(keterangan)}
         </p>
       )}
-    </div>
+    </motion.div>
   );
 }

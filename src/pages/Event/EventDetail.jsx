@@ -2,6 +2,7 @@ import { useMemo } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { FiArrowLeft, FiPlus, FiExternalLink } from "react-icons/fi";
+import { motion } from "framer-motion";
 
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
@@ -13,6 +14,60 @@ import {
   generateGoogleCalendarUrl,
   downloadIcsFile,
 } from "../../data/eventData";
+
+const viewportSettings = {
+  once: true,
+  amount: 0.15,
+};
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.05,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 16 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.5,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  },
+};
+
+const flyerVariants = {
+  hidden: { opacity: 0, y: 25, scale: 0.98 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: {
+      duration: 0.65,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  },
+};
+
+const metaBoxVariants = {
+  hidden: { opacity: 0, y: 14 },
+  visible: (i = 0) => ({
+    opacity: 1,
+    y: 0,
+    transition: {
+      delay: typeof i === "number" ? i * 0.08 : 0,
+      duration: 0.45,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  }),
+};
 
 export default function EventDetail() {
   const { slug } = useParams();
@@ -82,9 +137,14 @@ export default function EventDetail() {
         <div className="w-full flex-grow flex flex-col lg:flex-row items-stretch border-t border-gray-200">
           {/* Kolom Kiri: Dark Sidebar (Upcoming Events) */}
           <div className="w-full lg:w-[380px] xl:w-[420px] shrink-0 bg-[#111c24] border-r border-black/20">
-            <div className="lg:sticky lg:top-[calc(var(--header-h)+0.5rem)] lg:max-h-[calc(100vh-var(--header-h)-1rem)] lg:overflow-y-auto scrollbar-thin px-6 sm:px-8 lg:px-10 pt-10 sm:pt-14 lg:pt-16 pb-16 space-y-8 text-white">
+            <motion.div
+              variants={containerVariants}
+              initial="hidden"
+              animate="visible"
+              className="lg:sticky lg:top-[calc(var(--header-h)+0.5rem)] lg:max-h-[calc(100vh-var(--header-h)-1rem)] lg:overflow-y-auto scrollbar-thin px-6 sm:px-8 lg:px-10 pt-10 sm:pt-14 lg:pt-16 pb-16 space-y-8 text-white"
+            >
               {/* Header Sidebar Kiri */}
-              <div className="border-b border-white/10 pb-4">
+              <motion.div variants={itemVariants} className="border-b border-white/10 pb-4">
                 <Link
                   to="/event"
                   className="text-2xl sm:text-3xl font-heading font-normal tracking-tight text-white hover:text-gray-200 transition-colors block"
@@ -94,15 +154,18 @@ export default function EventDetail() {
                 <span className="text-xs uppercase tracking-wider text-gray-400 font-semibold block mt-1">
                   Upcoming Events
                 </span>
-              </div>
+              </motion.div>
 
               {/* Daftar Acara Mendatang Lainnya */}
-              <div className="space-y-6">
-                {upcomingEvents.map((item) => (
-                  <article
+              <div className="space-y-4">
+                {upcomingEvents.map((item, idx) => (
+                  <motion.article
                     key={item.id}
+                    custom={idx}
+                    variants={itemVariants}
+                    whileHover={{ x: 4, transition: { duration: 0.2 } }}
                     onClick={() => navigate(`/event/${item.slug}`)}
-                    className="group cursor-pointer space-y-1 block pb-4 border-b border-white/5 last:border-0"
+                    className="group cursor-pointer space-y-1 block p-3 rounded-xs hover:bg-white/5 pb-4 border-b border-white/5 last:border-0 transition-colors"
                   >
                     <h3 className="font-heading font-medium text-sm sm:text-base text-white group-hover:text-primary transition-colors leading-snug">
                       {item.title}
@@ -110,67 +173,87 @@ export default function EventDetail() {
                     <p className="text-xs text-gray-400 font-normal">
                       {formatIndoDate(item.date)} • {item.time}
                     </p>
-                  </article>
+                  </motion.article>
                 ))}
               </div>
 
               {/* Tombol Lihat Semua Kalender */}
-              <div className="pt-2">
+              <motion.div variants={itemVariants} className="pt-2">
                 <Link
                   to="/event"
-                  className="w-full py-2.5 px-4 rounded-full border border-white/20 hover:border-white text-xs font-semibold text-white transition-colors flex items-center justify-center gap-2"
+                  className="w-full py-2.5 px-4 rounded-full border border-white/20 hover:border-white hover:bg-white/10 text-xs font-semibold text-white transition-all flex items-center justify-center gap-2"
                 >
                   <FiArrowLeft className="w-3.5 h-3.5" />
                   <span>Lihat Kalender Lengkap</span>
                 </Link>
-              </div>
-            </div>
+              </motion.div>
+            </motion.div>
           </div>
 
           {/* Kolom Kanan: Detail Acara Lengkap (Putih Bersih) */}
           <div className="flex-grow min-w-0 bg-white px-6 sm:px-10 lg:px-14 xl:px-20 py-8 sm:py-12 space-y-10">
             {/* Tautan Navigasi Kembali */}
-            <div>
+            <motion.div
+              initial={{ opacity: 0, x: -10 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.4 }}
+            >
               <Link
                 to="/event"
-                className="inline-flex items-center gap-2 text-xs sm:text-sm font-medium text-primary hover:underline transition-colors"
+                className="inline-flex items-center gap-2 text-xs sm:text-sm font-medium text-primary hover:underline transition-colors group"
               >
-                <FiArrowLeft className="w-4 h-4" />
+                <FiArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
                 <span>Back to events list</span>
               </Link>
-            </div>
+            </motion.div>
 
-            {/* Flyer / Dokumentasi Acara — banner selebar kolom konten.
-                object-contain menjaga poster potret maupun banner lanskap tampil
-                utuh tanpa terpotong. Tingginya dibatasi sisa layar dikurangi
-                header + jarak + judul, supaya judul acara tetap ikut terlihat
-                tanpa perlu menggulir. */}
+            {/* Flyer / Dokumentasi Acara — banner selebar kolom konten */}
             {event.image && (
-              <figure className="w-full overflow-hidden">
+              <motion.figure
+                variants={flyerVariants}
+                initial="hidden"
+                animate="visible"
+                className="w-full overflow-hidden rounded-xs bg-gray-50 border border-gray-100 p-2 shadow-2xs group"
+              >
                 <ZoomableImg
                   src={event.image}
                   alt={event.title}
                   caption={event.title}
-                  className="w-full h-auto max-h-[calc(100vh-var(--header-h)-18rem)] object-contain mx-auto"
+                  className="w-full h-auto max-h-[calc(100vh-var(--header-h)-18rem)] object-contain mx-auto transition-transform duration-500 group-hover:scale-[1.01]"
                 />
-              </figure>
+              </motion.figure>
             )}
 
             {/* Header Acara */}
-            <div className="space-y-4 pb-8 border-b border-gray-200">
-              <h1 className="text-3xl sm:text-4xl lg:text-[44px] font-heading font-medium text-heading leading-[1.15] tracking-tight max-w-4xl">
+            <motion.div
+              variants={containerVariants}
+              initial="hidden"
+              animate="visible"
+              className="space-y-4 pb-8 border-b border-gray-200"
+            >
+              <motion.h1
+                variants={itemVariants}
+                className="text-3xl sm:text-4xl lg:text-[44px] font-heading font-medium text-heading leading-[1.15] tracking-tight max-w-4xl"
+              >
                 {event.title}
-              </h1>
+              </motion.h1>
 
-              <div className="space-y-0.5 pt-1">
+              <motion.div variants={itemVariants} className="space-y-0.5 pt-1">
                 <div className="text-base sm:text-lg font-bold text-heading">
                   {formatIndoDate(event.date)}
                 </div>
                 <div className="text-sm text-gray-600 font-normal">
                   {getIndoDayName(event.date)}, {event.time}
                 </div>
-              </div>
-            </div>
+              </motion.div>
+
+              <motion.div
+                initial={{ scaleX: 0, originX: 0 }}
+                animate={{ scaleX: 1 }}
+                transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                className="w-16 h-[2.5px] bg-primary mt-3"
+              />
+            </motion.div>
 
             {/* Konten Utama & Metadata Sidebar (Sub-grid) */}
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start">
@@ -178,99 +261,141 @@ export default function EventDetail() {
               <div className="lg:col-span-8 space-y-6 text-sm sm:text-base text-gray-700 leading-relaxed font-body">
                 {/* Informasi Lokasi / Ruang / Zoom */}
                 {event.venue && (
-                  <div className="p-4 bg-gray-50 rounded-xs border border-gray-200/90 text-sm">
-                    <span className="font-bold text-heading">Lokasi / Ruang: </span>
-                    <span>{event.venue}</span>
-                  </div>
+                  <motion.div
+                    initial={{ opacity: 0, y: 14 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={viewportSettings}
+                    transition={{ duration: 0.45 }}
+                    className="p-4 bg-gray-50 rounded-xs border border-gray-200/90 text-sm flex items-baseline gap-2 shadow-2xs"
+                  >
+                    <span className="font-bold text-heading shrink-0">Lokasi / Ruang: </span>
+                    <span className="text-body font-medium">{event.venue}</span>
+                  </motion.div>
                 )}
 
-                {/* Paragraf Narasi Acara — fullDescription dipecah per paragraf
-                    agar naskah panjang tetap enak dibaca. */}
-                <div className="space-y-4 pt-1">
-                  <p className="font-medium text-heading">
+                {/* Paragraf Narasi Acara — fullDescription dipecah per paragraf */}
+                <motion.div
+                  variants={containerVariants}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={viewportSettings}
+                  className="space-y-4 pt-1"
+                >
+                  <motion.p variants={itemVariants} className="font-medium text-heading">
                     {event.description}
-                  </p>
+                  </motion.p>
 
                   {(event.fullDescription || event.description)
                     .split(/\n\s*\n/)
                     .filter((paragraf) => paragraf.trim())
                     .map((paragraf, idx) => (
-                      <p
+                      <motion.p
                         key={idx}
+                        variants={itemVariants}
                         className="text-gray-600 text-[15px] leading-7 text-justify"
                       >
                         {paragraf.trim()}
-                      </p>
+                      </motion.p>
                     ))}
-                </div>
+                </motion.div>
 
                 {/* Informasi Narasumber */}
                 {event.speaker && (
-                  <div className="pt-4 border-t border-gray-150 space-y-1 text-sm">
+                  <motion.div
+                    initial={{ opacity: 0, y: 14 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={viewportSettings}
+                    transition={{ duration: 0.45 }}
+                    className="pt-4 border-t border-gray-150 space-y-1 text-sm bg-gray-50/50 p-4 rounded-xs border border-gray-100"
+                  >
                     <span className="text-xs uppercase tracking-wider font-bold text-gray-500 block">
                       Narasumber & Pakar
                     </span>
-                    <p className="font-medium text-heading">
+                    <p className="font-medium text-heading text-base">
                       {event.speaker}
                     </p>
-                  </div>
+                  </motion.div>
                 )}
               </div>
 
-              {/* Kolom Kanan Sub-grid: Metadata Singkat (Website, Contact, Organizer) */}
-              <div className="lg:col-span-4 space-y-6 pt-1 text-xs sm:text-sm border-t lg:border-t-0 lg:border-l lg:border-gray-200 lg:pl-8">
+              {/* Kolom Kanan Sub-grid: Metadata Singkat (Website, Contact, Organizer, Category) */}
+              <motion.div
+                variants={containerVariants}
+                initial="hidden"
+                whileInView="visible"
+                viewport={viewportSettings}
+                className="lg:col-span-4 space-y-4 pt-1 text-xs sm:text-sm border-t lg:border-t-0 lg:border-l lg:border-gray-200 lg:pl-8"
+              >
                 {/* Website / Pendaftaran */}
                 {event.registrationUrl && (
-                  <div className="space-y-1">
-                    <span className="font-bold text-heading uppercase tracking-wider text-xs block">
+                  <motion.div
+                    variants={itemVariants}
+                    className="space-y-1 p-3.5 bg-gray-50/80 rounded-xs border border-gray-100 hover:border-gray-200 hover:bg-gray-50 transition-colors shadow-2xs"
+                  >
+                    <span className="font-bold text-heading uppercase tracking-wider text-[11px] block text-gray-500">
                       Website
                     </span>
                     <a
                       href={event.registrationUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 text-primary hover:underline font-medium"
+                      className="inline-flex items-center gap-1.5 text-primary hover:underline font-semibold"
                     >
                       <span>Event Information</span>
                       <FiExternalLink className="w-3.5 h-3.5" />
                     </a>
-                  </div>
+                  </motion.div>
                 )}
 
                 {/* Contact */}
-                <div className="space-y-1">
-                  <span className="font-bold text-heading uppercase tracking-wider text-xs block">
+                <motion.div
+                  variants={itemVariants}
+                  className="space-y-1 p-3.5 bg-gray-50/80 rounded-xs border border-gray-100 hover:border-gray-200 hover:bg-gray-50 transition-colors shadow-2xs"
+                >
+                  <span className="font-bold text-heading uppercase tracking-wider text-[11px] block text-gray-500">
                     Contact
                   </span>
-                  <div className="text-gray-600 font-normal">
+                  <div className="text-gray-700 font-medium">
                     {event.cp || "Sekretariat Program Studi MKn UNISSULA"}
                   </div>
-                </div>
+                </motion.div>
 
                 {/* Penyelenggara */}
-                <div className="space-y-1">
-                  <span className="font-bold text-heading uppercase tracking-wider text-xs block">
+                <motion.div
+                  variants={itemVariants}
+                  className="space-y-1 p-3.5 bg-gray-50/80 rounded-xs border border-gray-100 hover:border-gray-200 hover:bg-gray-50 transition-colors shadow-2xs"
+                >
+                  <span className="font-bold text-heading uppercase tracking-wider text-[11px] block text-gray-500">
                     Student Organizations / Unit
                   </span>
-                  <div className="text-gray-600 font-normal">
+                  <div className="text-gray-700 font-medium">
                     {event.organizer}
                   </div>
-                </div>
+                </motion.div>
 
                 {/* Kategori */}
-                <div className="space-y-1">
-                  <span className="font-bold text-heading uppercase tracking-wider text-xs block">
+                <motion.div
+                  variants={itemVariants}
+                  className="space-y-1 p-3.5 bg-gray-50/80 rounded-xs border border-gray-100 hover:border-gray-200 hover:bg-gray-50 transition-colors shadow-2xs"
+                >
+                  <span className="font-bold text-heading uppercase tracking-wider text-[11px] block text-gray-500">
                     Kategori Agenda
                   </span>
-                  <div className="text-gray-600 font-normal">
+                  <div className="text-gray-700 font-medium">
                     {event.category}
                   </div>
-                </div>
-              </div>
+                </motion.div>
+              </motion.div>
             </div>
 
-            {/* Bagian Bawah: Add to Calendar (Persis Screenshot 2) */}
-            <div className="pt-10 border-t border-gray-200 flex flex-col sm:flex-row sm:items-center justify-between gap-6">
+            {/* Bagian Bawah: Add to Calendar */}
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={viewportSettings}
+              transition={{ duration: 0.5 }}
+              className="pt-10 border-t border-gray-200 flex flex-col sm:flex-row sm:items-center justify-between gap-6"
+            >
               <div className="space-y-0.5">
                 <span className="font-heading font-bold text-sm text-heading block">
                   Add to Calendar
@@ -283,27 +408,31 @@ export default function EventDetail() {
               {/* Tombol Pil Add to Calendar */}
               <div className="flex flex-wrap items-center gap-3">
                 {/* Google Calendar */}
-                <a
+                <motion.a
+                  whileHover={{ scale: 1.04 }}
+                  whileTap={{ scale: 0.96 }}
                   href={googleCalUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-5 py-2 rounded-full border border-gray-300 hover:border-primary hover:text-primary text-xs font-semibold text-heading transition-colors inline-flex items-center gap-1.5 bg-white shadow-2xs"
+                  className="px-5 py-2 rounded-full border border-gray-300 hover:border-primary hover:text-primary text-xs font-semibold text-heading transition-colors inline-flex items-center gap-1.5 bg-white shadow-2xs cursor-pointer"
                 >
                   <FiPlus className="w-3.5 h-3.5 text-primary" />
                   <span>Google Calendar</span>
-                </a>
+                </motion.a>
 
                 {/* iCal / Outlook */}
-                <button
+                <motion.button
+                  whileHover={{ scale: 1.04 }}
+                  whileTap={{ scale: 0.96 }}
                   type="button"
                   onClick={() => downloadIcsFile(event)}
                   className="px-5 py-2 rounded-full border border-gray-300 hover:border-primary hover:text-primary text-xs font-semibold text-heading transition-colors inline-flex items-center gap-1.5 bg-white shadow-2xs cursor-pointer"
                 >
                   <FiPlus className="w-3.5 h-3.5 text-primary" />
                   <span>iCal/Outlook</span>
-                </button>
+                </motion.button>
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
 
