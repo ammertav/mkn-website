@@ -11,6 +11,11 @@ import Siget from "../../assets/images/testi/ipda-siget.png";
 import Laeli from "../../assets/images/testi/laeli-nurchamidah.png";
 import hetiyasari from "../../assets/images/testi/hetiyasari.png";
 
+const viewportKartu = {
+  once: true,
+  amount: "some",
+};
+
 const viewportSettings = {
   once: true,
   amount: 0.2,
@@ -262,7 +267,7 @@ export default function Testimoni() {
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={viewportSettings}
+          viewport={viewportKartu}
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 sm:gap-8 items-start"
         >
           {tampil.map((item) => (
