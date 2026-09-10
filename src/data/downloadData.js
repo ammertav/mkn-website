@@ -4,22 +4,30 @@
  */
 
 export const downloadHeader = {
-  category: "REPOSITORI DOKUMEN",
-  title: "Pusat Unduhan & Dokumen Hukum",
-  description:
-    "Akses dan unduh seluruh berkas pedoman akademik, formulir administratif kenotariatan, serta kompilasi peraturan perundang-undangan Notaris dan PPAT yang berlaku di Indonesia.",
+  category: { id: "REPOSITORI DOKUMEN", en: "DOCUMENT REPOSITORY" },
+  title: { id: "Pusat Unduhan & Dokumen Hukum", en: "Download Center & Legal Documents" },
+  description: {
+    id: "Akses dan unduh seluruh berkas pedoman akademik, formulir administratif kenotariatan, serta kompilasi peraturan perundang-undangan Notaris dan PPAT yang berlaku di Indonesia.",
+    en: "Access and download academic guidelines, notarial administrative forms, and statutory compilations governing Notaries and Land Title Registrars (PPAT) in Indonesia.",
+  },
 };
 
 export const downloadGroups = [
   {
     id: "akademik",
-    title: "Dokumen Akademik",
-    description: "Pedoman studi, format penulisan karya ilmiah, formulir tesis, dan panduan magang kenotariatan.",
+    title: { id: "Dokumen Akademik", en: "Academic Documents" },
+    description: {
+      id: "Pedoman studi, format penulisan karya ilmiah, formulir tesis, dan panduan magang kenotariatan.",
+      en: "Study guidelines, scientific writing formats, master's thesis forms, and notarial internship guides.",
+    },
     documents: [
       {
         id: "pedoman-akademik",
-        title: "Buku Pedoman Akademik Magister Kenotariatan",
-        category: "Pedoman",
+        title: {
+          id: "Buku Pedoman Akademik Magister Kenotariatan",
+          en: "Master of Notarial Law Academic Handbook",
+        },
+        category: { id: "Pedoman", en: "Guideline" },
         format: "PDF",
         size: "3.4 MB",
         updatedAt: "2024",
@@ -27,8 +35,11 @@ export const downloadGroups = [
       },
       {
         id: "pedoman-tesis",
-        title: "Buku Pedoman Penulisan & Pembimbingan Tesis Kenotariatan",
-        category: "Pedoman",
+        title: {
+          id: "Buku Pedoman Penulisan & Pembimbingan Tesis Kenotariatan",
+          en: "Notarial Master's Thesis Writing & Supervision Guidelines",
+        },
+        category: { id: "Pedoman", en: "Guideline" },
         format: "PDF",
         size: "2.8 MB",
         updatedAt: "2024",
@@ -36,8 +47,11 @@ export const downloadGroups = [
       },
       {
         id: "form-judul-tesis",
-        title: "Formulir Pengajuan Judul & Proposal Penelitian Tesis",
-        category: "Formulir",
+        title: {
+          id: "Formulir Pengajuan Judul & Proposal Penelitian Tesis",
+          en: "Thesis Research Title & Proposal Submission Form",
+        },
+        category: { id: "Formulir", en: "Form" },
         format: "DOCX",
         size: "180 KB",
         updatedAt: "2024",
@@ -45,8 +59,11 @@ export const downloadGroups = [
       },
       {
         id: "form-ujian-tesis",
-        title: "Formulir Pendaftaran Ujian Tesis / Sidang Komprehensif",
-        category: "Formulir",
+        title: {
+          id: "Formulir Pendaftaran Ujian Tesis / Sidang Komprehensif",
+          en: "Master's Thesis Defense / Comprehensive Examination Application Form",
+        },
+        category: { id: "Formulir", en: "Form" },
         format: "DOCX",
         size: "210 KB",
         updatedAt: "2024",
@@ -54,8 +71,11 @@ export const downloadGroups = [
       },
       {
         id: "panduan-magang-notaris",
-        title: "Buku Panduan Magang Notaris & Praktik Kerja Lapangan",
-        category: "Panduan",
+        title: {
+          id: "Buku Panduan Magang Notaris & Praktik Kerja Lapangan",
+          en: "Notarial Internship & Field Practicum Manual",
+        },
+        category: { id: "Panduan", en: "Manual" },
         format: "PDF",
         size: "1.9 MB",
         updatedAt: "2024",
@@ -63,8 +83,11 @@ export const downloadGroups = [
       },
       {
         id: "form-bebas-pustaka",
-        title: "Surat Keterangan Bebas Pustaka & Laboratorium",
-        category: "Formulir",
+        title: {
+          id: "Surat Keterangan Bebas Pustaka & Laboratorium",
+          en: "Library & Laboratory Clearance Certificate",
+        },
+        category: { id: "Formulir", en: "Form" },
         format: "DOCX",
         size: "150 KB",
         updatedAt: "2024",
@@ -72,8 +95,11 @@ export const downloadGroups = [
       },
       {
         id: "form-banding-nilai-mkn",
-        title: "Formulir Permohonan Banding Nilai Akademik Mahasiswa",
-        category: "Formulir",
+        title: {
+          id: "Formulir Permohonan Banding Nilai Akademik Mahasiswa",
+          en: "Student Academic Grade Appeal Application Form",
+        },
+        category: { id: "Formulir", en: "Form" },
         format: "DOCX",
         size: "165 KB",
         updatedAt: "2024",
@@ -83,13 +109,19 @@ export const downloadGroups = [
   },
   {
     id: "undang-undang",
-    title: "Undang-Undang (UU)",
-    description: "Undang-undang pokok kenotariatan, pertanahan, perdata, perseroan, dan jaminan.",
+    title: { id: "Undang-Undang (UU)", en: "Acts & Statutes (UU)" },
+    description: {
+      id: "Undang-undang pokok kenotariatan, pertanahan, perdata, perseroan, dan jaminan.",
+      en: "Principal statutory acts on notarial office, agrarian principles, companies, and collaterals.",
+    },
     documents: [
       {
         id: "uu-30-2004",
-        title: "UU No. 30 Tahun 2004 tentang Jabatan Notaris (UUJN)",
-        category: "Undang-Undang",
+        title: {
+          id: "UU No. 30 Tahun 2004 tentang Jabatan Notaris (UUJN)",
+          en: "Law No. 30 of 2004 on the Notary Public Office (UUJN)",
+        },
+        category: { id: "Undang-Undang", en: "Statute" },
         format: "PDF",
         size: "1.2 MB",
         updatedAt: "2004",
@@ -97,8 +129,11 @@ export const downloadGroups = [
       },
       {
         id: "uu-2-2014",
-        title: "UU No. 2 Tahun 2014 tentang Perubahan Atas UU No. 30 Tahun 2004 tentang Jabatan Notaris",
-        category: "Undang-Undang",
+        title: {
+          id: "UU No. 2 Tahun 2014 tentang Perubahan Atas UU No. 30 Tahun 2004 tentang Jabatan Notaris",
+          en: "Law No. 2 of 2014 amending Law No. 30 of 2004 on the Notary Public Office",
+        },
+        category: { id: "Undang-Undang", en: "Statute" },
         format: "PDF",
         size: "1.5 MB",
         updatedAt: "2014",
@@ -106,8 +141,11 @@ export const downloadGroups = [
       },
       {
         id: "uu-5-1960",
-        title: "UU No. 5 Tahun 1960 tentang Peraturan Dasar Pokok-Pokok Agraria (UUPA)",
-        category: "Undang-Undang",
+        title: {
+          id: "UU No. 5 Tahun 1960 tentang Peraturan Dasar Pokok-Pokok Agraria (UUPA)",
+          en: "Law No. 5 of 1960 on Basic Agrarian Principles (UUPA)",
+        },
+        category: { id: "Undang-Undang", en: "Statute" },
         format: "PDF",
         size: "2.1 MB",
         updatedAt: "1960",
@@ -115,8 +153,11 @@ export const downloadGroups = [
       },
       {
         id: "uu-4-1996",
-        title: "UU No. 4 Tahun 1996 tentang Hak Tanggungan Atas Tanah Beserta Benda-Benda yang Berkaitan dengan Tanah",
-        category: "Undang-Undang",
+        title: {
+          id: "UU No. 4 Tahun 1996 tentang Hak Tanggungan Atas Tanah Beserta Benda-Benda yang Berkaitan dengan Tanah",
+          en: "Law No. 4 of 1996 on Mortgage Rights on Land and Land-Related Objects",
+        },
+        category: { id: "Undang-Undang", en: "Statute" },
         format: "PDF",
         size: "1.1 MB",
         updatedAt: "1996",
@@ -124,8 +165,11 @@ export const downloadGroups = [
       },
       {
         id: "uu-42-1999",
-        title: "UU No. 42 Tahun 1999 tentang Jaminan Fidusia",
-        category: "Undang-Undang",
+        title: {
+          id: "UU No. 42 Tahun 1999 tentang Jaminan Fidusia",
+          en: "Law No. 42 of 1999 on Fiduciary Security",
+        },
+        category: { id: "Undang-Undang", en: "Statute" },
         format: "PDF",
         size: "890 KB",
         updatedAt: "1999",
@@ -133,8 +177,11 @@ export const downloadGroups = [
       },
       {
         id: "uu-40-2007",
-        title: "UU No. 40 Tahun 2007 tentang Perseroan Terbatas",
-        category: "Undang-Undang",
+        title: {
+          id: "UU No. 40 Tahun 2007 tentang Perseroan Terbatas",
+          en: "Law No. 40 of 2007 on Limited Liability Companies",
+        },
+        category: { id: "Undang-Undang", en: "Statute" },
         format: "PDF",
         size: "1.8 MB",
         updatedAt: "2007",
@@ -142,8 +189,11 @@ export const downloadGroups = [
       },
       {
         id: "uu-16-2001",
-        title: "UU No. 16 Tahun 2001 juncto UU No. 28 Tahun 2004 tentang Yayasan",
-        category: "Undang-Undang",
+        title: {
+          id: "UU No. 16 Tahun 2001 juncto UU No. 28 Tahun 2004 tentang Yayasan",
+          en: "Law No. 16 of 2001 in conjunction with Law No. 28 of 2004 on Foundations",
+        },
+        category: { id: "Undang-Undang", en: "Statute" },
         format: "PDF",
         size: "1.3 MB",
         updatedAt: "2004",
@@ -151,8 +201,11 @@ export const downloadGroups = [
       },
       {
         id: "uu-25-1992",
-        title: "UU No. 25 Tahun 1992 tentang Perkoperasian",
-        category: "Undang-Undang",
+        title: {
+          id: "UU No. 25 Tahun 1992 tentang Perkoperasian",
+          en: "Law No. 25 of 1992 on Cooperatives",
+        },
+        category: { id: "Undang-Undang", en: "Statute" },
         format: "PDF",
         size: "950 KB",
         updatedAt: "1992",
@@ -160,8 +213,11 @@ export const downloadGroups = [
       },
       {
         id: "uu-1-2024-ite",
-        title: "UU No. 1 Tahun 2024 tentang Perubahan Kedua Atas UU No. 11 Tahun 2008 tentang Informasi dan Transaksi Elektronik",
-        category: "Undang-Undang",
+        title: {
+          id: "UU No. 1 Tahun 2024 tentang Perubahan Kedua Atas UU No. 11 Tahun 2008 tentang Informasi dan Transaksi Elektronik",
+          en: "Law No. 1 of 2024 on the Second Amendment to Law No. 11 of 2008 on Electronic Information and Transactions",
+        },
+        category: { id: "Undang-Undang", en: "Statute" },
         format: "PDF",
         size: "1.6 MB",
         updatedAt: "2024",
@@ -171,13 +227,19 @@ export const downloadGroups = [
   },
   {
     id: "peraturan-pemerintah",
-    title: "Peraturan Pemerintah (PP)",
-    description: "Regulasi pendaftaran tanah, jabatan PPAT, hak pengelolaan, dan perseroan.",
+    title: { id: "Peraturan Pemerintah (PP)", en: "Government Regulations (PP)" },
+    description: {
+      id: "Regulasi pendaftaran tanah, jabatan PPAT, hak pengelolaan, dan perseroan.",
+      en: "Executive regulations on land registration, Land Title Registrar offices, management rights, and micro enterprises.",
+    },
     documents: [
       {
         id: "pp-24-1997",
-        title: "PP No. 24 Tahun 1997 tentang Pendaftaran Tanah",
-        category: "Peraturan Pemerintah",
+        title: {
+          id: "PP No. 24 Tahun 1997 tentang Pendaftaran Tanah",
+          en: "Government Regulation No. 24 of 1997 on Land Registration",
+        },
+        category: { id: "Peraturan Pemerintah", en: "Gov. Regulation" },
         format: "PDF",
         size: "1.7 MB",
         updatedAt: "1997",
@@ -185,8 +247,11 @@ export const downloadGroups = [
       },
       {
         id: "pp-37-1998",
-        title: "PP No. 37 Tahun 1998 tentang Peraturan Jabatan Pejabat Pembuat Akta Tanah (PJPPAT)",
-        category: "Peraturan Pemerintah",
+        title: {
+          id: "PP No. 37 Tahun 1998 tentang Peraturan Jabatan Pejabat Pembuat Akta Tanah (PJPPAT)",
+          en: "Government Regulation No. 37 of 1998 on the Rules of Office of Land Title Registrars (PJPPAT)",
+        },
+        category: { id: "Peraturan Pemerintah", en: "Gov. Regulation" },
         format: "PDF",
         size: "1.1 MB",
         updatedAt: "1998",
@@ -194,8 +259,11 @@ export const downloadGroups = [
       },
       {
         id: "pp-24-2016",
-        title: "PP No. 24 Tahun 2016 tentang Perubahan Atas PP No. 37 Tahun 1998 tentang Peraturan Jabatan PPAT",
-        category: "Peraturan Pemerintah",
+        title: {
+          id: "PP No. 24 Tahun 2016 tentang Perubahan Atas PP No. 37 Tahun 1998 tentang Peraturan Jabatan PPAT",
+          en: "Government Regulation No. 24 of 2016 amending Regulation No. 37 of 1998 on the Rules of Office of PPAT",
+        },
+        category: { id: "Peraturan Pemerintah", en: "Gov. Regulation" },
         format: "PDF",
         size: "1.4 MB",
         updatedAt: "2016",
@@ -203,8 +271,11 @@ export const downloadGroups = [
       },
       {
         id: "pp-18-2021",
-        title: "PP No. 18 Tahun 2021 tentang Hak Pengelolaan, Hak Atas Tanah, Satuan Rumah Susun, dan Pendaftaran Tanah",
-        category: "Peraturan Pemerintah",
+        title: {
+          id: "PP No. 18 Tahun 2021 tentang Hak Pengelolaan, Hak Atas Tanah, Satuan Rumah Susun, dan Pendaftaran Tanah",
+          en: "Government Regulation No. 18 of 2021 on Management Rights, Land Rights, Condominiums, and Land Registration",
+        },
+        category: { id: "Peraturan Pemerintah", en: "Gov. Regulation" },
         format: "PDF",
         size: "2.3 MB",
         updatedAt: "2021",
@@ -212,8 +283,11 @@ export const downloadGroups = [
       },
       {
         id: "pp-8-2021",
-        title: "PP No. 8 Tahun 2021 tentang Modal Dasar Perseroan Serta Pendaftaran Pendirian, Perubahan, dan Pembubaran Perseroan UMK",
-        category: "Peraturan Pemerintah",
+        title: {
+          id: "PP No. 8 Tahun 2021 tentang Modal Dasar Perseroan Serta Pendaftaran Pendirian, Perubahan, dan Pembubaran Perseroan UMK",
+          en: "Government Regulation No. 8 of 2021 on Authorized Capital, Incorporation, Amendment, and Dissolution of MSME Companies",
+        },
+        category: { id: "Peraturan Pemerintah", en: "Gov. Regulation" },
         format: "PDF",
         size: "1.2 MB",
         updatedAt: "2021",
@@ -221,8 +295,11 @@ export const downloadGroups = [
       },
       {
         id: "pp-29-2016",
-        title: "PP No. 29 Tahun 2016 tentang Perubahan Modal Dasar Perseroan Terbatas",
-        category: "Peraturan Pemerintah",
+        title: {
+          id: "PP No. 29 Tahun 2016 tentang Perubahan Modal Dasar Perseroan Terbatas",
+          en: "Government Regulation No. 29 of 2016 on Changes in Authorized Capital of Limited Liability Companies",
+        },
+        category: { id: "Peraturan Pemerintah", en: "Gov. Regulation" },
         format: "PDF",
         size: "820 KB",
         updatedAt: "2016",
@@ -230,8 +307,11 @@ export const downloadGroups = [
       },
       {
         id: "pp-43-2015",
-        title: "PP No. 43 Tahun 2015 tentang Pihak Pelapor dalam Pencegahan dan Pemberantasan Tindak Pidana Pencucian Uang",
-        category: "Peraturan Pemerintah",
+        title: {
+          id: "PP No. 43 Tahun 2015 tentang Pihak Pelapor dalam Pencegahan dan Pemberantasan Tindak Pidana Pencucian Uang",
+          en: "Government Regulation No. 43 of 2015 on Reporting Parties in the Prevention and Eradication of Money Laundering Crimes",
+        },
+        category: { id: "Peraturan Pemerintah", en: "Gov. Regulation" },
         format: "PDF",
         size: "1.0 MB",
         updatedAt: "2015",
@@ -241,13 +321,19 @@ export const downloadGroups = [
   },
   {
     id: "peraturan-menteri",
-    title: "Peraturan Menteri (Permen)",
-    description: "Permenkumham dan Permen ATR/BPN terkait tata cara notaris, PPAT, dan layanan pertanahan.",
+    title: { id: "Peraturan Menteri (Permen)", en: "Ministerial Regulations (Permen)" },
+    description: {
+      id: "Permenkumham dan Permen ATR/BPN terkait tata cara notaris, PPAT, dan layanan pertanahan.",
+      en: "Ministerial regulations of Law & Human Rights and ATR/BPN regarding notaries, PPAT, and land services.",
+    },
     documents: [
       {
         id: "permenkumham-19-2019",
-        title: "Permenkumham No. 19 Tahun 2019 tentang Syarat dan Tata Cara Pengangkatan, Cuti, Perpindahan, Pemberhentian, dan Perpanjangan Masa Jabatan Notaris",
-        category: "Permenkumham",
+        title: {
+          id: "Permenkumham No. 19 Tahun 2019 tentang Syarat dan Tata Cara Pengangkatan, Cuti, Perpindahan, Pemberhentian, dan Perpanjangan Masa Jabatan Notaris",
+          en: "Minister of Law Regulation No. 19 of 2019 on Appointment, Leave, Transfer, Dismissal, and Term Extension of Notaries",
+        },
+        category: { id: "Permenkumham", en: "Permenkumham" },
         format: "PDF",
         size: "1.9 MB",
         updatedAt: "2019",
@@ -255,8 +341,11 @@ export const downloadGroups = [
       },
       {
         id: "permenkumham-15-2020",
-        title: "Permenkumham No. 15 Tahun 2020 tentang Tata Cara Pemeriksaan Majelis Pengawas Notaris",
-        category: "Permenkumham",
+        title: {
+          id: "Permenkumham No. 15 Tahun 2020 tentang Tata Cara Pemeriksaan Majelis Pengawas Notaris",
+          en: "Minister of Law Regulation No. 15 of 2020 on Inspection Procedures of Notarial Supervisory Councils",
+        },
+        category: { id: "Permenkumham", en: "Permenkumham" },
         format: "PDF",
         size: "1.4 MB",
         updatedAt: "2020",
@@ -264,8 +353,11 @@ export const downloadGroups = [
       },
       {
         id: "permenkumham-21-2021",
-        title: "Permenkumham No. 21 Tahun 2021 tentang Syarat dan Tata Cara Pendaftaran Pendirian, Perubahan, dan Pembubaran Badan Hukum PT",
-        category: "Permenkumham",
+        title: {
+          id: "Permenkumham No. 21 Tahun 2021 tentang Syarat dan Tata Cara Pendaftaran Pendirian, Perubahan, dan Pembubaran Badan Hukum PT",
+          en: "Minister of Law Regulation No. 21 of 2021 on Procedures for Registration of Incorporation, Amendment, and Dissolution of Legal Entity Companies",
+        },
+        category: { id: "Permenkumham", en: "Permenkumham" },
         format: "PDF",
         size: "1.8 MB",
         updatedAt: "2021",
@@ -273,8 +365,11 @@ export const downloadGroups = [
       },
       {
         id: "permenkumham-17-2018",
-        title: "Permenkumham No. 17 Tahun 2018 tentang Pendaftaran Persekutuan Komanditer, Persekutuan Firma, dan Persekutuan Perdata",
-        category: "Permenkumham",
+        title: {
+          id: "Permenkumham No. 17 Tahun 2018 tentang Pendaftaran Persekutuan Komanditer, Persekutuan Firma, dan Persekutuan Perdata",
+          en: "Minister of Law Regulation No. 17 of 2018 on Registration of Limited Partnerships (CV), Firms, and Civil Partnerships",
+        },
+        category: { id: "Permenkumham", en: "Permenkumham" },
         format: "PDF",
         size: "1.3 MB",
         updatedAt: "2018",
@@ -282,8 +377,11 @@ export const downloadGroups = [
       },
       {
         id: "permen-atrbpn-1-2021",
-        title: "Permen ATR/BPN No. 1 Tahun 2021 tentang Sertipikat Elektronik",
-        category: "Permen ATR/BPN",
+        title: {
+          id: "Permen ATR/BPN No. 1 Tahun 2021 tentang Sertipikat Elektronik",
+          en: "Minister of Agrarian Affairs Regulation No. 1 of 2021 on Electronic Certificates",
+        },
+        category: { id: "Permen ATR/BPN", en: "Permen ATR/BPN" },
         format: "PDF",
         size: "1.5 MB",
         updatedAt: "2021",
@@ -291,8 +389,11 @@ export const downloadGroups = [
       },
       {
         id: "permen-atrbpn-3-2023",
-        title: "Permen ATR/BPN No. 3 Tahun 2023 tentang Penerbitan Dokumen Elektronik Dalam Kegiatan Pendaftaran Tanah",
-        category: "Permen ATR/BPN",
+        title: {
+          id: "Permen ATR/BPN No. 3 Tahun 2023 tentang Penerbitan Dokumen Elektronik Dalam Kegiatan Pendaftaran Tanah",
+          en: "Minister of Agrarian Affairs Regulation No. 3 of 2023 on Issuance of Electronic Documents in Land Registration Activities",
+        },
+        category: { id: "Permen ATR/BPN", en: "Permen ATR/BPN" },
         format: "PDF",
         size: "1.6 MB",
         updatedAt: "2023",
@@ -300,8 +401,11 @@ export const downloadGroups = [
       },
       {
         id: "permen-atrbpn-20-2021",
-        title: "Permen ATR/BPN No. 20 Tahun 2021 tentang Tata Cara Ujian, Magang, Pengangkatan, dan Pelantikan PPAT",
-        category: "Permen ATR/BPN",
+        title: {
+          id: "Permen ATR/BPN No. 20 Tahun 2021 tentang Tata Cara Ujian, Magang, Pengangkatan, dan Pelantikan PPAT",
+          en: "Minister of Agrarian Affairs Regulation No. 20 of 2021 on Examination, Internship, Appointment, and Inauguration Procedures of PPAT",
+        },
+        category: { id: "Permen ATR/BPN", en: "Permen ATR/BPN" },
         format: "PDF",
         size: "1.7 MB",
         updatedAt: "2021",
@@ -309,8 +413,11 @@ export const downloadGroups = [
       },
       {
         id: "permenkumham-9-2017",
-        title: "Permenkumham No. 9 Tahun 2017 tentang Penerapan Prinsip Mengenali Pengguna Jasa Bagi Notaris (PMPJ)",
-        category: "Permenkumham",
+        title: {
+          id: "Permenkumham No. 9 Tahun 2017 tentang Penerapan Prinsip Mengenali Pengguna Jasa Bagi Notaris (PMPJ)",
+          en: "Minister of Law Regulation No. 9 of 2017 on Implementation of Know-Your-Customer Principles for Notaries (PMPJ)",
+        },
+        category: { id: "Permenkumham", en: "Permenkumham" },
         format: "PDF",
         size: "1.1 MB",
         updatedAt: "2017",
@@ -320,13 +427,19 @@ export const downloadGroups = [
   },
   {
     id: "peraturan-lain",
-    title: "Peraturan Lain / Surat Edaran",
-    description: "Surat Edaran Mahkamah Agung, SE Dirjen AHU, dan pedoman yudisial terkait akta autentik.",
+    title: { id: "Peraturan Lain / Surat Edaran", en: "Other Regulations / Circular Letters" },
+    description: {
+      id: "Surat Edaran Mahkamah Agung, SE Dirjen AHU, dan pedoman yudisial terkait akta autentik.",
+      en: "Supreme Court circulars, AHU Director General guidelines, and judicial jurisprudence.",
+    },
     documents: [
       {
         id: "sema-4-2016",
-        title: "Surat Edaran Mahkamah Agung (SEMA) No. 4 Tahun 2016 tentang Pemberlakuan Rumusan Hasil Rapat Pleno Kamar MA",
-        category: "Surat Edaran MA",
+        title: {
+          id: "Surat Edaran Mahkamah Agung (SEMA) No. 4 Tahun 2016 tentang Pemberlakuan Rumusan Hasil Rapat Pleno Kamar MA",
+          en: "Supreme Court Circular Letter (SEMA) No. 4 of 2016 on Implementation of Supreme Court Chamber Plenary Meeting Outcomes",
+        },
+        category: { id: "Surat Edaran MA", en: "Supreme Court Circular" },
         format: "PDF",
         size: "1.3 MB",
         updatedAt: "2016",
@@ -334,8 +447,11 @@ export const downloadGroups = [
       },
       {
         id: "se-ahu-pmpj-2021",
-        title: "Surat Edaran Dirjen AHU Kemenkumham tentang Petunjuk Teknis Pelaksanaan Pengisian Form PMPJ oleh Notaris",
-        category: "SE Dirjen AHU",
+        title: {
+          id: "Surat Edaran Dirjen AHU Kemenkumham tentang Petunjuk Teknis Pelaksanaan Pengisian Form PMPJ oleh Notaris",
+          en: "Director General of AHU Circular Letter on Technical Guidelines for Completing PMPJ Forms by Notaries",
+        },
+        category: { id: "SE Dirjen AHU", en: "AHU Circular" },
         format: "PDF",
         size: "950 KB",
         updatedAt: "2021",
@@ -343,8 +459,11 @@ export const downloadGroups = [
       },
       {
         id: "fatwa-dsn-mui-notaris",
-        title: "Himpunan Fatwa Dewan Syariah Nasional (DSN-MUI) tentang Akad Perjanjian Syariah Kenotariatan",
-        category: "Fatwa Syariah",
+        title: {
+          id: "Himpunan Fatwa Dewan Syariah Nasional (DSN-MUI) tentang Akad Perjanjian Syariah Kenotariatan",
+          en: "National Sharia Council (DSN-MUI) Compendium of Fatwas on Notarial Sharia Contracts",
+        },
+        category: { id: "Fatwa Syariah", en: "Sharia Fatwa" },
         format: "PDF",
         size: "2.4 MB",
         updatedAt: "2022",
@@ -352,8 +471,11 @@ export const downloadGroups = [
       },
       {
         id: "putusan-mk-009-2018",
-        title: "Putusan Mahkamah Konstitusi No. 009/PUU-XVI/2018 Pengujian Materiil UU Jabatan Notaris",
-        category: "Putusan MK",
+        title: {
+          id: "Putusan Mahkamah Konstitusi No. 009/PUU-XVI/2018 Pengujian Materiil UU Jabatan Notaris",
+          en: "Constitutional Court Ruling No. 009/PUU-XVI/2018 on Judicial Review of the Notary Public Office Law",
+        },
+        category: { id: "Putusan MK", en: "Constitutional Court Ruling" },
         format: "PDF",
         size: "1.8 MB",
         updatedAt: "2018",
@@ -363,13 +485,19 @@ export const downloadGroups = [
   },
   {
     id: "peraturan-perkumpulan",
-    title: "Peraturan Perkumpulan INI & IPPAT",
-    description: "Kode etik profesi, peraturan magang perkumpulan, ujian kode etik, dan standarisasi organisasi.",
+    title: { id: "Peraturan Perkumpulan INI & IPPAT", en: "Professional Association Regulations (INI & IPPAT)" },
+    description: {
+      id: "Kode etik profesi, peraturan magang perkumpulan, ujian kode etik, dan standarisasi organisasi.",
+      en: "Codes of professional ethics, association internship guidelines, ethics examinations, and organizational standards.",
+    },
     documents: [
       {
         id: "kode-etik-ini",
-        title: "Kode Etik Notaris Ikatan Notaris Indonesia (INI) Hasil Kongres Luar Biasa",
-        category: "Kode Etik",
+        title: {
+          id: "Kode Etik Notaris Ikatan Notaris Indonesia (INI) Hasil Kongres Luar Biasa",
+          en: "Notary Code of Ethics of the Indonesian Notaries Association (INI) Extraordinary Congress",
+        },
+        category: { id: "Kode Etik", en: "Code of Ethics" },
         format: "PDF",
         size: "1.2 MB",
         updatedAt: "2020",
@@ -377,8 +505,11 @@ export const downloadGroups = [
       },
       {
         id: "kode-etik-ippat",
-        title: "Kode Etik Pejabat Pembuat Akta Tanah (IPPAT)",
-        category: "Kode Etik",
+        title: {
+          id: "Kode Etik Pejabat Pembuat Akta Tanah (IPPAT)",
+          en: "Code of Ethics of the Indonesian Land Title Registrars Association (IPPAT)",
+        },
+        category: { id: "Kode Etik", en: "Code of Ethics" },
         format: "PDF",
         size: "1.0 MB",
         updatedAt: "2021",
@@ -386,8 +517,11 @@ export const downloadGroups = [
       },
       {
         id: "perkum-ini-19-2019",
-        title: "Peraturan Perkumpulan INI No. 19/PERKUM/INI/2019 tentang Magang Calon Notaris",
-        category: "Peraturan Perkumpulan",
+        title: {
+          id: "Peraturan Perkumpulan INI No. 19/PERKUM/INI/2019 tentang Magang Calon Notaris",
+          en: "INI Association Regulation No. 19/PERKUM/INI/2019 on Candidate Notary Internship",
+        },
+        category: { id: "Peraturan Perkumpulan", en: "Association Regulation" },
         format: "PDF",
         size: "1.4 MB",
         updatedAt: "2019",
@@ -395,8 +529,11 @@ export const downloadGroups = [
       },
       {
         id: "perkum-ini-24-2021",
-        title: "Peraturan Perkumpulan INI No. 24/PERKUM/INI/2021 tentang Ujian Kode Etik Notaris (UKEN)",
-        category: "Peraturan Perkumpulan",
+        title: {
+          id: "Peraturan Perkumpulan INI No. 24/PERKUM/INI/2021 tentang Ujian Kode Etik Notaris (UKEN)",
+          en: "INI Association Regulation No. 24/PERKUM/INI/2021 on the Notary Code of Ethics Examination (UKEN)",
+        },
+        category: { id: "Peraturan Perkumpulan", en: "Association Regulation" },
         format: "PDF",
         size: "1.1 MB",
         updatedAt: "2021",
@@ -404,8 +541,11 @@ export const downloadGroups = [
       },
       {
         id: "perkum-ippat-magang",
-        title: "Peraturan Perkumpulan IPPAT tentang Pedoman Pelaksanaan Magang Calon PPAT",
-        category: "Peraturan Perkumpulan",
+        title: {
+          id: "Peraturan Perkumpulan IPPAT tentang Pedoman Pelaksanaan Magang Calon PPAT",
+          en: "IPPAT Association Regulation on Operational Guidelines for Candidate PPAT Internship",
+        },
+        category: { id: "Peraturan Perkumpulan", en: "Association Regulation" },
         format: "PDF",
         size: "1.3 MB",
         updatedAt: "2021",

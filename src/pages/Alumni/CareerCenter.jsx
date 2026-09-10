@@ -8,6 +8,7 @@ import {
   FiClock,
   FiArrowRight,
 } from "react-icons/fi";
+import { useT, useLanguage } from "../../i18n/languageContext";
 import {
   sumberResmi,
   angkaKunci,
@@ -97,8 +98,11 @@ const lowonganContoh = [
     company: "Kantor Notaris & PPAT Dr. Bambang Tri Bawono, S.H., M.H.",
     location: "Semarang, Jawa Tengah",
     type: "Full-Time",
-    posted: "2 hari yang lalu",
-    desc: "Menangani pembuatan akta pendirian perseroan, perjanjian pembebanan hak tanggungan, dan konsultasi legalitas pertanahan.",
+    posted: { id: "2 hari yang lalu", en: "2 days ago" },
+    desc: {
+      id: "Menangani pembuatan akta pendirian perseroan, perjanjian pembebanan hak tanggungan, dan konsultasi legalitas pertanahan.",
+      en: "Handling the preparation of corporate deed of establishment, mortgage right agreement, and agrarian legality consultation.",
+    },
     link: "#",
   },
   {
@@ -107,8 +111,11 @@ const lowonganContoh = [
     company: "PT Bank Syariah Mandiri Utama",
     location: "Jakarta Pusat",
     type: "Full-Time",
-    posted: "4 hari yang lalu",
-    desc: "Penyusunan akad pembiayaan sindikasi, legal drafting jaminan fidusia & hak tanggungan elektronik, serta mitigasi risiko kepatuhan.",
+    posted: { id: "4 hari yang lalu", en: "4 days ago" },
+    desc: {
+      id: "Penyusunan akad pembiayaan sindikasi, legal drafting jaminan fidusia & hak tanggungan elektronik, serta mitigasi risiko kepatuhan.",
+      en: "Drafting syndicated financing agreements, legal drafting of fiduciary & electronic mortgage guarantees, and compliance risk mitigation.",
+    },
     link: "#",
   },
   {
@@ -117,8 +124,11 @@ const lowonganContoh = [
     company: "Kantor Pertanahan (ATR/BPN) Wilayah Jawa Tengah",
     location: "Semarang",
     type: "Contract",
-    posted: "1 minggu yang lalu",
-    desc: "Pemeriksaan validitas warkah pendaftaran tanah, konversi hak, dan penyelesaian sengketa administrasi pertanahan.",
+    posted: { id: "1 minggu yang lalu", en: "1 week ago" },
+    desc: {
+      id: "Pemeriksaan validitas warkah pendaftaran tanah, konversi hak, dan penyelesaian sengketa administrasi pertanahan.",
+      en: "Verification of land registration documents validity, rights conversion, and settlement of agrarian administrative disputes.",
+    },
     link: "#",
   },
   {
@@ -127,31 +137,37 @@ const lowonganContoh = [
     company: "Kantor Notaris & PPAT Hj. Siti Aminah, S.H., M.Kn.",
     location: "Surabaya, Jawa Timur",
     type: "Full-Time",
-    posted: "1 minggu yang lalu",
-    desc: "Draf minuta akta partij, legalisasi, waarmerking dokumen, serta pelaporan bulanan ke Majelis Pengawas Daerah (MPD).",
+    posted: { id: "1 minggu yang lalu", en: "1 week ago" },
+    desc: {
+      id: "Draf minuta akta partij, legalisasi, waarmerking dokumen, serta pelaporan bulanan ke Majelis Pengawas Daerah (MPD).",
+      en: "Drafting partij deed minutes, legalization, document registration (waarmerking), and monthly reporting to Regional Supervisory Board (MPD).",
+    },
     link: "#",
   },
 ];
 
 /**
  * Pusat Karir.
- *
- * Isi halaman ini adalah jalur menjadi Notaris, dirangkum dari pengumuman resmi
- * Ditjen AHU beserta peraturan yang dirujuknya. Jadwal siklus dan batas tanggal
- * lahir sengaja tidak dimuat karena hanya berlaku satu tahun — lihat catatan
- * pada src/data/alumni/pusatKarirData.js.
- *
- * Bagian lain yang direncanakan untuk halaman ini — layanan karier prodi, mitra
- * magang, dan angka serapan lulusan — masih menunggu data dari program studi.
  */
 function TampilanBaru() {
+  const t = useT();
+  const { lang } = useLanguage();
+
   return (
     <>
       <Helmet>
-        <title>Pusat Karir &amp; Jejaring Alumni | MKn UNISSULA</title>
+        <title>
+          {lang === "en"
+            ? "Career Center & Alumni Network | MKn UNISSULA"
+            : "Pusat Karir & Jejaring Alumni | MKn UNISSULA"}
+        </title>
         <meta
           name="description"
-          content="Jalur menjadi Notaris bagi lulusan Magister Kenotariatan UNISSULA — syarat pengangkatan, dokumen, tahapan pendaftaran daring, dan pindah wilayah jabatan."
+          content={
+            lang === "en"
+              ? "The path to becoming a Notary for UNISSULA Master of Notarial Law graduates — appointment requirements, documents, online registration phases, and office transfer."
+              : "Jalur menjadi Notaris bagi lulusan Magister Kenotariatan UNISSULA — syarat pengangkatan, dokumen, tahapan pendaftaran daring, dan pindah wilayah jabatan."
+          }
         />
       </Helmet>
 
@@ -167,13 +183,16 @@ function TampilanBaru() {
             variants={itemVariants}
             className="inline-block text-xs font-bold tracking-wider uppercase text-primary"
           >
-            Alumni &amp; Karier
+            {t({ id: "Alumni & Karier", en: "Alumni & Careers" })}
           </motion.span>
           <motion.h1
             variants={itemVariants}
             className="text-3xl sm:text-4xl lg:text-[40px] font-heading font-bold text-heading tracking-tight leading-tight"
           >
-            Pusat Karir &amp; Jejaring Alumni
+            {t({
+              id: "Pusat Karir & Jejaring Alumni",
+              en: "Career Center & Alumni Network",
+            })}
           </motion.h1>
         </motion.div>
 
@@ -183,7 +202,7 @@ function TampilanBaru() {
           variants={itemVariants}
           className="text-sm sm:text-base text-body text-justify leading-relaxed"
         >
-          {pengantar}
+          {t(pengantar)}
         </motion.p>
 
         {/* Angka kunci */}
@@ -206,10 +225,10 @@ function TampilanBaru() {
                 <span className="font-heading font-bold text-2xl sm:text-3xl text-primary leading-none">
                   {a.angka}
                 </span>
-                <span className="text-xs font-semibold text-gray-500">{a.satuan}</span>
+                <span className="text-xs font-semibold text-gray-500">{t(a.satuan)}</span>
               </div>
               <p className="text-[11px] font-medium tracking-wide uppercase text-gray-500 leading-snug">
-                {a.label}
+                {t(a.label)}
               </p>
             </motion.div>
           ))}
@@ -227,7 +246,10 @@ function TampilanBaru() {
             variants={itemVariants}
             className="font-heading font-bold text-xl sm:text-2xl text-heading tracking-tight"
           >
-            Tiga Prasyarat Sebelum Mendaftar
+            {t({
+              id: "Tiga Prasyarat Sebelum Mendaftar",
+              en: "Three Prerequisites Before Applying",
+            })}
           </motion.h2>
 
           <div className="space-y-4">
@@ -245,12 +267,14 @@ function TampilanBaru() {
                   </span>
                   <div className="space-y-2 min-w-0">
                     <h3 className="font-heading font-bold text-lg text-heading leading-snug">
-                      {p.judul}
+                      {t(p.judul)}
                     </h3>
-                    <p className="text-xs sm:text-sm text-body leading-relaxed text-justify hyphens-auto">{p.desc}</p>
+                    <p className="text-xs sm:text-sm text-body leading-relaxed text-justify hyphens-auto">
+                      {t(p.desc)}
+                    </p>
                   </div>
                 </div>
-                <p className="text-[11px] text-gray-500 pt-2 border-t border-gray-100">{p.dasar}</p>
+                <p className="text-[11px] text-gray-500 pt-2 border-t border-gray-100">{t(p.dasar)}</p>
               </motion.div>
             ))}
           </div>
@@ -261,12 +285,12 @@ function TampilanBaru() {
             className="p-6 border-l-3 border-l-primary border border-gray-200 bg-gray-50/70 rounded-xs space-y-4"
           >
             <p className="text-xs font-bold tracking-wider uppercase text-heading">
-              {catatanMagang.judul}
+              {t(catatanMagang.judul)}
             </p>
             {catatanMagang.butir.map((b, idx) => (
               <motion.div key={idx} custom={idx} variants={itemVariants} className="space-y-1.5">
-                <p className="text-xs sm:text-sm text-body text-justify leading-relaxed">{b.isi}</p>
-                <p className="text-[11px] text-gray-500">{b.dasar}</p>
+                <p className="text-xs sm:text-sm text-body text-justify leading-relaxed">{t(b.isi)}</p>
+                <p className="text-[11px] text-gray-500">{t(b.dasar)}</p>
               </motion.div>
             ))}
           </motion.div>
@@ -284,14 +308,19 @@ function TampilanBaru() {
             variants={itemVariants}
             className="font-heading font-bold text-xl sm:text-2xl text-heading tracking-tight"
           >
-            Delapan Syarat Pengangkatan
+            {t({
+              id: "Delapan Syarat Pengangkatan",
+              en: "Eight Requirements for Appointment",
+            })}
           </motion.h2>
           <motion.p
             variants={itemVariants}
             className="text-xs sm:text-sm text-body leading-relaxed text-justify hyphens-auto max-w-4xl"
           >
-            Seluruh syarat berikut harus dipenuhi calon Notaris menurut Pasal 2 ayat (1) Permenkum
-            22/2025.
+            {t({
+              id: "Seluruh syarat berikut harus dipenuhi calon Notaris menurut Pasal 2 ayat (1) Permenkum 22/2025.",
+              en: "All the following requirements must be fulfilled by Notary candidates according to Article 2 paragraph (1) Permenkum 22/2025.",
+            })}
           </motion.p>
 
           <motion.div
@@ -304,7 +333,9 @@ function TampilanBaru() {
                   <span className="shrink-0 mt-0.5 w-5 h-5 rounded-full bg-red-50 text-primary flex items-center justify-center">
                     <FiCheck className="w-3 h-3 stroke-[2.5]" />
                   </span>
-                  <span className="text-xs sm:text-sm text-body leading-relaxed text-justify hyphens-auto">{s}</span>
+                  <span className="text-xs sm:text-sm text-body leading-relaxed text-justify hyphens-auto">
+                    {t(s)}
+                  </span>
                 </motion.li>
               ))}
             </ul>
@@ -323,13 +354,16 @@ function TampilanBaru() {
             variants={itemVariants}
             className="font-heading font-bold text-xl sm:text-2xl text-heading tracking-tight"
           >
-            Dokumen yang Dilampirkan
+            {t({
+              id: "Dokumen yang Dilampirkan",
+              en: "Attached Documents",
+            })}
           </motion.h2>
 
           <div className="space-y-4">
             {dokumenKelompok.map((k, idx) => (
               <motion.div
-                key={k.judul}
+                key={idx}
                 custom={idx}
                 variants={cardVariants}
                 whileHover={{ y: -2 }}
@@ -337,10 +371,10 @@ function TampilanBaru() {
               >
                 <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3">
                   <h3 className="font-heading font-bold text-lg text-heading leading-snug">
-                    {k.judul}
+                    {t(k.judul)}
                   </h3>
                   <span className="self-start px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wider bg-gray-100 text-gray-600 rounded-xs whitespace-nowrap">
-                    {k.butir.length} berkas
+                    {k.butir.length} {t({ id: "berkas", en: "documents" })}
                   </span>
                 </div>
 
@@ -350,12 +384,14 @@ function TampilanBaru() {
                       <span className="shrink-0 tabular-nums text-gray-400 text-xs pt-0.5 select-none">
                         {bIdx + 1}.
                       </span>
-                      <span className="text-xs sm:text-sm text-body leading-relaxed text-justify hyphens-auto">{b}</span>
+                      <span className="text-xs sm:text-sm text-body leading-relaxed text-justify hyphens-auto">
+                        {t(b)}
+                      </span>
                     </li>
                   ))}
                 </ol>
 
-                <p className="text-[11px] text-gray-500 pt-2 border-t border-gray-100">{k.dasar}</p>
+                <p className="text-[11px] text-gray-500 pt-2 border-t border-gray-100">{t(k.dasar)}</p>
               </motion.div>
             ))}
           </div>
@@ -373,20 +409,25 @@ function TampilanBaru() {
             variants={itemVariants}
             className="font-heading font-bold text-xl sm:text-2xl text-heading tracking-tight"
           >
-            Tahapan Pendaftaran Daring
+            {t({
+              id: "Tahapan Pendaftaran Daring",
+              en: "Online Registration Steps",
+            })}
           </motion.h2>
           <motion.p
             variants={itemVariants}
             className="text-xs sm:text-sm text-body leading-relaxed text-justify hyphens-auto max-w-4xl"
           >
-            Seluruh permohonan diajukan secara elektronik melalui ahu.go.id. Jadwal tiap tahap
-            ditetapkan Ditjen AHU pada setiap pembukaan pendaftaran.
+            {t({
+              id: "Seluruh permohonan diajukan secara elektronik melalui ahu.go.id. Jadwal tiap tahap ditetapkan Ditjen AHU pada setiap pembukaan pendaftaran.",
+              en: "All applications are submitted electronically via ahu.go.id. The schedule for each stage is determined by DG AHU upon each registration opening.",
+            })}
           </motion.p>
 
           <ol className="relative border-l-2 border-gray-200 ml-3 space-y-6">
-            {tahapanPendaftaran.map((t, idx) => (
+            {tahapanPendaftaran.map((st, idx) => (
               <motion.li
-                key={t.nomor}
+                key={st.nomor}
                 custom={idx}
                 variants={itemVariants}
                 className="relative pl-7 sm:pl-9"
@@ -395,13 +436,13 @@ function TampilanBaru() {
                   aria-hidden="true"
                   className="absolute -left-[15px] top-0 w-7 h-7 rounded-full bg-primary text-white text-xs font-heading font-bold flex items-center justify-center border-4 border-banner tabular-nums"
                 >
-                  {t.nomor}
+                  {st.nomor}
                 </span>
                 <h3 className="font-heading font-bold text-base text-heading leading-snug">
-                  {t.judul}
+                  {t(st.judul)}
                 </h3>
                 <p className="mt-1.5 text-xs sm:text-sm text-body leading-relaxed text-justify hyphens-auto max-w-4xl">
-                  {t.desc}
+                  {t(st.desc)}
                 </p>
               </motion.li>
             ))}
@@ -420,18 +461,26 @@ function TampilanBaru() {
             variants={itemVariants}
             className="font-heading font-bold text-xl sm:text-2xl text-heading tracking-tight"
           >
-            Pindah Wilayah Jabatan
+            {t({
+              id: "Pindah Wilayah Jabatan",
+              en: "Transfer of Notary Office Region",
+            })}
           </motion.h2>
 
           <motion.div
             variants={cardVariants}
             className="p-6 border border-gray-200 bg-white rounded-xs space-y-4 shadow-2xs"
           >
-            <p className="text-xs sm:text-sm text-body leading-relaxed text-justify hyphens-auto">{pindahWilayah.ringkas}</p>
+            <p className="text-xs sm:text-sm text-body leading-relaxed text-justify hyphens-auto">
+              {t(pindahWilayah.ringkas)}
+            </p>
 
             <div className="pt-2 border-t border-gray-100 space-y-2.5">
               <p className="text-xs font-bold tracking-wider uppercase text-heading">
-                Dokumen pendukung
+                {t({
+                  id: "Dokumen pendukung",
+                  en: "Supporting documents",
+                })}
               </p>
               <ol className="space-y-2.5">
                 {pindahWilayah.dokumen.map((d, idx) => (
@@ -439,14 +488,16 @@ function TampilanBaru() {
                     <span className="shrink-0 tabular-nums text-gray-400 text-xs pt-0.5 select-none">
                       {idx + 1}.
                     </span>
-                    <span className="text-xs sm:text-sm text-body leading-relaxed text-justify hyphens-auto">{d}</span>
+                    <span className="text-xs sm:text-sm text-body leading-relaxed text-justify hyphens-auto">
+                      {t(d)}
+                    </span>
                   </motion.li>
                 ))}
               </ol>
             </div>
 
             <p className="text-[11px] text-gray-500 pt-2 border-t border-gray-100">
-              {pindahWilayah.dasar}
+              {t(pindahWilayah.dasar)}
             </p>
           </motion.div>
         </motion.section>
@@ -463,7 +514,7 @@ function TampilanBaru() {
             variants={itemVariants}
             className="font-heading font-bold text-xl sm:text-2xl text-heading tracking-tight"
           >
-            Biaya
+            {t({ id: "Biaya", en: "Fees" })}
           </motion.h2>
 
           <motion.div
@@ -474,17 +525,17 @@ function TampilanBaru() {
               <thead>
                 <tr className="border-b border-gray-200 bg-gray-50/70">
                   <th className="py-3 px-5 text-[11px] font-bold tracking-wider uppercase text-heading">
-                    Jenis
+                    {t({ id: "Jenis", en: "Fee Type" })}
                   </th>
                   <th className="py-3 px-5 text-[11px] font-bold tracking-wider uppercase text-heading text-right w-48">
-                    Tarif
+                    {t({ id: "Tarif", en: "Rate" })}
                   </th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-100">
                 {biaya.butir.map((b, idx) => (
                   <motion.tr key={idx} custom={idx} variants={itemVariants} className="hover:bg-gray-50/50 transition-colors">
-                    <td className="py-3.5 px-5 text-body leading-relaxed">{b.jenis}</td>
+                    <td className="py-3.5 px-5 text-body leading-relaxed">{t(b.jenis)}</td>
                     <td className="py-3.5 px-5 text-right font-semibold text-heading tabular-nums whitespace-nowrap">
                       {b.tarif}
                     </td>
@@ -494,8 +545,12 @@ function TampilanBaru() {
             </table>
           </motion.div>
 
-          <motion.p variants={itemVariants} className="text-xs text-body leading-relaxed text-justify hyphens-auto">{biaya.catatan}</motion.p>
-          <motion.p variants={itemVariants} className="text-[11px] text-gray-500 leading-relaxed">{biaya.dasar}</motion.p>
+          <motion.p variants={itemVariants} className="text-xs text-body leading-relaxed text-justify hyphens-auto">
+            {t(biaya.catatan)}
+          </motion.p>
+          <motion.p variants={itemVariants} className="text-[11px] text-gray-500 leading-relaxed">
+            {t(biaya.dasar)}
+          </motion.p>
         </motion.section>
 
         {/* Dasar hukum & rujukan resmi */}
@@ -510,7 +565,7 @@ function TampilanBaru() {
             variants={itemVariants}
             className="font-heading font-bold text-xl sm:text-2xl text-heading tracking-tight"
           >
-            Dasar Hukum
+            {t({ id: "Dasar Hukum", en: "Legal Basis" })}
           </motion.h2>
 
           <ol className="space-y-2.5">
@@ -519,7 +574,9 @@ function TampilanBaru() {
                 <span className="shrink-0 tabular-nums text-gray-400 text-xs pt-0.5 select-none">
                   {idx + 1}.
                 </span>
-                <span className="text-xs sm:text-sm text-body leading-relaxed text-justify hyphens-auto">{d}</span>
+                <span className="text-xs sm:text-sm text-body leading-relaxed text-justify hyphens-auto">
+                  {t(d)}
+                </span>
               </motion.li>
             ))}
           </ol>
@@ -529,9 +586,16 @@ function TampilanBaru() {
             className="p-6 border-l-3 border-l-primary border border-gray-200 bg-gray-50/70 rounded-xs space-y-3"
           >
             <p className="text-xs sm:text-sm text-body leading-relaxed text-justify hyphens-auto">
-              Halaman ini merupakan rangkuman yang disusun program studi dari {sumberResmi.dokumen}.
-              Persyaratan, jadwal, formasi wilayah, dan tarif dapat berubah mengikuti peraturan
-              terbaru. Rujukan resmi dan terkini adalah laman {sumberResmi.nama}.
+              {t({
+                id: "Halaman ini merupakan rangkuman yang disusun program studi dari",
+                en: "This page is a summary compiled by the study program from",
+              })}{" "}
+              {t(sumberResmi.dokumen)}.{" "}
+              {t({
+                id: "Persyaratan, jadwal, formasi wilayah, dan tarif dapat berubah mengikuti peraturan terbaru. Rujukan resmi dan terkini adalah laman",
+                en: "Requirements, schedules, regional formations, and fees may change following updated regulations. The official and most current reference is the website of",
+              })}{" "}
+              {t(sumberResmi.nama)}.
             </p>
             <a
               href={sumberResmi.laman}
@@ -539,7 +603,9 @@ function TampilanBaru() {
               rel="noopener noreferrer"
               className="inline-flex items-center space-x-1.5 text-primary hover:text-[#570000] font-semibold text-xs sm:text-sm group"
             >
-              <span className="group-hover:underline">Buka ahu.go.id</span>
+              <span className="group-hover:underline">
+                {t({ id: "Buka ahu.go.id", en: "Open ahu.go.id" })}
+              </span>
               <FiExternalLink />
             </a>
           </motion.div>
@@ -551,11 +617,10 @@ function TampilanBaru() {
 
 /**
  * Tampilan lama: daftar lowongan kerja dengan data contoh.
- *
- * Disalin apa adanya dari desain awal halaman ini (commit pertama) agar bisa
- * dibandingkan dengan tampilan sekarang. Semua lowongan di sini fiktif.
  */
 function TampilanLama() {
+  const t = useT();
+  const { lang } = useLanguage();
   const [visibleCount, setVisibleCount] = useState(3);
   const [hasLoaded, setHasLoaded] = useState(false);
 
@@ -575,10 +640,18 @@ function TampilanLama() {
   return (
     <>
       <Helmet>
-        <title>Pusat Karir &amp; Bursa Kerja | MKn UNISSULA</title>
+        <title>
+          {lang === "en"
+            ? "Career Center & Job Opportunities | MKn UNISSULA"
+            : "Pusat Karir & Bursa Kerja | MKn UNISSULA"}
+        </title>
         <meta
           name="description"
-          content="Layanan pusat karir, lowongan magang, dan peluang kerja profesional bidang notariat dan hukum bagi alumni MKn UNISSULA."
+          content={
+            lang === "en"
+              ? "Career center services, internship vacancies, and professional job opportunities in notarial and legal fields for MKn UNISSULA alumni."
+              : "Layanan pusat karir, lowongan magang, dan peluang kerja profesional bidang notariat dan hukum bagi alumni MKn UNISSULA."
+          }
         />
       </Helmet>
 
@@ -596,14 +669,19 @@ function TampilanLama() {
               variants={itemVariants}
               className="text-3xl sm:text-4xl lg:text-5xl font-heading font-bold text-heading tracking-tight leading-tight"
             >
-              Pusat Karir &amp; Jejaring Alumni
+              {t({
+                id: "Pusat Karir & Jejaring Alumni",
+                en: "Career Center & Alumni Network",
+              })}
             </motion.h1>
             <motion.p
               variants={itemVariants}
               className="text-sm sm:text-base text-body text-justify leading-relaxed"
             >
-              Menghubungkan lulusan Magister Kenotariatan UNISSULA dengan jejaring kantor Notaris/PPAT,
-              firma hukum, perbankan, dan institusi pemerintahan terkemuka di Indonesia.
+              {t({
+                id: "Menghubungkan lulusan Magister Kenotariatan UNISSULA dengan jejaring kantor Notaris/PPAT, firma hukum, perbankan, dan institusi pemerintahan terkemuka di Indonesia.",
+                en: "Connecting UNISSULA Master of Notarial Law graduates with networks of Notary/PPAT offices, law firms, banking, and leading government institutions across Indonesia.",
+              })}
             </motion.p>
           </motion.div>
 
@@ -638,7 +716,7 @@ function TampilanLama() {
                   </span>
                 </div>
 
-                <p className="text-xs sm:text-sm text-body leading-relaxed">{job.desc}</p>
+                <p className="text-xs sm:text-sm text-body leading-relaxed">{t(job.desc)}</p>
 
                 <div className="flex flex-wrap items-center justify-between gap-3 pt-2 border-t border-gray-100 text-xs text-gray-500">
                   <div className="flex items-center space-x-4">
@@ -648,7 +726,7 @@ function TampilanLama() {
                     </span>
                     <span className="flex items-center space-x-1">
                       <FiClock className="text-primary" />
-                      <span>{job.posted}</span>
+                      <span>{t(job.posted)}</span>
                     </span>
                   </div>
                   <motion.a
@@ -657,7 +735,7 @@ function TampilanLama() {
                     transition={{ type: "spring", stiffness: 300 }}
                     className="inline-flex items-center space-x-1 text-primary hover:text-[#570000] font-semibold"
                   >
-                    <span>Lihat Detail</span>
+                    <span>{t({ id: "Lihat Detail", en: "View Details" })}</span>
                     <FiArrowRight />
                   </motion.a>
                 </div>
@@ -681,8 +759,8 @@ function TampilanLama() {
             className="inline-block border border-primary text-primary hover:bg-primary hover:text-white px-8 py-2.5 text-xs font-semibold tracking-wider uppercase transition-all duration-200 cursor-pointer shadow-xs"
           >
             {visibleCount >= lowonganContoh.length
-              ? "TAMPILKAN LEBIH SEDIKIT"
-              : "MUAT LEBIH BANYAK"}
+              ? t({ id: "TAMPILKAN LEBIH SEDIKIT", en: "SHOW LESS" })
+              : t({ id: "MUAT LEBIH BANYAK", en: "LOAD MORE" })}
           </motion.button>
         </motion.div>
       </div>
@@ -693,4 +771,3 @@ function TampilanLama() {
 export default function CareerCenter() {
   return TAMPILAN === "old" ? <TampilanLama /> : <TampilanBaru />;
 }
-

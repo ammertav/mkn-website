@@ -2,6 +2,7 @@ import { Helmet } from "react-helmet-async";
 import { motion } from "framer-motion";
 import ZoomableImg from "../../components/ui/ZoomableImg";
 import { tenagaKependidikan } from "../../data/profil/tendikData";
+import { useT } from "../../i18n/languageContext";
 
 /** Gelar akademik yang diabaikan saat menyusun inisial pengganti foto. */
 const GELAR = new Set([
@@ -89,14 +90,59 @@ const lineVariants = {
   },
 };
 
+const tendikText = {
+  metaTitle: {
+    id: "Tenaga Kependidikan | MKn UNISSULA",
+    en: "Administrative & Support Staff | MKn UNISSULA",
+  },
+  metaDesc: {
+    id: "Direktori Tenaga Kependidikan Program Studi Magister Kenotariatan (MKn) UNISSULA: kepala tata usaha, direktur laboratorium dan perpustakaan, serta bidang akademik, keuangan, promosi & humas, dan sarana prasarana.",
+    en: "Directory of Administrative & Support Staff of Master of Notarial Law Programme (MKn) UNISSULA: Head of Administration, Lab & Library Directors, and Academic, Finance, PR, & Facilities Staff.",
+  },
+  badge: {
+    id: "STAF",
+    en: "STAFF",
+  },
+  title: {
+    id: "Tenaga Kependidikan",
+    en: "Administrative & Support Staff",
+  },
+  desc: {
+    id: "Tenaga kependidikan menopang penyelenggaraan akademik program studi: ketatausahaan dan layanan administratif, pengelolaan laboratorium akta dan perpustakaan, serta empat bidang pelaksana — akademik, keuangan, promosi & humas, dan sarana prasarana.",
+    en: "Administrative and support staff facilitate the academic delivery of the study programme: secretariat and administrative services, deed laboratory and library management, and four operational divisions — academic, financial, promotion & PR, and facilities.",
+  },
+  dirTitle: {
+    id: "Direktori Tenaga Kependidikan",
+    en: "Support Staff Directory",
+  },
+  tugasTitle: {
+    id: "Pembagian Tugas",
+    en: "Role & Task Distribution",
+  },
+  colJabatan: {
+    id: "JABATAN",
+    en: "POSITION",
+  },
+  colPelaksana: {
+    id: "PELAKSANA",
+    en: "STAFF MEMBER",
+  },
+  colTugas: {
+    id: "LINGKUP TUGAS",
+    en: "SCOPE OF DUTIES",
+  },
+};
+
 export default function Tendik() {
+  const t = useT();
+
   return (
     <>
       <Helmet>
-        <title>Tenaga Kependidikan | MKn UNISSULA</title>
+        <title>{t(tendikText.metaTitle)}</title>
         <meta
           name="description"
-          content="Direktori Tenaga Kependidikan Program Studi Magister Kenotariatan (MKn) UNISSULA: kepala tata usaha, direktur laboratorium dan perpustakaan, serta bidang akademik, keuangan, promosi & humas, dan sarana prasarana."
+          content={t(tendikText.metaDesc)}
         />
       </Helmet>
 
@@ -111,23 +157,20 @@ export default function Tendik() {
             variants={itemVariants}
             className="text-[11px] font-bold tracking-[0.16em] uppercase text-primary block mb-2"
           >
-            STAF
+            {t(tendikText.badge)}
           </motion.span>
           <motion.h1
             variants={itemVariants}
             className="text-3xl sm:text-4xl md:text-[42px] font-heading font-bold text-heading tracking-normal"
           >
-            Tenaga Kependidikan
+            {t(tendikText.title)}
           </motion.h1>
           <motion.div variants={lineVariants} className="w-full h-[2px] bg-primary mt-4 mb-5" />
           <motion.p
             variants={itemVariants}
             className="text-base text-body leading-relaxed max-w-3xl"
           >
-            Tenaga kependidikan menopang penyelenggaraan akademik program studi: ketatausahaan
-            dan layanan administratif, pengelolaan laboratorium akta dan perpustakaan, serta
-            empat bidang pelaksana — akademik, keuangan, promosi &amp; humas, dan sarana
-            prasarana.
+            {t(tendikText.desc)}
           </motion.p>
         </motion.div>
 
@@ -141,7 +184,7 @@ export default function Tendik() {
         >
           <div>
             <h2 className="text-xl sm:text-2xl font-heading font-medium text-heading tracking-normal">
-              Direktori Tenaga Kependidikan
+              {t(tendikText.dirTitle)}
             </h2>
             <motion.div variants={lineVariants} className="w-full h-[1.5px] bg-heading mt-2.5" />
           </div>
@@ -150,9 +193,9 @@ export default function Tendik() {
             variants={listContainerVariants}
             className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5"
           >
-            {tenagaKependidikan.map((orang) => (
+            {tenagaKependidikan.map((orang, idx) => (
               <motion.div
-                key={`${orang.jabatan}-${orang.name}`}
+                key={`${orang.name}-${idx}`}
                 variants={cardVariants}
                 whileHover={{ y: -3, transition: { duration: 0.2 } }}
                 className="border border-gray-200 bg-white rounded-xs shadow-2xs p-5 flex gap-4 hover:border-primary/40 transition-colors"
@@ -162,7 +205,7 @@ export default function Tendik() {
                     <ZoomableImg
                       src={orang.photo}
                       alt={orang.name}
-                      caption={`${orang.name} — ${orang.jabatan}`}
+                      caption={`${orang.name} — ${t(orang.jabatan)}`}
                       className="w-full h-full object-cover object-top rounded-md hover:scale-105 transition-transform duration-500"
                     />
                   ) : (
@@ -174,12 +217,12 @@ export default function Tendik() {
 
                 <div className="min-w-0 space-y-1.5">
                   <span className="text-[10px] font-bold tracking-[0.1em] uppercase text-primary block leading-snug">
-                    {orang.jabatan}
+                    {t(orang.jabatan)}
                   </span>
                   <h3 className="font-heading font-bold text-sm sm:text-base text-heading leading-snug">
                     {orang.name}
                   </h3>
-                  <p className="text-xs text-body leading-relaxed">{orang.tugas}</p>
+                  <p className="text-xs text-body leading-relaxed">{t(orang.tugas)}</p>
                 </div>
               </motion.div>
             ))}
@@ -196,7 +239,7 @@ export default function Tendik() {
         >
           <div>
             <h2 className="text-xl sm:text-2xl font-heading font-medium text-heading tracking-normal">
-              Pembagian Tugas
+              {t(tendikText.tugasTitle)}
             </h2>
             <motion.div variants={lineVariants} className="w-full h-[1.5px] bg-heading mt-2.5" />
           </div>
@@ -206,13 +249,13 @@ export default function Tendik() {
               <thead>
                 <tr className="border-b-2 border-heading">
                   <th className="py-3 px-5 sm:px-6 text-[11px] font-bold tracking-wider uppercase text-heading w-64">
-                    JABATAN
+                    {t(tendikText.colJabatan)}
                   </th>
                   <th className="py-3 px-5 sm:px-6 text-[11px] font-bold tracking-wider uppercase text-heading">
-                    PELAKSANA
+                    {t(tendikText.colPelaksana)}
                   </th>
                   <th className="py-3 px-5 sm:px-6 text-[11px] font-bold tracking-wider uppercase text-heading">
-                    LINGKUP TUGAS
+                    {t(tendikText.colTugas)}
                   </th>
                 </tr>
               </thead>
@@ -220,20 +263,20 @@ export default function Tendik() {
                 variants={listContainerVariants}
                 className="divide-y divide-gray-100 text-sm"
               >
-                {tenagaKependidikan.map((orang) => (
+                {tenagaKependidikan.map((orang, idx) => (
                   <motion.tr
-                    key={`${orang.jabatan}-${orang.name}`}
+                    key={`${orang.name}-${idx}`}
                     variants={rowVariants}
                     className="hover:bg-gray-50/50 transition-colors"
                   >
                     <td className="py-4 px-5 sm:px-6 font-bold text-heading align-top leading-snug">
-                      {orang.jabatan}
+                      {t(orang.jabatan)}
                     </td>
                     <td className="py-4 px-5 sm:px-6 text-body align-top leading-snug">
                       {orang.name}
                     </td>
                     <td className="py-4 px-5 sm:px-6 text-body align-top leading-relaxed">
-                      {orang.tugas}
+                      {t(orang.tugas)}
                     </td>
                   </motion.tr>
                 ))}

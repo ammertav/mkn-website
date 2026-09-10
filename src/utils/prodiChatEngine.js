@@ -202,16 +202,19 @@ export function jawabProdi(pertanyaan) {
 
     case "agenda": {
       const acara = agendaTerdekat();
+      const judul = acara ? (typeof acara.title === "object" ? acara.title.id : acara.title) : "";
+      const deskripsi = acara ? (typeof acara.description === "object" ? acara.description.id : acara.description) : "";
+      const waktu = acara ? (typeof acara.time === "object" ? acara.time.id : acara.time) : "";
 
       return {
         teks: acara
-          ? `Agenda terdekat: ${acara.title}, ${formatIndoDate(acara.date)}` +
-            `${acara.time ? `, pukul ${acara.time}` : ""}.\n\n${acara.description}`
+          ? `Agenda terdekat: ${judul}, ${formatIndoDate(acara.date)}` +
+            `${waktu ? `, pukul ${waktu}` : ""}.\n\n${deskripsi}`
           : "Belum ada agenda mendatang yang tercatat. Agenda baru diumumkan melalui " +
             "halaman Event dan kanal berita program studi.",
         rujukan: [
           acara
-            ? { label: acara.title, ke: `/event/${acara.slug}` }
+            ? { label: judul, ke: `/event/${acara.slug}` }
             : { label: "Seluruh Agenda", ke: "/event" },
           { label: "Berita & Pengumuman", ke: "/berita" },
         ],

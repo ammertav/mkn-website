@@ -10,6 +10,7 @@ import HeroSlideshow from "../../components/ui/HeroSlideshow";
 import FacilitySectionHeader from "../../components/Fasilitas/FacilitySectionHeader";
 import FacilityGallery from "../../components/Fasilitas/FacilityGallery";
 import { akomodasiData, akomodasiHeroSlides } from "../../data/akomodasiData";
+import { useT } from "../../i18n/languageContext";
 
 const akomodasiTabs = [
   {
@@ -84,6 +85,7 @@ const tabContentVariants = {
 };
 
 export default function Accommodation() {
+  const t = useT();
   const { tab } = useParams();
 
   // Validasi tab: default ke asrama jika slug tidak valid atau kosong
@@ -93,8 +95,11 @@ export default function Accommodation() {
   return (
     <>
       <Helmet>
-        <title>{`${item.title} | Akomodasi MKn UNISSULA`}</title>
-        <meta name="description" content={item.header.paragraphs[0]} />
+        <title>{`${t(item.title)} | ${t({
+          id: "Akomodasi MKn UNISSULA",
+          en: "MKn UNISSULA Accommodation",
+        })}`}</title>
+        <meta name="description" content={t(item.header.paragraphs[0])} />
       </Helmet>
 
       <main className="flex flex-col min-h-screen bg-banner font-body text-body">
@@ -106,9 +111,15 @@ export default function Accommodation() {
             saat pengunjung berpindah antara asrama dan guest house. */}
         <HeroSlideshow
           fotoLatar={akomodasiHeroSlides}
-          eyebrow="Akomodasi"
-          judul="Hunian di Lingkungan Kampus"
-          deskripsi="Dua kelompok akomodasi menopang kenyamanan studi dan aktivitas di Magister Kenotariatan, dari asrama mahasiswa berkarakter islami hingga wisma tamu representatif bagi keluarga wisudawan dan tamu universitas."
+          eyebrow={{ id: "Akomodasi", en: "Accommodation" }}
+          judul={{
+            id: "Hunian di Lingkungan Kampus",
+            en: "On-Campus Living Environments",
+          }}
+          deskripsi={{
+            id: "Dua kelompok akomodasi menopang kenyamanan studi dan aktivitas di Magister Kenotariatan, dari asrama mahasiswa berkarakter islami hingga wisma tamu representatif bagi keluarga wisudawan dan tamu universitas.",
+            en: "Two accommodation facilities support postgraduate living and campus visits, from an Islamic student residence to a distinguished university guest house for visiting scholars and graduation guests.",
+          }}
         />
 
         {/* Sticky Page Tabs (Persis sama dengan komponen tab di Fasilitas) */}
@@ -153,7 +164,7 @@ export default function Accommodation() {
                   variants={cardVariants}
                   className="text-xs sm:text-sm font-bold uppercase tracking-wider text-heading pb-3 border-b border-gray-200"
                 >
-                  Fasilitas Utama
+                  {t({ id: "Fasilitas Utama", en: "Main Facilities" })}
                 </motion.h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   {item.fasilitas.map((feat, idx) => (
@@ -167,7 +178,7 @@ export default function Accommodation() {
                         <FiCheck className="w-3.5 h-3.5 stroke-[2.5]" />
                       </div>
                       <span className="text-xs sm:text-sm text-heading font-medium leading-relaxed">
-                        {feat}
+                        {t(feat)}
                       </span>
                     </motion.div>
                   ))}
@@ -187,7 +198,10 @@ export default function Accommodation() {
                     to="/mahasiswa/organisasi"
                     className="inline-flex items-center font-semibold text-primary hover:underline transition-colors"
                   >
-                    ← Organisasi Mahasiswa (IMANU)
+                    {t({
+                      id: "← Organisasi Mahasiswa (IMANU)",
+                      en: "← Student Organization (IMANU)",
+                    })}
                   </Link>
                 </motion.div>
                 <motion.div whileHover={{ x: 4 }} transition={{ duration: 0.2 }}>
@@ -195,7 +209,10 @@ export default function Accommodation() {
                     to="/"
                     className="inline-flex items-center font-medium text-body hover:text-primary transition-colors"
                   >
-                    Kembali ke Beranda →
+                    {t({
+                      id: "Kembali ke Beranda →",
+                      en: "Back to Home →",
+                    })}
                   </Link>
                 </motion.div>
               </motion.div>

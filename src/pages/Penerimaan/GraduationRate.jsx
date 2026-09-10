@@ -6,6 +6,7 @@ import {
   predicateAndDurationDistribution,
   supportingDocuments,
 } from "../../data/informasi/graduationRateData";
+import { useT, useLanguage } from "../../i18n/languageContext";
 
 const viewportSettings = {
   once: true,
@@ -80,13 +81,25 @@ const lineVariants = {
 };
 
 export default function GraduationRate() {
+  const t = useT();
+  const { lang } = useLanguage();
+
   return (
     <>
       <Helmet>
-        <title>Tingkat Kelulusan | MKn UNISSULA</title>
+        <html lang={lang} />
+        <title>
+          {lang === "en"
+            ? "Graduation Rate | MKn UNISSULA"
+            : "Tingkat Kelulusan | MKn UNISSULA"}
+        </title>
         <meta
           name="description"
-          content="Data statistik tingkat kelulusan, rata-rata IPK, sebaran predikat kelulusan, dan masa studi mahasiswa Program Studi Magister Kenotariatan (MKn) UNISSULA."
+          content={
+            lang === "en"
+              ? "Statistical data on graduation rates, average GPA, distribution of graduation predicates, and study periods for students of the Master of Notarial Law (MKn) UNISSULA."
+              : "Data statistik tingkat kelulusan, rata-rata IPK, sebaran predikat kelulusan, dan masa studi mahasiswa Program Studi Magister Kenotariatan (MKn) UNISSULA."
+          }
         />
       </Helmet>
 
@@ -104,20 +117,23 @@ export default function GraduationRate() {
             variants={itemVariants}
             className="text-xs font-bold tracking-[0.18em] uppercase text-primary block mb-2"
           >
-            INFORMASI
+            {t({ id: "INFORMASI", en: "INFORMATION" })}
           </motion.span>
           <motion.h1
             variants={itemVariants}
             className="text-3xl sm:text-4xl lg:text-[42px] font-heading font-bold text-heading tracking-tight leading-tight"
           >
-            Tingkat Kelulusan
+            {t({ id: "Tingkat Kelulusan", en: "Graduation Rate" })}
           </motion.h1>
           <motion.div variants={lineVariants} className="w-full h-[2px] bg-primary my-4" />
           <motion.p
             variants={itemVariants}
             className="text-sm sm:text-base text-body text-justify leading-relaxed"
           >
-            Data kelulusan dihimpun setiap akhir tahun akademik oleh Gugus Penjaminan Mutu dari basis data akademik program studi. Indikator yang dipantau meliputi ketepatan masa studi, indeks prestasi kumulatif, predikat kelulusan, dan lama penyelesaian tesis.
+            {t({
+              id: "Data kelulusan dihimpun setiap akhir tahun akademik oleh Gugus Penjaminan Mutu dari basis data akademik program studi. Indikator yang dipantau meliputi ketepatan masa studi, indeks prestasi kumulatif, predikat kelulusan, dan lama penyelesaian tesis.",
+              en: "Graduation data is compiled at the end of each academic year by the Quality Assurance Team from the study programme's academic database. Monitored indicators include study duration timeliness, cumulative GPA, graduation honors predicate, and thesis completion time.",
+            })}
           </motion.p>
 
           {/* Metric Stats Cards */}
@@ -136,7 +152,7 @@ export default function GraduationRate() {
                   {metric.value}
                 </span>
                 <span className="text-[11px] sm:text-xs font-semibold tracking-wider uppercase text-body mt-2 block">
-                  {metric.label}
+                  {t(metric.label)}
                 </span>
               </motion.div>
             ))}
@@ -155,7 +171,10 @@ export default function GraduationRate() {
         >
           <motion.div variants={itemVariants} className="pb-2 border-b-2 border-heading">
             <h2 className="text-2xl font-heading font-normal text-heading tracking-tight">
-              Rekapitulasi per Periode Akademik
+              {t({
+                id: "Rekapitulasi per Periode Akademik",
+                en: "Recapitulation by Academic Period",
+              })}
             </h2>
           </motion.div>
 
@@ -163,12 +182,24 @@ export default function GraduationRate() {
             <table className="w-full text-left border-collapse text-xs sm:text-sm min-w-[600px]">
               <thead>
                 <tr className="border-b-2 border-heading text-xs font-bold tracking-wider text-heading uppercase">
-                  <th className="py-3.5 px-5 font-bold">PERIODE AKADEMIK</th>
-                  <th className="py-3.5 px-5 font-bold">MAHASISWA</th>
-                  <th className="py-3.5 px-5 font-bold">LULUS</th>
-                  <th className="py-3.5 px-5 font-bold">TEPAT WAKTU</th>
-                  <th className="py-3.5 px-5 font-bold">RATA IPK</th>
-                  <th className="py-3.5 px-5 font-bold">MASA STUDI</th>
+                  <th className="py-3.5 px-5 font-bold">
+                    {t({ id: "PERIODE AKADEMIK", en: "ACADEMIC PERIOD" })}
+                  </th>
+                  <th className="py-3.5 px-5 font-bold">
+                    {t({ id: "MAHASISWA", en: "STUDENTS" })}
+                  </th>
+                  <th className="py-3.5 px-5 font-bold">
+                    {t({ id: "LULUS", en: "GRADUATED" })}
+                  </th>
+                  <th className="py-3.5 px-5 font-bold">
+                    {t({ id: "TEPAT WAKTU", en: "ON TIME" })}
+                  </th>
+                  <th className="py-3.5 px-5 font-bold">
+                    {t({ id: "RATA IPK", en: "AVG GPA" })}
+                  </th>
+                  <th className="py-3.5 px-5 font-bold">
+                    {t({ id: "MASA STUDI", en: "STUDY DURATION" })}
+                  </th>
                 </tr>
               </thead>
               <motion.tbody
@@ -197,7 +228,7 @@ export default function GraduationRate() {
                       {item.avgGpa}
                     </td>
                     <td className="py-4 px-5 text-body whitespace-nowrap">
-                      {item.studyDuration}
+                      {t(item.studyDuration)}
                     </td>
                   </motion.tr>
                 ))}
@@ -218,7 +249,10 @@ export default function GraduationRate() {
         >
           <motion.div variants={itemVariants} className="pb-2 border-b-2 border-heading">
             <h2 className="text-2xl font-heading font-normal text-heading tracking-tight">
-              Sebaran Predikat dan Masa Studi
+              {t({
+                id: "Sebaran Predikat dan Masa Studi",
+                en: "Distribution of Predicates and Study Duration",
+              })}
             </h2>
           </motion.div>
 
@@ -226,10 +260,18 @@ export default function GraduationRate() {
             <table className="w-full text-left border-collapse text-xs sm:text-sm min-w-[550px]">
               <thead>
                 <tr className="border-b-2 border-heading text-xs font-bold tracking-wider text-heading uppercase">
-                  <th className="py-3.5 px-5 font-bold w-1/4">KELOMPOK</th>
-                  <th className="py-3.5 px-5 font-bold">LULUSAN 2024</th>
-                  <th className="py-3.5 px-5 font-bold">PROPORSI</th>
-                  <th className="py-3.5 px-5 font-bold w-2/5">KETERANGAN</th>
+                  <th className="py-3.5 px-5 font-bold w-1/4">
+                    {t({ id: "KELOMPOK", en: "CATEGORY" })}
+                  </th>
+                  <th className="py-3.5 px-5 font-bold">
+                    {t({ id: "LULUSAN 2024", en: "2024 GRADUATES" })}
+                  </th>
+                  <th className="py-3.5 px-5 font-bold">
+                    {t({ id: "PROPORSI", en: "PROPORTION" })}
+                  </th>
+                  <th className="py-3.5 px-5 font-bold w-2/5">
+                    {t({ id: "KETERANGAN", en: "REMARKS" })}
+                  </th>
                 </tr>
               </thead>
               <motion.tbody
@@ -243,7 +285,7 @@ export default function GraduationRate() {
                     className="hover:bg-gray-50/50 transition-colors"
                   >
                     <td className="py-4 px-5 text-heading whitespace-nowrap">
-                      {item.group}
+                      {t(item.group)}
                     </td>
                     <td className="py-4 px-5 text-body">
                       {item.graduates2024}
@@ -252,7 +294,7 @@ export default function GraduationRate() {
                       {item.proportion}
                     </td>
                     <td className="py-4 px-5 text-body leading-relaxed">
-                      {item.notes}
+                      {t(item.notes)}
                     </td>
                   </motion.tr>
                 ))}
@@ -273,7 +315,10 @@ export default function GraduationRate() {
         >
           <motion.div variants={itemVariants} className="pb-2 border-b-2 border-heading">
             <h2 className="text-2xl font-heading font-normal text-heading tracking-tight">
-              Dokumen Pendukung
+              {t({
+                id: "Dokumen Pendukung",
+                en: "Supporting Documents",
+              })}
             </h2>
           </motion.div>
 
@@ -281,10 +326,18 @@ export default function GraduationRate() {
             <table className="w-full text-left border-collapse text-xs sm:text-sm min-w-[500px]">
               <thead>
                 <tr className="border-b-2 border-heading text-xs font-bold tracking-wider text-heading uppercase">
-                  <th className="py-3.5 px-5 font-bold w-1/2">JUDUL DOKUMEN</th>
-                  <th className="py-3.5 px-5 font-bold">VERSI</th>
-                  <th className="py-3.5 px-5 font-bold">TANGGAL</th>
-                  <th className="py-3.5 px-5 font-bold">UNDUH</th>
+                  <th className="py-3.5 px-5 font-bold w-1/2">
+                    {t({ id: "JUDUL DOKUMEN", en: "DOCUMENT TITLE" })}
+                  </th>
+                  <th className="py-3.5 px-5 font-bold">
+                    {t({ id: "VERSI", en: "VERSION" })}
+                  </th>
+                  <th className="py-3.5 px-5 font-bold">
+                    {t({ id: "TANGGAL", en: "DATE" })}
+                  </th>
+                  <th className="py-3.5 px-5 font-bold">
+                    {t({ id: "UNDUH", en: "DOWNLOAD" })}
+                  </th>
                 </tr>
               </thead>
               <motion.tbody
@@ -298,13 +351,13 @@ export default function GraduationRate() {
                     className="hover:bg-gray-50/50 transition-colors"
                   >
                     <td className="py-4 px-5 text-heading">
-                      {doc.title}
+                      {t(doc.title)}
                     </td>
                     <td className="py-4 px-5 text-body">
                       {doc.version}
                     </td>
                     <td className="py-4 px-5 text-body whitespace-nowrap">
-                      {doc.date}
+                      {t(doc.date)}
                     </td>
                     <td className="py-4 px-5">
                       <motion.a

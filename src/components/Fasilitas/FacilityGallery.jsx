@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import ZoomableImg from "../ui/ZoomableImg";
+import { useT } from "../../i18n/languageContext";
 
 const subPhotoContainerVariants = {
   hidden: { opacity: 0 },
@@ -35,6 +36,7 @@ const subPhotoVariants = {
  * tidak menampilkan bingkai kosong.
  */
 export default function FacilityGallery({ galeri = [] }) {
+  const t = useT();
   if (galeri.length === 0) return null;
 
   const [utama, ...lainnya] = galeri;
@@ -43,8 +45,8 @@ export default function FacilityGallery({ galeri = [] }) {
   // panah di lightbox berpindah dari foto utama ke foto-foto pendukungnya.
   const grup = galeri.map((foto) => ({
     src: foto.src,
-    alt: foto.keterangan,
-    caption: foto.keterangan,
+    alt: t(foto.keterangan),
+    caption: t(foto.keterangan),
   }));
 
   return (
@@ -59,14 +61,14 @@ export default function FacilityGallery({ galeri = [] }) {
       >
         <ZoomableImg
           src={utama.src}
-          alt={utama.keterangan}
+          alt={t(utama.keterangan)}
           group={grup}
           index={0}
           className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
         <figcaption className="absolute bottom-4 left-5 right-5 text-white text-xs sm:text-sm font-medium drop-shadow-md pointer-events-none">
-          {utama.keterangan}
+          {t(utama.keterangan)}
         </figcaption>
       </motion.figure>
 
@@ -79,27 +81,30 @@ export default function FacilityGallery({ galeri = [] }) {
           viewport={{ once: true, amount: 0.2 }}
           className="grid grid-cols-2 lg:grid-cols-4 gap-4"
         >
-          {lainnya.map((foto, idx) => (
-            <motion.figure
-              key={foto.keterangan || idx}
-              variants={subPhotoVariants}
-              whileHover={{ y: -4, transition: { duration: 0.2 } }}
-              className="border border-gray-200 bg-white rounded-xs overflow-hidden shadow-2xs hover:shadow-sm hover:border-primary/40 transition-all"
-            >
-              <div className="aspect-[4/3] bg-neutral-100 overflow-hidden">
-                <ZoomableImg
-                  src={foto.src}
-                  alt={foto.keterangan}
-                  group={grup}
-                  index={idx + 1}
-                  className="w-full h-full object-cover object-center transition-transform duration-500 hover:scale-105"
-                />
-              </div>
-              <figcaption className="p-3 text-xs text-gray-500 leading-relaxed border-t border-gray-100">
-                {foto.keterangan}
-              </figcaption>
-            </motion.figure>
-          ))}
+          {lainnya.map((foto, idx) => {
+            const captionText = t(foto.keterangan);
+            return (
+              <motion.figure
+                key={typeof foto.keterangan === "string" ? foto.keterangan : foto.src || idx}
+                variants={subPhotoVariants}
+                whileHover={{ y: -4, transition: { duration: 0.2 } }}
+                className="border border-gray-200 bg-white rounded-xs overflow-hidden shadow-2xs hover:shadow-sm hover:border-primary/40 transition-all"
+              >
+                <div className="aspect-[4/3] bg-neutral-100 overflow-hidden">
+                  <ZoomableImg
+                    src={foto.src}
+                    alt={captionText}
+                    group={grup}
+                    index={idx + 1}
+                    className="w-full h-full object-cover object-center transition-transform duration-500 hover:scale-105"
+                  />
+                </div>
+                <figcaption className="p-3 text-xs text-gray-500 leading-relaxed border-t border-gray-100">
+                  {captionText}
+                </figcaption>
+              </motion.figure>
+            );
+          })}
         </motion.div>
       )}
     </section>

@@ -26,66 +26,111 @@ import imgSarpras2 from "../../assets/images/struktur-organisasi/nur-alamsyah.jp
 
 export const tenagaKependidikan = [
   {
-    jabatan: "Koordinator Tata Usaha",
+    jabatan: {
+      id: "Koordinator Tata Usaha",
+      en: "Head of Administration / Coordinator",
+    },
     name: "Ikrom, S.H., M.H.",
     photo: imgIkrom,
-    tugas:
-      "Koordinasi operasional ketatausahaan, layanan administratif terpadu, dan pengelolaan staf.",
+    tugas: {
+      id: "Koordinasi operasional ketatausahaan, layanan administratif terpadu, dan pengelolaan staf.",
+      en: "Coordination of operational administration, integrated administrative services, and staff management.",
+    },
   },
   {
-    jabatan: "Direktur Laboratorium Akta & Manajemen Kantor Notaris",
+    jabatan: {
+      id: "Direktur Laboratorium Akta & Manajemen Kantor Notaris",
+      en: "Director of Deed Laboratory & Notary Office Management",
+    },
     name: "Doni Catur Saefudin, S.H., M.Kn.",
     photo: imgDirLab,
-    tugas:
-      "Pengelolaan laboratorium akta, pembinaan praktik pembuatan akta, dan simulasi manajemen kantor notaris.",
+    tugas: {
+      id: "Pengelolaan laboratorium akta, pembinaan praktik pembuatan akta, dan simulasi manajemen kantor notaris.",
+      en: "Management of deed laboratory, supervision of deed drafting practice, and notary office management simulation.",
+    },
   },
   {
-    jabatan: "Kepala Perpustakaan",
+    jabatan: {
+      id: "Kepala Perpustakaan",
+      en: "Head of Library",
+    },
     name: "R. Hengky Aditya Wibisono S.E.",
     photo: imgDirPerpus,
-    tugas:
-      "Pengelolaan koleksi pustaka hukum kenotariatan, layanan referensi, dan dukungan literatur penelitian tesis.",
+    tugas: {
+      id: "Pengelolaan koleksi pustaka hukum kenotariatan, layanan referensi, dan dukungan literatur penelitian tesis.",
+      en: "Management of notarial legal library collections, reference services, and literature support for thesis research.",
+    },
   },
   {
-    jabatan: "Bidang Akademik",
+    jabatan: {
+      id: "Bidang Akademik",
+      en: "Academic Affairs Staff",
+    },
     name: "Suma’in, S.Pd.",
     photo: imgAkademik,
-    tugas:
-      "Layanan administrasi akademik mahasiswa, registrasi, penjadwalan perkuliahan, dan dokumentasi ujian.",
+    tugas: {
+      id: "Layanan administrasi akademik mahasiswa, registrasi, penjadwalan perkuliahan, dan dokumentasi ujian.",
+      en: "Student academic administrative services, registration, lecture scheduling, and examination documentation.",
+    },
   },
   {
-    jabatan: "Bidang Keuangan",
+    jabatan: {
+      id: "Bidang Keuangan",
+      en: "Financial Affairs Staff",
+    },
     name: "Laili Rohmah, S.E.",
     photo: imgKeuangan,
-    tugas:
-      "Administrasi keuangan mahasiswa, pembiayaan kegiatan akademik, dan pengelolaan anggaran program studi.",
+    tugas: {
+      id: "Administrasi keuangan mahasiswa, pembiayaan kegiatan akademik, dan pengelolaan anggaran program studi.",
+      en: "Student financial administration, academic activity funding, and study programme budget management.",
+    },
   },
   {
-    jabatan: "Bidang Promosi & Humas",
+    jabatan: {
+      id: "Bidang Promosi & Humas",
+      en: "Promotion & Public Relations Staff",
+    },
     name: "Muhammad Mutohar, S.H., M.Kn.",
     photo: imgPromosi1,
-    tugas:
-      "Sosialisasi program studi, promosi penerimaan mahasiswa baru, serta pengelolaan publikasi dan media.",
+    tugas: {
+      id: "Sosialisasi program studi, promosi penerimaan mahasiswa baru, serta pengelolaan publikasi dan media.",
+      en: "Study programme promotion, new student admissions outreach, and management of publications and media.",
+    },
   },
   {
-    jabatan: "Bidang Promosi & Humas",
+    jabatan: {
+      id: "Bidang Promosi & Humas",
+      en: "Promotion & Public Relations Staff",
+    },
     name: "Aidha Nabila Mustikaweni, S.Kom.",
     photo: imgPromosi2,
-    tugas:
-      "Sosialisasi program studi, promosi penerimaan mahasiswa baru, serta pengelolaan publikasi dan media.",
+    tugas: {
+      id: "Sosialisasi program studi, promosi penerimaan mahasiswa baru, serta pengelolaan publikasi dan media.",
+      en: "Study programme promotion, new student admissions outreach, and management of publications and media.",
+    },
   },
   {
-    jabatan: "Bidang Sarana Prasarana",
+    jabatan: {
+      id: "Bidang Sarana Prasarana",
+      en: "Facilities & Infrastructure Staff",
+    },
     name: "Ahmad Kuswardoyo, S.E.",
     photo: imgSarpras1,
-    tugas:
-      "Pengelolaan ruang kuliah, laboratorium kenotariatan, dan fasilitas penunjang program studi.",
+    tugas: {
+      id: "Pengelolaan ruang kuliah, laboratorium kenotariatan, dan fasilitas penunjang program studi.",
+      en: "Management of lecture halls, notarial laboratories, and study programme supporting facilities.",
+    },
   },
   {
-    jabatan: "Bidang Sarana Prasarana",
+    jabatan: {
+      id: "Bidang Sarana Prasarana",
+      en: "Facilities & Infrastructure Staff",
+    },
     name: "Nur Alamsyah",
     photo: imgSarpras2,
-    tugas:
-      "Pengelolaan ruang kuliah, laboratorium kenotariatan, dan fasilitas penunjang program studi.",
+    tugas: {
+      id: "Pengelolaan ruang kuliah, laboratorium kenotariatan, dan fasilitas penunjang program studi.",
+      en: "Management of lecture halls, notarial laboratories, and study programme supporting facilities.",
+    },
   },
 ];

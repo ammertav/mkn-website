@@ -2,6 +2,8 @@ import { useState, useRef, useLayoutEffect } from "react";
 import { motion } from "framer-motion";
 import { FiChevronRight, FiChevronLeft } from "react-icons/fi";
 import Img from "../ui/Img";
+import { useT } from "../../i18n/languageContext";
+import { useUi } from "../../i18n/useUi";
 
 import Fatiroh from "../../assets/images/testi/fatiroh.png";
 import Ismail from "../../assets/images/testi/ismail-fahmi.png";
@@ -63,24 +65,15 @@ const cardVariants = {
 
 /**
  * Jumlah kartu yang tampil sekaligus.
- *
- * Daftar di bawah boleh diisi sebanyak apa pun; tombol navigasi muncul sendiri
- * begitu jumlahnya lebih dari satu halaman. Sisa kartu pada halaman terakhir
- * tetap rata kiri karena grid-nya berkolom tetap.
  */
 const PER_HALAMAN = 5;
 
 /**
  * Isi kartu testimoni: nama, jabatan, tahun alumni, dan pesan.
- *
- * Saat tertutup, nama dan jabatan dipotong satu baris sedangkan pesannya
- * delapan baris, supaya tinggi kartu antar-alumni seragam. Satu tombol
- * "Baca selengkapnya" membuka ketiganya sekaligus, dan tombol itu hanya
- * muncul bila memang ada yang terpotong — jadi kartu dengan isi pendek tetap
- * bersih. Pengukuran dilakukan selagi kartu tertutup, karena setelah dibuka
- * tinggi isi dan tinggi kotaknya otomatis sama.
  */
 function IsiKartu({ item }) {
+  const t = useT();
+  const ui = useUi();
   const [terbuka, setTerbuka] = useState(false);
   const [terpotong, setTerpotong] = useState(false);
   const namaRef = useRef(null);
@@ -124,13 +117,13 @@ function IsiKartu({ item }) {
           terbuka ? "" : "line-clamp-1"
         }`}
       >
-        {item.occupation}
+        {t(item.occupation)}
       </motion.p>
 
       {/* Tahun alumni */}
       <motion.div variants={itemVariants}>
         <span className="mt-2 inline-block text-[11px] font-semibold tracking-wider text-primary uppercase">
-          {item.role}
+          {t(item.role)}
         </span>
       </motion.div>
 
@@ -142,7 +135,7 @@ function IsiKartu({ item }) {
             terbuka ? "" : "line-clamp-8"
           }`}
         >
-          &ldquo;{item.description}&rdquo;
+          &ldquo;{t(item.description)}&rdquo;
         </p>
 
         {terpotong && (
@@ -151,7 +144,7 @@ function IsiKartu({ item }) {
             onClick={() => setTerbuka((kini) => !kini)}
             className="mt-1.5 text-xs font-semibold text-primary hover:text-[#680000] transition-colors cursor-pointer"
           >
-            {terbuka ? "Tutup" : "Baca selengkapnya"}
+            {terbuka ? ui("showLess") : ui("readMoreSimple")}
           </button>
         )}
       </motion.div>
@@ -163,69 +156,126 @@ const testimonialData = [
   {
     id: 1,
     name: "Fatiroh, S.H., M.Hum., M.Kn.",
-    description:
-      "M.Kn. Unissula bukan sekadar mengajarkan ketelitian merangkai akta, kepatutan hukum, melainkan menanamkan pertanggungjawaban moral dan keteguhan Nurani profesi. Di sini, saya ditempa bahwa memahami kepastian hukum hanya bermakna jika dilandasi integritas dan kehati-hatian demi melindungi hak para pihak secara adil. Bekal berharga yang menjaga integritas dan keluhuran martabat profesi saya hari ini sebagai seorang Notaris dan PPAT",
+    description: {
+      id: "M.Kn. Unissula bukan sekadar mengajarkan ketelitian merangkai akta, kepatutan hukum, melainkan menanamkan pertanggungjawaban moral dan keteguhan Nurani profesi. Di sini, saya ditempa bahwa memahami kepastian hukum hanya bermakna jika dilandasi integritas dan kehati-hatian demi melindungi hak para pihak secara adil. Bekal berharga yang menjaga integritas dan keluhuran martabat profesi saya hari ini sebagai seorang Notaris dan PPAT.",
+      en: "M.Kn. UNISSULA taught me far more than the precision of drafting deeds and statutory compliance; it instilled moral accountability and steadfast professional conscience. Here, I learned that legal certainty is truly meaningful only when anchored in integrity and prudence to equitably protect the rights of all parties. This invaluable foundation preserves my professional dignity and ethics today as a Notary and PPAT.",
+    },
     image: Fatiroh,
-    occupation: "Notaris-PPAT Kabupaten Pekalongan",
-    role: "Alumni Tahun 2015",
+    occupation: {
+      id: "Notaris-PPAT Kabupaten Pekalongan",
+      en: "Notary & PPAT in Pekalongan Regency",
+    },
+    role: {
+      id: "Alumni Tahun 2015",
+      en: "Class of 2015 Alumnus",
+    },
   },
   {
     id: 2,
     name: "Ismail Fahmi, S.H., M.H., M.Kn.",
-    description:
-      "Menempuh studi di Magister Kenotariatan Unissula memperluas perspektif saya sebagai Jaksa, khususnya dalam bidang hukum keperdataan. Pemahaman yang diperoleh sangat mendukung peran Jaksa Pengacara Negara dalam memberikan legal opinion, mitigasi risiko perdata, hingga asset recovery untuk melindungi kepentingan dan keuangan negara. Bagi para penegak hukum yang ingin memperdalam keilmuan di bidang keperdataan, Magister Kenotariatan Unissula merupakan pilihan yang tepat untuk meningkatkan kompetensi dan profesionalisme.",
+    description: {
+      id: "Menempuh studi di Magister Kenotariatan Unissula memperluas perspektif saya sebagai Jaksa, khususnya dalam bidang hukum keperdataan. Pemahaman yang diperoleh sangat mendukung peran Jaksa Pengacara Negara dalam memberikan legal opinion, mitigasi risiko perdata, hingga asset recovery untuk melindungi kepentingan dan keuangan negara. Bagi para penegak hukum yang ingin memperdalam keilmuan di bidang keperdataan, Magister Kenotariatan Unissula merupakan pilihan yang tepat untuk meningkatkan kompetensi dan profesionalisme.",
+      en: "Studying at UNISSULA Master of Notarial Law broadened my perspective as a Public Prosecutor, particularly in civil law. The knowledge gained greatly supports the role of State Attorneys in providing legal opinions, civil risk mitigation, and asset recovery to protect state interests and finances. For law enforcement officials seeking to deepen their civil law expertise, UNISSULA Master of Notarial Law is an excellent choice for enhancing competence and professionalism.",
+    },
     image: Ismail,
-    occupation:"Aspisdus Kejati Kepulauan Riau",
-    role: "Alumni Tahun 2026",
+    occupation: {
+      id: "Aspidsus Kejati Kepulauan Riau",
+      en: "Special Crimes Assistant, Riau Islands High Prosecution Office",
+    },
+    role: {
+      id: "Alumni Tahun 2026",
+      en: "Class of 2026 Alumnus",
+    },
   },
   {
     id: 3,
     name: "Nurizka Firda, S.H., M.Kn., CFP, CWM",
-    description:
-      "Kuliah di Magister Kenotariatan itu emang butuh perjuangan ekstra, bukan cuma soal paham teori, tapi juga ngelatih ketelitian dan menjaga integritas. Kelak ketika setiap akta yang kalian buat punya dampak besar buat hidup orang lain. Tetap pegang teguh kejujuran dan etika, serta jangan pernah lelah buat terus update ilmu karena hukum bakal selalu berkembang.",
+    description: {
+      id: "Kuliah di Magister Kenotariatan itu emang butuh perjuangan ekstra, bukan cuma soal paham teori, tapi juga ngelatih ketelitian dan menjaga integritas. Kelak ketika setiap akta yang kalian buat punya dampak besar buat hidup orang lain. Tetap pegang teguh kejujuran dan etika, serta jangan pernah lelah buat terus update ilmu karena hukum bakal selalu berkembang.",
+      en: "Pursuing the Master of Notarial Law requires extra dedication—not just understanding theory, but training meticulousness and maintaining uncompromising integrity, knowing that every deed created will have a profound impact on people's lives. Uphold honesty and professional ethics, and never cease expanding your knowledge as law continually evolves.",
+    },
     image: Nurizka,
-    occupation: "Director of Agency di PT Chubb Life Insurance",
-    role: "Alumni Tahun 2024",
+    occupation: {
+      id: "Director of Agency di PT Chubb Life Insurance",
+      en: "Director of Agency at PT Chubb Life Insurance",
+    },
+    role: {
+      id: "Alumni Tahun 2024",
+      en: "Class of 2024 Alumnus",
+    },
   },
   {
     id: 4,
     name: "Wahyu Noto Wibowo, S.H., M.Kn.",
-    description:
-      "Bagi para bankir, mitigasi risiko pembiayaan bertumpu pada kesempurnaan perikatan dan jaminan. Studi pada Magister Kenotariatan UNISSULA mempertajam naluri saya membedah celah klausula perjanjian kredit serta validitas agunan secara presisi. Keilmuan ini mentransformasi analisis legal perbankan menjadi instrumen proteksi portofolio aset yang jauh lebih kokoh dan prudent.",
+    description: {
+      id: "Bagi para bankir, mitigasi risiko pembiayaan bertumpu pada kesempurnaan perikatan dan jaminan. Studi pada Magister Kenotariatan UNISSULA mempertajam naluri saya membedah celah klausula perjanjian kredit serta validitas agunan secara presisi. Keilmuan ini mentransformasi analisis legal perbankan menjadi instrumen proteksi portofolio aset yang jauh lebih kokoh dan prudent.",
+      en: "For bankers, financing risk mitigation relies on the legal perfection of covenants and collateral. Studies at UNISSULA Master of Notarial Law sharpened my ability to scrutinize loan contract clauses and collateral validity with utmost precision. This legal expertise transforms banking legal analysis into a much more robust and prudent asset protection mechanism.",
+    },
     image: Wahyu,
-    occupation: "Small Bisnis Manager BRI Region 10 Semarang",
-    role: "Alumni Tahun 2026",
+    occupation: {
+      id: "Small Business Manager BRI Region 10 Semarang",
+      en: "Small Business Manager, BRI Region 10 Semarang",
+    },
+    role: {
+      id: "Alumni Tahun 2026",
+      en: "Class of 2026 Alumnus",
+    },
   },
   {
     id: 5,
     name: "IPDA SIGET P., S.H., M.H., M.Kn., M.A.P.",
-    description:
-      "Kuliah di Magister Kenotariatan mempertajam analisis saya sebagai anggota Polri,  guna memahami secara mendalam tentang aspek perdata, korporasi, dan keabsahan dokumen. Pengetahuan ini sangat krusial dalam membongkar modus kejahatan bisnis serta tindak pidana korupsi hingga asset recovery guna melindungi kepentingan Masyarakat dan keuangan negara. Bekal keilmuan ini membuat penegakan hukum jauh lebih presisi, objektif, dan profesional. Pilihan kuliah di Magister Kenotarian UNISSULA adalah pilihan terbaik bagi rekan-rekan dari Kepolisian.",
+    description: {
+      id: "Kuliah di Magister Kenotariatan mempertajam analisis saya sebagai anggota Polri, guna memahami secara mendalam tentang aspek perdata, korporasi, dan keabsahan dokumen. Pengetahuan ini sangat krusial dalam membongkar modus kejahatan bisnis serta tindak pidana korupsi hingga asset recovery guna melindungi kepentingan Masyarakat dan keuangan negara. Bekal keilmuan ini membuat penegakan hukum jauh lebih presisi, objektif, dan profesional. Pilihan kuliah di Magister Kenotarian UNISSULA adalah pilihan terbaik bagi rekan-rekan dari Kepolisian.",
+      en: "Studying at Master of Notarial Law sharpened my analytical capabilities as a police officer in understanding civil law aspects, corporate law, and document authenticity. This expertise is pivotal in uncovering business crimes, corruption cases, and conducting asset recovery to safeguard public interests and state finances. UNISSULA Master of Notarial Law is an ideal choice for police officers seeking higher professional precision.",
+    },
     image: Siget,
-    occupation: "Kanit Polres Temanggung",
-    role: "Alumni Tahun 2024",
+    occupation: {
+      id: "Kanit Polres Temanggung",
+      en: "Unit Head, Temanggung Police Resort",
+    },
+    role: {
+      id: "Alumni Tahun 2024",
+      en: "Class of 2024 Alumnus",
+    },
   },
   {
     id: 6,
     name: "Dr. Hetiyasari, S.H., M.Kn.",
-    description:
-      "Magister Kenotariatan UNISSULA telah membentuk saya secara ilmu dan karakter. Dari mahasiswa perantau hingga kini mengabdi sebagai dosen, semua berawal di sini.   Semoga prodi terus melahirkan lulusan yang berilmu, berintegritas, dan bermanfaat bagi bangsa. ",
+    description: {
+      id: "Magister Kenotariatan UNISSULA telah membentuk saya secara ilmu dan karakter. Dari mahasiswa perantau hingga kini mengabdi sebagai dosen, semua berawal di sini. Semoga prodi terus melahirkan lulusan yang berilmu, berintegritas, dan bermanfaat bagi bangsa.",
+      en: "UNISSULA Master of Notarial Law shaped both my intellect and character. From an out-of-town student to now serving as a university lecturer, it all started here. May this study programme continue to nurture knowledgeable, principled, and impactful graduates for our nation.",
+    },
     image: hetiyasari,
-    occupation: "Dosen UNWAHAS",
-    role: "Alumni Tahun 2024",
+    occupation: {
+      id: "Dosen UNWAHAS",
+      en: "Lecturer at UNWAHAS",
+    },
+    role: {
+      id: "Alumni Tahun 2024",
+      en: "Class of 2024 Alumnus",
+    },
   },
   {
     id: 7,
     name: "Hj. Laeli Nurchamidah, S.H., M.Kn.",
-    description:
-      "Salam untuk Generasi Khaira Ummah Para Alumni M.Kn UNISSULA di seluruh Indonesia yang saya banggakan, Kejar dan Tekad kan Mimpi jika Kalian sebagian besar ingin Menjadi Notaris - PPAT ikuti Step by Step aturan dan alurnya, Kalian Harus Bangga dengan Almamater mu, Kita bangun Alumni M.Kn UNISSULA Bermartabat, Kuat dan Berdayasaing Unggul.",
+    description: {
+      id: "Salam untuk Generasi Khaira Ummah Para Alumni M.Kn UNISSULA di seluruh Indonesia yang saya banggakan, Kejar dan Tekad kan Mimpi jika Kalian sebagian besar ingin Menjadi Notaris - PPAT ikuti Step by Step aturan dan alurnya, Kalian Harus Bangga dengan Almamater mu, Kita bangun Alumni M.Kn UNISSULA Bermartabat, Kuat dan Berdayasaing Unggul.",
+      en: "Greetings to the Khaira Ummah Generation and proud UNISSULA M.Kn. alumni across Indonesia. Pursue your dreams with determination to become honorable Notaries and PPATs by faithfully following the professional path and regulations. Be proud of your alma mater as we build a dignified, strong, and highly competitive alumni community.",
+    },
     image: Laeli,
-    occupation: "Sekertaris Pengda INI Kota Tegal",
-    role: "Alumni Tahun 2015",
+    occupation: {
+      id: "Sekretaris Pengda INI Kota Tegal",
+      en: "Secretary of Regional Board, INI Tegal City",
+    },
+    role: {
+      id: "Alumni Tahun 2015",
+      en: "Class of 2015 Alumnus",
+    },
   },
 ];
 
 export default function Testimoni() {
+  const ui = useUi();
   const [halaman, setHalaman] = useState(0);
 
   const jumlahHalaman = Math.ceil(testimonialData.length / PER_HALAMAN);
@@ -250,7 +300,7 @@ export default function Testimoni() {
         >
           <motion.div variants={itemVariants}>
             <h2 className="text-3xl sm:text-4xl font-heading font-normal text-heading tracking-normal">
-              Kata Mereka
+              {ui("alumniTestimonials")}
             </h2>
           </motion.div>
         </motion.div>

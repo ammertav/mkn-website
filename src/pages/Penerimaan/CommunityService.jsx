@@ -2,9 +2,9 @@ import { Helmet } from "react-helmet-async";
 import { motion } from "framer-motion";
 import {
   featuredActivities,
-  // reportsAndOutputs, // di-hide sementara
   supportingDocuments,
 } from "../../data/informasi/communityServiceData";
+import { useT, useLanguage } from "../../i18n/languageContext";
 
 const viewportSettings = {
   once: true,
@@ -67,13 +67,25 @@ const lineVariants = {
 };
 
 export default function CommunityService() {
+  const t = useT();
+  const { lang } = useLanguage();
+
   return (
     <>
       <Helmet>
-        <title>Pengabdian Dosen | MKn UNISSULA</title>
+        <html lang={lang} />
+        <title>
+          {lang === "en"
+            ? "Lecturer Community Service | MKn UNISSULA"
+            : "Pengabdian Dosen | MKn UNISSULA"}
+        </title>
         <meta
           name="description"
-          content="Program kegiatan pengabdian kepada masyarakat (PkM), penyuluhan hukum pertanahan PTSL, pendampingan UMKM, laporan luaran, dan dokumen pendukung dosen MKn UNISSULA."
+          content={
+            lang === "en"
+              ? "Community service programs (PkM), PTSL land legal counseling, MSME assistance, output reports, and supporting documents for MKn UNISSULA lecturers."
+              : "Program kegiatan pengabdian kepada masyarakat (PkM), penyuluhan hukum pertanahan PTSL, pendampingan UMKM, laporan luaran, dan dokumen pendukung dosen MKn UNISSULA."
+          }
         />
       </Helmet>
 
@@ -91,20 +103,23 @@ export default function CommunityService() {
             variants={itemVariants}
             className="text-xs font-bold tracking-[0.18em] uppercase text-primary block mb-2"
           >
-            INFORMASI
+            {t({ id: "INFORMASI", en: "INFORMATION" })}
           </motion.span>
           <motion.h1
             variants={itemVariants}
             className="text-3xl sm:text-4xl lg:text-[42px] font-heading font-bold text-heading tracking-tight leading-tight"
           >
-            Pengabdian Dosen
+            {t({ id: "Pengabdian Dosen", en: "Community Service" })}
           </motion.h1>
           <motion.div variants={lineVariants} className="w-full h-[2px] bg-primary my-4" />
           <motion.p
             variants={itemVariants}
             className="text-sm sm:text-base text-body text-justify leading-relaxed"
           >
-            Pengabdian kepada masyarakat diselenggarakan sebagai penerjemahan keilmuan kenotariatan ke dalam layanan hukum yang dapat diakses masyarakat: penyuluhan pertanahan desa, pendampingan legalitas usaha mikro, dan konsultasi pembuatan perjanjian.
+            {t({
+              id: "Pengabdian kepada masyarakat diselenggarakan sebagai penerjemahan keilmuan kenotariatan ke dalam layanan hukum yang dapat diakses masyarakat: penyuluhan pertanahan desa, pendampingan legalitas usaha mikro, dan konsultasi pembuatan perjanjian.",
+              en: "Community service is conducted as the translation of notarial knowledge into accessible legal services for the community: village land counseling, micro-business legality mentoring, and agreement drafting consultation.",
+            })}
           </motion.p>
         </motion.div>
 
@@ -120,7 +135,7 @@ export default function CommunityService() {
         >
           <motion.div variants={itemVariants} className="pb-2 border-b-2 border-heading">
             <h2 className="text-2xl font-heading font-normal text-heading tracking-tight">
-              Kegiatan Terpilih
+              {t({ id: "Kegiatan Terpilih", en: "Selected Activities" })}
             </h2>
           </motion.div>
 
@@ -128,9 +143,15 @@ export default function CommunityService() {
             <table className="w-full text-left border-collapse text-xs sm:text-sm min-w-[550px]">
               <thead>
                 <tr className="border-b-2 border-heading text-xs font-bold tracking-wider text-heading uppercase">
-                  <th className="py-3.5 px-5 font-bold">KEGIATAN</th>
-                  <th className="py-3.5 px-5 font-bold w-1/4 sm:w-1/3">LOKASI</th>
-                  <th className="py-3.5 px-5 font-bold w-1/4 whitespace-nowrap">KETUA PELAKSANA</th>
+                  <th className="py-3.5 px-5 font-bold">
+                    {t({ id: "KEGIATAN", en: "ACTIVITY" })}
+                  </th>
+                  <th className="py-3.5 px-5 font-bold w-1/4 sm:w-1/3">
+                    {t({ id: "LOKASI", en: "LOCATION" })}
+                  </th>
+                  <th className="py-3.5 px-5 font-bold w-1/4 whitespace-nowrap">
+                    {t({ id: "KETUA PELAKSANA", en: "LEAD / SPEAKER" })}
+                  </th>
                 </tr>
               </thead>
               <motion.tbody
@@ -144,10 +165,10 @@ export default function CommunityService() {
                     className="hover:bg-gray-50/50 transition-colors"
                   >
                     <td className="py-4 px-5 text-heading leading-relaxed font-medium">
-                      {item.activity}
+                      {t(item.activity)}
                     </td>
                     <td className="py-4 px-5 text-body">
-                      {item.location}
+                      {t(item.location)}
                     </td>
                     <td className="py-4 px-5 text-body whitespace-nowrap">
                       {item.lead}
@@ -171,7 +192,7 @@ export default function CommunityService() {
         >
           <motion.div variants={itemVariants} className="pb-2 border-b-2 border-heading">
             <h2 className="text-2xl font-heading font-normal text-heading tracking-tight">
-              Dokumen Pendukung
+              {t({ id: "Dokumen Pendukung", en: "Supporting Documents" })}
             </h2>
           </motion.div>
 
@@ -179,9 +200,15 @@ export default function CommunityService() {
             <table className="w-full text-left border-collapse text-xs sm:text-sm min-w-[500px]">
               <thead>
                 <tr className="border-b-2 border-heading text-xs font-bold tracking-wider text-heading uppercase">
-                  <th className="py-3.5 px-5 font-bold">JUDUL DOKUMEN</th>
-                  <th className="py-3.5 px-5 font-bold w-36 whitespace-nowrap">TANGGAL</th>
-                  <th className="py-3.5 px-5 font-bold w-28 whitespace-nowrap">UNDUH</th>
+                  <th className="py-3.5 px-5 font-bold">
+                    {t({ id: "JUDUL DOKUMEN", en: "DOCUMENT TITLE" })}
+                  </th>
+                  <th className="py-3.5 px-5 font-bold w-36 whitespace-nowrap">
+                    {t({ id: "TANGGAL", en: "DATE" })}
+                  </th>
+                  <th className="py-3.5 px-5 font-bold w-28 whitespace-nowrap">
+                    {t({ id: "UNDUH", en: "DOWNLOAD" })}
+                  </th>
                 </tr>
               </thead>
               <motion.tbody
@@ -195,10 +222,10 @@ export default function CommunityService() {
                     className="hover:bg-gray-50/50 transition-colors"
                   >
                     <td className="py-4 px-5 text-heading font-medium">
-                      {doc.title}
+                      {t(doc.title)}
                     </td>
                     <td className="py-4 px-5 text-body whitespace-nowrap">
-                      {doc.date}
+                      {t(doc.date)}
                     </td>
                     <td className="py-4 px-5 whitespace-nowrap">
                       <motion.a

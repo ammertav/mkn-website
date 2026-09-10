@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import { FiArrowRight } from "react-icons/fi";
 import Img from "../ui/Img";
 import { eventData } from "../../data/eventData";
+import { useLanguage, useT } from "../../i18n/languageContext";
+import { useUi } from "../../i18n/useUi";
 
 const viewportSettings = {
   once: true,
@@ -64,6 +66,10 @@ const cardVariants = {
 const eventsData = eventData.slice(0, 3);
 
 export default function Events() {
+  const { lang } = useLanguage();
+  const t = useT();
+  const ui = useUi();
+
   const formatDateBadge = (dateString) => {
     const dateObj = new Date(dateString);
 
@@ -72,7 +78,7 @@ export default function Events() {
       .toString()
       .padStart(2, "0");
 
-    const month = dateObj.toLocaleDateString("id-ID", {
+    const month = dateObj.toLocaleDateString(lang === "en" ? "en-US" : "id-ID", {
       month: "short",
     });
 
@@ -94,7 +100,7 @@ export default function Events() {
           className="text-center mb-14 sm:mb-20"
         >
           <h2 className="text-3xl sm:text-4xl font-heading font-normal text-heading tracking-normal">
-            Agenda & Kegiatan Mendatang
+            {ui("upcomingEvents")}
           </h2>
         </motion.div>
 
@@ -222,7 +228,7 @@ export default function Events() {
                       line-clamp-2
                     "
                   >
-                    {item.title}
+                    {t(item.title)}
                   </motion.h3>
 
 
@@ -237,7 +243,7 @@ export default function Events() {
                       leading-relaxed
                     "
                   >
-                    {item.description}
+                    {t(item.description)}
                   </motion.p>
 
                 </motion.div>
@@ -273,7 +279,7 @@ export default function Events() {
               group/all
             "
           >
-            <span>LIHAT SEMUA AGENDA</span>
+            <span>{ui("viewAllEvents")}</span>
 
             <FiArrowRight
               className="

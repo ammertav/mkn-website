@@ -7,10 +7,10 @@ import {
   DaftarNomor,
 } from "../../components/QualityAssurance/MutuBagian";
 import {
-  standarMeta,
   standarStructure,
   standarGroups,
 } from "../../data/qualityAssurance/qaStandarData";
+import { useT, useLanguage } from "../../i18n/languageContext";
 
 const stagger = {
   hidden: {},
@@ -28,21 +28,35 @@ const sectionVar = {
 };
 
 export default function QaStandar() {
+  const t = useT();
+  const { lang } = useLanguage();
+
   return (
     <>
       <Helmet>
-        <title>Standar Mutu | MKn UNISSULA</title>
+        <title>
+          {lang === "en"
+            ? "Quality Standards | MKn UNISSULA"
+            : "Standar Mutu | MKn UNISSULA"}
+        </title>
         <meta
           name="description"
-          content="Dua puluh satu standar mutu Fakultas Hukum UNISSULA — standar pendidikan, penelitian, pengabdian kepada masyarakat, dan non-akademik beserta kodenya."
+          content={
+            lang === "en"
+              ? "Twenty-one quality standards of Faculty of Law UNISSULA — education, research, community service, and non-academic standards with official codes."
+              : "Dua puluh satu standar mutu Fakultas Hukum UNISSULA — standar pendidikan, penelitian, pengabdian kepada masyarakat, dan non-akademik beserta kodenya."
+          }
         />
       </Helmet>
 
       <div className="space-y-12 sm:space-y-14 font-body text-body">
         <KepalaMutu
-          eyebrow="DOKUMEN MUTU"
-          judul="Standar Mutu"
-          pengantar="Standar mutu adalah tolok ukur yang harus dipenuhi dalam penyelenggaraan pendidikan, penelitian, pengabdian kepada masyarakat, dan pengelolaan fakultas. Fakultas Hukum UNISSULA menetapkan 21 standar yang terbagi ke dalam empat kelompok."
+          eyebrow={{ id: "DOKUMEN MUTU", en: "QUALITY DOCUMENTS" }}
+          judul={{ id: "Standar Mutu", en: "Quality Standards" }}
+          pengantar={{
+            id: "Standar mutu adalah tolok ukur yang harus dipenuhi dalam penyelenggaraan pendidikan, penelitian, pengabdian kepada masyarakat, dan pengelolaan fakultas. Fakultas Hukum UNISSULA menetapkan 21 standar yang terbagi ke dalam empat kelompok.",
+            en: "Quality standards are benchmarks that must be fulfilled in education, research, community service, and faculty management. Faculty of Law UNISSULA establishes 21 standards divided into four categories.",
+          }}
         />
 
         {standarGroups.map((g) => (
@@ -54,7 +68,7 @@ export default function QaStandar() {
             viewport={{ once: true, amount: 0.08 }}
             variants={sectionVar}
           >
-            <JudulMutu judul={`${g.group} · ${g.code}`} keterangan={g.desc} />
+            <JudulMutu judul={`${t(g.group)} · ${g.code}`} keterangan={g.desc} />
 
             <motion.div
               className="border border-gray-200 bg-white rounded-xs overflow-x-auto"
@@ -67,16 +81,16 @@ export default function QaStandar() {
                 <thead>
                   <tr className="border-b border-gray-200 bg-gray-50/70">
                     <th className="py-3 px-4 sm:px-5 text-[11px] font-bold tracking-wider uppercase text-heading w-52">
-                      Kode
+                      {t({ id: "Kode", en: "Code" })}
                     </th>
                     <th className="py-3 px-4 sm:px-5 text-[11px] font-bold tracking-wider uppercase text-heading">
-                      Nama Standar
+                      {t({ id: "Nama Standar", en: "Standard Name" })}
                     </th>
                     <th className="py-3 px-4 sm:px-5 text-[11px] font-bold tracking-wider uppercase text-heading w-40">
-                      Rumpun
+                      {t({ id: "Rumpun", en: "Cluster" })}
                     </th>
                     <th className="py-3 px-4 sm:px-5 text-[11px] font-bold tracking-wider uppercase text-heading w-24 text-right">
-                      Berkas
+                      {t({ id: "Berkas", en: "File" })}
                     </th>
                   </tr>
                 </thead>
@@ -87,17 +101,17 @@ export default function QaStandar() {
                         {s.code}
                       </td>
                       <td className="py-3.5 px-4 sm:px-5 font-medium text-heading leading-relaxed">
-                        {s.name}
+                        {t(s.name)}
                       </td>
                       <td className="py-3.5 px-4 sm:px-5 text-body text-xs sm:text-sm leading-relaxed align-top">
-                        {s.cluster}
+                        {t(s.cluster)}
                       </td>
                       <td className="py-3.5 px-4 sm:px-5 align-top text-right">
                         <a
                           href={s.file}
                           target="_blank"
                           rel="noopener noreferrer"
-                          aria-label={`Unduh ${s.name}`}
+                          aria-label={`${lang === "en" ? "Download" : "Unduh"} ${t(s.name)}`}
                           className="inline-flex items-center gap-1.5 text-xs font-semibold text-primary hover:underline"
                         >
                           PDF
@@ -114,8 +128,14 @@ export default function QaStandar() {
 
         <section className="space-y-5">
           <JudulMutu
-            judul="Isi Setiap Dokumen Standar"
-            keterangan="Seluruh dokumen standar disusun dengan kerangka yang sama."
+            judul={{
+              id: "Isi Setiap Dokumen Standar",
+              en: "Contents of Each Standard Document",
+            }}
+            keterangan={{
+              id: "Seluruh dokumen standar disusun dengan kerangka yang sama.",
+              en: "All standard documents are constructed with an identical framework.",
+            }}
           />
           <DaftarNomor butir={standarStructure} />
         </section>

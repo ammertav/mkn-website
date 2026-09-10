@@ -4,6 +4,7 @@ import {
   featuredPublications,
   supportingDocuments,
 } from "../../data/informasi/lecturerResearchData";
+import { useT, useLanguage } from "../../i18n/languageContext";
 
 const viewportSettings = {
   once: true,
@@ -78,13 +79,25 @@ const lineVariants = {
 };
 
 export default function LecturerResearch() {
+  const t = useT();
+  const { lang } = useLanguage();
+
   return (
     <>
       <Helmet>
-        <title>Penelitian Dosen | MKn UNISSULA</title>
+        <html lang={lang} />
+        <title>
+          {lang === "en"
+            ? "Lecturer Research | MKn UNISSULA"
+            : "Penelitian Dosen | MKn UNISSULA"}
+        </title>
         <meta
           name="description"
-          content="Publikasi riset, artikel terindeks SINTA/Scopus, prosiding, buku, dan skema pendanaan penelitian dosen Program Studi Magister Kenotariatan (MKn) UNISSULA."
+          content={
+            lang === "en"
+              ? "Research publications, SINTA/Scopus indexed articles, proceedings, books, and research funding schemes for lecturers of Master of Notarial Law (MKn) UNISSULA."
+              : "Publikasi riset, artikel terindeks SINTA/Scopus, prosiding, buku, dan skema pendanaan penelitian dosen Program Studi Magister Kenotariatan (MKn) UNISSULA."
+          }
         />
       </Helmet>
 
@@ -102,20 +115,23 @@ export default function LecturerResearch() {
             variants={itemVariants}
             className="text-xs font-bold tracking-[0.18em] uppercase text-primary block mb-2"
           >
-            INFORMASI
+            {t({ id: "INFORMASI", en: "INFORMATION" })}
           </motion.span>
           <motion.h1
             variants={itemVariants}
             className="text-3xl sm:text-4xl lg:text-[42px] font-heading font-bold text-heading tracking-tight leading-tight"
           >
-            Penelitian Dosen
+            {t({ id: "Penelitian Dosen", en: "Lecturer Research" })}
           </motion.h1>
           <motion.div variants={lineVariants} className="w-full h-[2px] bg-primary my-4" />
           <motion.p
             variants={itemVariants}
             className="text-sm sm:text-base text-body text-justify leading-relaxed"
           >
-            Penelitian dosen diarahkan pada empat peta jalan program studi: kepastian hukum akta autentik, pendaftaran tanah dan hukum agraria, hukum perusahaan dan kepailitan, serta digitalisasi jabatan notaris. Setiap penelitian diwajibkan menghasilkan luaran publikasi dan bahan ajar.
+            {t({
+              id: "Penelitian dosen diarahkan pada empat peta jalan program studi: kepastian hukum akta autentik, pendaftaran tanah dan hukum agraria, hukum perusahaan dan kepailitan, serta digitalisasi jabatan notaris. Setiap penelitian diwajibkan menghasilkan luaran publikasi dan bahan ajar.",
+              en: "Lecturer research is directed towards four study programme roadmaps: legal certainty of authentic deeds, land registration and agrarian law, corporate and bankruptcy law, and digitalization of the notarial profession. Every research project is required to produce publication outputs and teaching materials.",
+            })}
           </motion.p>
         </motion.div>
 
@@ -131,7 +147,7 @@ export default function LecturerResearch() {
         >
           <motion.div variants={itemVariants} className="pb-2 border-b-2 border-heading">
             <h2 className="text-2xl font-heading font-normal text-heading tracking-tight">
-              Publikasi Terpilih
+              {t({ id: "Publikasi Terpilih", en: "Selected Publications" })}
             </h2>
           </motion.div>
 
@@ -147,17 +163,19 @@ export default function LecturerResearch() {
                 className="py-6 first:pt-2 last:pb-2 space-y-1.5 transition-colors hover:bg-white/60 px-3 -mx-3 rounded-xs"
               >
                 <span className="text-xs font-bold tracking-[0.15em] uppercase text-primary block">
-                  {item.category}
+                  {t(item.category)}
                 </span>
                 <h3 className="font-heading italic font-normal text-base sm:text-[18px] text-heading leading-snug">
-                  {item.title}
+                  {t(item.title)}
                 </h3>
                 <p className="text-xs sm:text-sm text-body">
                   <span className="text-heading font-medium">{item.authors}</span> ({item.year}).
                 </p>
-                <p className="text-xs sm:text-sm text-body">
-                  {item.citation}
-                </p>
+                {item.citation && (
+                  <p className="text-xs sm:text-sm text-body">
+                    {t(item.citation)}
+                  </p>
+                )}
               </motion.div>
             ))}
           </motion.div>
@@ -175,7 +193,7 @@ export default function LecturerResearch() {
         >
           <motion.div variants={itemVariants} className="pb-2 border-b-2 border-heading">
             <h2 className="text-2xl font-heading font-normal text-heading tracking-tight">
-              Dokumen Pendukung
+              {t({ id: "Dokumen Pendukung", en: "Supporting Documents" })}
             </h2>
           </motion.div>
 
@@ -183,9 +201,15 @@ export default function LecturerResearch() {
             <table className="w-full text-left border-collapse text-xs sm:text-sm min-w-[500px]">
               <thead>
                 <tr className="border-b-2 border-heading text-xs font-bold tracking-wider text-heading uppercase">
-                  <th className="py-3.5 px-5 font-bold">JUDUL DOKUMEN</th>
-                  <th className="py-3.5 px-5 font-bold w-36 whitespace-nowrap">TANGGAL</th>
-                  <th className="py-3.5 px-5 font-bold w-28 whitespace-nowrap">UNDUH</th>
+                  <th className="py-3.5 px-5 font-bold">
+                    {t({ id: "JUDUL DOKUMEN", en: "DOCUMENT TITLE" })}
+                  </th>
+                  <th className="py-3.5 px-5 font-bold w-36 whitespace-nowrap">
+                    {t({ id: "TANGGAL", en: "DATE" })}
+                  </th>
+                  <th className="py-3.5 px-5 font-bold w-28 whitespace-nowrap">
+                    {t({ id: "UNDUH", en: "DOWNLOAD" })}
+                  </th>
                 </tr>
               </thead>
               <motion.tbody
@@ -199,10 +223,10 @@ export default function LecturerResearch() {
                     className="hover:bg-gray-50/50 transition-colors"
                   >
                     <td className="py-4 px-5 text-heading font-medium">
-                      {doc.title}
+                      {t(doc.title)}
                     </td>
                     <td className="py-4 px-5 text-body whitespace-nowrap">
-                      {doc.date}
+                      {t(doc.date)}
                     </td>
                     <td className="py-4 px-5 whitespace-nowrap">
                       <motion.a

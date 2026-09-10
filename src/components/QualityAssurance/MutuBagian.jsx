@@ -238,7 +238,7 @@ export function DaftarDokumen({ butir }) {
                 onClick={() => setDokumenDibaca(d)}
                 className="inline-flex items-center justify-center gap-2 px-5 py-2 bg-primary border border-primary hover:bg-[#570000] hover:border-[#570000] text-white rounded-xs text-xs font-semibold transition-colors shadow-2xs cursor-pointer"
               >
-                <span>Baca</span>
+                <span>{t({ id: "Baca", en: "Read" })}</span>
                 <FiBookOpen className="text-sm" />
               </button>
             )}
@@ -250,12 +250,12 @@ export function DaftarDokumen({ butir }) {
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center gap-2 px-5 py-2 bg-white border border-gray-300 hover:border-primary hover:bg-primary hover:text-white text-heading rounded-xs text-xs font-semibold transition-colors shadow-2xs"
               >
-                <span>Unduh</span>
+                <span>{t({ id: "Unduh", en: "Download" })}</span>
                 <FiDownload className="text-sm" />
               </a>
             ) : (
               <span className="inline-flex items-center justify-center px-5 py-2 border border-dashed border-gray-300 bg-gray-50 text-gray-400 rounded-xs text-xs font-semibold cursor-not-allowed select-none">
-                Belum diunggah
+                {t({ id: "Belum diunggah", en: "Not yet uploaded" })}
               </span>
             )}
           </div>
@@ -358,7 +358,12 @@ export function BelumTersedia({ keterangan }) {
       viewport={{ once: true, amount: 0.3 }}
       transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
     >
-      <p className="text-sm font-medium text-gray-500">Konten akan segera ditambahkan.</p>
+      <p className="text-sm font-medium text-gray-500">
+        {t({
+          id: "Konten akan segera ditambahkan.",
+          en: "Content will be added soon.",
+        })}
+      </p>
       {keterangan && (
         <p className="mt-1.5 text-xs text-gray-400 max-w-lg mx-auto leading-relaxed">
           {t(keterangan)}

@@ -4,17 +4,30 @@ import { motion } from "framer-motion";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import Breadcrumb from "../../components/ui/Breadcrumb";
+import { useT } from "../../i18n/languageContext";
+
+const metaStaff = {
+  title: {
+    id: "Staf Pengajar & Tenaga Kependidikan | MKn UNISSULA",
+    en: "Faculty & Administrative Staff | MKn UNISSULA",
+  },
+  description: {
+    id: "Direktori Staf Dosen dan Tenaga Kependidikan (Tendik) Program Studi Magister Kenotariatan (MKn) UNISSULA.",
+    en: "Directory of Faculty and Administrative Staff of Master of Notarial Law (MKn) UNISSULA.",
+  },
+};
 
 export default function StaffLayout() {
+  const t = useT();
   const location = useLocation();
 
   return (
     <>
       <Helmet>
-        <title>Staf Pengajar & Tenaga Kependidikan | MKn UNISSULA</title>
+        <title>{t(metaStaff.title)}</title>
         <meta
           name="description"
-          content="Direktori Staf Dosen dan Tenaga Kependidikan (Tendik) Program Studi Magister Kenotariatan (MKn) UNISSULA."
+          content={t(metaStaff.description)}
         />
       </Helmet>
 

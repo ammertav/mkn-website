@@ -2,6 +2,8 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { FiChevronRight } from "react-icons/fi";
 import Img from "../ui/Img";
+import { useT } from "../../i18n/languageContext";
+import { useUi } from "../../i18n/useUi";
 
 import Ormawa from "../../assets/images/beranda/ormawa.jpg";
 import Lab from "../../assets/images/fasilitas/lab-akta/lab-akta-1.png";
@@ -56,43 +58,54 @@ const cardVariants = {
 const campusCultureData = [
   {
     id: 1,
-    title: "Organisasi Mahasiswa",
-    description:
-      "Wadah kepemimpinan mahasiswa melalui ikatan mahasiswa dan kegiatan keorganisasian.",
+    title: { id: "Organisasi Mahasiswa", en: "Student Organisations" },
+    description: {
+      id: "Wadah kepemimpinan mahasiswa melalui ikatan mahasiswa dan kegiatan keorganisasian.",
+      en: "A forum for student leadership through student associations and organizational activities.",
+    },
     image: Ormawa,
-    linkText: "Kenali Pengurus",
+    linkText: { id: "Kenali Pengurus", en: "Meet the Team" },
     linkHref: "/mahasiswa/organisasi",
   },
   {
     id: 2,
-    title: "Laboratorium",
-    description:
-      "Laboratorium Akta merupakan pusat simulasi taktis bagi mahasiswa Magister Kenotariatan UNISSULA untuk mematangkan keahlian dalam merancang, membuat, hingga membacakan draf akta autentik.",
+    title: { id: "Laboratorium", en: "Laboratories" },
+    description: {
+      id: "Laboratorium Akta merupakan pusat simulasi taktis bagi mahasiswa Magister Kenotariatan UNISSULA untuk mematangkan keahlian dalam merancang, membuat, hingga membacakan draf akta autentik.",
+      en: "The Deed Laboratory is a tactical simulation hub for UNISSULA Master of Notarial Law students to hone their skills in drafting, preparing, and executing authentic deeds.",
+    },
     image: Lab,
-    linkText: "Jadwal Laboratorium",
+    linkText: { id: "Jadwal Laboratorium", en: "Laboratory Schedule" },
     linkHref: "/fasilitas/laboratorium",
   },
   {
     id: 3,
-    title: "Pusat Riset Mahasiswa (SRC)",
-    description:
-      "Ruang kerja bersama untuk kajian hukum tingkat lanjut.",
+    title: { id: "Pusat Riset Mahasiswa (SRC)", en: "Student Research Center (SRC)" },
+    description: {
+      id: "Ruang kerja bersama untuk kajian hukum tingkat lanjut.",
+      en: "A collaborative workspace for advanced legal studies and research.",
+    },
     image: Stude,
-    linkText: "Lihat Kegiatan",
+    linkText: { id: "Lihat Kegiatan", en: "View Activities" },
     linkHref: "/fasilitas/student-research-center",
   },
   {
     id: 4,
-    title: "Perpustakaan",
-    description:
-      "Koleksi cetak yang luas serta akses ke basis data hukum internasional.",
+    title: { id: "Perpustakaan", en: "Library" },
+    description: {
+      id: "Koleksi cetak yang luas serta akses ke basis data hukum internasional.",
+      en: "An extensive collection of legal literature with access to international legal databases.",
+    },
     image: Perpus,
-    linkText: "Jelajahi Katalog",
+    linkText: { id: "Jelajahi Katalog", en: "Explore Catalogue" },
     linkHref: "/fasilitas/perpustakaan",
   },
 ];
 
 export default function CampusCulture() {
+  const t = useT();
+  const ui = useUi();
+
   return (
     <section className="w-full bg-hero-heading font-body py-16 sm:py-24 border-b border-gray-200 overflow-hidden">
       <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8">
@@ -107,7 +120,7 @@ export default function CampusCulture() {
         >
           <motion.div variants={itemVariants}>
             <h2 className="text-3xl sm:text-4xl font-heading font-normal text-heading tracking-normal">
-              Fasilitas & Budaya
+              {ui("facilitiesAndCulture")}
             </h2>
           </motion.div>
         </motion.div>
@@ -149,7 +162,7 @@ export default function CampusCulture() {
                 >
                   <Img
                     src={item.image}
-                    alt={item.title}
+                    alt={t(item.title)}
                     className="
                       w-full
                       h-full
@@ -175,7 +188,7 @@ export default function CampusCulture() {
                   {/* Title */}
                   <motion.div variants={itemVariants}>
                     <h3 className="font-heading font-normal text-xl sm:text-2xl text-heading leading-snug group-hover:text-primary transition-colors">
-                      {item.title}
+                      {t(item.title)}
                     </h3>
                   </motion.div>
 
@@ -184,7 +197,7 @@ export default function CampusCulture() {
                     variants={itemVariants}
                     className="mt-3 text-sm text-body leading-relaxed"
                   >
-                    {item.description}
+                    {t(item.description)}
                   </motion.p>
                 </div>
 
@@ -197,7 +210,7 @@ export default function CampusCulture() {
                     to={item.linkHref}
                     className="inline-flex items-center space-x-1 text-xs font-semibold tracking-wider text-primary hover:text-[#680000] uppercase transition-colors group/link"
                   >
-                    <span>{item.linkText}</span>
+                    <span>{t(item.linkText)}</span>
 
                     <FiChevronRight className="text-sm transition-transform duration-150 group-hover/link:translate-x-0.5" />
                   </Link>

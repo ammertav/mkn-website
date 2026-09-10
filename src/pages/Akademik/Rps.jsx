@@ -45,6 +45,10 @@ const halaman = {
     id: "Tidak ada mata kuliah yang cocok dengan kata kunci pencarian Anda.",
     en: "No courses match your search criteria.",
   },
+  tidakDitemukanSub: {
+    id: 'Coba gunakan kata kunci lain atau pilih tab "Semua Semester".',
+    en: 'Try using other keywords or select the "All Semesters" tab.',
+  },
   resetCari: {
     id: "Reset Pencarian",
     en: "Reset Search",
@@ -323,8 +327,7 @@ export default function Rps() {
               </p>
 
               <p className="text-xs text-body">
-                Coba gunakan kata kunci lain atau pilih tab
-                "Semua Semester".
+                {t(halaman.tidakDitemukanSub)}
               </p>
             </div>
 

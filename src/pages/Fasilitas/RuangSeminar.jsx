@@ -4,6 +4,7 @@ import {
   ruangSeminarLantai3Data,
   ruangSeminarLantai1Data,
 } from "../../data/fasilitasData";
+import { useT } from "../../i18n/languageContext";
 
 /**
  * Satu tab, dua ruangan. Aula lantai 3 dan ruang seminar lantai 1 punya
@@ -11,13 +12,23 @@ import {
  * berurutan sebagai bagian tersendiri, bukan digabung jadi satu daftar.
  */
 export default function RuangSeminar() {
+  const t = useT();
+
   return (
     <>
       <Helmet>
-        <title>Ruang Seminar | MKn UNISSULA</title>
+        <title>
+          {t({
+            id: "Ruang Seminar | MKn UNISSULA",
+            en: "Seminar Rooms | MKn UNISSULA",
+          })}
+        </title>
         <meta
           name="description"
-          content="Ruang seminar Fakultas Hukum UNISSULA: aula lantai 3 bergaya auditorium untuk seminar dan konferensi, serta ruang seminar lantai 1 untuk ujian tesis, rapat akademik, dan diskusi ilmiah."
+          content={t({
+            id: "Ruang seminar Fakultas Hukum UNISSULA: aula lantai 3 bergaya auditorium untuk seminar dan konferensi, serta ruang seminar lantai 1 untuk ujian tesis, rapat akademik, dan diskusi ilmiah.",
+            en: "Faculty of Law UNISSULA seminar halls: 3rd-floor auditorium for conferences and symposiums, and 1st-floor seminar room for thesis defenses and academic colloquiums.",
+          })}
         />
       </Helmet>
 

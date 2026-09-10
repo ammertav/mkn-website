@@ -4,15 +4,26 @@ import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import FasilitasHero from "../../components/Fasilitas/FasilitasHero";
 import FasilitasTabs from "../../components/Fasilitas/FasilitasTabs";
+import { useT } from "../../i18n/languageContext";
 
 export default function FasilitasLayout() {
+  const t = useT();
+
   return (
     <>
       <Helmet>
-        <title>Fasilitas Kampus | Magister Kenotariatan UNISSULA</title>
+        <title>
+          {t({
+            id: "Fasilitas Kampus | Magister Kenotariatan UNISSULA",
+            en: "Campus Facilities | Master of Notarial Law UNISSULA",
+          })}
+        </title>
         <meta
           name="description"
-          content="Fasilitas Ruang Kelas, Ruang Seminar, Laboratorium Kenotariatan, Student Research Center, Ruang Podcast, dan Perpustakaan Program Studi Magister Kenotariatan (MKn) UNISSULA."
+          content={t({
+            id: "Fasilitas Ruang Kelas, Ruang Seminar, Laboratorium Kenotariatan, Student Research Center, Ruang Podcast, dan Perpustakaan Program Studi Magister Kenotariatan (MKn) UNISSULA.",
+            en: "Facilities including Classrooms, Seminar Halls, Notarial Laboratories, Student Research Center, Podcast Studio, and Law Library of Master of Notarial Law (MKn) UNISSULA.",
+          })}
         />
       </Helmet>
 

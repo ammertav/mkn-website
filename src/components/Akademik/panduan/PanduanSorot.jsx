@@ -51,6 +51,11 @@ export function JudulSeksi({ judul, keterangan }) {
       <h2 className="font-heading font-normal text-2xl sm:text-3xl text-heading tracking-normal">
         {t(judul)}
       </h2>
+      {keterangan && (
+        <p className="text-sm text-body leading-relaxed max-w-4xl">
+          {t(keterangan)}
+        </p>
+      )}
       <div className="w-full h-[1.5px] bg-heading" />
     </div>
   );

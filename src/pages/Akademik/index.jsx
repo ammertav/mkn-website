@@ -4,14 +4,14 @@ import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import Breadcrumb from "../../components/ui/Breadcrumb";
 import SidebarNav from "../../components/ui/SidebarNav";
-import { navLinks } from "../../data/navLinks";
-
-// Single source of truth — ambil langsung dari navLinks
-const akademikMenus = navLinks.find((n) => n.href === "/akademik")?.children ?? [];
+import { useT } from "../../i18n/languageContext";
 
 /** Narahubung akademik dan PMB, dikelompokkan agar terbaca rapi di sidebar. */
 const akademikContact = {
-  title: "KONTAK AKADEMIK",
+  title: {
+    id: "KONTAK AKADEMIK",
+    en: "ACADEMIC CONTACT",
+  },
   groups: [
     {
       items: [
@@ -19,18 +19,30 @@ const akademikContact = {
         { name: "Ikrom, S.H., M.H.", phone: "+62 823-1222-8181" },
       ],
     },
-
   ],
 };
 
+const metaAkademik = {
+  title: {
+    id: "Akademik | MKn UNISSULA",
+    en: "Academic | MKn UNISSULA",
+  },
+  description: {
+    id: "Informasi Akademik, Kurikulum, Profil Lulusan, Panduan, dan Kalender Akademik Magister Kenotariatan (MKn) UNISSULA.",
+    en: "Academic Information, Curriculum, Graduate Profiles, Guidelines, and Academic Calendar of Master of Notarial Law (MKn) UNISSULA.",
+  },
+};
+
 export default function AkademikLayout() {
+  const t = useT();
+
   return (
     <>
       <Helmet>
-        <title>Akademik | MKn UNISSULA</title>
+        <title>{t(metaAkademik.title)}</title>
         <meta
           name="description"
-          content="Informasi Akademik, Kurikulum, Profil Lulusan, Panduan, dan Kalender Akademik Magister Kenotariatan (MKn) UNISSULA."
+          content={t(metaAkademik.description)}
         />
       </Helmet>
 

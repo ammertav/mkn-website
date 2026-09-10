@@ -1,6 +1,6 @@
-import { useState } from "react";
 import { FiSearch, FiChevronLeft, FiChevronRight, FiPlus } from "react-icons/fi";
 import { motion } from "framer-motion";
+import { useT, useLanguage } from "../../i18n/languageContext";
 
 const sidebarContainerVariants = {
   hidden: { opacity: 0 },
@@ -36,10 +36,18 @@ export default function EventCalendarSidebar({
   eventDates = [], // array of "YYYY-MM-DD" that have events
   onSubmitEventClick,
 }) {
-  const monthNames = [
+  const t = useT();
+  const { lang } = useLanguage();
+
+  const monthNamesId = [
     "Januari", "Februari", "Maret", "April", "Mei", "Juni",
     "Juli", "Agustus", "September", "Oktober", "November", "Desember"
   ];
+  const monthNamesEn = [
+    "January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December"
+  ];
+  const monthNames = lang === "en" ? monthNamesEn : monthNamesId;
 
   const daysOfWeek = ["S", "M", "T", "W", "T", "F", "S"];
 
@@ -108,14 +116,14 @@ export default function EventCalendarSidebar({
         className="flex items-baseline justify-between gap-4 border-b border-white/10 pb-4"
       >
         <h2 className="text-2xl sm:text-3xl font-heading font-normal tracking-tight text-white">
-          Events Calendar
+          {t({ id: "Kalender Agenda", en: "Events Calendar" })}
         </h2>
         <button
           type="button"
           onClick={onResetAll}
           className="text-xs text-gray-400 hover:text-white transition-colors cursor-pointer hover:underline"
         >
-          Reset all
+          {t({ id: "Reset semua", en: "Reset all" })}
         </button>
       </motion.div>
 
@@ -126,7 +134,7 @@ export default function EventCalendarSidebar({
             type="text"
             value={searchKeyword}
             onChange={(e) => onSearchChange(e.target.value)}
-            placeholder="Search by keyword"
+            placeholder={t({ id: "Cari kata kunci...", en: "Search by keyword" })}
             className="w-full bg-[#182733] text-sm text-white placeholder:text-gray-400 pl-4 pr-10 py-3 rounded-xs border border-white/15 focus:outline-none focus:border-white/40 transition-colors"
           />
           <FiSearch className="absolute right-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" />
@@ -147,7 +155,7 @@ export default function EventCalendarSidebar({
               whileTap={{ scale: 0.9 }}
               type="button"
               onClick={() => onChangeMonth(-1)}
-              title="Bulan Sebelumnya"
+              title={t({ id: "Bulan Sebelumnya", en: "Previous Month" })}
               className="p-1.5 hover:text-white hover:bg-white/10 rounded-full transition-colors cursor-pointer"
             >
               <FiChevronLeft className="w-4 h-4" />
@@ -157,7 +165,7 @@ export default function EventCalendarSidebar({
               whileTap={{ scale: 0.9 }}
               type="button"
               onClick={() => onChangeMonth(1)}
-              title="Bulan Berikutnya"
+              title={t({ id: "Bulan Berikutnya", en: "Next Month" })}
               className="p-1.5 hover:text-white hover:bg-white/10 rounded-full transition-colors cursor-pointer"
             >
               <FiChevronRight className="w-4 h-4" />
@@ -221,7 +229,7 @@ export default function EventCalendarSidebar({
           className="w-full py-3 px-5 bg-white text-[#111c24] font-heading font-semibold text-xs sm:text-sm rounded-full transition-colors flex items-center justify-center gap-2 shadow-sm cursor-pointer"
         >
           <FiPlus className="w-4 h-4" />
-          <span>Submit an Event</span>
+          <span>{t({ id: "Ajukan Agenda", en: "Submit an Event" })}</span>
         </motion.button>
       </motion.div>
     </motion.aside>

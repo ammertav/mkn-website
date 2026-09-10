@@ -9,6 +9,7 @@ import {
   formsArsip,
   formGroups,
 } from "../../data/qualityAssurance/qaFormsData";
+import { useT, useLanguage } from "../../i18n/languageContext";
 
 const stagger = {
   hidden: {},
@@ -26,20 +27,31 @@ const sectionVar = {
 };
 
 export default function QaForms() {
+  const t = useT();
+  const { lang } = useLanguage();
+
   return (
     <>
       <Helmet>
-        <title>Formulir Mutu | MKn UNISSULA</title>
+        <title>
+          {lang === "en"
+            ? "Quality Forms | MKn UNISSULA"
+            : "Formulir Mutu | MKn UNISSULA"}
+        </title>
         <meta
           name="description"
-          content="Sembilan belas formulir SPMI Fakultas Hukum UNISSULA, dikelompokkan menurut tahap siklus PPEPP: penetapan, pelaksanaan, evaluasi, pengendalian, dan peningkatan."
+          content={
+            lang === "en"
+              ? "Nineteen SPMI forms of Faculty of Law UNISSULA, categorized by PPEPP cycle stages: determination, implementation, evaluation, control, and improvement."
+              : "Sembilan belas formulir SPMI Fakultas Hukum UNISSULA, dikelompokkan menurut tahap siklus PPEPP: penetapan, pelaksanaan, evaluasi, pengendalian, dan peningkatan."
+          }
         />
       </Helmet>
 
       <div className="space-y-12 sm:space-y-14 font-body text-body">
         <KepalaMutu
-          eyebrow="DOKUMEN MUTU"
-          judul="Formulir Mutu"
+          eyebrow={{ id: "DOKUMEN MUTU", en: "QUALITY DOCUMENTS" }}
+          judul={{ id: "Formulir Mutu", en: "Quality Forms" }}
           pengantar={formsPengantar}
         />
 
@@ -52,18 +64,18 @@ export default function QaForms() {
         >
           <p className="text-sm text-body leading-relaxed">
             <span className="font-mono text-xs text-primary">{formsMeta.code}</span> ·{" "}
-            {formsMeta.revisi} · {formsMeta.tanggal} · {formsMeta.halaman} ·{" "}
-            {formsMeta.total} formulir
+            {t(formsMeta.revisi)} · {t(formsMeta.tanggal)} · {t(formsMeta.halaman)} ·{" "}
+            {formsMeta.total} {t({ id: "formulir", en: "forms" })}
           </p>
-          <p className="text-sm text-body leading-relaxed">{formsPengguna}</p>
-          <p className="text-sm text-body leading-relaxed">{formsArsip}</p>
+          <p className="text-sm text-body leading-relaxed">{t(formsPengguna)}</p>
+          <p className="text-sm text-body leading-relaxed">{t(formsArsip)}</p>
           <a
             href={formsMeta.fileUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="mt-2 inline-flex items-center gap-2 px-5 py-2 bg-white border border-gray-300 hover:border-primary hover:bg-primary hover:text-white text-heading rounded-xs text-xs font-semibold transition-colors shadow-2xs"
           >
-            <span>Unduh himpunan formulir</span>
+            <span>{t({ id: "Unduh himpunan formulir", en: "Download forms collection" })}</span>
             <FiDownload className="text-sm" />
           </a>
         </motion.div>
@@ -77,7 +89,11 @@ export default function QaForms() {
             viewport={{ once: true, amount: 0.08 }}
             variants={sectionVar}
           >
-            <JudulMutu judul={`Tahap ${g.stage} · Kode ${g.code}`} />
+            <JudulMutu
+              judul={`${lang === "en" ? "Stage" : "Tahap"} ${t(g.stage)} · ${
+                lang === "en" ? "Code" : "Kode"
+              } ${g.code}`}
+            />
 
             <motion.div
               className="border border-gray-200 bg-white rounded-xs overflow-x-auto"
@@ -90,10 +106,10 @@ export default function QaForms() {
                 <thead>
                   <tr className="border-b border-gray-200 bg-gray-50/70">
                     <th className="py-3 px-4 sm:px-5 text-[11px] font-bold tracking-wider uppercase text-heading w-48">
-                      Kode
+                      {t({ id: "Kode", en: "Code" })}
                     </th>
                     <th className="py-3 px-4 sm:px-5 text-[11px] font-bold tracking-wider uppercase text-heading">
-                      Nama Formulir
+                      {t({ id: "Nama Formulir", en: "Form Name" })}
                     </th>
                   </tr>
                 </thead>
@@ -104,7 +120,7 @@ export default function QaForms() {
                         {f.code}
                       </td>
                       <td className="py-3.5 px-4 sm:px-5 font-medium text-heading leading-relaxed">
-                        {f.name}
+                        {t(f.name)}
                       </td>
                     </motion.tr>
                   ))}

@@ -10,6 +10,8 @@ import {
 
 import logoUnissula from "../assets/images/logo-unissula-crest.png";
 import Img from "./ui/Img";
+import { useT } from "../i18n/languageContext";
+import { useUi } from "../i18n/useUi";
 
 /** Akun media sosial resmi Program Studi Magister Kenotariatan UNISSULA. */
 const socialLinks = [
@@ -44,79 +46,87 @@ const kontak = {
   surel: { tampilan: "mkn.fh@unissula.ac.id", href: "mailto:mkn.fh@unissula.ac.id" },
 };
 
+const deskripsiProdi = {
+  id: "Mencetak Notaris profesional, beretika tinggi, dan berwawasan global melalui pendidikan hukum yang komprehensif.",
+  en: "Producing professional, highly ethical, and globally competitive notaries through comprehensive legal education.",
+};
+
 /** Tautan ringkas pada bar bawah, di samping teks hak cipta. */
 const bottomLinks = [
-  { name: "Pengaduan & Bantuan", href: "/layanan-pengaduan" },
-  { name: "Pusat Unduhan", href: "/download" },
-  { name: "Agenda & Event", href: "/event" },
+  { name: { id: "Pengaduan & Bantuan", en: "Complaints & Support" }, href: "/layanan-pengaduan" },
+  { name: { id: "Pusat Unduhan", en: "Download Center" }, href: "/download" },
+  { name: { id: "Agenda & Event", en: "Events & Agenda" }, href: "/event" },
 ];
 
 const footerSections = [
   {
-    title: "PROFIL",
+    title: { id: "PROFIL", en: "PROFILE" },
     links: [
-      { name: "Sejarah / Latar Belakang", href: "/profil/sejarah" },
-      { name: "Visi dan Misi", href: "/profil/visi-misi" },
-      { name: "Tujuan", href: "/profil/tujuan" },
-      { name: "Struktur Organisasi", href: "/profil/struktur-organisasi" },
-      { name: "Berita & Wawasan", href: "/berita" },
+      { name: { id: "Sejarah / Latar Belakang", en: "History / Background" }, href: "/profil/sejarah" },
+      { name: { id: "Visi dan Misi", en: "Vision & Mission" }, href: "/profil/visi-misi" },
+      { name: { id: "Tujuan (PEO)", en: "Educational Objectives (PEO)" }, href: "/profil/tujuan" },
+      { name: { id: "Struktur Organisasi", en: "Organisational Structure" }, href: "/profil/struktur-organisasi" },
+      { name: { id: "Berita & Wawasan", en: "News & Insights" }, href: "/berita" },
     ],
   },
   {
-    title: "AKADEMIK",
+    title: { id: "AKADEMIK", en: "ACADEMIC" },
     links: [
-      { name: "Profil Lulusan", href: "/akademik/profil-lulusan" },
-      { name: "Capaian Pembelajaran", href: "/akademik/capaian-pembelajaran" },
-      { name: "Kurikulum", href: "/akademik/kurikulum" },
-      { name: "Panduan Evaluasi", href: "/akademik/panduan-evaluasi" },
-      { name: "Panduan Ujian", href: "/akademik/panduan-ujian" },
+      { name: { id: "Profil Lulusan", en: "Graduate Profiles" }, href: "/akademik/profil-lulusan" },
+      { name: { id: "Capaian Pembelajaran", en: "Intended Learning Outcomes" }, href: "/akademik/capaian-pembelajaran" },
+      { name: { id: "Kurikulum", en: "Curriculum" }, href: "/akademik/kurikulum" },
+      { name: { id: "Panduan Evaluasi", en: "Learning Evaluation Guidelines" }, href: "/akademik/panduan-evaluasi" },
+      { name: { id: "Panduan Ujian", en: "Examination Guidelines" }, href: "/akademik/panduan-ujian" },
     ],
   },
   {
-    title: "MAHASISWA & ALUMNI",
+    title: { id: "MAHASISWA & ALUMNI", en: "STUDENTS & ALUMNI" },
     links: [
-      { name: "Organisasi Mahasiswa", href: "/mahasiswa/organisasi" },
-      { name: "Akomodasi", href: "/mahasiswa/akomodasi" },
-      { name: "Pengaduan & Bantuan", href: "/layanan-pengaduan" },
-      { name: "Penelusuran Alumni", href: "/alumni/tracer-study" },
-      { name: "Pusat Karir", href: "/alumni/pusat-karir" },
-      { name: "Lowongan Pekerjaan", href: "/alumni/lowongan" },
+      { name: { id: "Organisasi Mahasiswa", en: "Student Organisations" }, href: "/mahasiswa/organisasi" },
+      { name: { id: "Akomodasi", en: "Accommodation" }, href: "/mahasiswa/akomodasi" },
+      { name: { id: "Pengaduan & Bantuan", en: "Complaints & Support" }, href: "/layanan-pengaduan" },
+      { name: { id: "Penelusuran Alumni", en: "Tracer Study" }, href: "/alumni/tracer-study" },
+      { name: { id: "Pusat Karir", en: "Career Center" }, href: "/alumni/pusat-karir" },
+      { name: { id: "Lowongan Pekerjaan", en: "Job Vacancies" }, href: "/alumni/lowongan" },
     ],
   },
   {
-    title: "INFORMASI",
+    title: { id: "INFORMASI", en: "INFORMATION" },
     links: [
-      { name: "Penerimaan Mahasiswa", href: "/informasi/penerimaan-mahasiswa" },
-      { name: "Agenda & Event", href: "/event" },
-      { name: "Tingkat Kelulusan", href: "/informasi/tingkat-kelulusan" },
-      { name: "Penelitian Dosen", href: "/informasi/penelitian-dosen" },
-      { name: "Pengabdian Dosen", href: "/informasi/pengabdian-dosen" },
+      { name: { id: "Penerimaan Mahasiswa", en: "Student Admissions" }, href: "/informasi/penerimaan-mahasiswa" },
+      { name: { id: "Agenda & Event", en: "Events & Agenda" }, href: "/event" },
+      { name: { id: "Tingkat Kelulusan", en: "Graduation Rate" }, href: "/informasi/tingkat-kelulusan" },
+      { name: { id: "Penelitian Dosen", en: "Lecturer Research" }, href: "/informasi/penelitian-dosen" },
+      { name: { id: "Pengabdian Dosen", en: "Community Service" }, href: "/informasi/pengabdian-dosen" },
     ],
   },
   {
-    title: "STAF & FASILITAS",
+    title: { id: "STAF & FASILITAS", en: "STAFF & FACILITIES" },
     links: [
-      { name: "Dosen", href: "/staff/dosen" },
-      { name: "Tenaga Kependidikan", href: "/staff/tendik" },
-      { name: "Ruang Kelas", href: "/fasilitas/ruang-kelas" },
-      { name: "Laboratorium", href: "/fasilitas/laboratorium" },
-      { name: "Perpustakaan", href: "/fasilitas/perpustakaan" },
+      { name: { id: "Dosen", en: "Faculty Members" }, href: "/staff/dosen" },
+      { name: { id: "Tenaga Kependidikan", en: "Administrative Staff" }, href: "/staff/tendik" },
+      { name: { id: "Ruang Kelas", en: "Classrooms" }, href: "/fasilitas/ruang-kelas" },
+      { name: { id: "Laboratorium", en: "Laboratories" }, href: "/fasilitas/laboratorium" },
+      { name: { id: "Perpustakaan", en: "Library" }, href: "/fasilitas/perpustakaan" },
     ],
   },
   {
-    title: "PENJAMINAN MUTU",
+    title: { id: "PENJAMINAN MUTU", en: "QUALITY ASSURANCE" },
     links: [
-      { name: "Gugus Penjaminan Mutu", href: "/quality-assurance" },
-      { name: "Dokumen Mutu", href: "/quality-assurance/qa-documents" },
-      { name: "Laporan Audit Internal", href: "/quality-assurance/internal-audit-report" },
-      { name: "Laporan Pembelajaran", href: "/quality-assurance/learning-teaching-report" },
-      { name: "Survei Mahasiswa", href: "/quality-assurance/student-survey-report" },
-      { name: "Pusat Unduhan", href: "/download" },
+      { name: { id: "Gugus Penjaminan Mutu", en: "Quality Assurance Unit" }, href: "/quality-assurance" },
+      { name: { id: "Dokumen Mutu", en: "QA Documents" }, href: "/quality-assurance/qa-documents" },
+      { name: { id: "Laporan Audit Internal", en: "Internal Audit Report" }, href: "/quality-assurance/internal-audit-report" },
+      { name: { id: "Laporan Pembelajaran", en: "Teaching & Learning Report" }, href: "/quality-assurance/learning-teaching-report" },
+      { name: { id: "Survei Mahasiswa", en: "Student Survey Report" }, href: "/quality-assurance/student-survey-report" },
+      { name: { id: "Pusat Unduhan", en: "Download Center" }, href: "/download" },
     ],
   },
 ];
 
 export default function Footer() {
+  const t = useT();
+  const ui = useUi();
+
   return (
     <footer className="w-full font-body bg-white text-body border-t border-gray-200">
       {/* Blok utama: identitas + kontak + sosial di kiri, navigasi 3 kolom di kanan */}
@@ -141,7 +151,7 @@ export default function Footer() {
             </Link>
 
             <p className="mt-5 text-[12.5px] sm:text-[13px] leading-relaxed max-w-sm text-body">
-              Mencetak Notaris profesional, beretika tinggi, dan berwawasan global melalui pendidikan hukum yang komprehensif.
+              {t(deskripsiProdi)}
             </p>
 
             {/* Kontak & alamat */}
@@ -179,7 +189,7 @@ export default function Footer() {
             {/* Sosial media: pil bernama, sejajar di bawah kontak */}
             <div className="mt-7">
               <h2 className="font-heading text-[11px] font-semibold uppercase tracking-[0.18em] text-subheading-sidebar">
-                Ikuti Kami
+                {ui("followUs")}
               </h2>
               <ul className="mt-3 flex flex-wrap gap-2">
                 {socialLinks.map(({ label, handle, href, Icon }) => (
@@ -206,14 +216,14 @@ export default function Footer() {
             aria-label="Peta situs"
             className="lg:col-span-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-9"
           >
-            {footerSections.map((section) => (
-              <div key={section.title}>
+            {footerSections.map((section, sIdx) => (
+              <div key={sIdx}>
                 <h2 className="font-heading text-[11px] font-semibold uppercase tracking-[0.18em] text-heading pb-3 mb-3 border-b border-gray-200">
-                  {section.title}
+                  {t(section.title)}
                 </h2>
                 <ul className="space-y-2">
-                  {section.links.map((link) => (
-                    <li key={link.href}>
+                  {section.links.map((link, lIdx) => (
+                    <li key={lIdx}>
                       <Link
                         to={link.href}
                         className="group inline-flex items-baseline gap-2 text-[12.5px] leading-snug text-body hover:text-primary transition-colors duration-150"
@@ -222,7 +232,7 @@ export default function Footer() {
                           aria-hidden="true"
                           className="w-0 group-hover:w-3 h-px bg-primary shrink-0 translate-y-[-3px] transition-all duration-150"
                         />
-                        {link.name}
+                        {t(link.name)}
                       </Link>
                     </li>
                   ))}
@@ -238,16 +248,16 @@ export default function Footer() {
         <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 py-5">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 text-[11.5px] sm:text-xs">
             <p>
-              © {new Date().getFullYear()} Magister Kenotariatan UNISSULA. All Rights Reserved.
+              © {new Date().getFullYear()} Magister Kenotariatan UNISSULA. {ui("allRightsReserved")}
             </p>
             <ul className="flex flex-wrap items-center gap-x-5 gap-y-2">
-              {bottomLinks.map((link) => (
-                <li key={link.href}>
+              {bottomLinks.map((link, bIdx) => (
+                <li key={bIdx}>
                   <Link
                     to={link.href}
                     className="hover:text-white transition-colors duration-150"
                   >
-                    {link.name}
+                    {t(link.name)}
                   </Link>
                 </li>
               ))}
