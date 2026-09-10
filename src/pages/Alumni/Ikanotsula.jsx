@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import { motion } from "framer-motion";
 import ZoomableImg from "../../components/ui/ZoomableImg";
+import GaleriGeser from "../../components/ui/GaleriGeser";
 import Logo from "../../assets/images/ikanot/logo.jpg";
 
 const containerVariants = {
@@ -787,27 +788,25 @@ export default function IkanotsulaDetail() {
                   </span>
                 </motion.div>
 
-                <motion.div
-                  variants={containerVariants}
-                  className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4"
-                >
-                  {kegiatan.foto.map((foto, idx) => (
-                    <motion.div
-                      key={foto.src}
-                      custom={idx}
-                      variants={cardVariants}
-                      whileHover={{ y: -3 }}
-                      className="group relative aspect-[4/3] rounded-md bg-gray-200 overflow-hidden border border-gray-200 shadow-2xs hover:shadow-md transition-shadow"
-                    >
-                      <ZoomableImg
-                        src={foto.src}
-                        alt={foto.alt}
-                        group={kegiatan.foto}
-                        index={idx}
-                        className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out"
-                      />
-                    </motion.div>
-                  ))}
+                {/*
+                  Foto tiap kegiatan digeser tiga-tiga, bukan digelar sebagai
+                  kisi: satu kegiatan bisa berisi belasan foto, dan menampilkan
+                  semuanya sekaligus membuat halaman ini sangat panjang.
+
+                  Geser otomatis dimatikan karena galeri di halaman ini ada
+                  banyak — satu per kegiatan — dan semuanya bergerak sendiri
+                  pada waktu yang sama justru mengganggu.
+                */}
+                <motion.div variants={itemVariants}>
+                  <GaleriGeser
+                    foto={kegiatan.foto}
+                    ariaLabel={`Galeri ${kegiatan.judul} ${kegiatan.tahun}`}
+                    otomatis={false}
+                    tampilkanJudul={false}
+                    kelasTrek="gap-4"
+                    kelasBasis="basis-full sm:basis-[calc((100%-1rem)/2)] md:basis-[calc((100%-2rem)/3)]"
+                    kelasKartu="aspect-[4/3] rounded-md border border-gray-200 shadow-2xs"
+                  />
                 </motion.div>
               </motion.div>
             ))}

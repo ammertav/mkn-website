@@ -10,6 +10,14 @@ module.exports = {
   ignorePatterns: ['dist', '.eslintrc.cjs'],
   parserOptions: { ecmaVersion: 'latest', sourceType: 'module' },
   settings: { react: { version: '18.2' } },
+  // Berkas di scripts/ dijalankan Node, bukan peramban: process, __dirname, dan
+  // kawan-kawannya sah di sana.
+  overrides: [
+    {
+      files: ['scripts/**/*.mjs', 'scripts/**/*.js'],
+      env: { node: true, browser: false },
+    },
+  ],
   plugins: ['react-refresh'],
   rules: {
     'react/jsx-no-target-blank': 'off',
