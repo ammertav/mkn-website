@@ -1,4 +1,5 @@
 import { Helmet } from "react-helmet-async";
+import { motion } from "framer-motion";
 import {
   FiBook,
   FiBookOpen,
@@ -16,6 +17,56 @@ import imgSoegianto from "../../assets/images/struktur-organisasi/soegianto.png"
 import imgSurya from "../../assets/images/struktur-organisasi/anugrah-surya-kusuma.png";
 import ZoomableImg from "../../components/ui/ZoomableImg";
 import { tenagaKependidikan } from "../../data/profil/tendikData";
+
+const viewportSettings = {
+  once: true,
+  amount: 0.2,
+};
+
+// Container animation
+const containerVariants = {
+  hidden: {
+    opacity: 0,
+  },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.15,
+    },
+  },
+};
+
+// Standard item animation
+const itemVariants = {
+  hidden: {
+    opacity: 0,
+    x: -30,
+  },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: {
+      duration: 0.8,
+      ease: "easeOut",
+    },
+  },
+};
+
+// Card animation
+const cardVariants = {
+  hidden: {
+    opacity: 0,
+    y: 30,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.7,
+      ease: "easeOut",
+    },
+  },
+};
 
 const strukturPejabat = [
   {
@@ -154,7 +205,12 @@ function initialsOf(name) {
 
 function PersonCard({ jabatan, name, photo }) {
   return (
-    <div className="w-32 sm:w-36 lg:w-40 border border-gray-200 bg-white rounded-xs shadow-2xs p-3 flex flex-col items-center text-center hover:border-primary/40 transition-colors">
+    // Akar kartu memakai motion agar bisa distagger induknya; tanpa induk
+    // bervarian, kartu ini tampil apa adanya.
+    <motion.div
+      variants={cardVariants}
+      className="w-32 sm:w-36 lg:w-40 border border-gray-200 bg-white rounded-xs shadow-2xs p-3 flex flex-col items-center text-center hover:border-primary/40 transition-colors"
+    >
       <div className="w-20 h-24 sm:w-24 sm:h-28 rounded-xs overflow-hidden bg-gray-100 mb-3 border border-gray-200 flex items-center justify-center shrink-0">
         {photo ? (
           <ZoomableImg
@@ -175,7 +231,7 @@ function PersonCard({ jabatan, name, photo }) {
       <p className="font-heading text-xs sm:text-sm font-bold text-heading leading-snug">
         {name}
       </p>
-    </div>
+    </motion.div>
   );
 }
 
@@ -219,21 +275,33 @@ export default function StrukturOrganisasi() {
 
       <div className="space-y-16 sm:space-y-20">
         {/* Section STRUKTUR ORGANISASI Header */}
-        <section className="space-y-4">
-          <span className="text-xs font-semibold tracking-wider text-primary uppercase block">
+        <motion.section
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportSettings}
+          className="space-y-4"
+        >
+          <motion.span
+            variants={itemVariants}
+            className="text-xs font-semibold tracking-wider text-primary uppercase block"
+          >
             STRUKTUR ORGANISASI DAN TATA KELOLA
-          </span>
+          </motion.span>
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-start pt-2">
             {/* Left Column: Heading */}
-            <div className="lg:col-span-5">
+            <motion.div variants={itemVariants} className="lg:col-span-5">
               <h2 className="font-heading font-normal text-3xl sm:text-4xl lg:text-[40px] text-heading leading-tight">
                 Garis tanggung jawab yang jelas dan terstruktur
               </h2>
-            </div>
+            </motion.div>
 
             {/* Right Column: Paragraph */}
-            <div className="lg:col-span-7 text-sm sm:text-base text-body leading-relaxed space-y-4">
+            <motion.div
+              variants={itemVariants}
+              className="lg:col-span-7 text-sm sm:text-base text-body leading-relaxed space-y-4"
+            >
               <p>
                 Program Studi Magister (S2) Kenotariatan Fakultas Hukum UNISSULA
                 dipimpin oleh Ketua Program Studi yang bertanggung jawab
@@ -241,9 +309,9 @@ export default function StrukturOrganisasi() {
                 mengoordinasi penyelenggaraan akademik harian, didukung oleh
                 Koordinator Tata Usaha beserta empat bidang pelaksana administrasi.
               </p>
-            </div>
+            </motion.div>
           </div>
-        </section>
+        </motion.section>
 
         {/* Section Bagan Organisasi Visual */}
         <section className="space-y-6">
@@ -253,7 +321,18 @@ export default function StrukturOrganisasi() {
               Koordinasi: Gugus Penjamin Mutu (garis putus-putus merah)
               Unit Penunjang: Lab Akta & Perpustakaan (kiri / bawah)
           ============================================================ */}
-          <div className="bg-white border border-gray-200 p-4 sm:p-8 lg:p-10 rounded-xs shadow-2xs overflow-hidden">
+          {/*
+            Bagan dianimasikan sebagai satu blok utuh. Menganimasikan tiap
+            kotaknya sendiri-sendiri akan memutus garis penghubung yang
+            digambar dengan posisi absolut, karena garisnya tidak ikut bergeser.
+          */}
+          <motion.div
+            variants={cardVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportSettings}
+            className="bg-white border border-gray-200 p-4 sm:p-8 lg:p-10 rounded-xs shadow-2xs overflow-hidden"
+          >
 
             {/* Petunjuk scroll untuk layar kecil */}
             <div className="flex items-center justify-between pb-3 mb-4 border-b border-gray-100 lg:hidden">
@@ -529,26 +608,51 @@ export default function StrukturOrganisasi() {
             </div>
             */}
 
-          </div>{/* /card */}
+          </motion.div>{/* /card */}
         </section>
 
         {/* Section Pejabat dan Pelaksana: foto per orang, dikelompokkan per
             unit. Terpisah dari bagan di atas — bagan menunjukkan garis
             komando, section ini menunjukkan orangnya. */}
         <section className="space-y-6">
-          <div>
-            <h2 className="font-heading font-normal text-3xl sm:text-4xl text-heading tracking-normal">
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportSettings}
+          >
+            <motion.h2
+              variants={itemVariants}
+              className="font-heading font-normal text-3xl sm:text-4xl text-heading tracking-normal"
+            >
               Pejabat dan Pelaksana
-            </h2>
-            <div className="w-full h-[1.5px] bg-heading mt-3 mb-8" />
-          </div>
+            </motion.h2>
+            <motion.div
+              variants={itemVariants}
+              className="w-full h-[1.5px] bg-heading mt-3 mb-8"
+            />
+          </motion.div>
 
           <div className="space-y-10">
+            {/*
+              Tiap grup memicu animasinya sendiri, bukan diikat ke satu induk
+              di puncak bagian ini: daftarnya panjang, dan dengan satu pemicu
+              grup paling bawah sudah selesai beranimasi jauh sebelum terlihat.
+            */}
             {pejabatPelaksana.map((group) => (
-              <div key={group.title}>
-                <span className="text-lg flex justify-center font-bold tracking-wider text-primary uppercase mb-4">
+              <motion.div
+                key={group.title}
+                variants={containerVariants}
+                initial="hidden"
+                whileInView="visible"
+                viewport={viewportSettings}
+              >
+                <motion.span
+                  variants={itemVariants}
+                  className="text-lg flex justify-center font-bold tracking-wider text-primary uppercase mb-4"
+                >
                   {group.title}
-                </span>
+                </motion.span>
                 {/* flex-wrap + justify-center: grup 1-3 anggota tampil
                     terpusat, grup besar (Tata Usaha & Administrasi) mengalir
                     ke baris berikutnya tanpa perlu penanganan khusus. */}
@@ -560,21 +664,36 @@ export default function StrukturOrganisasi() {
                     />
                   ))}
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </section>
 
         {/* Section Pejabat dan Tanggung Jawab Table */}
-        <section className="space-y-6">
+        <motion.section
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportSettings}
+          className="space-y-6"
+        >
           <div>
-            <h2 className="font-heading font-normal text-3xl sm:text-4xl text-heading tracking-normal">
+            <motion.h2
+              variants={itemVariants}
+              className="font-heading font-normal text-3xl sm:text-4xl text-heading tracking-normal"
+            >
               Pejabat dan Tanggung Jawab
-            </h2>
-            <div className="w-full h-[1.5px] bg-heading mt-3 mb-8" />
+            </motion.h2>
+            <motion.div
+              variants={itemVariants}
+              className="w-full h-[1.5px] bg-heading mt-3 mb-8"
+            />
           </div>
 
-          <div className="border border-gray-200 bg-white overflow-x-auto rounded-xs shadow-2xs">
+          <motion.div
+            variants={cardVariants}
+            className="border border-gray-200 bg-white overflow-x-auto rounded-xs shadow-2xs"
+          >
             <table className="w-full text-left border-collapse">
               <thead>
                 <tr className="border-b border-gray-200 bg-gray-50/50">
@@ -602,16 +721,19 @@ export default function StrukturOrganisasi() {
                 ))}
               </tbody>
             </table>
-          </div>
+          </motion.div>
 
           {/* Footnote Notice */}
-          <p className="text-xs text-gray-500 leading-relaxed pt-2">
+          <motion.p
+            variants={itemVariants}
+            className="text-xs text-gray-500 leading-relaxed pt-2"
+          >
             Struktur organisasi Program Studi Magister (S2) Kenotariatan
             Fakultas Hukum UNISSULA disusun untuk menjamin akuntabilitas, tata
             kelola akademik yang kredibel, serta pelayanan prima kepada seluruh
             mahasiswa dan pemangku kepentingan.
-          </p>
-        </section>
+          </motion.p>
+        </motion.section>
       </div>
     </>
   );

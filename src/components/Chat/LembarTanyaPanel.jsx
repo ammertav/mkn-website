@@ -5,11 +5,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { FiCornerDownLeft, FiFeather, FiRotateCcw, FiX } from "react-icons/fi";
 
-import {
-  catatanLembar,
-  jawabProdi,
-  pokokBahasan,
-} from "../../utils/prodiChatEngine";
+import { catatanLembar, pokokBahasan } from "../../utils/prodiChatEngine";
 
 /**
  * Lembar Tanya — asisten cakupan program studi.
@@ -21,7 +17,7 @@ import {
  * akan menemukan bagian chatbot di sini persis di tempat yang sama.
  *
  * KONTRAK API:
- *   POST <VITE_CHAT_API_URL>
+ *   POST https://mkn.codefy.my.id/chat
  *   badan   : { "prompt": "<pertanyaan pengguna>" }
  *   balasan : { "reply":  "<jawaban>" }
  *
@@ -33,12 +29,9 @@ import {
  * lembar keterangan bernomor — kepala dokumen, garis margin, butir berlabel
  * PERTANYAAN dan KETERANGAN, serta daftar rujukan di tiap keterangan.
  *
- * Dimuat lambat oleh LembarTanya supaya axios dan mesin luring tidak ikut ke
- * dalam bundel awal setiap halaman.
+ * Dimuat lambat oleh LembarTanya supaya axios tidak ikut ke dalam bundel awal
+ * setiap halaman.
  */
-
-/** Kosong selama endpoint belum diatur; lihat .env.example. */
-const API_URL = (import.meta.env.VITE_CHAT_API_URL ?? "").trim();
 
 /** Batas tunggu, supaya permintaan yang menggantung tidak membekukan tombol. */
 const BATAS_TUNGGU_MS = 20000;
@@ -183,20 +176,8 @@ export default function LembarTanyaPanel({ onTutup }) {
     setLoading(true);
 
     try {
-      // Selama VITE_CHAT_API_URL belum diisi, keterangan disusun mesin luring
-      // agar halamannya tetap berfungsi. Hapus cabang ini bila API sudah tetap.
-      if (!API_URL) {
-        await new Promise((selesai) => setTimeout(selesai, 500));
-        const jawaban = jawabProdi(prompt);
-        setMessages((prev) => [
-          ...prev,
-          { from: "bot", text: jawaban.teks, rujukan: jawaban.rujukan },
-        ]);
-        return;
-      }
-
       const response = await axios.post(
-        API_URL,
+        "https://mkn.codefy.my.id/chat",
         { prompt },
         { timeout: BATAS_TUNGGU_MS }
       );
@@ -301,17 +282,7 @@ export default function LembarTanyaPanel({ onTutup }) {
           <div className="mt-3 pt-3 border-t border-dashed border-heading/15 flex flex-wrap gap-x-6 gap-y-1 text-[11px] text-heading/50 tabular-nums">
             <span>No. {nomorLembar(tanggalRef.current)}</span>
             <span>{tanggalPanjang(tanggalRef.current)}</span>
-            <span className="ml-auto flex items-center gap-3">
-              {!API_URL && (
-                <span
-                  title="VITE_CHAT_API_URL belum diisi; keterangan disusun dari isi situs."
-                  className="text-[10px] font-bold tracking-wider uppercase text-heading/40 border border-heading/20 px-1.5 py-0.5 rounded-xs"
-                >
-                  Luring
-                </span>
-              )}
-              <span>{hitung} butir</span>
-            </span>
+            <span className="ml-auto">{hitung} butir</span>
           </div>
         </div>
 

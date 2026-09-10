@@ -2,7 +2,7 @@ import { Suspense, lazy } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import Loading from "./components/Loading";
 import ScrollToTop from "./components/ScrollToTop";
-import LembarTanya from "./components/chat/LembarTanya";
+import LembarTanya from "./components/Chat/LembarTanya";
 
 const Home = lazy(() => import("./pages/Home"));
 
