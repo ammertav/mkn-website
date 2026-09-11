@@ -164,7 +164,7 @@ export default function FacultyDetail() {
                   variants={itemVariants}
                   className="font-heading italic text-lg sm:text-xl text-special"
                 >
-                  {faculty.title}
+                  {t(faculty.title)}
                 </motion.p>
 
                 <motion.div
@@ -176,7 +176,7 @@ export default function FacultyDetail() {
                   variants={itemVariants}
                   className="text-sm sm:text-base text-body leading-relaxed max-w-xl"
                 >
-                  {faculty.bio}
+                  {t(faculty.bio)}
                 </motion.p>
               </div>
 
@@ -263,7 +263,7 @@ export default function FacultyDetail() {
                 />
               ) : (
                 <span className="text-xs sm:text-sm text-gray-500 font-medium tracking-wide">
-                  {faculty.imageCaption || `Potret ${faculty.shortName || faculty.name}`}
+                  {t(faculty.imageCaption) || `Potret ${faculty.shortName || faculty.name}`}
                 </span>
               )}
             </motion.div>
@@ -288,7 +288,7 @@ export default function FacultyDetail() {
                 >
                   {faculty.fullBio.map((paragraph, idx) => (
                     <motion.p variants={itemVariants} key={idx} className="leading-relaxed">
-                      {paragraph}
+                      {t(paragraph)}
                     </motion.p>
                   ))}
                 </motion.div>
@@ -332,9 +332,9 @@ export default function FacultyDetail() {
                             className="text-body hover:bg-gray-50/50 transition-colors"
                           >
                             <td className="py-3.5 pr-4 font-medium text-heading">
-                              {course.name}
+                              {t(course.name)}
                             </td>
-                            <td className="py-3.5 px-4">{course.placement}</td>
+                            <td className="py-3.5 px-4">{t(course.placement)}</td>
                             <td className="py-3.5 pl-4 text-right font-medium">
                               {course.sks}
                             </td>
@@ -478,11 +478,11 @@ export default function FacultyDetail() {
                             className="text-body hover:bg-gray-50/50 transition-colors"
                           >
                             <td className="py-3.5 pr-4 font-medium text-heading">
-                              {service.role}
+                              {t(service.role)}
                             </td>
-                            <td className="py-3.5 px-4">{service.institution}</td>
+                            <td className="py-3.5 px-4">{t(service.institution)}</td>
                             <td className="py-3.5 pl-4 text-right sm:text-left">
-                              {service.period}
+                              {t(service.period)}
                             </td>
                           </motion.tr>
                         ))}
@@ -683,14 +683,14 @@ export default function FacultyDetail() {
                           </span>
                         )}
                         <h4 className="font-heading font-bold text-sm sm:text-base text-heading">
-                          {edu.degree}
+                          {t(edu.degree)}
                         </h4>
                         <p className="text-xs sm:text-sm text-body">
                           {edu.university}
                         </p>
                         {edu.thesis && (
                           <p className="text-xs text-special italic pt-0.5">
-                            &ldquo;{edu.thesis}&rdquo;
+                            &ldquo;{t(edu.thesis)}&rdquo;
                           </p>
                         )}
                       </motion.div>
@@ -719,7 +719,7 @@ export default function FacultyDetail() {
                             {other.shortName || other.name}
                           </h4>
                           <p className="text-xs text-body mt-0.5">
-                            {other.title}
+                            {t(other.title)}
                           </p>
                         </Link>
                       </motion.div>

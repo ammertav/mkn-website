@@ -211,6 +211,10 @@ export const navLinks = [
     href: "/event",
   },
   {
+    title: { id: "KERJA SAMA", en: "PARTNERSHIPS" },
+    href: "/kerja-sama",
+  },
+  {
     title: { id: "PENJAMINAN MUTU", en: "QUALITY ASSURANCE" },
     href: "/quality-assurance",
     children: [
