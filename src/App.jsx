@@ -3,6 +3,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import Loading from "./components/Loading";
 import ScrollToTop from "./components/ScrollToTop";
 import LembarTanya from "./components/Chat/LembarTanya";
+import BatasGalatRute, { BatasGalat } from "./components/BatasGalat";
 
 const Home = lazy(() => import("./pages/Home"));
 
@@ -96,13 +97,21 @@ const JobVacancies = lazy(() => import("./pages/Alumni/JobVacancies"));
 
 // Kerja Sama
 const KerjaSama = lazy(() => import("./pages/KerjaSama/index"));
+const NotFound = lazy(() => import("./pages/NotFound"));
 
 export default function App() {
   return (
     <>
       <ScrollToTop />
       {/* Asisten cakupan program studi — hadir di seluruh halaman. */}
-      <LembarTanya />
+      {/* Dibungkus sendiri dan senyap: bila asisten gagal, cukup ia yang
+          hilang — halaman yang sedang dibaca tidak ikut tumbang. */}
+      <BatasGalat senyap>
+        <LembarTanya />
+      </BatasGalat>
+      {/* Menangkap galat render dan chunk yang gagal dimuat di semua
+          halaman; pulih sendiri saat pengguna berpindah alamat. */}
+      <BatasGalatRute>
       <Suspense fallback={<Loading />}>
         <Routes>
         <Route path="/" element={<Home />} />
@@ -270,9 +279,10 @@ export default function App() {
         <Route path="/qa-documents/*" element={<Navigate to="/quality-assurance/qa-documents" replace />} />
         <Route path="/alumni-karir" element={<Navigate to="/alumni" replace />} />
 
-        <Route path="*" element={<h1>404 Not Found</h1>} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </Suspense>
+      </BatasGalatRute>
     </>
   );
 }

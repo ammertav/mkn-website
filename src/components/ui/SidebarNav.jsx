@@ -83,10 +83,10 @@ export default function SidebarNav({ title, menus, contact, className = "" }) {
                     href={line.href}
                     className="block text-primary hover:underline"
                   >
-                    {line.text}
+                    {t(line.text)}
                   </a>
                 ) : (
-                  <p key={i}>{line.text}</p>
+                  <p key={i}>{t(line.text)}</p>
                 )
               )}
             </div>
