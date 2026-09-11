@@ -1,12 +1,14 @@
 import { Helmet } from "react-helmet-async";
 import { motion } from "framer-motion";
 import {
-  graduationMetrics,
-  academicYearRecap,
-  predicateAndDurationDistribution,
-  supportingDocuments,
+  sumberKelulusan,
+  ringkasanKelulusan,
+  periodeLulus,
+  rekapAngkatan,
 } from "../../data/informasi/graduationRateData";
 import { useT, useLanguage } from "../../i18n/languageContext";
+import { KotakStatistik } from "../../components/ui/Grafik";
+import { WARNA } from "../../components/ui/grafikWarna";
 
 const viewportSettings = {
   once: true,
@@ -47,18 +49,6 @@ const itemVariants = {
   },
 };
 
-const statCardVariants = {
-  hidden: { opacity: 0, y: 16 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.45,
-      ease: [0.22, 1, 0.36, 1],
-    },
-  },
-};
-
 const rowVariants = {
   hidden: { opacity: 0, y: 14 },
   visible: {
@@ -80,6 +70,15 @@ const lineVariants = {
   },
 };
 
+/** Judul seksi bergaris tebal, sama dengan halaman Informasi lainnya. */
+function JudulSeksi({ children }) {
+  return (
+    <motion.div variants={itemVariants} className="pb-2 border-b-2 border-heading">
+      <h2 className="text-2xl font-heading font-normal text-heading tracking-tight">{children}</h2>
+    </motion.div>
+  );
+}
+
 export default function GraduationRate() {
   const t = useT();
   const { lang } = useLanguage();
@@ -97,16 +96,13 @@ export default function GraduationRate() {
           name="description"
           content={
             lang === "en"
-              ? "Statistical data on graduation rates, average GPA, distribution of graduation predicates, and study periods for students of the Master of Notarial Law (MKn) UNISSULA."
-              : "Data statistik tingkat kelulusan, rata-rata IPK, sebaran predikat kelulusan, dan masa studi mahasiswa Program Studi Magister Kenotariatan (MKn) UNISSULA."
+              ? "Graduation data for the Master of Notarial Law (MKn) UNISSULA: study duration, study success, on-time graduation, and graduates per intake."
+              : "Data kelulusan Program Studi Magister Kenotariatan (MKn) UNISSULA: masa studi, keberhasilan studi, kelulusan tepat waktu, dan lulusan per angkatan."
           }
         />
       </Helmet>
 
       <div className="space-y-12 sm:space-y-16 font-body text-body">
-        {/* ========================================================================= */}
-        {/* HEADER SECTION */}
-        {/* ========================================================================= */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
@@ -131,37 +127,33 @@ export default function GraduationRate() {
             className="text-sm sm:text-base text-body text-justify leading-relaxed"
           >
             {t({
-              id: "Data kelulusan dihimpun setiap akhir tahun akademik oleh Gugus Penjaminan Mutu dari basis data akademik program studi. Indikator yang dipantau meliputi ketepatan masa studi, indeks prestasi kumulatif, predikat kelulusan, dan lama penyelesaian tesis.",
-              en: "Graduation data is compiled at the end of each academic year by the Quality Assurance Team from the study programme's academic database. Monitored indicators include study duration timeliness, cumulative GPA, graduation honors predicate, and thesis completion time.",
+              id:
+                "Program Studi memantau kelulusan melalui monitoring dan evaluasi pembelajaran setiap " +
+                "akhir semester. Karena mahasiswa diterima setiap semester dan studi dapat diselesaikan " +
+                "dalam tiga semester, rekapitulasi disusun per angkatan semester. Kelulusan tepat waktu " +
+                "dihitung bagi mahasiswa yang lulus dalam tiga atau empat semester.",
+              en:
+                "The programme monitors graduation through its end-of-semester learning monitoring and " +
+                "evaluation. Because students are admitted every semester and the programme can be " +
+                "completed in three semesters, figures are compiled per semester intake. On-time " +
+                "graduation counts students who graduate within three or four semesters.",
             })}
           </motion.p>
 
-          {/* Metric Stats Cards */}
-          <motion.div
-            variants={listContainerVariants}
-            className="grid grid-cols-2 md:grid-cols-4 bg-white border border-gray-200 divide-x divide-y md:divide-y-0 divide-gray-200 mt-8 rounded-xs shadow-2xs overflow-hidden"
-          >
-            {graduationMetrics.map((metric, idx) => (
-              <motion.div
-                key={idx}
-                variants={statCardVariants}
-                whileHover={{ y: -2 }}
-                className="p-5 sm:p-6 text-left flex flex-col justify-center transition-colors hover:bg-gray-50/70"
-              >
-                <span className="font-heading italic font-normal text-3xl sm:text-4xl text-primary block leading-none">
-                  {metric.value}
-                </span>
-                <span className="text-[11px] sm:text-xs font-semibold tracking-wider uppercase text-body mt-2 block">
-                  {t(metric.label)}
-                </span>
-              </motion.div>
-            ))}
+          <motion.div variants={itemVariants} className="pt-4">
+            <KotakStatistik
+              butir={ringkasanKelulusan.map((r) => ({
+                nilai: t(r.nilai),
+                label: t(r.label),
+                keterangan: t(r.keterangan),
+              }))}
+            />
           </motion.div>
         </motion.div>
 
-        {/* ========================================================================= */}
-        {/* REKAPITULASI PER TAHUN AKADEMIK */}
-        {/* ========================================================================= */}
+        {/* ===================================================================== */}
+        {/* REKAPITULASI PER ANGKATAN */}
+        {/* ===================================================================== */}
         <motion.section
           variants={containerVariants}
           initial="hidden"
@@ -169,66 +161,115 @@ export default function GraduationRate() {
           viewport={viewportSettings}
           className="space-y-4"
         >
-          <motion.div variants={itemVariants} className="pb-2 border-b-2 border-heading">
-            <h2 className="text-2xl font-heading font-normal text-heading tracking-tight">
-              {t({
-                id: "Rekapitulasi per Periode Akademik",
-                en: "Recapitulation by Academic Period",
-              })}
-            </h2>
-          </motion.div>
+          <JudulSeksi>
+            {t({ id: "Rekapitulasi Lulusan per Angkatan", en: "Graduates by Intake" })}
+          </JudulSeksi>
 
-          <motion.div variants={itemVariants} className="border border-gray-200 bg-white overflow-x-auto shadow-2xs">
-            <table className="w-full text-left border-collapse text-xs sm:text-sm min-w-[600px]">
+          <motion.p variants={itemVariants} className="text-sm text-body leading-relaxed">
+            {t({
+              id:
+                "Setiap baris adalah satu angkatan masuk. Kolom semester menunjukkan jumlah lulusan " +
+                "angkatan tersebut pada semester itu.",
+              en:
+                "Each row is one intake. The semester columns show how many students from that intake " +
+                "graduated in that semester.",
+            })}
+          </motion.p>
+
+          <motion.div
+            variants={itemVariants}
+            className="border border-gray-200 bg-white overflow-x-auto shadow-2xs"
+          >
+            <table className="w-full text-left border-collapse text-xs sm:text-sm min-w-180">
               <thead>
-                <tr className="border-b-2 border-heading text-xs font-bold tracking-wider text-heading uppercase">
-                  <th className="py-3.5 px-5 font-bold">
-                    {t({ id: "PERIODE AKADEMIK", en: "ACADEMIC PERIOD" })}
+                <tr className="text-[11px] font-bold tracking-wider text-heading uppercase">
+                  <th rowSpan={2} className="py-3 px-4 align-bottom border-b-2 border-heading">
+                    {t({ id: "Angkatan", en: "Intake" })}
                   </th>
-                  <th className="py-3.5 px-5 font-bold">
-                    {t({ id: "MAHASISWA", en: "STUDENTS" })}
+                  <th
+                    rowSpan={2}
+                    className="py-3 px-4 align-bottom text-right border-b-2 border-heading"
+                  >
+                    {t({ id: "Diterima", en: "Admitted" })}
                   </th>
-                  <th className="py-3.5 px-5 font-bold">
-                    {t({ id: "LULUS", en: "GRADUATED" })}
+                  <th
+                    colSpan={periodeLulus.length}
+                    className="pt-3 pb-1.5 px-4 text-center border-b border-gray-200"
+                  >
+                    {t({ id: "Lulus pada semester", en: "Graduated in semester" })}
                   </th>
-                  <th className="py-3.5 px-5 font-bold">
-                    {t({ id: "TEPAT WAKTU", en: "ON TIME" })}
+                  <th rowSpan={2} className="py-3 px-4 align-bottom border-b-2 border-heading">
+                    {t({ id: "Jumlah lulus", en: "Total graduated" })}
                   </th>
-                  <th className="py-3.5 px-5 font-bold">
-                    {t({ id: "RATA IPK", en: "AVG GPA" })}
-                  </th>
-                  <th className="py-3.5 px-5 font-bold">
-                    {t({ id: "MASA STUDI", en: "STUDY DURATION" })}
+                  <th
+                    rowSpan={2}
+                    className="py-3 px-4 align-bottom text-right border-b-2 border-heading"
+                  >
+                    {t({ id: "Masa studi (tahun)", en: "Duration (years)" })}
                   </th>
                 </tr>
+                <tr className="text-[10px] font-semibold tracking-wide text-body normal-case">
+                  {periodeLulus.map((p) => (
+                    <th
+                      key={p.kode}
+                      className="py-2 px-2 text-right font-semibold leading-tight border-b-2 border-heading"
+                    >
+                      {/* Label berbentuk "Gasal 2022/2023"; dipecah dua baris agar kolom ramping. */}
+                      <span className="block">{t(p.label).split(" ")[0]}</span>
+                      <span className="block tabular-nums">{t(p.label).split(" ")[1]}</span>
+                    </th>
+                  ))}
+                </tr>
               </thead>
-              <motion.tbody
-                variants={listContainerVariants}
-                className="divide-y divide-gray-200"
-              >
-                {academicYearRecap.map((item, idx) => (
+              <motion.tbody variants={listContainerVariants} className="divide-y divide-gray-200">
+                {rekapAngkatan.map((a) => (
                   <motion.tr
-                    key={idx}
+                    key={a.kode}
                     variants={rowVariants}
                     className="hover:bg-gray-50/50 transition-colors"
                   >
-                    <td className="py-4 px-5 text-heading whitespace-nowrap">
-                      {item.year}
+                    <td className="py-3.5 px-4 text-heading whitespace-nowrap">
+                      {t(a.angkatan)}
+                      <span className="block text-[11px] text-body/70 tabular-nums">{a.kode}</span>
                     </td>
-                    <td className="py-4 px-5 text-body">
-                      {item.students}
+                    <td className="py-3.5 px-4 text-right text-heading tabular-nums">{a.diterima}</td>
+                    {periodeLulus.map((p) => (
+                      <td key={p.kode} className="py-3.5 px-2 text-right tabular-nums">
+                        {a.lulus[p.kode] ? (
+                          <span className="text-heading">{a.lulus[p.kode]}</span>
+                        ) : (
+                          <span className="text-gray-300" aria-label={t({ id: "tidak ada", en: "none" })}>
+                            –
+                          </span>
+                        )}
+                      </td>
+                    ))}
+                    <td className="py-3.5 px-4">
+                      <div className="flex flex-col gap-1.5">
+                        {/* Meter: isi = lulusan, lintasan = seluruh mahasiswa diterima. */}
+                        <span
+                          aria-hidden="true"
+                          className="block h-1.5 w-16 shrink-0 rounded-full overflow-hidden"
+                          style={{ backgroundColor: WARNA.lintasan }}
+                        >
+                          <span
+                            className="block h-full rounded-full"
+                            style={{
+                              width: `${(a.jumlahLulus / a.diterima) * 100}%`,
+                              backgroundColor: WARNA.utama,
+                            }}
+                          />
+                        </span>
+                        <span className="whitespace-nowrap text-heading tabular-nums">
+                          {a.jumlahLulus}{" "}
+                          <span className="text-body">
+                            {t({ id: "dari", en: "of" })} {a.diterima}
+                          </span>
+                        </span>
+                      </div>
                     </td>
-                    <td className="py-4 px-5 text-body">
-                      {item.graduated}
-                    </td>
-                    <td className="py-4 px-5 text-body font-medium">
-                      {item.onTime}
-                    </td>
-                    <td className="py-4 px-5 text-body">
-                      {item.avgGpa}
-                    </td>
-                    <td className="py-4 px-5 text-body whitespace-nowrap">
-                      {t(item.studyDuration)}
+                    <td className="py-3.5 px-4 text-right text-heading tabular-nums">
+                      {t(a.masaStudi)}
                     </td>
                   </motion.tr>
                 ))}
@@ -237,9 +278,9 @@ export default function GraduationRate() {
           </motion.div>
         </motion.section>
 
-        {/* ========================================================================= */}
-        {/* SEBARAN PREDIKAT DAN MASA STUDI */}
-        {/* ========================================================================= */}
+        {/* ===================================================================== */}
+        {/* SUMBER DATA */}
+        {/* ===================================================================== */}
         <motion.section
           variants={containerVariants}
           initial="hidden"
@@ -247,137 +288,22 @@ export default function GraduationRate() {
           viewport={viewportSettings}
           className="space-y-4"
         >
-          <motion.div variants={itemVariants} className="pb-2 border-b-2 border-heading">
-            <h2 className="text-2xl font-heading font-normal text-heading tracking-tight">
-              {t({
-                id: "Sebaran Predikat dan Masa Studi",
-                en: "Distribution of Predicates and Study Duration",
-              })}
-            </h2>
-          </motion.div>
-
-          <motion.div variants={itemVariants} className="border border-gray-200 bg-white overflow-x-auto shadow-2xs">
-            <table className="w-full text-left border-collapse text-xs sm:text-sm min-w-[550px]">
-              <thead>
-                <tr className="border-b-2 border-heading text-xs font-bold tracking-wider text-heading uppercase">
-                  <th className="py-3.5 px-5 font-bold w-1/4">
-                    {t({ id: "KELOMPOK", en: "CATEGORY" })}
-                  </th>
-                  <th className="py-3.5 px-5 font-bold">
-                    {t({ id: "LULUSAN 2024", en: "2024 GRADUATES" })}
-                  </th>
-                  <th className="py-3.5 px-5 font-bold">
-                    {t({ id: "PROPORSI", en: "PROPORTION" })}
-                  </th>
-                  <th className="py-3.5 px-5 font-bold w-2/5">
-                    {t({ id: "KETERANGAN", en: "REMARKS" })}
-                  </th>
-                </tr>
-              </thead>
-              <motion.tbody
-                variants={listContainerVariants}
-                className="divide-y divide-gray-200"
+          <JudulSeksi>{t({ id: "Sumber Data", en: "Data Sources" })}</JudulSeksi>
+          <motion.ul variants={listContainerVariants} className="divide-y divide-gray-200">
+            {sumberKelulusan.map((s) => (
+              <motion.li
+                key={s.judul.id}
+                variants={rowVariants}
+                className="py-3.5 flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6"
               >
-                {predicateAndDurationDistribution.map((item, idx) => (
-                  <motion.tr
-                    key={idx}
-                    variants={rowVariants}
-                    className="hover:bg-gray-50/50 transition-colors"
-                  >
-                    <td className="py-4 px-5 text-heading whitespace-nowrap">
-                      {t(item.group)}
-                    </td>
-                    <td className="py-4 px-5 text-body">
-                      {item.graduates2024}
-                    </td>
-                    <td className="py-4 px-5 text-body font-medium">
-                      {item.proportion}
-                    </td>
-                    <td className="py-4 px-5 text-body leading-relaxed">
-                      {t(item.notes)}
-                    </td>
-                  </motion.tr>
-                ))}
-              </motion.tbody>
-            </table>
-          </motion.div>
-        </motion.section>
-
-        {/* ========================================================================= */}
-        {/* DOKUMEN PENDUKUNG */}
-        {/* ========================================================================= */}
-        <motion.section
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={viewportSettings}
-          className="space-y-4"
-        >
-          <motion.div variants={itemVariants} className="pb-2 border-b-2 border-heading">
-            <h2 className="text-2xl font-heading font-normal text-heading tracking-tight">
-              {t({
-                id: "Dokumen Pendukung",
-                en: "Supporting Documents",
-              })}
-            </h2>
-          </motion.div>
-
-          <motion.div variants={itemVariants} className="border border-gray-200 bg-white overflow-x-auto shadow-2xs">
-            <table className="w-full text-left border-collapse text-xs sm:text-sm min-w-[500px]">
-              <thead>
-                <tr className="border-b-2 border-heading text-xs font-bold tracking-wider text-heading uppercase">
-                  <th className="py-3.5 px-5 font-bold w-1/2">
-                    {t({ id: "JUDUL DOKUMEN", en: "DOCUMENT TITLE" })}
-                  </th>
-                  <th className="py-3.5 px-5 font-bold">
-                    {t({ id: "VERSI", en: "VERSION" })}
-                  </th>
-                  <th className="py-3.5 px-5 font-bold">
-                    {t({ id: "TANGGAL", en: "DATE" })}
-                  </th>
-                  <th className="py-3.5 px-5 font-bold">
-                    {t({ id: "UNDUH", en: "DOWNLOAD" })}
-                  </th>
-                </tr>
-              </thead>
-              <motion.tbody
-                variants={listContainerVariants}
-                className="divide-y divide-gray-200"
-              >
-                {supportingDocuments.map((doc) => (
-                  <motion.tr
-                    key={doc.id}
-                    variants={rowVariants}
-                    className="hover:bg-gray-50/50 transition-colors"
-                  >
-                    <td className="py-4 px-5 text-heading">
-                      {t(doc.title)}
-                    </td>
-                    <td className="py-4 px-5 text-body">
-                      {doc.version}
-                    </td>
-                    <td className="py-4 px-5 text-body whitespace-nowrap">
-                      {t(doc.date)}
-                    </td>
-                    <td className="py-4 px-5">
-                      <motion.a
-                        href={doc.fileUrl}
-                        download={doc.fileName}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                        className="text-primary font-bold hover:underline inline-flex items-center gap-1 cursor-pointer transition-colors"
-                      >
-                        <span>{doc.fileType}</span>
-                        <span className="text-xs">↓</span>
-                      </motion.a>
-                    </td>
-                  </motion.tr>
-                ))}
-              </motion.tbody>
-            </table>
-          </motion.div>
+                <div>
+                  <p className="text-sm text-heading font-medium">{t(s.judul)}</p>
+                  <p className="text-xs text-body mt-0.5">{t(s.cakupan)}</p>
+                </div>
+                <span className="text-xs text-body whitespace-nowrap">{t(s.tanggal)}</span>
+              </motion.li>
+            ))}
+          </motion.ul>
         </motion.section>
       </div>
     </>
