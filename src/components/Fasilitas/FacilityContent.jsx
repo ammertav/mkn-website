@@ -1,5 +1,6 @@
 import { FaFilePdf } from "react-icons/fa";
 import { FiExternalLink } from "react-icons/fi";
+import { useT } from "../../i18n/languageContext";
 import FacilitySectionHeader from "./FacilitySectionHeader";
 import FacilityGallery from "./FacilityGallery";
 
@@ -13,6 +14,7 @@ import FacilityGallery from "./FacilityGallery";
  * yang belum menyerahkan foto atau video tidak menampilkan bingkai kosong.
  */
 export default function FacilityContent({ data }) {
+  const t = useT();
   const { header, fasilitas, galeri, video, dokumen } = data;
 
   return (
@@ -34,7 +36,7 @@ export default function FacilityContent({ data }) {
         <section className="space-y-4">
           <div>
             <h3 className="text-2xl sm:text-3xl font-heading font-normal text-heading">
-              {video.judul}
+              {t(video.judul)}
             </h3>
             <div className="w-full h-[1.5px] bg-heading mt-3" />
           </div>
@@ -46,7 +48,10 @@ export default function FacilityContent({ data }) {
             className="w-full aspect-video bg-neutral-900 rounded-xs"
           >
             <source src={video.src} type="video/mp4" />
-            Peramban Anda tidak mendukung pemutaran video.
+            {t({
+              id: "Peramban Anda tidak mendukung pemutaran video.",
+              en: "Your browser does not support playing videos.",
+            })}
           </video>
         </section>
       )}
@@ -54,7 +59,10 @@ export default function FacilityContent({ data }) {
       <section className="space-y-6">
         <div>
           <h3 className="text-2xl sm:text-3xl font-heading font-normal text-heading">
-            Fasilitas yang Tersedia
+            {t({
+              id: "Fasilitas yang Tersedia",
+              en: "Available Facilities",
+            })}
           </h3>
           <div className="w-full h-[1.5px] bg-heading mt-3" />
         </div>
@@ -62,13 +70,13 @@ export default function FacilityContent({ data }) {
         <div className="grid grid-cols-1 md:grid-cols-2 border-t border-l border-gray-200 bg-white">
           {fasilitas.map((item, idx) => (
             <div
-              key={item}
+              key={typeof item === "string" ? item : item.id || idx}
               className="p-5 sm:p-6 border-r border-b border-gray-200 flex gap-4"
             >
               <span className="font-heading font-bold text-primary tabular-nums shrink-0 leading-snug">
                 {String(idx + 1).padStart(2, "0")}
               </span>
-              <p className="text-sm text-body leading-relaxed">{item}</p>
+              <p className="text-sm text-body leading-relaxed">{t(item)}</p>
             </div>
           ))}
         </div>
@@ -89,9 +97,11 @@ export default function FacilityContent({ data }) {
             </div>
             <div className="flex-1 min-w-0">
               <h3 className="font-heading font-semibold text-base text-heading group-hover:text-primary transition-colors leading-snug">
-                {dokumen.label}
+                {t(dokumen.label)}
               </h3>
-              <p className="text-xs text-gray-500 mt-0.5">Berkas PDF</p>
+              <p className="text-xs text-gray-500 mt-0.5">
+                {t({ id: "Berkas PDF", en: "PDF Document" })}
+              </p>
             </div>
             <FiExternalLink className="text-gray-400 group-hover:text-primary transition-colors shrink-0" />
           </a>

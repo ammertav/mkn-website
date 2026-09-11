@@ -4,19 +4,26 @@ import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import Breadcrumb from "../../components/ui/Breadcrumb";
 import SidebarNav from "../../components/ui/SidebarNav";
-import { navLinks } from "../../data/navLinks";
-
-const studentLifeMenus =
-  navLinks.find((n) => n.href === "/mahasiswa" || n.href === "/kehidupan-mahasiswa")?.children ?? [];
+import { useT } from "../../i18n/languageContext";
 
 export default function StudentLifeLayout() {
+  const t = useT();
+
   return (
     <>
       <Helmet>
-        <title>Kehidupan Mahasiswa | MKn UNISSULA</title>
+        <title>
+          {t({
+            id: "Kehidupan Mahasiswa | MKn UNISSULA",
+            en: "Student Life | MKn UNISSULA",
+          })}
+        </title>
         <meta
           name="description"
-          content="Kehidupan Mahasiswa Magister Kenotariatan (MKn) UNISSULA: Organisasi Mahasiswa dan Akomodasi."
+          content={t({
+            id: "Kehidupan Mahasiswa Magister Kenotariatan (MKn) UNISSULA: Organisasi Mahasiswa dan Akomodasi.",
+            en: "Master of Notarial Law (MKn) UNISSULA Student Life: Student Organizations and On-Campus Accommodation.",
+          })}
         />
       </Helmet>
 

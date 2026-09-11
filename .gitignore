@@ -37,3 +37,5 @@ input-berita/*
 .env
 .env.local
 .env.*.local
+
+I18N_CHECKLIST.md

@@ -6,6 +6,7 @@ import { berita } from "../../data/beritaSelectors";
 import { getBeritaImage } from "../../utils/imageResolver";
 import { generateSlug } from "../../utils/slugHelper";
 import Img from "../ui/Img";
+import { useUi } from "../../i18n/useUi";
 
 const viewportSettings = {
   once: true,
@@ -53,6 +54,7 @@ const cardVariants = {
 };
 
 export default function AcademicFocus() {
+  const ui = useUi();
   // Sumber dan urutannya sama persis dengan halaman Berita, sehingga entri
   // teratas di sini selalu berita terbaru yang sama.
   const featured = berita[0];
@@ -72,7 +74,7 @@ export default function AcademicFocus() {
         >
           <motion.div variants={itemVariants}>
             <h2 className="text-3xl sm:text-4xl md:text-[38px] font-heading font-normal text-heading tracking-normal">
-              Berita Terbaru
+              {ui("latestNews")}
             </h2>
           </motion.div>
 
@@ -81,7 +83,7 @@ export default function AcademicFocus() {
               to="/berita"
               className="inline-flex items-center space-x-1 text-xs font-bold tracking-wider text-primary hover:text-[#680000] uppercase transition-colors group pb-1"
             >
-              <span>LIHAT SEMUA BERITA</span>
+              <span>{ui("viewAllNews")}</span>
 
               <FiArrowRight className="text-sm transition-transform duration-200 group-hover:translate-x-1" />
             </Link>

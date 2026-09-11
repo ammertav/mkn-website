@@ -13,7 +13,7 @@ import {
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import Breadcrumb from "../../components/ui/Breadcrumb";
-import { useT } from "../../i18n/languageContext";
+import { useT, useLanguage } from "../../i18n/languageContext";
 import { useUi } from "../../i18n/useUi";
 import { berita as beritaTerurut, pengumuman as pengumumanTerurut } from "../../data/beritaSelectors";
 import { getBeritaImage } from "../../utils/imageResolver";
@@ -195,6 +195,7 @@ const KATEGORI_TABS = [
  * daftarnya tetap terbaca sebagai satu ritme.
  */
 function PengumumanCard({ item }) {
+  const t = useT();
   // getBeritaImage() punya fallback ke gambar berita utama saat path tidak
   // ketemu, jadi "tanpa gambar" harus ditentukan dari datanya, bukan dari
   // hasil resolusi path.
@@ -259,7 +260,7 @@ function PengumumanCard({ item }) {
                 <span className="text-gray-300">&bull;</span>
                 <span className="inline-flex items-center gap-1 text-[11px] bg-amber-50 text-amber-800 border border-amber-200 px-2 py-0.5 rounded-xs">
                   <FiClock className="text-xs" />
-                  Berlaku s.d. {item.berlakuHingga}
+                  {t({ id: "Berlaku s.d.", en: "Valid until" })} {item.berlakuHingga}
                 </span>
               </>
             )}
@@ -295,7 +296,7 @@ function PengumumanCard({ item }) {
             <div className="flex flex-wrap items-center gap-2">
               <span className="text-[11px] font-semibold text-gray-500 uppercase tracking-wider flex items-center gap-1">
                 <FiPaperclip className="text-primary text-xs" />
-                Lampiran:
+                {t({ id: "Lampiran:", en: "Attachments:" })}
               </span>
               {lampiran.map((file, idx) => (
                 <a
@@ -305,7 +306,7 @@ function PengumumanCard({ item }) {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-red-50/70 hover:bg-primary text-primary hover:text-white border border-primary/20 text-xs font-semibold rounded-xs transition-colors"
-                  title={`Unduh ${file.nama}`}
+                  title={`${t({ id: "Unduh", en: "Download" })} ${file.nama}`}
                 >
                   <FiFileText className="text-xs" />
                   <span className="truncate max-w-[150px] sm:max-w-[200px]">
@@ -327,7 +328,7 @@ function PengumumanCard({ item }) {
             to={`/berita/${itemSlug}`}
             className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-primary hover:text-[#680000] transition-colors shrink-0 self-start sm:self-auto"
           >
-            <span>Selengkapnya</span>
+            <span>{t({ id: "Selengkapnya", en: "Read more" })}</span>
             <span aria-hidden="true">&rarr;</span>
           </Link>
         </div>
@@ -339,6 +340,7 @@ function PengumumanCard({ item }) {
 export default function BeritaIndex() {
   const t = useT();
   const ui = useUi();
+  const { lang } = useLanguage();
 
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -403,6 +405,7 @@ export default function BeritaIndex() {
   return (
     <>
       <Helmet>
+        <html lang={lang} />
         <title>{t(halaman.meta.title)}</title>
         <meta
           name="description"
@@ -657,16 +660,19 @@ export default function BeritaIndex() {
                 </h2>
 
                 <span className="text-xs text-gray-500 font-medium">
-                  Menampilkan{" "}
-                  {(currentPage - 1) *
-                    ITEMS_PER_PAGE +
-                    1}{" "}
-                  -{" "}
-                  {Math.min(
-                    currentPage * ITEMS_PER_PAGE,
-                    allOtherNews.length
-                  )}{" "}
-                  dari {allOtherNews.length} berita
+                  {lang === "en" ? (
+                    <>
+                      Showing {(currentPage - 1) * ITEMS_PER_PAGE + 1} -{" "}
+                      {Math.min(currentPage * ITEMS_PER_PAGE, allOtherNews.length)}{" "}
+                      of {allOtherNews.length} news
+                    </>
+                  ) : (
+                    <>
+                      Menampilkan {(currentPage - 1) * ITEMS_PER_PAGE + 1} -{" "}
+                      {Math.min(currentPage * ITEMS_PER_PAGE, allOtherNews.length)}{" "}
+                      dari {allOtherNews.length} berita
+                    </>
+                  )}
                 </span>
               </motion.div>
 
@@ -803,14 +809,16 @@ export default function BeritaIndex() {
                   </h2>
 
                   <p className="text-xs sm:text-sm text-gray-500 mt-1">
-                    Pengumuman resmi dan edaran akademik
-                    Program Studi Magister Kenotariatan
-                    UNISSULA.
+                    {t({
+                      id: "Pengumuman resmi dan edaran akademik Program Studi Magister Kenotariatan UNISSULA.",
+                      en: "Official announcements and academic notices of the UNISSULA Master of Notary Program.",
+                    })}
                   </p>
                 </div>
 
                 <span className="text-xs font-semibold text-primary uppercase tracking-wider bg-red-50 border border-primary/20 px-3 py-1 rounded-xs w-fit">
-                  {pengumumanItems.length} Pengumuman
+                  {pengumumanItems.length}{" "}
+                  {t({ id: "Pengumuman", en: "Announcements" })}
                 </span>
               </motion.div>
 

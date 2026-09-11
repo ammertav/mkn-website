@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { FiPause, FiPlay, FiVolume2, FiVolumeX } from "react-icons/fi";
 
 import heroBackdrop from "../../assets/images/profil/hero-backdrop.webp";
+import { useT } from "../../i18n/languageContext";
 
 const SUMBER_VIDEO = "/videos/profile-mkn-terbaru-4.mp4";
 
@@ -45,7 +46,39 @@ const itemVariants = {
   },
 };
 
+const profilHeroText = {
+  label: {
+    id: "PROFIL PROGRAM STUDI",
+    en: "STUDY PROGRAMME PROFILE",
+  },
+  title: {
+    id: "Tentang Kami",
+    en: "About Us",
+  },
+  desc: {
+    id: "Program Studi Magister Kenotariatan UNISSULA berdiri untuk memenuhi kebutuhan notaris yang menguasai hukum keperdataan sekaligus memegang etika jabatan.",
+    en: "The Master of Notarial Law Study Programme at UNISSULA was established to meet the demand for notaries who master civil law while upholding high professional ethics.",
+  },
+  mute: {
+    id: "Matikan suara",
+    en: "Mute audio",
+  },
+  unmute: {
+    id: "Nyalakan suara",
+    en: "Unmute audio",
+  },
+  pauseVideo: {
+    id: "Jeda video",
+    en: "Pause video",
+  },
+  playVideo: {
+    id: "Putar video",
+    en: "Play video",
+  },
+};
+
 export default function ProfilHero() {
+  const t = useT();
   const videoRef = useRef(null);
   const videoLatarRef = useRef(null);
   const [sedangMain, setSedangMain] = useState(false);
@@ -168,8 +201,8 @@ export default function ProfilHero() {
           <button
             type="button"
             onClick={alihkanSuara}
-            aria-label={bersuara ? "Matikan suara" : "Nyalakan suara"}
-            title={bersuara ? "Matikan suara" : "Nyalakan suara"}
+            aria-label={t(bersuara ? profilHeroText.mute : profilHeroText.unmute)}
+            title={t(bersuara ? profilHeroText.mute : profilHeroText.unmute)}
             className={tombolKendali}
           >
             {bersuara ? <FiVolume2 /> : <FiVolumeX />}
@@ -178,8 +211,8 @@ export default function ProfilHero() {
           <button
             type="button"
             onClick={alihkanPutar}
-            aria-label={sedangMain ? "Jeda video" : "Putar video"}
-            title={sedangMain ? "Jeda video" : "Putar video"}
+            aria-label={t(sedangMain ? profilHeroText.pauseVideo : profilHeroText.playVideo)}
+            title={t(sedangMain ? profilHeroText.pauseVideo : profilHeroText.playVideo)}
             className={tombolKendali}
           >
             {sedangMain ? <FiPause /> : <FiPlay />}
@@ -227,7 +260,7 @@ export default function ProfilHero() {
             mb-2
           "
         >
-          PROFIL PROGRAM STUDI
+          {t(profilHeroText.label)}
         </motion.span>
 
 
@@ -244,7 +277,7 @@ export default function ProfilHero() {
             tracking-tight
           "
         >
-          Tentang Kami
+          {t(profilHeroText.title)}
         </motion.h1>
 
 
@@ -273,9 +306,7 @@ export default function ProfilHero() {
             leading-relaxed
           "
         >
-          Program Studi Magister Kenotariatan UNISSULA berdiri untuk memenuhi
-          kebutuhan notaris yang menguasai hukum keperdataan sekaligus memegang
-          etika jabatan.
+          {t(profilHeroText.desc)}
         </motion.p>
 
       </motion.div>

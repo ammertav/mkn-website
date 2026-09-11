@@ -4,6 +4,7 @@ import { useParams, Link, Navigate, useSearchParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import { facultyData } from "../../data/facultyData";
 import Img from "../../components/ui/Img";
+import { useT, useLanguage } from "../../i18n/languageContext";
 import DosenChatSidebar from "../../components/Staff/chat/DosenChatSidebar";
 import DosenChatInline from "../../components/Staff/chat/DosenChatInline";
 import DosenChatFloating from "../../components/Staff/chat/DosenChatFloating";
@@ -83,6 +84,8 @@ const lineVariants = {
 };
 
 export default function FacultyDetail() {
+  const t = useT();
+  const { lang } = useLanguage();
   const { slug } = useParams();
   const [searchParams] = useSearchParams();
 
@@ -117,10 +120,15 @@ export default function FacultyDetail() {
   return (
     <>
       <Helmet>
-        <title>{`${faculty.name} | MKn UNISSULA`}</title>
+        <html lang={lang} />
+        <title>{`${faculty.name} | ${lang === "en" ? "Faculty Profile | MKn UNISSULA" : "MKn UNISSULA"}`}</title>
         <meta
           name="description"
-          content={`Profil ${faculty.name}, ${faculty.title} Program Studi Magister Kenotariatan (MKn) UNISSULA.`}
+          content={
+            lang === "en"
+              ? `Profile of ${faculty.name}, ${faculty.title} of Master of Notarial Law (MKn) UNISSULA.`
+              : `Profil ${faculty.name}, ${faculty.title} Program Studi Magister Kenotariatan (MKn) UNISSULA.`
+          }
         />
       </Helmet>
 
@@ -142,7 +150,7 @@ export default function FacultyDetail() {
                   variants={itemVariants}
                   className="text-xs font-bold tracking-[0.16em] uppercase text-primary block"
                 >
-                  STAF · DOSEN
+                  {t({ id: "STAF · DOSEN", en: "STAFF · FACULTY" })}
                 </motion.span>
 
                 <motion.h1
@@ -197,13 +205,13 @@ export default function FacultyDetail() {
                 )}
                 {faculty.joinedYear && (
                   <div className="py-2.5 flex items-center justify-between">
-                    <span className="text-body font-medium">Almamater / Bergabung</span>
+                    <span className="text-body font-medium">{t({ id: "Almamater / Bergabung", en: "Alma Mater / Joined" })}</span>
                     <span className="font-semibold text-heading">{faculty.joinedYear}</span>
                   </div>
                 )}
                 {faculty.email && (
                   <div className="py-2.5 flex items-center justify-between">
-                    <span className="text-body font-medium">Surel</span>
+                    <span className="text-body font-medium">{t({ id: "Surel", en: "Email" })}</span>
                     <a
                       href={`mailto:${faculty.email}`}
                       className="font-semibold text-heading hover:text-primary transition-colors"
@@ -214,7 +222,7 @@ export default function FacultyDetail() {
                 )}
                 {faculty.phone && (
                   <div className="py-2.5 flex items-center justify-between">
-                    <span className="text-body font-medium">Kontak / HP</span>
+                    <span className="text-body font-medium">{t({ id: "Kontak / HP", en: "Contact / Phone" })}</span>
                     <span className="font-semibold text-heading">{faculty.phone}</span>
                   </div>
                 )}
@@ -301,16 +309,16 @@ export default function FacultyDetail() {
                     variants={itemVariants}
                     className="text-2xl sm:text-3xl font-heading font-normal text-heading tracking-tight"
                   >
-                    Mata Kuliah yang Diampu
+                    {t({ id: "Mata Kuliah yang Diampu", en: "Courses Taught" })}
                   </motion.h2>
 
                   <motion.div variants={itemVariants} className="overflow-x-auto">
                     <table className="w-full text-left border-collapse text-xs sm:text-sm">
                       <thead>
                         <tr className="border-b-2 border-heading text-xs font-bold tracking-wider text-heading uppercase">
-                          <th className="py-3 pr-4 font-bold">MATA KULIAH</th>
-                          <th className="py-3 px-4 font-bold">PENEMPATAN</th>
-                          <th className="py-3 pl-4 font-bold text-right">SKS</th>
+                          <th className="py-3 pr-4 font-bold">{t({ id: "MATA KULIAH", en: "COURSE" })}</th>
+                          <th className="py-3 px-4 font-bold">{t({ id: "PENEMPATAN", en: "PLACEMENT" })}</th>
+                          <th className="py-3 pl-4 font-bold text-right">{t({ id: "SKS", en: "CREDITS" })}</th>
                         </tr>
                       </thead>
                       <motion.tbody
@@ -349,7 +357,7 @@ export default function FacultyDetail() {
                 >
                   <motion.div variants={itemVariants} className="pb-2 border-b-2 border-heading">
                     <h2 className="text-2xl sm:text-3xl font-heading font-normal text-heading tracking-tight">
-                      Publikasi Terpilih
+                      {t({ id: "Publikasi Terpilih", en: "Selected Publications" })}
                     </h2>
                   </motion.div>
 
@@ -392,16 +400,16 @@ export default function FacultyDetail() {
                     variants={itemVariants}
                     className="text-2xl sm:text-3xl font-heading font-normal text-heading tracking-tight"
                   >
-                    Pengalaman Penelitian
+                    {t({ id: "Pengalaman Penelitian", en: "Research Experience" })}
                   </motion.h2>
 
                   <motion.div variants={itemVariants} className="overflow-x-auto">
                     <table className="w-full text-left border-collapse text-xs sm:text-sm">
                       <thead>
                         <tr className="border-b-2 border-heading text-xs font-bold tracking-wider text-heading uppercase">
-                          <th className="py-3 pr-4 font-bold">JUDUL PENELITIAN</th>
-                          <th className="py-3 px-4 font-bold">SUMBER DANA</th>
-                          <th className="py-3 pl-4 font-bold text-right sm:text-left">TAHUN</th>
+                          <th className="py-3 pr-4 font-bold">{t({ id: "JUDUL PENELITIAN", en: "RESEARCH TITLE" })}</th>
+                          <th className="py-3 px-4 font-bold">{t({ id: "SUMBER DANA", en: "FUNDING SOURCE" })}</th>
+                          <th className="py-3 pl-4 font-bold text-right sm:text-left">{t({ id: "TAHUN", en: "YEAR" })}</th>
                         </tr>
                       </thead>
                       <motion.tbody
@@ -447,16 +455,16 @@ export default function FacultyDetail() {
                     variants={itemVariants}
                     className="text-2xl sm:text-3xl font-heading font-normal text-heading tracking-tight"
                   >
-                    Pengabdian dan Penugasan
+                    {t({ id: "Pengabdian dan Penugasan", en: "Community Service and Assignments" })}
                   </motion.h2>
 
                   <motion.div variants={itemVariants} className="overflow-x-auto">
                     <table className="w-full text-left border-collapse text-xs sm:text-sm">
                       <thead>
                         <tr className="border-b-2 border-heading text-xs font-bold tracking-wider text-heading uppercase">
-                          <th className="py-3 pr-4 font-bold">PENUGASAN</th>
-                          <th className="py-3 px-4 font-bold">INSTITUSI / TOPIK</th>
-                          <th className="py-3 pl-4 font-bold text-right sm:text-left">PERIODE</th>
+                          <th className="py-3 pr-4 font-bold">{t({ id: "PENUGASAN", en: "ASSIGNMENT" })}</th>
+                          <th className="py-3 px-4 font-bold">{t({ id: "INSTITUSI / TOPIK", en: "INSTITUTION / TOPIC" })}</th>
+                          <th className="py-3 pl-4 font-bold text-right sm:text-left">{t({ id: "PERIODE", en: "PERIOD" })}</th>
                         </tr>
                       </thead>
                       <motion.tbody
@@ -497,16 +505,16 @@ export default function FacultyDetail() {
                     variants={itemVariants}
                     className="text-2xl sm:text-3xl font-heading font-normal text-heading tracking-tight"
                   >
-                    Pemakalah Seminar Ilmiah (Oral Presentation)
+                    {t({ id: "Pemakalah Seminar Ilmiah (Oral Presentation)", en: "Scientific Seminar Presenter (Oral Presentation)" })}
                   </motion.h2>
 
                   <motion.div variants={itemVariants} className="overflow-x-auto">
                     <table className="w-full text-left border-collapse text-xs sm:text-sm">
                       <thead>
                         <tr className="border-b-2 border-heading text-xs font-bold tracking-wider text-heading uppercase">
-                          <th className="py-3 pr-4 font-bold">NAMA TEMU ILMIAH / SEMINAR</th>
-                          <th className="py-3 px-4 font-bold">JUDUL ARTIKEL ILMIAH</th>
-                          <th className="py-3 pl-4 font-bold text-right sm:text-left">WAKTU & TEMPAT</th>
+                          <th className="py-3 pr-4 font-bold">{t({ id: "NAMA TEMU ILMIAH / SEMINAR", en: "SEMINAR / CONFERENCE NAME" })}</th>
+                          <th className="py-3 px-4 font-bold">{t({ id: "JUDUL ARTIKEL ILMIAH", en: "SCIENTIFIC ARTICLE TITLE" })}</th>
+                          <th className="py-3 pl-4 font-bold text-right sm:text-left">{t({ id: "WAKTU & TEMPAT", en: "TIME & LOCATION" })}</th>
                         </tr>
                       </thead>
                       <motion.tbody
@@ -548,17 +556,17 @@ export default function FacultyDetail() {
                     variants={itemVariants}
                     className="text-2xl sm:text-3xl font-heading font-normal text-heading tracking-tight"
                   >
-                    Karya Buku
+                    {t({ id: "Karya Buku", en: "Book Publications" })}
                   </motion.h2>
 
                   <motion.div variants={itemVariants} className="overflow-x-auto">
                     <table className="w-full text-left border-collapse text-xs sm:text-sm">
                       <thead>
                         <tr className="border-b-2 border-heading text-xs font-bold tracking-wider text-heading uppercase">
-                          <th className="py-3 pr-4 font-bold">JUDUL BUKU</th>
-                          <th className="py-3 px-4 font-bold">PENERBIT</th>
-                          <th className="py-3 px-4 font-bold text-center">JUMLAH HALAMAN</th>
-                          <th className="py-3 pl-4 font-bold text-right sm:text-left">TAHUN</th>
+                          <th className="py-3 pr-4 font-bold">{t({ id: "JUDUL BUKU", en: "BOOK TITLE" })}</th>
+                          <th className="py-3 px-4 font-bold">{t({ id: "PENERBIT", en: "PUBLISHER" })}</th>
+                          <th className="py-3 px-4 font-bold text-center">{t({ id: "JUMLAH HALAMAN", en: "PAGES" })}</th>
+                          <th className="py-3 pl-4 font-bold text-right sm:text-left">{t({ id: "TAHUN", en: "YEAR" })}</th>
                         </tr>
                       </thead>
                       <motion.tbody
@@ -603,17 +611,17 @@ export default function FacultyDetail() {
                     variants={itemVariants}
                     className="text-2xl sm:text-3xl font-heading font-normal text-heading tracking-tight"
                   >
-                    Perolehan HKI (Hak Kekayaan Intelektual)
+                    {t({ id: "Perolehan HKI (Hak Kekayaan Intelektual)", en: "Intellectual Property Rights (IPR)" })}
                   </motion.h2>
 
                   <motion.div variants={itemVariants} className="overflow-x-auto">
                     <table className="w-full text-left border-collapse text-xs sm:text-sm">
                       <thead>
                         <tr className="border-b-2 border-heading text-xs font-bold tracking-wider text-heading uppercase">
-                          <th className="py-3 pr-4 font-bold">JUDUL / TEMA HKI</th>
-                          <th className="py-3 px-4 font-bold">JENIS</th>
-                          <th className="py-3 px-4 font-bold">NOMOR P/ID</th>
-                          <th className="py-3 pl-4 font-bold text-right sm:text-left">TAHUN</th>
+                          <th className="py-3 pr-4 font-bold">{t({ id: "JUDUL / TEMA HKI", en: "IPR TITLE / THEME" })}</th>
+                          <th className="py-3 px-4 font-bold">{t({ id: "JENIS", en: "TYPE" })}</th>
+                          <th className="py-3 px-4 font-bold">{t({ id: "NOMOR P/ID", en: "P/ID NUMBER" })}</th>
+                          <th className="py-3 pl-4 font-bold text-right sm:text-left">{t({ id: "TAHUN", en: "YEAR" })}</th>
                         </tr>
                       </thead>
                       <motion.tbody
@@ -661,7 +669,7 @@ export default function FacultyDetail() {
               {varianChat !== "tab" && faculty.education && faculty.education.length > 0 && (
                 <motion.div variants={itemVariants} className="space-y-4">
                   <h3 className="text-xs font-bold tracking-[0.14em] uppercase text-body pb-2 border-b border-gray-200">
-                    RIWAYAT PENDIDIKAN
+                    {t({ id: "RIWAYAT PENDIDIKAN", en: "EDUCATION HISTORY" })}
                   </h3>
                   <motion.div
                     variants={listContainerVariants}
@@ -682,7 +690,7 @@ export default function FacultyDetail() {
                         </p>
                         {edu.thesis && (
                           <p className="text-xs text-special italic pt-0.5">
-                            "{edu.thesis}"
+                            &ldquo;{edu.thesis}&rdquo;
                           </p>
                         )}
                       </motion.div>
@@ -695,7 +703,7 @@ export default function FacultyDetail() {
               {otherLecturers.length > 0 && (
                 <motion.div variants={itemVariants} className="space-y-4 pt-2">
                   <h3 className="text-xs font-bold tracking-[0.14em] uppercase text-body pb-2 border-b border-gray-200">
-                    DOSEN LAIN
+                    {t({ id: "DOSEN LAIN", en: "OTHER FACULTY" })}
                   </h3>
                   <motion.div
                     variants={listContainerVariants}
@@ -723,7 +731,7 @@ export default function FacultyDetail() {
                       to="/staff/dosen"
                       className="block w-full py-2.5 px-4 bg-white border border-gray-300 hover:bg-gray-50 text-heading text-xs font-medium text-center rounded-xs transition-colors shadow-2xs"
                     >
-                      Semua dosen
+                      {t({ id: "Semua dosen", en: "All faculty" })}
                     </Link>
                   </div>
                 </motion.div>

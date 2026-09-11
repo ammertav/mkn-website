@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { useT } from "../../i18n/languageContext";
 
 const sectionHeaderContainer = {
   hidden: { opacity: 0 },
@@ -43,6 +44,7 @@ export default function FacilitySectionHeader({
   paragraphs = [],
   children,
 }) {
+  const t = useT();
   return (
     <motion.div
       variants={sectionHeaderContainer}
@@ -59,14 +61,14 @@ export default function FacilitySectionHeader({
             className="text-xs sm:text-sm font-semibold tracking-wider uppercase text-primary"
           >
             {number ? `${number} — ` : ""}
-            {category}
+            {t(category)}
           </motion.div>
         )}
         <motion.h2
           variants={headerItemLeft}
           className="text-3xl sm:text-4xl lg:text-[42px] font-heading font-normal text-heading leading-tight tracking-tight"
         >
-          {title}
+          {t(title)}
         </motion.h2>
       </div>
 
@@ -82,7 +84,7 @@ export default function FacilitySectionHeader({
                 variants={headerItemRight}
                 className="leading-relaxed"
               >
-                {text}
+                {t(text)}
               </motion.p>
             ))
           : children}

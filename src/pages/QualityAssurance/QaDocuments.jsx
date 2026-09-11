@@ -7,6 +7,7 @@ import {
   documentArchitecture,
   qualityCycles,
 } from "../../data/qualityAssurance/qaOverviewData";
+import { useT, useLanguage } from "../../i18n/languageContext";
 
 const stagger = {
   hidden: {},
@@ -24,24 +25,46 @@ const rowVar = {
 };
 
 export default function QaDocuments() {
+  const t = useT();
+  const { lang } = useLanguage();
+
   return (
     <>
       <Helmet>
-        <title>Dokumen Mutu | MKn UNISSULA</title>
+        <title>
+          {lang === "en"
+            ? "Quality Documents | MKn UNISSULA"
+            : "Dokumen Mutu | MKn UNISSULA"}
+        </title>
         <meta
           name="description"
-          content="Dokumen mutu Fakultas Hukum UNISSULA — kebijakan mutu, manual mutu, 21 standar mutu, dan 19 formulir mutu yang disahkan Keputusan Dekan Nomor 1098/A.1/SA-H/X/2025."
+          content={
+            lang === "en"
+              ? "Faculty of Law UNISSULA quality documents — quality policy, quality manuals, 21 quality standards, and 19 quality forms ratified by Dean's Decree Number 1098/A.1/SA-H/X/2025."
+              : "Dokumen mutu Fakultas Hukum UNISSULA — kebijakan mutu, manual mutu, 21 standar mutu, dan 19 formulir mutu yang disahkan Keputusan Dekan Nomor 1098/A.1/SA-H/X/2025."
+          }
         />
       </Helmet>
 
       <div className="space-y-12 sm:space-y-14 font-body text-body">
         <KepalaMutu
-          judul="Dokumen Mutu"
-          pengantar="Dokumen mutu Fakultas Hukum UNISSULA Tahun 2025 terdiri atas 23 dokumen yang disahkan melalui Keputusan Dekan Nomor 1098/A.1/SA-H/X/2025 tanggal 2 Oktober 2025. Keempat jenis dokumen berikut saling terkait: kebijakan menjadi payung, manual menjelaskan cara kerjanya, standar menetapkan tolok ukurnya, dan formulir merekam buktinya."
+          judul={{
+            id: "Dokumen Mutu",
+            en: "Quality Documents",
+          }}
+          pengantar={{
+            id: "Dokumen mutu Fakultas Hukum UNISSULA Tahun 2025 terdiri atas 23 dokumen yang disahkan melalui Keputusan Dekan Nomor 1098/A.1/SA-H/X/2025 tanggal 2 Oktober 2025. Keempat jenis dokumen berikut saling terkait: kebijakan menjadi payung, manual menjelaskan cara kerjanya, standar menetapkan tolok ukurnya, dan formulir merekam buktinya.",
+            en: "The Faculty of Law UNISSULA Year 2025 quality documents comprise 23 documents ratified through Dean's Decree Number 1098/A.1/SA-H/X/2025 dated October 2, 2025. The four interrelated categories are: policies provide the umbrella, manuals explain operational mechanisms, standards determine benchmarks, and forms record objective evidence.",
+          }}
         />
 
         <section className="space-y-5">
-          <JudulMutu judul="Empat Jenis Dokumen" />
+          <JudulMutu
+            judul={{
+              id: "Empat Jenis Dokumen",
+              en: "Four Document Categories",
+            }}
+          />
           <motion.div
             className="grid grid-cols-1 sm:grid-cols-2 gap-5"
             initial="hidden"
@@ -64,15 +87,15 @@ export default function QaDocuments() {
                       {d.code}
                     </span>
                     <span className="text-[11px] font-semibold text-gray-400 tabular-nums">
-                      {d.count}
+                      {t(d.count)}
                     </span>
                   </div>
                   <h3 className="font-heading font-semibold text-base text-heading leading-snug group-hover:text-primary transition-colors">
-                    {d.name}
+                    {t(d.name)}
                   </h3>
-                  <p className="text-sm text-body leading-relaxed">{d.desc}</p>
+                  <p className="text-sm text-body leading-relaxed">{t(d.desc)}</p>
                   <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-primary pt-1">
-                    Buka
+                    {t({ id: "Buka", en: "Open" })}
                     <FiArrowRight className="text-xs transition-transform group-hover:translate-x-0.5" />
                   </span>
                 </Link>
@@ -83,8 +106,14 @@ export default function QaDocuments() {
 
         <section className="space-y-5">
           <JudulMutu
-            judul="Penomoran Dokumen"
-            keterangan="Kode dokumen mengikuti pola JENIS/SA-FH/BIDANG-NOMOR. Khusus formulir, huruf setelah SA-FH menandai tahap siklus PPEPP tempat formulir itu dipakai."
+            judul={{
+              id: "Penomoran Dokumen",
+              en: "Document Numbering System",
+            }}
+            keterangan={{
+              id: "Kode dokumen mengikuti pola JENIS/SA-FH/BIDANG-NOMOR. Khusus formulir, huruf setelah SA-FH menandai tahap siklus PPEPP tempat formulir itu dipakai.",
+              en: "Document codes follow the pattern TYPE/SA-FH/FIELD-NUMBER. For forms specifically, the letter following SA-FH indicates the PPEPP cycle stage where the form is applied.",
+            }}
           />
           <motion.div
             className="border border-gray-200 bg-white rounded-xs overflow-x-auto"
@@ -97,13 +126,13 @@ export default function QaDocuments() {
               <thead>
                 <tr className="border-b border-gray-200 bg-gray-50/70">
                   <th className="py-3 px-4 sm:px-5 text-[11px] font-bold tracking-wider uppercase text-heading w-24">
-                    Kode
+                    {t({ id: "Kode", en: "Code" })}
                   </th>
                   <th className="py-3 px-4 sm:px-5 text-[11px] font-bold tracking-wider uppercase text-heading w-44">
-                    Tahap
+                    {t({ id: "Tahap", en: "Stage" })}
                   </th>
                   <th className="py-3 px-4 sm:px-5 text-[11px] font-bold tracking-wider uppercase text-heading">
-                    Cakupan
+                    {t({ id: "Cakupan", en: "Scope" })}
                   </th>
                 </tr>
               </thead>
@@ -114,9 +143,9 @@ export default function QaDocuments() {
                       {c.code}
                     </td>
                     <td className="py-3.5 px-4 sm:px-5 font-semibold text-heading align-top">
-                      {c.stage}
+                      {t(c.stage)}
                     </td>
-                    <td className="py-3.5 px-4 sm:px-5 text-body leading-relaxed">{c.desc}</td>
+                    <td className="py-3.5 px-4 sm:px-5 text-body leading-relaxed">{t(c.desc)}</td>
                   </motion.tr>
                 ))}
               </tbody>

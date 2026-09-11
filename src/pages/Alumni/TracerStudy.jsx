@@ -1,5 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import { motion } from "framer-motion";
+import { useT, useLanguage } from "../../i18n/languageContext";
 
 const viewportSettings = {
   once: true,
@@ -54,13 +55,24 @@ const cardVariants = {
 };
 
 export default function TracerStudy() {
+  const t = useT();
+  const { lang } = useLanguage();
+
   return (
     <>
       <Helmet>
-        <title>Penelusuran Alumni | MKn UNISSULA</title>
+        <title>
+          {lang === "en"
+            ? "Alumni Career Tracking (Tracer Study) | MKn UNISSULA"
+            : "Penelusuran Alumni | MKn UNISSULA"}
+        </title>
         <meta
           name="description"
-          content="Laporan Tracer Study, pelacakan jejak karir lulusan, dan survei alumni Magister Kenotariatan (MKn) UNISSULA."
+          content={
+            lang === "en"
+              ? "Tracer Study report, graduate career path tracking, and alumni survey of Master of Notarial Law (MKn) UNISSULA."
+              : "Laporan Tracer Study, pelacakan jejak karir lulusan, dan survei alumni Magister Kenotariatan (MKn) UNISSULA."
+          }
         />
       </Helmet>
 
@@ -76,13 +88,16 @@ export default function TracerStudy() {
             variants={itemVariants}
             className="text-xs font-bold tracking-wider uppercase text-primary block"
           >
-            Alumni &amp; Karier
+            {t({ id: "Alumni & Karier", en: "Alumni & Careers" })}
           </motion.span>
           <motion.h1
             variants={itemVariants}
             className="text-3xl sm:text-4xl lg:text-[40px] font-heading font-bold text-heading tracking-tight leading-tight"
           >
-            Penelusuran Alumni (Tracer Study) MKn UNISSULA
+            {t({
+              id: "Penelusuran Alumni (Tracer Study) MKn UNISSULA",
+              en: "Alumni Career Tracking (Tracer Study) MKn UNISSULA",
+            })}
           </motion.h1>
         </div>
 
@@ -95,8 +110,10 @@ export default function TracerStudy() {
           variants={itemVariants}
           className="text-sm sm:text-base text-body text-justify leading-relaxed"
         >
-          Pemantauan berkala dan pelacakan jejak karir lulusan guna mengevaluasi efektivitas kurikulum,
-          menjamin mutu lulusan, dan memperluas jejaring profesional kenotariatan di seluruh Indonesia.
+          {t({
+            id: "Pemantauan berkala dan pelacakan jejak karir lulusan guna mengevaluasi efektivitas kurikulum, menjamin mutu lulusan, dan memperluas jejaring profesional kenotariatan di seluruh Indonesia.",
+            en: "Periodic monitoring and tracking of graduates' career paths to evaluate curriculum effectiveness, guarantee graduate quality, and expand notarial professional networks across Indonesia.",
+          })}
         </motion.p>
 
         <motion.div
@@ -105,7 +122,10 @@ export default function TracerStudy() {
           className="p-12 text-center text-gray-400 border border-dashed border-gray-200 rounded-sm bg-white shadow-2xs hover:border-primary/40 transition-colors"
         >
           <p className="text-sm font-medium">
-            Informasi penelusuran alumni akan segera diperbarui di sini.
+            {t({
+              id: "Informasi penelusuran alumni akan segera diperbarui di sini.",
+              en: "Alumni career tracking information will be updated here soon.",
+            })}
           </p>
         </motion.div>
       </motion.div>

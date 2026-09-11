@@ -5,18 +5,26 @@ import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import Breadcrumb from "../../components/ui/Breadcrumb";
 import SidebarNav from "../../components/ui/SidebarNav";
-import { navLinks } from "../../data/navLinks";
-
-const alumniMenus = navLinks.find((n) => n.href === "/alumni")?.children ?? [];
+import { useLanguage } from "../../i18n/languageContext";
 
 export default function AlumniLayout() {
+  const { lang } = useLanguage();
+
   return (
     <>
       <Helmet>
-        <title>Alumni & Karir | MKn UNISSULA</title>
+        <title>
+          {lang === "en"
+            ? "Alumni & Careers | MKn UNISSULA"
+            : "Alumni & Karir | MKn UNISSULA"}
+        </title>
         <meta
           name="description"
-          content="Pusat Karir, Jejaring Alumni, Tracer Study, dan Lowongan Pekerjaan Magister Kenotariatan (MKn) UNISSULA."
+          content={
+            lang === "en"
+              ? "Career Center, Alumni Network, Tracer Study, and Job Vacancies of Master of Notarial Law (MKn) UNISSULA."
+              : "Pusat Karir, Jejaring Alumni, Tracer Study, dan Lowongan Pekerjaan Magister Kenotariatan (MKn) UNISSULA."
+          }
         />
       </Helmet>
 

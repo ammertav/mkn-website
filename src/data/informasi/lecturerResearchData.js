@@ -3,75 +3,129 @@ import daftarPenelitianPdf from "../../assets/pdf/DAFTAR PENELITIAN DOSEN_MKN 20
 export const researchMetrics = [
   {
     value: "34",
-    label: "PENELITIAN 2024",
+    label: {
+      id: "PENELITIAN 2024",
+      en: "RESEARCH 2024",
+    },
   },
   {
     value: "21",
-    label: "ARTIKEL TERINDEKS",
+    label: {
+      id: "ARTIKEL TERINDEKS",
+      en: "INDEXED ARTICLES",
+    },
   },
   {
     value: "4",
-    label: "PETA JALAN RISET",
+    label: {
+      id: "PETA JALAN RISET",
+      en: "RESEARCH ROADMAPS",
+    },
   },
   {
     value: "11",
-    label: "MAHASISWA TERLIBAT",
+    label: {
+      id: "MAHASISWA TERLIBAT",
+      en: "STUDENTS INVOLVED",
+    },
   },
 ];
 
 export const featuredPublications = [
   {
     id: 1,
-    category: "ARTIKEL JURNAL",
-    title: "Perlindungan Hukum Hak Anak Dalam Peralihan Hak Atas Tanah",
+    category: {
+      id: "ARTIKEL JURNAL",
+      en: "JOURNAL ARTICLE",
+    },
+    title: {
+      id: "Perlindungan Hukum Hak Anak Dalam Peralihan Hak Atas Tanah",
+      en: "Legal Protection of Children's Rights in the Transfer of Land Rights",
+    },
     authors: "Dr. H. Umar Ma'ruf, S.H., Sp.N., M.Hum.; Dr. Aryani Witasari, S.H., M.Hum.; Dr. Sri Kusriyah, S.H., M.Hum.",
     year: "2026",
     citation: "",
   },
   {
     id: 2,
-    category: "ARTIKEL JURNAL",
-    title: "Analisis Pelaksanaan Honorarium Ppat Berdasarkan PP Nomor 24 Tahun 2016 Tentang Perubahan Atas PP Nomor 37 Tahun 1998 Tentang Peraturan Jabatan Pejabat Pembuat Akta Tanah",
+    category: {
+      id: "ARTIKEL JURNAL",
+      en: "JOURNAL ARTICLE",
+    },
+    title: {
+      id: "Analisis Pelaksanaan Honorarium Ppat Berdasarkan PP Nomor 24 Tahun 2016 Tentang Perubahan Atas PP Nomor 37 Tahun 1998 Tentang Peraturan Jabatan Pejabat Pembuat Akta Tanah",
+      en: "Analysis of the Implementation of PPAT Honorarium Based on Government Regulation No. 24 of 2016 concerning Amendments to GR No. 37 of 1998 concerning Regulations for Land Deed Officials",
+    },
     authors: "Dr. Dahniarti Hasana Dahnan, S.H., M.Kn.; Dr. Aryani Witasari, S.H., M.Hum.; Dr. Sri Kusriyah, S.H., M.Hum.",
     year: "2025",
     citation: "",
   },
   {
     id: 3,
-    category: "ARTIKEL JURNAL",
-    title: "Pelaksanaan Perjanjian Pembiayaan Ekonomi Kreatif Berbasis Kekayaan Intelektual dengan Jaminan Fidusia di Indonesia",
+    category: {
+      id: "ARTIKEL JURNAL",
+      en: "JOURNAL ARTICLE",
+    },
+    title: {
+      id: "Pelaksanaan Perjanjian Pembiayaan Ekonomi Kreatif Berbasis Kekayaan Intelektual dengan Jaminan Fidusia di Indonesia",
+      en: "Implementation of Intellectual Property-Based Creative Economy Financing Agreements with Fiduciary Security in Indonesia",
+    },
     authors: "Dr. Lathifah Hanim, SH., M.Hum., M.Kn.; Dini Amalia Fitri, S.H., M.H.",
     year: "2025",
     citation: "",
   },
   {
     id: 4,
-    category: "ARTIKEL JURNAL",
-    title: "Analisis Hukum Mengenai Wanprestasi dalam Perjanjian Jual Beli Rumah Melalui Kredit Kepemilikan Rumah (KPR) Serta Upaya Pencegahannya",
+    category: {
+      id: "ARTIKEL JURNAL",
+      en: "JOURNAL ARTICLE",
+    },
+    title: {
+      id: "Analisis Hukum Mengenai Wanprestasi dalam Perjanjian Jual Beli Rumah Melalui Kredit Kepemilikan Rumah (KPR) Serta Upaya Pencegahannya",
+      en: "Legal Analysis of Breach of Contract in Housing Purchase Agreements Through Home Ownership Loans (KPR) and Prevention Efforts",
+    },
     authors: "Muhammad Dias Saktiawan, S.H., M.Kn.; Dr. M. Rizal Bagaskoro, S.H., M.H.",
     year: "2025",
     citation: "",
   },
   {
     id: 5,
-    category: "ARTIKEL JURNAL",
-    title: "Penerapan Konsep Pengawasan Ideal Majelis Pengawas Wilayah (MPW) Notaris Dalam Perspektif Hukum Administrasi Negara",
+    category: {
+      id: "ARTIKEL JURNAL",
+      en: "JOURNAL ARTICLE",
+    },
+    title: {
+      id: "Penerapan Konsep Pengawasan Ideal Majelis Pengawas Wilayah (MPW) Notaris Dalam Perspektif Hukum Administrasi Negara",
+      en: "Application of the Ideal Supervisory Concept of the Regional Supervisory Council (MPW) of Notaries in the Perspective of State Administrative Law",
+    },
     authors: "Dr. Jawade Hafidz, S.H., M.H.; Moh. Aris Siswanto, S.H., M.H.",
     year: "2024",
     citation: "",
   },
   {
     id: 6,
-    category: "ARTIKEL JURNAL",
-    title: "Pembaharuan Sistem Digitalisasi Terhadap Layanan Jaminan Fidusia Demi Kebutuhan yang Berkembang di Masyarakat",
+    category: {
+      id: "ARTIKEL JURNAL",
+      en: "JOURNAL ARTICLE",
+    },
+    title: {
+      id: "Pembaharuan Sistem Digitalisasi Terhadap Layanan Jaminan Fidusia Demi Kebutuhan yang Berkembang di Masyarakat",
+      en: "Modernization of the Digitalization System for Fiduciary Security Services for Growing Needs in Society",
+    },
     authors: "Dr. Lathifah Hanim, S.H., M.Hum., M.Kn.; Dr. Hj. Peni Rinda Listyawati, S.H., M.Hum.",
     year: "2024",
     citation: "",
   },
   {
     id: 7,
-    category: "ARTIKEL JURNAL",
-    title: "Akta Perbankan Syariah Dalam Perspektif Notaris Di Jawa Tengah",
+    category: {
+      id: "ARTIKEL JURNAL",
+      en: "JOURNAL ARTICLE",
+    },
+    title: {
+      id: "Akta Perbankan Syariah Dalam Perspektif Notaris Di Jawa Tengah",
+      en: "Islamic Banking Deeds from the Perspective of Notaries in Central Java",
+    },
     authors: "Dr. Aryani Witasari, S.H., M.Hum.; Dr. Hj. Siti Rodhiyah Dwi Istinah, S.H., M.H.",
     year: "2023",
     citation: "",
@@ -80,36 +134,90 @@ export const featuredPublications = [
 
 export const fundingSchemes = [
   {
-    scheme: "Penelitian Dasar Unggulan",
-    source: "Kementerian",
-    amount2024: "6 penelitian",
-    mandatoryOutput: "Artikel jurnal terindeks",
+    scheme: {
+      id: "Penelitian Dasar Unggulan",
+      en: "Flagship Fundamental Research",
+    },
+    source: {
+      id: "Kementerian",
+      en: "Ministry",
+    },
+    amount2024: {
+      id: "6 penelitian",
+      en: "6 research projects",
+    },
+    mandatoryOutput: {
+      id: "Artikel jurnal terindeks",
+      en: "Indexed journal articles",
+    },
   },
   {
-    scheme: "Penelitian Internal Unissula",
-    source: "Internal",
-    amount2024: "19 penelitian",
-    mandatoryOutput: "Artikel dan bahan ajar",
+    scheme: {
+      id: "Penelitian Internal Unissula",
+      en: "Unissula Internal Research",
+    },
+    source: {
+      id: "Internal",
+      en: "Internal",
+    },
+    amount2024: {
+      id: "19 penelitian",
+      en: "19 research projects",
+    },
+    mandatoryOutput: {
+      id: "Artikel dan bahan ajar",
+      en: "Articles and teaching materials",
+    },
   },
   {
-    scheme: "Penelitian Kerja Sama Mitra",
-    source: "Kantor notaris, pemerintah daerah",
-    amount2024: "5 penelitian",
-    mandatoryOutput: "Laporan kebijakan",
+    scheme: {
+      id: "Penelitian Kerja Sama Mitra",
+      en: "Partner Collaborative Research",
+    },
+    source: {
+      id: "Kantor notaris, pemerintah daerah",
+      en: "Notary offices, local government",
+    },
+    amount2024: {
+      id: "5 penelitian",
+      en: "5 research projects",
+    },
+    mandatoryOutput: {
+      id: "Laporan kebijakan",
+      en: "Policy reports",
+    },
   },
   {
-    scheme: "Penelitian Bersama Mahasiswa",
-    source: "Internal",
-    amount2024: "4 penelitian",
-    mandatoryOutput: "Artikel bersama mahasiswa",
+    scheme: {
+      id: "Penelitian Bersama Mahasiswa",
+      en: "Joint Student Research",
+    },
+    source: {
+      id: "Internal",
+      en: "Internal",
+    },
+    amount2024: {
+      id: "4 penelitian",
+      en: "4 research projects",
+    },
+    mandatoryOutput: {
+      id: "Artikel bersama mahasiswa",
+      en: "Co-authored student articles",
+    },
   },
 ];
 
 export const supportingDocuments = [
   {
     id: 1,
-    title: "Daftar Penelitian Dosen MKn 2023-2024-2025-2026",
-    date: "5 Sep 2026",
+    title: {
+      id: "Daftar Penelitian Dosen MKn 2023-2024-2025-2026",
+      en: "MKn Lecturer Research List 2023-2024-2025-2026",
+    },
+    date: {
+      id: "5 Sep 2026",
+      en: "5 Sep 2026",
+    },
     fileType: "PDF",
     fileUrl: daftarPenelitianPdf,
     fileName: "DAFTAR PENELITIAN DOSEN_MKN 2023-2024-2025-2026.pdf",

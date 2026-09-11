@@ -2,6 +2,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FiPlus } from "react-icons/fi";
 import faqImage from "../../assets/images/beranda/faq-1.jpeg";
+import { useT } from "../../i18n/languageContext";
 
 const viewportSettings = {
   once: true,
@@ -51,42 +52,79 @@ const rightItemVariants = {
 const faqData = [
   {
     id: 1,
-    category: "Beasiswa",
-    question: "Apa saja jenis beasiswa yang tersedia untuk mahasiswa?",
-    answer:
-      "Tersedia berbagai program beasiswa seperti Beasiswa Prestasi, Beasiswa Kemitraan, serta bantuan biaya pendidikan bagi mahasiswa yang memenuhi persyaratan akademik maupun non-akademik.",
+    category: { id: "Beasiswa", en: "Scholarships" },
+    question: {
+      id: "Apa saja jenis beasiswa yang tersedia untuk mahasiswa?",
+      en: "What scholarships are available for students?",
+    },
+    answer: {
+      id: "Tersedia berbagai program beasiswa seperti Beasiswa Prestasi, Beasiswa Kemitraan, serta bantuan biaya pendidikan bagi mahasiswa yang memenuhi persyaratan akademik maupun non-akademik.",
+      en: "Various scholarship schemes are available, such as Academic Achievement Scholarships, Partnership Scholarships, and educational financial assistance for students meeting specific criteria.",
+    },
   },
   {
     id: 2,
-    category: "Fasilitas",
-    question: "Apa saja fasilitas yang dapat digunakan oleh mahasiswa?",
-    answer:
-      "Mahasiswa dapat memanfaatkan perpustakaan, ruang diskusi, laboratorium, akses database hukum, fasilitas akademik, serta berbagai fasilitas pendukung kegiatan pembelajaran.",
+    category: { id: "Fasilitas", en: "Facilities" },
+    question: {
+      id: "Apa saja fasilitas yang dapat digunakan oleh mahasiswa?",
+      en: "What facilities can students access and utilize?",
+    },
+    answer: {
+      id: "Mahasiswa dapat memanfaatkan perpustakaan, ruang diskusi, laboratorium, akses database hukum, fasilitas akademik, serta berbagai fasilitas pendukung kegiatan pembelajaran.",
+      en: "Students have full access to specialized libraries, discussion rooms, authentic deed laboratories, legal databases, modern classrooms, and comprehensive learning amenities.",
+    },
   },
   {
     id: 3,
-    category: "Kurikulum",
-    question: "Bagaimana sistem pembelajaran dan kurikulum yang diterapkan?",
-    answer:
-      "Kurikulum dirancang untuk menggabungkan pemahaman teori dengan praktik melalui perkuliahan, studi kasus, diskusi, simulasi, penelitian, serta kegiatan praktik lapangan.",
+    category: { id: "Kurikulum", en: "Curriculum" },
+    question: {
+      id: "Bagaimana sistem pembelajaran dan kurikulum yang diterapkan?",
+      en: "How is the learning system and curriculum structured?",
+    },
+    answer: {
+      id: "Kurikulum dirancang untuk menggabungkan pemahaman teori dengan praktik melalui perkuliahan, studi kasus, diskusi, simulasi, penelitian, serta kegiatan praktik lapangan.",
+      en: "The curriculum combines rigorous theoretical legal foundations with practical exercises, case studies, deed-drafting simulations, research, and field practice.",
+    },
   },
   {
     id: 4,
-    category: "Praktik",
-    question: "Apakah mahasiswa mendapatkan kesempatan magang atau PKL?",
-    answer:
-      "Ya. Mahasiswa mendapatkan kesempatan untuk mengikuti praktik kerja lapangan di berbagai institusi seperti kantor hukum, pengadilan, lembaga pemerintahan, maupun organisasi mitra.",
+    category: { id: "Praktik", en: "Practical Training" },
+    question: {
+      id: "Apakah mahasiswa mendapatkan kesempatan magang atau PKL?",
+      en: "Do students receive internship or practical training opportunities?",
+    },
+    answer: {
+      id: "Ya. Mahasiswa mendapatkan kesempatan untuk mengikuti praktik kerja lapangan di berbagai institusi seperti kantor hukum, pengadilan, lembaga pemerintahan, maupun organisasi mitra.",
+      en: "Yes. Students undertake practical internships at notary/PPAT offices, law firms, courts, land registry offices (BPN), and partner institutions.",
+    },
   },
   {
     id: 5,
-    category: "Pendaftaran",
-    question: "Bagaimana prosedur pendaftaran mahasiswa baru?",
-    answer:
-      "Pendaftaran dilakukan secara daring melalui jalur penerimaan yang tersedia. Informasi mengenai persyaratan, jadwal, biaya, dan tahapan seleksi dapat dilihat pada halaman penerimaan mahasiswa baru.",
+    category: { id: "Pendaftaran", en: "Admissions" },
+    question: {
+      id: "Bagaimana prosedur pendaftaran mahasiswa baru?",
+      en: "What is the procedure for new student admissions?",
+    },
+    answer: {
+      id: "Pendaftaran dilakukan secara daring melalui jalur penerimaan yang tersedia. Informasi mengenai persyaratan, jadwal, biaya, dan tahapan seleksi dapat dilihat pada halaman penerimaan mahasiswa baru.",
+      en: "Admissions are conducted online through the official portal. Details regarding entry requirements, schedules, tuition fees, and selection stages can be viewed on the admissions page.",
+    },
   },
 ];
 
+const teksFaq = {
+  judul: {
+    id: "Pertanyaan yang Sering Ditanyakan",
+    en: "Frequently Asked Questions",
+  },
+  keteranganGambar: {
+    id: "Temukan informasi seputar akademik, fasilitas, pendaftaran, dan kehidupan mahasiswa.",
+    en: "Discover comprehensive information on academics, facilities, admissions, and student life.",
+  },
+};
+
 export default function FAQ() {
+  const t = useT();
   const [openFAQ, setOpenFAQ] = useState(null);
 
   const toggleFAQ = (id) => {
@@ -118,9 +156,7 @@ export default function FAQ() {
             className="max-w-2xl"
           >
             <h2 className="mt-2 text-3xl sm:text-4xl md:text-[42px] font-heading font-normal text-heading leading-tight">
-              Pertanyaan yang
-              <br className="hidden sm:block" />
-              Sering Ditanyakan
+              {t(teksFaq.judul)}
             </h2>
           </motion.div>
         </motion.div>
@@ -235,8 +271,7 @@ export default function FAQ() {
                     max-w-sm
                   "
                 >
-                  Temukan informasi seputar akademik, fasilitas,
-                  pendaftaran, dan kehidupan mahasiswa.
+                  {t(teksFaq.keteranganGambar)}
                 </motion.p>
               </motion.div>
 
@@ -312,7 +347,7 @@ export default function FAQ() {
                               uppercase
                             "
                           >
-                            {item.category}
+                            {t(item.category)}
                           </span>
 
                           {/* Question */}
@@ -334,7 +369,7 @@ export default function FAQ() {
                               }
                             `}
                           >
-                            {item.question}
+                            {t(item.question)}
                           </h3>
 
                           {/* Answer */}
@@ -382,7 +417,7 @@ export default function FAQ() {
                                     max-w-2xl
                                   "
                                 >
-                                  {item.answer}
+                                  {t(item.answer)}
                                 </motion.p>
                               </motion.div>
                             )}

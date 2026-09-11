@@ -5,21 +5,17 @@ import Footer from "../../components/Footer";
 import Breadcrumb from "../../components/ui/Breadcrumb";
 import SidebarNav from "../../components/ui/SidebarNav";
 import { navLinks } from "../../data/navLinks";
+import { useT, useLanguage } from "../../i18n/languageContext";
 
 // Ambil menu anak untuk Quality Assurance dari navLinks
 const qualityAssuranceMenus =
   navLinks.find((n) => n.href === "/quality-assurance" || n.href === "/download")?.children ?? [];
 
-/**
- * Kontak diambil dari kop surat resmi Program Magister Kenotariatan.
- * Nomor ekstensi dan alamat ruang gugus belum diterima dari prodi, jadi tidak
- * dicantumkan daripada menampilkan data yang tidak terverifikasi.
- */
 const qaContact = {
-  title: "Kontak Penjaminan Mutu",
+  title: { id: "Kontak Penjaminan Mutu", en: "Quality Assurance Contact" },
   lines: [
-    { text: "Gugus Penjaminan Mutu MKn" },
-    { text: "Fakultas Hukum UNISSULA" },
+    { text: { id: "Gugus Penjaminan Mutu MKn", en: "MKn Quality Assurance Unit" } },
+    { text: { id: "Fakultas Hukum UNISSULA", en: "Faculty of Law UNISSULA" } },
     { text: "Jl. Raya Kaligawe Km. 4, Semarang 50112" },
     { text: "(024) 6583584" },
     { text: "mkn.fh@unissula.ac.id", href: "mailto:mkn.fh@unissula.ac.id" },
@@ -27,13 +23,24 @@ const qaContact = {
 };
 
 export default function QualityAssuranceLayout() {
+  const t = useT();
+  const { lang } = useLanguage();
+
   return (
     <>
       <Helmet>
-        <title>Gugus Penjaminan Mutu | MKn UNISSULA</title>
+        <title>
+          {lang === "en"
+            ? "Quality Assurance Committee | MKn UNISSULA"
+            : "Gugus Penjaminan Mutu | MKn UNISSULA"}
+        </title>
         <meta
           name="description"
-          content="Gugus Penjaminan Mutu (Quality Assurance Unit) Program Studi Magister Kenotariatan (MKn) UNISSULA: Dokumen Kebijakan Mutu, Standar Manual, Laporan Audit Internal, dan Evaluasi Pembelajaran."
+          content={
+            lang === "en"
+              ? "Quality Assurance Unit of Master of Notarial Law Program UNISSULA: Quality Policy, Standard Manuals, Internal Audit Reports, and Learning Evaluation."
+              : "Gugus Penjaminan Mutu (Quality Assurance Unit) Program Studi Magister Kenotariatan (MKn) UNISSULA: Dokumen Kebijakan Mutu, Standar Manual, Laporan Audit Internal, dan Evaluasi Pembelajaran."
+          }
         />
       </Helmet>
 
@@ -51,7 +58,7 @@ export default function QualityAssuranceLayout() {
             {/* Left Sidebar Navigation */}
             <aside className="lg:col-span-4 xl:col-span-3 lg:self-stretch">
               <SidebarNav
-                title="PENJAMINAN MUTU"
+                title={t({ id: "PENJAMINAN MUTU", en: "QUALITY ASSURANCE" })}
                 menus={qualityAssuranceMenus}
                 contact={qaContact}
               />

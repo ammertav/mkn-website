@@ -4,15 +4,29 @@ import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import ProfilHero from "../../components/Profil/ProfilHero";
 import ProfilTabs from "../../components/Profil/ProfilTabs";
+import { useT } from "../../i18n/languageContext";
+
+const metaProfil = {
+  title: {
+    id: "Profil Program Studi | Magister Kenotariatan UNISSULA",
+    en: "Study Programme Profile | Master of Notarial Law UNISSULA",
+  },
+  description: {
+    id: "Profil lengkap Program Studi Magister Kenotariatan (MKn) UNISSULA: Sejarah dan Latar Belakang, Visi Misi, Tujuan Pendidikan, dan Struktur Organisasi.",
+    en: "Comprehensive profile of the Master of Notarial Law Programme (MKn) UNISSULA: History, Vision & Mission, Educational Objectives, and Organisational Structure.",
+  },
+};
 
 export default function ProfilLayout() {
+  const t = useT();
+
   return (
     <>
       <Helmet>
-        <title>Profil Program Studi | Magister Kenotariatan UNISSULA</title>
+        <title>{t(metaProfil.title)}</title>
         <meta
           name="description"
-          content="Profil lengkap Program Studi Magister Kenotariatan (MKn) UNISSULA: Sejarah dan Latar Belakang, Visi Misi, Tujuan Pendidikan, dan Struktur Organisasi."
+          content={t(metaProfil.description)}
         />
       </Helmet>
 

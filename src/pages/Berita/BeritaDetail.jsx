@@ -2,7 +2,7 @@ import { useState, useMemo, useEffect } from "react";
 import { motion } from "framer-motion";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
-import { useT } from "../../i18n/languageContext";
+import { useT, useLanguage } from "../../i18n/languageContext";
 import { useUi } from "../../i18n/useUi";
 import {
   FiArrowLeft,
@@ -76,21 +76,6 @@ const leftVariants = {
   },
 };
 
-const rightVariants = {
-  hidden: {
-    opacity: 0,
-    x: 35,
-  },
-  visible: {
-    opacity: 1,
-    x: 0,
-    transition: {
-      duration: 0.8,
-      ease: "easeOut",
-    },
-  },
-};
-
 const scaleVariants = {
   hidden: {
     opacity: 0,
@@ -105,6 +90,29 @@ const scaleVariants = {
     },
   },
 };
+
+const formatArticleDate = (dateStr, lang) => {
+  if (!dateStr || lang !== "en") return dateStr;
+  const monthMap = {
+    Januari: "January",
+    Februari: "February",
+    Maret: "March",
+    April: "April",
+    Mei: "May",
+    Juni: "June",
+    Juli: "July",
+    Agustus: "August",
+    September: "September",
+    Oktober: "October",
+    November: "November",
+    Desember: "December",
+  };
+  return dateStr.replace(
+    /Januari|Februari|Maret|April|Mei|Juni|Juli|Agustus|September|Oktober|November|Desember/g,
+    (m) => monthMap[m] || m
+  );
+};
+
 
 /**
  * Teks antarmuka halaman detail berita.
@@ -164,6 +172,7 @@ const halaman = {
 export default function BeritaDetail() {
   const t = useT();
   const ui = useUi();
+  const { lang } = useLanguage();
   const { slug } = useParams();
   const navigate = useNavigate();
 
@@ -263,6 +272,12 @@ export default function BeritaDetail() {
   if (!article) {
     return (
       <main className="flex flex-col min-h-screen bg-banner font-body text-body">
+        <Helmet>
+          <html lang={lang} />
+          <title>
+            {t(halaman.tidakDitemukan)} | MKn UNISSULA
+          </title>
+        </Helmet>
         <Navbar />
 
         <motion.div
@@ -318,8 +333,9 @@ export default function BeritaDetail() {
   return (
     <>
       <Helmet>
+        <html lang={lang} />
         <title>
-          {article.title} | Berita MKn UNISSULA
+          {article.title} | {lang === "en" ? "MKn UNISSULA News" : "Berita MKn UNISSULA"}
         </title>
 
         <meta
@@ -407,8 +423,14 @@ export default function BeritaDetail() {
 
               <span>
                 {isAnnouncement
-                  ? "KEMBALI KE SEMUA PENGUMUMAN"
-                  : "KEMBALI KE SEMUA BERITA"}
+                  ? t({
+                      id: "KEMBALI KE SEMUA PENGUMUMAN",
+                      en: "BACK TO ALL ANNOUNCEMENTS",
+                    })
+                  : t({
+                      id: "KEMBALI KE SEMUA BERITA",
+                      en: "BACK TO ALL NEWS",
+                    })}
               </span>
             </button>
           </motion.div>
@@ -450,7 +472,11 @@ export default function BeritaDetail() {
                 variants={scaleVariants}
                 className="inline-block bg-red-50 text-primary border border-primary/20 text-xs font-bold px-3 py-1 uppercase tracking-wider rounded-xs"
               >
-                {article.category}
+                {article.category === "Pengumuman"
+                  ? t({ id: "Pengumuman", en: "Announcement" })
+                  : article.category === "Berita"
+                  ? t({ id: "Berita", en: "News" })
+                  : article.category}
               </motion.span>
 
               {/* TITLE */}
@@ -493,7 +519,7 @@ export default function BeritaDetail() {
                   <div className="flex items-center space-x-3 text-gray-500">
                     <span className="flex items-center gap-1.5">
                       <FiCalendar className="text-primary text-xs" />
-                      {article.date}
+                      {formatArticleDate(article.date, lang)}
                     </span>
 
                     <span>•</span>
@@ -553,7 +579,7 @@ export default function BeritaDetail() {
 
                   {copied && (
                     <span className="text-[11px] text-green-600 font-semibold animate-fade-in">
-                      Tersalin!
+                      {t({ id: "Tersalin!", en: "Copied!" })}
                     </span>
                   )}
                 </motion.div>
@@ -593,9 +619,10 @@ export default function BeritaDetail() {
                 />
 
                 <p className="p-3 text-center text-xs text-gray-500 bg-gray-50/80 italic border-t border-gray-100">
-                  Dokumentasi Program Studi Magister
-                  Kenotariatan (MKn) Fakultas Hukum
-                  UNISSULA Semarang.
+                  {t({
+                    id: "Dokumentasi Program Studi Magister Kenotariatan (MKn) Fakultas Hukum UNISSULA Semarang.",
+                    en: "Documentation of the Master of Notarial Law (MKn) Programme, Faculty of Law, UNISSULA Semarang.",
+                  })}
                 </p>
               </motion.div>
             )}
@@ -628,7 +655,10 @@ export default function BeritaDetail() {
                   variants={itemVariants}
                   className="text-sm text-gray-500 italic"
                 >
-                  Isi lengkap belum tersedia.
+                  {t({
+                    id: "Isi lengkap belum tersedia.",
+                    en: "Full content is not yet available.",
+                  })}
                 </motion.p>
               )}
             </motion.div>
@@ -696,7 +726,7 @@ export default function BeritaDetail() {
                 viewport={viewportSettings}
                 className="pb-6 text-sm text-body"
               >
-                Sumber:{" "}
+                {t({ id: "Sumber:", en: "Source:" })}{" "}
                 <a
                   href={article.sumber.url}
                   target="_blank"
@@ -744,7 +774,10 @@ export default function BeritaDetail() {
                       <FiPaperclip className="text-primary text-xl" />
 
                       <span>
-                        Dokumen & Berkas Lampiran
+                        {t({
+                          id: "Dokumen & Berkas Lampiran",
+                          en: "Attached Documents & Files",
+                        })}
                       </span>
                     </motion.div>
 
@@ -752,9 +785,10 @@ export default function BeritaDetail() {
                       variants={itemVariants}
                       className="text-xs sm:text-sm text-body/80 mb-5"
                     >
-                      Silakan unduh dokumen resmi terkait
-                      pengumuman ini melalui tautan di
-                      bawah:
+                      {t({
+                        id: "Silakan unduh dokumen resmi terkait pengumuman ini melalui tautan di bawah:",
+                        en: "Please download the official documents related to this announcement via the links below:",
+                      })}
                     </motion.p>
                   </motion.div>
 
@@ -831,7 +865,7 @@ export default function BeritaDetail() {
                               <FiDownload className="text-sm" />
 
                               <span>
-                                Unduh Berkas
+                                {t({ id: "Unduh Berkas", en: "Download File" })}
                               </span>
                             </a>
                           </div>
@@ -930,7 +964,10 @@ export default function BeritaDetail() {
                   variants={itemVariants}
                   className="text-[10px] font-bold tracking-wider uppercase text-primary block"
                 >
-                  PENULIS / KONTRIBUTOR
+                  {t({
+                    id: "PENULIS / KONTRIBUTOR",
+                    en: "AUTHOR / CONTRIBUTOR",
+                  })}
                 </motion.span>
 
                 <motion.h4
@@ -951,11 +988,10 @@ export default function BeritaDetail() {
                   variants={itemVariants}
                   className="text-xs text-body leading-relaxed pt-1"
                 >
-                  Kabar berita dan publikasi kegiatan
-                  Program Studi Magister (S2)
-                  Kenotariatan Fakultas Hukum
-                  Universitas Islam Sultan Agung
-                  (UNISSULA) Semarang.
+                  {t({
+                    id: "Kabar berita dan publikasi kegiatan Program Studi Magister (S2) Kenotariatan Fakultas Hukum Universitas Islam Sultan Agung (UNISSULA) Semarang.",
+                    en: "News and activity publications of the Master of Notarial Law Programme, Faculty of Law, Sultan Agung Islamic University (UNISSULA) Semarang.",
+                  })}
                 </motion.p>
               </motion.div>
             </motion.div>

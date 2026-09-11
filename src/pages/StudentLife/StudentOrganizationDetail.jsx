@@ -8,6 +8,7 @@ import Breadcrumb from "../../components/ui/Breadcrumb";
 import { studentOrganizationsData } from "../../data/studentOrganizationsData";
 import ZoomableImg from "../../components/ui/ZoomableImg";
 import GaleriGeser from "../../components/ui/GaleriGeser";
+import { useT } from "../../i18n/languageContext";
 
 const viewportSettings = {
   once: true,
@@ -101,12 +102,13 @@ function JudulSeksi({ children }) {
  * mencantumkannya — beberapa nama memang belum memilikinya.
  */
 function BarisNama({ name, nim, role }) {
+  const t = useT();
   return (
     <div className="py-2.5 flex items-baseline justify-between gap-4">
       <div className="min-w-0">
         {role && (
           <span className="block text-[10px] font-bold tracking-[0.14em] uppercase text-primary mb-0.5">
-            {role}
+            {t(role)}
           </span>
         )}
         <span className="text-sm sm:text-[15px] font-medium text-heading leading-snug">
@@ -121,6 +123,8 @@ function BarisNama({ name, nim, role }) {
 }
 
 export default function StudentOrganizationDetail() {
+  const t = useT();
+
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: "instant" });
   }, []);
@@ -130,8 +134,11 @@ export default function StudentOrganizationDetail() {
   return (
     <>
       <Helmet>
-        <title>{`${organization.shortName} | MKn UNISSULA`}</title>
-        <meta name="description" content={organization.description} />
+        <title>{`${organization.shortName} | ${t({
+          id: "MKn UNISSULA",
+          en: "MKn UNISSULA",
+        })}`}</title>
+        <meta name="description" content={t(organization.description)} />
       </Helmet>
 
       {/*
@@ -175,7 +182,7 @@ export default function StudentOrganizationDetail() {
                   variants={itemVariants}
                   className="text-[11px] sm:text-xs font-bold tracking-[0.16em] uppercase text-primary block mb-2"
                 >
-                  {organization.category}
+                  {t(organization.category)}
                 </motion.span>
                 <motion.h1
                   variants={itemVariants}
@@ -187,7 +194,7 @@ export default function StudentOrganizationDetail() {
                   variants={itemVariants}
                   className="mt-2 text-sm sm:text-base font-heading text-special leading-snug max-w-xl"
                 >
-                  {organization.title}
+                  {t(organization.title)}
                 </motion.p>
                 <motion.div
                   variants={lineVariants}
@@ -197,7 +204,7 @@ export default function StudentOrganizationDetail() {
                   variants={itemVariants}
                   className="text-sm sm:text-base text-body text-justify leading-relaxed max-w-xl"
                 >
-                  {organization.description}
+                  {t(organization.description)}
                 </motion.p>
               </motion.div>
 
@@ -207,10 +214,10 @@ export default function StudentOrganizationDetail() {
                   variants={itemVariants}
                   className="w-full max-w-xl border-t border-gray-200 divide-y divide-gray-200 text-xs sm:text-sm pt-1"
                 >
-                  {organization.meta.map((m) => (
-                    <div key={m.label} className="py-2.5 flex items-center justify-between gap-4">
-                      <span className="text-body font-normal">{m.label}</span>
-                      <span className="font-semibold text-heading text-right">{m.value}</span>
+                  {organization.meta.map((m, idx) => (
+                    <div key={typeof m.label === "string" ? m.label : idx} className="py-2.5 flex items-center justify-between gap-4">
+                      <span className="text-body font-normal">{t(m.label)}</span>
+                      <span className="font-semibold text-heading text-right">{t(m.value)}</span>
                     </div>
                   ))}
                 </motion.div>
@@ -226,8 +233,8 @@ export default function StudentOrganizationDetail() {
             >
               <ZoomableImg
                 src={organization.image}
-                alt={organization.imageCaption || organization.title}
-                caption={organization.imageCaption}
+                alt={t(organization.imageCaption) || t(organization.title)}
+                caption={t(organization.imageCaption)}
                 className="w-full h-full object-cover object-center rounded-md hover:scale-105 transition-transform duration-500"
                 eager
               />
@@ -250,10 +257,10 @@ export default function StudentOrganizationDetail() {
                   whileInView="visible"
                   viewport={viewportSettings}
                 >
-                  <JudulSeksi>Sejarah</JudulSeksi>
+                  <JudulSeksi>{t({ id: "Sejarah", en: "History" })}</JudulSeksi>
                   <motion.div variants={itemVariants} className="space-y-5 text-justify">
                     {organization.narrative.map((paragraph, idx) => (
-                      <p key={idx}>{paragraph}</p>
+                      <p key={idx}>{t(paragraph)}</p>
                     ))}
                   </motion.div>
                 </motion.div>
@@ -267,14 +274,14 @@ export default function StudentOrganizationDetail() {
                   whileInView="visible"
                   viewport={viewportSettings}
                 >
-                  <JudulSeksi>Fungsi dan Tujuan</JudulSeksi>
+                  <JudulSeksi>{t({ id: "Fungsi dan Tujuan", en: "Functions and Objectives" })}</JudulSeksi>
                   <motion.div
                     variants={containerVariants}
                     className="grid grid-cols-1 sm:grid-cols-3 border-t border-l border-gray-200 bg-white"
                   >
                     {organization.fungsi.map((fungsi, idx) => (
                       <motion.div
-                        key={fungsi}
+                        key={idx}
                         variants={cardVariants}
                         whileHover={{ y: -3, transition: { duration: 0.2 } }}
                         className="p-5 sm:p-6 border-r border-b border-gray-200 space-y-2 transition-colors hover:bg-neutral-50/70"
@@ -282,7 +289,7 @@ export default function StudentOrganizationDetail() {
                         <span className="text-sm font-bold text-primary tabular-nums">
                           {String(idx + 1).padStart(2, "0")}
                         </span>
-                        <p className="text-sm text-body leading-relaxed">{fungsi}</p>
+                        <p className="text-sm text-body leading-relaxed">{t(fungsi)}</p>
                       </motion.div>
                     ))}
                   </motion.div>
@@ -291,7 +298,7 @@ export default function StudentOrganizationDetail() {
                       variants={itemVariants}
                       className="mt-6 text-sm sm:text-base text-justify leading-relaxed"
                     >
-                      {organization.tujuan}
+                      {t(organization.tujuan)}
                     </motion.p>
                   )}
                 </motion.div>
@@ -305,11 +312,16 @@ export default function StudentOrganizationDetail() {
                   whileInView="visible"
                   viewport={viewportSettings}
                 >
-                  <JudulSeksi>Program Kerja {organization.periode}</JudulSeksi>
+                  <JudulSeksi>
+                    {t({
+                      id: `Program Kerja ${organization.periode}`,
+                      en: `Work Programmes ${organization.periode}`,
+                    })}
+                  </JudulSeksi>
                   <div className="space-y-8">
                     {organization.programKerja.map((group, idx) => (
                       <motion.div
-                        key={group.divisi}
+                        key={idx}
                         variants={cardVariants}
                         className="p-4 sm:p-5 rounded-xs bg-white border border-gray-100 hover:border-gray-200 hover:shadow-2xs transition-all"
                       >
@@ -318,14 +330,14 @@ export default function StudentOrganizationDetail() {
                             {String(idx + 1).padStart(2, "0")}
                           </span>
                           <h3 className="font-heading font-bold text-base sm:text-lg text-heading leading-snug">
-                            {group.divisi}
+                            {t(group.divisi)}
                           </h3>
                         </div>
                         <ul className="space-y-2.5 pl-1">
-                          {group.items.map((item) => (
-                            <li key={item} className="flex gap-3 text-sm leading-relaxed">
+                          {group.items.map((item, i) => (
+                            <li key={i} className="flex gap-3 text-sm leading-relaxed">
                               <span className="text-primary shrink-0 mt-[3px]">—</span>
-                              <span>{item}</span>
+                              <span>{t(item)}</span>
                             </li>
                           ))}
                         </ul>
@@ -351,12 +363,12 @@ export default function StudentOrganizationDetail() {
                     variants={itemVariants}
                     className="text-[11px] font-bold tracking-[0.16em] uppercase text-body pb-3 border-b border-gray-200"
                   >
-                    RINGKASAN
+                    {t({ id: "RINGKASAN", en: "SUMMARY" })}
                   </motion.h3>
                   <div className="space-y-5">
-                    {organization.summary.map((stat) => (
+                    {organization.summary.map((stat, idx) => (
                       <motion.div
-                        key={stat.label}
+                        key={idx}
                         variants={itemVariants}
                         whileHover={{ x: 3, transition: { duration: 0.2 } }}
                         className="space-y-0.5"
@@ -364,7 +376,7 @@ export default function StudentOrganizationDetail() {
                         <div className="font-heading text-3xl sm:text-4xl font-bold text-primary leading-none">
                           {stat.number}
                         </div>
-                        <div className="text-xs sm:text-sm text-body">{stat.label}</div>
+                        <div className="text-xs sm:text-sm text-body">{t(stat.label)}</div>
                       </motion.div>
                     ))}
                   </div>
@@ -384,17 +396,17 @@ export default function StudentOrganizationDetail() {
                     variants={itemVariants}
                     className="text-[11px] font-bold tracking-[0.16em] uppercase text-body pb-3 border-b border-gray-200"
                   >
-                    LANDASAN
+                    {t({ id: "LANDASAN", en: "FOUNDATIONS" })}
                   </motion.h3>
                   <ul className="space-y-2">
-                    {organization.landasan.map((nilai) => (
+                    {organization.landasan.map((nilai, idx) => (
                       <motion.li
-                        key={nilai}
+                        key={idx}
                         variants={itemVariants}
                         whileHover={{ x: 4, transition: { duration: 0.2 } }}
                         className="text-xs sm:text-sm text-heading font-medium border-l-2 border-primary pl-3 py-0.5 transition-colors"
                       >
-                        {nilai}
+                        {t(nilai)}
                       </motion.li>
                     ))}
                   </ul>
@@ -430,7 +442,12 @@ export default function StudentOrganizationDetail() {
             whileInView="visible"
             viewport={viewportSettings}
           >
-            <JudulSeksi>Struktur Organisasi {organization.periode}</JudulSeksi>
+            <JudulSeksi>
+              {t({
+                id: `Struktur Organisasi ${organization.periode}`,
+                en: `Organisational Structure ${organization.periode}`,
+              })}
+            </JudulSeksi>
 
             {/* Pengurus Inti — tanpa foto, program studi belum menyerahkan pas foto */}
             {organization.pengurusInti?.length > 0 && (
@@ -440,7 +457,7 @@ export default function StudentOrganizationDetail() {
               >
                 {organization.pengurusInti.map((member) => (
                   <motion.div
-                    key={member.role}
+                    key={member.name}
                     variants={cardVariants}
                     whileHover={{ y: -2, transition: { duration: 0.2 } }}
                     className="px-5 py-4 sm:px-6 sm:py-5 border-r border-b border-gray-200 transition-colors hover:bg-neutral-50/70"
@@ -457,20 +474,20 @@ export default function StudentOrganizationDetail() {
                 variants={containerVariants}
                 className="mt-10 grid grid-cols-1 lg:grid-cols-3 gap-6"
               >
-                {organization.divisi.map((div) => (
+                {organization.divisi.map((div, idx) => (
                   <motion.div
-                    key={div.nama}
+                    key={idx}
                     variants={cardVariants}
                     whileHover={{ y: -4, transition: { duration: 0.25 } }}
                     className="bg-white border border-gray-200 rounded-xs p-6 flex flex-col hover:shadow-sm hover:border-gray-300 transition-all"
                   >
                     <h3 className="font-heading font-bold text-base sm:text-lg text-heading leading-snug pb-3 border-b-2 border-primary">
-                      {div.nama}
+                      {t(div.nama)}
                     </h3>
 
                     <div className="mt-4">
                       <BarisNama
-                        role="Koordinator"
+                        role={{ id: "Koordinator", en: "Coordinator" }}
                         name={div.koordinator.name}
                         nim={div.koordinator.nim}
                       />
@@ -478,13 +495,13 @@ export default function StudentOrganizationDetail() {
 
                     <div className="mt-4 pt-4 border-t border-gray-200">
                       <span className="block text-[10px] font-bold tracking-[0.14em] uppercase text-body mb-1">
-                        Anggota
+                        {t({ id: "Anggota", en: "Members" })}
                       </span>
                       <ol className="divide-y divide-gray-100">
-                        {div.anggota.map((anggota, idx) => (
-                          <li key={anggota.name} className="flex gap-3 items-baseline">
+                        {div.anggota.map((anggota, i) => (
+                          <li key={i} className="flex gap-3 items-baseline">
                             <span className="text-xs text-gray-400 tabular-nums w-4 shrink-0">
-                              {idx + 1}.
+                              {i + 1}.
                             </span>
                             <div className="flex-1 min-w-0">
                               <BarisNama name={anggota.name} nim={anggota.nim} />
@@ -512,7 +529,10 @@ export default function StudentOrganizationDetail() {
                 to="/mahasiswa/akomodasi"
                 className="inline-flex items-center font-semibold text-primary hover:underline transition-colors"
               >
-                Informasi Akomodasi Mahasiswa →
+                {t({
+                  id: "Informasi Akomodasi Mahasiswa →",
+                  en: "Student Accommodation Info →",
+                })}
               </Link>
             </motion.div>
           </motion.div>

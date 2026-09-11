@@ -4,62 +4,137 @@ import imgIMANU4 from "../assets/images/imanu-kegiatan.jpeg";
 import imgIMANU5 from "../assets/images/lomba-imanu.jpg";
 import imgIMANU6 from "../assets/images/imanu-1.jpeg";
 
-
 export const studentOrganizationsData = [
   {
     id: 1,
     slug: "imanu",
-    title: "Ikatan Mahasiswa Notariat UNISSULA",
+    title: {
+      id: "Ikatan Mahasiswa Notariat UNISSULA",
+      en: "UNISSULA Notarial Students Association",
+    },
     shortName: "IMANU",
-    category: "ORGANISASI MAHASISWA",
+    category: {
+      id: "ORGANISASI MAHASISWA",
+      en: "STUDENT ORGANIZATION",
+    },
     periode: "2026/2027",
-    description:
-      "IMANU UNISSULA adalah lembaga kemahasiswaan formal intra kampus di tingkat Program " +
-      "Studi Magister Kenotariatan. Organisasi ini bersifat akademis, kekeluargaan, dan " +
-      "independen tanpa berafiliasi pada kekuatan politik mana pun.",
+    description: {
+      id:
+        "IMANU UNISSULA adalah lembaga kemahasiswaan formal intra kampus di tingkat Program " +
+        "Studi Magister Kenotariatan. Organisasi ini bersifat akademis, kekeluargaan, dan " +
+        "independen tanpa berafiliasi pada kekuatan politik mana pun.",
+      en:
+        "IMANU UNISSULA is the official intra-campus student governing body of the Master of " +
+        "Notarial Law Study Programme. The organization is academic, fraternal, and " +
+        "autonomous, free from partisan political affiliations.",
+    },
     image: imgIMANU4,
-    imageCaption: "Kampus Universitas Islam Sultan Agung, Semarang",
+    imageCaption: {
+      id: "Kampus Universitas Islam Sultan Agung, Semarang",
+      en: "Sultan Agung Islamic University Campus, Semarang",
+    },
 
     meta: [
-      { label: "Nama singkat", value: "IMANU UNISSULA" },
-      { label: "Didirikan", value: "18 November 2018, Kota Semarang" },
-      { label: "Kedudukan", value: "Program Studi Magister Kenotariatan" },
-      { label: "Periode kepengurusan", value: "2026 / 2027" },
+      {
+        label: { id: "Nama singkat", en: "Short name" },
+        value: "IMANU UNISSULA",
+      },
+      {
+        label: { id: "Didirikan", en: "Founded" },
+        value: {
+          id: "18 November 2018, Kota Semarang",
+          en: "18 November 2018, Semarang City",
+        },
+      },
+      {
+        label: { id: "Kedudukan", en: "Status/Seat" },
+        value: {
+          id: "Program Studi Magister Kenotariatan",
+          en: "Master of Notarial Law Programme",
+        },
+      },
+      {
+        label: { id: "Periode kepengurusan", en: "Term period" },
+        value: "2026 / 2027",
+      },
     ],
 
     /** Fungsi organisasi sebagaimana dirumuskan pada dokumen sumber. */
     fungsi: [
-      "Wadah komunikasi antaranggota dan dengan program studi",
-      "Penjaring aspirasi mahasiswa Magister Kenotariatan",
-      "Sarana pengembangan keilmuan dan kompetensi mahasiswa",
+      {
+        id: "Wadah komunikasi antaranggota dan dengan program studi",
+        en: "Forum for mutual communication among members and with the study programme",
+      },
+      {
+        id: "Penjaring aspirasi mahasiswa Magister Kenotariatan",
+        en: "Channelling aspirations of Master of Notarial Law students",
+      },
+      {
+        id: "Sarana pengembangan keilmuan dan kompetensi mahasiswa",
+        en: "Medium for developing scholarly insight and professional legal competencies",
+      },
     ],
 
     /** Landasan nilai organisasi. */
-    landasan: ["Nilai-nilai keislaman", "Pancasila", "Tri Dharma Perguruan Tinggi"],
+    landasan: [
+      { id: "Nilai-nilai keislaman", en: "Islamic Values" },
+      { id: "Pancasila", en: "Pancasila" },
+      { id: "Tri Dharma Perguruan Tinggi", en: "Tri Dharma of Higher Education" },
+    ],
 
-    tujuan:
-      "Berlandaskan nilai-nilai tersebut, IMANU UNISSULA didedikasikan untuk menjembatani " +
-      "sinergi antara civitas academica, alumni, masyarakat, serta organisasi profesi hukum. " +
-      "Tujuannya adalah membentuk calon praktisi hukum dan Notaris/PPAT yang berintegritas, " +
-      "beretika luhur, profesional, dan bertakwa.",
+    tujuan: {
+      id:
+        "Berlandaskan nilai-nilai tersebut, IMANU UNISSULA didedikasikan untuk menjembatani " +
+        "sinergi antara civitas academica, alumni, masyarakat, serta organisasi profesi hukum. " +
+        "Tujuannya adalah membentuk calon praktisi hukum dan Notaris/PPAT yang berintegritas, " +
+        "beretika luhur, profesional, dan bertakwa.",
+      en:
+        "Grounded upon these values, IMANU UNISSULA is dedicated to bridging synergy between the " +
+        "academic community, alumni, society, and legal professional bodies. Its goal is to " +
+        "forge prospective legal practitioners and Notaries/PPAT who possess uncompromising " +
+        "integrity, noble ethics, professional mastery, and devotion to God.",
+    },
 
     narrative: [
-      "Sejarah berdirinya IMANU UNISSULA berawal dari kesadaran mendalam bahwa mahasiswa " +
-        "Program Studi Magister Kenotariatan merupakan bagian integral dari civitas academica. " +
-        "Mahasiswa dituntut untuk mengemban amanah keilmuan, kepemimpinan, serta etika profesi " +
-        "luhur yang senantiasa berlandaskan pada nilai-nilai ajaran Islam. Berangkat dari " +
-        "pemikiran filosofis dan kebutuhan taktis tersebut, IMANU UNISSULA secara resmi " +
-        "didirikan di Kota Semarang pada tanggal 18 November 2018.",
-      "Pembentukan organisasi ini tidak terlepas dari urgensi untuk menyediakan sebuah wadah " +
-        "formal yang mampu mengakomodasi aspirasi mahasiswa sekaligus mempererat tali " +
-        "silaturahmi. Lebih jauh, para pendiri IMANU UNISSULA memandang pentingnya sebuah " +
-        "institusi kemahasiswaan yang secara terstruktur berupaya mengembangkan integritas dan " +
-        "kapasitas keilmuan di bidang kenotariatan.",
-      "Kehadiran organisasi ini dirancang sebagai instrumen strategis guna mempersiapkan " +
-        "calon-calon praktisi hukum, yang tidak hanya memiliki kapabilitas serta keahlian hukum " +
-        "tinggi, tetapi juga menjunjung tinggi nilai ketakwaan kepada Allah SWT. Melalui pijakan " +
-        "historis yang kuat ini, IMANU UNISSULA terus bergerak sebagai jembatan komunikasi antara " +
-        "dunia akademik dan realitas profesi hukum.",
+      {
+        id:
+          "Sejarah berdirinya IMANU UNISSULA berawal dari kesadaran mendalam bahwa mahasiswa " +
+          "Program Studi Magister Kenotariatan merupakan bagian integral dari civitas academica. " +
+          "Mahasiswa dituntut untuk mengemban amanah keilmuan, kepemimpinan, serta etika profesi " +
+          "luhur yang senantiasa berlandaskan pada nilai-nilai ajaran Islam. Berangkat dari " +
+          "pemikiran filosofis dan kebutuhan taktis tersebut, IMANU UNISSULA secara resmi " +
+          "didirikan di Kota Semarang pada tanggal 18 November 2018.",
+        en:
+          "The history of IMANU UNISSULA stems from a profound awareness that Master of Notarial Law " +
+          "students are an integral part of the academic community, entrusted with scholarly " +
+          "leadership and noble professional ethics anchored in Islamic tenets. Stemming from this " +
+          "philosophy and practical necessity, IMANU UNISSULA was formally established in Semarang on " +
+          "18 November 2018.",
+      },
+      {
+        id:
+          "Pembentukan organisasi ini tidak terlepas dari urgensi untuk menyediakan sebuah wadah " +
+          "formal yang mampu mengakomodasi aspirasi mahasiswa sekaligus mempererat tali " +
+          "silaturahmi. Lebih jauh, para pendiri IMANU UNISSULA memandang pentingnya sebuah " +
+          "institusi kemahasiswaan yang secara terstruktur berupaya mengembangkan integritas dan " +
+          "kapasitas keilmuan di bidang kenotariatan.",
+        en:
+          "The foundation was propelled by the urgency to provide a structured student body " +
+          "capable of accommodating member aspirations, fostering solidarity, and systematically " +
+          "advancing intellectual capacity and integrity in notarial science.",
+      },
+      {
+        id:
+          "Kehadiran organisasi ini dirancang sebagai instrumen strategis guna mempersiapkan " +
+          "calon-calon praktisi hukum, yang tidak hanya memiliki kapabilitas serta keahlian hukum " +
+          "tinggi, tetapi juga menjunjung tinggi nilai ketakwaan kepada Allah SWT. Melalui pijakan " +
+          "historis yang kuat ini, IMANU UNISSULA terus bergerak sebagai jembatan komunikasi antara " +
+          "dunia akademik dan realitas profesi hukum.",
+        en:
+          "The presence of IMANU serves as a strategic instrument preparing future legal practitioners " +
+          "of profound competence and high spiritual devotion, continuing as an active bridge between " +
+          "legal academia and professional reality.",
+      },
     ],
 
     /**
@@ -69,44 +144,107 @@ export const studentOrganizationsData = [
      */
     programKerja: [
       {
-        divisi: "Hubungan Masyarakat & Jejaring Organisasi",
+        divisi: {
+          id: "Hubungan Masyarakat & Jejaring Organisasi",
+          en: "Public Relations & Organisational Networks",
+        },
         items: [
-          "Melaksanakan kunjungan dan menjalin relasi kelembagaan dengan Pengurus Wilayah/Daerah INI dan IPPAT.",
-          "Membangun komunikasi strategis dengan instansi pemerintahan terkait, seperti ATR/BPN dan Kementerian Hukum dan HAM.",
-          "Membentuk serta mengelola forum jejaring komunikasi yang solid dengan alumni Magister Kenotariatan.",
+          {
+            id: "Melaksanakan kunjungan dan menjalin relasi kelembagaan dengan Pengurus Wilayah/Daerah INI dan IPPAT.",
+            en: "Conducting institutional visits and forging collaborative partnerships with Regional Boards of INI and IPPAT.",
+          },
+          {
+            id: "Membangun komunikasi strategis dengan instansi pemerintahan terkait, seperti ATR/BPN dan Kementerian Hukum dan HAM.",
+            en: "Establishing strategic communication channels with relevant agencies, including ATR/BPN and the Ministry of Law and Human Rights.",
+          },
+          {
+            id: "Membentuk serta mengelola forum jejaring komunikasi yang solid dengan alumni Magister Kenotariatan.",
+            en: "Developing and stewarding robust communication networks with Master of Notarial Law alumni.",
+          },
         ],
       },
       {
-        divisi: "Pengembangan Sumber Daya Manusia (PSDM) & Minat Bakat",
+        divisi: {
+          id: "Pengembangan Sumber Daya Manusia (PSDM) & Minat Bakat",
+          en: "Human Resource Development (HRD) & Student Talents",
+        },
         items: [
-          "Menyelenggarakan kegiatan kaderisasi dan forum keakraban bagi mahasiswa baru untuk membangun ukhuwah.",
-          "Memfasilitasi penyelenggaraan pelatihan kemahiran hukum praktis, seperti kegiatan bedah akta bagi anggota.",
-          "Menyelenggarakan kegiatan olahraga dan seni secara berkala guna mewadahi minat dan bakat mahasiswa.",
+          {
+            id: "Menyelenggarakan kegiatan kaderisasi dan forum keakraban bagi mahasiswa baru untuk membangun ukhuwah.",
+            en: "Organizing student orientation and fraternity forums for incoming students to foster solidarity.",
+          },
+          {
+            id: "Memfasilitasi penyelenggaraan pelatihan kemahiran hukum praktis, seperti kegiatan bedah akta bagi anggota.",
+            en: "Facilitating practical legal skills workshops, including deed dissection and drafting clinics for members.",
+          },
+          {
+            id: "Menyelenggarakan kegiatan olahraga dan seni secara berkala guna mewadahi minat dan bakat mahasiswa.",
+            en: "Hosting sports and arts events regularly to nurture diverse student talents.",
+          },
         ],
       },
       {
-        divisi: "Pengabdian Masyarakat & Keislaman",
+        divisi: {
+          id: "Pengabdian Masyarakat & Keislaman",
+          en: "Community Service & Islamic Affairs",
+        },
         items: [
-          "Melaksanakan program bakti sosial dan kegiatan kemasyarakatan sebagai wujud implementasi Tri Dharma Perguruan Tinggi.",
-          "Menyediakan layanan konsultasi hukum gratis bagi masyarakat yang membutuhkan pendampingan atau literasi hukum.",
-          "Menyelenggarakan forum diskusi dan kajian keislaman secara rutin guna memperkuat nilai-nilai religius para calon Notaris.",
+          {
+            id: "Melaksanakan program bakti sosial dan kegiatan kemasyarakatan sebagai wujud implementasi Tri Dharma Perguruan Tinggi.",
+            en: "Executing community outreach programs and social service in fulfillment of the Tri Dharma of Higher Education.",
+          },
+          {
+            id: "Menyediakan layanan konsultasi hukum gratis bagi masyarakat yang membutuhkan pendampingan atau literasi hukum.",
+            en: "Providing pro bono legal consultation services for community members seeking legal literacy.",
+          },
+          {
+            id: "Menyelenggarakan forum diskusi dan kajian keislaman secara rutin guna memperkuat nilai-nilai religius para calon Notaris.",
+            en: "Organizing regular Islamic study circles to reinforce the religious and ethical character of future notaries.",
+          },
         ],
       },
     ],
 
     /** Susunan pengurus periode 2026-2027. */
     pengurusInti: [
-      { role: "Ketua", name: "Hasnan Habib Dwicahya", nim: "21302500052" },
-      { role: "Wakil Ketua", name: "Raka Faathir Wicaksana", nim: "21302500104" },
-      { role: "Sekretaris", name: "Arika Dian Astuti", nim: "21302500185" },
-      { role: "Wakil Sekretaris", name: "Evelyn Rumondang Angelica", nim: "21302500283" },
-      { role: "Bendahara", name: "Mila Oktavia Pratiwi", nim: "21302500278" },
-      { role: "Wakil Bendahara", name: "Rizki Diah Yustikawati", nim: "21302500237" },
+      {
+        role: { id: "Ketua", en: "President" },
+        name: "Hasnan Habib Dwicahya",
+        nim: "21302500052",
+      },
+      {
+        role: { id: "Wakil Ketua", en: "Vice President" },
+        name: "Raka Faathir Wicaksana",
+        nim: "21302500104",
+      },
+      {
+        role: { id: "Sekretaris", en: "Secretary" },
+        name: "Arika Dian Astuti",
+        nim: "21302500185",
+      },
+      {
+        role: { id: "Wakil Sekretaris", en: "Vice Secretary" },
+        name: "Evelyn Rumondang Angelica",
+        nim: "21302500283",
+      },
+      {
+        role: { id: "Bendahara", en: "Treasurer" },
+        name: "Mila Oktavia Pratiwi",
+        nim: "21302500278",
+      },
+      {
+        role: { id: "Wakil Bendahara", en: "Vice Treasurer" },
+        name: "Rizki Diah Yustikawati",
+        nim: "21302500237",
+      },
     ],
 
     divisi: [
       {
-        nama: "Divisi Hubungan Masyarakat",
+        nama: {
+          id: "Divisi Hubungan Masyarakat",
+          en: "Public Relations Division",
+        },
         koordinator: { name: "Lilianti", nim: "21302500068" },
         anggota: [
           { name: "Ma'iya Zulfiana Aisyah", nim: "21302500071" },
@@ -118,7 +256,10 @@ export const studentOrganizationsData = [
         ],
       },
       {
-        nama: "Divisi Pengembangan Sumber Daya Manusia (PSDM)",
+        nama: {
+          id: "Divisi Pengembangan Sumber Daya Manusia (PSDM)",
+          en: "Human Resource Development (HRD) Division",
+        },
         koordinator: { name: "Agus Jumianto", nim: "" },
         anggota: [
           { name: "Ari Puguh Sudi Hartono", nim: "21302500186" },
@@ -127,7 +268,10 @@ export const studentOrganizationsData = [
         ],
       },
       {
-        nama: "Divisi Pengabdian Masyarakat & Keislaman",
+        nama: {
+          id: "Divisi Pengabdian Masyarakat & Keislaman",
+          en: "Community Service & Islamic Affairs Division",
+        },
         koordinator: { name: "Mai Ranti", nim: "21302500070" },
         anggota: [
           { name: "Anis Wahdi", nim: "21302500017" },
@@ -149,9 +293,18 @@ export const studentOrganizationsData = [
     ],
 
     summary: [
-      { number: "3", label: "Divisi kerja" },
-      { number: "27", label: "Pengurus periode 2026/2027" },
-      { number: "9", label: "Program kerja satu periode" },
+      {
+        number: "3",
+        label: { id: "Divisi kerja", en: "Working divisions" },
+      },
+      {
+        number: "27",
+        label: { id: "Pengurus periode 2026/2027", en: "Officers (2026/2027 term)" },
+      },
+      {
+        number: "9",
+        label: { id: "Program kerja satu periode", en: "Work programmes" },
+      },
     ],
   },
 ];

@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
 import { FiX, FiCheckCircle } from "react-icons/fi";
 import { eventCategories } from "../../data/eventData";
+import { useT } from "../../i18n/languageContext";
 
 export default function SubmitEventModal({ isOpen, onClose }) {
+  const t = useT();
   const [formData, setFormData] = useState({
     title: "",
     organizer: "",
@@ -65,11 +67,13 @@ export default function SubmitEventModal({ isOpen, onClose }) {
               <FiCheckCircle className="w-8 h-8" />
             </div>
             <h3 className="text-xl font-heading font-bold text-heading">
-              Pengajuan Agenda Berhasil Dikirim
+              {t({ id: "Pengajuan Agenda Berhasil Dikirim", en: "Event Proposal Successfully Submitted" })}
             </h3>
             <p className="text-sm text-body max-w-md mx-auto leading-relaxed">
-              Terima kasih. Usulan agenda acara Anda telah diterima oleh Sekretariat Program Studi
-              Magister Kenotariatan UNISSULA dan akan ditinjau dalam 1x24 jam kerja sebelum dipublikasikan.
+              {t({
+                id: "Terima kasih. Usulan agenda acara Anda telah diterima oleh Sekretariat Program Studi Magister Kenotariatan UNISSULA dan akan ditinjau dalam 1x24 jam kerja sebelum dipublikasikan.",
+                en: "Thank you. Your event proposal has been received by the Master of Notarial Law Program Secretariat and will be reviewed within 1 business day before publication.",
+              })}
             </p>
             <div className="pt-4">
               <button
@@ -77,7 +81,7 @@ export default function SubmitEventModal({ isOpen, onClose }) {
                 onClick={handleReset}
                 className="px-6 py-2.5 bg-primary hover:bg-[#680000] text-white text-xs sm:text-sm font-semibold rounded-xs uppercase tracking-wider transition-colors"
               >
-                Selesai
+                {t({ id: "Selesai", en: "Done" })}
               </button>
             </div>
           </div>
@@ -85,27 +89,30 @@ export default function SubmitEventModal({ isOpen, onClose }) {
           <div className="space-y-6">
             <div>
               <span className="text-[11px] font-bold tracking-[0.16em] uppercase text-primary block">
-                AGENDA KAMPUS
+                {t({ id: "AGENDA KAMPUS", en: "CAMPUS AGENDA" })}
               </span>
               <h2 className="text-xl sm:text-2xl font-heading font-bold text-heading mt-1">
-                Pengajuan Agenda Acara
+                {t({ id: "Pengajuan Agenda Acara", en: "Submit Event Proposal" })}
               </h2>
               <p className="text-xs sm:text-sm text-gray-500 mt-1">
-                Isi formulir berikut untuk mempublikasikan agenda seminar, kuliah umum, atau kegiatan kemahasiswaan.
+                {t({
+                  id: "Isi formulir berikut untuk mempublikasikan agenda seminar, kuliah umum, atau kegiatan kemahasiswaan.",
+                  en: "Fill in the following form to submit a seminar, guest lecture, or student activity agenda.",
+                })}
               </p>
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-4 text-xs sm:text-sm">
               <div>
                 <label className="block font-semibold text-heading mb-1">
-                  Nama / Judul Acara <span className="text-primary">*</span>
+                  {t({ id: "Nama / Judul Acara", en: "Event Title" })} <span className="text-primary">*</span>
                 </label>
                 <input
                   type="text"
                   required
                   value={formData.title}
                   onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-                  placeholder="Contoh: Seminar Nasional Hukum Waris Islam"
+                  placeholder={t({ id: "Contoh: Seminar Nasional Hukum Waris Islam", en: "e.g., National Seminar on Islamic Inheritance Law" })}
                   className="w-full px-3.5 py-2.5 bg-gray-50 border border-gray-200 rounded-xs text-heading focus:outline-none focus:border-primary focus:bg-white transition-all"
                 />
               </div>
@@ -113,21 +120,21 @@ export default function SubmitEventModal({ isOpen, onClose }) {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className="block font-semibold text-heading mb-1">
-                    Penyelenggara / Unit <span className="text-primary">*</span>
+                    {t({ id: "Penyelenggara / Unit", en: "Organizer / Unit" })} <span className="text-primary">*</span>
                   </label>
                   <input
                     type="text"
                     required
                     value={formData.organizer}
                     onChange={(e) => setFormData({ ...formData, organizer: e.target.value })}
-                    placeholder="Contoh: IMANU UNISSULA / Dosen"
+                    placeholder={t({ id: "Contoh: IMANU UNISSULA / Dosen", en: "e.g., IMANU UNISSULA / Faculty" })}
                     className="w-full px-3.5 py-2.5 bg-gray-50 border border-gray-200 rounded-xs text-heading focus:outline-none focus:border-primary focus:bg-white transition-all"
                   />
                 </div>
 
                 <div>
                   <label className="block font-semibold text-heading mb-1">
-                    Kategori Acara <span className="text-primary">*</span>
+                    {t({ id: "Kategori Acara", en: "Event Category" })} <span className="text-primary">*</span>
                   </label>
                   <select
                     value={formData.category}
@@ -135,12 +142,16 @@ export default function SubmitEventModal({ isOpen, onClose }) {
                     className="w-full px-3.5 py-2.5 bg-gray-50 border border-gray-200 rounded-xs text-heading focus:outline-none focus:border-primary focus:bg-white transition-all"
                   >
                     {eventCategories
-                      .filter((c) => c !== "Semua Kategori")
-                      .map((cat) => (
-                        <option key={cat} value={cat}>
-                          {cat}
-                        </option>
-                      ))}
+                      .filter((c) => (typeof c === "object" ? c.id : c) !== "Semua Kategori")
+                      .map((cat) => {
+                        const catVal = typeof cat === "object" ? cat.id : cat;
+                        const catLabel = typeof cat === "object" ? t(cat) : cat;
+                        return (
+                          <option key={catVal} value={catVal}>
+                            {catLabel}
+                          </option>
+                        );
+                      })}
                   </select>
                 </div>
               </div>
@@ -148,7 +159,7 @@ export default function SubmitEventModal({ isOpen, onClose }) {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className="block font-semibold text-heading mb-1">
-                    Tanggal Pelaksanaan <span className="text-primary">*</span>
+                    {t({ id: "Tanggal Pelaksanaan", en: "Event Date" })} <span className="text-primary">*</span>
                   </label>
                   <input
                     type="date"
@@ -161,14 +172,14 @@ export default function SubmitEventModal({ isOpen, onClose }) {
 
                 <div>
                   <label className="block font-semibold text-heading mb-1">
-                    Waktu (WIB) <span className="text-primary">*</span>
+                    {t({ id: "Waktu (WIB)", en: "Time (WIB)" })} <span className="text-primary">*</span>
                   </label>
                   <input
                     type="text"
                     required
                     value={formData.time}
                     onChange={(e) => setFormData({ ...formData, time: e.target.value })}
-                    placeholder="Contoh: 09:00 - 12:00 WIB"
+                    placeholder="09:00 - 12:00 WIB"
                     className="w-full px-3.5 py-2.5 bg-gray-50 border border-gray-200 rounded-xs text-heading focus:outline-none focus:border-primary focus:bg-white transition-all"
                   />
                 </div>
@@ -176,55 +187,55 @@ export default function SubmitEventModal({ isOpen, onClose }) {
 
               <div>
                 <label className="block font-semibold text-heading mb-1">
-                  Tempat / Ruangan / Link Zoom <span className="text-primary">*</span>
+                  {t({ id: "Tempat / Ruangan / Link Zoom", en: "Venue / Room / Zoom Link" })} <span className="text-primary">*</span>
                 </label>
                 <input
                   type="text"
                   required
                   value={formData.venue}
                   onChange={(e) => setFormData({ ...formData, venue: e.target.value })}
-                  placeholder="Contoh: Ruang Sidang Pascasarjana Lt. 3 / Zoom Meeting"
+                  placeholder={t({ id: "Contoh: Ruang Sidang Pascasarjana Lt. 3 / Zoom Meeting", en: "e.g., Postgraduate Hall 3rd Fl. / Zoom Meeting" })}
                   className="w-full px-3.5 py-2.5 bg-gray-50 border border-gray-200 rounded-xs text-heading focus:outline-none focus:border-primary focus:bg-white transition-all"
                 />
               </div>
 
               <div>
                 <label className="block font-semibold text-heading mb-1">
-                  Narasumber / Pembicara
+                  {t({ id: "Narasumber / Pembicara", en: "Speaker / Presenter" })}
                 </label>
                 <input
                   type="text"
                   value={formData.speaker}
                   onChange={(e) => setFormData({ ...formData, speaker: e.target.value })}
-                  placeholder="Nama pembicara & gelar akademis"
+                  placeholder={t({ id: "Nama pembicara & gelar akademis", en: "Speaker name & academic titles" })}
                   className="w-full px-3.5 py-2.5 bg-gray-50 border border-gray-200 rounded-xs text-heading focus:outline-none focus:border-primary focus:bg-white transition-all"
                 />
               </div>
 
               <div>
                 <label className="block font-semibold text-heading mb-1">
-                  Deskripsi Ringkas Acara <span className="text-primary">*</span>
+                  {t({ id: "Deskripsi Ringkas Acara", en: "Brief Event Description" })} <span className="text-primary">*</span>
                 </label>
                 <textarea
                   required
                   rows={3}
                   value={formData.description}
                   onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                  placeholder="Ringkasan topik dan target peserta acara..."
+                  placeholder={t({ id: "Ringkasan topik dan target peserta acara...", en: "Summary of event topic and target audience..." })}
                   className="w-full px-3.5 py-2.5 bg-gray-50 border border-gray-200 rounded-xs text-heading focus:outline-none focus:border-primary focus:bg-white transition-all resize-none"
                 />
               </div>
 
               <div>
                 <label className="block font-semibold text-heading mb-1">
-                  Narahubung / Kontak WhatsApp <span className="text-primary">*</span>
+                  {t({ id: "Narahubung / Kontak WhatsApp", en: "Contact Person / WhatsApp" })} <span className="text-primary">*</span>
                 </label>
                 <input
                   type="text"
                   required
                   value={formData.contact}
                   onChange={(e) => setFormData({ ...formData, contact: e.target.value })}
-                  placeholder="Contoh: 0812-3456-7890 (Nama PIC)"
+                  placeholder="0812-3456-7890 (PIC)"
                   className="w-full px-3.5 py-2.5 bg-gray-50 border border-gray-200 rounded-xs text-heading focus:outline-none focus:border-primary focus:bg-white transition-all"
                 />
               </div>
@@ -235,13 +246,13 @@ export default function SubmitEventModal({ isOpen, onClose }) {
                   onClick={onClose}
                   className="px-5 py-2.5 border border-gray-300 hover:bg-gray-50 text-heading font-medium rounded-xs transition-colors cursor-pointer"
                 >
-                  Batal
+                  {t({ id: "Batal", en: "Cancel" })}
                 </button>
                 <button
                   type="submit"
                   className="px-6 py-2.5 bg-primary hover:bg-[#680000] text-white font-semibold rounded-xs tracking-wider uppercase transition-colors shadow-2xs cursor-pointer"
                 >
-                  Kirim Usulan
+                  {t({ id: "Kirim Usulan", en: "Submit" })}
                 </button>
               </div>
             </form>

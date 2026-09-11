@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import { FiArrowRight } from "react-icons/fi";
 import Img from "../ui/Img";
 import bgKampus from "../../assets/images/gedung.jpg";
+import { useT } from "../../i18n/languageContext";
+import { useUi } from "../../i18n/useUi";
 
 const viewportSettings = {
   once: true,
@@ -34,7 +36,21 @@ const itemVariants = {
   },
 };
 
+const teksReady = {
+  judul: {
+    id: "Siap Memulai Langkah Menjadi Notaris & PPAT?",
+    en: "Ready to Begin Your Journey as a Notary & PPAT?",
+  },
+  deskripsi: {
+    id: "Bergabunglah dengan Program Studi Magister Kenotariatan dan kembangkan keahlian hukum profesional Anda bersama para ahli dan praktisi unggul.",
+    en: "Join the Master of Notarial Law Study Programme and cultivate your professional legal expertise alongside distinguished scholars and leading practitioners.",
+  },
+};
+
 export default function Ready() {
+  const t = useT();
+  const ui = useUi();
+
   return (
     <section className="w-full bg-white font-body py-16 sm:py-20 border-b border-gray-200 overflow-hidden">
       <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8">
@@ -156,7 +172,7 @@ export default function Ready() {
                 leading-tight
               "
             >
-              Siap Memulai Langkah Menjadi Notaris & PPAT?
+              {t(teksReady.judul)}
             </motion.h2>
 
             {/* Deskripsi */}
@@ -171,9 +187,7 @@ export default function Ready() {
                 mx-auto
               "
             >
-              Bergabunglah dengan Program Studi Magister Kenotariatan dan
-              kembangkan keahlian hukum profesional Anda bersama para ahli
-              dan praktisi unggul.
+              {t(teksReady.deskripsi)}
             </motion.p>
 
             {/* Button */}
@@ -205,7 +219,7 @@ export default function Ready() {
                   hover:-translate-y-0.5
                 "
               >
-                <span>DAFTAR SEKARANG</span>
+                <span>{ui("applyNow")}</span>
 
                 <FiArrowRight
                   className="
@@ -219,7 +233,6 @@ export default function Ready() {
             </motion.div>
           </motion.div>
         </motion.div>
-
       </div>
     </section>
   );

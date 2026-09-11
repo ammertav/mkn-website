@@ -6,6 +6,7 @@ import { FiMail, FiClock, FiAlertCircle } from "react-icons/fi";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import Breadcrumb from "../../components/ui/Breadcrumb";
+import { useT, useLanguage } from "../../i18n/languageContext";
 
 /* =========================
    Animation Settings
@@ -56,52 +57,73 @@ const cardVariants = {
 const kategoriPengaduan = [
   {
     id: "akademik",
-    label: "Registrasi, jadwal kuliah & dokumen ujian",
+    label: {
+      id: "Registrasi, jadwal kuliah & dokumen ujian",
+      en: "Registration, class schedule & exam documents",
+    },
     penanggungJawab: "Suma'in, S.Pd.",
-    jabatan: "Bidang Akademik",
+    jabatan: { id: "Bidang Akademik", en: "Academic Affairs Division" },
     telepon: "6282312228282",
   },
   {
     id: "keuangan",
-    label: "Biaya kuliah, pembayaran & administrasi keuangan",
+    label: {
+      id: "Biaya kuliah, pembayaran & administrasi keuangan",
+      en: "Tuition fees, payment & financial administration",
+    },
     penanggungJawab: "Laili Rohmah, S.E.",
-    jabatan: "Bidang Keuangan",
+    jabatan: { id: "Bidang Keuangan", en: "Financial Affairs Division" },
     telepon: null,
   },
   {
     id: "promosi-humas",
-    label: "Penerimaan mahasiswa baru, publikasi & media",
+    label: {
+      id: "Penerimaan mahasiswa baru, publikasi & media",
+      en: "Student admissions, publications & media",
+    },
     penanggungJawab: "Aidha Nabila Mustikaweni, S.Kom.",
-    jabatan: "Bidang Promosi & Humas",
+    jabatan: { id: "Bidang Promosi & Humas", en: "Promotion & Public Relations Division" },
     telepon: null,
   },
   {
     id: "sarana-prasarana",
-    label: "Ruang kuliah, laboratorium & fasilitas kampus",
+    label: {
+      id: "Ruang kuliah, laboratorium & fasilitas kampus",
+      en: "Lecture rooms, laboratories & campus facilities",
+    },
     penanggungJawab: "Ahmad Kuswardoyo, S.E.",
-    jabatan: "Bidang Sarana Prasarana",
+    jabatan: { id: "Bidang Sarana Prasarana", en: "Facilities & Infrastructure Division" },
     telepon: null,
   },
   {
-    // Satu-satunya kategori yang tertuju ke pimpinan prodi, bukan ke bidang
-    // pelaksana, sehingga sengaja ditempatkan sesudah keempat bidang dan
-    // dibuat selebar penuh agar terbaca sebagai jalur tersendiri.
     id: "bimbingan",
-    label: "Bimbingan akademik, konsultasi studi & tesis",
+    label: {
+      id: "Bimbingan akademik, konsultasi studi & tesis",
+      en: "Academic advising, study consultation & thesis",
+    },
     penanggungJawab: "Dr. Nanang Sri Darmadi, S.H., M.H.",
-    jabatan: "Ketua Program Studi",
+    jabatan: { id: "Ketua Program Studi", en: "Head of Study Program" },
     telepon: null,
   },
   {
     id: "tata-usaha",
-    label: "Urusan lain, atau belum yakin harus ke bidang mana",
+    label: {
+      id: "Urusan lain, atau belum yakin harus ke bidang mana",
+      en: "Other matters, or unsure which division to consult",
+    },
     penanggungJawab: "Ikrom, S.H., M.H.",
-    jabatan: "Kepala Tata Usaha",
+    jabatan: { id: "Kepala Tata Usaha", en: "Head of Administration" },
     telepon: "6282312228181",
   },
 ];
 
-const daftarStatus = ["Mahasiswa", "Alumni", "Calon mahasiswa", "Dosen / tenaga kependidikan", "Umum"];
+const daftarStatus = [
+  { id: "Mahasiswa", en: "Student" },
+  { id: "Alumni", en: "Alumni" },
+  { id: "Calon mahasiswa", en: "Prospective student" },
+  { id: "Dosen / tenaga kependidikan", en: "Faculty / staff" },
+  { id: "Umum", en: "Public" },
+];
 
 const surel = { alamat: "mkn.fh@unissula.ac.id" };
 
@@ -110,8 +132,15 @@ const nomorUmum = {
   telepon: "6282312228181",
 };
 
-const jamKonsultasi = "Senin – Jumat, pukul 08.00 – 17.00 WIB";
-const jamKonsultasi2 = "Sabtu, pukul 08.00 – 15.00 WIB";
+const jamKonsultasi = {
+  id: "Senin – Jumat, pukul 08.00 – 17.00 WIB",
+  en: "Monday – Friday, 08:00 – 17:00 WIB",
+};
+
+const jamKonsultasi2 = {
+  id: "Sabtu, pukul 08.00 – 15.00 WIB",
+  en: "Saturday, 08:00 – 15:00 WIB",
+};
 
 const isianAwal = {
   kategori: "",
@@ -123,18 +152,34 @@ const isianAwal = {
   uraian: "",
 };
 
-/** Kolom yang wajib diisi sebelum pengaduan boleh dikirim. */
-const wajibDiisi = {
-  kategori: "Pilih kategori pengaduan.",
-  nama: "Nama lengkap wajib diisi.",
-  status: "Pilih status Anda.",
-  perihal: "Perihal wajib diisi.",
-  uraian: "Uraian pengaduan wajib diisi.",
-};
-
 export default function LayananPengaduan() {
+  const t = useT();
+  const { lang } = useLanguage();
   const [isian, setIsian] = useState(isianAwal);
   const [galat, setGalat] = useState({});
+
+  const wajibDiisi = {
+    kategori: {
+      id: "Pilih kategori pengaduan.",
+      en: "Please select a complaint category.",
+    },
+    nama: {
+      id: "Nama lengkap wajib diisi.",
+      en: "Full name is required.",
+    },
+    status: {
+      id: "Pilih status Anda.",
+      en: "Please select your status.",
+    },
+    perihal: {
+      id: "Perihal wajib diisi.",
+      en: "Subject is required.",
+    },
+    uraian: {
+      id: "Uraian pengaduan wajib diisi.",
+      en: "Description is required.",
+    },
+  };
 
   const kategoriTerpilih = kategoriPengaduan.find((k) => k.id === isian.kategori);
 
@@ -143,29 +188,35 @@ export default function LayananPengaduan() {
     setGalat((prev) => ({ ...prev, [kolom]: undefined }));
   };
 
-  /** Kembalikan true bila semua kolom wajib terisi; selebihnya tandai galatnya. */
   const lolosPeriksa = () => {
     const temuan = {};
     Object.entries(wajibDiisi).forEach(([kolom, pesan]) => {
-      if (!isian[kolom].trim()) temuan[kolom] = pesan;
+      if (!isian[kolom].trim()) temuan[kolom] = t(pesan);
     });
     setGalat(temuan);
     return Object.keys(temuan).length === 0;
   };
 
-  /** Rangkai isian formulir menjadi satu badan pesan yang runut. */
   const susunPesan = () =>
     [
-      `Pengaduan & Permohonan Bantuan — MKn UNISSULA`,
+      lang === "en"
+        ? `Inquiry & Assistance Request — MKn UNISSULA`
+        : `Pengaduan & Permohonan Bantuan — MKn UNISSULA`,
       ``,
-      `Kategori   : ${kategoriTerpilih?.label ?? "-"}`,
-      `Nama       : ${isian.nama.trim()}`,
-      `Status     : ${isian.status}`,
-      isian.identitas.trim() ? `NIM/Angkatan: ${isian.identitas.trim()}` : null,
-      isian.kontak.trim() ? `Kontak balik: ${isian.kontak.trim()}` : null,
-      `Perihal    : ${isian.perihal.trim()}`,
+      `${lang === "en" ? "Category   " : "Kategori   "}: ${
+        kategoriTerpilih ? t(kategoriTerpilih.label) : "-"
+      }`,
+      `${lang === "en" ? "Name       " : "Nama       "}: ${isian.nama.trim()}`,
+      `${lang === "en" ? "Status     " : "Status     "}: ${isian.status}`,
+      isian.identitas.trim()
+        ? `${lang === "en" ? "Student ID/Cohort" : "NIM/Angkatan"}: ${isian.identitas.trim()}`
+        : null,
+      isian.kontak.trim()
+        ? `${lang === "en" ? "Contact Info" : "Kontak balik"}: ${isian.kontak.trim()}`
+        : null,
+      `${lang === "en" ? "Subject    " : "Perihal    "}: ${isian.perihal.trim()}`,
       ``,
-      `Uraian:`,
+      `${lang === "en" ? "Description" : "Uraian"}:`,
       isian.uraian.trim(),
     ]
       .filter((baris) => baris !== null)
@@ -183,14 +234,14 @@ export default function LayananPengaduan() {
 
   const kirimSurel = () => {
     if (!lolosPeriksa()) return;
-    const perihal = `[Pengaduan] ${isian.perihal.trim()}`;
+    const prefix = lang === "en" ? "[Inquiry]" : "[Pengaduan]";
+    const perihal = `${prefix} ${isian.perihal.trim()}`;
     window.location.href =
       `mailto:${surel.alamat}` +
       `?subject=${encodeURIComponent(perihal)}` +
       `&body=${encodeURIComponent(susunPesan())}`;
   };
 
-  /** Kelas kolom isian, berubah saat kolomnya bergalat. */
   const kelasKolom = (kolom) =>
     `w-full px-3.5 py-2.5 bg-white border text-sm text-heading placeholder-gray-400 rounded-xs transition-colors focus:outline-none ${
       galat[kolom]
@@ -209,10 +260,19 @@ export default function LayananPengaduan() {
   return (
     <>
       <Helmet>
-        <title>Pengaduan &amp; Bantuan | MKn UNISSULA</title>
+        <html lang={lang} />
+        <title>
+          {lang === "en"
+            ? "Complaints & Inquiries | MKn UNISSULA"
+            : "Pengaduan & Bantuan | MKn UNISSULA"}
+        </title>
         <meta
           name="description"
-          content="Formulir pengaduan dan permohonan bantuan Program Studi Magister Kenotariatan (MKn) UNISSULA. Isi formulir, pesan diteruskan ke staf yang menangani melalui WhatsApp atau surel resmi."
+          content={
+            lang === "en"
+              ? "Inquiry and assistance form for Master of Notarial Law (MKn) UNISSULA. Submit your request, routed to relevant personnel via WhatsApp or official email."
+              : "Formulir pengaduan dan permohonan bantuan Program Studi Magister Kenotariatan (MKn) UNISSULA. Isi formulir, pesan diteruskan ke staf yang menangani melalui WhatsApp atau surel resmi."
+          }
         />
       </Helmet>
 
@@ -235,13 +295,19 @@ export default function LayananPengaduan() {
               variants={headerItemVariants}
               className="text-[11px] font-bold tracking-[0.18em] uppercase text-primary block mb-2"
             >
-              Layanan Program Studi
+              {t({
+                id: "Layanan Program Studi",
+                en: "Study Program Services",
+              })}
             </motion.span>
             <motion.h1
               variants={headerItemVariants}
               className="font-heading font-bold text-3xl sm:text-4xl lg:text-[44px] text-heading leading-[1.12] tracking-tight"
             >
-              Formulir Pengaduan &amp; Bantuan
+              {t({
+                id: "Formulir Pengaduan & Bantuan",
+                en: "Complaints & Assistance Form",
+              })}
             </motion.h1>
             <motion.div
               initial={{ width: 0 }}
@@ -254,8 +320,10 @@ export default function LayananPengaduan() {
               variants={fadeUpVariants}
               className="mt-4 text-sm sm:text-base text-body leading-relaxed"
             >
-              Isi keterangan di bawah ini. Pengaduan Anda akan dirangkai menjadi satu pesan
-              lengkap dan diteruskan kepada staf yang menangani kategori tersebut.
+              {t({
+                id: "Isi keterangan di bawah ini. Pengaduan Anda akan dirangkai menjadi satu pesan lengkap dan diteruskan kepada staf yang menangani kategori tersebut.",
+                en: "Fill in the details below. Your inquiry will be compiled into a structured message and forwarded to the staff handling the selected category.",
+              })}
             </motion.p>
           </motion.div>
 
@@ -279,10 +347,16 @@ export default function LayananPengaduan() {
                   id="langkah-1"
                   className="text-[11px] font-bold tracking-[0.16em] uppercase text-gray-400"
                 >
-                  Langkah 1 — Kategori
+                  {t({
+                    id: "Langkah 1 — Kategori",
+                    en: "Step 1 — Category",
+                  })}
                 </p>
                 <p className="mt-3 text-sm font-semibold text-heading">
-                  Urusan Anda mengenai apa?
+                  {t({
+                    id: "Urusan Anda mengenai apa?",
+                    en: "What is your inquiry regarding?",
+                  })}
                 </p>
 
                 <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -297,8 +371,6 @@ export default function LayananPengaduan() {
                         transition={{ duration: 0.4, ease: "easeOut", delay: idx * 0.07 }}
                         whileHover={{ scale: 1.015 }}
                         className={`cursor-pointer border rounded-xs p-4 transition-colors ${
-                          kategori.lebar ? "sm:col-span-2" : ""
-                        } ${
                           terpilih
                             ? "border-primary bg-red-50/50 ring-1 ring-primary/30"
                             : "border-gray-200 hover:border-gray-400"
@@ -317,10 +389,10 @@ export default function LayananPengaduan() {
                             terpilih ? "text-primary" : "text-heading"
                           }`}
                         >
-                          {kategori.label}
+                          {t(kategori.label)}
                         </span>
                         <span className="mt-2 block text-xs text-gray-500 leading-relaxed">
-                          {kategori.jabatan} · {kategori.penanggungJawab}
+                          {t(kategori.jabatan)} · {kategori.penanggungJawab}
                         </span>
                       </motion.label>
                     );
@@ -335,13 +407,16 @@ export default function LayananPengaduan() {
                   id="langkah-2"
                   className="text-[11px] font-bold tracking-[0.16em] uppercase text-gray-400"
                 >
-                  Langkah 2 — Identitas
+                  {t({
+                    id: "Langkah 2 — Identitas",
+                    en: "Step 2 — Identity",
+                  })}
                 </p>
 
                 <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-5">
                   <div>
                     <label htmlFor="nama" className="block text-xs font-semibold text-heading mb-1.5">
-                      Nama lengkap <span className="text-primary">*</span>
+                      {t({ id: "Nama lengkap", en: "Full name" })} <span className="text-primary">*</span>
                     </label>
                     <input
                       id="nama"
@@ -349,7 +424,11 @@ export default function LayananPengaduan() {
                       value={isian.nama}
                       onChange={ubah("nama")}
                       aria-invalid={Boolean(galat.nama)}
-                      placeholder="Nama sesuai data akademik"
+                      placeholder={
+                        lang === "en"
+                          ? "Name as registered in academic records"
+                          : "Nama sesuai data akademik"
+                      }
                       className={kelasKolom("nama")}
                     />
                     <Galat kolom="nama" />
@@ -357,7 +436,7 @@ export default function LayananPengaduan() {
 
                   <div>
                     <label htmlFor="status" className="block text-xs font-semibold text-heading mb-1.5">
-                      Status <span className="text-primary">*</span>
+                      {t({ id: "Status", en: "Status" })} <span className="text-primary">*</span>
                     </label>
                     <select
                       id="status"
@@ -366,10 +445,12 @@ export default function LayananPengaduan() {
                       aria-invalid={Boolean(galat.status)}
                       className={`${kelasKolom("status")} cursor-pointer`}
                     >
-                      <option value="">— Pilih status —</option>
-                      {daftarStatus.map((status) => (
-                        <option key={status} value={status}>
-                          {status}
+                      <option value="">
+                        {t({ id: "— Pilih status —", en: "— Select status —" })}
+                      </option>
+                      {daftarStatus.map((st) => (
+                        <option key={st.id} value={t(st)}>
+                          {t(st)}
                         </option>
                       ))}
                     </select>
@@ -378,30 +459,42 @@ export default function LayananPengaduan() {
 
                   <div>
                     <label htmlFor="identitas" className="block text-xs font-semibold text-heading mb-1.5">
-                      NIM / angkatan{" "}
-                      <span className="font-normal text-gray-400">(opsional)</span>
+                      {t({ id: "NIM / angkatan", en: "Student ID / cohort" })}{" "}
+                      <span className="font-normal text-gray-400">
+                        ({t({ id: "opsional", en: "optional" })})
+                      </span>
                     </label>
                     <input
                       id="identitas"
                       type="text"
                       value={isian.identitas}
                       onChange={ubah("identitas")}
-                      placeholder="Contoh: 21302500052 / 2025"
+                      placeholder={
+                        lang === "en"
+                          ? "Example: 21302500052 / 2025"
+                          : "Contoh: 21302500052 / 2025"
+                      }
                       className={kelasKolom("identitas")}
                     />
                   </div>
 
                   <div>
                     <label htmlFor="kontak" className="block text-xs font-semibold text-heading mb-1.5">
-                      Kontak balik{" "}
-                      <span className="font-normal text-gray-400">(opsional)</span>
+                      {t({ id: "Kontak balik", en: "Contact info" })}{" "}
+                      <span className="font-normal text-gray-400">
+                        ({t({ id: "opsional", en: "optional" })})
+                      </span>
                     </label>
                     <input
                       id="kontak"
                       type="text"
                       value={isian.kontak}
                       onChange={ubah("kontak")}
-                      placeholder="Nomor WhatsApp atau surel Anda"
+                      placeholder={
+                        lang === "en"
+                          ? "Your WhatsApp number or email"
+                          : "Nomor WhatsApp atau surel Anda"
+                      }
                       className={kelasKolom("kontak")}
                     />
                   </div>
@@ -414,13 +507,16 @@ export default function LayananPengaduan() {
                   id="langkah-3"
                   className="text-[11px] font-bold tracking-[0.16em] uppercase text-gray-400"
                 >
-                  Langkah 3 — Isi pengaduan
+                  {t({
+                    id: "Langkah 3 — Isi pengaduan",
+                    en: "Step 3 — Details",
+                  })}
                 </p>
 
                 <div className="mt-4 space-y-5">
                   <div>
                     <label htmlFor="perihal" className="block text-xs font-semibold text-heading mb-1.5">
-                      Perihal <span className="text-primary">*</span>
+                      {t({ id: "Perihal", en: "Subject" })} <span className="text-primary">*</span>
                     </label>
                     <input
                       id="perihal"
@@ -428,7 +524,11 @@ export default function LayananPengaduan() {
                       value={isian.perihal}
                       onChange={ubah("perihal")}
                       aria-invalid={Boolean(galat.perihal)}
-                      placeholder="Ringkas dalam satu kalimat"
+                      placeholder={
+                        lang === "en"
+                          ? "Summarize in one sentence"
+                          : "Ringkas dalam satu kalimat"
+                      }
                       className={kelasKolom("perihal")}
                     />
                     <Galat kolom="perihal" />
@@ -436,7 +536,7 @@ export default function LayananPengaduan() {
 
                   <div>
                     <label htmlFor="uraian" className="block text-xs font-semibold text-heading mb-1.5">
-                      Uraian <span className="text-primary">*</span>
+                      {t({ id: "Uraian", en: "Description" })} <span className="text-primary">*</span>
                     </label>
                     <textarea
                       id="uraian"
@@ -444,18 +544,24 @@ export default function LayananPengaduan() {
                       value={isian.uraian}
                       onChange={ubah("uraian")}
                       aria-invalid={Boolean(galat.uraian)}
-                      placeholder="Jelaskan kronologi, waktu kejadian, serta pihak atau berkas yang terkait."
+                      placeholder={
+                        lang === "en"
+                          ? "Explain the background, timeline, involved parties, or related documents."
+                          : "Jelaskan kronologi, waktu kejadian, serta pihak atau berkas yang terkait."
+                      }
                       className={`${kelasKolom("uraian")} leading-relaxed resize-y`}
                     />
                     <Galat kolom="uraian" />
                   </div>
                 </div>
 
-                {/* Pengiriman — dua saluran, isian formulir yang sama */}
+                {/* Pengiriman */}
                 <div className="mt-7 pt-6 border-t border-gray-200">
                   <p className="text-xs text-gray-500 leading-relaxed">
-                    Pilih cara pengiriman. Isian di atas akan tersalin otomatis ke aplikasi yang
-                    Anda pilih, sehingga tidak perlu diketik ulang.
+                    {t({
+                      id: "Pilih cara pengiriman. Isian di atas akan tersalin otomatis ke aplikasi yang Anda pilih, sehingga tidak perlu diketik ulang.",
+                      en: "Choose submission method. The form data above will be automatically prefilled into your chosen application without needing retyping.",
+                    })}
                   </p>
 
                   <div className="mt-4 flex flex-col sm:flex-row gap-3">
@@ -467,7 +573,7 @@ export default function LayananPengaduan() {
                       className="inline-flex items-center justify-center gap-2 bg-primary hover:bg-btn text-white px-6 py-3 rounded-xs text-xs font-bold tracking-wider uppercase transition-colors cursor-pointer"
                     >
                       <FaWhatsapp className="text-base" />
-                      <span>Kirim lewat WhatsApp</span>
+                      <span>{t({ id: "Kirim lewat WhatsApp", en: "Send via WhatsApp" })}</span>
                     </motion.button>
 
                     <motion.button
@@ -478,7 +584,7 @@ export default function LayananPengaduan() {
                       className="inline-flex items-center justify-center gap-2 border border-heading text-heading hover:bg-heading hover:text-white px-6 py-3 rounded-xs text-xs font-bold tracking-wider uppercase transition-colors cursor-pointer"
                     >
                       <FiMail className="text-base" />
-                      <span>Kirim lewat Surel</span>
+                      <span>{t({ id: "Kirim lewat Surel", en: "Send via Email" })}</span>
                     </motion.button>
                   </div>
 
@@ -489,11 +595,14 @@ export default function LayananPengaduan() {
                       transition={{ duration: 0.35, ease: "easeOut" }}
                       className="mt-4 text-xs text-body leading-relaxed"
                     >
-                      Pengaduan ini akan diteruskan kepada{" "}
+                      {t({
+                        id: "Pengaduan ini akan diteruskan kepada",
+                        en: "This request will be forwarded to",
+                      })}{" "}
                       <strong className="text-heading font-semibold">
                         {kategoriTerpilih.penanggungJawab}
                       </strong>{" "}
-                      — {kategoriTerpilih.jabatan}.
+                      — {t(kategoriTerpilih.jabatan)}.
                     </motion.p>
                   )}
                 </div>
@@ -513,16 +622,25 @@ export default function LayananPengaduan() {
                 className="border-t-2 border-heading pt-5"
               >
                 <h2 className="text-[11px] font-bold tracking-[0.16em] uppercase text-heading">
-                  Cara kerjanya
+                  {t({ id: "Cara kerjanya", en: "How it works" })}
                 </h2>
                 <ol className="mt-4 space-y-4">
                   {[
-                    "Pilih kategori urusan agar pengaduan langsung sampai ke staf yang berwenang.",
-                    "Lengkapi identitas dan uraian sejelas mungkin, sertakan waktu kejadian.",
-                    "Kirim lewat WhatsApp untuk respons cepat, atau surel bila perlu lampiran dan jejak tertulis.",
+                    {
+                      id: "Pilih kategori urusan agar pengaduan langsung sampai ke staf yang berwenang.",
+                      en: "Select a category so your inquiry directly reaches the authorized staff.",
+                    },
+                    {
+                      id: "Lengkapi identitas dan uraian sejelas mungkin, sertakan waktu kejadian.",
+                      en: "Provide identification and clear details, including dates/timeline.",
+                    },
+                    {
+                      id: "Kirim lewat WhatsApp untuk respons cepat, atau surel bila perlu lampiran dan jejak tertulis.",
+                      en: "Send via WhatsApp for swift responses, or email if attachments or written records are required.",
+                    },
                   ].map((langkah, idx) => (
                     <motion.li
-                      key={langkah}
+                      key={idx}
                       initial={{ opacity: 0, x: 16 }}
                       whileInView={{ opacity: 1, x: 0 }}
                       viewport={viewportSettings}
@@ -532,7 +650,7 @@ export default function LayananPengaduan() {
                       <span className="font-heading font-bold text-primary tabular-nums shrink-0">
                         {idx + 1}.
                       </span>
-                      <span className="text-sm text-body leading-relaxed">{langkah}</span>
+                      <span className="text-sm text-body leading-relaxed">{t(langkah)}</span>
                     </motion.li>
                   ))}
                 </ol>
@@ -546,7 +664,7 @@ export default function LayananPengaduan() {
                 className="border-t border-gray-200 pt-5 space-y-4"
               >
                 <h2 className="text-[11px] font-bold tracking-[0.16em] uppercase text-heading">
-                  Kontak langsung
+                  {t({ id: "Kontak langsung", en: "Direct contacts" })}
                 </h2>
 
                 <motion.div
@@ -558,9 +676,11 @@ export default function LayananPengaduan() {
                 >
                   <FiClock className="text-base text-primary mt-0.5 shrink-0" />
                   <div>
-                    <p className="text-xs font-semibold text-heading">Jam operasional</p>
-                    <p className="text-sm text-body leading-relaxed">{jamKonsultasi}</p>
-                    <p className="text-sm text-body leading-relaxed">{jamKonsultasi2}</p>
+                    <p className="text-xs font-semibold text-heading">
+                      {t({ id: "Jam operasional", en: "Operating hours" })}
+                    </p>
+                    <p className="text-sm text-body leading-relaxed">{t(jamKonsultasi)}</p>
+                    <p className="text-sm text-body leading-relaxed">{t(jamKonsultasi2)}</p>
                   </div>
                 </motion.div>
 
@@ -573,7 +693,9 @@ export default function LayananPengaduan() {
                 >
                   <FiMail className="text-base text-primary mt-0.5 shrink-0" />
                   <div>
-                    <p className="text-xs font-semibold text-heading">Surel resmi</p>
+                    <p className="text-xs font-semibold text-heading">
+                      {t({ id: "Surel resmi", en: "Official email" })}
+                    </p>
                     <a
                       href={`mailto:${surel.alamat}`}
                       className="text-sm text-primary hover:underline underline-offset-4"
@@ -592,7 +714,12 @@ export default function LayananPengaduan() {
                 >
                   <FaWhatsapp className="text-base text-primary mt-0.5 shrink-0" />
                   <div>
-                    <p className="text-xs font-semibold text-heading">Nomor umum program studi</p>
+                    <p className="text-xs font-semibold text-heading">
+                      {t({
+                        id: "Nomor umum program studi",
+                        en: "General study program number",
+                      })}
+                    </p>
                     <a
                       href={`https://wa.me/${nomorUmum.telepon}`}
                       target="_blank"

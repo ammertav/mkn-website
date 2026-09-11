@@ -30,71 +30,187 @@ import guestHouse7 from "../assets/images/akomodasi/bh-7.png";
 export const akomodasiData = {
   asrama: {
     id: "asrama",
-    title: "Sultan Agung Boarding House",
-    shortName: "Asrama Mahasiswa",
+    title: {
+      id: "Sultan Agung Boarding House",
+      en: "Sultan Agung Boarding House",
+    },
+    shortName: {
+      id: "Asrama Mahasiswa",
+      en: "Student Residence",
+    },
     header: {
-      category: "ASRAMA MAHASISWA",
-      title: "Hunian jangka panjang berbudaya islami",
+      category: { id: "ASRAMA MAHASISWA", en: "STUDENT RESIDENCE" },
+      title: {
+        id: "Hunian jangka panjang berbudaya islami",
+        en: "Long-term student housing with an Islamic environment",
+      },
       paragraphs: [
-        "Fasilitas akomodasi ini ditujukan untuk hunian jangka panjang bagi mahasiswa maupun tamu, dengan pengelolaan lingkungan yang kental dengan budaya islami.",
-        "Selain sebagai tempat tinggal, asrama ini berfungsi sebagai Pesantren Mahasiswa yang bertujuan membentuk karakter khaira ummah berakhlakul karimah serta membiasakan kedisiplinan beribadah.",
+        {
+          id: "Fasilitas akomodasi ini ditujukan untuk hunian jangka panjang bagi mahasiswa maupun tamu, dengan pengelolaan lingkungan yang kental dengan budaya islami.",
+          en: "This accommodation facility offers long-term residential housing for students and visitors, managed within an enriching Islamic cultural environment.",
+        },
+        {
+          id: "Selain sebagai tempat tinggal, asrama ini berfungsi sebagai Pesantren Mahasiswa yang bertujuan membentuk karakter khaira ummah berakhlakul karimah serta membiasakan kedisiplinan beribadah.",
+          en: "Beyond lodging, this residence serves as a student Islamic boarding community aimed at forging noble character (khaira ummah) and consistent devotional discipline.",
+        },
       ],
     },
     galeri: [
-      { src: asrama1, keterangan: "Tampak depan gedung asrama." },
-      { src: asrama2, keterangan: "Halaman depan gedung asrama." },
-      { src: asrama3, keterangan: "Koridor lantai atas asrama." },
-      { src: asrama4, keterangan: "Kamar empat tempat tidur." },
-      { src: asrama5, keterangan: "Kamar dengan meja belajar." },
+      {
+        src: asrama1,
+        keterangan: {
+          id: "Tampak depan gedung asrama.",
+          en: "Front facade of the student residence.",
+        },
+      },
+      {
+        src: asrama2,
+        keterangan: {
+          id: "Halaman depan gedung asrama.",
+          en: "Front courtyard of the student residence.",
+        },
+      },
+      {
+        src: asrama3,
+        keterangan: {
+          id: "Koridor lantai atas asrama.",
+          en: "Upper floor corridor of the residence.",
+        },
+      },
+      {
+        src: asrama4,
+        keterangan: {
+          id: "Kamar empat tempat tidur.",
+          en: "Four-bed dormitory room.",
+        },
+      },
+      {
+        src: asrama5,
+        keterangan: {
+          id: "Kamar dengan meja belajar.",
+          en: "Student room equipped with study desks.",
+        },
+      },
     ],
     fasilitas: [
-      "Kamar asrama yang didesain nyaman untuk kebutuhan istirahat mahasiswa.",
-      "Ruang tunggu tamu.",
-      "Area parkir kendaraan yang terjamin keamanannya.",
-      "Fasilitas hot spot (Wi-Fi) untuk menunjang kebutuhan belajar.",
-      "Area olahraga, seperti lapangan basket dan bola voli.",
-      "Program internal berupa bimbingan pengamalan agama Islam serta pembelajaran berbagai bahasa.",
+      {
+        id: "Kamar asrama yang didesain nyaman untuk kebutuhan istirahat mahasiswa.",
+        en: "Comfortable dormitory rooms designed for student rest and study.",
+      },
+      {
+        id: "Ruang tunggu tamu.",
+        en: "Visitor lounge.",
+      },
+      {
+        id: "Area parkir kendaraan yang terjamin keamanannya.",
+        en: "Secure parking area.",
+      },
+      {
+        id: "Fasilitas hot spot (Wi-Fi) untuk menunjang kebutuhan belajar.",
+        en: "High-speed Wi-Fi hotspot support for academic needs.",
+      },
+      {
+        id: "Area olahraga, seperti lapangan basket dan bola voli.",
+        en: "Sports facilities including basketball and volleyball courts.",
+      },
+      {
+        id: "Program internal berupa bimbingan pengamalan agama Islam serta pembelajaran berbagai bahasa.",
+        en: "Residential programs offering Islamic guidance and foreign language learning.",
+      },
     ],
   },
 
   guestHouse: {
     id: "guest-house",
-    title: "Sultan Agung Guest House",
-    shortName: "Guest House",
+    title: {
+      id: "Sultan Agung Guest House",
+      en: "Sultan Agung Guest House",
+    },
+    shortName: {
+      id: "Guest House",
+      en: "Guest House",
+    },
     header: {
-      category: "GUEST HOUSE",
-      title: "Penginapan resmi bagi tamu akademik",
+      category: { id: "GUEST HOUSE", en: "GUEST HOUSE" },
+      title: {
+        id: "Penginapan resmi bagi tamu akademik",
+        en: "Official accommodation for academic visitors",
+      },
       paragraphs: [
-        "Sultan Agung Guest House adalah fasilitas akomodasi resmi yang diperuntukkan bagi tamu akademik, dosen tamu, peneliti, maupun peserta seminar.",
-        "Guest house ini menyediakan tempat menginap yang nyaman dan strategis bagi tamu universitas, sekaligus menjadi lokasi transit praktis untuk acara wisuda, seminar nasional, atau kunjungan kerja.",
+        {
+          id: "Sultan Agung Guest House adalah fasilitas akomodasi resmi yang diperuntukkan bagi tamu akademik, dosen tamu, peneliti, maupun peserta seminar.",
+          en: "Sultan Agung Guest House is an official hospitality facility designated for visiting professors, scholars, researchers, and conference participants.",
+        },
+        {
+          id: "Guest house ini menyediakan tempat menginap yang nyaman dan strategis bagi tamu universitas, sekaligus menjadi lokasi transit praktis untuk acara wisuda, seminar nasional, atau kunjungan kerja.",
+          en: "The guest house provides comfortable and strategic lodging for university guests, serving as convenient accommodation for graduation ceremonies, national seminars, and official visits.",
+        },
       ],
     },
     galeri: [
       {
         src: guestHouse2,
-        keterangan:
-          "Tampak gedung dari seberang danau kampus, bersebelahan dengan Fakultas Kedokteran Gigi.",
+        keterangan: {
+          id: "Tampak gedung dari seberang danau kampus, bersebelahan dengan Fakultas Kedokteran Gigi.",
+          en: "Building view from across the campus lake, adjacent to the Faculty of Dentistry.",
+        },
       },
       {
         src: guestHouse1,
-        keterangan: "Halaman depan gedung dengan lapangan basket dan area parkir kendaraan.",
+        keterangan: {
+          id: "Halaman depan gedung dengan lapangan basket dan area parkir kendaraan.",
+          en: "Front courtyard with basketball court and parking area.",
+        },
       },
-      { src: guestHouse3, keterangan: "Kamar dengan televisi dan meja kerja." },
+      {
+        src: guestHouse3,
+        keterangan: {
+          id: "Kamar dengan televisi dan meja kerja.",
+          en: "Guest room equipped with television and work desk.",
+        },
+      },
       {
         src: guestHouse4,
-        keterangan: "Kamar ber-AC dengan lemari pakaian dan meja kerja.",
+        keterangan: {
+          id: "Kamar ber-AC dengan lemari pakaian dan meja kerja.",
+          en: "Air-conditioned room with wardrobe and desk.",
+        },
       },
-      { src: guestHouse7, keterangan: "Kamar mandi dalam dengan shower." },
-      { src: guestHouse5, keterangan: "Gerai kuliner di area dalam gedung." },
+      {
+        src: guestHouse7,
+        keterangan: {
+          id: "Kamar mandi dalam dengan shower.",
+          en: "En-suite bathroom with shower.",
+        },
+      },
+      {
+        src: guestHouse5,
+        keterangan: {
+          id: "Gerai kuliner di area dalam gedung.",
+          en: "Culinary outlets inside the building.",
+        },
+      },
       {
         src: guestHouse6,
-        keterangan: "Minimarket untuk kebutuhan harian penghuni.",
+        keterangan: {
+          id: "Minimarket untuk kebutuhan harian penghuni.",
+          en: "Minimart for daily residential essentials.",
+        },
       },
     ],
     fasilitas: [
-      "Kamar nyaman yang dilengkapi AC, televisi, dan kamar mandi dalam.",
-      "Restoran atau kantin yang menyediakan layanan konsumsi dan sarapan bagi para tamu.",
-      "Akses strategis menuju fakultas, rektorat, dan fasilitas umum kota.",
+      {
+        id: "Kamar nyaman yang dilengkapi AC, televisi, dan kamar mandi dalam.",
+        en: "Comfortable rooms equipped with air conditioning, television, and private en-suite bathrooms.",
+      },
+      {
+        id: "Restoran atau kantin yang menyediakan layanan konsumsi dan sarapan bagi para tamu.",
+        en: "Dining cafeteria providing breakfast and meals for guests.",
+      },
+      {
+        id: "Akses strategis menuju fakultas, rektorat, dan fasilitas umum kota.",
+        en: "Strategic access to academic faculties, university rectorate, and city transit.",
+      },
     ],
   },
 };

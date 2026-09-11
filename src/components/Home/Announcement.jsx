@@ -6,6 +6,7 @@ import { berita, pengumuman } from "../../data/beritaSelectors";
 import { getBeritaImage } from "../../utils/imageResolver";
 import { generateSlug } from "../../utils/slugHelper";
 import Img from "../ui/Img";
+import { useUi } from "../../i18n/useUi";
 
 const viewportSettings = {
   once: true,
@@ -53,6 +54,7 @@ const cardVariants = {
 };
 
 export default function Announcement() {
+  const ui = useUi();
   // Bila belum ada pengumuman terbit, section ini jatuh ke berita terbaru agar
   // tidak menyisakan blok kosong di Beranda.
   const displayList = pengumuman.length > 0 ? pengumuman : berita;
@@ -79,7 +81,7 @@ export default function Announcement() {
         >
           <motion.div variants={itemVariants}>
             <h2 className="text-3xl sm:text-4xl md:text-[38px] font-heading font-normal text-heading tracking-normal">
-              Pengumuman Terbaru
+              {ui("latestAnnouncements")}
             </h2>
           </motion.div>
 
@@ -88,7 +90,7 @@ export default function Announcement() {
               to="/berita?kategori=pengumuman"
               className="inline-flex items-center space-x-1 text-xs font-bold tracking-wider text-primary hover:text-[#680000] uppercase transition-colors group pb-1"
             >
-              <span>LIHAT SEMUA PENGUMUMAN</span>
+              <span>{ui("viewAllAnnouncements")}</span>
 
               <FiArrowRight className="text-sm transition-transform duration-200 group-hover:translate-x-1" />
             </Link>

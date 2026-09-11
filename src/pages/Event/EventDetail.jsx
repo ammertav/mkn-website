@@ -14,6 +14,7 @@ import {
   generateGoogleCalendarUrl,
   downloadIcsFile,
 } from "../../data/eventData";
+import { useT, useLanguage } from "../../i18n/languageContext";
 
 const viewportSettings = {
   once: true,
@@ -56,22 +57,11 @@ const flyerVariants = {
   },
 };
 
-const metaBoxVariants = {
-  hidden: { opacity: 0, y: 14 },
-  visible: (i = 0) => ({
-    opacity: 1,
-    y: 0,
-    transition: {
-      delay: typeof i === "number" ? i * 0.08 : 0,
-      duration: 0.45,
-      ease: [0.22, 1, 0.36, 1],
-    },
-  }),
-};
-
 export default function EventDetail() {
   const { slug } = useParams();
   const navigate = useNavigate();
+  const t = useT();
+  const { lang } = useLanguage();
 
   // Cari event berdasarkan slug
   const event = useMemo(() => {
@@ -90,16 +80,20 @@ export default function EventDetail() {
     return (
       <>
         <Helmet>
-          <title>Agenda Tidak Ditemukan | MKn UNISSULA</title>
+          <html lang={lang} />
+          <title>{lang === "en" ? "Event Not Found | MKn UNISSULA" : "Agenda Tidak Ditemukan | MKn UNISSULA"}</title>
         </Helmet>
         <div className="flex flex-col min-h-screen bg-white font-body text-body">
           <Navbar />
           <div className="flex-grow max-w-4xl mx-auto px-4 py-20 text-center space-y-6">
             <h1 className="text-3xl font-heading font-bold text-heading">
-              Agenda Acara Tidak Ditemukan
+              {t({ id: "Agenda Acara Tidak Ditemukan", en: "Event Not Found" })}
             </h1>
             <p className="text-gray-600">
-              Agenda yang Anda cari mungkin telah berakhir atau tautan tidak valid.
+              {t({
+                id: "Agenda yang Anda cari mungkin telah berakhir atau tautan tidak valid.",
+                en: "The event you are looking for may have concluded or the link is invalid.",
+              })}
             </p>
             <div>
               <Link
@@ -107,7 +101,7 @@ export default function EventDetail() {
                 className="inline-flex items-center gap-2 px-6 py-3 bg-primary hover:bg-[#680000] text-white text-sm font-semibold rounded-xs transition-colors"
               >
                 <FiArrowLeft className="w-4 h-4" />
-                <span>Kembali ke Kalender Agenda</span>
+                <span>{t({ id: "Kembali ke Kalender Agenda", en: "Back to Events Calendar" })}</span>
               </Link>
             </div>
           </div>
@@ -122,10 +116,11 @@ export default function EventDetail() {
   return (
     <>
       <Helmet>
-        <title>{`${event.title} | Agenda MKn UNISSULA`}</title>
+        <html lang={lang} />
+        <title>{`${t(event.title)} | ${lang === "en" ? "MKn UNISSULA Event" : "Agenda MKn UNISSULA"}`}</title>
         <meta
           name="description"
-          content={event.description || "Agenda kegiatan Magister Kenotariatan UNISSULA."}
+          content={t(event.description) || "Agenda kegiatan Magister Kenotariatan UNISSULA."}
         />
       </Helmet>
 
@@ -149,10 +144,10 @@ export default function EventDetail() {
                   to="/event"
                   className="text-2xl sm:text-3xl font-heading font-normal tracking-tight text-white hover:text-gray-200 transition-colors block"
                 >
-                  Events Calendar
+                  {t({ id: "Kalender Agenda", en: "Events Calendar" })}
                 </Link>
                 <span className="text-xs uppercase tracking-wider text-gray-400 font-semibold block mt-1">
-                  Upcoming Events
+                  {t({ id: "Agenda Mendatang", en: "Upcoming Events" })}
                 </span>
               </motion.div>
 
@@ -168,10 +163,10 @@ export default function EventDetail() {
                     className="group cursor-pointer space-y-1 block p-3 rounded-xs hover:bg-white/5 pb-4 border-b border-white/5 last:border-0 transition-colors"
                   >
                     <h3 className="font-heading font-medium text-sm sm:text-base text-white group-hover:text-primary transition-colors leading-snug">
-                      {item.title}
+                      {t(item.title)}
                     </h3>
                     <p className="text-xs text-gray-400 font-normal">
-                      {formatIndoDate(item.date)} • {item.time}
+                      {formatIndoDate(item.date, lang)} • {t(item.time)}
                     </p>
                   </motion.article>
                 ))}
@@ -184,7 +179,7 @@ export default function EventDetail() {
                   className="w-full py-2.5 px-4 rounded-full border border-white/20 hover:border-white hover:bg-white/10 text-xs font-semibold text-white transition-all flex items-center justify-center gap-2"
                 >
                   <FiArrowLeft className="w-3.5 h-3.5" />
-                  <span>Lihat Kalender Lengkap</span>
+                  <span>{t({ id: "Lihat Kalender Lengkap", en: "View Full Calendar" })}</span>
                 </Link>
               </motion.div>
             </motion.div>
@@ -203,7 +198,7 @@ export default function EventDetail() {
                 className="inline-flex items-center gap-2 text-xs sm:text-sm font-medium text-primary hover:underline transition-colors group"
               >
                 <FiArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
-                <span>Back to events list</span>
+                <span>{t({ id: "Kembali ke daftar agenda", en: "Back to events list" })}</span>
               </Link>
             </motion.div>
 
@@ -217,8 +212,8 @@ export default function EventDetail() {
               >
                 <ZoomableImg
                   src={event.image}
-                  alt={event.title}
-                  caption={event.title}
+                  alt={t(event.title)}
+                  caption={t(event.title)}
                   className="w-full h-auto max-h-[calc(100vh-var(--header-h)-18rem)] object-contain mx-auto transition-transform duration-500 group-hover:scale-[1.01]"
                 />
               </motion.figure>
@@ -235,15 +230,15 @@ export default function EventDetail() {
                 variants={itemVariants}
                 className="text-3xl sm:text-4xl lg:text-[44px] font-heading font-medium text-heading leading-[1.15] tracking-tight max-w-4xl"
               >
-                {event.title}
+                {t(event.title)}
               </motion.h1>
 
               <motion.div variants={itemVariants} className="space-y-0.5 pt-1">
                 <div className="text-base sm:text-lg font-bold text-heading">
-                  {formatIndoDate(event.date)}
+                  {formatIndoDate(event.date, lang)}
                 </div>
                 <div className="text-sm text-gray-600 font-normal">
-                  {getIndoDayName(event.date)}, {event.time}
+                  {getIndoDayName(event.date, lang)}, {t(event.time)}
                 </div>
               </motion.div>
 
@@ -268,8 +263,10 @@ export default function EventDetail() {
                     transition={{ duration: 0.45 }}
                     className="p-4 bg-gray-50 rounded-xs border border-gray-200/90 text-sm flex items-baseline gap-2 shadow-2xs"
                   >
-                    <span className="font-bold text-heading shrink-0">Lokasi / Ruang: </span>
-                    <span className="text-body font-medium">{event.venue}</span>
+                    <span className="font-bold text-heading shrink-0">
+                      {t({ id: "Lokasi / Ruang:", en: "Location / Venue:" })}{" "}
+                    </span>
+                    <span className="text-body font-medium">{t(event.venue)}</span>
                   </motion.div>
                 )}
 
@@ -282,10 +279,10 @@ export default function EventDetail() {
                   className="space-y-4 pt-1"
                 >
                   <motion.p variants={itemVariants} className="font-medium text-heading">
-                    {event.description}
+                    {t(event.description)}
                   </motion.p>
 
-                  {(event.fullDescription || event.description)
+                  {(t(event.fullDescription) || t(event.description))
                     .split(/\n\s*\n/)
                     .filter((paragraf) => paragraf.trim())
                     .map((paragraf, idx) => (
@@ -309,10 +306,10 @@ export default function EventDetail() {
                     className="pt-4 border-t border-gray-150 space-y-1 text-sm bg-gray-50/50 p-4 rounded-xs border border-gray-100"
                   >
                     <span className="text-xs uppercase tracking-wider font-bold text-gray-500 block">
-                      Narasumber & Pakar
+                      {t({ id: "Narasumber & Pakar", en: "Speaker & Resource Person" })}
                     </span>
                     <p className="font-medium text-heading text-base">
-                      {event.speaker}
+                      {t(event.speaker)}
                     </p>
                   </motion.div>
                 )}
@@ -341,7 +338,7 @@ export default function EventDetail() {
                       rel="noopener noreferrer"
                       className="inline-flex items-center gap-1.5 text-primary hover:underline font-semibold"
                     >
-                      <span>Event Information</span>
+                      <span>{t({ id: "Informasi Acara", en: "Event Information" })}</span>
                       <FiExternalLink className="w-3.5 h-3.5" />
                     </a>
                   </motion.div>
@@ -353,10 +350,10 @@ export default function EventDetail() {
                   className="space-y-1 p-3.5 bg-gray-50/80 rounded-xs border border-gray-100 hover:border-gray-200 hover:bg-gray-50 transition-colors shadow-2xs"
                 >
                   <span className="font-bold text-heading uppercase tracking-wider text-[11px] block text-gray-500">
-                    Contact
+                    {t({ id: "Narahubung", en: "Contact" })}
                   </span>
                   <div className="text-gray-700 font-medium">
-                    {event.cp || "Sekretariat Program Studi MKn UNISSULA"}
+                    {event.cp || t({ id: "Sekretariat Program Studi MKn UNISSULA", en: "MKn UNISSULA Secretariat" })}
                   </div>
                 </motion.div>
 
@@ -366,10 +363,10 @@ export default function EventDetail() {
                   className="space-y-1 p-3.5 bg-gray-50/80 rounded-xs border border-gray-100 hover:border-gray-200 hover:bg-gray-50 transition-colors shadow-2xs"
                 >
                   <span className="font-bold text-heading uppercase tracking-wider text-[11px] block text-gray-500">
-                    Student Organizations / Unit
+                    {t({ id: "Penyelenggara / Unit", en: "Student Organizations / Unit" })}
                   </span>
                   <div className="text-gray-700 font-medium">
-                    {event.organizer}
+                    {t(event.organizer)}
                   </div>
                 </motion.div>
 
@@ -379,10 +376,10 @@ export default function EventDetail() {
                   className="space-y-1 p-3.5 bg-gray-50/80 rounded-xs border border-gray-100 hover:border-gray-200 hover:bg-gray-50 transition-colors shadow-2xs"
                 >
                   <span className="font-bold text-heading uppercase tracking-wider text-[11px] block text-gray-500">
-                    Kategori Agenda
+                    {t({ id: "Kategori Agenda", en: "Event Category" })}
                   </span>
                   <div className="text-gray-700 font-medium">
-                    {event.category}
+                    {t(event.category)}
                   </div>
                 </motion.div>
               </motion.div>
@@ -398,10 +395,10 @@ export default function EventDetail() {
             >
               <div className="space-y-0.5">
                 <span className="font-heading font-bold text-sm text-heading block">
-                  Add to Calendar
+                  {t({ id: "Tambahkan ke Kalender", en: "Add to Calendar" })}
                 </span>
                 <p className="text-xs text-gray-500 font-normal">
-                  {formatIndoDate(event.date)}, {event.time}
+                  {formatIndoDate(event.date, lang)}, {t(event.time)}
                 </p>
               </div>
 

@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { FiArrowRight } from "react-icons/fi";
+import { useT } from "../../i18n/languageContext";
 
 const cardVariants = {
   hidden: { opacity: 0, y: 24 },
@@ -15,6 +16,8 @@ const cardVariants = {
 };
 
 export default function EventCard({ event, onSelect, compact = false, index = 0 }) {
+  const t = useT();
+
   return (
     <motion.article
       custom={index}
@@ -32,7 +35,7 @@ export default function EventCard({ event, onSelect, compact = false, index = 0 
           {/* Judul Acara dengan Panah */}
           <div className="inline-flex items-baseline gap-2">
             <h3 className="font-heading font-medium text-xl sm:text-[22px] lg:text-2xl text-heading group-hover:text-primary transition-colors leading-snug">
-              {event.title}
+              {t(event.title)}
             </h3>
             <span className="text-primary font-light text-lg sm:text-xl group-hover:translate-x-1.5 transition-transform shrink-0">
               <FiArrowRight className="w-5 h-5 inline" />
@@ -41,13 +44,13 @@ export default function EventCard({ event, onSelect, compact = false, index = 0 
 
           {/* Baris Waktu Sederhana & Bersih */}
           <div className="text-xs sm:text-sm text-gray-500 font-normal">
-            {event.time}
+            {t(event.time)}
           </div>
 
           {/* Deskripsi Acara */}
           {!compact && (
             <p className="text-xs sm:text-sm text-gray-700 leading-relaxed pt-2 line-clamp-3 font-normal">
-              {event.description}
+              {t(event.description)}
             </p>
           )}
         </div>
@@ -57,7 +60,7 @@ export default function EventCard({ event, onSelect, compact = false, index = 0 
           <div className="w-full md:w-48 lg:w-56 aspect-[4/3] shrink-0 bg-gray-50 rounded-xs overflow-hidden transition-all shadow-2xs group-hover:shadow-sm">
             <img
               src={event.image}
-              alt={event.title}
+              alt={t(event.title)}
               className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500 rounded-md"
               loading="lazy"
             />

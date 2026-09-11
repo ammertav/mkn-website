@@ -1,7 +1,7 @@
 import { useState, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
-import { FiCalendar, FiChevronLeft, FiChevronRight, FiCheck } from "react-icons/fi";
+import { FiCalendar, FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import { motion, AnimatePresence } from "framer-motion";
 
 import Navbar from "../../components/Navbar";
@@ -11,6 +11,7 @@ import EventCard from "../../components/Event/EventCard";
 import EventDetailModal from "../../components/Event/EventDetailModal";
 import SubmitEventModal from "../../components/Event/SubmitEventModal";
 import { eventData, formatIndoDate, getIndoDayName } from "../../data/eventData";
+import { useT, useLanguage } from "../../i18n/languageContext";
 
 const viewportSettings = {
   once: true,
@@ -56,6 +57,8 @@ const compactRowVariants = {
 
 export default function EventPage() {
   const navigate = useNavigate();
+  const t = useT();
+  const { lang } = useLanguage();
 
   // Tanggal default: 1 September 2026 (sesuai screenshot Harvard)
   const defaultYear = 2026;
@@ -94,18 +97,21 @@ export default function EventPage() {
       }
 
       // Filter kategori
-      if (selectedCategory && item.category !== selectedCategory) {
-        return false;
+      if (selectedCategory) {
+        const catVal = typeof item.category === "object" ? item.category.id : item.category;
+        if (catVal !== selectedCategory) return false;
       }
 
       // Filter keyword
       if (searchKeyword.trim()) {
         const q = searchKeyword.toLowerCase();
-        const matchTitle = item.title.toLowerCase().includes(q);
-        const matchDesc = item.description.toLowerCase().includes(q);
-        const matchSpeaker = item.speaker?.toLowerCase().includes(q);
-        const matchVenue = item.venue?.toLowerCase().includes(q);
-        if (!matchTitle && !matchDesc && !matchSpeaker && !matchVenue) {
+        const titleId = typeof item.title === "object" ? item.title.id : (item.title || "");
+        const titleEn = typeof item.title === "object" ? item.title.en : "";
+        const descId = typeof item.description === "object" ? item.description.id : (item.description || "");
+        const descEn = typeof item.description === "object" ? item.description.en : "";
+        const matchSpeaker = (typeof item.speaker === "object" ? (item.speaker.id + " " + item.speaker.en) : (item.speaker || "")).toLowerCase().includes(q);
+        const matchVenue = (typeof item.venue === "object" ? (item.venue.id + " " + item.venue.en) : (item.venue || "")).toLowerCase().includes(q);
+        if (!titleId.toLowerCase().includes(q) && !titleEn.toLowerCase().includes(q) && !descId.toLowerCase().includes(q) && !descEn.toLowerCase().includes(q) && !matchSpeaker && !matchVenue) {
           return false;
         }
       }
@@ -179,10 +185,14 @@ export default function EventPage() {
   return (
     <>
       <Helmet>
-        <title>Agenda & Kalender Kegiatan | MKn UNISSULA</title>
+        <html lang={lang} />
+        <title>{lang === "en" ? "Events & Activity Calendar | MKn UNISSULA" : "Agenda & Kalender Kegiatan | MKn UNISSULA"}</title>
         <meta
           name="description"
-          content="Kalender kegiatan akademik, seminar nasional, kuliah pakar, workshop akta, dan agenda kemahasiswaan Magister Kenotariatan UNISSULA."
+          content={t({
+            id: "Kalender kegiatan akademik, seminar nasional, kuliah pakar, workshop akta, dan agenda kemahasiswaan Magister Kenotariatan UNISSULA.",
+            en: "Activity calendar for academic events, national seminars, expert lectures, deed drafting workshops, and student affairs of Master of Notarial Law UNISSULA.",
+          })}
         />
       </Helmet>
 
@@ -230,7 +240,7 @@ export default function EventPage() {
                   className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xs border border-gray-300 hover:border-primary hover:text-primary text-heading text-xs sm:text-sm font-medium transition-colors cursor-pointer bg-white shadow-2xs"
                 >
                   <FiCalendar className="w-4 h-4 text-primary" />
-                  <span>Hari Ini (Today)</span>
+                  <span>{lang === "en" ? "Today" : "Hari Ini (Today)"}</span>
                 </motion.button>
 
                 {/* Tombol Tampilkan Semua */}
@@ -248,7 +258,7 @@ export default function EventPage() {
                       : "text-body hover:text-heading bg-gray-100 hover:bg-gray-200"
                   }`}
                 >
-                  Semua Agenda Mendatang
+                  {t({ id: "Semua Agenda Mendatang", en: "All Upcoming Events" })}
                 </motion.button>
               </div>
 
@@ -262,7 +272,7 @@ export default function EventPage() {
                     className="inline-flex items-center gap-1 hover:text-primary transition-colors cursor-pointer"
                   >
                     <FiChevronLeft className="w-4 h-4" />
-                    <span>Sebelumnya</span>
+                    <span>{t({ id: "Sebelumnya", en: "Previous" })}</span>
                   </button>
                   <span className="text-gray-300">|</span>
                   <button
@@ -270,14 +280,16 @@ export default function EventPage() {
                     onClick={() => handleStepDay(1)}
                     className="inline-flex items-center gap-1 hover:text-primary transition-colors cursor-pointer"
                   >
-                    <span>Berikutnya</span>
+                    <span>{t({ id: "Berikutnya", en: "Next" })}</span>
                     <FiChevronRight className="w-4 h-4" />
                   </button>
                 </div>
 
                 {/* Toggle Compact View */}
                 <div className="flex items-center gap-2 pl-2 border-l border-gray-200">
-                  <span className="text-gray-600 text-xs">Tampilan Ringkas</span>
+                  <span className="text-gray-600 text-xs">
+                    {t({ id: "Tampilan Ringkas", en: "Compact View" })}
+                  </span>
                   <button
                     type="button"
                     role="switch"
@@ -306,10 +318,10 @@ export default function EventPage() {
                   exit={{ opacity: 0, height: 0 }}
                   className="flex flex-wrap items-center gap-2 text-xs overflow-hidden"
                 >
-                  <span className="text-gray-500">Filter aktif:</span>
+                  <span className="text-gray-500">{t({ id: "Filter aktif:", en: "Active filters:" })}</span>
                   {selectedDate && (
                     <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-red-50 text-primary border border-red-200 rounded-full font-medium">
-                      Tanggal: {formatIndoDate(selectedDate)}
+                      {t({ id: "Tanggal:", en: "Date:" })} {formatIndoDate(selectedDate, lang)}
                       <button
                         type="button"
                         onClick={() => setSelectedDate(null)}
@@ -321,7 +333,7 @@ export default function EventPage() {
                   )}
                   {searchKeyword && (
                     <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-gray-100 text-heading border border-gray-300 rounded-full font-medium">
-                      Kata Kunci: "{searchKeyword}"
+                      {t({ id: "Kata Kunci:", en: "Keyword:" })} &quot;{searchKeyword}&quot;
                       <button
                         type="button"
                         onClick={() => setSearchKeyword("")}
@@ -336,7 +348,7 @@ export default function EventPage() {
                     onClick={handleResetAll}
                     className="text-primary hover:underline ml-1 font-medium cursor-pointer"
                   >
-                    Reset semua
+                    {t({ id: "Reset semua", en: "Reset all" })}
                   </button>
                 </motion.div>
               )}
@@ -345,7 +357,7 @@ export default function EventPage() {
             {/* Feed Agenda (Dikelompokkan Berdasarkan Tanggal) */}
             {groupedEvents.length > 0 ? (
               isCompactView ? (
-                /* COMPACT VIEW: Persis Sesuai Screenshot yang Dikirimkan */
+                /* COMPACT VIEW */
                 <div className="divide-y divide-gray-200 border-t border-b border-gray-200">
                   {groupedEvents.map((group) => (
                     <motion.div
@@ -359,10 +371,10 @@ export default function EventPage() {
                       {/* Kolom 1: Tanggal & Jumlah Acara */}
                       <div className="md:col-span-3 lg:col-span-3 space-y-0.5">
                         <h3 className="font-heading font-bold text-sm sm:text-base text-heading">
-                          {formatIndoDate(group.date)}
+                          {formatIndoDate(group.date, lang)}
                         </h3>
                         <p className="text-xs text-gray-500">
-                          {getIndoDayName(group.date)} • {group.events.length} events
+                          {getIndoDayName(group.date, lang)} • {group.events.length} {lang === "en" ? "events" : "acara"}
                         </p>
                       </div>
 
@@ -378,10 +390,10 @@ export default function EventPage() {
                             className="flex flex-col sm:flex-row sm:items-baseline gap-2 sm:gap-8 group cursor-pointer py-1"
                           >
                             <span className="text-xs sm:text-sm text-body sm:w-44 shrink-0 font-medium">
-                              {event.time}
+                              {t(event.time)}
                             </span>
                             <h4 className="font-heading font-bold text-xs sm:text-sm text-heading group-hover:text-primary transition-colors leading-relaxed">
-                              {event.title}
+                              {t(event.title)}
                             </h4>
                           </motion.div>
                         ))}
@@ -390,7 +402,7 @@ export default function EventPage() {
                   ))}
                 </div>
               ) : (
-                /* STANDARD VIEW: Persis Sesuai Screenshot (Tanggal di Kiri, Acara di Kanan) */
+                /* STANDARD VIEW */
                 <div className="space-y-14 divide-y divide-gray-200/80">
                   {groupedEvents.map((group) => (
                     <motion.div
@@ -401,13 +413,13 @@ export default function EventPage() {
                       variants={dateGroupVariants}
                       className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12 pt-12 first:pt-2 items-start"
                     >
-                      {/* Kolom Kiri: Tanggal & Jumlah Event (Persis Screenshot) */}
+                      {/* Kolom Kiri: Tanggal & Jumlah Event */}
                       <div className="lg:col-span-3 lg:sticky lg:top-32 space-y-1">
                         <h2 className="text-2xl sm:text-3xl font-heading font-medium text-heading tracking-tight">
-                          {formatIndoDate(group.date)}
+                          {formatIndoDate(group.date, lang)}
                         </h2>
                         <p className="text-xs sm:text-sm text-gray-500 font-normal">
-                          {getIndoDayName(group.date)} • {group.events.length} events
+                          {getIndoDayName(group.date, lang)} • {group.events.length} {lang === "en" ? "events" : "acara"}
                         </p>
                         <div className="w-12 h-[2px] bg-primary mt-3" />
                       </div>
@@ -440,10 +452,13 @@ export default function EventPage() {
                   <FiCalendar className="w-6 h-6" />
                 </div>
                 <h3 className="text-lg font-heading font-bold text-heading">
-                  Tidak Ada Agenda Ditemukan
+                  {t({ id: "Tidak Ada Agenda Ditemukan", en: "No Events Found" })}
                 </h3>
                 <p className="text-xs sm:text-sm text-gray-500 max-w-md mx-auto">
-                  Tidak ada agenda kegiatan yang cocok dengan kriteria filter atau tanggal yang Anda pilih.
+                  {t({
+                    id: "Tidak ada agenda kegiatan yang cocok dengan kriteria filter atau tanggal yang Anda pilih.",
+                    en: "No event activities match your selected filter criteria or chosen date.",
+                  })}
                 </p>
                 <div className="pt-2">
                   <motion.button
@@ -453,7 +468,7 @@ export default function EventPage() {
                     onClick={handleResetAll}
                     className="px-5 py-2.5 bg-primary hover:bg-[#680000] text-white text-xs sm:text-sm font-semibold rounded-xs transition-colors cursor-pointer shadow-xs"
                   >
-                    Tampilkan Semua Agenda
+                    {t({ id: "Tampilkan Semua Agenda", en: "Show All Events" })}
                   </motion.button>
                 </div>
               </motion.div>

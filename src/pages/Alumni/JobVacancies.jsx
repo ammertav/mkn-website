@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import { FiMapPin, FiClock, FiCalendar, FiArrowRight, FiSearch } from "react-icons/fi";
 import { motion, AnimatePresence } from "framer-motion";
+import { useT, useLanguage } from "../../i18n/languageContext";
 
 const viewportSettings = {
   once: true,
@@ -94,82 +95,89 @@ const jobItemVariants = {
 const vacancies = [
   {
     id: 1,
-    title: "Notaris Junior",
+    title: { id: "Notaris Junior", en: "Junior Notary" },
     company: "Kantor Notaris & PPAT Ahmad Fauzan, S.H., M.Kn.",
     location: "Jakarta Selatan",
     type: "Full-time",
-    deadline: "Ditutup: 15 Nov 2024",
-    description:
-      "Dibutuhkan lulusan MKn untuk membantu penyusunan draf akta otentik, pengecekan keabsahan sertipikat tanah, dan koordinasi dengan kantor BPN.",
+    deadline: { id: "Ditutup: 15 Nov 2024", en: "Deadline: 15 Nov 2024" },
+    description: {
+      id: "Dibutuhkan lulusan MKn untuk membantu penyusunan draf akta otentik, pengecekan keabsahan sertipikat tanah, dan koordinasi dengan kantor BPN.",
+      en: "Seeking MKn graduates to assist in drafting authentic deeds, verifying land certificate validity, and coordinating with the BPN office.",
+    },
     link: "#",
   },
   {
     id: 2,
-    title: "Legal Consultant (Corporate Real Estate)",
+    title: { id: "Konsultan Hukum (Real Estat Korporat)", en: "Legal Consultant (Corporate Real Estate)" },
     company: "Baskoro & Partners Law Firm",
     location: "Semarang",
     type: "Full-time",
-    deadline: "Ditutup: 20 Nov 2024",
-    description:
-      "Menangani legal audit / due diligence proyek properti komersial, perizinan pengembang, dan perjanjian kerjasama akuisisi lahan.",
+    deadline: { id: "Ditutup: 20 Nov 2024", en: "Deadline: 20 Nov 2024" },
+    description: {
+      id: "Menangani legal audit / due diligence proyek properti komersial, perizinan pengembang, dan perjanjian kerjasama akuisisi lahan.",
+      en: "Handling legal audit/due diligence for commercial property projects, developer licensing, and land acquisition agreements.",
+    },
     link: "#",
   },
   {
     id: 3,
-    title: "Staf Ahli PPAT",
+    title: { id: "Staf Ahli PPAT", en: "PPAT Expert Staff" },
     company: "Kantor Pertanahan Kota Surakarta",
     location: "Surakarta",
     type: "Contract",
-    deadline: "Ditutup: 30 Nov 2024",
-    description:
-      "Mendukung verifikasi berkas pendaftaran hak tanah, roya, hak tanggungan elektronik, dan penyusunan berita acara pengukuran.",
+    deadline: { id: "Ditutup: 30 Nov 2024", en: "Deadline: 30 Nov 2024" },
+    description: {
+      id: "Mendukung verifikasi berkas pendaftaran hak tanah, roya, hak tanggungan elektronik, dan penyusunan berita acara pengukuran.",
+      en: "Supporting verification of land registration rights, roya, electronic mortgage rights, and drafting measurement reports.",
+    },
     link: "#",
   },
   {
     id: 4,
-    title: "Senior In-House Legal Officer (Banking)",
+    title: { id: "Senior In-House Legal Officer (Perbankan)", en: "Senior In-House Legal Officer (Banking)" },
     company: "PT Bank Syariah Indonesia Tbk",
     location: "Semarang",
     type: "Full-time",
-    deadline: "Ditutup: 05 Des 2024",
-    description:
-      "Review akad pembiayaan syariah, verifikasi legalitas jaminan agunan kebendaan (Fidusia & HT), serta mitigasi risiko hukum pembiayaan.",
+    deadline: { id: "Ditutup: 05 Des 2024", en: "Deadline: 05 Dec 2024" },
+    description: {
+      id: "Review akad pembiayaan syariah, verifikasi legalitas jaminan agunan kebendaan (Fidusia & HT), serta mitigasi risiko hukum pembiayaan.",
+      en: "Reviewing sharia financing contracts, verifying collateral legality (Fiduciary & HT), and mitigating financing legal risks.",
+    },
     link: "#",
   },
   {
     id: 5,
-    title: "Asisten Notaris Bidang Akta Badan Usaha",
+    title: { id: "Asisten Notaris Bidang Akta Badan Usaha", en: "Notary Assistant - Business Entity Deeds" },
     company: "Kantor Notaris Hendra Kusuma, S.H., M.Kn.",
     location: "Surabaya",
     type: "Full-time",
-    deadline: "Ditutup: 12 Des 2024",
-    description:
-      "Membuat akta pendirian PT/CV/Yayasan, perubahan anggaran dasar, pelaporan sistem AHU Online, dan legalitas OSS.",
+    deadline: { id: "Ditutup: 12 Des 2024", en: "Deadline: 12 Dec 2024" },
+    description: {
+      id: "Membuat akta pendirian PT/CV/Yayasan, perubahan anggaran dasar, pelaporan sistem AHU Online, dan legalitas OSS.",
+      en: "Drafting incorporation deeds for PT/CV/Foundations, articles of association amendments, AHU Online system reporting, and OSS licensing.",
+    },
     link: "#",
   },
   {
     id: 6,
-    title: "Legal Internship (Magang Calon Notaris)",
+    title: { id: "Magang Calon Notaris", en: "Legal Internship (Notary Candidate)" },
     company: "Kantor Notaris & PPAT Siti Rahmawati, S.H., M.Kn.",
     location: "Semarang",
     type: "Internship",
-    deadline: "Ditutup: 20 Des 2024",
-    description:
-      "Program magang praktek kemahiran kenotariatan terstruktur bagi mahasiswa semester akhir atau lulusan baru MKn UNISSULA.",
+    deadline: { id: "Ditutup: 20 Des 2024", en: "Deadline: 20 Dec 2024" },
+    description: {
+      id: "Program magang praktek kemahiran kenotariatan terstruktur bagi mahasiswa semester akhir atau lulusan baru MKn UNISSULA.",
+      en: "Structured practical notarial internship program for final-year students or fresh graduates of MKn UNISSULA.",
+    },
     link: "#",
   },
 ];
 
-/**
- * Saklar tampilnya isi halaman.
- *
- * Daftar lowongan di bawah masih data contoh, jadi halaman ini untuk sementara
- * menampilkan empty state seperti halaman Tracer Study. Susunan aslinya sengaja
- * dibiarkan utuh: ubah nilainya menjadi `true` untuk menayangkannya kembali.
- */
 const KONTEN_SIAP = true;
 
 export default function JobVacancies() {
+  const t = useT();
+  const { lang } = useLanguage();
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedType, setSelectedType] = useState("all");
   const [hasLoaded, setHasLoaded] = useState(false);
@@ -180,8 +188,9 @@ export default function JobVacancies() {
   }, []);
 
   const filteredJobs = vacancies.filter((job) => {
+    const titleStr = typeof job.title === "object" ? (job.title[lang] || job.title.id || "") : job.title;
     const matchesSearch =
-      job.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      titleStr.toLowerCase().includes(searchTerm.toLowerCase()) ||
       job.company.toLowerCase().includes(searchTerm.toLowerCase()) ||
       job.location.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesType = selectedType === "all" || job.type.toLowerCase() === selectedType.toLowerCase();
@@ -192,8 +201,19 @@ export default function JobVacancies() {
     return (
       <>
         <Helmet>
-          <title>Lowongan Pekerjaan &amp; Magang | MKn UNISSULA</title>
-          <meta name="description" content="Posisi karir bagi lulusan Magister Kenotariatan dari jaringan firma hukum, kantor notaris, institusi perbankan, dan instansi agraria mitra UNISSULA." />
+          <title>
+            {lang === "en"
+              ? "Job Vacancies & Internships | MKn UNISSULA"
+              : "Lowongan Pekerjaan & Magang | MKn UNISSULA"}
+          </title>
+          <meta
+            name="description"
+            content={
+              lang === "en"
+                ? "Career positions for Master of Notarial Law graduates from networks of law firms, notary offices, banking institutions, and agrarian partners of UNISSULA."
+                : "Posisi karir bagi lulusan Magister Kenotariatan dari jaringan firma hukum, kantor notaris, institusi perbankan, dan instansi agraria mitra UNISSULA."
+            }
+          />
         </Helmet>
 
         <motion.div
@@ -208,13 +228,16 @@ export default function JobVacancies() {
               variants={itemVariants}
               className="text-xs font-bold tracking-wider uppercase text-primary block"
             >
-              Alumni &amp; Karier
+              {t({ id: "Alumni & Karier", en: "Alumni & Careers" })}
             </motion.span>
             <motion.h1
               variants={itemVariants}
               className="text-3xl sm:text-4xl lg:text-[40px] font-heading font-bold text-heading tracking-tight leading-tight"
             >
-              Lowongan Pekerjaan &amp; Magang
+              {t({
+                id: "Lowongan Pekerjaan & Magang",
+                en: "Job Vacancies & Internships",
+              })}
             </motion.h1>
           </div>
 
@@ -224,7 +247,10 @@ export default function JobVacancies() {
             variants={itemVariants}
             className="text-sm sm:text-base text-body text-justify leading-relaxed"
           >
-            Posisi karir bagi lulusan Magister Kenotariatan dari jaringan firma hukum, kantor notaris, institusi perbankan, dan instansi agraria mitra UNISSULA.
+            {t({
+              id: "Posisi karir bagi lulusan Magister Kenotariatan dari jaringan firma hukum, kantor notaris, institusi perbankan, dan instansi agraria mitra UNISSULA.",
+              en: "Career positions for Master of Notarial Law graduates from networks of law firms, notary offices, banking institutions, and agrarian partners of UNISSULA.",
+            })}
           </motion.p>
 
           <motion.div
@@ -232,7 +258,10 @@ export default function JobVacancies() {
             className="p-12 text-center text-gray-400 border border-dashed border-gray-200 rounded-sm bg-white"
           >
             <p className="text-sm font-medium">
-              Informasi lowongan pekerjaan dan magang akan segera diperbarui di sini.
+              {t({
+                id: "Informasi lowongan pekerjaan dan magang akan segera diperbarui di sini.",
+                en: "Job vacancy and internship information will be updated here soon.",
+              })}
             </p>
           </motion.div>
         </motion.div>
@@ -243,10 +272,18 @@ export default function JobVacancies() {
   return (
     <>
       <Helmet>
-        <title>Lowongan Pekerjaan & Magang | MKn UNISSULA</title>
+        <title>
+          {lang === "en"
+            ? "Job Vacancies & Internships | MKn UNISSULA"
+            : "Lowongan Pekerjaan & Magang | MKn UNISSULA"}
+        </title>
         <meta
           name="description"
-          content="Informasi lowongan kerja notaris junior, staf PPAT, in-house legal officer, dan magang calon notaris bagi lulusan MKn UNISSULA."
+          content={
+            lang === "en"
+              ? "Job vacancies for junior notaries, PPAT staff, in-house legal officers, and notary internships for MKn UNISSULA graduates."
+              : "Informasi lowongan kerja notaris junior, staf PPAT, in-house legal officer, dan magang calon notaris bagi lulusan MKn UNISSULA."
+          }
         />
       </Helmet>
 
@@ -264,14 +301,19 @@ export default function JobVacancies() {
               variants={itemVariants}
               className="text-3xl sm:text-4xl lg:text-5xl font-heading font-bold text-heading tracking-tight leading-tight"
             >
-              Lowongan Pekerjaan & Magang
+              {t({
+                id: "Lowongan Pekerjaan & Magang",
+                en: "Job Vacancies & Internships",
+              })}
             </motion.h1>
             <motion.p
               variants={itemVariants}
               className="text-sm sm:text-base text-body text-justify leading-relaxed"
             >
-              Eksplorasi posisi karir eksklusif bagi lulusan Magister Kenotariatan dari jaringan firma hukum,
-              kantor notaris terakreditasi, institusi perbankan, dan instansi agraria mitra UNISSULA.
+              {t({
+                id: "Eksplorasi posisi karir eksklusif bagi lulusan Magister Kenotariatan dari jaringan firma hukum, kantor notaris terakreditasi, institusi perbankan, dan instansi agraria mitra UNISSULA.",
+                en: "Explore exclusive career positions for Master of Notarial Law graduates from partnered networks of law firms, accredited notary offices, banking institutions, and agrarian agencies.",
+              })}
             </motion.p>
           </motion.div>
 
@@ -289,7 +331,11 @@ export default function JobVacancies() {
                 type="text"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                placeholder="Cari posisi, kantor notaris, atau kota..."
+                placeholder={
+                  lang === "en"
+                    ? "Search position, notary office, or city..."
+                    : "Cari posisi, kantor notaris, atau kota..."
+                }
                 className="w-full pl-10 pr-4 py-2.5 bg-gray-50 border border-gray-200 text-xs sm:text-sm text-heading placeholder-gray-400 focus:outline-none focus:border-primary focus:bg-white transition-colors"
               />
             </motion.div>
@@ -311,7 +357,7 @@ export default function JobVacancies() {
                       : "bg-gray-100 text-heading hover:bg-gray-200"
                   }`}
                 >
-                  {type === "all" ? "Semua Tipe" : type}
+                  {type === "all" ? t({ id: "Semua Tipe", en: "All Types" }) : type}
                 </motion.button>
               ))}
             </motion.div>
@@ -337,13 +383,13 @@ export default function JobVacancies() {
                 >
                   <div className="space-y-2.5 max-w-2xl">
                     <h3 className="font-heading font-medium text-xl sm:text-2xl text-primary group-hover:text-[#5a0000] transition-colors leading-snug">
-                      {job.title}
+                      {t(job.title)}
                     </h3>
                     <p className="text-sm sm:text-[14.5px] font-medium text-heading">
                       {job.company}
                     </p>
                     <p className="text-xs sm:text-sm text-body leading-relaxed">
-                      {job.description}
+                      {t(job.description)}
                     </p>
 
                     {/* Meta Tags */}
@@ -358,7 +404,7 @@ export default function JobVacancies() {
                       </span>
                       <span className="flex items-center gap-1.5">
                         <FiCalendar className="text-sm shrink-0" />
-                        {job.deadline}
+                        {t(job.deadline)}
                       </span>
                     </div>
                   </div>
@@ -382,7 +428,10 @@ export default function JobVacancies() {
                 animate={{ opacity: 1 }}
                 className="py-12 text-center text-gray-500 text-sm"
               >
-                Tidak ada lowongan yang sesuai dengan kriteria pencarian Anda.
+                {t({
+                  id: "Tidak ada lowongan yang sesuai dengan kriteria pencarian Anda.",
+                  en: "No job vacancies matched your search criteria.",
+                })}
               </motion.div>
             )}
           </AnimatePresence>

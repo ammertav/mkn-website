@@ -4,6 +4,7 @@ import { FiChevronDown, FiExternalLink } from "react-icons/fi";
 import { motion, AnimatePresence } from "framer-motion";
 import { admissionRequirements } from "../../data/penerimaanData";
 import Img from "../../components/ui/Img";
+import { useT, useLanguage } from "../../i18n/languageContext";
 
 const viewportSettings = {
   once: true,
@@ -66,6 +67,8 @@ const accordionItemVariants = {
 };
 
 export default function StudentAdmission() {
+  const t = useT();
+  const { lang } = useLanguage();
   const [openIndex, setOpenIndex] = useState(1);
 
   const toggleAccordion = (id) => {
@@ -75,10 +78,19 @@ export default function StudentAdmission() {
   return (
     <>
       <Helmet>
-        <title>Penerimaan Mahasiswa Baru | MKn UNISSULA</title>
+        <html lang={lang} />
+        <title>
+          {lang === "en"
+            ? "New Student Admission | MKn UNISSULA"
+            : "Penerimaan Mahasiswa Baru | MKn UNISSULA"}
+        </title>
         <meta
           name="description"
-          content="Informasi pendaftaran mahasiswa baru, persyaratan akademik, jadwal seleksi, dan registrasi online Magister Kenotariatan (MKn) UNISSULA."
+          content={
+            lang === "en"
+              ? "New student admission information, academic requirements, selection schedule, and online registration of Master of Notarial Law (MKn) UNISSULA."
+              : "Informasi pendaftaran mahasiswa baru, persyaratan akademik, jadwal seleksi, dan registrasi online Magister Kenotariatan (MKn) UNISSULA."
+          }
         />
       </Helmet>
 
@@ -93,10 +105,13 @@ export default function StudentAdmission() {
           {/* Header Eyebrow & Title */}
           <motion.div variants={itemVariants} className="space-y-2">
             <span className="text-xs font-bold tracking-wider uppercase text-primary">
-              Admissions
+              {t({ id: "PENERIMAAN", en: "ADMISSIONS" })}
             </span>
             <h1 className="text-3xl sm:text-4xl lg:text-[40px] font-heading font-bold text-heading tracking-tight leading-tight">
-              Penerimaan Mahasiswa Baru
+              {t({
+                id: "Penerimaan Mahasiswa Baru",
+                en: "New Student Admission",
+              })}
             </h1>
           </motion.div>
 
@@ -105,9 +120,10 @@ export default function StudentAdmission() {
 
           {/* Description */}
           <motion.p variants={itemVariants} className="text-sm sm:text-base text-body text-justify leading-relaxed">
-            Program Studi Magister Kenotariatan (MKn) Universitas Islam Sultan Agung (UNISSULA)
-            menyelenggarakan penerimaan mahasiswa baru bagi sarjana hukum yang ingin mendalami keilmuan dan
-            profesi kenotariatan dengan standar akademik yang ketat dan berwawasan global.
+            {t({
+              id: "Program Studi Magister Kenotariatan (MKn) Universitas Islam Sultan Agung (UNISSULA) menyelenggarakan penerimaan mahasiswa baru bagi sarjana hukum yang ingin mendalami keilmuan dan profesi kenotariatan dengan standar akademik yang ketat dan berwawasan global.",
+              en: "The Master of Notarial Law (MKn) Study Programme of Sultan Agung Islamic University (UNISSULA) organizes new student admissions for law graduates who wish to deepen their knowledge and pursue the notarial profession with rigorous academic standards and a global perspective.",
+            })}
           </motion.p>
 
           {/* Hero Banner Image */}
@@ -117,7 +133,10 @@ export default function StudentAdmission() {
           >
             <Img
               src="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?auto=format&fit=crop&w=1200&q=80"
-              alt="Penerimaan Mahasiswa Baru MKn UNISSULA"
+              alt={t({
+                id: "Penerimaan Mahasiswa Baru MKn UNISSULA",
+                en: "New Student Admission MKn UNISSULA",
+              })}
               className="w-full h-full object-cover object-center rounded-md hover:scale-105 transition-transform duration-500"
             />
           </motion.div>
@@ -130,10 +149,16 @@ export default function StudentAdmission() {
           >
             <div className="space-y-1">
               <h3 className="font-heading font-semibold text-base text-heading">
-                Pendaftaran Online PMB UNISSULA 2025/2026 Telah Dibuka
+                {t({
+                  id: "Pendaftaran Online PMB UNISSULA 2025/2026 Telah Dibuka",
+                  en: "Online Registration for UNISSULA Admissions 2025/2026 is Open",
+                })}
               </h3>
               <p className="text-xs sm:text-sm text-body">
-                Daftarkan diri Anda sekarang melalui portal resmi penerimaan mahasiswa baru UNISSULA.
+                {t({
+                  id: "Daftarkan diri Anda sekarang melalui portal resmi penerimaan mahasiswa baru UNISSULA.",
+                  en: "Register now through the official UNISSULA new student admission portal.",
+                })}
               </p>
             </div>
             <motion.a
@@ -144,7 +169,7 @@ export default function StudentAdmission() {
               whileTap={{ scale: 0.96 }}
               className="shrink-0 bg-primary hover:bg-[#570000] text-white px-6 py-2.5 text-xs font-semibold uppercase tracking-wider transition-colors inline-flex items-center gap-2 shadow-2xs cursor-pointer"
             >
-              <span>Daftar Sekarang</span>
+              <span>{t({ id: "Daftar Sekarang", en: "Apply Now" })}</span>
               <FiExternalLink />
             </motion.a>
           </motion.div>
@@ -162,7 +187,10 @@ export default function StudentAdmission() {
             variants={itemVariants}
             className="text-2xl sm:text-3xl font-heading font-bold text-heading tracking-normal"
           >
-            Persyaratan & Prosedur Pendaftaran
+            {t({
+              id: "Persyaratan & Prosedur Pendaftaran",
+              en: "Admission Requirements & Procedures",
+            })}
           </motion.h2>
 
           {/* Accordion List */}
@@ -184,7 +212,7 @@ export default function StudentAdmission() {
                     aria-expanded={isOpen}
                   >
                     <span className="font-heading font-medium text-base sm:text-lg text-heading group-hover:text-primary transition-colors">
-                      {item.title}
+                      {t(item.title)}
                     </span>
                     <motion.div
                       animate={{ rotate: isOpen ? 180 : 0 }}
@@ -208,19 +236,19 @@ export default function StudentAdmission() {
                           {item.points && (
                             <ul className="list-disc pl-5 space-y-2 text-sm text-body">
                               {item.points.map((pt, pIdx) => (
-                                <li key={pIdx}>{pt}</li>
+                                <li key={pIdx}>{t(pt)}</li>
                               ))}
                             </ul>
                           )}
 
                           {item.description && (
-                            <p className="text-sm text-body">{item.description}</p>
+                            <p className="text-sm text-body">{t(item.description)}</p>
                           )}
 
                           {item.steps && (
                             <ol className="list-decimal pl-5 space-y-1.5 text-sm text-body">
                               {item.steps.map((st, sIdx) => (
-                                <li key={sIdx}>{st}</li>
+                                <li key={sIdx}>{t(st)}</li>
                               ))}
                             </ol>
                           )}

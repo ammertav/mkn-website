@@ -5,13 +5,13 @@ import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import Breadcrumb from "../../components/ui/Breadcrumb";
 import SidebarNav from "../../components/ui/SidebarNav";
-import { navLinks } from "../../data/navLinks";
-
-const informasiMenus =
-  navLinks.find((n) => n.href === "/informasi" || n.href === "/penerimaan")?.children ?? [];
+import { useLanguage } from "../../i18n/languageContext";
 
 const akademikContact = {
-  title: "KONTAK PMB",
+  title: {
+    id: "KONTAK PMB",
+    en: "ADMISSIONS CONTACT",
+  },
   groups: [
     {
       items: [
@@ -23,13 +23,24 @@ const akademikContact = {
 };
 
 export default function PenerimaanLayout() {
+  const { lang } = useLanguage();
+
   return (
     <>
       <Helmet>
-        <title>Informasi & Penerimaan Mahasiswa Baru | MKn UNISSULA</title>
+        <html lang={lang} />
+        <title>
+          {lang === "en"
+            ? "Information & Student Admissions | MKn UNISSULA"
+            : "Informasi & Penerimaan Mahasiswa Baru | MKn UNISSULA"}
+        </title>
         <meta
           name="description"
-          content="Informasi Penerimaan Mahasiswa Baru, Persyaratan Pendaftaran, Seleksi Masuk, Tingkat Kelulusan, dan Riset Program Studi Magister Kenotariatan (MKn) UNISSULA."
+          content={
+            lang === "en"
+              ? "New Student Admission Information, Registration Requirements, Entrance Selection, Graduation Rates, and Research of Master of Notarial Law (MKn) UNISSULA."
+              : "Informasi Penerimaan Mahasiswa Baru, Persyaratan Pendaftaran, Seleksi Masuk, Tingkat Kelulusan, dan Riset Program Studi Magister Kenotariatan (MKn) UNISSULA."
+          }
         />
       </Helmet>
 

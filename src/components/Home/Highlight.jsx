@@ -6,6 +6,7 @@ import {
   FiAward,
   FiCalendar,
 } from "react-icons/fi";
+import { useT } from "../../i18n/languageContext";
 
 const viewportSettings = {
   once: true,
@@ -63,7 +64,6 @@ const itemVariants = {
   },
 };
 
-
 // =========================================
 // ANIMATED NUMBER
 // =========================================
@@ -113,7 +113,7 @@ function AnimatedNumber({
     };
   }, [value, duration, start]);
 
-  const suffix = value.includes("+") ? "+" : "";
+  const suffix = typeof value === "string" && value.includes("+") ? "+" : "";
 
   return (
     <>
@@ -123,30 +123,31 @@ function AnimatedNumber({
   );
 }
 
-
 // =========================================
 // HIGHLIGHT
 // =========================================
 function Highlight() {
+  const t = useT();
+
   const statistics = [
     {
       value: "75+",
-      label: "Dosen",
+      label: { id: "Dosen", en: "Faculty Members" },
       icon: FiUsers,
     },
     {
       value: "50+",
-      label: "Mitra Kerja Sama",
+      label: { id: "Mitra Kerja Sama", en: "Partner Institutions" },
       icon: FiBriefcase,
     },
     {
-      value: "Unggul",
-      label: "Akreditasi BAN-PT",
+      value: { id: "Unggul", en: "Unggul" },
+      label: { id: "Akreditasi BAN-PT", en: "BAN-PT Accreditation" },
       icon: FiAward,
     },
     {
       value: "2012",
-      label: "Berdiri sejak",
+      label: { id: "Berdiri sejak", en: "Established in" },
       icon: FiCalendar,
     },
   ];
@@ -154,7 +155,6 @@ function Highlight() {
   return (
     <section className="w-full bg-hero-heading font-body py-12 sm:py-18 border-b border-gray-200 overflow-hidden">
       <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8">
-
         <motion.div
           variants={containerVariants}
           initial="hidden"
@@ -179,11 +179,11 @@ function Highlight() {
                 item={item}
                 index={index}
                 Icon={Icon}
+                t={t}
               />
             );
           })}
         </motion.div>
-
       </div>
     </section>
   );
@@ -197,6 +197,7 @@ function HighlightCard({
   item,
   index,
   Icon,
+  t,
 }) {
   const ref = useRef(null);
 
@@ -206,7 +207,7 @@ function HighlightCard({
   });
 
   // Hanya angka dengan "+" yang menggunakan count-up
-  const isCountUp = item.value.includes("+");
+  const isCountUp = typeof item.value === "string" && item.value.includes("+");
 
   return (
     <motion.div
@@ -292,7 +293,7 @@ function HighlightCard({
             start={isInView}
           />
         ) : (
-          item.value
+          t(item.value)
         )}
       </motion.div>
 
@@ -309,7 +310,7 @@ function HighlightCard({
           text-gray-600
         "
       >
-        {item.label}
+        {t(item.label)}
       </motion.div>
 
     </motion.div>

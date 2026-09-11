@@ -45,4 +45,26 @@ export const uiText = {
     id: "Halaman yang Anda cari tidak ada atau telah dipindahkan.",
     en: "The page you are looking for does not exist or has been moved.",
   },
+
+  // Beranda & Footer
+  followUs: { id: "Ikuti Kami", en: "Follow Us" },
+  allRightsReserved: { id: "Hak Cipta Dilindungi.", en: "All Rights Reserved." },
+  viewAllNews: { id: "LIHAT SEMUA BERITA", en: "VIEW ALL NEWS" },
+  viewAllAnnouncements: { id: "LIHAT SEMUA PENGUMUMAN", en: "VIEW ALL ANNOUNCEMENTS" },
+  viewAllEvents: { id: "LIHAT SEMUA AGENDA", en: "VIEW ALL EVENTS" },
+  applyNow: { id: "DAFTAR SEKARANG", en: "APPLY NOW" },
+  readMoreSimple: { id: "Baca selengkapnya", en: "Read more" },
+  showLess: { id: "Tutup", en: "Show less" },
+  latestNews: { id: "Berita Terbaru", en: "Latest News" },
+  latestAnnouncements: { id: "Pengumuman Terbaru", en: "Latest Announcements" },
+  upcomingEvents: { id: "Agenda & Kegiatan Mendatang", en: "Upcoming Events & Activities" },
+  facilitiesAndCulture: { id: "Fasilitas & Budaya", en: "Facilities & Culture" },
+  faqTitle: { id: "Pertanyaan yang Sering Diajukan", en: "Frequently Asked Questions" },
+  faqSubtitle: {
+    id: "Temukan jawaban atas pertanyaan umum seputar program studi, beasiswa, perkuliahan, dan pendaftaran.",
+    en: "Find answers to frequently asked questions regarding study programmes, scholarships, academics, and admissions.",
+  },
+  alumniTestimonials: { id: "Kata Alumni", en: "Alumni Testimonials" },
+  viewFullProfile: { id: "Lihat Profil Lengkap", en: "View Full Profile" },
+  headOfProgrammeWelcome: { id: "SAMBUTAN KETUA PROGRAM STUDI", en: "HEAD OF STUDY PROGRAMME WELCOME" },
 };

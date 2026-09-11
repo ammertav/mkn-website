@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import { useT } from "../../i18n/languageContext";
 
 const JEDA_MS = 3000;
 
@@ -43,6 +44,7 @@ export default function HeroSlideshow({
   judul,
   deskripsi,
 }) {
+  const t = useT();
   const [aktif, setAktif] = useState(0);
 
   // Kunci dari daftar sumber foto, bukan dari array-nya langsung: pemanggil
@@ -96,21 +98,21 @@ export default function HeroSlideshow({
             variants={textItemVariants}
             className="inline-block text-xs font-semibold tracking-widest uppercase text-gray-300"
           >
-            {eyebrow}
+            {t(eyebrow)}
           </motion.span>
 
           <motion.h1
             variants={textItemVariants}
             className="text-4xl sm:text-5xl lg:text-6xl font-heading font-medium text-hero-heading leading-tight tracking-tight"
           >
-            {judul}
+            {t(judul)}
           </motion.h1>
 
           <motion.p
             variants={textItemVariants}
             className="text-sm sm:text-base lg:text-lg text-hero-description font-normal leading-relaxed pt-2"
           >
-            {deskripsi}
+            {t(deskripsi)}
           </motion.p>
         </motion.div>
       </div>
@@ -128,7 +130,10 @@ export default function HeroSlideshow({
                   ? "w-7 bg-white"
                   : "w-3 bg-white/40 hover:bg-white/70"
               }`}
-              aria-label={`Tampilkan foto ${idx + 1}`}
+              aria-label={t({
+                id: `Tampilkan foto ${idx + 1}`,
+                en: `Show photo ${idx + 1}`,
+              })}
               aria-current={idx === aktif}
             />
           ))}

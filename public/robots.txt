@@ -1,4 +1,10 @@
+# Dibuat otomatis oleh scripts/generate-sitemap.mjs — jangan disunting manual.
 User-agent: *
 Allow: /
+
+# Tidak ada yang ditutup: berkas PDF prodi justru berguna bila ditemukan
+# lewat pencarian. Perlu diperhatikan bila suatu saat ingin menutup folder
+# unduhan — awalan /quality-assurance/ dipakai bersama oleh berkas PDF dan
+# halaman Penjaminan Mutu, jadi melarangnya ikut memblokir halamannya.
 
 Sitemap: https://mkn.unissula.ac.id/sitemap.xml

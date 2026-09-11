@@ -5,6 +5,7 @@ import { FiSearch, FiChevronDown, FiUser } from "react-icons/fi";
 import { motion } from "framer-motion";
 import { facultyData } from "../../data/facultyData";
 import Img from "../../components/ui/Img";
+import { useT, useLanguage } from "../../i18n/languageContext";
 
 /**
  * Urutan tampil daftar dosen: jenjang jabatan akademik dari yang tertinggi,
@@ -63,28 +64,12 @@ function bandingkanDosen(a, b) {
     return (a.shortName || a.name).localeCompare(b.shortName || b.name, "id");
 }
 
-const viewportSettings = {
-  once: true,
-  amount: 0.15,
-};
-
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
     transition: {
       staggerChildren: 0.12,
-      delayChildren: 0.05,
-    },
-  },
-};
-
-const listContainerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.08,
       delayChildren: 0.05,
     },
   },
@@ -132,6 +117,8 @@ const cardVariants = {
 };
 
 export default function FacultyDirectory() {
+    const t = useT();
+    const { lang } = useLanguage();
     const [searchQuery, setSearchQuery] = useState("");
     const [selectedExpertise, setSelectedExpertise] = useState("Semua Keahlian");
     const [selectedType, setSelectedType] = useState("Semua Tipe");
@@ -182,10 +169,19 @@ export default function FacultyDirectory() {
     return (
         <>
             <Helmet>
-                <title>Dosen & Penelitian | MKn UNISSULA</title>
+                <html lang={lang} />
+                <title>
+                    {lang === "en"
+                        ? "Faculty & Research | MKn UNISSULA"
+                        : "Dosen & Penelitian | MKn UNISSULA"}
+                </title>
                 <meta
                     name="description"
-                    content="Jelajahi keahlian dan kontribusi penelitian dari staf pengajar Program Studi Magister Kenotariatan UNISSULA."
+                    content={
+                        lang === "en"
+                            ? "Explore the expertise and research contributions of the faculty members of the Master of Notarial Law Study Programme UNISSULA."
+                            : "Jelajahi keahlian dan kontribusi penelitian dari staf pengajar Program Studi Magister Kenotariatan UNISSULA."
+                    }
                 />
             </Helmet>
 
@@ -201,21 +197,22 @@ export default function FacultyDirectory() {
                         variants={itemVariants}
                         className="text-xs font-semibold tracking-widest text-primary uppercase block mb-2"
                     >
-                        DIREKTORI AKADEMIK
+                        {t({ id: "DIREKTORI AKADEMIK", en: "ACADEMIC DIRECTORY" })}
                     </motion.span>
                     <motion.h1
                         variants={itemVariants}
                         className="text-3xl sm:text-4xl md:text-5xl font-heading text-heading font-normal tracking-tight"
                     >
-                        Dosen & Penelitian
+                        {t({ id: "Dosen & Penelitian", en: "Faculty & Research" })}
                     </motion.h1>
                     <motion.p
                         variants={itemVariants}
                         className="mt-4 text-sm sm:text-base text-special leading-relaxed max-w-3xl"
                     >
-                        Jelajahi keahlian dan kontribusi penelitian dari staf pengajar kami yang merupakan pakar
-                        terkemuka di bidang ilmu kenotariatan dan hukum, berkomitmen pada keunggulan akademis dan
-                        integritas profesional.
+                        {t({
+                            id: "Jelajahi keahlian dan kontribusi penelitian dari staf pengajar kami yang merupakan pakar terkemuka di bidang ilmu kenotariatan dan hukum, berkomitmen pada keunggulan akademis dan integritas profesional.",
+                            en: "Explore the expertise and research contributions of our faculty members, who are prominent scholars and practitioners in notarial law, committed to academic excellence and professional integrity.",
+                        })}
                     </motion.p>
                 </motion.div>
 
@@ -232,7 +229,7 @@ export default function FacultyDirectory() {
                             {/* Search by Name */}
                             <div className="lg:col-span-4 space-y-1.5">
                                 <label className="text-xs sm:text-xs font-medium text-gray-500 block">
-                                    Pencarian
+                                    {t({ id: "Pencarian", en: "Search" })}
                                 </label>
                                 <div className="relative flex items-center">
                                     <FiSearch className="absolute left-3 text-gray-400 text-sm" />
@@ -241,7 +238,7 @@ export default function FacultyDirectory() {
                                         value={searchQuery}
                                         onChange={(e) => setSearchQuery(e.target.value)}
                                         onKeyDown={(e) => e.key === "Enter" && handleApplyFilter()}
-                                        placeholder="Cari nama dosen..."
+                                        placeholder={lang === "en" ? "Search faculty name..." : "Cari nama dosen..."}
                                         className="w-full bg-[#fbfbfb] border border-gray-200 rounded-sm pl-9 pr-3 py-2 text-xs sm:text-sm text-heading placeholder-gray-400 focus:outline-none focus:border-primary/50 focus:bg-white transition-all"
                                     />
                                 </div>
@@ -250,7 +247,7 @@ export default function FacultyDirectory() {
                             {/* Filter: Area Keahlian */}
                             <div className="lg:col-span-3 space-y-1.5">
                                 <label className="text-xs sm:text-xs font-medium text-gray-500 block">
-                                    Area Keahlian
+                                    {t({ id: "Area Keahlian", en: "Area of Expertise" })}
                                 </label>
                                 <div className="relative">
                                     <select
@@ -258,15 +255,15 @@ export default function FacultyDirectory() {
                                         onChange={(e) => setSelectedExpertise(e.target.value)}
                                         className="w-full appearance-none bg-[#fbfbfb] border border-gray-200 rounded-sm px-3.5 py-2 text-xs sm:text-sm text-heading focus:outline-none focus:border-primary/50 focus:bg-white transition-all cursor-pointer"
                                     >
-                                        <option value="Semua Keahlian">Semua Keahlian</option>
-                                        <option value="Hukum Agraria">Hukum Agraria</option>
-                                        <option value="Hukum Perusahaan">Hukum Perusahaan</option>
-                                        <option value="Hukum Perikatan">Hukum Perikatan</option>
-                                        <option value="Hukum Keluarga & Waris">Hukum Keluarga & Waris</option>
-                                        <option value="Hukum Kenotariatan">Hukum Kenotariatan</option>
-                                        <option value="Hukum Bisnis & Pasar Modal">Hukum Bisnis & Pasar Modal</option>
-                                        <option value="Filsafat & Teori Hukum">Filsafat & Teori Hukum</option>
-                                        <option value="Hukum Pajak Kenotariatan">Hukum Pajak Kenotariatan</option>
+                                        <option value="Semua Keahlian">{t({ id: "Semua Keahlian", en: "All Expertise" })}</option>
+                                        <option value="Hukum Agraria">{t({ id: "Hukum Agraria", en: "Agrarian Law" })}</option>
+                                        <option value="Hukum Perusahaan">{t({ id: "Hukum Perusahaan", en: "Corporate Law" })}</option>
+                                        <option value="Hukum Perikatan">{t({ id: "Hukum Perikatan", en: "Law of Obligations" })}</option>
+                                        <option value="Hukum Keluarga & Waris">{t({ id: "Hukum Keluarga & Waris", en: "Family & Inheritance Law" })}</option>
+                                        <option value="Hukum Kenotariatan">{t({ id: "Hukum Kenotariatan", en: "Notarial Law" })}</option>
+                                        <option value="Hukum Bisnis & Pasar Modal">{t({ id: "Hukum Bisnis & Pasar Modal", en: "Business & Capital Market Law" })}</option>
+                                        <option value="Filsafat & Teori Hukum">{t({ id: "Filsafat & Teori Hukum", en: "Philosophy & Theory of Law" })}</option>
+                                        <option value="Hukum Pajak Kenotariatan">{t({ id: "Hukum Pajak Kenotariatan", en: "Notarial Tax Law" })}</option>
                                     </select>
                                     <FiChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 pointer-events-none text-sm" />
                                 </div>
@@ -275,7 +272,7 @@ export default function FacultyDirectory() {
                             {/* Filter: Tipe Pengajar */}
                             <div className="lg:col-span-3 space-y-1.5">
                                 <label className="text-[11px] sm:text-xs font-medium text-gray-500 block">
-                                    Tipe Pengajar
+                                    {t({ id: "Tipe Pengajar", en: "Faculty Type" })}
                                 </label>
                                 <div className="relative">
                                     <select
@@ -283,10 +280,10 @@ export default function FacultyDirectory() {
                                         onChange={(e) => setSelectedType(e.target.value)}
                                         className="w-full appearance-none bg-[#fbfbfb] border border-gray-200 rounded-sm px-3.5 py-2 text-xs sm:text-sm text-heading focus:outline-none focus:border-primary/50 focus:bg-white transition-all cursor-pointer"
                                     >
-                                        <option value="Semua Tipe">Semua Tipe</option>
-                                        <option value="Guru Besar">Guru Besar</option>
-                                        <option value="Dosen Tetap">Dosen Tetap</option>
-                                        <option value="Dosen Praktisi">Dosen Praktisi / Notaris</option>
+                                        <option value="Semua Tipe">{t({ id: "Semua Tipe", en: "All Types" })}</option>
+                                        <option value="Guru Besar">{t({ id: "Guru Besar", en: "Professor" })}</option>
+                                        <option value="Dosen Tetap">{t({ id: "Dosen Tetap", en: "Permanent Faculty" })}</option>
+                                        <option value="Dosen Praktisi">{t({ id: "Dosen Praktisi / Notaris", en: "Practitioner / Notary" })}</option>
                                     </select>
                                     <FiChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 pointer-events-none text-sm" />
                                 </div>
@@ -300,7 +297,7 @@ export default function FacultyDirectory() {
                                     onClick={handleApplyFilter}
                                     className="w-full bg-btn hover:opacity-90 text-white text-xs sm:text-[13px] font-semibold py-2.5 px-4 rounded-sm transition-opacity cursor-pointer text-center"
                                 >
-                                    Terapkan Filter
+                                    {t({ id: "Terapkan Filter", en: "Apply Filter" })}
                                 </motion.button>
                             </div>
 
@@ -343,7 +340,7 @@ export default function FacultyDirectory() {
                                                 <div className="w-full h-full flex flex-col items-center justify-center bg-gray-50 text-gray-400 group-hover:bg-gray-100 transition-colors p-4 text-center">
                                                     <FiUser className="text-5xl text-gray-300 mb-2" />
                                                     <span className="text-[11px] uppercase tracking-wider font-medium text-gray-400">
-                                                        Foto Belum Tersedia
+                                                        {t({ id: "Foto Belum Tersedia", en: "Photo Not Available" })}
                                                     </span>
                                                 </div>
                                             )}
@@ -370,7 +367,12 @@ export default function FacultyDirectory() {
                         </div>
                     ) : (
                         <div className="text-center py-16 text-body">
-                            <p className="text-base font-medium">Tidak ada dosen yang sesuai dengan kriteria filter.</p>
+                            <p className="text-base font-medium">
+                                {t({
+                                    id: "Tidak ada dosen yang sesuai dengan kriteria filter.",
+                                    en: "No faculty members match the filter criteria.",
+                                })}
+                            </p>
                             <button
                                 onClick={() => {
                                     setSearchQuery("");
@@ -384,7 +386,7 @@ export default function FacultyDirectory() {
                                 }}
                                 className="mt-3 text-xs text-primary font-semibold underline cursor-pointer"
                             >
-                                Reset Filter
+                                {t({ id: "Reset Filter", en: "Reset Filter" })}
                             </button>
                         </div>
                     )}
@@ -404,7 +406,7 @@ export default function FacultyDirectory() {
                                 onClick={() => setVisibleCount(filteredFaculty.length)}
                                 className="bg-white border border-gray-300 text-heading hover:bg-gray-50 hover:border-gray-400 text-xs font-medium py-2.5 px-8 rounded-sm shadow-2xs transition-all duration-150 cursor-pointer"
                             >
-                                Muat Lebih Banyak
+                                {t({ id: "Muat Lebih Banyak", en: "Load More" })}
                             </motion.button>
                         </motion.div>
                     )}
