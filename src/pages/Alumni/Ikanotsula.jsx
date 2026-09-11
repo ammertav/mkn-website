@@ -126,17 +126,17 @@ const ikanotsulaData = {
   // Galeri dikelompokkan per kegiatan dan diurutkan kronologis, dari yang
   // paling awal ke yang terbaru. `folder` menunjuk ke direktori asetnya.
   galeri: [
-    { judul: "Bimbingan UKEN", tahun: "2022", folder: "bim-uken-2022" },
+    { judul: "Bimbingan Belajar Ujian Kode Etik Notaris (UKEN)", tahun: "2023", folder: "bim-uken-2022" },
     { judul: "Penyuluhan Hukum IKANOTSULA", tahun: "2023", folder: "penyuluhan-hukum-2023" },
-    { judul: "Bimbingan UKEN", tahun: "2024", folder: "bim-uken-2024" },
-    { judul: "Jalan Sehat", tahun: "2024", folder: "jalan-sehat-2024" },
+    { judul: "Bimbingan Belajar Ujian Kompetensi Notaris", tahun: "2024", folder: "bim-uken-2024" },
+    { judul: "Jalan Sehat dan Silaturahmi", tahun: "2024", folder: "jalan-sehat-2024" },
     { judul: "Pelantikan Pengurus IKANOTSULA", tahun: "2024", folder: "pelantikan-2024" },
     { judul: "Pengabdian Masyarakat Pekalongan", tahun: "2024", folder: "pm-pekalongan-2024" },
-    { judul: "Workshop Bimbel Habib Adjie", tahun: "2024", folder: "workshop-2024" },
-    { judul: "Bimbingan UKEN", tahun: "2025", folder: "bimbel-uken-2025" },
-    { judul: "Reuni Milad 62", tahun: "2025", folder: "reuni-2025" },
-    { judul: "Diklat PPAT", tahun: "2026", folder: "diklat-ppat-2026" },
+    { judul: "Workshop \"Seputar Dunia Kenotariatan\" bersama Dr. Habib Adjie, S.H.,M.Hum", tahun: "2024", folder: "workshop-2024" },
+    { judul: "Bimbingan Belajar Ujian Kompetensi Notaris", tahun: "2025", folder: "bimbel-uken-2025" },
+    { judul: "Dialog Alumni", tahun: "2025", folder: "reuni-2025" },
     { judul: "Halal Bihalal", tahun: "2026", folder: "halal-bihalal-2026" },
+    { judul: "Diklat Calon PPAT \"Peningkatan Calon PPAT Dalam Rangka Mewujudkan PPAT yang berintegritas Tinggi dan Bertanggung Jawab\"", tahun: "2026", folder: "diklat-ppat-2026" },
   ],
   strukturOrganisasi: {
     dasar:
