@@ -8,7 +8,7 @@ import Breadcrumb from "../../components/ui/Breadcrumb";
 import { studentOrganizationsData } from "../../data/studentOrganizationsData";
 import ZoomableImg from "../../components/ui/ZoomableImg";
 import GaleriGeser from "../../components/ui/GaleriGeser";
-import { useT } from "../../i18n/languageContext";
+import { useT, useLanguage } from "../../i18n/languageContext";
 
 const viewportSettings = {
   once: true,
@@ -122,8 +122,26 @@ function BarisNama({ name, nim, role }) {
   );
 }
 
+/**
+ * Baca foto kegiatan dari subfolder assets/images/prestasi/<folder>/
+ * menggunakan import.meta.glob agar foto baru langsung terbaca tanpa
+ * perlu menambahkan impor satu per satu.
+ */
+const berkasKegiatan = import.meta.glob(
+  "../../assets/images/prestasi/*/*.{jpg,jpeg,png,webp,JPG,JPEG,PNG}",
+  { eager: true, import: "default" }
+);
+
+function fotoKegiatan(folder) {
+  return Object.entries(berkasKegiatan)
+    .filter(([path]) => path.includes(`/prestasi/${folder}/`))
+    .sort(([a], [b]) => a.localeCompare(b, "id", { numeric: true }))
+    .map(([, url]) => url);
+}
+
 export default function StudentOrganizationDetail() {
   const t = useT();
+  const { lang } = useLanguage();
 
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: "instant" });
@@ -417,20 +435,112 @@ export default function StudentOrganizationDetail() {
         </div>
 
         {/* ========================================================================= */}
-        {/* FULL BLEED GALLERY: geser mendatar, mentok kanan & kiri layar penuh */}
+        {/* FULL BLEED GALLERY: dipisah per kegiatan seperti pola Ikanotsula */}
         {/* ========================================================================= */}
-        {organization.gallery?.length > 0 && (
-          <div className="w-full my-8 sm:my-14">
-            <GaleriGeser
-              foto={organization.gallery.map((item) => ({
-                id: item.id,
-                src: item.image,
-                alt: item.title,
-                judul: item.title,
-              }))}
-            />
-          </div>
-        )}
+        {(() => {
+          const terdaftar = organization.galeri ?? [];
+          const folderTerdaftar = new Set(terdaftar.map((k) => k.folder));
+
+          // Auto-discovery: temukan semua subfolder yang ada di assets/images/prestasi/
+          const folderDitemukan = Array.from(
+            new Set(
+              Object.keys(berkasKegiatan)
+                .map((path) => {
+                  const match = path.match(/\/prestasi\/([^/]+)\//);
+                  return match ? match[1] : null;
+                })
+                .filter(Boolean)
+            )
+          );
+
+          // Buat entri otomatis untuk folder yang belum terdaftar secara manual
+          const folderTambahan = folderDitemukan
+            .filter((f) => !folderTerdaftar.has(f))
+            .map((f) => {
+              const yearMatch = f.match(/\b(20\d\d)\b/);
+              const tahun = yearMatch ? yearMatch[1] : "";
+              const judulStr = f.replace(/\b(20\d\d)\b/, "").trim() || f;
+              return {
+                judul: { id: judulStr, en: judulStr },
+                tahun,
+                folder: f,
+              };
+            });
+
+          const semuaKegiatan = [...terdaftar, ...folderTambahan];
+
+          const galeri = semuaKegiatan
+            .map((kegiatan) => {
+              const judulText = t(kegiatan.judul);
+              const namaLengkap = kegiatan.tahun ? `${judulText} ${kegiatan.tahun}` : judulText;
+              return {
+                ...kegiatan,
+                foto: fotoKegiatan(kegiatan.folder).map((src, idx) => ({
+                  src,
+                  alt: `${namaLengkap} — ${lang === "en" ? "photo" : "foto"} ${idx + 1}`,
+                  caption: `${namaLengkap} — ${lang === "en" ? "photo" : "foto"} ${idx + 1}`,
+                })),
+              };
+            })
+            .filter((kg) => kg.foto.length > 0);
+
+          if (galeri.length === 0) return null;
+
+          return (
+            <div className="w-full my-8 sm:my-14 max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8">
+              <motion.section
+                variants={containerVariants}
+                initial="hidden"
+                whileInView="visible"
+                viewport={viewportSettings}
+                className="space-y-10"
+              >
+                <JudulSeksi>{t({ id: "Galeri Kegiatan", en: "Activity Gallery" })}</JudulSeksi>
+
+                {galeri.map((kegiatan) => (
+                  <motion.div
+                    key={kegiatan.folder}
+                    variants={containerVariants}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={viewportSettings}
+                    className="space-y-4"
+                  >
+                    {/* Kepala kegiatan: nama acara, tahun, dan jumlah foto */}
+                    <motion.div
+                      variants={itemVariants}
+                      className="flex flex-wrap items-baseline gap-x-3 gap-y-1 pb-2 border-b border-gray-200"
+                    >
+                      <h3 className="font-heading font-bold text-lg sm:text-xl text-heading leading-snug">
+                        {t(kegiatan.judul)}
+                      </h3>
+
+                      <span className="text-[11px] font-bold tracking-wider text-primary uppercase bg-red-50 border border-primary/20 px-2 py-0.5 rounded-xs tabular-nums">
+                        {kegiatan.tahun}
+                      </span>
+
+                      <span className="text-xs text-gray-400 ml-auto tabular-nums">
+                        {kegiatan.foto.length} {lang === "en" ? "photos" : "foto"}
+                      </span>
+                    </motion.div>
+
+                    <motion.div variants={itemVariants}>
+                      <GaleriGeser
+                        foto={kegiatan.foto}
+                        ariaLabel={`${t({ id: "Galeri", en: "Gallery" })} ${t(kegiatan.judul)} ${kegiatan.tahun}`}
+                        otomatis={false}
+                        tampilkanJudul={false}
+                        kelasTrek="gap-4"
+                        kelasBasis="basis-full sm:basis-[calc((100%-1rem)/2)] md:basis-[calc((100%-2rem)/3)]"
+                        kelasKartu="aspect-[4/3] rounded-md border border-gray-200 shadow-2xs"
+                      />
+                    </motion.div>
+                  </motion.div>
+                ))}
+              </motion.section>
+            </div>
+          );
+        })()}
 
         {/* ========================================================================= */}
         {/* STRUKTUR ORGANISASI (Pengurus Inti & Divisi) */}

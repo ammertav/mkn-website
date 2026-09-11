@@ -60,7 +60,7 @@ export default function EventPage() {
   const t = useT();
   const { lang } = useLanguage();
 
-  // Tanggal default: 1 September 2026 (sesuai screenshot Harvard)
+  // Bulan default kalender: September 2026
   const defaultYear = 2026;
   const defaultMonth = 8; // 0-indexed: 8 = September
 
@@ -68,8 +68,8 @@ export default function EventPage() {
     new Date(defaultYear, defaultMonth, 1)
   );
 
-  // Filter state
-  const [selectedDate, setSelectedDate] = useState("2026-09-01");
+  // Filter state — selectedDate null berarti tampilkan semua agenda
+  const [selectedDate, setSelectedDate] = useState(null);
   const [searchKeyword, setSearchKeyword] = useState("");
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [isCompactView, setIsCompactView] = useState(false);
@@ -87,12 +87,8 @@ export default function EventPage() {
   // Filter event berdasarkan kriteria
   const filteredEvents = useMemo(() => {
     return eventData.filter((item) => {
-      // Filter tanggal (jika viewMode === "day" atau user memilih tanggal tertentu)
-      if (viewMode === "day" && selectedDate && item.date !== selectedDate) {
-        return false;
-      }
-      if (viewMode === "all" && selectedDate && item.date !== selectedDate) {
-        // Jika ada selectedDate aktif, prioritaskan tanggal terpilih
+      // Filter tanggal — hanya aktif jika selectedDate dipilih (tidak null)
+      if (selectedDate && item.date !== selectedDate) {
         return false;
       }
 
@@ -118,7 +114,7 @@ export default function EventPage() {
 
       return true;
     });
-  }, [viewMode, selectedDate, selectedCategory, searchKeyword]);
+  }, [selectedDate, selectedCategory, searchKeyword]);
 
   // Kelompokkan event berdasarkan tanggal
   const groupedEvents = useMemo(() => {
@@ -130,9 +126,10 @@ export default function EventPage() {
       groups[ev.date].push(ev);
     });
 
-    // Urutkan berdasarkan tanggal
+    // Urutkan terbaru dari atas (descending)
     return Object.keys(groups)
       .sort()
+      .reverse()
       .map((dateKey) => ({
         date: dateKey,
         events: groups[dateKey],

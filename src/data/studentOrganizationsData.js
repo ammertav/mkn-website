@@ -1,8 +1,4 @@
-import imgIMANU1 from "../assets/images/imanu-4.jpeg";
-import imgIMANU3 from "../assets/images/pohon.jpg";
 import imgIMANU4 from "../assets/images/imanu-kegiatan.jpeg";
-import imgIMANU5 from "../assets/images/lomba-imanu.jpg";
-import imgIMANU6 from "../assets/images/imanu-1.jpeg";
 
 export const studentOrganizationsData = [
   {
@@ -285,11 +281,23 @@ export const studentOrganizationsData = [
       },
     ],
 
-    gallery: [
-      { id: 1, title: " ", image: imgIMANU1 },
-      { id: 2, title: " ", image: imgIMANU5 },
-      { id: 3, title: " ", image: imgIMANU3 },
-      { id: 4, title: " ", image: imgIMANU6 },
+    /**
+     * Galeri foto kegiatan, dipisah per kegiatan.
+     * Foto dibaca otomatis dari subfolder assets/images/prestasi/<folder>/
+     * menggunakan import.meta.glob di komponen StudentOrganizationDetail.
+     */
+    galeri: [
+      {
+        judul: { id: "Lomba Kenotariatan Nasional", en: "National Notarial Competition" },
+        tahun: "2022",
+        folder: "Lomba Nasional 2022",
+      },
+      {
+        judul: { id: "Juara 3 Debat Hukum Nasional", en: "3rd Place National Legal Debate" },
+        tahun: "2022",
+        folder: "Juara 3 Debat 2022",
+      },
+      // Subfolder lain akan ditambahkan otomatis atau sesuai data yang tersedia
     ],
 
     summary: [

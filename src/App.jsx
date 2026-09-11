@@ -94,6 +94,9 @@ const Ikanotsula = lazy(() => import("./pages/Alumni/Ikanotsula"));
 const CareerCenter = lazy(() => import("./pages/Alumni/CareerCenter"));
 const JobVacancies = lazy(() => import("./pages/Alumni/JobVacancies"));
 
+// Kerja Sama
+const KerjaSama = lazy(() => import("./pages/KerjaSama/index"));
+
 export default function App() {
   return (
     <>
@@ -239,6 +242,9 @@ export default function App() {
         <Route path="/event" element={<EventPage />} />
         <Route path="/event/:slug" element={<EventDetailPage />} />
         <Route path="/agenda" element={<Navigate to="/event" replace />} />
+
+        {/* Kerja Sama */}
+        <Route path="/kerja-sama" element={<KerjaSama />} />
 
         {/* Alumni & Karir — nested routes */}
         <Route path="/alumni" element={<AlumniLayout />}>
