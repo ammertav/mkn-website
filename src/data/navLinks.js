@@ -133,6 +133,7 @@ export const navLinks = [
         href: "/mahasiswa/organisasi",
       },
       { title: { id: "Akomodasi", en: "Accommodation" }, href: "/mahasiswa/akomodasi" },
+      { title: { id: "Prestasi", en: "Achievements" }, href: "/mahasiswa/prestasi" },
     ],
   },
   {

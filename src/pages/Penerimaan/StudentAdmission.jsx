@@ -5,6 +5,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { admissionRequirements } from "../../data/penerimaanData";
 import Img from "../../components/ui/Img";
 import { useT, useLanguage } from "../../i18n/languageContext";
+import fotoPmb from "../../assets/images/foto-pmb.jpeg";
+import { biayaKelas } from "../../data/biayaPMBData";
 
 const viewportSettings = {
   once: true,
@@ -132,7 +134,7 @@ export default function StudentAdmission() {
             className="w-full aspect-[21/9] sm:aspect-[16/7] rounded-xs overflow-hidden bg-gray-100 shadow-2xs"
           >
             <Img
-              src="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?auto=format&fit=crop&w=1200&q=80"
+              src={fotoPmb}
               alt={t({
                 id: "Penerimaan Mahasiswa Baru MKn UNISSULA",
                 en: "New Student Admission MKn UNISSULA",
@@ -174,6 +176,74 @@ export default function StudentAdmission() {
             </motion.a>
           </motion.div>
         </motion.div>
+
+        {/* Section Biaya Pendidikan */}
+        <motion.section
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportSettings}
+          className="pt-2 space-y-6"
+        >
+          <motion.h2
+            variants={itemVariants}
+            className="text-2xl sm:text-3xl font-heading font-bold text-heading tracking-normal"
+          >
+            {t({ id: "Biaya Pendidikan", en: "Tuition Fees" })}
+          </motion.h2>
+
+          <motion.p variants={itemVariants} className="text-sm text-body">
+            {t({
+              id: "Biaya pendidikan disesuaikan dengan kelas yang dipilih. Untuk informasi lebih lanjut, silakan hubungi admin Program Studi.",
+              en: "Tuition fees vary according to the selected class. For further information, please contact the Study Programme administration.",
+            })}
+          </motion.p>
+
+          {/* 3 Kartu Kelas */}
+          <motion.div
+            variants={listContainerVariants}
+            className="grid grid-cols-1 sm:grid-cols-3 gap-4"
+          >
+            {biayaKelas.map((kelas) => (
+              <motion.div
+                key={kelas.id}
+                variants={itemVariants}
+                whileHover={{ y: -3, transition: { duration: 0.2 } }}
+                className="border border-gray-200 rounded-xs p-6 space-y-4 bg-white shadow-2xs hover:border-primary/40 hover:shadow-sm transition-all duration-300"
+              >
+                <div className="space-y-1">
+                  <h3 className="font-heading font-bold text-base text-heading">
+                    {t(kelas.nama)}
+                  </h3>
+                  <p className="text-xs text-body leading-relaxed">
+                    {t(kelas.deskripsi)}
+                  </p>
+                </div>
+
+                <div className="divide-y divide-gray-100">
+                  {kelas.komponen.map((item, idx) => (
+                    <div
+                      key={idx}
+                      className="flex justify-between items-start py-3 gap-2"
+                    >
+                      <div className="space-y-0.5">
+                        <span className="text-xs text-body block">{t(item.label)}</span>
+                        {item.frekuensi && (
+                          <span className="inline-block text-[10px] font-medium px-1.5 py-0.5 rounded bg-gray-100 text-body/70 leading-tight">
+                            {t(item.frekuensi)}
+                          </span>
+                        )}
+                      </div>
+                      <span className="text-xs font-semibold text-primary text-right shrink-0">
+                        {t(item.nilai)}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+        </motion.section>
 
         {/* Section Header & Accordion */}
         <motion.section

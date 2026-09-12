@@ -808,6 +808,47 @@ export const halamanTesis = {
     },
     tataTertib: { id: "Tata Tertib Ujian", en: "Examination Rules" },
     yudisium: { id: "Perbaikan, Yudisium, dan Predikat", en: "Revisions, Yudisium, and Distinction" },
+    contohTesis: { id: "Contoh Tesis", en: "Thesis Examples" },
+    contohTesisKeterangan: {
+      id: "Berikut contoh tesis mahasiswa MKn UNISSULA yang dapat dijadikan referensi penulisan.",
+      en: "The following are thesis examples from MKn UNISSULA students that may serve as writing references.",
+    },
   },
   namaDokumen: { id: "Panduan Ujian Tesis", en: "Thesis Examination Guidelines" },
 };
+
+/**
+ * Contoh file tesis yang dapat diunduh.
+ * Placeholder — ganti `href` dengan path lokal (mis. "/assets/tesis/...") atau URL Google Drive
+ * saat file asli tersedia.
+ */
+export const contohTesis = [
+  {
+    id: "ct-1",
+    judul: {
+      id: "Contoh Tesis — Keabsahan Akta Notaris dalam Perjanjian Kredit",
+      en: "Thesis Example — Validity of Notarial Deed in Credit Agreements",
+    },
+    tahun: "2024",
+    href: "#",
+  },
+  {
+    id: "ct-2",
+    judul: {
+      id: "Contoh Tesis — Tanggung Jawab Notaris atas Akta yang Cacat Hukum",
+      en: "Thesis Example — Notary Liability for Legally Defective Deeds",
+    },
+    tahun: "2023",
+    href: "#",
+  },
+  {
+    id: "ct-3",
+    judul: {
+      id: "Contoh Tesis — Perlindungan Hukum bagi Pihak Ketiga dalam Akta PPAT",
+      en: "Thesis Example — Legal Protection for Third Parties in PPAT Deeds",
+    },
+    tahun: "2023",
+    href: "#",
+  },
+];
+
