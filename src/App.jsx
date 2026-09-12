@@ -83,6 +83,7 @@ const AlumniSurveyReport = lazy(() => import("./pages/QualityAssurance/AlumniSur
 // Mahasiswa sub-pages
 const Accommodation = lazy(() => import("./pages/StudentLife/Accommodation"));
 const StudentOrganizationDetail = lazy(() => import("./pages/StudentLife/StudentOrganizationDetail"));
+const Prestasi = lazy(() => import("./pages/StudentLife/Prestasi"));
 
 // Event sub-pages
 const EventPage = lazy(() => import("./pages/Event/index"));
@@ -241,6 +242,9 @@ export default function App() {
         {/* Akomodasi — Standalone page dengan PageTabs Asrama & Guest House (tanpa sidebar) */}
         <Route path="/mahasiswa/akomodasi" element={<Navigate to="/mahasiswa/akomodasi/asrama" replace />} />
         <Route path="/mahasiswa/akomodasi/:tab" element={<Accommodation />} />
+
+        {/* Prestasi — Gallery foto prestasi mahasiswa */}
+        <Route path="/mahasiswa/prestasi" element={<Prestasi />} />
 
         {/* Mahasiswa root & Fallback legacy routes */}
         <Route path="/mahasiswa" element={<Navigate to="/mahasiswa/organisasi" replace />} />
