@@ -131,7 +131,7 @@ function Highlight() {
 
   const statistics = [
     {
-      value: "75+",
+      value: "30+",
       label: { id: "Dosen", en: "Faculty Members" },
       icon: FiUsers,
     },

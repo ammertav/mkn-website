@@ -77,15 +77,16 @@ function KartuJurnal({ item }) {
   return (
     <motion.article
       variants={cardVariants}
-      className="bg-white border border-gray-200 rounded-xs shadow-2xs flex flex-col overflow-hidden hover:border-gray-300 transition-colors"
+      className="bg-white border border-gray-200 rounded-xs shadow-2xs flex flex-col sm:flex-row overflow-hidden hover:border-gray-300 transition-colors"
     >
-      {/* Logo — tiap jurnal punya rasio banner yang berbeda-beda, jadi tingginya
-          dikunci dan gambarnya object-contain agar tidak ada yang terpotong. */}
-      <div className="h-24 sm:h-28 bg-neutral-50 border-b border-gray-200 flex items-center justify-center p-4">
+      {/* Sampul di sisi kiri. Rasio tiap sampul berbeda — ada yang datar, ada
+          yang mockup buku — jadi lebar kolomnya yang dikunci dan gambarnya
+          object-contain, supaya tidak ada bagian yang terpotong. */}
+      <div className="sm:w-52 lg:w-60 shrink-0 bg-neutral-50 border-b sm:border-b-0 sm:border-r border-gray-200 flex items-center justify-center p-5">
         <Img
-          src={item.logo}
+          src={item.sampul}
           alt={item.nama}
-          className="max-h-full w-auto object-contain"
+          className="w-auto max-w-full max-h-56 sm:max-h-64 object-contain"
         />
       </div>
 
@@ -190,7 +191,7 @@ export default function Jurnal() {
           initial="hidden"
           whileInView="visible"
           viewport={viewportSettings}
-          className="grid grid-cols-1 lg:grid-cols-2 gap-5"
+          className="flex flex-col gap-5"
         >
           {jurnalData.map((item) => (
             <KartuJurnal key={item.id} item={item} />

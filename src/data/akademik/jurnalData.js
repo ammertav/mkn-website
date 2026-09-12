@@ -2,7 +2,7 @@
  * Jurnal ilmiah yang dikelola Program Studi Magister (S2) Kenotariatan FH UNISSULA.
  *
  * SUMBER: dokumen resmi "PROFIL LENGKAP JURNAL MKN UNISSULA 2026" dari program
- * studi. Hanya empat hal yang ditampilkan di halaman — logo, status akreditasi,
+ * studi. Hanya empat hal yang ditampilkan di halaman — sampul, status akreditasi,
  * deskripsi, dan fokus/cakupan. Detail lain pada dokumen sumber (ISSN, DOI,
  * biaya publikasi, panduan penulis, durasi terbit) sengaja tidak dicantumkan
  * karena lebih tepat dibaca langsung di portal OJS masing-masing jurnal, yang
@@ -12,10 +12,13 @@
  * menampilkan `catatan` sebagai gantinya, bukan badge kosong.
  */
 
-import logoAkta from "../../assets/images/jurnal/logo-jurnal-akta.png";
-import logoSanlar from "../../assets/images/jurnal/logo-sanlar.png";
-import logoKonstatering from "../../assets/images/jurnal/logo-konstatering.png";
-import logoTabellius from "../../assets/images/jurnal/logo-tabelius.png";
+// Sampul terbitan, bukan lambang. Gambarnya memuat nama jurnal, penerbit,
+// dan ISSN sekaligus, sehingga kartunya langsung terbaca sebagai terbitan
+// ilmiah.
+import sampulAkta from "../../assets/images/jurnal/jurnal-akta.png";
+import sampulSanlar from "../../assets/images/jurnal/sanlar.png";
+import sampulKonstatering from "../../assets/images/jurnal/jurnal-konstatering.png";
+import sampulTabellius from "../../assets/images/jurnal/tabellius.png";
 
 export const halaman = {
   meta: {
@@ -36,7 +39,7 @@ export const jurnalData = [
   {
     id: "akta",
     nama: "Jurnal AKTA",
-    logo: logoAkta,
+    sampul: sampulAkta,
     akreditasi: {
       peringkat: "SINTA 2",
       sk: "SK Kemendikbudristek No. 164/E/KPT/2021",
@@ -78,7 +81,7 @@ export const jurnalData = [
   {
     id: "sanlar",
     nama: "Sultan Agung Notary Law Review (SANLaR)",
-    logo: logoSanlar,
+    sampul: sampulSanlar,
     akreditasi: {
       peringkat: "SINTA 3",
       sk: "SK No. 0110/C3/DT.05.00/2026",
@@ -108,7 +111,7 @@ export const jurnalData = [
   {
     id: "konstatering",
     nama: "Jurnal Konstatering",
-    logo: logoKonstatering,
+    sampul: sampulKonstatering,
     akreditasi: null,
     catatan: { id: "Khusus Wisuda", en: "Graduation Requirement" },
     deskripsi: {
@@ -143,7 +146,7 @@ export const jurnalData = [
   {
     id: "tabellius",
     nama: "TABELLIUS: Journal of Law",
-    logo: logoTabellius,
+    sampul: sampulTabellius,
     akreditasi: null,
     catatan: { id: "Khusus Wisuda", en: "Graduation Requirement" },
     deskripsi: {
