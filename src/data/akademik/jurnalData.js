@@ -3,13 +3,15 @@
  *
  * SUMBER: dokumen resmi "PROFIL LENGKAP JURNAL MKN UNISSULA 2026" dari program
  * studi. Hanya empat hal yang ditampilkan di halaman — sampul, status akreditasi,
- * deskripsi, dan fokus/cakupan. Detail lain pada dokumen sumber (ISSN, DOI,
- * biaya publikasi, panduan penulis, durasi terbit) sengaja tidak dicantumkan
- * karena lebih tepat dibaca langsung di portal OJS masing-masing jurnal, yang
- * selalu lebih mutakhir daripada salinan di sini.
+ * deskripsi, dan fokus/cakupan. Detail lain pada dokumen sumber (DOI, biaya
+ * publikasi, panduan penulis, durasi terbit) sengaja tidak dicantumkan karena
+ * lebih tepat dibaca langsung di portal OJS masing-masing jurnal, yang selalu
+ * lebih mutakhir daripada salinan di sini.
  *
- * `akreditasi: null` berarti jurnal tersebut tidak berperingkat SINTA; kartunya
- * menampilkan `catatan` sebagai gantinya, bukan badge kosong.
+ * `akreditasi` memuat peringkat SINTA beserta SK-nya. Jurnal nasional yang belum
+ * berperingkat SINTA memakai label "Jurnal Nasional" beserta E-ISSN-nya.
+ * `akreditasi: null` membuat kartunya menampilkan `catatan` sebagai gantinya,
+ * bukan badge kosong.
  */
 
 // Sampul terbitan, bukan lambang. Gambarnya memuat nama jurnal, penerbit,
@@ -112,8 +114,11 @@ export const jurnalData = [
     id: "konstatering",
     nama: "Jurnal Konstatering",
     sampul: sampulKonstatering,
-    akreditasi: null,
-    catatan: { id: "Khusus Wisuda", en: "Graduation Requirement" },
+    akreditasi: {
+      peringkat: "Jurnal Nasional",
+      sk: "E-ISSN 2828-6626",
+    },
+    catatan: null,
     deskripsi: {
       id:
         "Diambil dari istilah konstatering — merumuskan fakta hukum ke dalam bentuk akta. " +
@@ -147,8 +152,11 @@ export const jurnalData = [
     id: "tabellius",
     nama: "TABELLIUS: Journal of Law",
     sampul: sampulTabellius,
-    akreditasi: null,
-    catatan: { id: "Khusus Wisuda", en: "Graduation Requirement" },
+    akreditasi: {
+      peringkat: "Jurnal Nasional",
+      sk: "E-ISSN 2988-6201",
+    },
+    catatan: null,
     deskripsi: {
       id:
         "Tabellius adalah sebutan bagi juru tulis pembuat dokumen pada zaman Romawi Kuno, " +

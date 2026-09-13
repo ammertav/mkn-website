@@ -129,11 +129,11 @@ export const navLinks = [
     href: "/mahasiswa",
     children: [
       {
-        title: { id: "Organisasi Mahasiswa", en: "Student Organisations" },
+        title: { id: "Organisasi", en: "Student Organisations" },
         href: "/mahasiswa/organisasi",
       },
-      { title: { id: "Akomodasi", en: "Accommodation" }, href: "/mahasiswa/akomodasi" },
       { title: { id: "Prestasi", en: "Achievements" }, href: "/mahasiswa/prestasi" },
+      { title: { id: "Akomodasi", en: "Accommodation" }, href: "/mahasiswa/akomodasi" },
     ],
   },
   {

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { FiChevronDown, FiExternalLink } from "react-icons/fi";
 import { motion, AnimatePresence } from "framer-motion";
-import { admissionRequirements } from "../../data/penerimaanData";
+import { admissionRequirements, formulirPendaftaranUrl } from "../../data/penerimaanData";
 import Img from "../../components/ui/Img";
 import { useT, useLanguage } from "../../i18n/languageContext";
 import fotoPmb from "../../assets/images/foto-pmb.jpeg";
@@ -158,13 +158,13 @@ export default function StudentAdmission() {
               </h3>
               <p className="text-xs sm:text-sm text-body">
                 {t({
-                  id: "Daftarkan diri Anda sekarang melalui portal resmi penerimaan mahasiswa baru UNISSULA.",
-                  en: "Register now through the official UNISSULA new student admission portal.",
+                  id: "Daftarkan diri Anda sekarang melalui formulir pendaftaran online Magister Kenotariatan UNISSULA.",
+                  en: "Register now through the UNISSULA Master of Notarial Law online registration form.",
                 })}
               </p>
             </div>
             <motion.a
-              href="https://pmb.unissula.ac.id"
+              href={formulirPendaftaranUrl}
               target="_blank"
               rel="noopener noreferrer"
               whileHover={{ scale: 1.04 }}

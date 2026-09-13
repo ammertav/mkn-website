@@ -1,4 +1,11 @@
 // ─── Data Persyaratan Penerimaan Mahasiswa Baru ─────────────────────
+/**
+ * Formulir pendaftaran online program studi (Google Form). Dipakai tombol
+ * daftar di Beranda dan di halaman Penerimaan Mahasiswa.
+ */
+export const formulirPendaftaranUrl =
+  "https://docs.google.com/forms/d/e/1FAIpQLSdqGp_moVI4nvxFOnFvI28zOPDLB695E0XjqpNomdrG5TRO3w/viewform";
+
 export const admissionRequirements = [
   {
     id: 1,

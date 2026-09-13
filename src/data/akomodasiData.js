@@ -1,5 +1,5 @@
 /**
- * Akomodasi UNISSULA — asrama mahasiswa dan wisma tamu.
+ * Akomodasi UNISSULA — asrama mahasiswa, wisma tamu, dan fasilitas pendukung kampus.
  *
  * SUMBER: dokumen resmi "akomodasi.docx" dari program studi. Deskripsi dan
  * daftar fasilitas disalin dari dokumen tersebut, hanya dirapikan ejaannya.
@@ -26,6 +26,34 @@ import guestHouse4 from "../assets/images/akomodasi/bh-4.png";
 import guestHouse5 from "../assets/images/akomodasi/bh-5.png";
 import guestHouse6 from "../assets/images/akomodasi/bh-6.png";
 import guestHouse7 from "../assets/images/akomodasi/bh-7.png";
+
+/**
+ * Fasilitas pendukung kampus yang sudah punya tab di halaman Akomodasi, tetapi
+ * deskripsi dan fotonya belum diterima dari program studi. Sampai isinya ada,
+ * halamannya hanya menampilkan keterangan "segera tersedia", bukan isi
+ * kira-kira. Setelah dokumen sumbernya ada, ganti entrinya dengan struktur
+ * lengkap seperti asrama dan guest house.
+ */
+const keteranganSegera = {
+  id: "Informasi mengenai fasilitas ini sedang disiapkan dan akan segera tersedia.",
+  en: "Information about this facility is being prepared and will be available soon.",
+};
+
+function fasilitasSegeraTersedia(slug, nama) {
+  return {
+    id: slug,
+    segeraTersedia: true,
+    title: nama,
+    shortName: nama,
+    header: {
+      category: { id: nama.id.toUpperCase(), en: nama.en.toUpperCase() },
+      title: nama,
+      paragraphs: [keteranganSegera],
+    },
+    galeri: [],
+    fasilitas: [],
+  };
+}
 
 export const akomodasiData = {
   asrama: {
@@ -213,6 +241,13 @@ export const akomodasiData = {
       },
     ],
   },
+
+  sportCenter: fasilitasSegeraTersedia("sport-center", { id: "Sport Center", en: "Sport Center" }),
+  coffeeShop: fasilitasSegeraTersedia("coffee-shop", { id: "Coffee Shop", en: "Coffee Shop" }),
+  pujasera: fasilitasSegeraTersedia("pujasera", { id: "Pujasera", en: "Food Court" }),
+  klinik: fasilitasSegeraTersedia("klinik", { id: "Klinik", en: "Clinic" }),
+  miniMarket: fasilitasSegeraTersedia("mini-market", { id: "Mini Market", en: "Minimarket" }),
+  masjid: fasilitasSegeraTersedia("masjid", { id: "Masjid", en: "Mosque" }),
 };
 
 /**

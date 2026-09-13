@@ -426,12 +426,6 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://mkn.unissula.ac.id/berita/penyerahan-sertifikat-iso-fakultas-hukum-universitas-pancasila</loc>
-    <lastmod>2023-10-10</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
     <loc>https://mkn.unissula.ac.id/berita/penyuluhan-hukum-problematika-perusahaan-di-masyarakat-pentingnya-surat-ijin-usaha-perdagangan-siup-dan-tanda-daftar-perusahaan-tdp</loc>
     <lastmod>2017-01-07</lastmod>
     <changefreq>monthly</changefreq>
@@ -629,6 +623,11 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://mkn.unissula.ac.id/kerja-sama</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://mkn.unissula.ac.id/layanan-pengaduan</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -639,12 +638,47 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://mkn.unissula.ac.id/mahasiswa/akomodasi/coffee-shop</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://mkn.unissula.ac.id/mahasiswa/akomodasi/guest-house</loc>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://mkn.unissula.ac.id/mahasiswa/akomodasi/klinik</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://mkn.unissula.ac.id/mahasiswa/akomodasi/masjid</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://mkn.unissula.ac.id/mahasiswa/akomodasi/mini-market</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://mkn.unissula.ac.id/mahasiswa/akomodasi/pujasera</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://mkn.unissula.ac.id/mahasiswa/akomodasi/sport-center</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://mkn.unissula.ac.id/mahasiswa/organisasi</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://mkn.unissula.ac.id/mahasiswa/prestasi</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>

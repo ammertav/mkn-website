@@ -1,10 +1,10 @@
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
 import { FiArrowRight } from "react-icons/fi";
 import Img from "../ui/Img";
 import bgKampus from "../../assets/images/gedung.jpg";
 import { useT } from "../../i18n/languageContext";
 import { useUi } from "../../i18n/useUi";
+import { formulirPendaftaranUrl } from "../../data/penerimaanData";
 
 const viewportSettings = {
   once: true,
@@ -195,8 +195,10 @@ export default function Ready() {
               variants={itemVariants}
               className="pt-4"
             >
-              <Link
-                to="/pendaftaran"
+              <a
+                href={formulirPendaftaranUrl}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="
                   inline-flex
                   items-center
@@ -229,7 +231,7 @@ export default function Ready() {
                     group-hover:translate-x-1
                   "
                 />
-              </Link>
+              </a>
             </motion.div>
           </motion.div>
         </motion.div>

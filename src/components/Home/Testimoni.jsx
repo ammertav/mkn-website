@@ -188,16 +188,16 @@ const testimonialData = [
     },
   },
   {
-    id: 3,
-    name: "Nurizka Firda, S.H., M.Kn., CFP, CWM",
+    id: 6,
+    name: "Dr. Hetiyasari, S.H., M.Kn.",
     description: {
-      id: "Kuliah di Magister Kenotariatan itu emang butuh perjuangan ekstra, bukan cuma soal paham teori, tapi juga ngelatih ketelitian dan menjaga integritas. Kelak ketika setiap akta yang kalian buat punya dampak besar buat hidup orang lain. Tetap pegang teguh kejujuran dan etika, serta jangan pernah lelah buat terus update ilmu karena hukum bakal selalu berkembang.",
-      en: "Pursuing the Master of Notarial Law requires extra dedication—not just understanding theory, but training meticulousness and maintaining uncompromising integrity, knowing that every deed created will have a profound impact on people's lives. Uphold honesty and professional ethics, and never cease expanding your knowledge as law continually evolves.",
+      id: "Magister Kenotariatan UNISSULA telah membentuk saya secara ilmu dan karakter. Dari mahasiswa perantau hingga kini mengabdi sebagai dosen, semua berawal di sini. Semoga prodi terus melahirkan lulusan yang berilmu, berintegritas, dan bermanfaat bagi bangsa.",
+      en: "UNISSULA Master of Notarial Law shaped both my intellect and character. From an out-of-town student to now serving as a university lecturer, it all started here. May this study programme continue to nurture knowledgeable, principled, and impactful graduates for our nation.",
     },
-    image: Nurizka,
+    image: hetiyasari,
     occupation: {
-      id: "Director of Agency di PT Chubb Life Insurance",
-      en: "Director of Agency at PT Chubb Life Insurance",
+      id: "Dosen UNWAHAS",
+      en: "Lecturer at UNWAHAS",
     },
     role: {
       id: "Alumni Tahun 2024",
@@ -239,16 +239,16 @@ const testimonialData = [
     },
   },
   {
-    id: 6,
-    name: "Dr. Hetiyasari, S.H., M.Kn.",
+    id: 3,
+    name: "Nurizka Firda, S.H., M.Kn., CFP, CWM",
     description: {
-      id: "Magister Kenotariatan UNISSULA telah membentuk saya secara ilmu dan karakter. Dari mahasiswa perantau hingga kini mengabdi sebagai dosen, semua berawal di sini. Semoga prodi terus melahirkan lulusan yang berilmu, berintegritas, dan bermanfaat bagi bangsa.",
-      en: "UNISSULA Master of Notarial Law shaped both my intellect and character. From an out-of-town student to now serving as a university lecturer, it all started here. May this study programme continue to nurture knowledgeable, principled, and impactful graduates for our nation.",
+      id: "Kuliah di Magister Kenotariatan itu emang butuh perjuangan ekstra, bukan cuma soal paham teori, tapi juga ngelatih ketelitian dan menjaga integritas. Kelak ketika setiap akta yang kalian buat punya dampak besar buat hidup orang lain. Tetap pegang teguh kejujuran dan etika, serta jangan pernah lelah buat terus update ilmu karena hukum bakal selalu berkembang.",
+      en: "Pursuing the Master of Notarial Law requires extra dedication—not just understanding theory, but training meticulousness and maintaining uncompromising integrity, knowing that every deed created will have a profound impact on people's lives. Uphold honesty and professional ethics, and never cease expanding your knowledge as law continually evolves.",
     },
-    image: hetiyasari,
+    image: Nurizka,
     occupation: {
-      id: "Dosen UNWAHAS",
-      en: "Lecturer at UNWAHAS",
+      id: "Director of Agency di PT Chubb Life Insurance",
+      en: "Director of Agency at PT Chubb Life Insurance",
     },
     role: {
       id: "Alumni Tahun 2024",

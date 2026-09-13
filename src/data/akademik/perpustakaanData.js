@@ -105,7 +105,7 @@ export const layananPerpustakaan = [
         "Digital collections and subscribed electronic databases, accessible from anywhere " +
         "using a UNISSULA academic account.",
     },
-    link: "https://library.unissula.ac.id/e-resources/electronic-library/",
+    link: "https://kubuku.id/download/unissula-cyber-library/",
   },
   {
     id: "repository",

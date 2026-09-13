@@ -24,66 +24,11 @@ import Img from "../../components/ui/Img";
    ANIMATION
 ========================================================= */
 
+// Teks dan daftar berita tampil langsung tanpa animasi masuk bertahap. Yang
+// dipertahankan hanya pengungkapan gambar dan garis aksen, sekali saat terlihat.
 const viewportSettings = {
   once: true,
   amount: 0.2,
-};
-
-const containerVariants = {
-  hidden: {
-    opacity: 0,
-  },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.15,
-    },
-  },
-};
-
-const itemVariants = {
-  hidden: {
-    opacity: 0,
-    y: 30,
-  },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.8,
-      ease: "easeOut",
-    },
-  },
-};
-
-const leftVariants = {
-  hidden: {
-    opacity: 0,
-    x: -35,
-  },
-  visible: {
-    opacity: 1,
-    x: 0,
-    transition: {
-      duration: 0.8,
-      ease: "easeOut",
-    },
-  },
-};
-
-const rightVariants = {
-  hidden: {
-    opacity: 0,
-    x: 35,
-  },
-  visible: {
-    opacity: 1,
-    x: 0,
-    transition: {
-      duration: 0.8,
-      ease: "easeOut",
-    },
-  },
 };
 
 const ITEMS_PER_PAGE = 10;
@@ -205,7 +150,6 @@ function PengumumanCard({ item }) {
 
   return (
     <motion.article
-      variants={itemVariants}
       whileHover={{ y: -3 }}
       transition={{ duration: 0.25, ease: "easeOut" }}
       className="group bg-white border border-gray-200 rounded-xs overflow-hidden hover:border-primary/40 hover:shadow-xs transition-all flex flex-col md:flex-row"
@@ -422,36 +366,21 @@ export default function BeritaIndex() {
               HEADER
           ===================================================== */}
 
-          <motion.section
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={viewportSettings}
-            className="space-y-6"
-          >
-            <motion.div variants={leftVariants}>
+          <section className="space-y-6">
+            <div>
               <Breadcrumb
                 customTitle={t(halaman.breadcrumb)}
               />
-            </motion.div>
+            </div>
 
-            <motion.div
-              variants={containerVariants}
-              className="space-y-3"
-            >
-              <motion.span
-                variants={leftVariants}
-                className="text-xs font-bold tracking-[0.16em] uppercase text-primary block"
-              >
+            <div className="space-y-3">
+              <span className="text-xs font-bold tracking-[0.16em] uppercase text-primary block">
                 {t(halaman.eyebrow)}
-              </motion.span>
+              </span>
 
-              <motion.h1
-                variants={leftVariants}
-                className="text-4xl sm:text-5xl lg:text-[56px] font-heading font-normal text-heading tracking-tight"
-              >
+              <h1 className="text-4xl sm:text-5xl lg:text-[56px] font-heading font-normal text-heading tracking-tight">
                 {t(halaman.judul)}
-              </motion.h1>
+              </h1>
 
               <motion.div
                 initial={{
@@ -470,24 +399,17 @@ export default function BeritaIndex() {
                 className="max-w-sm h-[2.5px] bg-primary mt-3 mb-4"
               />
 
-              <motion.p
-                variants={itemVariants}
-                className="text-base sm:text-lg text-body text-justify leading-relaxed"
-              >
+              <p className="text-base sm:text-lg text-body text-justify leading-relaxed">
                 {t(halaman.intro)}
-              </motion.p>
-            </motion.div>
-          </motion.section>
+              </p>
+            </div>
+          </section>
 
           {/* =====================================================
               CATEGORY TABS
           ===================================================== */}
 
-          <motion.nav
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={viewportSettings}
+          <nav
             className="flex items-center gap-6 sm:gap-10 border-b border-gray-200 -mt-10 sm:-mt-14 overflow-x-auto scrollbar-none"
             aria-label={t(halaman.ariaKategori)}
           >
@@ -495,9 +417,8 @@ export default function BeritaIndex() {
               const active = kategori === tab.key;
 
               return (
-                <motion.button
+                <button
                   key={tab.key}
-                  variants={itemVariants}
                   type="button"
                   onClick={() =>
                     handleKategoriChange(tab.key)
@@ -512,29 +433,20 @@ export default function BeritaIndex() {
                   }`}
                 >
                   {t(tab.label)}
-                </motion.button>
+                </button>
               );
             })}
-          </motion.nav>
+          </nav>
 
           {/* =====================================================
               FEATURED NEWS
           ===================================================== */}
 
           {isBerita && featuredNews && (
-            <motion.section
-              variants={containerVariants}
-              initial="hidden"
-              whileInView="visible"
-              viewport={viewportSettings}
-              className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center"
-            >
+            <section className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
               {/* IMAGE */}
 
-              <motion.div
-                variants={leftVariants}
-                className="lg:col-span-6"
-              >
+              <div className="lg:col-span-6">
                 <Link
                   to={`/berita/${generateSlug(
                     featuredNews.title,
@@ -576,25 +488,19 @@ export default function BeritaIndex() {
                     />
                   </motion.div>
                 </Link>
-              </motion.div>
+              </div>
 
               {/* CONTENT */}
 
-              <motion.div
-                variants={rightVariants}
-                className="lg:col-span-6 space-y-4"
-              >
-                <motion.span
-                  variants={itemVariants}
-                  className="text-xs font-bold tracking-wider text-primary uppercase block"
-                >
+              <div className="lg:col-span-6 space-y-4">
+                <span className="text-xs font-bold tracking-wider text-primary uppercase block">
                   {t(halaman.beritaUtama)} ·{" "}
                   {featuredNews.tanggal
                     ? featuredNews.tanggal.toUpperCase()
                     : "OKTOBER 2022"}
-                </motion.span>
+                </span>
 
-                <motion.div variants={itemVariants}>
+                <div>
                   <Link
                     to={`/berita/${generateSlug(
                       featuredNews.title,
@@ -605,19 +511,13 @@ export default function BeritaIndex() {
                       {featuredNews.title}
                     </h2>
                   </Link>
-                </motion.div>
+                </div>
 
-                <motion.p
-                  variants={itemVariants}
-                  className="text-sm sm:text-base text-body leading-relaxed pt-1 line-clamp-4"
-                >
+                <p className="text-sm sm:text-base text-body leading-relaxed pt-1 line-clamp-4">
                   {featuredNews.content}
-                </motion.p>
+                </p>
 
-                <motion.div
-                  variants={itemVariants}
-                  className="pt-2"
-                >
+                <div className="pt-2">
                   <Link
                     to={`/berita/${generateSlug(
                       featuredNews.title,
@@ -633,9 +533,9 @@ export default function BeritaIndex() {
                       →
                     </span>
                   </Link>
-                </motion.div>
-              </motion.div>
-            </motion.section>
+                </div>
+              </div>
+            </section>
           )}
 
           {/* =====================================================
@@ -643,18 +543,11 @@ export default function BeritaIndex() {
           ===================================================== */}
 
           {isBerita && allOtherNews.length > 0 && (
-            <motion.section
+            <section
               ref={newsSectionRef}
-              variants={containerVariants}
-              initial="hidden"
-              whileInView="visible"
-              viewport={viewportSettings}
               className="space-y-6 pt-4 scroll-mt-20"
             >
-              <motion.div
-                variants={itemVariants}
-                className="flex flex-col sm:flex-row sm:items-end justify-between gap-2 border-b border-heading pb-3"
-              >
+              <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-2 border-b border-heading pb-3">
                 <h2 className="font-heading font-normal text-3xl sm:text-4xl text-heading tracking-normal">
                   {t(halaman.beritaLainnya)}
                 </h2>
@@ -674,16 +567,12 @@ export default function BeritaIndex() {
                     </>
                   )}
                 </span>
-              </motion.div>
+              </div>
 
-              <motion.div
-                variants={containerVariants}
-                className="divide-y divide-gray-200"
-              >
+              <div className="divide-y divide-gray-200">
                 {currentNewsList.map((news) => (
-                  <motion.article
+                  <article
                     key={news.id}
-                    variants={itemVariants}
                     className="py-6 sm:py-7 space-y-2 group first:pt-2"
                   >
                     <span className="text-xs text-gray-500 block">
@@ -705,17 +594,14 @@ export default function BeritaIndex() {
                     <p className="text-sm sm:text-[15px] text-body leading-relaxed max-w-5xl line-clamp-3">
                       {news.content}
                     </p>
-                  </motion.article>
+                  </article>
                 ))}
-              </motion.div>
+              </div>
 
               {/* PAGINATION */}
 
               {totalPages > 1 && (
-                <motion.div
-                  variants={itemVariants}
-                  className="pt-8 pb-4 flex items-center justify-center gap-2"
-                >
+                <div className="pt-8 pb-4 flex items-center justify-center gap-2">
                   <button
                     onClick={() =>
                       handlePageChange(
@@ -780,9 +666,9 @@ export default function BeritaIndex() {
                     <span>{ui("next")}</span>
                     <FiChevronRight className="ml-1 text-sm" />
                   </button>
-                </motion.div>
+                </div>
               )}
-            </motion.section>
+            </section>
           )}
 
           {/* =====================================================
@@ -790,19 +676,10 @@ export default function BeritaIndex() {
           ===================================================== */}
 
           {!isBerita && (
-            <motion.section
-              variants={containerVariants}
-              initial="hidden"
-              whileInView="visible"
-              viewport={viewportSettings}
-              className="space-y-6"
-            >
+            <section className="space-y-6">
               {/* HEADER */}
 
-              <motion.div
-                variants={itemVariants}
-                className="border-b border-heading pb-3 flex flex-col sm:flex-row sm:items-end justify-between gap-2"
-              >
+              <div className="border-b border-heading pb-3 flex flex-col sm:flex-row sm:items-end justify-between gap-2">
                 <div>
                   <h2 className="font-heading font-normal text-3xl sm:text-4xl text-heading tracking-normal">
                     {t(halaman.judulPengumuman)}
@@ -820,22 +697,16 @@ export default function BeritaIndex() {
                   {pengumumanItems.length}{" "}
                   {t({ id: "Pengumuman", en: "Announcements" })}
                 </span>
-              </motion.div>
+              </div>
 
               {pengumumanItems.length > 0 ? (
-                <motion.div
-                  variants={containerVariants}
-                  className="space-y-6"
-                >
+                <div className="space-y-6">
                   {pengumumanItems.map((item) => (
                     <PengumumanCard key={item.id} item={item} />
                   ))}
-                </motion.div>
+                </div>
               ) : (
-                <motion.div
-                  variants={itemVariants}
-                  className="border border-dashed border-gray-300 bg-white p-10 sm:p-14 text-center rounded-xs"
-                >
+                <div className="border border-dashed border-gray-300 bg-white p-10 sm:p-14 text-center rounded-xs">
                   <p className="text-sm font-medium text-gray-500">
                     {t(halaman.pengumumanKosong)}
                   </p>
@@ -845,9 +716,9 @@ export default function BeritaIndex() {
                       halaman.pengumumanKosongDetail
                     )}
                   </p>
-                </motion.div>
+                </div>
               )}
-            </motion.section>
+            </section>
           )}
         </div>
 

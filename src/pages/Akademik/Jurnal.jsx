@@ -41,9 +41,9 @@ const cardVariants = {
 };
 
 /**
- * Penanda status jurnal: peringkat SINTA bila terakreditasi, atau catatan
- * peruntukan (mis. "Khusus Wisuda") bila tidak. Keduanya dibedakan warnanya
- * supaya jurnal berakreditasi langsung terbaca sebagai yang berperingkat.
+ * Penanda status jurnal: peringkat SINTA atau label "Jurnal Nasional" beserta
+ * SK/E-ISSN-nya, atau catatan peruntukan (mis. "Khusus Wisuda") bila tidak ada.
+ * Keduanya dibedakan warnanya supaya status resmi jurnal langsung terbaca.
  */
 function BadgeStatus({ akreditasi, catatan }) {
   const t = useT();

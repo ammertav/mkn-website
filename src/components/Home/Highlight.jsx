@@ -261,7 +261,7 @@ function HighlightCard({
           flex
           items-center
           justify-center
-          rounded-full
+          rounded-md
           bg-[#9f1d20]/10
           text-[#9f1d20]
           transition-all

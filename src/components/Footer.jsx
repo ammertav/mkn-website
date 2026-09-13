@@ -3,6 +3,7 @@ import {
   FaInstagram,
   FaTiktok,
   FaYoutube,
+  FaFacebook,
   FaMapMarkerAlt,
   FaPhoneAlt,
   FaEnvelope,
@@ -17,21 +18,23 @@ import { useUi } from "../i18n/useUi";
 const socialLinks = [
   {
     label: "notariatunissula",
-    handle: "@notariatunissula",
     href: "https://www.instagram.com/notariatunissula",
     Icon: FaInstagram,
   },
   {
     label: "Magister Kenotariatan Unissula",
-    handle: "@notariatunissula",
     href: "https://www.tiktok.com/@notariatunissula",
     Icon: FaTiktok,
   },
   {
     label: "NOTARIAT TV",
-    handle: "@kenotariatanunissula",
     href: "https://www.youtube.com/@kenotariatanunissula",
     Icon: FaYoutube,
+  },
+  {
+    label: "Notariat Unissula",
+    href: "https://www.facebook.com/share/1APjdJTzaK/",
+    Icon: FaFacebook,
   },
 ];
 
@@ -42,7 +45,10 @@ const kontak = {
     "Jl. Raya Kaligawe No.Km. 4, Terboyo Kulon",
     "Kec. Genuk, Kota Semarang, Jawa Tengah 50112",
   ],
-  telepon: { tampilan: "+62 823-1222-8181", href: "tel:+6282312228181" },
+  telepon: [
+    { tampilan: "+62 823-1222-8181", href: "tel:+6282312228181" },
+    { tampilan: "+62 823-1222-8282", href: "tel:+6282312228282" },
+  ],
   surel: { tampilan: "mkn.fh@unissula.ac.id", href: "mailto:mkn.fh@unissula.ac.id" },
 };
 
@@ -166,15 +172,17 @@ export default function Footer() {
                   ))}
                 </span>
               </div>
-              <div className="flex gap-3">
-                <FaPhoneAlt aria-hidden="true" className="mt-1 shrink-0 text-primary" />
-                <a
-                  href={kontak.telepon.href}
-                  className="text-body hover:text-primary transition-colors duration-150"
-                >
-                  {kontak.telepon.tampilan}
-                </a>
-              </div>
+              {kontak.telepon.map((telepon) => (
+                <div key={telepon.href} className="flex gap-3">
+                  <FaPhoneAlt aria-hidden="true" className="mt-1 shrink-0 text-primary" />
+                  <a
+                    href={telepon.href}
+                    className="text-body hover:text-primary transition-colors duration-150"
+                  >
+                    {telepon.tampilan}
+                  </a>
+                </div>
+              ))}
               <div className="flex gap-3">
                 <FaEnvelope aria-hidden="true" className="mt-1 shrink-0 text-primary" />
                 <a
@@ -192,18 +200,16 @@ export default function Footer() {
                 {ui("followUs")}
               </h2>
               <ul className="mt-3 flex flex-wrap gap-2">
-                {socialLinks.map(({ label, handle, href, Icon }) => (
+                {socialLinks.map(({ label, href, Icon }) => (
                   <li key={label}>
                     <a
                       href={href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      title={handle}
                       className="inline-flex items-center gap-2 rounded-full border border-gray-300 px-3.5 py-2 text-[12px] font-semibold text-heading hover:bg-primary hover:text-white hover:border-primary transition-colors duration-150"
                     >
                       <Icon aria-hidden="true" className="text-sm" />
                       {label}
-                      <span className="font-normal text-[11.5px] opacity-70">{handle}</span>
                     </a>
                   </li>
                 ))}

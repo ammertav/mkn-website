@@ -22,6 +22,32 @@ const akomodasiTabs = [
     label: { id: "GUEST HOUSE", en: "GUEST HOUSE" },
     path: "/mahasiswa/akomodasi/guest-house",
   },
+  // Fasilitas pendukung kampus. Isinya belum diterima dari program studi, jadi
+  // halamannya sementara hanya menampilkan keterangan "segera tersedia".
+  {
+    label: { id: "SPORT CENTER", en: "SPORT CENTER" },
+    path: "/mahasiswa/akomodasi/sport-center",
+  },
+  {
+    label: { id: "COFFEE SHOP", en: "COFFEE SHOP" },
+    path: "/mahasiswa/akomodasi/coffee-shop",
+  },
+  {
+    label: { id: "PUJASERA", en: "FOOD COURT" },
+    path: "/mahasiswa/akomodasi/pujasera",
+  },
+  {
+    label: { id: "KLINIK", en: "CLINIC" },
+    path: "/mahasiswa/akomodasi/klinik",
+  },
+  {
+    label: { id: "MINI MARKET", en: "MINIMARKET" },
+    path: "/mahasiswa/akomodasi/mini-market",
+  },
+  {
+    label: { id: "MASJID", en: "MOSQUE" },
+    path: "/mahasiswa/akomodasi/masjid",
+  },
 ];
 
 const viewportSettings = {
@@ -88,9 +114,9 @@ export default function Accommodation() {
   const t = useT();
   const { tab } = useParams();
 
-  // Validasi tab: default ke asrama jika slug tidak valid atau kosong
-  const currentKey = tab === "guest-house" ? "guestHouse" : "asrama";
-  const item = akomodasiData[currentKey] || akomodasiData.asrama;
+  // Tab dicocokkan lewat slug pada data; slug tidak dikenal atau kosong jatuh ke asrama.
+  const item =
+    Object.values(akomodasiData).find((entri) => entri.id === tab) ?? akomodasiData.asrama;
 
   return (
     <>
@@ -107,18 +133,18 @@ export default function Accommodation() {
         <Navbar />
 
         {/* Hero Section — komponen yang sama dengan hero Fasilitas. Putaran
-            fotonya tetap sama di kedua tab, jadi latarnya tidak ikut berganti
-            saat pengunjung berpindah antara asrama dan guest house. */}
+            fotonya tetap sama di semua tab, jadi latarnya tidak ikut berganti
+            saat pengunjung berpindah tab. */}
         <HeroSlideshow
           fotoLatar={akomodasiHeroSlides}
           eyebrow={{ id: "Akomodasi", en: "Accommodation" }}
           judul={{
-            id: "Hunian di Lingkungan Kampus",
-            en: "On-Campus Living Environments",
+            id: "Hunian & Fasilitas Kampus",
+            en: "On-Campus Living & Facilities",
           }}
           deskripsi={{
-            id: "Dua kelompok akomodasi menopang kenyamanan studi dan aktivitas di Magister Kenotariatan, dari asrama mahasiswa berkarakter islami hingga wisma tamu representatif bagi keluarga wisudawan dan tamu universitas.",
-            en: "Two accommodation facilities support postgraduate living and campus visits, from an Islamic student residence to a distinguished university guest house for visiting scholars and graduation guests.",
+            id: "Akomodasi dan fasilitas pendukung di lingkungan kampus menopang kenyamanan studi dan aktivitas di Magister Kenotariatan, dari asrama mahasiswa berkarakter islami dan wisma tamu representatif hingga sarana olahraga, kuliner, kesehatan, kebutuhan harian, dan ibadah.",
+            en: "On-campus accommodation and supporting facilities sustain postgraduate study and daily life, from an Islamic student residence and a distinguished guest house to sports, dining, health, daily-needs, and worship facilities.",
           }}
         />
 
@@ -129,7 +155,7 @@ export default function Accommodation() {
         <div className="w-full flex-grow max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20">
           <AnimatePresence mode="wait">
             <motion.div
-              key={currentKey}
+              key={item.id}
               variants={tabContentVariants}
               initial="initial"
               animate="animate"
@@ -143,47 +169,62 @@ export default function Accommodation() {
                 paragraphs={item.header.paragraphs}
               />
 
-              {/* Galeri foto akomodasi — dengan animasi gambar utama & grid bertingkat (stagger) */}
-              <FacilityGallery galeri={item.galeri} />
-
-              {/*
-                Fasilitas Utama.
-
-                Kartu bercentang mengikuti susunan semula. Grid-nya dua kolom, bukan
-                empat: butir fasilitas pada dokumen program studi berupa kalimat
-                penuh, bukan frasa pendek, sehingga empat kolom membuatnya terpotong.
-              */}
-              <motion.div
-                variants={containerVariants}
-                initial="hidden"
-                whileInView="visible"
-                viewport={viewportSettings}
-                className="space-y-4 pt-2"
-              >
-                <motion.h3
-                  variants={cardVariants}
-                  className="text-xs sm:text-sm font-bold uppercase tracking-wider text-heading pb-3 border-b border-gray-200"
-                >
-                  {t({ id: "Fasilitas Utama", en: "Main Facilities" })}
-                </motion.h3>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  {item.fasilitas.map((feat, idx) => (
-                    <motion.div
-                      key={idx}
-                      variants={cardVariants}
-                      whileHover={{ y: -2, transition: { duration: 0.2 } }}
-                      className="flex items-start gap-3 p-3.5 bg-white border border-gray-200/80 rounded-sm shadow-2xs hover:border-primary/40 hover:shadow-xs transition-all"
-                    >
-                      <div className="w-6 h-6 rounded-full bg-red-50 text-primary flex items-center justify-center shrink-0 mt-0.5">
-                        <FiCheck className="w-3.5 h-3.5 stroke-[2.5]" />
-                      </div>
-                      <span className="text-xs sm:text-sm text-heading font-medium leading-relaxed">
-                        {t(feat)}
-                      </span>
-                    </motion.div>
-                  ))}
+              {item.segeraTersedia ? (
+                // Fasilitas yang isinya belum diterima: tanpa galeri dan daftar
+                // fasilitas, cukup penanda bahwa rinciannya menyusul.
+                <div className="border border-dashed border-gray-300 bg-white p-10 sm:p-14 text-center rounded-xs">
+                  <p className="text-sm font-medium text-gray-500">
+                    {t({
+                      id: "Foto dan rincian fasilitas segera tersedia.",
+                      en: "Photos and facility details coming soon.",
+                    })}
+                  </p>
                 </div>
-              </motion.div>
+              ) : (
+                <>
+                  {/* Galeri foto akomodasi — dengan animasi gambar utama & grid bertingkat (stagger) */}
+                  <FacilityGallery galeri={item.galeri} />
+
+                  {/*
+                    Fasilitas Utama.
+
+                    Kartu bercentang mengikuti susunan semula. Grid-nya dua kolom, bukan
+                    empat: butir fasilitas pada dokumen program studi berupa kalimat
+                    penuh, bukan frasa pendek, sehingga empat kolom membuatnya terpotong.
+                  */}
+                  <motion.div
+                    variants={containerVariants}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={viewportSettings}
+                    className="space-y-4 pt-2"
+                  >
+                    <motion.h3
+                      variants={cardVariants}
+                      className="text-xs sm:text-sm font-bold uppercase tracking-wider text-heading pb-3 border-b border-gray-200"
+                    >
+                      {t({ id: "Fasilitas Utama", en: "Main Facilities" })}
+                    </motion.h3>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                      {item.fasilitas.map((feat, idx) => (
+                        <motion.div
+                          key={idx}
+                          variants={cardVariants}
+                          whileHover={{ y: -2, transition: { duration: 0.2 } }}
+                          className="flex items-start gap-3 p-3.5 bg-white border border-gray-200/80 rounded-sm shadow-2xs hover:border-primary/40 hover:shadow-xs transition-all"
+                        >
+                          <div className="w-6 h-6 rounded-full bg-red-50 text-primary flex items-center justify-center shrink-0 mt-0.5">
+                            <FiCheck className="w-3.5 h-3.5 stroke-[2.5]" />
+                          </div>
+                          <span className="text-xs sm:text-sm text-heading font-medium leading-relaxed">
+                            {t(feat)}
+                          </span>
+                        </motion.div>
+                      ))}
+                    </div>
+                  </motion.div>
+                </>
+              )}
 
               {/* Navigasi Kemahasiswaan Bawah */}
               <motion.div
