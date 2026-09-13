@@ -40,35 +40,10 @@ const cardVariants = {
   },
 };
 
-/** Tombol menuju sistem; jatuh ke penanda non-aktif bila tautannya kosong. */
-function TombolSistem({ link, terang = false }) {
-  const t = useT();
-
-  if (!link) {
-    return (
-      <span className="inline-flex items-center justify-center px-5 py-2.5 border border-dashed border-gray-300 bg-gray-50 text-gray-400 rounded-xs text-xs sm:text-sm font-semibold cursor-not-allowed select-none">
-        {t(halaman.belumTersedia)}
-      </span>
-    );
-  }
-
-  return (
-    <span
-      className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-xs text-xs sm:text-sm font-semibold transition-colors ${
-        terang
-          ? "bg-white text-heading group-hover:bg-white/90"
-          : "bg-primary text-white group-hover:bg-[#680000]"
-      }`}
-    >
-      <span>{t(halaman.labelBuka)}</span>
-      <FiArrowUpRight className="text-base transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-    </span>
-  );
-}
-
 /**
  * Sistem utama — berlatar gelap dan selebar penuh supaya terbaca sebagai pintu
  * masuk pertama, sekaligus memberi ruang bagi daftar cakupan layanannya.
+ * Layout tombol identik dengan KartuUtama di ELibrary.
  */
 function KartuUtama({ item }) {
   const t = useT();
@@ -82,30 +57,27 @@ function KartuUtama({ item }) {
       rel="noopener noreferrer"
       className="group block bg-heading text-white rounded-xs p-6 sm:p-8 hover:bg-primary transition-colors"
     >
-      <div className="flex flex-col lg:flex-row lg:items-start gap-6 lg:gap-10">
+      <div className="flex flex-col sm:flex-row sm:items-center gap-5 sm:gap-7">
         <span className="w-12 h-12 shrink-0 rounded-xs bg-white/10 flex items-center justify-center text-2xl">
           <Ikon />
         </span>
 
-        <div className="flex-1 min-w-0 space-y-3">
+        <div className="flex-1 min-w-0 space-y-2">
           <span className="text-[11px] font-bold tracking-[0.16em] uppercase text-white/60 block">
             {t(halaman.labelUtama)}
           </span>
 
-          <div>
-            <h2 className="font-heading font-bold text-xl sm:text-2xl leading-snug">
-              {t(item.nama)}
-            </h2>
-            <p className="text-sm text-white/60 mt-1">{t(item.subjudul)}</p>
-          </div>
+          <h2 className="font-heading font-bold text-xl sm:text-2xl leading-snug">
+            {t(item.nama)}
+          </h2>
 
-          <p className="text-sm text-white/80 leading-relaxed max-w-2xl">
+          <p className="text-sm text-white/75 leading-relaxed max-w-2xl">
             {t(item.deskripsi)}
           </p>
 
           {item.cakupan && (
-            <div className="pt-2">
-              <span className="text-[11px] font-bold tracking-[0.14em] uppercase text-white/50 block mb-2.5">
+            <div className="pt-1">
+              <span className="text-[11px] font-bold tracking-[0.14em] uppercase text-white/50 block mb-2">
                 {t(halaman.labelCakupan)}
               </span>
 
@@ -123,9 +95,10 @@ function KartuUtama({ item }) {
           )}
         </div>
 
-        <div className="shrink-0 lg:self-center">
-          <TombolSistem link={item.link} terang />
-        </div>
+        <span className="shrink-0 inline-flex items-center gap-2 text-sm font-semibold self-start sm:self-center">
+          <span>{t(halaman.labelBuka)}</span>
+          <FiArrowUpRight className="text-lg transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+        </span>
       </div>
     </motion.a>
   );
@@ -141,30 +114,26 @@ function KartuSistem({ item }) {
       href={item.link}
       target="_blank"
       rel="noopener noreferrer"
-      className="group block bg-white border border-gray-200 rounded-xs shadow-2xs p-6 sm:p-7 hover:border-primary/40 transition-colors"
+      className="group flex flex-col bg-white border border-gray-200 rounded-xs shadow-2xs p-6 hover:border-primary/40 transition-colors"
     >
-      <div className="flex flex-col sm:flex-row sm:items-center gap-5 sm:gap-7">
-        <span className="w-12 h-12 shrink-0 rounded-xs bg-red-50 border border-primary/15 text-primary flex items-center justify-center text-2xl">
-          <Ikon />
-        </span>
+      <span className="w-11 h-11 rounded-xs bg-red-50 border border-primary/15 text-primary flex items-center justify-center text-xl mb-4">
+        <Ikon />
+      </span>
 
-        <div className="flex-1 min-w-0 space-y-2">
-          <div>
-            <h2 className="font-heading font-bold text-lg sm:text-xl text-heading leading-snug group-hover:text-primary transition-colors">
-              {t(item.nama)}
-            </h2>
-            <p className="text-sm text-gray-500 mt-0.5">{t(item.subjudul)}</p>
-          </div>
+      <h2 className="font-heading font-bold text-base sm:text-lg text-heading leading-snug group-hover:text-primary transition-colors">
+        {t(item.nama)}
+      </h2>
+      <p className="text-xs text-gray-500 mt-0.5">{t(item.subjudul)}</p>
 
-          <p className="text-sm text-body leading-relaxed max-w-2xl">
-            {t(item.deskripsi)}
-          </p>
-        </div>
+      <p className="mt-2 text-sm text-body leading-relaxed">
+        {t(item.deskripsi)}
+      </p>
 
-        <div className="shrink-0 self-start sm:self-center">
-          <TombolSistem link={item.link} />
-        </div>
-      </div>
+      {/* mt-auto: baris tautan sejajar di dasar kartu */}
+      <span className="mt-auto pt-5 inline-flex items-center gap-1.5 text-xs font-bold tracking-wider uppercase text-primary">
+        <span>{t(halaman.labelBuka)}</span>
+        <FiArrowUpRight className="text-sm transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+      </span>
     </motion.a>
   );
 }
@@ -231,9 +200,11 @@ export default function SistemInformasi() {
         >
           {utama && <KartuUtama item={utama} />}
 
-          {lainnya.map((item) => (
-            <KartuSistem key={item.id} item={item} />
-          ))}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            {lainnya.map((item) => (
+              <KartuSistem key={item.id} item={item} />
+            ))}
+          </div>
         </motion.div>
 
         {/* Bantuan akun */}

@@ -243,10 +243,10 @@ export default function EventDetail() {
               </motion.div>
 
               <motion.div
-                initial={{ scaleX: 0, originX: 0 }}
-                animate={{ scaleX: 1 }}
-                transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-                className="w-16 h-[2.5px] bg-primary mt-3"
+                initial={{ width: 0 }}
+                animate={{ width: "100%" }}
+                transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+                className="h-[2px] bg-primary mt-3"
               />
             </motion.div>
 

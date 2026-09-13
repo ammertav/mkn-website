@@ -414,7 +414,8 @@ export default function BeritaDetail() {
                 navigate(
                   isAnnouncement
                     ? "/berita?kategori=pengumuman"
-                    : "/berita"
+                    : "/berita",
+                  { state: { restore: true } }
                 )
               }
               className="inline-flex items-center space-x-2 text-xs font-semibold text-gray-500 hover:text-primary transition-colors cursor-pointer"

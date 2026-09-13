@@ -47,15 +47,34 @@ export function parseIndonesianDate(str) {
   return new Date(Number(year), month, Number(day));
 }
 
-const terbaruDuluan = (a, b) =>
-  parseIndonesianDate(b.tanggal) - parseIndonesianDate(a.tanggal);
+/**
+ * Comparator: item dengan `pinned: true` naik ke atas,
+ * sisanya diurutkan dari terbaru ke terlama.
+ */
+const terbaruDuluan = (a, b) => {
+  if (a.pinned && !b.pinned) return -1;
+  if (!a.pinned && b.pinned) return 1;
+  return parseIndonesianDate(b.tanggal) - parseIndonesianDate(a.tanggal);
+};
 
 const isPengumuman = (item) => item.tags === TAG_PENGUMUMAN;
 
 // Dihitung sekali saat modul dimuat: `berita.json` statis, jadi tidak ada
 // gunanya mengurutkan ulang pada tiap render.
-/** Seluruh berita (non-pengumuman), terbaru lebih dulu. */
+
+/** Seluruh berita (non-pengumuman), pinned dulu lalu terbaru lebih dulu. */
 export const berita = beritaList.filter((item) => !isPengumuman(item)).sort(terbaruDuluan);
 
-/** Seluruh pengumuman, terbaru lebih dulu. */
+/** Seluruh pengumuman, pinned dulu lalu terbaru lebih dulu. */
 export const pengumuman = beritaList.filter(isPengumuman).sort(terbaruDuluan);
+
+/**
+ * Berita yang sedang dipin (`pinned: true`). Jika tidak ada,
+ * kembalikan `null` agar konsumen bisa fallback ke item terbaru.
+ */
+export const getPinnedBerita = () => berita.find((item) => item.pinned) ?? null;
+
+/**
+ * Pengumuman yang sedang dipin (`pinned: true`). Jika tidak ada, kembalikan `null`.
+ */
+export const getPinnedPengumuman = () => pengumuman.find((item) => item.pinned) ?? null;

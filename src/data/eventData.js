@@ -17,6 +17,7 @@ export const eventCategories = [
 export const eventData = [
   {
     id: 1,
+    pinned: true,
     slug: "penglepasan-lulusan-ke-98-september-2026",
     title: {
       id: "Penglepasan Lulusan Ke-98 Periode September 2026",
