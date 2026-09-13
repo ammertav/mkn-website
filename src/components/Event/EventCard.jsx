@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { FiArrowRight } from "react-icons/fi";
+import { TbPinFilled } from "react-icons/tb";
 import { useT } from "../../i18n/languageContext";
 
 const cardVariants = {
@@ -27,19 +28,27 @@ export default function EventCard({ event, onSelect, compact = false, index = 0 
       viewport={{ once: true, amount: 0.15 }}
       whileHover={{ x: 4, transition: { duration: 0.2 } }}
       onClick={() => onSelect(event)}
-      className="group cursor-pointer transition-all rounded-xs p-2 -mx-2 hover:bg-gray-50/70"
+      className={`group cursor-pointer transition-all rounded-xs p-2 -mx-2 hover:bg-gray-50/70 ${
+        event.pinned ? "border-l-2 border-primary pl-3 -ml-1" : ""
+      }`}
     >
       <div className="flex flex-col-reverse md:flex-row gap-6 lg:gap-8 items-start justify-between">
         {/* Informasi Teks Event */}
         <div className="flex-grow space-y-1.5 max-w-2xl">
-          {/* Judul Acara dengan Panah */}
-          <div className="inline-flex items-baseline gap-2">
+          {/* Judul Acara dengan Panah & badge pin */}
+          <div className="inline-flex items-baseline gap-2 flex-wrap">
             <h3 className="font-heading font-medium text-xl sm:text-[22px] lg:text-2xl text-heading group-hover:text-primary transition-colors leading-snug">
               {t(event.title)}
             </h3>
             <span className="text-primary font-light text-lg sm:text-xl group-hover:translate-x-1.5 transition-transform shrink-0">
               <FiArrowRight className="w-5 h-5 inline" />
             </span>
+            {event.pinned && (
+              <span className="inline-flex items-center gap-1 text-[9px] font-bold tracking-wider uppercase bg-primary text-white px-1.5 py-0.5 rounded-xs self-center">
+                <TbPinFilled className="text-[9px]" />
+                {t({ id: "DIPIN", en: "PINNED" })}
+              </span>
+            )}
           </div>
 
           {/* Baris Waktu Sederhana & Bersih */}
@@ -70,4 +79,3 @@ export default function EventCard({ event, onSelect, compact = false, index = 0 
     </motion.article>
   );
 }
-

@@ -71,9 +71,16 @@ function Seksi({ judul, pengantar, children }) {
       className="space-y-5"
     >
       <motion.div variants={itemVariants} className="space-y-3">
-        <h2 className="text-2xl sm:text-3xl font-heading font-bold text-heading pb-3 border-b-2 border-gray-900">
+        <h2 className="text-2xl sm:text-3xl font-heading font-bold text-heading">
           {judul}
         </h2>
+        <motion.div
+          initial={{ width: 0 }}
+          whileInView={{ width: "100%" }}
+          transition={{ duration: 0.9, ease: "easeOut" }}
+          viewport={{ once: true, amount: 0.2 }}
+          className="h-[2px] bg-primary mt-1 mb-3"
+        />
         {pengantar && (
           <p className="text-sm sm:text-base text-body leading-relaxed">{pengantar}</p>
         )}

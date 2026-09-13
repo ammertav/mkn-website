@@ -205,6 +205,12 @@ export default function FacultyDirectory() {
                     >
                         {t({ id: "Dosen & Penelitian", en: "Faculty & Research" })}
                     </motion.h1>
+                    <motion.div
+                        initial={{ width: 0 }}
+                        animate={{ width: "100%" }}
+                        transition={{ duration: 0.9, ease: "easeOut", delay: 0.15 }}
+                        className="h-[2px] bg-primary mt-3"
+                    />
                     <motion.p
                         variants={itemVariants}
                         className="mt-4 text-sm sm:text-base text-special leading-relaxed max-w-3xl"

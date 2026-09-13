@@ -1,5 +1,7 @@
+import { motion } from "framer-motion";
 import { Helmet } from "react-helmet-async";
 import { useT, useLanguage } from "../../i18n/languageContext";
+
 
 export default function Dosen() {
   const t = useT();
@@ -36,7 +38,13 @@ export default function Dosen() {
           </h1>
         </div>
 
-        <hr className="border-t border-gray-800 my-4" />
+        <motion.div
+          initial={{ width: 0 }}
+          whileInView={{ width: "100%" }}
+          transition={{ duration: 0.9, ease: "easeOut", delay: 0.15 }}
+          viewport={{ once: true, amount: 0.2 }}
+          className="h-[2px] bg-primary mt-4 mb-5"
+        />
 
         <p className="text-sm sm:text-base text-body text-justify leading-relaxed">
           {t({

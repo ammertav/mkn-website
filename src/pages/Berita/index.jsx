@@ -1,7 +1,7 @@
 import { useState, useMemo, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Helmet } from "react-helmet-async";
-import { Link, useSearchParams } from "react-router-dom";
+import { Link, useSearchParams, useLocation } from "react-router-dom";
 import {
   FiChevronLeft,
   FiChevronRight,
@@ -10,6 +10,7 @@ import {
   FiFileText,
   FiClock,
 } from "react-icons/fi";
+import { TbPinFilled } from "react-icons/tb";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import Breadcrumb from "../../components/ui/Breadcrumb";
@@ -281,14 +282,22 @@ function PengumumanCard({ item }) {
   );
 }
 
+const BERITA_SESSION_KEY = "mkn_berita_state";
+
 export default function BeritaIndex() {
   const t = useT();
   const ui = useUi();
   const { lang } = useLanguage();
+  const location = useLocation();
 
   const [currentPage, setCurrentPage] = useState(1);
 
   const newsSectionRef = useRef(null);
+  const articleRefs = useRef({});
+  const featuredRef = useRef(null);
+  // Menyimpan target scroll yang tertunda saat restore dari detail berita.
+  // Diproses oleh effect kedua setelah currentPage + currentNewsList sudah dirender.
+  const pendingScrollRef = useRef(null);
 
   const [searchParams, setSearchParams] = useSearchParams();
 
@@ -312,11 +321,60 @@ export default function BeritaIndex() {
     setCurrentPage(1);
   }, [kategori]);
 
-  const featuredNews = beritaItems[0];
+  // Step 1 — Baca sessionStorage dan set halaman yang disimpan.
+  // Scroll belum dilakukan di sini karena artikel di halaman baru belum ter-render.
+  useEffect(() => {
+    if (location.state?.restore) {
+      try {
+        const saved = JSON.parse(sessionStorage.getItem(BERITA_SESSION_KEY) || "null");
+        if (saved) {
+          pendingScrollRef.current = saved.articleId ?? null;
+          if (saved.page && saved.articleId !== "featured") {
+            setCurrentPage(saved.page);
+          } else if (saved.articleId === "featured") {
+            // Featured selalu di page 1, langsung scroll
+            requestAnimationFrame(() => {
+              requestAnimationFrame(() => {
+                featuredRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
+                pendingScrollRef.current = null;
+              });
+            });
+          }
+        }
+      } catch (_) { /* ignore */ }
+    }
+  }, [location.state]);
+
+  // Step 2 — Setelah currentPage berubah dan artikel di daftar sudah ter-render,
+  // lakukan scroll ke artikel target.
+  useEffect(() => {
+    const target = pendingScrollRef.current;
+    if (!target || target === "featured") return;
+    pendingScrollRef.current = null;
+
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        const el = articleRefs.current[target];
+        if (el) {
+          el.scrollIntoView({ behavior: "smooth", block: "center" });
+        }
+      });
+    });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentPage]);
+
+  // Featured news: item yang dipin, fallback ke item terbaru
+  const featuredNews = useMemo(
+    () => beritaItems.find((item) => item.pinned) ?? beritaItems[0],
+    [beritaItems]
+  );
+
+  // Apakah featured news memang karena dipin (bukan fallback)
+  const featuredIsPinned = featuredNews?.pinned === true;
 
   const allOtherNews = useMemo(
-    () => beritaItems.slice(1),
-    [beritaItems]
+    () => beritaItems.filter((item) => item !== featuredNews),
+    [beritaItems, featuredNews]
   );
 
   const totalPages = Math.ceil(
@@ -396,7 +454,7 @@ export default function BeritaIndex() {
                   ease: "easeOut",
                 }}
                 viewport={viewportSettings}
-                className="max-w-sm h-[2.5px] bg-primary mt-3 mb-4"
+                className="h-[2.5px] bg-primary mt-3 mb-4"
               />
 
               <p className="text-base sm:text-lg text-body text-justify leading-relaxed">
@@ -448,10 +506,19 @@ export default function BeritaIndex() {
 
               <div className="lg:col-span-6">
                 <Link
+                  ref={featuredRef}
                   to={`/berita/${generateSlug(
                     featuredNews.title,
                     featuredNews.slug
                   )}`}
+                  onClick={() => {
+                    try {
+                      sessionStorage.setItem(
+                        BERITA_SESSION_KEY,
+                        JSON.stringify({ page: 1, articleId: "featured" })
+                      );
+                    } catch (_) { /* ignore */ }
+                  }}
                   className="block w-full aspect-[4/3] bg-[#E8E6E1] rounded-xs relative overflow-hidden group"
                 >
                   <motion.div
@@ -493,12 +560,20 @@ export default function BeritaIndex() {
               {/* CONTENT */}
 
               <div className="lg:col-span-6 space-y-4">
-                <span className="text-xs font-bold tracking-wider text-primary uppercase block">
-                  {t(halaman.beritaUtama)} ·{" "}
-                  {featuredNews.tanggal
-                    ? featuredNews.tanggal.toUpperCase()
-                    : "OKTOBER 2022"}
-                </span>
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className="text-xs font-bold tracking-wider text-primary uppercase">
+                    {t(halaman.beritaUtama)} ·{" "}
+                    {featuredNews.tanggal
+                      ? featuredNews.tanggal.toUpperCase()
+                      : "OKTOBER 2022"}
+                  </span>
+                  {featuredIsPinned && (
+                    <span className="inline-flex items-center gap-1 text-[10px] font-bold tracking-wider uppercase bg-primary text-white px-2 py-0.5 rounded-xs">
+                      <TbPinFilled className="text-xs" />
+                      {t({ id: "DIPIN", en: "PINNED" })}
+                    </span>
+                  )}
+                </div>
 
                 <div>
                   <Link
@@ -506,6 +581,14 @@ export default function BeritaIndex() {
                       featuredNews.title,
                       featuredNews.slug
                     )}`}
+                    onClick={() => {
+                      try {
+                        sessionStorage.setItem(
+                          BERITA_SESSION_KEY,
+                          JSON.stringify({ page: 1, articleId: "featured" })
+                        );
+                      } catch (_) { /* ignore */ }
+                    }}
                   >
                     <h2 className="font-heading font-normal text-3xl sm:text-4xl text-heading leading-tight hover:text-primary transition-colors">
                       {featuredNews.title}
@@ -523,6 +606,14 @@ export default function BeritaIndex() {
                       featuredNews.title,
                       featuredNews.slug
                     )}`}
+                    onClick={() => {
+                      try {
+                        sessionStorage.setItem(
+                          BERITA_SESSION_KEY,
+                          JSON.stringify({ page: 1, articleId: "featured" })
+                        );
+                      } catch (_) { /* ignore */ }
+                    }}
                     className="inline-flex items-center text-xs font-bold tracking-wider text-primary hover:text-[#680000] uppercase transition-colors group/btn"
                   >
                     <span>
@@ -570,32 +661,49 @@ export default function BeritaIndex() {
               </div>
 
               <div className="divide-y divide-gray-200">
-                {currentNewsList.map((news) => (
-                  <article
-                    key={news.id}
-                    className="py-6 sm:py-7 space-y-2 group first:pt-2"
-                  >
-                    <span className="text-xs text-gray-500 block">
-                      {news.tanggal || "Oktober 2022"} ·{" "}
-                      {news.tags || "News"}
-                    </span>
-
-                    <Link
-                      to={`/berita/${generateSlug(
-                        news.title,
-                        news.slug
-                      )}`}
+                {currentNewsList.map((news) => {
+                  const newsSlug = generateSlug(news.title, news.slug);
+                  return (
+                    <article
+                      key={news.id}
+                      ref={(el) => { if (el) articleRefs.current[news.id] = el; }}
+                      className="py-6 sm:py-7 space-y-2 group first:pt-2"
                     >
-                      <h3 className="font-heading font-semibold text-lg sm:text-xl text-heading leading-snug group-hover:text-primary transition-colors">
-                        {news.title}
-                      </h3>
-                    </Link>
+                      <div className="flex flex-wrap items-center gap-2">
+                        <span className="text-xs text-gray-500">
+                          {news.tanggal || "Oktober 2022"} ·{" "}
+                          {news.tags || "News"}
+                        </span>
+                        {news.pinned && (
+                          <span className="inline-flex items-center gap-1 text-[9px] font-bold tracking-wider uppercase bg-primary/10 text-primary border border-primary/20 px-1.5 py-0.5 rounded-xs">
+                            <TbPinFilled className="text-[9px]" />
+                            {t({ id: "DIPIN", en: "PINNED" })}
+                          </span>
+                        )}
+                      </div>
 
-                    <p className="text-sm sm:text-[15px] text-body leading-relaxed max-w-5xl line-clamp-3">
-                      {news.content}
-                    </p>
-                  </article>
-                ))}
+                      <Link
+                        to={`/berita/${newsSlug}`}
+                        onClick={() => {
+                          try {
+                            sessionStorage.setItem(
+                              BERITA_SESSION_KEY,
+                              JSON.stringify({ page: currentPage, articleId: news.id })
+                            );
+                          } catch (_) { /* ignore */ }
+                        }}
+                      >
+                        <h3 className="font-heading font-semibold text-lg sm:text-xl text-heading leading-snug group-hover:text-primary transition-colors">
+                          {news.title}
+                        </h3>
+                      </Link>
+
+                      <p className="text-sm sm:text-[15px] text-body leading-relaxed max-w-5xl line-clamp-3">
+                        {news.content}
+                      </p>
+                    </article>
+                  );
+                })}
               </div>
 
               {/* PAGINATION */}

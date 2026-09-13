@@ -1,8 +1,14 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { FiArrowRight } from "react-icons/fi";
+import { TbPinFilled } from "react-icons/tb";
 
-import { berita, pengumuman } from "../../data/beritaSelectors";
+import {
+  berita,
+  pengumuman,
+  getPinnedBerita,
+  getPinnedPengumuman,
+} from "../../data/beritaSelectors";
 import { getBeritaImage } from "../../utils/imageResolver";
 import { generateSlug } from "../../utils/slugHelper";
 import Img from "../ui/Img";
@@ -55,12 +61,22 @@ const cardVariants = {
 
 export default function Announcement() {
   const ui = useUi();
-  // Bila belum ada pengumuman terbit, section ini jatuh ke berita terbaru agar
-  // tidak menyisakan blok kosong di Beranda.
-  const displayList = pengumuman.length > 0 ? pengumuman : berita;
 
-  const featured = displayList[0];
-  const sideArticles = displayList.slice(1, 4);
+  // Bila belum ada pengumuman, section ini fallback ke berita agar tidak kosong.
+  // Featured: item yang dipin lebih dulu, fallback ke item terbaru.
+  const displayList = pengumuman.length > 0 ? pengumuman : berita;
+  const pinnedFeatured =
+    pengumuman.length > 0
+      ? getPinnedPengumuman() ?? pengumuman[0]
+      : getPinnedBerita() ?? berita[0];
+
+  const featured = pinnedFeatured;
+  const featuredIsPinned = featured?.pinned === true;
+
+  // Sisi kanan: 3 item berikutnya dari daftar (kecuali featured)
+  const sideArticles = displayList
+    .filter((item) => item !== featured)
+    .slice(0, 3);
 
   // Tidak semua pengumuman menyertakan flyer. Tanpa gambar, kartu utama jadi
   // jauh lebih pendek daripada daftar di kolom kanan, jadi tampilannya
@@ -198,6 +214,13 @@ export default function Announcement() {
                 variants={itemVariants}
                 className="flex flex-wrap items-center gap-3 text-xs text-gray-500 mb-2"
               >
+                {featuredIsPinned && (
+                  <span className="inline-flex items-center gap-1 text-[10px] font-bold tracking-wider uppercase bg-primary text-white px-2 py-0.5 rounded-xs">
+                    <TbPinFilled className="text-[10px]" />
+                    DIPIN
+                  </span>
+                )}
+
                 {!hasFlyer && featured.kategori && (
                   <span className="text-[10px] font-bold tracking-wider text-primary uppercase bg-red-50 border border-primary/20 px-2 py-0.5 rounded-xs">
                     {featured.kategori}

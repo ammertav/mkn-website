@@ -126,13 +126,17 @@ export default function EventPage() {
       groups[ev.date].push(ev);
     });
 
-    // Urutkan terbaru dari atas (descending)
+    // Urutkan terbaru dari atas (descending), pinned naik ke atas di setiap group
     return Object.keys(groups)
       .sort()
       .reverse()
       .map((dateKey) => ({
         date: dateKey,
-        events: groups[dateKey],
+        events: groups[dateKey].sort((a, b) => {
+          if (a.pinned && !b.pinned) return -1;
+          if (!a.pinned && b.pinned) return 1;
+          return 0;
+        }),
       }));
   }, [filteredEvents]);
 

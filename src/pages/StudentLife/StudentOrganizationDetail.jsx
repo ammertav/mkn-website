@@ -85,15 +85,24 @@ const lineVariants = {
   },
 };
 
-/** Judul seksi dengan garis tebal, dipakai berulang di kolom utama. */
+/** Judul seksi dengan garis merah animasi, dipakai berulang di kolom utama. */
 function JudulSeksi({ children }) {
   return (
-    <motion.h2
-      variants={itemVariants}
-      className="text-2xl sm:text-3xl font-heading font-bold text-heading pb-3 mb-6 border-b-2 border-gray-900"
-    >
-      {children}
-    </motion.h2>
+    <div className="mb-6">
+      <motion.h2
+        variants={itemVariants}
+        className="text-2xl sm:text-3xl font-heading font-bold text-heading"
+      >
+        {children}
+      </motion.h2>
+      <motion.div
+        initial={{ width: 0 }}
+        whileInView={{ width: "100%" }}
+        transition={{ duration: 0.9, ease: "easeOut" }}
+        viewport={{ once: true, amount: 0.2 }}
+        className="h-[2px] bg-primary mt-2"
+      />
+    </div>
   );
 }
 

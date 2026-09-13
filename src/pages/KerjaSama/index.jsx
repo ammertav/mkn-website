@@ -159,7 +159,13 @@ export default function KerjaSama() {
               {t({ id: "Kerja Sama", en: "Partnerships" })}
             </motion.h1>
 
-            <motion.div variants={lineVariants} className="w-24 h-[3px] bg-primary mt-5 mb-6" />
+            <motion.div
+              initial={{ width: 0 }}
+              whileInView={{ width: "100%" }}
+              transition={{ duration: 0.9, ease: "easeOut", delay: 0.15 }}
+              viewport={{ once: true, amount: 0.2 }}
+              className="h-[2px] bg-primary mt-5 mb-6"
+            />
 
             <motion.p
               variants={itemVariants}
@@ -192,10 +198,17 @@ export default function KerjaSama() {
           >
             <motion.h2
               variants={itemVariants}
-              className="text-2xl sm:text-3xl font-heading font-bold text-heading pb-3 border-b-2 border-gray-900"
+              className="text-2xl sm:text-3xl font-heading font-bold text-heading"
             >
               {t({ id: "Galeri Kegiatan Kerja Sama", en: "Partnership Activity Gallery" })}
             </motion.h2>
+            <motion.div
+              initial={{ width: 0 }}
+              whileInView={{ width: "100%" }}
+              transition={{ duration: 0.9, ease: "easeOut" }}
+              viewport={{ once: true, amount: 0.2 }}
+              className="h-[2px] bg-primary mt-1 mb-3"
+            />
 
             {galeri.length > 0 ? (
               /* Loop per kegiatan */
