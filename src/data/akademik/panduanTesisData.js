@@ -818,37 +818,17 @@ export const halamanTesis = {
 };
 
 /**
- * Contoh file tesis yang dapat diunduh.
- * Placeholder — ganti `href` dengan path lokal (mis. "/assets/tesis/...") atau URL Google Drive
- * saat file asli tersedia.
+ * Contoh file tesis yang dapat diunduh. File PDF disimpan di public/pdf/tesis/.
  */
 export const contohTesis = [
   {
     id: "ct-1",
     judul: {
-      id: "Contoh Tesis — Keabsahan Akta Notaris dalam Perjanjian Kredit",
-      en: "Thesis Example — Validity of Notarial Deed in Credit Agreements",
+      id: "Keabsahan Tanda Tangan Elektronik pada Pembuatan Akta Notaris dalam Perspektif Hukum Positif di Indonesia",
+      en: "Validity of Electronic Signatures in the Making of Notarial Deeds from the Perspective of Indonesian Positive Law",
     },
     tahun: "2024",
-    href: "#",
-  },
-  {
-    id: "ct-2",
-    judul: {
-      id: "Contoh Tesis — Tanggung Jawab Notaris atas Akta yang Cacat Hukum",
-      en: "Thesis Example — Notary Liability for Legally Defective Deeds",
-    },
-    tahun: "2023",
-    href: "#",
-  },
-  {
-    id: "ct-3",
-    judul: {
-      id: "Contoh Tesis — Perlindungan Hukum bagi Pihak Ketiga dalam Akta PPAT",
-      en: "Thesis Example — Legal Protection for Third Parties in PPAT Deeds",
-    },
-    tahun: "2023",
-    href: "#",
+    href: "/pdf/tesis/contoh-tesis-keabsahan-tte-akta-notaris.pdf",
   },
 ];
 
