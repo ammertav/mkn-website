@@ -131,23 +131,6 @@ function BarisNama({ name, nim, role }) {
   );
 }
 
-/**
- * Baca foto kegiatan dari subfolder assets/images/prestasi/<folder>/
- * menggunakan import.meta.glob agar foto baru langsung terbaca tanpa
- * perlu menambahkan impor satu per satu.
- */
-const berkasKegiatan = import.meta.glob(
-  "../../assets/images/prestasi/*/*.{jpg,jpeg,png,webp,JPG,JPEG,PNG}",
-  { eager: true, import: "default" }
-);
-
-function fotoKegiatan(folder) {
-  return Object.entries(berkasKegiatan)
-    .filter(([path]) => path.includes(`/prestasi/${folder}/`))
-    .sort(([a], [b]) => a.localeCompare(b, "id", { numeric: true }))
-    .map(([, url]) => url);
-}
-
 export default function StudentOrganizationDetail() {
   const t = useT();
   const { lang } = useLanguage();
@@ -447,44 +430,14 @@ export default function StudentOrganizationDetail() {
         {/* FULL BLEED GALLERY: dipisah per kegiatan seperti pola Ikanotsula */}
         {/* ========================================================================= */}
         {(() => {
-          const terdaftar = organization.galeri ?? [];
-          const folderTerdaftar = new Set(terdaftar.map((k) => k.folder));
-
-          // Auto-discovery: temukan semua subfolder yang ada di assets/images/prestasi/
-          const folderDitemukan = Array.from(
-            new Set(
-              Object.keys(berkasKegiatan)
-                .map((path) => {
-                  const match = path.match(/\/prestasi\/([^/]+)\//);
-                  return match ? match[1] : null;
-                })
-                .filter(Boolean)
-            )
-          );
-
-          // Buat entri otomatis untuk folder yang belum terdaftar secara manual
-          const folderTambahan = folderDitemukan
-            .filter((f) => !folderTerdaftar.has(f))
-            .map((f) => {
-              const yearMatch = f.match(/\b(20\d\d)\b/);
-              const tahun = yearMatch ? yearMatch[1] : "";
-              const judulStr = f.replace(/\b(20\d\d)\b/, "").trim() || f;
-              return {
-                judul: { id: judulStr, en: judulStr },
-                tahun,
-                folder: f,
-              };
-            });
-
-          const semuaKegiatan = [...terdaftar, ...folderTambahan];
-
-          const galeri = semuaKegiatan
+          // Foto tiap kegiatan diambil langsung dari data organisasi.
+          const galeri = (organization.galeri ?? [])
             .map((kegiatan) => {
               const judulText = t(kegiatan.judul);
               const namaLengkap = kegiatan.tahun ? `${judulText} ${kegiatan.tahun}` : judulText;
               return {
                 ...kegiatan,
-                foto: fotoKegiatan(kegiatan.folder).map((src, idx) => ({
+                foto: (kegiatan.foto ?? []).map((src, idx) => ({
                   src,
                   alt: `${namaLengkap} — ${lang === "en" ? "photo" : "foto"} ${idx + 1}`,
                   caption: `${namaLengkap} — ${lang === "en" ? "photo" : "foto"} ${idx + 1}`,
@@ -508,7 +461,7 @@ export default function StudentOrganizationDetail() {
 
                 {galeri.map((kegiatan) => (
                   <motion.div
-                    key={kegiatan.folder}
+                    key={kegiatan.id}
                     variants={containerVariants}
                     initial="hidden"
                     whileInView="visible"
@@ -524,9 +477,12 @@ export default function StudentOrganizationDetail() {
                         {t(kegiatan.judul)}
                       </h3>
 
-                      <span className="text-[11px] font-bold tracking-wider text-primary uppercase bg-red-50 border border-primary/20 px-2 py-0.5 rounded-xs tabular-nums">
-                        {kegiatan.tahun}
-                      </span>
+                      {/* Lencana tahun hanya tampil bila tahunnya diisi. */}
+                      {kegiatan.tahun && (
+                        <span className="text-[11px] font-bold tracking-wider text-primary uppercase bg-red-50 border border-primary/20 px-2 py-0.5 rounded-xs tabular-nums">
+                          {kegiatan.tahun}
+                        </span>
+                      )}
 
                       <span className="text-xs text-gray-400 ml-auto tabular-nums">
                         {kegiatan.foto.length} {lang === "en" ? "photos" : "foto"}
@@ -536,7 +492,7 @@ export default function StudentOrganizationDetail() {
                     <motion.div variants={itemVariants}>
                       <GaleriGeser
                         foto={kegiatan.foto}
-                        ariaLabel={`${t({ id: "Galeri", en: "Gallery" })} ${t(kegiatan.judul)} ${kegiatan.tahun}`}
+                        ariaLabel={`${t({ id: "Galeri", en: "Gallery" })} ${t(kegiatan.judul)} ${kegiatan.tahun}`.trim()}
                         otomatis={false}
                         tampilkanJudul={false}
                         kelasTrek="gap-4"
