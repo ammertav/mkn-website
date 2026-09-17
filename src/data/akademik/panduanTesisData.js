@@ -742,6 +742,36 @@ export const yudisiumRingkas = [
   },
 ];
 
+/**
+ * Halaman formulir pengajuan judul dan pendaftaran ujian tesis (berkata sandi).
+ * Dirujuk dari Panduan Akademik dan dari Panduan Ujian Tesis.
+ */
+export const rutePendaftaranTesis = "/akademik/panduan-akademik/pendaftaran-tesis";
+
+/** Ringkasan pendaftaran yang ditampilkan di Panduan Ujian Tesis. */
+export const infoPendaftaranTesis = {
+  judul: {
+    id: "Pengajuan Judul & Pendaftaran Ujian",
+    en: "Title Submission & Examination Registration",
+  },
+  keterangan: {
+    id:
+      "Pengajuan judul tesis serta pendaftaran ujian pra proposal, proposal, dan tesis " +
+      "dilakukan secara daring melalui formulir yang tersedia di halaman Panduan Akademik. " +
+      "Halaman tersebut khusus mahasiswa dan dibuka dengan kata sandi yang dibagikan " +
+      "bagian akademik.",
+    en:
+      "Thesis title submission and registration for the pre-proposal, proposal, and " +
+      "thesis examinations are done online through the forms on the Academic Guidelines " +
+      "page. That page is for students only and is opened with a password shared by the " +
+      "academic office.",
+  },
+  tombol: {
+    id: "Ke Halaman Pendaftaran",
+    en: "Go to Registration",
+  },
+};
+
 /** Teks halaman Panduan Ujian Tesis dan ketiga tab anaknya. */
 export const halamanTesis = {
   meta: {

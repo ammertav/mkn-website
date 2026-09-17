@@ -107,7 +107,7 @@ export default function Prestasi() {
             className="space-y-5"
           >
             {/* Event Header */}
-            <div className="space-y-1 pb-3 border-b border-gray-200">
+            <div className="space-y-1 pb-3 border-b-2 border-heading">
               <h2 className="text-xl sm:text-2xl font-heading font-bold text-heading">
                 {t(event.nama)}
               </h2>

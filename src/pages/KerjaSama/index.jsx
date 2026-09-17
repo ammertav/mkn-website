@@ -237,7 +237,7 @@ export default function KerjaSama() {
               whileInView={{ width: "100%" }}
               transition={{ duration: 0.9, ease: "easeOut" }}
               viewport={{ once: true, amount: 0.2 }}
-              className="h-[2px] bg-primary mt-1 mb-3"
+              className="h-[1.5px] bg-heading mt-1 mb-3"
             />
 
             {galeri.length > 0 ? (

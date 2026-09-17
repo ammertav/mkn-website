@@ -85,7 +85,7 @@ const lineVariants = {
   },
 };
 
-/** Judul seksi dengan garis merah animasi, dipakai berulang di kolom utama. */
+/** Judul seksi dengan garis hitam animasi, dipakai berulang di kolom utama. */
 function JudulSeksi({ children }) {
   return (
     <div className="mb-6">
@@ -100,7 +100,7 @@ function JudulSeksi({ children }) {
         whileInView={{ width: "100%" }}
         transition={{ duration: 0.9, ease: "easeOut" }}
         viewport={{ once: true, amount: 0.2 }}
-        className="h-[2px] bg-primary mt-2"
+        className="h-[1.5px] bg-heading mt-2"
       />
     </div>
   );

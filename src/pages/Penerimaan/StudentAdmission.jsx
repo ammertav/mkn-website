@@ -123,7 +123,7 @@ export default function StudentAdmission() {
           </motion.div>
 
           {/* Horizontal Divider */}
-          <motion.hr variants={lineVariants} className="border-t border-gray-800 my-4" />
+          <motion.div variants={lineVariants} className="w-full h-[2px] bg-primary my-4" />
 
           {/* Description */}
           <motion.p variants={itemVariants} className="text-sm sm:text-base text-body text-justify leading-relaxed">
@@ -192,7 +192,7 @@ export default function StudentAdmission() {
         >
           <motion.h2
             variants={itemVariants}
-            className="text-2xl sm:text-3xl font-heading font-bold text-heading tracking-normal"
+            className="text-2xl sm:text-3xl font-heading font-bold text-heading tracking-normal pb-2 border-b-2 border-heading"
           >
             {t({ id: "Biaya Pendidikan", en: "Tuition Fees" })}
           </motion.h2>
@@ -341,7 +341,7 @@ export default function StudentAdmission() {
         >
           <motion.h2
             variants={itemVariants}
-            className="text-2xl sm:text-3xl font-heading font-bold text-heading tracking-normal"
+            className="text-2xl sm:text-3xl font-heading font-bold text-heading tracking-normal pb-2 border-b-2 border-heading"
           >
             {t({
               id: "Persyaratan & Prosedur Pendaftaran",
