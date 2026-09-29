@@ -25,10 +25,6 @@ import lnPialaDebat2 from "../assets/images/prestasi/lomba-debat-nasional-2022/p
 import lnPialaDebat3 from "../assets/images/prestasi/lomba-debat-nasional-2022/piala debat 3.jpeg";
 import lnPialaDebat4 from "../assets/images/prestasi/lomba-debat-nasional-2022/piala debat 4.jpeg";
 
-// === Lomba Internal 2023 ===
-import internal1 from "../assets/images/prestasi/lomba-internal-2023/lomba-internal-1.jpg";
-import internal2 from "../assets/images/prestasi/lomba-internal-2023/lomba-internal-2.jpg";
-import internal3 from "../assets/images/prestasi/lomba-internal-2023/lomba-internal-3.jpg";
 
 // === Lomba Forum Kerjasama Program Studi Magister Kenotariatan Perguruan Tinggi Swasta Indonesia 2024 ===
 import forum1 from "../assets/images/prestasi/fk-pts-mkn-2024/fk-pts-mkn-1.jpg";
@@ -84,22 +80,6 @@ export const prestasiEvents = [
       { src: lnPialaDebat2, caption: { id: "Foto bersama pemenang dari berbagai kampus", en: "Winners from various universities" } },
       { src: lnPialaDebat3, caption: { id: "Selebrasi para pemenang", en: "Winners celebrating" } },
       { src: lnPialaDebat4, caption: { id: "Foto bersama seluruh pemenang lomba", en: "Group photo of all competition winners" } },
-    ],
-  },
-  {
-    id: "lomba-internal-2023",
-    nama: {
-      id: "Lomba Internal 2023",
-      en: "Internal Competition 2023",
-    },
-    keterangan: {
-      id: "Dokumentasi Lomba Internal 2023",
-      en: "Documentation of Internal Competition 2023",
-    },
-    foto: [
-      { src: internal1, caption: { id: "Foto bersama dosen dan peserta lomba", en: "Lecturers and participants group photo" } },
-      { src: internal2, caption: { id: "Penyerahan sertifikat penghargaan", en: "Presentation of award certificates" } },
-      { src: internal3, caption: { id: "Para pemenang di Notariat UNISSULA", en: "Winners at Notariat UNISSULA" } },
     ],
   },
   {

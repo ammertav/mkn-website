@@ -3,6 +3,11 @@ import fotoMubes1 from "../assets/images/imanu-1.jpg";
 import fotoMubes2 from "../assets/images/imanu-4.jpg";
 import fotoPohon from "../assets/images/pohon.jpg";
 
+// === Lomba Internal 2023 ===
+import internal1 from "../assets/images/prestasi/lomba-internal-2023/lomba-internal-1.jpg";
+import internal2 from "../assets/images/prestasi/lomba-internal-2023/lomba-internal-2.jpg";
+import internal3 from "../assets/images/prestasi/lomba-internal-2023/lomba-internal-3.jpg";
+
 export const studentOrganizationsData = [
   {
     id: 1,
@@ -300,6 +305,12 @@ export const studentOrganizationsData = [
         judul: { id: "Penanaman Pohon", en: "Tree Planting" },
         tahun: "",
         foto: [fotoPohon],
+      },
+      {
+        id: "lomba-internal-2023",
+        judul: { id: "Lomba Internal", en: "Internal Competition" },
+        tahun: "2023",
+        foto: [internal1, internal2, internal3],
       },
     ],
 
