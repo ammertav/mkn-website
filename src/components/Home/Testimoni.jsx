@@ -6,7 +6,7 @@ import { useT } from "../../i18n/languageContext";
 import { useUi } from "../../i18n/useUi";
 
 import Fatiroh from "../../assets/images/testi/fatiroh.png";
-import Ismail from "../../assets/images/testi/ismail-fahmi.png";
+import Ismail from "../../assets/images/testi/ismail-fahmi.jpg";
 import Nurizka from "../../assets/images/testi/nurizka-fida.png";
 import Wahyu from "../../assets/images/testi/wahyu-noto.png";
 import Siget from "../../assets/images/testi/ipda-siget.png";
