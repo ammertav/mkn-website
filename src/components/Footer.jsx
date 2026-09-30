@@ -14,6 +14,7 @@ import Img from "./ui/Img";
 import { useT } from "../i18n/languageContext";
 import { useUi } from "../i18n/useUi";
 import { navLinks } from "../data/navLinks";
+import { useVisitorCounter } from "../hooks/useVisitorCounter";
 
 /** Akun media sosial resmi Program Studi Magister Kenotariatan UNISSULA. */
 const socialLinks = [
@@ -178,6 +179,7 @@ const footerSections = [
 export default function Footer() {
   const t = useT();
   const ui = useUi();
+  const { total, today } = useVisitorCounter();
 
   return (
     <footer className="w-full font-body bg-white text-body border-t border-gray-200">
@@ -260,6 +262,53 @@ export default function Footer() {
                   </li>
                 ))}
               </ul>
+
+              {/* Counter Pengunjung */}
+              <div className="mt-5">
+                <p className="font-heading text-[10px] font-semibold uppercase tracking-[0.18em] text-subheading-sidebar mb-2">
+                  Statistik Pengunjung
+                </p>
+                <div
+                  className="inline-flex items-stretch divide-x divide-gray-200 rounded-xl border border-gray-200 bg-white overflow-hidden"
+                  style={{ boxShadow: "0 1px 4px 0 rgba(0,0,0,0.06)" }}
+                >
+                  {/* Hari Ini */}
+                  <div className="flex flex-col items-center justify-center px-5 py-2.5 gap-0.5 min-w-[80px]">
+                    <span className="text-[9.5px] font-semibold uppercase tracking-[0.12em] text-subheading-sidebar">
+                      Hari Ini
+                    </span>
+                    <span className="text-[19px] font-bold text-primary leading-snug tabular-nums">
+                      {today === null ? (
+                        <span className="inline-block w-8 h-4 rounded bg-gray-200 animate-pulse align-middle" />
+                      ) : (
+                        today.toLocaleString("id-ID")
+                      )}
+                    </span>
+                  </div>
+
+                  {/* Total */}
+                  <div className="flex flex-col items-center justify-center px-5 py-2.5 gap-0.5 min-w-[80px]">
+                    <span className="text-[9.5px] font-semibold uppercase tracking-[0.12em] text-subheading-sidebar">
+                      Total
+                    </span>
+                    <span className="text-[19px] font-bold text-heading leading-snug tabular-nums">
+                      {total === null ? (
+                        <span className="inline-block w-10 h-4 rounded bg-gray-200 animate-pulse align-middle" />
+                      ) : (
+                        total.toLocaleString("id-ID")
+                      )}
+                    </span>
+                  </div>
+
+                  {/* Live indicator */}
+                  <div className="flex items-center justify-center px-3">
+                    <span className="relative flex h-2 w-2" title="Live">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-50" />
+                      <span className="relative inline-flex rounded-full h-2 w-2 bg-primary" />
+                    </span>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 
