@@ -92,6 +92,11 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://mkn.unissula.ac.id/alumni/reuni</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://mkn.unissula.ac.id/alumni/tracer-study</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -100,6 +105,12 @@
     <loc>https://mkn.unissula.ac.id/berita</loc>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://mkn.unissula.ac.id/berita/126-alumni-mkn-unissula-lolos-ujian-ppat-siap-mengabdi-dan-bekerja-dari-aceh-hingga-papua</loc>
+    <lastmod>2026-09-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://mkn.unissula.ac.id/berita/126-mahasiswa-prodi-mkn-unissula-ikuti-materikulasi</loc>
@@ -793,6 +804,11 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://mkn.unissula.ac.id/staff/dosen/agung-iriantoro</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://mkn.unissula.ac.id/staff/dosen/amin-purnawan</loc>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
@@ -819,6 +835,11 @@
   </url>
   <url>
     <loc>https://mkn.unissula.ac.id/staff/dosen/aryani-witasari</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://mkn.unissula.ac.id/staff/dosen/bambang-syamsuzar-oyong</loc>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -868,12 +889,22 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://mkn.unissula.ac.id/staff/dosen/muhammad-hafidh</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://mkn.unissula.ac.id/staff/dosen/mutamimah</loc>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://mkn.unissula.ac.id/staff/dosen/nanang-sri-darmadi</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://mkn.unissula.ac.id/staff/dosen/pandam-nurwulan</loc>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>

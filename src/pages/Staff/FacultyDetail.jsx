@@ -212,18 +212,22 @@ export default function FacultyDetail() {
                 {faculty.email && (
                   <div className="py-2.5 flex items-center justify-between">
                     <span className="text-body font-medium">{t({ id: "Surel", en: "Email" })}</span>
-                    <a
-                      href={`mailto:${faculty.email}`}
-                      className="font-semibold text-heading hover:text-primary transition-colors"
-                    >
-                      {faculty.email}
-                    </a>
+                    {faculty.email === "Belum tersedia" ? (
+                      <span className="font-semibold text-body italic">{faculty.email}</span>
+                    ) : (
+                      <a
+                        href={`mailto:${faculty.email}`}
+                        className="font-semibold text-heading hover:text-primary transition-colors"
+                      >
+                        {faculty.email}
+                      </a>
+                    )}
                   </div>
                 )}
                 {faculty.phone && (
                   <div className="py-2.5 flex items-center justify-between">
                     <span className="text-body font-medium">{t({ id: "Kontak / HP", en: "Contact / Phone" })}</span>
-                    <span className="font-semibold text-heading">{faculty.phone}</span>
+                    <span className={`font-semibold ${faculty.phone === "Belum tersedia" ? "text-body italic" : "text-heading"}`}>{faculty.phone}</span>
                   </div>
                 )}
                 {faculty.sintaId && (
@@ -347,20 +351,20 @@ export default function FacultyDetail() {
               )}
 
               {/* Publikasi Terpilih */}
-              {faculty.publications?.length > 0 && (
-                <motion.section
-                  variants={containerVariants}
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={viewportSettings}
-                  className="space-y-4"
-                >
-                  <motion.div variants={itemVariants} className="pb-2 border-b-2 border-heading">
-                    <h2 className="text-2xl sm:text-3xl font-heading font-normal text-heading tracking-tight">
-                      {t({ id: "Publikasi Terpilih", en: "Selected Publications" })}
-                    </h2>
-                  </motion.div>
+              <motion.section
+                variants={containerVariants}
+                initial="hidden"
+                whileInView="visible"
+                viewport={viewportSettings}
+                className="space-y-4"
+              >
+                <motion.div variants={itemVariants} className="pb-2 border-b-2 border-heading">
+                  <h2 className="text-2xl sm:text-3xl font-heading font-normal text-heading tracking-tight">
+                    {t({ id: "Publikasi Terpilih", en: "Selected Publications" })}
+                  </h2>
+                </motion.div>
 
+                {faculty.publications?.length > 0 ? (
                   <motion.div
                     variants={listContainerVariants}
                     className="divide-y divide-gray-100"
@@ -384,25 +388,29 @@ export default function FacultyDetail() {
                       </motion.div>
                     ))}
                   </motion.div>
-                </motion.section>
-              )}
+                ) : (
+                  <motion.p variants={itemVariants} className="text-sm text-body italic">
+                    {t({ id: "Belum tersedia", en: "Not available" })}
+                  </motion.p>
+                )}
+              </motion.section>
 
               {/* Pengalaman Penelitian */}
-              {faculty.researches?.length > 0 && (
-                <motion.section
-                  variants={containerVariants}
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={viewportSettings}
-                  className="space-y-4"
+              <motion.section
+                variants={containerVariants}
+                initial="hidden"
+                whileInView="visible"
+                viewport={viewportSettings}
+                className="space-y-4"
+              >
+                <motion.h2
+                  variants={itemVariants}
+                  className="text-2xl sm:text-3xl font-heading font-normal text-heading tracking-tight pb-2 border-b-2 border-heading"
                 >
-                  <motion.h2
-                    variants={itemVariants}
-                    className="text-2xl sm:text-3xl font-heading font-normal text-heading tracking-tight pb-2 border-b-2 border-heading"
-                  >
-                    {t({ id: "Pengalaman Penelitian", en: "Research Experience" })}
-                  </motion.h2>
+                  {t({ id: "Pengalaman Penelitian", en: "Research Experience" })}
+                </motion.h2>
 
+                {faculty.researches?.length > 0 ? (
                   <motion.div variants={itemVariants} className="overflow-x-auto">
                     <table className="w-full text-left border-collapse text-xs sm:text-sm">
                       <thead>
@@ -439,25 +447,29 @@ export default function FacultyDetail() {
                       </motion.tbody>
                     </table>
                   </motion.div>
-                </motion.section>
-              )}
+                ) : (
+                  <motion.p variants={itemVariants} className="text-sm text-body italic">
+                    {t({ id: "Belum tersedia", en: "Not available" })}
+                  </motion.p>
+                )}
+              </motion.section>
 
               {/* Pengabdian dan Penugasan */}
-              {faculty.communityServices?.length > 0 && (
-                <motion.section
-                  variants={containerVariants}
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={viewportSettings}
-                  className="space-y-4"
+              <motion.section
+                variants={containerVariants}
+                initial="hidden"
+                whileInView="visible"
+                viewport={viewportSettings}
+                className="space-y-4"
+              >
+                <motion.h2
+                  variants={itemVariants}
+                  className="text-2xl sm:text-3xl font-heading font-normal text-heading tracking-tight pb-2 border-b-2 border-heading"
                 >
-                  <motion.h2
-                    variants={itemVariants}
-                    className="text-2xl sm:text-3xl font-heading font-normal text-heading tracking-tight pb-2 border-b-2 border-heading"
-                  >
-                    {t({ id: "Pengabdian dan Penugasan", en: "Community Service and Assignments" })}
-                  </motion.h2>
+                  {t({ id: "Pengabdian dan Penugasan", en: "Community Service and Assignments" })}
+                </motion.h2>
 
+                {faculty.communityServices?.length > 0 ? (
                   <motion.div variants={itemVariants} className="overflow-x-auto">
                     <table className="w-full text-left border-collapse text-xs sm:text-sm">
                       <thead>
@@ -489,25 +501,29 @@ export default function FacultyDetail() {
                       </motion.tbody>
                     </table>
                   </motion.div>
-                </motion.section>
-              )}
+                ) : (
+                  <motion.p variants={itemVariants} className="text-sm text-body italic">
+                    {t({ id: "Belum tersedia", en: "Not available" })}
+                  </motion.p>
+                )}
+              </motion.section>
 
               {/* Pemakalah Seminar Ilmiah */}
-              {faculty.seminars?.length > 0 && (
-                <motion.section
-                  variants={containerVariants}
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={viewportSettings}
-                  className="space-y-4"
+              <motion.section
+                variants={containerVariants}
+                initial="hidden"
+                whileInView="visible"
+                viewport={viewportSettings}
+                className="space-y-4"
+              >
+                <motion.h2
+                  variants={itemVariants}
+                  className="text-2xl sm:text-3xl font-heading font-normal text-heading tracking-tight pb-2 border-b-2 border-heading"
                 >
-                  <motion.h2
-                    variants={itemVariants}
-                    className="text-2xl sm:text-3xl font-heading font-normal text-heading tracking-tight pb-2 border-b-2 border-heading"
-                  >
-                    {t({ id: "Pemakalah Seminar Ilmiah (Oral Presentation)", en: "Scientific Seminar Presenter (Oral Presentation)" })}
-                  </motion.h2>
+                  {t({ id: "Pemakalah Seminar Ilmiah (Oral Presentation)", en: "Scientific Seminar Presenter (Oral Presentation)" })}
+                </motion.h2>
 
+                {faculty.seminars?.length > 0 ? (
                   <motion.div variants={itemVariants} className="overflow-x-auto">
                     <table className="w-full text-left border-collapse text-xs sm:text-sm">
                       <thead>
@@ -539,8 +555,12 @@ export default function FacultyDetail() {
                       </motion.tbody>
                     </table>
                   </motion.div>
-                </motion.section>
-              )}
+                ) : (
+                  <motion.p variants={itemVariants} className="text-sm text-body italic">
+                    {t({ id: "Belum tersedia", en: "Not available" })}
+                  </motion.p>
+                )}
+              </motion.section>
 
               {/* Karya Buku */}
               {/* Seksi disembunyikan sepenuhnya bila dosen belum punya karya buku */}
