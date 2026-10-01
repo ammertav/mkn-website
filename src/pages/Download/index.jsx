@@ -107,6 +107,8 @@ export default function Download() {
     "peraturan-menteri": true,
     "peraturan-lain": true,
     "peraturan-perkumpulan": true,
+    "penjaminan-mutu": true,
+    "akreditasi-informasi": true,
   });
 
   const toggleSection = (id) => {
@@ -179,6 +181,8 @@ export default function Download() {
     { id: "peraturan-pemerintah", label: { id: "Peraturan Pemerintah", en: "Government Regulations" } },
     { id: "peraturan-menteri", label: { id: "Peraturan Menteri", en: "Ministerial Regulations" } },
     { id: "peraturan-perkumpulan", label: { id: "INI & IPPAT", en: "INI & IPPAT" } },
+    { id: "penjaminan-mutu", label: { id: "Penjaminan Mutu", en: "Quality Assurance" } },
+    { id: "akreditasi-informasi", label: { id: "Akreditasi & Lainnya", en: "Accreditation & Others" } },
   ];
 
   return (

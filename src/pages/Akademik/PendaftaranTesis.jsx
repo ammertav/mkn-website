@@ -9,6 +9,7 @@ import {
   FiExternalLink,
   FiEye,
   FiEyeOff,
+  FiDownload,
 } from "react-icons/fi";
 import { useT } from "../../i18n/languageContext";
 import { useUi } from "../../i18n/useUi";
@@ -156,7 +157,7 @@ const halaman = {
 };
 
 /** Satu kartu formulir yang sudah terbuka. */
-function KartuFormulir({ item, url }) {
+function KartuFormulir({ item, url, downloadUrl }) {
   const t = useT();
   const Ikon = item.ikon;
 
@@ -171,14 +172,32 @@ function KartuFormulir({ item, url }) {
       }}
       className="bg-white border border-gray-200 rounded-xs p-6 sm:p-7 flex flex-col sm:flex-row sm:items-center justify-between gap-6 lg:gap-12 hover:border-gray-300 transition-all duration-200 shadow-2xs group"
     >
-      <div className="flex items-center gap-4 sm:gap-5 flex-1 min-w-0">
-        <div className="text-primary text-2xl sm:text-3xl shrink-0 flex items-center justify-center">
-          <Ikon />
+      <div className="flex flex-col gap-2 flex-1 min-w-0">
+        <div className="flex items-center gap-4 sm:gap-5">
+          <div className="text-primary text-2xl sm:text-3xl shrink-0 flex items-center justify-center">
+            <Ikon />
+          </div>
+
+          <h2 className="font-heading font-bold text-base sm:text-[18px] text-heading leading-snug group-hover:text-primary transition-colors">
+            {t(item.judul)}
+          </h2>
         </div>
 
-        <h2 className="font-heading font-bold text-base sm:text-[18px] text-heading leading-snug group-hover:text-primary transition-colors">
-          {t(item.judul)}
-        </h2>
+        {downloadUrl && (
+          <div className="pl-10 sm:pl-12">
+            <motion.a
+              href={downloadUrl}
+              download="Form Pengajuan Judul Tesis.pdf"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.97 }}
+              className="inline-flex items-center gap-2 text-primary hover:underline text-xs sm:text-sm font-semibold transition-all duration-200"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <FiDownload className="text-sm shrink-0" />
+              <span>Silahkan klik untuk download form pengajuan judul</span>
+            </motion.a>
+          </div>
+        )}
       </div>
 
       <div className="shrink-0 flex items-center self-start sm:self-center pl-10 sm:pl-0">
@@ -376,6 +395,11 @@ export default function PendaftaranTesis() {
                   key={item.kunci}
                   item={item}
                   url={tautan[item.kunci]}
+                  downloadUrl={
+                    item.kunci === "judulTesis"
+                      ? "/pdf/tesis/form-pengajuan-judul-tesis.pdf"
+                      : undefined
+                  }
                 />
               ) : null,
             )}

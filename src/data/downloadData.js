@@ -3,6 +3,22 @@
  * Berisi Dokumen Akademik dan Peraturan Perundang-undangan Notaris & PPAT
  */
 
+import pedomanAkademik from "../assets/pdf/Pedoman Akademik 2021.pdf";
+import pedomanProposalTesis from "../assets/pdf/Pedoman Penulisan Proposal & Tesis.pdf";
+import formJudulTesis from "../assets/pdf/FORM PENGAJUAN JUDUL TESIS (1).pdf";
+import panduanMagang from "../assets/pdf/Pedoman Praktek Laboratorium Manajemen Kantor Notaris & PPAT.pdf";
+import sopYudisiumWisuda from "../assets/pdf/Standar Operasional Prosedur (SOP) Yudisium & Wisuda.pdf";
+
+import berkasSkA2018 from "../assets/pdf/SK-BAN-PT-Akreditasi-A-MKn-2018.pdf";
+import berkasSertifikatAsic2020 from "../assets/pdf/Sertifikat-ASIC-Premier-MKn-2020.pdf";
+import berkasSkUnggul2021 from "../assets/pdf/SK-BAN-PT-Konversi-Unggul-MKn-2021.pdf";
+import berkasSertifikatUnggul2021 from "../assets/pdf/Sertifikat-Akreditasi-Unggul-MKn-2021.pdf";
+import berkasSkUnggul2023 from "../assets/pdf/SK-BAN-PT-Akreditasi-Unggul-MKn-2023.pdf";
+import berkasSertifikatUnggul2023 from "../assets/pdf/Sertifikat-Akreditasi-Unggul-MKn-2023.pdf";
+
+import daftarPenelitianPdf from "../assets/pdf/DAFTAR PENELITIAN DOSEN_MKN 2023-2024-2025-2026.pdf";
+import daftarPengabdianPdf from "../assets/pdf/DAFTAR PENGABDIAN MASYARAKAT.pdf";
+
 export const downloadHeader = {
   category: { id: "REPOSITORI DOKUMEN", en: "DOCUMENT REPOSITORY" },
   title: { id: "Pusat Unduhan & Dokumen Hukum", en: "Download Center & Legal Documents" },
@@ -29,9 +45,9 @@ export const downloadGroups = [
         },
         category: { id: "Pedoman", en: "Guideline" },
         format: "PDF",
-        size: "3.4 MB",
-        updatedAt: "2024",
-        url: "",
+        size: "10 MB",
+        updatedAt: "2021",
+        url: pedomanAkademik,
       },
       {
         id: "pedoman-tesis",
@@ -41,9 +57,9 @@ export const downloadGroups = [
         },
         category: { id: "Pedoman", en: "Guideline" },
         format: "PDF",
-        size: "2.8 MB",
+        size: "1.1 MB",
         updatedAt: "2024",
-        url: "",
+        url: pedomanProposalTesis,
       },
       {
         id: "form-judul-tesis",
@@ -52,10 +68,10 @@ export const downloadGroups = [
           en: "Thesis Research Title & Proposal Submission Form",
         },
         category: { id: "Formulir", en: "Form" },
-        format: "DOCX",
-        size: "180 KB",
+        format: "PDF",
+        size: "40 KB",
         updatedAt: "2024",
-        url: "",
+        url: formJudulTesis,
       },
       {
         id: "form-ujian-tesis",
@@ -67,7 +83,7 @@ export const downloadGroups = [
         format: "DOCX",
         size: "210 KB",
         updatedAt: "2024",
-        url: "",
+        url: "#",
       },
       {
         id: "panduan-magang-notaris",
@@ -77,9 +93,21 @@ export const downloadGroups = [
         },
         category: { id: "Panduan", en: "Manual" },
         format: "PDF",
-        size: "1.9 MB",
+        size: "167 KB",
         updatedAt: "2024",
-        url: "",
+        url: panduanMagang,
+      },
+      {
+        id: "sop-yudisium",
+        title: {
+          id: "Standar Operasional Prosedur (SOP) Yudisium & Wisuda",
+          en: "Standard Operating Procedure (SOP) for Yudisium & Graduation",
+        },
+        category: { id: "Pedoman", en: "Guideline" },
+        format: "PDF",
+        size: "237 KB",
+        updatedAt: "2024",
+        url: sopYudisiumWisuda,
       },
       {
         id: "form-bebas-pustaka",
@@ -91,7 +119,7 @@ export const downloadGroups = [
         format: "DOCX",
         size: "150 KB",
         updatedAt: "2024",
-        url: "",
+        url: "#",
       },
       {
         id: "form-banding-nilai-mkn",
@@ -103,7 +131,7 @@ export const downloadGroups = [
         format: "DOCX",
         size: "165 KB",
         updatedAt: "2024",
-        url: "",
+        url: "#",
       },
     ],
   },
@@ -125,7 +153,7 @@ export const downloadGroups = [
         format: "PDF",
         size: "1.2 MB",
         updatedAt: "2004",
-        url: "",
+        url: "#",
       },
       {
         id: "uu-2-2014",
@@ -137,7 +165,7 @@ export const downloadGroups = [
         format: "PDF",
         size: "1.5 MB",
         updatedAt: "2014",
-        url: "",
+        url: "#",
       },
       {
         id: "uu-5-1960",
@@ -149,7 +177,7 @@ export const downloadGroups = [
         format: "PDF",
         size: "2.1 MB",
         updatedAt: "1960",
-        url: "",
+        url: "#",
       },
       {
         id: "uu-4-1996",
@@ -161,7 +189,7 @@ export const downloadGroups = [
         format: "PDF",
         size: "1.1 MB",
         updatedAt: "1996",
-        url: "",
+        url: "#",
       },
       {
         id: "uu-42-1999",
@@ -173,7 +201,7 @@ export const downloadGroups = [
         format: "PDF",
         size: "890 KB",
         updatedAt: "1999",
-        url: "",
+        url: "#",
       },
       {
         id: "uu-40-2007",
@@ -185,7 +213,7 @@ export const downloadGroups = [
         format: "PDF",
         size: "1.8 MB",
         updatedAt: "2007",
-        url: "",
+        url: "#",
       },
       {
         id: "uu-16-2001",
@@ -197,7 +225,7 @@ export const downloadGroups = [
         format: "PDF",
         size: "1.3 MB",
         updatedAt: "2004",
-        url: "",
+        url: "#",
       },
       {
         id: "uu-25-1992",
@@ -209,7 +237,7 @@ export const downloadGroups = [
         format: "PDF",
         size: "950 KB",
         updatedAt: "1992",
-        url: "",
+        url: "#",
       },
       {
         id: "uu-1-2024-ite",
@@ -221,7 +249,7 @@ export const downloadGroups = [
         format: "PDF",
         size: "1.6 MB",
         updatedAt: "2024",
-        url: "",
+        url: "#",
       },
     ],
   },
@@ -243,7 +271,7 @@ export const downloadGroups = [
         format: "PDF",
         size: "1.7 MB",
         updatedAt: "1997",
-        url: "",
+        url: "#",
       },
       {
         id: "pp-37-1998",
@@ -255,7 +283,7 @@ export const downloadGroups = [
         format: "PDF",
         size: "1.1 MB",
         updatedAt: "1998",
-        url: "",
+        url: "#",
       },
       {
         id: "pp-24-2016",
@@ -267,7 +295,7 @@ export const downloadGroups = [
         format: "PDF",
         size: "1.4 MB",
         updatedAt: "2016",
-        url: "",
+        url: "#",
       },
       {
         id: "pp-18-2021",
@@ -279,7 +307,7 @@ export const downloadGroups = [
         format: "PDF",
         size: "2.3 MB",
         updatedAt: "2021",
-        url: "",
+        url: "#",
       },
       {
         id: "pp-8-2021",
@@ -291,7 +319,7 @@ export const downloadGroups = [
         format: "PDF",
         size: "1.2 MB",
         updatedAt: "2021",
-        url: "",
+        url: "#",
       },
       {
         id: "pp-29-2016",
@@ -303,7 +331,7 @@ export const downloadGroups = [
         format: "PDF",
         size: "820 KB",
         updatedAt: "2016",
-        url: "",
+        url: "#",
       },
       {
         id: "pp-43-2015",
@@ -315,7 +343,7 @@ export const downloadGroups = [
         format: "PDF",
         size: "1.0 MB",
         updatedAt: "2015",
-        url: "",
+        url: "#",
       },
     ],
   },
@@ -337,7 +365,7 @@ export const downloadGroups = [
         format: "PDF",
         size: "1.9 MB",
         updatedAt: "2019",
-        url: "",
+        url: "#",
       },
       {
         id: "permenkumham-15-2020",
@@ -349,7 +377,7 @@ export const downloadGroups = [
         format: "PDF",
         size: "1.4 MB",
         updatedAt: "2020",
-        url: "",
+        url: "#",
       },
       {
         id: "permenkumham-21-2021",
@@ -361,7 +389,7 @@ export const downloadGroups = [
         format: "PDF",
         size: "1.8 MB",
         updatedAt: "2021",
-        url: "",
+        url: "#",
       },
       {
         id: "permenkumham-17-2018",
@@ -373,7 +401,7 @@ export const downloadGroups = [
         format: "PDF",
         size: "1.3 MB",
         updatedAt: "2018",
-        url: "",
+        url: "#",
       },
       {
         id: "permen-atrbpn-1-2021",
@@ -385,7 +413,7 @@ export const downloadGroups = [
         format: "PDF",
         size: "1.5 MB",
         updatedAt: "2021",
-        url: "",
+        url: "#",
       },
       {
         id: "permen-atrbpn-3-2023",
@@ -397,7 +425,7 @@ export const downloadGroups = [
         format: "PDF",
         size: "1.6 MB",
         updatedAt: "2023",
-        url: "",
+        url: "#",
       },
       {
         id: "permen-atrbpn-20-2021",
@@ -409,7 +437,7 @@ export const downloadGroups = [
         format: "PDF",
         size: "1.7 MB",
         updatedAt: "2021",
-        url: "",
+        url: "#",
       },
       {
         id: "permenkumham-9-2017",
@@ -421,7 +449,7 @@ export const downloadGroups = [
         format: "PDF",
         size: "1.1 MB",
         updatedAt: "2017",
-        url: "",
+        url: "#",
       },
     ],
   },
@@ -443,7 +471,7 @@ export const downloadGroups = [
         format: "PDF",
         size: "1.3 MB",
         updatedAt: "2016",
-        url: "",
+        url: "#",
       },
       {
         id: "se-ahu-pmpj-2021",
@@ -455,7 +483,7 @@ export const downloadGroups = [
         format: "PDF",
         size: "950 KB",
         updatedAt: "2021",
-        url: "",
+        url: "#",
       },
       {
         id: "fatwa-dsn-mui-notaris",
@@ -467,7 +495,7 @@ export const downloadGroups = [
         format: "PDF",
         size: "2.4 MB",
         updatedAt: "2022",
-        url: "",
+        url: "#",
       },
       {
         id: "putusan-mk-009-2018",
@@ -479,7 +507,7 @@ export const downloadGroups = [
         format: "PDF",
         size: "1.8 MB",
         updatedAt: "2018",
-        url: "",
+        url: "#",
       },
     ],
   },
@@ -501,7 +529,7 @@ export const downloadGroups = [
         format: "PDF",
         size: "1.2 MB",
         updatedAt: "2020",
-        url: "",
+        url: "#",
       },
       {
         id: "kode-etik-ippat",
@@ -513,7 +541,7 @@ export const downloadGroups = [
         format: "PDF",
         size: "1.0 MB",
         updatedAt: "2021",
-        url: "",
+        url: "#",
       },
       {
         id: "perkum-ini-19-2019",
@@ -525,7 +553,7 @@ export const downloadGroups = [
         format: "PDF",
         size: "1.4 MB",
         updatedAt: "2019",
-        url: "",
+        url: "#",
       },
       {
         id: "perkum-ini-24-2021",
@@ -537,7 +565,7 @@ export const downloadGroups = [
         format: "PDF",
         size: "1.1 MB",
         updatedAt: "2021",
-        url: "",
+        url: "#",
       },
       {
         id: "perkum-ippat-magang",
@@ -549,8 +577,119 @@ export const downloadGroups = [
         format: "PDF",
         size: "1.3 MB",
         updatedAt: "2021",
-        url: "",
+        url: "#",
+      },
+    ],
+  },
+  {
+    id: "penjaminan-mutu",
+    title: { id: "Penjaminan Mutu (SPMI)", en: "Quality Assurance (SPMI)" },
+    description: {
+      id: "Dokumen Sistem Penjaminan Mutu Internal (SPMI) Fakultas Hukum UNISSULA.",
+      en: "Internal Quality Assurance System (SPMI) documents of the Faculty of Law UNISSULA.",
+    },
+    documents: [
+      {
+        id: "kebijakan-mutu",
+        title: { id: "Kebijakan Mutu SPMI", en: "SPMI Quality Policy" },
+        category: { id: "Kebijakan", en: "Policy" },
+        format: "PDF",
+        size: "-",
+        updatedAt: "2024",
+        url: "/quality-assurance/KBJ-SA-FH-MUTU-01-Kebijakan-Mutu.pdf",
+      },
+      {
+        id: "manual-spmi",
+        title: { id: "Manual SPMI", en: "SPMI Manual" },
+        category: { id: "Manual", en: "Manual" },
+        format: "PDF",
+        size: "-",
+        updatedAt: "2024",
+        url: "/quality-assurance/MAN-SA-FH-MUTU-01-Manual-SPMI.pdf",
+      },
+      {
+        id: "standar-spmi",
+        title: { id: "Standar SPMI (Pendidikan, Penelitian, Pengabdian)", en: "SPMI Standards" },
+        category: { id: "Standar", en: "Standard" },
+        format: "PDF",
+        size: "-",
+        updatedAt: "2024",
+        url: "/quality-assurance/STD-SA-FH-MUTU-01-Standar-Pendidikan.pdf",
+      },
+      {
+        id: "formulir-spmi",
+        title: { id: "Himpunan Formulir SPMI", en: "SPMI Forms Collection" },
+        category: { id: "Formulir", en: "Form" },
+        format: "PDF",
+        size: "-",
+        updatedAt: "2024",
+        url: "/quality-assurance/FRM-SA-FH-MUTU-02-Formulir-SPMI.pdf",
+      },
+      {
+        id: "sk-dokumen-mutu",
+        title: { id: "SK Pengesahan Dokumen Mutu", en: "Quality Documents Ratification Decree" },
+        category: { id: "SK", en: "Decree" },
+        format: "PDF",
+        size: "-",
+        updatedAt: "2024",
+        url: "/quality-assurance/SK-1098-2025-Pengesahan-Dokumen-Mutu.pdf",
+      },
+    ],
+  },
+  {
+    id: "akreditasi-informasi",
+    title: { id: "Akreditasi & Informasi Lainnya", en: "Accreditation & Other Information" },
+    description: {
+      id: "Sertifikat akreditasi program studi serta daftar penelitian dan pengabdian masyarakat.",
+      en: "Study program accreditation certificates and lists of research and community service.",
+    },
+    documents: [
+      {
+        id: "sertifikat-unggul-2023",
+        title: { id: "Sertifikat Akreditasi Unggul BAN-PT (2023 - 2028)", en: "BAN-PT Excellent Accreditation Certificate (2023 - 2028)" },
+        category: { id: "Akreditasi", en: "Accreditation" },
+        format: "PDF",
+        size: "728 KB",
+        updatedAt: "2023",
+        url: berkasSertifikatUnggul2023,
+      },
+      {
+        id: "sk-unggul-2023",
+        title: { id: "SK Akreditasi Unggul BAN-PT (2023)", en: "BAN-PT Excellent Accreditation Decree (2023)" },
+        category: { id: "Akreditasi", en: "Accreditation" },
+        format: "PDF",
+        size: "770 KB",
+        updatedAt: "2023",
+        url: berkasSkUnggul2023,
+      },
+      {
+        id: "sertifikat-asic-2020",
+        title: { id: "Sertifikat Akreditasi Internasional ASIC Premier (2020)", en: "ASIC Premier International Accreditation Certificate (2020)" },
+        category: { id: "Akreditasi", en: "Accreditation" },
+        format: "PDF",
+        size: "1 MB",
+        updatedAt: "2020",
+        url: berkasSertifikatAsic2020,
+      },
+      {
+        id: "daftar-penelitian",
+        title: { id: "Daftar Penelitian Dosen MKn (2023-2026)", en: "List of MKn Lecturer Research (2023-2026)" },
+        category: { id: "Penelitian", en: "Research" },
+        format: "PDF",
+        size: "222 KB",
+        updatedAt: "2024",
+        url: daftarPenelitianPdf,
+      },
+      {
+        id: "daftar-pengabdian",
+        title: { id: "Daftar Pengabdian Masyarakat Dosen MKn", en: "List of MKn Lecturer Community Service" },
+        category: { id: "Pengabdian", en: "Community Svc" },
+        format: "PDF",
+        size: "280 KB",
+        updatedAt: "2024",
+        url: daftarPengabdianPdf,
       },
     ],
   },
 ];
+

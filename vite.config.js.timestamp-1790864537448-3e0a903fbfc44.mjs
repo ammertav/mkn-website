@@ -1,0 +1,17 @@
+// vite.config.js
+import { defineConfig } from "file:///E:/2.kerja/New%20folder/mkn-website-original/mkn-website/node_modules/vite/dist/node/index.js";
+import react from "file:///E:/2.kerja/New%20folder/mkn-website-original/mkn-website/node_modules/@vitejs/plugin-react/dist/index.mjs";
+import tailwindcss from "file:///E:/2.kerja/New%20folder/mkn-website-original/mkn-website/node_modules/@tailwindcss/vite/dist/index.mjs";
+var vite_config_default = defineConfig(
+  {
+    plugins: [react(), tailwindcss()]
+    // server: {
+    //   host: '192.168.100.34',
+    //   port: 5173, // Pastikan pakai port ini
+    // }
+  }
+);
+export {
+  vite_config_default as default
+};
+//# sourceMappingURL=data:application/json;base64,ewogICJ2ZXJzaW9uIjogMywKICAic291cmNlcyI6IFsidml0ZS5jb25maWcuanMiXSwKICAic291cmNlc0NvbnRlbnQiOiBbImNvbnN0IF9fdml0ZV9pbmplY3RlZF9vcmlnaW5hbF9kaXJuYW1lID0gXCJFOlxcXFwyLmtlcmphXFxcXE5ldyBmb2xkZXJcXFxcbWtuLXdlYnNpdGUtb3JpZ2luYWxcXFxcbWtuLXdlYnNpdGVcIjtjb25zdCBfX3ZpdGVfaW5qZWN0ZWRfb3JpZ2luYWxfZmlsZW5hbWUgPSBcIkU6XFxcXDIua2VyamFcXFxcTmV3IGZvbGRlclxcXFxta24td2Vic2l0ZS1vcmlnaW5hbFxcXFxta24td2Vic2l0ZVxcXFx2aXRlLmNvbmZpZy5qc1wiO2NvbnN0IF9fdml0ZV9pbmplY3RlZF9vcmlnaW5hbF9pbXBvcnRfbWV0YV91cmwgPSBcImZpbGU6Ly8vRTovMi5rZXJqYS9OZXclMjBmb2xkZXIvbWtuLXdlYnNpdGUtb3JpZ2luYWwvbWtuLXdlYnNpdGUvdml0ZS5jb25maWcuanNcIjtpbXBvcnQgeyBkZWZpbmVDb25maWcgfSBmcm9tICd2aXRlJ1xyXG5pbXBvcnQgcmVhY3QgZnJvbSAnQHZpdGVqcy9wbHVnaW4tcmVhY3QnXHJcbmltcG9ydCB0YWlsd2luZGNzcyBmcm9tICdAdGFpbHdpbmRjc3Mvdml0ZSdcclxuXHJcbi8vIGh0dHBzOi8vdml0ZWpzLmRldi9jb25maWcvXHJcbmV4cG9ydCBkZWZhdWx0IGRlZmluZUNvbmZpZyh7XHJcbiAgcGx1Z2luczogW3JlYWN0KCksIHRhaWx3aW5kY3NzKCksXSxcclxuXHJcbiAgLy8gc2VydmVyOiB7XHJcbiAgLy8gICBob3N0OiAnMTkyLjE2OC4xMDAuMzQnLFxyXG4gIC8vICAgcG9ydDogNTE3MywgLy8gUGFzdGlrYW4gcGFrYWkgcG9ydCBpbmlcclxuICAvLyB9XHJcbn1cclxuKVxyXG4iXSwKICAibWFwcGluZ3MiOiAiO0FBQWdXLFNBQVMsb0JBQW9CO0FBQzdYLE9BQU8sV0FBVztBQUNsQixPQUFPLGlCQUFpQjtBQUd4QixJQUFPLHNCQUFRO0FBQUEsRUFBYTtBQUFBLElBQzFCLFNBQVMsQ0FBQyxNQUFNLEdBQUcsWUFBWSxDQUFFO0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFBQSxFQU1uQztBQUNBOyIsCiAgIm5hbWVzIjogW10KfQo=
