@@ -157,8 +157,8 @@ export default function StudentAdmission() {
             <div className="space-y-1">
               <h3 className="font-heading font-semibold text-base text-heading">
                 {t({
-                  id: "Pendaftaran Online PMB UNISSULA 2025/2026 Telah Dibuka",
-                  en: "Online Registration for UNISSULA Admissions 2025/2026 is Open",
+                  id: "Pendaftaran Online PMB UNISSULA 2026/2027 Telah Dibuka",
+                  en: "Online Registration for UNISSULA Admissions 2026/2027 is Open",
                 })}
               </h3>
               <p className="text-xs sm:text-sm text-body">

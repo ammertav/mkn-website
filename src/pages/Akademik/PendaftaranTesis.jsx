@@ -160,6 +160,7 @@ const halaman = {
 function KartuFormulir({ item, url, downloadUrl }) {
   const t = useT();
   const Ikon = item.ikon;
+  
 
   return (
     <motion.div
@@ -187,7 +188,7 @@ function KartuFormulir({ item, url, downloadUrl }) {
           <div className="pl-10 sm:pl-12">
             <motion.a
               href={downloadUrl}
-              download="Form Pengajuan Judul Tesis.pdf"
+              download="Form Pengajuan Judul Tesis.docx"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.97 }}
               className="inline-flex items-center gap-2 text-primary hover:underline text-xs sm:text-sm font-semibold transition-all duration-200"
@@ -397,7 +398,7 @@ export default function PendaftaranTesis() {
                   url={tautan[item.kunci]}
                   downloadUrl={
                     item.kunci === "judulTesis"
-                      ? "/pdf/tesis/form-pengajuan-judul-tesis.pdf"
+                      ? "/pdf/tesis/form-pengajuan-judul-tesis.docx"
                       : undefined
                   }
                 />

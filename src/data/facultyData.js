@@ -28,9 +28,9 @@ import imgAris from "../assets/images/dosen/moh-aris-siswanto.webp";
 import imgSriKusriyah from "../assets/images/dosen/sri-kusriyah.webp";
 import imgWidhiHandoko from "../assets/images/dosen/widhi-handoko.webp";
 import imgShallman from "../assets/images/dosen/shallman.webp";
-import imgBambangOyong from "../assets/images/dosen/bambang_oyong.jpg";
-import imgAgungIriantoro from "../assets/images/dosen/agung_irianto.jpg";
-import imgPandamNurwulan from "../assets/images/dosen/pandam_nurwulan.jpg";
+import imgBambangOyong from "../assets/images/dosen/bambang-oyong.png";
+import imgAgungIriantoro from "../assets/images/dosen/agung-iriantoro.png";
+import imgPandamNurwulan from "../assets/images/dosen/pandam.png";
 import imgHafidh from "../assets/images/dosen/hafidh.png";
 
 export const facultyData = [

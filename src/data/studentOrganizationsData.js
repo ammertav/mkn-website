@@ -2,6 +2,15 @@ import imgIMANU4 from "../assets/images/imanu-kegiatan.jpeg";
 import fotoMubes1 from "../assets/images/imanu-1.jpg";
 import fotoMubes2 from "../assets/images/imanu-4.jpg";
 import fotoPohon from "../assets/images/pohon.jpg";
+import pohon1 from "../assets/images/organisasi/pohon-1.jpg";
+import pohon2 from "../assets/images/organisasi/pohon-2.jpg";
+import pohon3 from "../assets/images/organisasi/pohon-3.jpg";
+import pohon4 from "../assets/images/organisasi/pohon-4.jpg";
+import pohon5 from "../assets/images/organisasi/pohon-5.jpg";
+import pohon6 from "../assets/images/organisasi/pohon-6.jpg";
+import pohon7 from "../assets/images/organisasi/pohon-7.jpg";
+import pohon8 from "../assets/images/organisasi/pohon-8.jpg";
+import pohon9 from "../assets/images/organisasi/pohon-9.jpg";
 
 // === Lomba Internal 2023 ===
 import internal1 from "../assets/images/prestasi/lomba-internal-2023/lomba-internal-1.jpg";
@@ -304,7 +313,7 @@ export const studentOrganizationsData = [
         id: "penanaman-pohon",
         judul: { id: "Penanaman Pohon", en: "Tree Planting" },
         tahun: "",
-        foto: [fotoPohon],
+        foto: [fotoPohon, pohon1, pohon2, pohon3, pohon4, pohon5, pohon6, pohon7, pohon8, pohon9],
       },
       {
         id: "lomba-internal-2023",
