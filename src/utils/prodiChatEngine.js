@@ -1,5 +1,6 @@
 import { sorotKurikulum, totalSks } from "../data/akademik/kurikulumData";
-import { eventData, formatIndoDate } from "../data/eventData";
+import { formatIndoDate } from "../data/eventData";
+import { getHybridEventList } from "../services/eventService";
 
 /**
  * Mesin jawaban untuk Lembar Tanya — asisten cakupan program studi.
@@ -25,11 +26,29 @@ const sorot = Object.fromEntries(
   sorotKurikulum.map((baris) => [baris.label.id, baris.angka])
 );
 
+/**
+ * Daftar agenda dari Strapi, dimuat sekali saat pertama dibutuhkan.
+ * Selama permintaan belum selesai daftarnya kosong, sehingga jawaban
+ * agenda jatuh ke kalimat "belum ada agenda" alih-alih mengarang.
+ */
+let agendaCache = null;
+
+function muatAgenda() {
+  if (agendaCache !== null) return;
+  agendaCache = [];
+  getHybridEventList({ locale: "id" })
+    .then((daftar) => {
+      agendaCache = daftar;
+    })
+    .catch(() => {});
+}
+
 /** Agenda terdekat yang belum lewat, dihitung saat mesin dipanggil. */
 function agendaTerdekat() {
+  muatAgenda();
   const hariIni = new Date().setHours(0, 0, 0, 0);
 
-  return eventData
+  return agendaCache
     .filter((acara) => new Date(acara.date).getTime() >= hariIni)
     .sort((a, b) => new Date(a.date) - new Date(b.date))[0];
 }

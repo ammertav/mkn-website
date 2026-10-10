@@ -8,9 +8,10 @@
  *
  * Daftar URL-nya diturunkan dari dua sumber, bukan diketik ulang:
  *   1. Rute statis dibaca langsung dari src/App.jsx.
- *   2. Rute berparameter (:slug) diperluas dari modul data yang sama dengan
- *      yang dipakai halamannya, dimuat lewat Vite agar impor gambar di dalam
- *      modul tersebut tetap bisa diselesaikan.
+ *   2. Rute berparameter (:slug) diperluas dari sumber data yang sama dengan
+ *      yang dipakai halamannya: berita, pengumuman, dan agenda dari Strapi CMS
+ *      (VITE_STRAPI_URL), dosen dari modul data lokal yang dimuat lewat Vite
+ *      agar impor gambar di dalam modul tersebut tetap bisa diselesaikan.
  *
  * Alamat situs bisa ditimpa lewat variabel lingkungan SITE_URL, misalnya untuk
  * lingkungan pementasan: SITE_URL=https://staging.example.id npm run sitemap
@@ -19,9 +20,7 @@
 import { readFile, writeFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
-import { createServer } from "vite";
-
-import { generateSlug } from "../src/utils/slugHelper.js";
+import { createServer, loadEnv } from "vite";
 
 const AKAR = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const SITE_URL = (process.env.SITE_URL || "https://mkn.unissula.ac.id").replace(/\/+$/, "");
@@ -165,28 +164,66 @@ async function ruteStatis() {
 
 /* ---------------------------------------------- Rute berparameter dari data */
 
-/** Nama bulan pada berita.json ditulis dalam bahasa Indonesia, bukan ISO. */
-const BULAN = [
-  "januari", "februari", "maret", "april", "mei", "juni",
-  "juli", "agustus", "september", "oktober", "november", "desember",
-];
+/**
+ * Mengambil slug seluruh entri satu koleksi Strapi (locale "id"), halaman demi
+ * halaman karena Strapi membatasi jumlah entri per permintaan.
+ */
+async function ambilSlugStrapi(strapiUrl, koleksi, fieldTanggal) {
+  const hasil = [];
+  for (let page = 1; ; page += 1) {
+    const params = new URLSearchParams({
+      locale: "id",
+      "fields[0]": "slug",
+      "fields[1]": fieldTanggal,
+      "pagination[page]": String(page),
+      "pagination[pageSize]": "100",
+    });
+    const res = await fetch(`${strapiUrl}/api/${koleksi}?${params}`);
+    if (!res.ok) throw new Error(`${koleksi}: HTTP ${res.status}`);
 
-/** "26 Mei 2026" -> "2026-05-26". Mengembalikan null bila formatnya lain. */
-function keTanggalIso(teks) {
-  const cocok = String(teks || "").trim().match(/^(\d{1,2})\s+([A-Za-zÀ-ÿ]+)\s+(\d{4})$/);
-  if (!cocok) return null;
+    const json = await res.json();
+    for (const item of json.data ?? []) {
+      if (item.slug) hasil.push({ slug: item.slug, tanggal: item[fieldTanggal] ?? null });
+    }
+    if (page >= (json.meta?.pagination?.pageCount ?? 1)) return hasil;
+  }
+}
 
-  const bulan = BULAN.indexOf(cocok[2].toLowerCase());
-  if (bulan < 0) return null;
+/**
+ * Rute berita, pengumuman, dan agenda dari Strapi. Bila CMS tidak dapat
+ * diakses, sitemap tetap dibuat tanpa rute tersebut supaya build tidak gagal.
+ */
+async function ruteStrapi() {
+  const env = loadEnv(process.env.NODE_ENV || "production", AKAR, "VITE_");
+  const strapiUrl = (env.VITE_STRAPI_URL || "").replace(/\/+$/, "");
+  if (!strapiUrl) {
+    console.warn("[sitemap] VITE_STRAPI_URL kosong — rute berita, pengumuman, dan agenda dilewati.");
+    return [];
+  }
 
-  return `${cocok[3]}-${String(bulan + 1).padStart(2, "0")}-${cocok[1].padStart(2, "0")}`;
+  const tanggalIso = (nilai) => (nilai ? String(nilai).slice(0, 10) : null);
+
+  try {
+    const [berita, pengumuman, agenda] = await Promise.all([
+      ambilSlugStrapi(strapiUrl, "beritas", "tanggal"),
+      ambilSlugStrapi(strapiUrl, "pengumumen", "tanggal"),
+      ambilSlugStrapi(strapiUrl, "agenda", "date"),
+    ]);
+
+    return [
+      ...berita.map((b) => ({ url: `/berita/${b.slug}`, lastmod: tanggalIso(b.tanggal) })),
+      ...pengumuman.map((p) => ({ url: `/pengumuman/${p.slug}`, lastmod: tanggalIso(p.tanggal) })),
+      ...agenda.map((e) => ({ url: `/event/${e.slug}`, lastmod: tanggalIso(e.tanggal) })),
+    ];
+  } catch (err) {
+    console.warn(`[sitemap] Strapi tidak dapat diakses (${err.message}) — rute berita, pengumuman, dan agenda dilewati.`);
+    return [];
+  }
 }
 
 async function ruteDinamis() {
-  const berita = JSON.parse(await readFile(path.join(AKAR, "src/data/berita.json"), "utf8"));
-
-  // facultyData.js dan eventData.js mengimpor berkas gambar, jadi tidak bisa
-  // diimpor Node begitu saja. Vite yang menyelesaikan impor tersebut.
+  // facultyData.js mengimpor berkas gambar, jadi tidak bisa diimpor Node
+  // begitu saja. Vite yang menyelesaikan impor tersebut.
   const server = await createServer({
     root: AKAR,
     server: { middlewareMode: true },
@@ -195,19 +232,9 @@ async function ruteDinamis() {
   });
 
   try {
-    const { eventData } = await server.ssrLoadModule("/src/data/eventData.js");
     const { facultyData } = await server.ssrLoadModule("/src/data/facultyData.js");
 
-    const url = [];
-
-    for (const b of berita) {
-      const slug = generateSlug(b.title, b.slug);
-      if (slug) url.push({ url: `/berita/${slug}`, lastmod: keTanggalIso(b.tanggal) });
-    }
-
-    for (const e of eventData ?? []) {
-      if (e.slug) url.push({ url: `/event/${e.slug}`, lastmod: e.date ?? null });
-    }
+    const url = await ruteStrapi();
 
     // Dosen punya dua alamat yang sah; hanya /staff/dosen yang didaftarkan
     // (lihat DIKECUALIKAN) agar tidak menjadi isi ganda di mesin pencari.

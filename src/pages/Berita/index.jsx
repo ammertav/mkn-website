@@ -9,6 +9,8 @@ import {
   FiPaperclip,
   FiFileText,
   FiClock,
+  FiAlertCircle,
+  FiRefreshCw,
 } from "react-icons/fi";
 import { TbPinFilled } from "react-icons/tb";
 import Navbar from "../../components/Navbar";
@@ -16,12 +18,6 @@ import Footer from "../../components/Footer";
 import Breadcrumb from "../../components/ui/Breadcrumb";
 import { useT, useLanguage } from "../../i18n/languageContext";
 import { useUi } from "../../i18n/useUi";
-import {
-  berita as beritaTerurut,
-  pengumuman as pengumumanTerurut,
-  getBeritaByLocale,
-  getPengumumanByLocale,
-} from "../../data/beritaSelectors";
 import { getHybridPengumumanList } from "../../services/pengumumanService";
 import { getHybridBeritaList } from "../../services/beritaService";
 import { formatBeritaDate } from "../../utils/beritaFormatters";
@@ -411,44 +407,47 @@ export default function BeritaIndex() {
 
   const isBerita = kategori === "berita";
 
-  const [beritaItems, setBeritaItems] = useState(() =>
-    getBeritaByLocale(lang)
-  );
-  const [pengumumanItems, setPengumumanItems] = useState(() =>
-    getPengumumanByLocale(lang)
-  );
+  const [beritaItems, setBeritaItems] = useState([]);
+  const [pengumumanItems, setPengumumanItems] = useState([]);
+  // Status pemuatan per kategori: "loading" | "ready" | "error"
+  const [beritaStatus, setBeritaStatus] = useState("loading");
+  const [pengumumanStatus, setPengumumanStatus] = useState("loading");
+  const [reloadKey, setReloadKey] = useState(0);
 
   useEffect(() => {
     let isMounted = true;
-    setBeritaItems(getBeritaByLocale(lang));
-    setPengumumanItems(getPengumumanByLocale(lang));
+    setBeritaStatus("loading");
+    setPengumumanStatus("loading");
 
-    // Ambil data berita hybrid (Strapi CMS + Local JSON)
     getHybridBeritaList({ locale: lang })
       .then((data) => {
-        if (isMounted && Array.isArray(data) && data.length > 0) {
-          setBeritaItems(data);
-        }
+        if (!isMounted) return;
+        setBeritaItems(Array.isArray(data) ? data : []);
+        setBeritaStatus("ready");
       })
       .catch((err) => {
-        console.warn("[BeritaIndex] Fallback to local berita:", err);
+        console.error("[BeritaIndex] Gagal memuat berita:", err);
+        if (isMounted) setBeritaStatus("error");
       });
 
-    // Ambil data pengumuman hybrid (Strapi CMS + Local JSON)
     getHybridPengumumanList({ locale: lang })
       .then((data) => {
-        if (isMounted && Array.isArray(data) && data.length > 0) {
-          setPengumumanItems(data);
-        }
+        if (!isMounted) return;
+        setPengumumanItems(Array.isArray(data) ? data : []);
+        setPengumumanStatus("ready");
       })
       .catch((err) => {
-        console.warn("[BeritaIndex] Fallback to local pengumuman:", err);
+        console.error("[BeritaIndex] Gagal memuat pengumuman:", err);
+        if (isMounted) setPengumumanStatus("error");
       });
 
     return () => {
       isMounted = false;
     };
-  }, [lang]);
+  }, [lang, reloadKey]);
+
+  const activeStatus = isBerita ? beritaStatus : pengumumanStatus;
+  const isReady = activeStatus === "ready";
 
   const handleKategoriChange = (key) => {
     setSearchParams(key === "berita" ? {} : { kategori: key });
@@ -684,10 +683,44 @@ export default function BeritaIndex() {
           </nav>
 
           {/* =====================================================
+              STATE LOADING / ERROR
+          ===================================================== */}
+
+          {activeStatus === "loading" && (
+            <div className="py-20 text-center space-y-4">
+              <div className="inline-block w-8 h-8 border-3 border-primary border-t-transparent rounded-full animate-spin" />
+              <p className="text-sm text-gray-500 font-medium">
+                {isBerita
+                  ? t({ id: "Memuat berita...", en: "Loading news..." })
+                  : t({ id: "Memuat pengumuman...", en: "Loading announcements..." })}
+              </p>
+            </div>
+          )}
+
+          {activeStatus === "error" && (
+            <div className="p-8 bg-red-50 border border-red-200 rounded-sm text-center space-y-4">
+              <FiAlertCircle className="w-8 h-8 text-primary mx-auto" />
+              <h3 className="font-heading font-bold text-heading">
+                {isBerita
+                  ? t({ id: "Gagal Memuat Berita", en: "Failed to Load News" })
+                  : t({ id: "Gagal Memuat Pengumuman", en: "Failed to Load Announcements" })}
+              </h3>
+              <button
+                type="button"
+                onClick={() => setReloadKey((k) => k + 1)}
+                className="px-4 py-2 bg-primary text-white text-xs font-semibold rounded-xs shadow-xs hover:bg-[#680000] cursor-pointer inline-flex items-center gap-1.5"
+              >
+                <FiRefreshCw className="w-3.5 h-3.5" />
+                <span>{t({ id: "Coba Lagi", en: "Try Again" })}</span>
+              </button>
+            </div>
+          )}
+
+          {/* =====================================================
               FEATURED NEWS
           ===================================================== */}
 
-          {isBerita && featuredNews && (() => {
+          {isReady && isBerita && featuredNews && (() => {
             const featuredSlug = featuredNews.slug || generateSlug(featuredNews.title, featuredNews.slug);
             const featuredImageSrc = featuredNews.imageUrl || (featuredNews.gambar ? (typeof featuredNews.gambar === "string" && (featuredNews.gambar.startsWith("http") || featuredNews.gambar.startsWith("/")) ? featuredNews.gambar : getBeritaImage(featuredNews.gambar)) : "");
             const featuredContent = featuredNews.plainContent || (typeof featuredNews.content === "string" ? featuredNews.content : "");
@@ -805,7 +838,7 @@ export default function BeritaIndex() {
               MORE NEWS
           ===================================================== */}
 
-          {isBerita && allOtherNews.length > 0 && (
+          {isReady && isBerita && allOtherNews.length > 0 && (
             <section
               ref={newsSectionRef}
               className="space-y-6 pt-4 scroll-mt-20"
@@ -896,7 +929,7 @@ export default function BeritaIndex() {
               FEATURED ANNOUNCEMENT (Pengumuman Utama)
           ===================================================== */}
 
-          {!isBerita && featuredPengumuman && (() => {
+          {isReady && !isBerita && featuredPengumuman && (() => {
             const featuredSlug = featuredPengumuman.slug || generateSlug(featuredPengumuman.title, featuredPengumuman.slug);
             const detailUrl = `/pengumuman/${encodeURIComponent(featuredSlug)}`;
             const featuredImageSrc = featuredPengumuman.gambar
@@ -1029,7 +1062,7 @@ export default function BeritaIndex() {
               ANNOUNCEMENTS LIST
           ===================================================== */}
 
-          {!isBerita && (
+          {isReady && !isBerita && (
             <section ref={newsSectionRef} className="space-y-6">
               {/* HEADER */}
 

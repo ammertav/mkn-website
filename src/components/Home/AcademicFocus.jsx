@@ -4,12 +4,12 @@ import { Link } from "react-router-dom";
 import { FiArrowRight } from "react-icons/fi";
 import { TbPinFilled } from "react-icons/tb";
 
-import { berita, getBeritaByLocale } from "../../data/beritaSelectors";
 import { getHybridBeritaList } from "../../services/beritaService";
 import { formatBeritaDate } from "../../utils/beritaFormatters";
 import { getBeritaImage } from "../../utils/imageResolver";
 import { generateSlug } from "../../utils/slugHelper";
 import Img from "../ui/Img";
+import HomeSectionSkeleton from "./HomeSectionSkeleton";
 import { useUi } from "../../i18n/useUi";
 import { useLanguage } from "../../i18n/languageContext";
 
@@ -61,20 +61,23 @@ const cardVariants = {
 export default function AcademicFocus() {
   const ui = useUi();
   const { lang } = useLanguage();
-  const [items, setItems] = useState(() => getBeritaByLocale(lang));
+  const [items, setItems] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     let isMounted = true;
-    setItems(getBeritaByLocale(lang));
+    setIsLoading(true);
 
     getHybridBeritaList({ locale: lang })
       .then((data) => {
-        if (isMounted && Array.isArray(data) && data.length > 0) {
-          setItems(data);
-        }
+        if (isMounted) setItems(Array.isArray(data) ? data : []);
       })
       .catch((err) => {
-        console.warn("[AcademicFocus] Fallback to local berita:", err);
+        console.warn("[AcademicFocus] Gagal memuat berita:", err);
+        if (isMounted) setItems([]);
+      })
+      .finally(() => {
+        if (isMounted) setIsLoading(false);
       });
 
     return () => {
@@ -87,7 +90,7 @@ export default function AcademicFocus() {
   const nonPinnedItems = items.filter((item) => !Boolean(item.isPinned || item.pinned));
 
   // Pinned pertama jadi featured di kiri; jika tidak ada yang dipin, ambil non-pinned terbaru
-  const featured = pinnedItems.length > 0 ? pinnedItems[0] : (nonPinnedItems[0] || items[0] || getBeritaByLocale(lang)[0]);
+  const featured = pinnedItems.length > 0 ? pinnedItems[0] : (nonPinnedItems[0] || items[0]);
   const featuredIsPinned = Boolean(featured?.isPinned || featured?.pinned);
 
   // Sisa item yang dipin (pinned ke-2, ke-3, dst) diletakkan di sisi kanan (side articles)
@@ -104,6 +107,13 @@ export default function AcademicFocus() {
   const featuredImg = featured?.imageUrl || (featured?.gambar ? (typeof featured.gambar === "string" && (featured.gambar.startsWith("http") || featured.gambar.startsWith("/")) ? featured.gambar : getBeritaImage(featured.gambar)) : "");
   const featuredContent = featured?.plainContent || (typeof featured?.content === "string" ? featured?.content : "");
   const featuredDate = formatBeritaDate(featured?.tanggal, lang);
+
+  if (isLoading) {
+    return <HomeSectionSkeleton title={ui("latestNews")} className="bg-hero-heading" />;
+  }
+
+  // Strapi tidak dapat diakses atau belum ada berita: section disembunyikan.
+  if (!featured) return null;
 
   return (
     <section className="w-full bg-hero-heading font-body py-16 sm:py-20 border-b border-gray-200 overflow-hidden">

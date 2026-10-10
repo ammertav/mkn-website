@@ -1,29 +1,20 @@
 /**
  * =========================================================
- * HYBRID EVENT & AGENDA SERVICE
+ * SERVICE EVENT & AGENDA (STRAPI CMS)
  * =========================================================
- * Menggabungkan data Event / Agenda dari Strapi CMS (/api/agenda)
- * dan arsip data lokal (src/data/eventData.js) secara transparan.
- *
- * Aturan Deduplikasi: Title-Matching (Strapi Wins)
- * Apabila judul acara di berkas lokal sudah ada di Strapi CMS,
- * maka versi Strapi yang dimenangkan dan versi lokal diabaikan.
+ * Seluruh data agenda diambil dari Strapi CMS (/api/agenda).
+ * Data lokal (eventData.js) sudah tidak dipakai lagi.
  */
 
-import { strapiFetch } from "../api/strapiClient.js";
-import { buildListQuery, buildDetailByFieldQuery } from "../api/strapiQuery.js";
-import { STRAPI_ENDPOINTS, STRAPI_POPULATE, STRAPI_DEFAULTS } from "../config/strapi.js";
-import { eventData as localEventData } from "../data/eventData.js";
+import { strapiFetch, strapiFetchAll } from "../api/strapiClient.js";
+import { buildDetailByFieldQuery } from "../api/strapiQuery.js";
 import {
-  normalizeEvent,
-  normalizeLocalEvent,
-  normalizeTitleKey,
-} from "../utils/eventFormatters.js";
-
-/**
- * Saklar fallback lokal selama transisi
- */
-export const ENABLE_LOCAL_FALLBACK = true;
+  STRAPI_ENDPOINTS,
+  STRAPI_POPULATE,
+  STRAPI_DEFAULTS,
+  STRAPI_SORT,
+} from "../config/strapi.js";
+import { normalizeEvent } from "../utils/eventFormatters.js";
 
 /**
  * Parse tanggal YYYY-MM-DD ke timestamp numerik untuk sorting
@@ -35,80 +26,48 @@ function parseDateToTimestamp(dateStr) {
 }
 
 /**
- * Mengambil daftar seluruh event secara hybrid (Strapi CMS + Local)
- * dengan aturan deduplikasi cerdas (Strapi Wins) dan pengurutan presisi.
+ * Mengambil daftar seluruh event dari Strapi CMS.
+ * Urutan: pinned dulu, lalu tanggal acara terdekat.
  *
  * @param {object} options
  * @param {string} [options.locale="id"]
  * @returns {Promise<Array>}
+ * @throws {Error} Jika Strapi tidak dapat diakses
  */
 export async function getHybridEventList({
   locale = STRAPI_DEFAULTS.LOCALE,
 } = {}) {
-  let strapiItems = [];
+  const rawData = await strapiFetchAll(STRAPI_ENDPOINTS.AGENDA, {
+    populate: STRAPI_POPULATE.AGENDA_FULL,
+    sort: STRAPI_SORT.AGENDA_DEFAULT,
+    locale,
+  });
 
-  // 1. Ambil data dari Strapi CMS
-  try {
-    const query = buildListQuery({
-      populate: STRAPI_POPULATE.AGENDA_FULL,
-      sort: ["pinned:desc", "date:asc", "createdAt:desc"],
-      locale,
-      pageSize: 50,
+  return rawData
+    .map(normalizeEvent)
+    .filter(Boolean)
+    .sort((a, b) => {
+      // A. Item yang dipin selalu berada di atas
+      if (a.pinned && !b.pinned) return -1;
+      if (!a.pinned && b.pinned) return 1;
+
+      // B. Urutkan berdasarkan tanggal acara terdekat
+      const timeA = parseDateToTimestamp(a.date);
+      const timeB = parseDateToTimestamp(b.date);
+      if (timeA !== timeB) return timeA - timeB;
+
+      return (b.id || 0) - (a.id || 0);
     });
-
-    const response = await strapiFetch(`${STRAPI_ENDPOINTS.AGENDA}?${query}`);
-    const rawData = Array.isArray(response?.data) ? response.data : [];
-    strapiItems = rawData.map(normalizeEvent).filter(Boolean);
-  } catch (err) {
-    console.warn("[eventService] Strapi agenda unavailable, using local fallback only:", err?.message);
-    strapiItems = [];
-  }
-
-  // Jika fallback lokal dinonaktifkan, kembalikan data Strapi saja
-  if (!ENABLE_LOCAL_FALLBACK) {
-    return strapiItems;
-  }
-
-  // 2. Siapkan data lokal
-  const localItems = (localEventData || []).map(normalizeLocalEvent).filter(Boolean);
-
-  // 3. Deduplikasi cerdas (Title-Matching: Strapi Wins)
-  const strapiTitles = new Set(
-    strapiItems.map((item) => normalizeTitleKey(item.title))
-  );
-
-  const filteredLocalItems = localItems.filter((local) => {
-    const titleKey = normalizeTitleKey(local.title);
-    return !strapiTitles.has(titleKey);
-  });
-
-  // 4. Gabungkan dan Urutkan
-  const combined = [...strapiItems, ...filteredLocalItems];
-
-  combined.sort((a, b) => {
-    // A. Item yang dipin selalu berada di atas
-    if (a.pinned && !b.pinned) return -1;
-    if (!a.pinned && b.pinned) return 1;
-
-    // B. Urutkan berdasarkan tanggal acara terdekat
-    const timeA = parseDateToTimestamp(a.date);
-    const timeB = parseDateToTimestamp(b.date);
-    if (timeA !== timeB) return timeA - timeB;
-
-    return (b.id || 0) - (a.id || 0);
-  });
-
-  return combined;
 }
 
 /**
- * Mengambil satu event berdasarkan slug atau documentId
- * dengan mekanisme pencarian berjenjang (Strapi -> Local Fallback -> Title Deduplication)
+ * Mengambil satu event berdasarkan slug atau documentId.
  *
- * @param {string} slugParam - Slug atau ID event
+ * @param {string} slugParam - Slug atau documentId event
  * @param {object} options
  * @param {string} [options.locale="id"]
  * @returns {Promise<object|null>}
+ * @throws {Error} Jika Strapi tidak dapat diakses
  */
 export async function getHybridEventBySlug(
   slugParam,
@@ -118,68 +77,20 @@ export async function getHybridEventBySlug(
 
   const cleanSlug = decodeURIComponent(slugParam).trim();
 
-  // 1. Cari di Strapi CMS berdasarkan slug
-  try {
-    const slugQuery = buildDetailByFieldQuery({
-      field: "slug",
+  for (const field of ["slug", "documentId"]) {
+    const query = buildDetailByFieldQuery({
+      field,
       value: cleanSlug,
       populate: STRAPI_POPULATE.AGENDA_FULL,
       locale,
     });
-
-    const res = await strapiFetch(`${STRAPI_ENDPOINTS.AGENDA}?${slugQuery}`);
+    const res = await strapiFetch(`${STRAPI_ENDPOINTS.AGENDA}?${query}`);
     if (Array.isArray(res?.data) && res.data.length > 0) {
       return normalizeEvent(res.data[0]);
     }
-
-    // Coba cari berdasarkan documentId jika tidak ketemu via slug
-    if (cleanSlug.length >= 16) {
-      const docQuery = buildDetailByFieldQuery({
-        field: "documentId",
-        value: cleanSlug,
-        populate: STRAPI_POPULATE.AGENDA_FULL,
-        locale,
-      });
-      const docRes = await strapiFetch(`${STRAPI_ENDPOINTS.AGENDA}?${docQuery}`);
-      if (Array.isArray(docRes?.data) && docRes.data.length > 0) {
-        return normalizeEvent(docRes.data[0]);
-      }
-    }
-  } catch (err) {
-    console.warn("[eventService] Failed fetching event from Strapi by slug:", err?.message);
   }
 
-  // 2. Cari di Berkas Lokal (Fallback)
-  if (!ENABLE_LOCAL_FALLBACK) return null;
-
-  const localMatch = (localEventData || []).find((item) => {
-    return (
-      item.slug === cleanSlug ||
-      String(item.id) === cleanSlug
-    );
-  });
-
-  if (!localMatch) return null;
-
-  const normalizedLocal = normalizeLocalEvent(localMatch);
-
-  // 3. Periksa apakah item lokal ini sebetulnya sudah ada di Strapi (Strapi Wins)
-  try {
-    const strapiList = await getHybridEventList({ locale });
-    const localTitleKey = normalizeTitleKey(normalizedLocal.title);
-
-    const strapiEquivalent = strapiList.find(
-      (item) => item.source === "strapi" && normalizeTitleKey(item.title) === localTitleKey
-    );
-
-    if (strapiEquivalent) {
-      return strapiEquivalent; // Kembalikan versi Strapi yang lebih kaya data
-    }
-  } catch {
-    // Abaikan jika pengecekan gagal, lanjutkan dengan data lokal
-  }
-
-  return normalizedLocal;
+  return null;
 }
 
 /**

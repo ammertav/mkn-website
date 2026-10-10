@@ -5,7 +5,8 @@
 
 import pedomanAkademik from "../assets/pdf/Pedoman Akademik 2021.pdf";
 import pedomanProposalTesis from "../assets/pdf/Pedoman Penulisan Proposal & Tesis.pdf";
-import formJudulTesis from "../assets/pdf/FORM PENGAJUAN JUDUL TESIS (1).pdf";
+// .docx bukan tipe aset bawaan Vite, jadi diimpor eksplisit sebagai URL.
+import formJudulTesis from "../assets/pdf/form-pengajuan-judul-tesis.docx?url";
 import panduanMagang from "../assets/pdf/Pedoman Praktek Laboratorium Manajemen Kantor Notaris & PPAT.pdf";
 import sopYudisiumWisuda from "../assets/pdf/Standar Operasional Prosedur (SOP) Yudisium & Wisuda.pdf";
 
@@ -68,8 +69,8 @@ export const downloadGroups = [
           en: "Thesis Research Title & Proposal Submission Form",
         },
         category: { id: "Formulir", en: "Form" },
-        format: "PDF",
-        size: "40 KB",
+        format: "DOCX",
+        size: "89 KB",
         updatedAt: "2024",
         url: formJudulTesis,
       },

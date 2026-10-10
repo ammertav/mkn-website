@@ -4,18 +4,12 @@ import { Link } from "react-router-dom";
 import { FiArrowRight } from "react-icons/fi";
 import { TbPinFilled } from "react-icons/tb";
 
-import {
-  berita,
-  pengumuman,
-  getBeritaByLocale,
-  getPengumumanByLocale,
-  getPinnedBerita,
-  getPinnedPengumuman,
-} from "../../data/beritaSelectors";
 import { getHybridPengumumanList } from "../../services/pengumumanService";
+import { getHybridBeritaList } from "../../services/beritaService";
 import { getBeritaImage } from "../../utils/imageResolver";
 import { generateSlug } from "../../utils/slugHelper";
 import Img from "../ui/Img";
+import HomeSectionSkeleton from "./HomeSectionSkeleton";
 import { useUi } from "../../i18n/useUi";
 import { useLanguage } from "../../i18n/languageContext";
 
@@ -67,33 +61,41 @@ const cardVariants = {
 export default function Announcement() {
   const ui = useUi();
   const { lang } = useLanguage();
-  const [hybridPengumuman, setHybridPengumuman] = useState(() =>
-    getPengumumanByLocale(lang)
-  );
+  const [displayList, setDisplayList] = useState([]);
+  const [isAnnouncement, setIsAnnouncement] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     let isMounted = true;
-    setHybridPengumuman(getPengumumanByLocale(lang));
+    setIsLoading(true);
 
-    getHybridPengumumanList({ locale: lang })
-      .then((items) => {
-        if (isMounted && Array.isArray(items) && items.length > 0) {
-          setHybridPengumuman(items);
+    async function load() {
+      try {
+        const items = await getHybridPengumumanList({ locale: lang });
+        if (!isMounted) return;
+        if (items.length > 0) {
+          setDisplayList(items);
+          setIsAnnouncement(true);
+          return;
         }
-      })
-      .catch((err) => {
-        console.warn("[Announcement] Fallback to local pengumuman:", err);
-      });
+        // Bila belum ada pengumuman, section ini fallback ke berita agar tidak kosong.
+        const beritaItems = await getHybridBeritaList({ locale: lang });
+        if (!isMounted) return;
+        setDisplayList(beritaItems);
+        setIsAnnouncement(false);
+      } catch (err) {
+        console.warn("[Announcement] Gagal memuat pengumuman:", err);
+        if (isMounted) setDisplayList([]);
+      } finally {
+        if (isMounted) setIsLoading(false);
+      }
+    }
+    load();
 
     return () => {
       isMounted = false;
     };
   }, [lang]);
-
-  // Bila belum ada pengumuman, section ini fallback ke berita agar tidak kosong.
-  const displayList =
-    hybridPengumuman.length > 0 ? hybridPengumuman : getBeritaByLocale(lang);
-  const isAnnouncement = hybridPengumuman.length > 0;
 
   // Pisahkan pengumuman yang di-pin dan non-pinned
   const pinnedItems = displayList.filter((item) => Boolean(item.isPinned || item.pinned));
@@ -131,6 +133,13 @@ export default function Announcement() {
       ? `/pengumuman/${encodeURIComponent(slug)}`
       : `/berita/${encodeURIComponent(slug)}`;
   };
+
+  if (isLoading) {
+    return <HomeSectionSkeleton title={ui("latestAnnouncements")} className="bg-hero-headingy" />;
+  }
+
+  // Strapi tidak dapat diakses atau belum ada isi: section disembunyikan.
+  if (!featured) return null;
 
   return (
     <section className="w-full bg-hero-headingy font-body py-16 sm:py-20 border-b border-gray-200 overflow-hidden">

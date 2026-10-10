@@ -1,10 +1,9 @@
 /**
  * =========================================================
- * UTILITY FORMATTER EVENT & AGENDA (HYBRID CONTRACT)
+ * UTILITY FORMATTER EVENT & AGENDA
  * =========================================================
- * Menggabungkan dan menstandarisasi bentuk data dari Strapi CMS
- * (/api/agenda) dan berkas lokal (src/data/eventData.js) menjadi
- * kontrak data yang seragam untuk komponen antarmuka.
+ * Menstandarisasi bentuk data dari Strapi CMS (/api/agenda)
+ * menjadi kontrak data yang seragam untuk komponen antarmuka.
  */
 
 import {
@@ -75,47 +74,6 @@ export function normalizeEvent(item) {
     pinned: Boolean(item.pinned || item.isPinned),
     isFeatured: Boolean(item.isFeatured || item.featured),
     source: "strapi",
-  };
-}
-
-/**
- * Normalisasi satu entri agenda dari berkas lokal (eventData.js)
- *
- * @param {object} item - Objek dari eventData.js
- * @returns {object|null}
- */
-export function normalizeLocalEvent(item) {
-  if (!item) return null;
-
-  const plainDesc =
-    typeof item.fullDescription === "object" && item.fullDescription !== null
-      ? item.fullDescription.id || item.fullDescription.en || ""
-      : typeof item.fullDescription === "string"
-      ? item.fullDescription
-      : typeof item.description === "object" && item.description !== null
-      ? item.description.id || item.description.en || ""
-      : String(item.description || "");
-
-  return {
-    id: item.id,
-    documentId: null,
-    slug: item.slug || String(item.id),
-    title: item.title,
-    date: item.date ? item.date.split("T")[0] : null,
-    time: item.time,
-    venue: item.venue,
-    organizer: item.organizer,
-    category: item.category,
-    description: item.description,
-    fullDescription: item.fullDescription || item.description,
-    plainDescription: plainDesc,
-    image: item.image || null,
-    cp: item.cp || "",
-    speaker: item.speaker || "",
-    registrationUrl: item.registrationUrl || "",
-    pinned: Boolean(item.pinned || item.isPinned),
-    isFeatured: Boolean(item.isFeatured || item.featured),
-    source: "local",
   };
 }
 

@@ -3,7 +3,6 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { FiArrowRight } from "react-icons/fi";
 import Img from "../ui/Img";
-import { eventData } from "../../data/eventData";
 import { getHybridEventList } from "../../services/eventService";
 import { useLanguage, useT } from "../../i18n/languageContext";
 import { useUi } from "../../i18n/useUi";
@@ -69,19 +68,22 @@ export default function Events() {
   const t = useT();
   const ui = useUi();
 
-  // Inisialisasi awal dengan data lokal terdekat, lalu diperbarui dengan data hybrid
-  const [eventsData, setEventsData] = useState(() => (eventData || []).slice(0, 3));
+  // Diisi dari Strapi CMS setelah komponen dimuat
+  const [eventsData, setEventsData] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     let isMounted = true;
     async function loadEvents() {
       try {
         const hybridList = await getHybridEventList({ locale: lang });
-        if (isMounted && Array.isArray(hybridList) && hybridList.length > 0) {
+        if (isMounted && Array.isArray(hybridList)) {
           setEventsData(hybridList.slice(0, 3));
         }
       } catch (err) {
-        console.warn("[Home/Events] Error fetching hybrid events:", err);
+        console.warn("[Home/Events] Gagal memuat agenda:", err);
+      } finally {
+        if (isMounted) setIsLoading(false);
       }
     }
     loadEvents();
@@ -128,6 +130,20 @@ export default function Events() {
         {/* =========================================
             EVENT GRID
         ========================================= */}
+        {isLoading && (
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10 lg:gap-14 animate-pulse" aria-busy="true">
+            {[0, 1, 2].map((i) => (
+              <div key={i} className="space-y-4">
+                <div className="w-full aspect-[4/3] bg-gray-200 rounded-xs" />
+                <div className="w-24 h-4 bg-gray-200 rounded" />
+                <div className="w-full h-5 bg-gray-200 rounded" />
+                <div className="w-2/3 h-4 bg-gray-200 rounded" />
+              </div>
+            ))}
+          </div>
+        )}
+
+        {!isLoading && eventsData.length > 0 && (
         <motion.div
           variants={containerVariants}
           initial="hidden"
@@ -272,6 +288,7 @@ export default function Events() {
             </motion.article>
           ))}
         </motion.div>
+        )}
 
 
         {/* =========================================

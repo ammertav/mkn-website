@@ -3,7 +3,6 @@ import {
   blocksToPlainText,
   formatStrapiDate,
 } from "./strapiHelpers.js";
-import { getBeritaImage } from "./imageResolver.js";
 import { generateSlug } from "./slugHelper.js";
 
 // Re-export helper global Strapi
@@ -146,94 +145,10 @@ export function normalizeBerita(item) {
   };
 }
 
-/**
- * Normalisasi satu objek artikel berita dari berkas data lokal (berita.json)
- * @param {object} item
- * @returns {object|null}
- */
-export function normalizeLocalBerita(item) {
-  if (!item) return null;
-
-  // Resolusi Tags
-  let tags = [];
-  if (Array.isArray(item.tags)) {
-    tags = item.tags.filter(Boolean);
-  } else if (typeof item.tags === "string" && item.tags.trim()) {
-    tags = [item.tags.trim()];
-  }
-  if (tags.length === 0) {
-    tags = ["Berita"];
-  }
-
-  // Resolusi Galeri Foto
-  const rawGaleri = Array.isArray(item.galeri) ? item.galeri : [];
-  const galeri = rawGaleri.map((g, idx) => {
-    const rawImg = g.gambar || g.foto || g.media || g.image;
-    const resolvedUrl = typeof rawImg === "string" ? getBeritaImage(rawImg) : "";
-    return {
-      id: g.id || `local-galeri-${item.id}-${idx}`,
-      keterangan: g.keterangan || "",
-      gambar: rawImg,
-      imageUrl: resolvedUrl,
-    };
-  });
-
-  // Resolusi Sumber
-  let sumber = null;
-  if (item.sumber) {
-    if (typeof item.sumber === "object") {
-      sumber = {
-        nama: item.sumber.nama || item.sumber.name || item.sumber.url || "",
-        url: item.sumber.url || "",
-      };
-    } else if (typeof item.sumber === "string") {
-      sumber = {
-        nama: item.sumber,
-        url: item.sumber.startsWith("http") ? item.sumber : "",
-      };
-    }
-  }
-
-  const plainContent =
-    typeof item.content === "string"
-      ? item.content
-      : blocksToPlainText(item.content);
-
-  const localImg = getBeritaImage(item.gambar);
-  const slug = generateSlug(item.title, item.slug);
-
-  return {
-    id: item.id,
-    documentId: item.documentId || String(item.id),
-    title: item.title || "",
-    slug,
-    tanggal: item.tanggal || "",
-    content: item.content || "",
-    plainContent,
-    author: item.author || "admkn",
-    authorRole: {
-      id: "Redaksi MKn UNISSULA",
-      en: "MKn UNISSULA Editorial",
-    },
-    tags,
-    category: tags[0] || "Berita",
-    gambar: item.gambar,
-    imageUrl: localImg,
-    galeri,
-    sumber,
-    isPinned: Boolean(item.pinned || item.isPinned),
-    pinned: Boolean(item.pinned || item.isPinned),
-    locale: item.locale || "id",
-    source: "local",
-    lampiran: Array.isArray(item.lampiran) ? item.lampiran : [],
-  };
-}
-
 export default {
   getStrapiMediaUrl,
   blocksToPlainText,
   formatStrapiDate,
   formatBeritaDate,
   normalizeBerita,
-  normalizeLocalBerita,
 };

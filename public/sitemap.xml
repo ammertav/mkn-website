@@ -137,12 +137,6 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://mkn.unissula.ac.id/berita/batas-akhir-pengajuan-judul-tesis-gasal-2026</loc>
-    <lastmod>2026-08-15</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
     <loc>https://mkn.unissula.ac.id/berita/cetak-notaris-andal-mkn-unissula-hadirkan-agung-irianto-dalam-kuliah-pakar</loc>
     <lastmod>2024-05-25</lastmod>
     <changefreq>monthly</changefreq>
@@ -185,12 +179,6 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://mkn.unissula.ac.id/berita/enhancing-cross-border-legal-understanding-indonesian-masters-students-visit-uow-malaysia-for-notarial-law-exchange</loc>
-    <lastmod>2024-02-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
     <loc>https://mkn.unissula.ac.id/berita/gala-dinner-pengabdian-masyarakat-2024-prodi-mkn-unissula-berlangsung-meriah-spektakuler</loc>
     <lastmod>2024-08-11</lastmod>
     <changefreq>monthly</changefreq>
@@ -205,12 +193,6 @@
   <url>
     <loc>https://mkn.unissula.ac.id/berita/ikanotsula-sukses-gelar-bimbel-ujian-ppat-pengda-ippat-kabupaten-pekalongan-bersama</loc>
     <lastmod>2022-10-30</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://mkn.unissula.ac.id/berita/jadwal-perkuliahan-semester-gasal-2026-2027</loc>
-    <lastmod>2026-08-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -269,11 +251,6 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://mkn.unissula.ac.id/berita/land-law-system-in-indonesia-and-malaysia-examined-in-international-conference</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
     <loc>https://mkn.unissula.ac.id/berita/magister-kenotariatan-fh-unissula-perkuat-kompetensi-mahasiswa-lewat-pengabdian-masyarakat-di-magelang</loc>
     <lastmod>2026-05-26</lastmod>
     <changefreq>monthly</changefreq>
@@ -324,11 +301,6 @@
   <url>
     <loc>https://mkn.unissula.ac.id/berita/mahasiswa-prodi-mkn-unissula-lakukan-penyuluhan-hukum-kepada-warga-desa-tawangmangu</loc>
     <lastmod>2025-01-04</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://mkn.unissula.ac.id/berita/master-s-program-in-notary-law-at-the-faculty-of-law-unissula-strengthens-student-competencies-through-community-service-in-magelang</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -411,22 +383,6 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://mkn.unissula.ac.id/berita/new-student-admission-batch-ii-2026</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://mkn.unissula.ac.id/berita/odd-semester-lecture-schedule-2026-2027</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://mkn.unissula.ac.id/berita/open-recruitment-imanu-2026</loc>
-    <lastmod>2026-08-11</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
     <loc>https://mkn.unissula.ac.id/berita/pelatihan-pembekalan-persiapan-ujian-kode-etik-bagi-alumni</loc>
     <lastmod>2017-02-19</lastmod>
     <changefreq>monthly</changefreq>
@@ -441,12 +397,6 @@
   <url>
     <loc>https://mkn.unissula.ac.id/berita/pembukaan-pengabdian-masyarakat-pentingnya-pencatatan-peristiwa-hukum-dalam-akta-noteris-ppat-mahasiswa-dikenalkan-penyuluhan-hukum-kepada-masyarakat</loc>
     <lastmod>2025-08-24</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://mkn.unissula.ac.id/berita/penerimaan-mahasiswa-baru-gelombang-ii-2026</loc>
-    <lastmod>2026-08-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -519,12 +469,6 @@
   <url>
     <loc>https://mkn.unissula.ac.id/berita/studi-banding-notariat-universitas-pancasila-di-notariat-unissula</loc>
     <lastmod>2018-09-10</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://mkn.unissula.ac.id/berita/survei-kepuasan-layanan-akademik-genap</loc>
-    <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -720,6 +664,36 @@
   </url>
   <url>
     <loc>https://mkn.unissula.ac.id/mahasiswa/prestasi</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://mkn.unissula.ac.id/pengumuman/batas-akhir-pengajuan-judul-tesis-gasal-2026</loc>
+    <lastmod>2026-08-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://mkn.unissula.ac.id/pengumuman/jadwal-perkuliahan-semester-gasal-2026-2027</loc>
+    <lastmod>2026-08-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://mkn.unissula.ac.id/pengumuman/open-recruitment-imanu-2026</loc>
+    <lastmod>2026-08-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://mkn.unissula.ac.id/pengumuman/penerimaan-mahasiswa-baru-gelombang-ii-2026</loc>
+    <lastmod>2026-08-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://mkn.unissula.ac.id/pengumuman/survei-kepuasan-layanan-akademik-genap</loc>
+    <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
