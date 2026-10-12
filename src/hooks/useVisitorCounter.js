@@ -1,122 +1,108 @@
-/**
- * useVisitorCounter
- *
- * Counter pengunjung ringan berbasis Firebase Realtime Database REST API.
- * Tidak memerlukan SDK Firebase — cukup fetch bawaan browser.
- *
- * Struktur data Firebase:
- *   visitors/total          → akumulasi semua pengunjung
- *   visitors/daily/YYYY-MM-DD → pengunjung per hari
- *
- * Perilaku:
- * - Menggunakan localStorage (bukan sessionStorage) agar tracking bertahan
- *   antar tab. Key menyertakan tanggal, sehingga setiap hari baru pengunjung
- *   dihitung lagi sebagai "hari ini" namun total tetap terakumulasi.
- */
-
 import { useState, useEffect } from "react";
 
-const DB_BASE =
-  "https://mkn-unisulla-default-rtdb.asia-southeast1.firebasedatabase.app/visitors";
+const DB_BASE = import.meta.env.VITE_FIREBASE_DB_URL;
 
-/** Key localStorage; menyertakan tanggal agar reset otomatis tiap hari. */
-function getStorageKey() {
-  return `mkn_visited_${new Date().toISOString().slice(0, 10)}`;
-}
+const FETCH_TIMEOUT_MS = 8000;
 
-/** Tanggal hari ini dalam format YYYY-MM-DD (UTC+7). */
-function getTodayKey() {
-  const now = new Date();
-  // Geser ke WIB (UTC+7)
-  const wib = new Date(now.getTime() + 7 * 60 * 60 * 1000);
+function getTodayWIB() {
+  const wib = new Date(Date.now() + 7 * 60 * 60 * 1000);
   return wib.toISOString().slice(0, 10);
 }
 
-/**
- * Memastikan nilai yang diterima selalu berupa integer non-negatif.
- * Jika nilai sebelumnya korup (misal string "[object Object]111..."),
- * pulihkan dengan menghitung jumlah digit '1' yang tertempel.
- */
-function toValidNumber(val) {
-  if (typeof val === "number" && !isNaN(val)) {
-    return Math.max(0, Math.floor(val));
+function getStorageKey() {
+  return `mkn_visited_${getTodayWIB()}`;
+}
+
+function toSafeInt(val) {
+  if (val === null || val === undefined) return 0;
+  if (typeof val === "number") {
+    return Number.isFinite(val) ? Math.max(0, Math.trunc(val)) : 0;
   }
   if (typeof val === "string") {
     if (val.includes("[object")) {
-      const ones = val.replace(/[^1]/g, "");
-      return Math.max(0, ones.length);
+      return Math.max(0, (val.match(/1/g) || []).length);
     }
-    const parsed = parseInt(val, 10);
-    return isNaN(parsed) ? 0 : Math.max(0, parsed);
+    const n = parseInt(val, 10);
+    return Number.isFinite(n) ? Math.max(0, n) : 0;
   }
+  if (typeof val === "boolean") return val ? 1 : 0;
   return 0;
 }
 
+async function fetchWithTimeout(url, options = {}) {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), FETCH_TIMEOUT_MS);
+  try {
+    return await fetch(url, { ...options, signal: controller.signal });
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
+async function fbGet(url) {
+  const res = await fetchWithTimeout(url);
+  if (!res.ok) throw new Error(`GET ${res.status}`);
+  return res.json();
+}
+
+async function fbPut(url, value) {
+  const safeValue = toSafeInt(value);
+  const res = await fetchWithTimeout(url, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(safeValue),
+  });
+  if (!res.ok) throw new Error(`PUT ${res.status}`);
+  return safeValue;
+}
+
 export function useVisitorCounter() {
-  /** { total: number|null, today: number|null } */
   const [stats, setStats] = useState({ total: null, today: null });
 
   useEffect(() => {
     let isMounted = true;
-    const today = getTodayKey();
-    const alreadyCounted = localStorage.getItem(getStorageKey());
+
+    const todayKey = getTodayWIB();
+    const storageKey = getStorageKey();
+    const alreadyCounted = localStorage.getItem(storageKey);
 
     const totalUrl = `${DB_BASE}/total.json`;
-    const todayUrl = `${DB_BASE}/daily/${today}.json`;
-    const headers = { "Content-Type": "application/json" };
+    const todayUrl = `${DB_BASE}/daily/${encodeURIComponent(todayKey)}.json`;
 
     async function incrementBoth() {
       try {
-        // Baca keduanya secara paralel
-        const [rTotal, rToday] = await Promise.all([
-          fetch(totalUrl),
-          fetch(todayUrl),
+        const [rawTotal, rawToday] = await Promise.all([
+          fbGet(totalUrl),
+          fbGet(todayUrl),
         ]);
-        if (!rTotal.ok || !rToday.ok) throw new Error("Read error");
 
-        const rawTotal = await rTotal.json();
-        const rawToday = await rToday.json();
+        const newTotal = toSafeInt(rawTotal) + 1;
+        const newToday = toSafeInt(rawToday) + 1;
 
-        const currentTotal = toValidNumber(rawTotal);
-        const currentToday = toValidNumber(rawToday);
-
-        const newTotal = currentTotal + 1;
-        const newToday = currentToday + 1;
-
-        // Tulis keduanya secara paralel (pastikan number murni yang dikirim)
         await Promise.all([
-          fetch(totalUrl, { method: "PUT", headers, body: JSON.stringify(newTotal) }),
-          fetch(todayUrl, { method: "PUT", headers, body: JSON.stringify(newToday) }),
+          fbPut(totalUrl, newTotal),
+          fbPut(todayUrl, newToday),
         ]);
 
-        localStorage.setItem(getStorageKey(), "1");
-        if (isMounted) {
-          setStats({ total: newTotal, today: newToday });
-        }
+        localStorage.setItem(storageKey, "1");
+        if (isMounted) setStats({ total: newTotal, today: newToday });
       } catch (err) {
-        console.error("[VisitorCounter] Gagal increment:", err);
+        console.error("[VisitorCounter]", err);
+        if (isMounted) fetchOnly();
       }
     }
 
     async function fetchOnly() {
       try {
-        const [rTotal, rToday] = await Promise.all([
-          fetch(totalUrl),
-          fetch(todayUrl),
+        const [rawTotal, rawToday] = await Promise.all([
+          fbGet(totalUrl),
+          fbGet(todayUrl),
         ]);
-        if (!rTotal.ok || !rToday.ok) throw new Error("Read error");
-
-        const rawTotal = await rTotal.json();
-        const rawToday = await rToday.json();
-
-        const total = toValidNumber(rawTotal);
-        const today = toValidNumber(rawToday);
-
         if (isMounted) {
-          setStats({ total, today });
+          setStats({ total: toSafeInt(rawTotal), today: toSafeInt(rawToday) });
         }
       } catch (err) {
-        console.error("[VisitorCounter] Gagal baca:", err);
+        console.error("[VisitorCounter]", err);
       }
     }
 
@@ -126,11 +112,8 @@ export function useVisitorCounter() {
       fetchOnly();
     }
 
-    return () => {
-      isMounted = false;
-    };
+    return () => { isMounted = false; };
   }, []);
 
   return stats;
 }
-
