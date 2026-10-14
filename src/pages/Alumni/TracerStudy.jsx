@@ -202,6 +202,47 @@ export default function TracerStudy() {
           </motion.dl>
         </motion.div>
 
+        {/* ── Daftar Notaris-PPAT Ikanotsula ── */}
+        <Seksi
+          judul={t({
+            id: "Daftar Notaris-PPAT Ikanotsula",
+            en: "Ikanotsula Notary-PPAT Directory",
+          })}
+          pengantar={t({
+            id: "Ikatan Notaris Alumni UNISSULA (Ikanotsula) menghimpun data alumni yang telah berpraktik sebagai Notaris dan/atau PPAT di seluruh wilayah Indonesia. Daftar ini diperbarui secara berkala dan dapat diakses melalui tautan berikut.",
+            en: "The UNISSULA Notary Alumni Association (Ikanotsula) compiles a directory of alumni who have practised as Notaries and/or PPATs across Indonesia. The list is updated regularly and is accessible via the link below.",
+          })}
+        >
+          <motion.div variants={itemVariants} className="flex flex-wrap gap-3">
+            <a
+              href="#"  // LINK SPREADSHEET
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xs text-sm font-semibold text-white bg-primary hover:bg-[#680000] hover:-translate-y-0.5 shadow-sm transition-all duration-200"
+            >
+              {/* spreadsheet icon */}
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                viewBox="0 0 16 16"
+                aria-hidden="true"
+              >
+                <path d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5L14 4.5zm-3-1V1L13.5 4H11.5a.5.5 0 0 1-.5-.5z" />
+                <path
+                  fillRule="evenodd"
+                  d="M5 11.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm0-2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm0-2a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5z"
+                />
+              </svg>
+              {t({
+                id: "Lihat Daftar Notaris-PPAT Ikanotsula",
+                en: "View Ikanotsula Notary-PPAT Directory",
+              })}
+            </a>
+          </motion.div>
+        </Seksi>
+
         <Seksi
           judul={t({ id: "Status Pekerjaan Alumni", en: "Alumni Employment Status" })}
           pengantar={t({
